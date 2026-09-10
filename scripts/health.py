@@ -29,7 +29,7 @@ def main() -> int:
 
     for slug, meta in REGISTRY.get("actors", {}).items():
         actor_id = meta.get("apify_actor_id")
-        if not actor_id or meta.get("status") != "live":
+        if not actor_id or meta.get("status") not in ("live", "staging"):
             continue
         runs = runs_for(actor_id)
         recent = [r for r in runs if r.get("startedAt", "") >= day_ago.isoformat()]
