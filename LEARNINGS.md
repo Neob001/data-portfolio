@@ -9,3 +9,11 @@
 - Node 22.16 `node --test <dir>` fails; must glob `tests/*.test.mjs`.
 - Local machine has no gh CLI, no Apify CLI, no Apify token — publishing and GitHub remain owner-gated (see WEEKLY_REPORT.md blockers).
 - Pattern for all future actors: pure `transform.js` (testable without Apify SDK) + thin `main.js`; golden fixtures are trimmed REAL API captures (~10 KB).
+
+## 2026-09-11 — go-live session (accounts connected)
+- GitHub home: https://github.com/Neob001/data-portfolio (public), pushed via write deploy key `~/.ssh/data_portfolio_deploy`; `core.sshCommand` set in-repo, so plain `git push` works.
+- Apify account `capacious_threshold` (FREE plan, $5 credit/month, ACTORS_PUBLIC_ALL enabled). Token stored at `~/.apify_token` (chmod 600); export `APIFY_TOKEN=$(cat ~/.apify_token)` before scripts.
+- Actor creation via `POST /v2/acts` with `sourceType: GIT_REPO` + `gitRepoUrl ...#main:actors/<slug>` builds straight from the public monorepo — no per-actor deploy keys needed. All 3 builds succeeded first try.
+- Staging runs: SEC + TED SUCCEEDED with real data; UK failed by design with the correct "bring your own key" error. Staging schedules `staging-sec-edgar` / `staging-eu-ted` run 2x/day (06:00/18:00 UTC) exercising `sinceLastRun`.
+- SEC display names can carry ticker suffixes, e.g. "Piedmont Lithium Inc. (PLL, PLLTL)" — harmless, but a future polish is stripping ticker parens in cleanName().
+- Chrome automation: `type` into GitHub inputs drops characters; use `form_input` with refs for anything that must be exact.

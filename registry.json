@@ -1,42 +1,59 @@
 {
-  "updated_at": "2026-09-11",
+  "updated_at": "2026-09-10",
   "actors": {
     "sec-edgar-filings-search": {
-      "apify_actor_id": null,
+      "apify_actor_id": "alNg1FFs9rdVhfX1T",
       "source": "SEC EDGAR official APIs (efts.sec.gov, data.sec.gov)",
       "variant": "full+incremental (sinceLastRun)",
-      "status": "ready-to-stage",
+      "status": "staging",
       "approval": "AUTO-APPROVED-PENDING-REVIEW (US federal public data)",
-      "ppe_events": { "filing-result": { "proposed_price_usd": 0.008 } },
+      "ppe_events": {
+        "filing-result": {
+          "proposed_price_usd": 0.008
+        }
+      },
       "pricing_rationale": "Leading incumbent charges ~$0.01/filing-fetched; launch ~20% below.",
       "launched_at": null,
       "last_fix_date": null,
-      "kpis": {}
+      "kpis": {},
+      "staging_started_at": "2026-09-10T16:46:05Z"
     },
     "eu-ted-tenders-monitor": {
-      "apify_actor_id": null,
+      "apify_actor_id": "uw85K3A58AQE2zbUa",
       "source": "TED Search API v3 (api.ted.europa.eu, EU open data)",
       "variant": "full+incremental (sinceLastRun)",
-      "status": "ready-to-stage",
+      "status": "staging",
       "approval": "AUTO-APPROVED-PENDING-REVIEW (EU official public data)",
-      "ppe_events": { "tender-result": { "proposed_price_usd": 0.01 } },
+      "ppe_events": {
+        "tender-result": {
+          "proposed_price_usd": 0.01
+        }
+      },
       "pricing_rationale": "Incumbents rental/PPR at higher effective cost and 13.7% failure rate; undercut + reliability.",
       "launched_at": null,
       "last_fix_date": null,
-      "kpis": {}
+      "kpis": {},
+      "staging_started_at": "2026-09-10T16:46:05Z"
     },
     "uk-company-lookup": {
-      "apify_actor_id": null,
+      "apify_actor_id": "wfcdwJw5mWYbpxaPp",
       "source": "Companies House official API (company profile + search only, no personal data)",
       "variant": "lookup",
-      "status": "ready-to-stage",
+      "status": "staging",
       "approval": "AUTO-APPROVED-PENDING-REVIEW (UK statutory register, company facts only)",
-      "ppe_events": { "company-found": { "proposed_price_usd": 0.004 } },
+      "ppe_events": {
+        "company-found": {
+          "proposed_price_usd": 0.004
+        }
+      },
       "pricing_rationale": "Highest-demand safe niche (21.7k runs/30d across incumbents); per-lookup pricing beats per-run incumbents on small batches.",
       "launched_at": null,
       "last_fix_date": null,
       "kpis": {},
-      "notes": "Users supply their own free CH API key (input, secret). Officers/PSC variant requires owner legal approval — asked in WEEKLY_REPORT.md."
+      "notes": "Users supply their own free CH API key (input, secret). Officers/PSC variant requires owner legal approval \u2014 asked in WEEKLY_REPORT.md.",
+      "staging_started_at": "2026-09-10T16:46:05Z"
     }
-  }
+  },
+  "apify_account": "capacious_threshold",
+  "github_repo": "https://github.com/Neob001/data-portfolio"
 }
