@@ -1,0 +1,52 @@
+{
+  "title": "SEC EDGAR Filings Search",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "query": {
+      "title": "Search phrase",
+      "type": "string",
+      "description": "Exact phrase to search across full text of SEC filings, e.g. \"supply chain disruption\" or a company name.",
+      "editor": "textfield",
+      "prefill": "artificial intelligence"
+    },
+    "forms": {
+      "title": "Form types",
+      "type": "array",
+      "description": "Optional filing form filters, e.g. 10-K, 10-Q, 8-K, S-1, 4, 13F-HR.",
+      "editor": "stringList",
+      "prefill": ["8-K"]
+    },
+    "startDate": {
+      "title": "Filed on or after",
+      "type": "string",
+      "description": "YYYY-MM-DD. Leave empty for no lower bound.",
+      "editor": "textfield",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "nullable": true
+    },
+    "endDate": {
+      "title": "Filed on or before",
+      "type": "string",
+      "description": "YYYY-MM-DD. Leave empty for no upper bound.",
+      "editor": "textfield",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "nullable": true
+    },
+    "maxResults": {
+      "title": "Max results",
+      "type": "integer",
+      "description": "Stop after this many filing records (you are charged per result).",
+      "default": 100,
+      "minimum": 1,
+      "maximum": 10000
+    },
+    "sinceLastRun": {
+      "title": "Only new filings since last run",
+      "type": "boolean",
+      "description": "Incremental mode: remembers the newest filing date per query and only returns newer filings on the next run. Ideal for scheduled monitoring.",
+      "default": false
+    }
+  },
+  "required": ["query"]
+}

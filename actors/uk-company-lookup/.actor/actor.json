@@ -1,0 +1,24 @@
+{
+  "actorSpecification": 1,
+  "name": "uk-company-lookup",
+  "title": "UK Company Lookup (Companies House)",
+  "description": "Look up UK companies by number or name via the official Companies House API: status, incorporation date, SIC codes, registered office, filing deadlines. Pay per successful lookup.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "categories": ["BUSINESS", "LEAD_GENERATION"],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "companies": {
+          "title": "Companies",
+          "transformation": { "fields": ["query", "found", "company_number", "company_name", "status", "incorporated_on", "company_url"] },
+          "display": { "component": "table" }
+        }
+      }
+    }
+  }
+}

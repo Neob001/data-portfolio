@@ -1,0 +1,24 @@
+{
+  "actorSpecification": 1,
+  "name": "sec-edgar-filings-search",
+  "title": "SEC EDGAR Filings Search & Monitor",
+  "description": "Full-text search SEC filings (10-K, 10-Q, 8-K, S-1, Form 4...) via official SEC APIs. Flat records, incremental mode, pay per result.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "categories": ["BUSINESS", "NEWS"],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "filings": {
+          "title": "Filings",
+          "transformation": { "fields": ["filed_at", "company_name", "form_type", "accession_number", "document_url"] },
+          "display": { "component": "table" }
+        }
+      }
+    }
+  }
+}

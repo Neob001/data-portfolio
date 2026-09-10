@@ -1,0 +1,8 @@
+node_modules/
+.DS_Store
+*.log
+state/health.json
+state/report_numbers.json
+state/issue_replies.json
+state/issues_for_model.json
+state/pricing_proposals.json

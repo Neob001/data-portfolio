@@ -1,0 +1,1788 @@
+[
+  {
+    "slug": "companies-house",
+    "query": "companies house",
+    "source": "UK gov API (needs free API key)",
+    "legal_safety": 1.0,
+    "build_cost_h": 8,
+    "score": 1.54,
+    "demand_runs30d": 21687,
+    "demand_users30d": 49,
+    "avg_rating": 0,
+    "fail_rate_30d": 0.0006,
+    "weakness": 1.002,
+    "incumbents": [
+      {
+        "actor": "logiover/uk-companies-house-bulk-scraper",
+        "title": "UK Companies House Bulk Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 10,
+        "runs30d": 78,
+        "failed30d": 1,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "scrapesage/companies-house-scraper",
+        "title": "Companies House Scraper \u2014 UK Companies, Directors & PSCs",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 30,
+        "runs30d": 21448,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "parseforge/uk-companies-house-scraper",
+        "title": "UK Companies House Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 4,
+        "runs30d": 38,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "alkausari_mujahid/ofsted-providers-companies-house-enrichment",
+        "title": "Ofsted Providers Companies House Enrichment",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 2,
+        "runs30d": 9,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "silentflow/uk-companies-house-enricher",
+        "title": "UK Companies House Enricher",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 0,
+        "runs30d": 30,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "nexgendata/business-registration-lookup",
+        "title": "Business Registration Lookup \u2014 SEC EDGAR & UK Companies House",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 0,
+        "runs30d": 34,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "jungle_synthesizer/companies-house-uk-financials-scraper",
+        "title": "Companies House UK Financials & Beneficial Owners Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 2,
+        "runs30d": 31,
+        "failed30d": 1,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "parsebird/uk-companies-house-scraper",
+        "title": "UK Companies House Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 19,
+        "failed30d": 1,
+        "pricingModel": "PAY_PER_EVENT"
+      }
+    ]
+  },
+  {
+    "slug": "open-food-facts",
+    "query": "food nutrition data",
+    "source": "Open Food Facts API (ODbL)",
+    "legal_safety": 1.0,
+    "build_cost_h": 5,
+    "score": 1.482,
+    "demand_runs30d": 271,
+    "demand_users30d": 9,
+    "avg_rating": 0,
+    "fail_rate_30d": 0.0738,
+    "weakness": 1.295,
+    "incumbents": [
+      {
+        "actor": "gentle_cloud/open-food-facts-scraper",
+        "title": "Open Food Facts Nutrition Data Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 2,
+        "runs30d": 53,
+        "failed30d": 0,
+        "pricingModel": "FREE"
+      },
+      {
+        "actor": "scrapesage/openfoodfacts-scraper",
+        "title": "Open Food Facts Scraper - Food Product & Nutrition Data",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 14,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "crawlerbros/cronometer-scraper",
+        "title": "Cronometer Food & Nutrition Database Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 30,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "ryyos/nilai-gizi",
+        "title": "NilaiGizi.com",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "ponderable_hydrometer/openfoodfacts-scraper",
+        "title": "Food & Nutrition Scraper (Open Food Facts)",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 3,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "ponderable_hydrometer/usda-food-scraper",
+        "title": "USDA FoodData \u2014 Nutrition & Ingredients",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 3,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "lulzasaur/usda-food-scraper",
+        "title": "USDA Food Nutrition Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "parseforge/usda-fooddata-central-scraper",
+        "title": "USDA FoodData Central Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 58,
+        "failed30d": 3,
+        "pricingModel": "PAY_PER_EVENT"
+      }
+    ]
+  },
+  {
+    "slug": "wikipedia-data",
+    "query": "wikipedia",
+    "source": "Official MediaWiki APIs",
+    "legal_safety": 1.0,
+    "build_cost_h": 4,
+    "score": 1.322,
+    "demand_runs30d": 230,
+    "demand_users30d": 21,
+    "avg_rating": 0,
+    "fail_rate_30d": 0.0,
+    "weakness": 1.0,
+    "incumbents": [
+      {
+        "actor": "automation-lab/wikipedia-scraper",
+        "title": "Wikipedia Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 9,
+        "runs30d": 84,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "santamaria-automations/wikipedia-scraper",
+        "title": "Wikipedia Scraper - Articles, Summaries, Metadata",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 2,
+        "runs30d": 31,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "fatihtahta/wikipedia-scraper",
+        "title": "Wikipedia Scraper | $5 / 1k | Fast & Reliable",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "crawlerbros/wikipedia-scraper",
+        "title": "Wikipedia Article Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 4,
+        "runs30d": 41,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "ryanclinton/wikipedia-article-search",
+        "title": "Wikipedia Research Intelligence \u2014 Topic Maps & Research Briefs",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 3,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "nexgendata/web-scraping-mcp-server",
+        "title": "Web Scraping MCP \u2014 Crawl, Search & Wikipedia for Agents",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 2,
+        "runs30d": 16,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      }
+    ]
+  },
+  {
+    "slug": "eu-tenders",
+    "query": "tenders procurement",
+    "source": "EU TED open data",
+    "legal_safety": 1.0,
+    "build_cost_h": 10,
+    "score": 0.986,
+    "demand_runs30d": 262,
+    "demand_users30d": 25,
+    "avg_rating": 4.0,
+    "fail_rate_30d": 0.1374,
+    "weakness": 1.15,
+    "incumbents": [
+      {
+        "actor": "foxlabs/ted-tenders",
+        "title": "EU TED Tenders \u2014 Public Procurement Notice Scraper",
+        "rating": 5,
+        "reviews": 1,
+        "users30d": 15,
+        "runs30d": 95,
+        "failed30d": 13,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "dltik/ted-europa-scraper",
+        "title": "TED Europa Scraper: EU Public Procurement Tenders",
+        "rating": 3,
+        "reviews": 1,
+        "users30d": 3,
+        "runs30d": 36,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "foxlabs/worldbank-tenders",
+        "title": "World Bank Tenders Scraper \u2014 Procurement & Bid Notices",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 3,
+        "runs30d": 37,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "jungle_synthesizer/eu-national-procurement-portals-scraper",
+        "title": "EU Tenders & Procurement Notices Scraper \u2014 TED + 6 Portals",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 1,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "omarchydev/eu-tender-data",
+        "title": "EU Tender Data - Procurement Intelligence API",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 0,
+        "runs30d": 30,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "koalastuff/eu-ted-tender-monitor",
+        "title": "EU TED Cybersecurity Tender & Procurement API",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "northlab/eu-defense-contract-monitor",
+        "title": "EU Defense Tenders & Procurement Awards (TED) \u2192 Stock Tickers",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 2,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "studio-amba/e-licitatie-ro-scraper",
+        "title": "e-licitatie.ro Scraper \u2014 Romanian Public Procurement Tenders",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 4,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      }
+    ]
+  },
+  {
+    "slug": "sanctions-lists",
+    "query": "sanctions screening",
+    "source": "OFAC/EU/UN published lists",
+    "legal_safety": 1.0,
+    "build_cost_h": 8,
+    "score": 0.97,
+    "demand_runs30d": 375,
+    "demand_users30d": 11,
+    "avg_rating": 0,
+    "fail_rate_30d": 0.0053,
+    "weakness": 1.021,
+    "incumbents": [
+      {
+        "actor": "mooseandraven/ofac-sanctions-screening-suite",
+        "title": "OFAC Sanctions Screening API - No API Key Required",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 2,
+        "runs30d": 36,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "ryanclinton/opensanctions-search",
+        "title": "Sanctions & Watchlist Screening \u2014 Risk-Scored Decisions",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 3,
+        "runs30d": 159,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "pink_comic/ofac-sanctions-screening",
+        "title": "OFAC Sanctions Screening API - KYC AML Compliance",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 0,
+        "runs30d": 30,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "inexhaustible_glass/sanctions-screener",
+        "title": "Sanctions & PEP Screening \u2014 OFAC, UN, EU, UK (KYC/AML)",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 30,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "zinin/sanctions-screening",
+        "title": "Sanctions Screening API",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 3,
+        "runs30d": 33,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "webdata_labs/sanctions-screening-api",
+        "title": "Global Sanctions Screening API - OFAC, EU, UK & UN Watchlists",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 0,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "maximedupre/sanctions-screening",
+        "title": "Sanctions & Watchlist Screening \u2014 Risk-Scored Decisions",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "haketa/sanctions-screening",
+        "title": "AML & Sanctions Screening for AI Agents (OFAC, EU, UN, UK)",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      }
+    ]
+  },
+  {
+    "slug": "weather-data",
+    "query": "weather forecast",
+    "source": "NWS / open-meteo APIs",
+    "legal_safety": 0.9,
+    "build_cost_h": 4,
+    "score": 0.848,
+    "demand_runs30d": 1014,
+    "demand_users30d": 37,
+    "avg_rating": 4.0,
+    "fail_rate_30d": 0.0,
+    "weakness": 0.6,
+    "incumbents": [
+      {
+        "actor": "xtracto/ventusky-weather-scraper",
+        "title": "Ventusky Weather Forecast Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 3,
+        "runs30d": 533,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "fortuitous_pirate/windguru-forecast-agent",
+        "title": "Windguru Weather Forecast Agent",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 2,
+        "runs30d": 38,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "lulzasaur/nws-weather-scraper",
+        "title": "NWS Weather Forecast Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 9,
+        "runs30d": 82,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "gentle_cloud/weather-forecast-api",
+        "title": "Weather Forecast API",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 12,
+        "runs30d": 227,
+        "failed30d": 0,
+        "pricingModel": "FREE"
+      },
+      {
+        "actor": "cloud9_ai/open-meteo-scraper",
+        "title": "Open-Meteo Weather Scraper - Forecast & Historical Data",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 9,
+        "runs30d": 45,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "velvety_bedbug/noaa-weather-forecast-scraper",
+        "title": "Noaa Weather Forecast Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 0,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "agentx/weather-forecast-api",
+        "title": "Weather Forecast API",
+        "rating": 4,
+        "reviews": 1,
+        "users30d": 1,
+        "runs30d": 31,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "fanciful_geode/weather-forecast-scraper",
+        "title": "Weather Forecast Scraper \u2014 Open-Meteo Free API",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      }
+    ]
+  },
+  {
+    "slug": "github-repos",
+    "query": "github repository data",
+    "source": "GitHub REST API (rate limits)",
+    "legal_safety": 0.7,
+    "build_cost_h": 6,
+    "score": 0.824,
+    "demand_runs30d": 472,
+    "demand_users30d": 25,
+    "avg_rating": 0,
+    "fail_rate_30d": 0.0021,
+    "weakness": 1.008,
+    "incumbents": [
+      {
+        "actor": "moving_beacon-owner1/github----repository-search-data-scraper",
+        "title": "GitHub \u2014 Repository Search & Data Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 12,
+        "runs30d": 237,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "fortuitous_pirate/github-scraper",
+        "title": "Github Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "lulzasaur/github-stars-scraper",
+        "title": "GitHub Stars Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 0,
+        "runs30d": 30,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "fetch_cat/github-repositories-search-scraper",
+        "title": "GitHub Repositories Search Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 31,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "cryptosignals/github-scraper",
+        "title": "GitHub Scraper - Repos, Stars, Issues & Profiles",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 2,
+        "runs30d": 76,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "hipersoft/github-scraper",
+        "title": "GitHub Scraper \u2014 Repositories & User Profiles",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 31,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "benthepythondev/github-repository-intelligence",
+        "title": "\ud83d\udc19 GitHub Repository Intelligence - Repos & READMEs",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 8,
+        "runs30d": 38,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      }
+    ]
+  },
+  {
+    "slug": "sec-edgar",
+    "query": "sec edgar filings",
+    "source": "Official SEC APIs (data.sec.gov, efts.sec.gov)",
+    "legal_safety": 1.0,
+    "build_cost_h": 6,
+    "score": 0.805,
+    "demand_runs30d": 455,
+    "demand_users30d": 28,
+    "avg_rating": 4.0,
+    "fail_rate_30d": 0.022,
+    "weakness": 0.688,
+    "incumbents": [
+      {
+        "actor": "constant_quadruped/sec-edgar-filings-scraper",
+        "title": "SEC Edgar Filings Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 22,
+        "runs30d": 164,
+        "failed30d": 0,
+        "pricingModel": "FREE"
+      },
+      {
+        "actor": "ryanclinton/edgar-filing-search",
+        "title": "SEC EDGAR Filing Search & Signal Engine \u2014 Risk, Events & Alerts",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 99,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "benthepythondev/sec-edgar-filings-intelligence",
+        "title": "\ud83c\udfdb\ufe0f SEC EDGAR Filings - 10-K, 10-Q, 8-K & More",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 0,
+        "runs30d": 35,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "nexgendata/sec-edgar-filings-api",
+        "title": "SEC EDGAR Filings API \u2014 Official Source, No API Key",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "crawlerbros/sec-edgar-scraper",
+        "title": "SEC EDGAR Filings Scraper",
+        "rating": 4,
+        "reviews": 1,
+        "users30d": 2,
+        "runs30d": 38,
+        "failed30d": 9,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "martc03/sec-edgar-filings",
+        "title": "SEC EDGAR Filings Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 32,
+        "failed30d": 1,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "jweninger16/sec-edgar-filings-scraper",
+        "title": "SEC EDGAR Filings Scraper & Parser",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 0,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "FREE"
+      },
+      {
+        "actor": "copious_atoll/sec-edgar-filings-scraper",
+        "title": "SEC EDGAR Filings Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      }
+    ]
+  },
+  {
+    "slug": "uspto-trademarks",
+    "query": "trademark search",
+    "source": "USPTO open data APIs",
+    "legal_safety": 1.0,
+    "build_cost_h": 10,
+    "score": 0.593,
+    "demand_runs30d": 46843,
+    "demand_users30d": 39,
+    "avg_rating": 5.0,
+    "fail_rate_30d": 0.0003,
+    "weakness": 0.401,
+    "incumbents": [
+      {
+        "actor": "nexgendata/euipo-esearch-trademarks",
+        "title": "EUIPO Trademark Search \u2014 EU Trade Mark Lookup & Clearance",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 4,
+        "runs30d": 88,
+        "failed30d": 3,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "nexgendata/uspto-trademark-search",
+        "title": "Trademark Search \u2014 USPTO Serial + IP Australia Name Search",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 13,
+        "runs30d": 656,
+        "failed30d": 6,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "dev00/uspto-trademark-api",
+        "title": "USPTO Trademark Batch Search API",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 12,
+        "runs30d": 45782,
+        "failed30d": 2,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "jungle_synthesizer/euipo-trademark-scraper",
+        "title": "EUIPO Trademark Scraper - EU Trademark Search & Monitoring",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 168,
+        "failed30d": 3,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "sian.agency/uspto-trademark-scraper",
+        "title": "USPTO Trademark Search \u2014 Lookup, Availability & Data",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 3,
+        "runs30d": 41,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "hanamira/patent-trademark-search",
+        "title": "Patent Trademark Search",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 4,
+        "runs30d": 48,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "memo23/uspto-trademark-scraper",
+        "title": "USPTO Trademark Search \u2014 Wordmark, Owner, Class & Serial Lookup",
+        "rating": 5,
+        "reviews": 1,
+        "users30d": 0,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "ryanclinton/euipo-trademark-search",
+        "title": "EUIPO Trademark Search \u2014 By Name, Class & Status",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 2,
+        "runs30d": 31,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      }
+    ]
+  },
+  {
+    "slug": "product-hunt",
+    "query": "product hunt",
+    "source": "Public pages; official API is OAuth",
+    "legal_safety": 0.6,
+    "build_cost_h": 8,
+    "score": 0.548,
+    "demand_runs30d": 3175,
+    "demand_users30d": 227,
+    "avg_rating": 4.72,
+    "fail_rate_30d": 0.109,
+    "weakness": 0.692,
+    "incumbents": [
+      {
+        "actor": "maximedupre/product-hunt-scraper",
+        "title": "Product Hunt Scraper",
+        "rating": 4.645780237186674,
+        "reviews": 4,
+        "users30d": 108,
+        "runs30d": 1020,
+        "failed30d": 32,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "muzafferkadir/product-hunt-leaderboard",
+        "title": "Product Hunt Leaderboard Scraper | Daily, Weekly, Monthly",
+        "rating": 4.999999999999999,
+        "reviews": 3,
+        "users30d": 29,
+        "runs30d": 1030,
+        "failed30d": 2,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "parseforge/producthunt-scraper",
+        "title": "Product Hunt Launches Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 14,
+        "runs30d": 143,
+        "failed30d": 31,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "fatihtahta/product-hunt-scraper-fast-reliable-4-1k",
+        "title": "Product Hunt Scraper with Founders & Emails",
+        "rating": 4.235082730488282,
+        "reviews": 8,
+        "users30d": 28,
+        "runs30d": 227,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "logiover/product-hunt-daily-launches-scraper",
+        "title": "Product Hunt Daily Launches Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 18,
+        "runs30d": 124,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "memo23/producthunt-scraper",
+        "title": "Product Hunt [Only $0.80\ud83d\udcb0] Scraper \u00b7Launches, Reviews & Emails",
+        "rating": 5,
+        "reviews": 1,
+        "users30d": 19,
+        "runs30d": 568,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "khadinakbar/producthunt-scraper-pro",
+        "title": "Product Hunt Scraper (with Email Enrichment)",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 11,
+        "runs30d": 34,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "piotrv1001/product-hunt-scraper",
+        "title": "Product Hunt Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 0,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      }
+    ]
+  },
+  {
+    "slug": "flight-status",
+    "query": "flight status",
+    "source": "Mostly paywalled/licensed sources",
+    "legal_safety": 0.5,
+    "build_cost_h": 8,
+    "score": 0.478,
+    "demand_runs30d": 394,
+    "demand_users30d": 11,
+    "avg_rating": 0,
+    "fail_rate_30d": 0.0,
+    "weakness": 1.0,
+    "incumbents": [
+      {
+        "actor": "apt_marble/flight-status-tracker",
+        "title": "Flight Status Tracker",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 4,
+        "runs30d": 160,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "parseforge/flightstats-scraper",
+        "title": "FlightStats Flight Status Scraper - Delays, Gates, Tails",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 2,
+        "runs30d": 11,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "automation-lab/phoenix-sky-harbor-flight-status",
+        "title": "Phoenix Sky Harbor Flight Status Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 12,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "apt_marble/airport-departures-arrivals-board-scraper",
+        "title": "Airport Departures & Arrivals Board Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 144,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "delightful_unicorn/smart-travel-ops-api",
+        "title": "Smart Travel Ops API",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 0,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "moving_beacon-owner1/flightaware-flight-scraper",
+        "title": "FlightAware Flight Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 3,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "rl1987/qatarairways-api-scraper",
+        "title": "Qatar Airways Flight Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 4,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "maximedupre/flight-tracker",
+        "title": "Live Flight Tracker",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 31,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      }
+    ]
+  },
+  {
+    "slug": "federal-register",
+    "query": "federal register",
+    "source": "Official federalregister.gov API",
+    "legal_safety": 1.0,
+    "build_cost_h": 5,
+    "score": 0.462,
+    "demand_runs30d": 330,
+    "demand_users30d": 5,
+    "avg_rating": 5.0,
+    "fail_rate_30d": 0.0,
+    "weakness": 0.4,
+    "incumbents": [
+      {
+        "actor": "ryanclinton/federal-register-search",
+        "title": "Federal Register Rules & Regulations Search",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 0,
+        "runs30d": 126,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "pink_comic/federal-register-search",
+        "title": "Federal Register Scraper - Rules & Regulations API",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 0,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "benthepythondev/federal-register-intelligence",
+        "title": "\ud83c\udfdb\ufe0f Federal Register Intelligence - Track US Rules",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 0,
+        "runs30d": 30,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "challenge_logic/federal-register-deadline-monitor",
+        "title": "Federal Register Deadline Monitor",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "foo121/federal-register-scraper",
+        "title": "Federal Register Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "scrapemint/federal-register-monitor",
+        "title": "Federal Register Monitor: New Rules & Notices",
+        "rating": 5,
+        "reviews": 1,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "straightforward_hydra/federal-register-scraper",
+        "title": "Federal Register Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "maximedupre/federal-register",
+        "title": "Federal Register Scraper \u2014 Rules & Regulations",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      }
+    ]
+  },
+  {
+    "slug": "fda-recalls",
+    "query": "fda recall",
+    "source": "Official openFDA enforcement API",
+    "legal_safety": 1.0,
+    "build_cost_h": 5,
+    "score": 0.46,
+    "demand_runs30d": 282,
+    "demand_users30d": 9,
+    "avg_rating": 5.0,
+    "fail_rate_30d": 0.0,
+    "weakness": 0.4,
+    "incumbents": [
+      {
+        "actor": "scrapers_lat/openfda-food-recalls-scraper",
+        "title": "FDA Food Recalls Scraper - openFDA Enforcement API",
+        "rating": 5,
+        "reviews": 1,
+        "users30d": 3,
+        "runs30d": 62,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "benthepythondev/fda-recall-intelligence",
+        "title": "\ud83d\udea8 FDA Recall Intelligence - Drug, Device & Food",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 0,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "ryanclinton/fda-food-recall-monitor",
+        "title": "FDA Food Recall Monitor",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 0,
+        "runs30d": 44,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "inexhaustible_glass/fda-intelligence-scraper",
+        "title": "\ud83d\udc8a FDA Intelligence \u2014 Recalls, Approvals & Adverse Events",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 2,
+        "runs30d": 30,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "bikram07/fda-recall-monitor",
+        "title": "FDA Recall Monitor: Drug, Device & Food Recall Alerts API",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 30,
+        "failed30d": 0,
+        "pricingModel": "FREE"
+      },
+      {
+        "actor": "flash_scraper/fda-recall-scraper",
+        "title": "FDA Recalls Scraper - openFDA Drug, Device & Food Data",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "benthepythondev/openfda-scraper",
+        "title": "FDA Recalls Scraper - Food, Drug & Device",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "maydit/us-fda-recalls-scraper",
+        "title": "FDA Recalls Scraper - Drug, Device & Food",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      }
+    ]
+  },
+  {
+    "slug": "job-postings-ats",
+    "query": "greenhouse lever jobs",
+    "source": "Public ATS JSON endpoints",
+    "legal_safety": 0.8,
+    "build_cost_h": 6,
+    "score": 0.454,
+    "demand_runs30d": 1440,
+    "demand_users30d": 121,
+    "avg_rating": 5.0,
+    "fail_rate_30d": 0.0014,
+    "weakness": 0.406,
+    "incumbents": [
+      {
+        "actor": "bovi/greenhouse-lever-ashby-job-scraper",
+        "title": "Greenhouse, Lever & Ashby Job Scraper API | $1.50/1K",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 104,
+        "runs30d": 1104,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "blackfalcondata/greenhouse-scraper",
+        "title": "Greenhouse, Lever & Ashby Job Scraper API \ud83d\udcb0 $0.95/1K",
+        "rating": 4.999999999999999,
+        "reviews": 1,
+        "users30d": 6,
+        "runs30d": 58,
+        "failed30d": 2,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "mambalabs/gtm-hiring-signal-scraper",
+        "title": "Greenhouse Lever Ashby Job Scraper: GTM Hiring Signals",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 101,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "scrapersdelight/ats-jobs-scraper",
+        "title": "Greenhouse, Lever & Ashby Job Scraper \u2014 Companies' Open Roles",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 5,
+        "runs30d": 54,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "moving_beacon-owner1/workday-greenhouse-lever-job-scraper",
+        "title": "Workday + Greenhouse + Lever Job Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 33,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "seemuapps/ats-jobs-scraper",
+        "title": "Greenhouse, Lever & Ashby Jobs Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 2,
+        "runs30d": 31,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "freshactors/greenhouse-lever-jobs-scraper",
+        "title": "Greenhouse & Lever ATS Jobs Scraper \u2014 JSON/CSV Export",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 0,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "flash_scraper/ats-job-scraper",
+        "title": "ATS Job Scraper \u2014 Greenhouse, Lever & Ashby Jobs API",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 2,
+        "runs30d": 30,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      }
+    ]
+  },
+  {
+    "slug": "clinical-trials",
+    "query": "clinical trials",
+    "source": "Official ClinicalTrials.gov API v2",
+    "legal_safety": 1.0,
+    "build_cost_h": 6,
+    "score": 0.413,
+    "demand_runs30d": 258,
+    "demand_users30d": 8,
+    "avg_rating": 5.0,
+    "fail_rate_30d": 0.0,
+    "weakness": 0.4,
+    "incumbents": [
+      {
+        "actor": "parseforge/clinicaltrials-scraper",
+        "title": "ClinicalTrials.gov Scraper",
+        "rating": 5,
+        "reviews": 1,
+        "users30d": 1,
+        "runs30d": 36,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "logiover/clinicaltrials-gov-scraper",
+        "title": "ClinicalTrials.gov Scraper \u2014 Trials Data, No API Key",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 3,
+        "runs30d": 32,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "alizarin_refrigerator-owner/clinicaltrials-gov-api---clinical-study-data",
+        "title": "ClinicalTrials.gov API - Clinical Study Data",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "ryanclinton/clinical-trial-tracker",
+        "title": "Clinical Trial Tracker \u2014 500K+ ClinicalTrials.gov",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 44,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "labrat011/clinical-trial-site-contact-finder",
+        "title": "Clinical Trial Site Contact Finder",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 0,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "datamule/clinicaltrials-gov-scraper",
+        "title": "ClinicalTrials.gov Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "quotient_variablebarrier/healthcare-data-scraper",
+        "title": "Healthcare Data Scraper - CMS, FDA & Clinical Trials",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 0,
+        "runs30d": 30,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "cblu/clinical-trials-scraper",
+        "title": "ClinicalTrials.gov Scraper \u2014 Trial Search & Bulk Export API",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      }
+    ]
+  },
+  {
+    "slug": "nih-grants",
+    "query": "nih grants",
+    "source": "NIH RePORTER API",
+    "legal_safety": 1.0,
+    "build_cost_h": 6,
+    "score": 0.392,
+    "demand_runs30d": 179,
+    "demand_users30d": 7,
+    "avg_rating": 5.0,
+    "fail_rate_30d": 0.0,
+    "weakness": 0.4,
+    "incumbents": [
+      {
+        "actor": "pink_comic/nih-reporter-search",
+        "title": "NIH RePORTER Grants Scraper - Research Funding API",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 0,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "red.cars/nih-grants-mcp",
+        "title": "NIH Grants MCP \u2014 AI Agent Grant Intelligence",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 2,
+        "runs30d": 1,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "publicmoney/nih-reporter-grants-scraper",
+        "title": "NIH RePORTER Grant Scraper",
+        "rating": 5,
+        "reviews": 1,
+        "users30d": 0,
+        "runs30d": 3,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "foo121/nih-reporter-scraper",
+        "title": "NIH RePORTER Grants Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "scrapers_lat/usa-nih-reporter-scraper",
+        "title": "NIH Research Grants & Funding Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "scrapemint/nih-grant-finder",
+        "title": "NIH Research Grant Finder: Awards & PIs",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "taroyamada/nih-grant-publication-output-report",
+        "title": "NIH Grant Publication Linkage & Output Report",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 30,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "nexgenwatch/nih-reporter-grant-award-delta",
+        "title": "NIH RePORTER Grant Award Delta",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      }
+    ]
+  },
+  {
+    "slug": "google-trends",
+    "query": "google trends",
+    "source": "Unofficial endpoints; brittle",
+    "legal_safety": 0.4,
+    "build_cost_h": 10,
+    "score": 0.345,
+    "demand_runs30d": 85416,
+    "demand_users30d": 1987,
+    "avg_rating": 4.76,
+    "fail_rate_30d": 0.0737,
+    "weakness": 0.543,
+    "incumbents": [
+      {
+        "actor": "apify/google-trends-scraper",
+        "title": "Google Trends Scraper",
+        "rating": 3.677352332297747,
+        "reviews": 32,
+        "users30d": 1280,
+        "runs30d": 21726,
+        "failed30d": 546,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "data_xplorer/google-trends-fast-scraper",
+        "title": "Google Trends Scraper",
+        "rating": 4.882045380583565,
+        "reviews": 4,
+        "users30d": 358,
+        "runs30d": 28731,
+        "failed30d": 4,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "khadinakbar/google-trends-scraper",
+        "title": "Google Trends Scraper \u2014 Interest, Regions & Queries",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 98,
+        "runs30d": 1014,
+        "failed30d": 121,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "vnx0/google-trends-scraper",
+        "title": "Google Trends Daily Scraper - Real-Time Trending Keywords API",
+        "rating": 5,
+        "reviews": 1,
+        "users30d": 121,
+        "runs30d": 13862,
+        "failed30d": 59,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "automation-lab/google-trends-scraper",
+        "title": "Google Trends Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 61,
+        "runs30d": 2575,
+        "failed30d": 9,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "leadsbrary/google-trends-scraper",
+        "title": "Google Trends Scraper",
+        "rating": 5,
+        "reviews": 1,
+        "users30d": 19,
+        "runs30d": 15561,
+        "failed30d": 1,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "easyapi/google-realtime-trends-data-scraper",
+        "title": "Google RealTime Trends Data Scraper",
+        "rating": 5,
+        "reviews": 1,
+        "users30d": 6,
+        "runs30d": 191,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "data_xplorer/google-trends-trending-now",
+        "title": "Google Trends Trending Now",
+        "rating": 5,
+        "reviews": 2,
+        "users30d": 44,
+        "runs30d": 1756,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      }
+    ]
+  },
+  {
+    "slug": "hacker-news",
+    "query": "hacker news",
+    "source": "Official Firebase/Algolia HN API",
+    "legal_safety": 0.9,
+    "build_cost_h": 4,
+    "score": 0.313,
+    "demand_runs30d": 1170,
+    "demand_users30d": 90,
+    "avg_rating": 5.0,
+    "fail_rate_30d": 0.0026,
+    "weakness": 0.21,
+    "incumbents": [
+      {
+        "actor": "ryanclinton/hackernews-search",
+        "title": "Hacker News Search \u2014 Stories, Comments & Developer Sentiment",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 27,
+        "runs30d": 198,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "gentle_cloud/hacker-news-scraper",
+        "title": "Hacker News Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 39,
+        "runs30d": 507,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "scrapemint/emerging-launch-radar-pipeline",
+        "title": "Emerging Launch Radar: GitHub Trending + Hacker News Momentum",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 2,
+        "runs30d": 34,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "automation-lab/hackernews-scraper",
+        "title": "Hacker News Scraper",
+        "rating": 4.999999999999999,
+        "reviews": 1,
+        "users30d": 7,
+        "runs30d": 156,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "constructive_calm/hacker-news-scraper",
+        "title": "Hacker News Scraper",
+        "rating": 5,
+        "reviews": 1,
+        "users30d": 4,
+        "runs30d": 59,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "getascraper/hn-hiring-scraper",
+        "title": "Hacker News Job Scraper: Who is Hiring Posts",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 32,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "logiover/hacker-news-who-is-hiring-scraper",
+        "title": "Hacker News Who Is Hiring Scraper \u2013 Jobs, Salary & Email",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 5,
+        "runs30d": 135,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "shahidirfan/hacker-news-data-scraper",
+        "title": "Hacker News Data Scraper",
+        "rating": 5,
+        "reviews": 2,
+        "users30d": 5,
+        "runs30d": 49,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      }
+    ]
+  },
+  {
+    "slug": "crypto-listings",
+    "query": "crypto token listings",
+    "source": "Mixed ToS; exchange APIs vary",
+    "legal_safety": 0.5,
+    "build_cost_h": 6,
+    "score": 0.236,
+    "demand_runs30d": 224,
+    "demand_users30d": 6,
+    "avg_rating": 5.0,
+    "fail_rate_30d": 0.0179,
+    "weakness": 0.471,
+    "incumbents": [
+      {
+        "actor": "crawlerbros/dexscreener-token-listings",
+        "title": "DexScreener Token Listings & Pair Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 2,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "jungle_synthesizer/cex-token-listings-tracker",
+        "title": "CEX Token Listings Tracker - New Listings & Delistings",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 30,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "parseforge/base-org-token-list-scraper",
+        "title": "Base Token List Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 29,
+        "failed30d": 3,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "george.the.developer/unblockable-ico-drops-scraper",
+        "title": "ICO Drops Scraper - Crypto Token Data and Social Links",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 31,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "george.the.developer/unblockable-ico-drops-scraper-clone",
+        "title": "ICO Drops Bulk Scraper - Enterprise Crypto Data Extraction",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 0,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "scrapemint/crypto-whale-token-launch-tracker",
+        "title": "Crypto Whale Tracker: DEX Token Launches + Wallet Alerts",
+        "rating": 5,
+        "reviews": 3,
+        "users30d": 0,
+        "runs30d": 29,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "parseforge/kucoin-tickers-scraper",
+        "title": "KuCoin Crypto Tickers Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 0,
+        "runs30d": 30,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      },
+      {
+        "actor": "automation-lab/pumpfun-new-token-listings-scraper",
+        "title": "Pump.fun New Token Listings Scraper",
+        "rating": 0,
+        "reviews": 0,
+        "users30d": 1,
+        "runs30d": 17,
+        "failed30d": 0,
+        "pricingModel": "PAY_PER_EVENT"
+      }
+    ]
+  },
+  {
+    "slug": "court-opinions",
+    "query": "court opinions",
+    "source": "CourtListener API (PII care needed)",
+    "legal_safety": 0.8,
+    "build_cost_h": 8,
+    "score": 0.0,
+    "demand": 0,
+    "weakness": 1.0,
+    "incumbents": []
+  }
+]

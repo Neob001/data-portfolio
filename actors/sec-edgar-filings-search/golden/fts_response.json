@@ -1,0 +1,604 @@
+{
+ "took": 64,
+ "timed_out": false,
+ "_shards": {
+  "total": 50,
+  "successful": 50,
+  "skipped": 0,
+  "failed": 0
+ },
+ "hits": {
+  "total": {
+   "value": 7873,
+   "relation": "eq"
+  },
+  "max_score": 12.459394,
+  "hits": [
+   {
+    "_index": "edgar_file",
+    "_id": "0001144204-11-036302:v226209_ex99-1.htm",
+    "_score": 12.459394,
+    "_source": {
+     "ciks": [
+      "0001334699"
+     ],
+     "period_ending": "2011-06-17",
+     "file_num": [
+      "000-54303"
+     ],
+     "display_names": [
+      "Li3 Energy, Inc.  (CIK 0001334699)"
+     ],
+     "xsl": null,
+     "sequence": 3,
+     "root_forms": [
+      "8-K"
+     ],
+     "file_date": "2011-06-17",
+     "biz_states": [
+      "R5"
+     ],
+     "sics": [
+      "3990"
+     ],
+     "form": "8-K",
+     "adsh": "0001144204-11-036302",
+     "film_num": [
+      "11919403"
+     ],
+     "biz_locations": [
+      "Lima 27, R5"
+     ],
+     "file_type": "EX-99.1",
+     "file_description": null,
+     "inc_states": [
+      "NV"
+     ],
+     "items": [
+      "7.01",
+      "9.01"
+     ]
+    }
+   },
+   {
+    "_index": "edgar_file",
+    "_id": "0001140361-24-009364:ny20021964x4_ex99-1.htm",
+    "_score": 12.38951,
+    "_source": {
+     "ciks": [
+      "0001728205"
+     ],
+     "period_ending": "2024-02-26",
+     "file_num": [
+      "001-38427"
+     ],
+     "display_names": [
+      "Piedmont Lithium Inc.  (PLL, PLLTL)  (CIK 0001728205)"
+     ],
+     "xsl": null,
+     "sequence": 2,
+     "root_forms": [
+      "8-K"
+     ],
+     "file_date": "2024-02-26",
+     "biz_states": [
+      "NC"
+     ],
+     "sics": [
+      "1400"
+     ],
+     "form": "8-K",
+     "adsh": "0001140361-24-009364",
+     "film_num": [
+      "24673517"
+     ],
+     "biz_locations": [
+      "Belmont, NC"
+     ],
+     "file_type": "EX-99.1",
+     "file_description": "EXHIBIT 99.1",
+     "inc_states": [],
+     "items": [
+      "7.01",
+      "9.01"
+     ]
+    }
+   },
+   {
+    "_index": "edgar_file",
+    "_id": "0001144204-13-030852:v345845_ex99-1.htm",
+    "_score": 12.367791,
+    "_source": {
+     "ciks": [
+      "0001334699"
+     ],
+     "period_ending": "2013-05-21",
+     "file_num": [
+      "000-54303"
+     ],
+     "display_names": [
+      "Li3 Energy, Inc.  (CIK 0001334699)"
+     ],
+     "xsl": null,
+     "sequence": 3,
+     "root_forms": [
+      "8-K"
+     ],
+     "file_date": "2013-05-21",
+     "biz_states": [
+      "R5"
+     ],
+     "sics": [
+      "3990"
+     ],
+     "form": "8-K",
+     "adsh": "0001144204-13-030852",
+     "film_num": [
+      "13862796"
+     ],
+     "biz_locations": [
+      "Lima 27, R5"
+     ],
+     "file_type": "EX-99.1",
+     "file_description": "EXHIBIT 99.1",
+     "inc_states": [
+      "NV"
+     ],
+     "items": [
+      "1.01",
+      "7.01",
+      "8.01",
+      "9.01"
+     ]
+    }
+   }
+  ]
+ },
+ "aggregations": {
+  "entity_filter": {
+   "doc_count_error_upper_bound": 50,
+   "sum_other_doc_count": 4728,
+   "buckets": [
+    {
+     "key": "Piedmont Lithium Inc.  (PLL, PLLTL)  (CIK 0001728205)",
+     "doc_count": 254
+    },
+    {
+     "key": "LITHIUM TECHNOLOGY CORP  (CIK 0000804154)",
+     "doc_count": 224
+    },
+    {
+     "key": "Enertopia Corp.  (ENRT)  (CIK 0001346022)",
+     "doc_count": 222
+    },
+    {
+     "key": "Lithium Exploration Group, Inc.  (CIK 0001375576)",
+     "doc_count": 210
+    },
+    {
+     "key": "FMC CORP  (FMC)  (CIK 0000037785)",
+     "doc_count": 189
+    },
+    {
+     "key": "KULR Technology Group, Inc.  (KULR)  (CIK 0001662684)",
+     "doc_count": 145
+    },
+    {
+     "key": "ALBEMARLE CORP  (ALB, ALB-PA)  (CIK 0000915913)",
+     "doc_count": 141
+    },
+    {
+     "key": "Rockwood Holdings, Inc.  (CIK 0001315695)",
+     "doc_count": 139
+    },
+    {
+     "key": "ENER1 INC  (CIK 0000895642)",
+     "doc_count": 106
+    },
+    {
+     "key": "Polypore International, Inc.  (CIK 0001292556)",
+     "doc_count": 106
+    },
+    {
+     "key": "CANADIAN DERIVATIVES CLEARING CORP  (CIK 0000319643)",
+     "doc_count": 105
+    },
+    {
+     "key": "Flux Power Holdings, Inc.  (FLUX)  (CIK 0001083743)",
+     "doc_count": 105
+    },
+    {
+     "key": "VALENCE TECHNOLOGY INC  (CIK 0000885551)",
+     "doc_count": 99
+    },
+    {
+     "key": "ULTRALIFE BATTERIES INC  (ULBI)  (CIK 0000875657)",
+     "doc_count": 98
+    },
+    {
+     "key": "AROTECH CORP  (CIK 0000916529)",
+     "doc_count": 88
+    },
+    {
+     "key": "Li3 Energy, Inc.  (CIK 0001334699)",
+     "doc_count": 87
+    },
+    {
+     "key": "ALTAIR NANOTECHNOLOGIES INC  (CIK 0001016546)",
+     "doc_count": 86
+    },
+    {
+     "key": "ASP Isotopes Inc.  (ASPI)  (CIK 0001921865)",
+     "doc_count": 82
+    },
+    {
+     "key": "AMERICAN BATTERY TECHNOLOGY Co  (ABAT)  (CIK 0001576873)",
+     "doc_count": 81
+    },
+    {
+     "key": "COMPASS MINERALS INTERNATIONAL INC  (CMP)  (CIK 0001227654)",
+     "doc_count": 75
+    },
+    {
+     "key": "CHINA BAK BATTERY INC  (CBAT)  (CIK 0001117171)",
+     "doc_count": 74
+    },
+    {
+     "key": "Atlas Lithium Corp  (ATLX)  (CIK 0001540684)",
+     "doc_count": 69
+    },
+    {
+     "key": "Livent Corp.  (CIK 0001742924)",
+     "doc_count": 64
+    },
+    {
+     "key": "Comstock Inc.  (LODE)  (CIK 0001120970)",
+     "doc_count": 63
+    },
+    {
+     "key": "5E Advanced Materials, Inc.  (FEAM, FEAV)  (CIK 0001888654)",
+     "doc_count": 61
+    },
+    {
+     "key": "Highpower International, Inc.  (CIK 0001368308)",
+     "doc_count": 58
+    },
+    {
+     "key": "QuantumScape Corp  (QS)  (CIK 0001811414)",
+     "doc_count": 56
+    },
+    {
+     "key": "Eos Energy Enterprises, Inc.  (EOSE, EOSEW)  (CIK 0001805077)",
+     "doc_count": 54
+    },
+    {
+     "key": "LITHIUM AMERICAS CORP.  (LAC)  (CIK 0001966983)",
+     "doc_count": 52
+    },
+    {
+     "key": "ASPEN AEROGELS INC  (ASPN)  (CIK 0001145986)",
+     "doc_count": 47
+    }
+   ]
+  },
+  "sic_filter": {
+   "doc_count_error_upper_bound": 1,
+   "sum_other_doc_count": 1128,
+   "buckets": [
+    {
+     "key": "3690",
+     "doc_count": 1908
+    },
+    {
+     "key": "1000",
+     "doc_count": 813
+    },
+    {
+     "key": "1400",
+     "doc_count": 613
+    },
+    {
+     "key": "2800",
+     "doc_count": 452
+    },
+    {
+     "key": "6770",
+     "doc_count": 402
+    },
+    {
+     "key": "2890",
+     "doc_count": 296
+    },
+    {
+     "key": "3711",
+     "doc_count": 181
+    },
+    {
+     "key": "3670",
+     "doc_count": 165
+    },
+    {
+     "key": "2834",
+     "doc_count": 164
+    },
+    {
+     "key": "2821",
+     "doc_count": 155
+    },
+    {
+     "key": "3674",
+     "doc_count": 149
+    },
+    {
+     "key": "3990",
+     "doc_count": 137
+    },
+    {
+     "key": "2810",
+     "doc_count": 129
+    },
+    {
+     "key": "1040",
+     "doc_count": 118
+    },
+    {
+     "key": "6200",
+     "doc_count": 105
+    },
+    {
+     "key": "4899",
+     "doc_count": 102
+    },
+    {
+     "key": "2860",
+     "doc_count": 81
+    },
+    {
+     "key": "3714",
+     "doc_count": 80
+    },
+    {
+     "key": "4931",
+     "doc_count": 76
+    },
+    {
+     "key": "1311",
+     "doc_count": 75
+    },
+    {
+     "key": "4911",
+     "doc_count": 72
+    },
+    {
+     "key": "3537",
+     "doc_count": 71
+    },
+    {
+     "key": "7372",
+     "doc_count": 64
+    },
+    {
+     "key": "4955",
+     "doc_count": 57
+    },
+    {
+     "key": "3721",
+     "doc_count": 54
+    },
+    {
+     "key": "3460",
+     "doc_count": 53
+    },
+    {
+     "key": "3330",
+     "doc_count": 48
+    },
+    {
+     "key": "3350",
+     "doc_count": 47
+    },
+    {
+     "key": "5030",
+     "doc_count": 47
+    },
+    {
+     "key": "2531",
+     "doc_count": 43
+    }
+   ]
+  },
+  "biz_states_filter": {
+   "doc_count_error_upper_bound": 0,
+   "sum_other_doc_count": 331,
+   "buckets": [
+    {
+     "key": "CA",
+     "doc_count": 1051
+    },
+    {
+     "key": "NY",
+     "doc_count": 638
+    },
+    {
+     "key": "NV",
+     "doc_count": 621
+    },
+    {
+     "key": "PA",
+     "doc_count": 589
+    },
+    {
+     "key": "TX",
+     "doc_count": 463
+    },
+    {
+     "key": "NC",
+     "doc_count": 402
+    },
+    {
+     "key": "F4",
+     "doc_count": 395
+    },
+    {
+     "key": "FL",
+     "doc_count": 290
+    },
+    {
+     "key": "NJ",
+     "doc_count": 290
+    },
+    {
+     "key": "A1",
+     "doc_count": 285
+    },
+    {
+     "key": "AZ",
+     "doc_count": 269
+    },
+    {
+     "key": "OH",
+     "doc_count": 220
+    },
+    {
+     "key": "A6",
+     "doc_count": 214
+    },
+    {
+     "key": "MA",
+     "doc_count": 183
+    },
+    {
+     "key": "CO",
+     "doc_count": 173
+    },
+    {
+     "key": "MI",
+     "doc_count": 137
+    },
+    {
+     "key": "DC",
+     "doc_count": 115
+    },
+    {
+     "key": "OK",
+     "doc_count": 110
+    },
+    {
+     "key": "WI",
+     "doc_count": 106
+    },
+    {
+     "key": "IL",
+     "doc_count": 95
+    },
+    {
+     "key": "CT",
+     "doc_count": 94
+    },
+    {
+     "key": "OR",
+     "doc_count": 93
+    },
+    {
+     "key": "R5",
+     "doc_count": 87
+    },
+    {
+     "key": "KS",
+     "doc_count": 80
+    },
+    {
+     "key": "IN",
+     "doc_count": 58
+    },
+    {
+     "key": "MO",
+     "doc_count": 58
+    },
+    {
+     "key": "L2",
+     "doc_count": 57
+    },
+    {
+     "key": "GA",
+     "doc_count": 56
+    },
+    {
+     "key": "MN",
+     "doc_count": 47
+    },
+    {
+     "key": "WA",
+     "doc_count": 47
+    }
+   ]
+  },
+  "form_filter": {
+   "doc_count_error_upper_bound": 0,
+   "sum_other_doc_count": 0,
+   "buckets": [
+    {
+     "key": "8-K",
+     "doc_count": 7873
+    }
+   ]
+  }
+ },
+ "query": {
+  "_source": {
+   "exclude": [
+    "doc_text"
+   ]
+  },
+  "query": {
+   "bool": {
+    "must": [
+     {
+      "match_phrase": {
+       "doc_text": "lithium"
+      }
+     }
+    ],
+    "must_not": [],
+    "should": [],
+    "filter": [
+     {
+      "terms": {
+       "root_forms": [
+        "8-K"
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "from": 0,
+  "size": 100,
+  "aggregations": {
+   "form_filter": {
+    "terms": {
+     "field": "root_forms",
+     "size": 30
+    }
+   },
+   "entity_filter": {
+    "terms": {
+     "field": "display_names.raw",
+     "size": 30
+    }
+   },
+   "sic_filter": {
+    "terms": {
+     "field": "sics",
+     "size": 30
+    }
+   },
+   "biz_states_filter": {
+    "terms": {
+     "field": "biz_states",
+     "size": 30
+    }
+   }
+  }
+ }
+}

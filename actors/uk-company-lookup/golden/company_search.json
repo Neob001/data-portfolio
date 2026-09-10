@@ -1,0 +1,18 @@
+{
+  "_fixture_note": "Handcrafted from the documented Companies House search schema; replace with a live capture once an API key exists.",
+  "total_results": 2,
+  "items": [
+    {
+      "title": "EXAMPLE WIDGETS (HOLDINGS) LIMITED",
+      "company_number": "07654321",
+      "company_status": "active",
+      "kind": "searchresults#company"
+    },
+    {
+      "title": "EXAMPLE WIDGETS LIMITED",
+      "company_number": "01234567",
+      "company_status": "active",
+      "kind": "searchresults#company"
+    }
+  ]
+}

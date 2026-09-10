@@ -1,0 +1,51 @@
+{
+  "title": "EU Tenders (TED) Search & Monitor",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "cpvCodes": {
+      "title": "CPV codes",
+      "type": "array",
+      "description": "Common Procurement Vocabulary codes, e.g. 45000000 (construction), 72000000 (IT services), 33600000 (pharma).",
+      "editor": "stringList",
+      "prefill": ["72000000"]
+    },
+    "countries": {
+      "title": "Buyer countries",
+      "type": "array",
+      "description": "ISO 3166-1 alpha-3 codes of the buying authority's country, e.g. DEU, FRA, NLD.",
+      "editor": "stringList",
+      "nullable": true
+    },
+    "fullTextSearch": {
+      "title": "Keyword",
+      "type": "string",
+      "description": "Optional full-text keyword or phrase to match in the notice.",
+      "editor": "textfield",
+      "nullable": true
+    },
+    "publishedAfter": {
+      "title": "Published after",
+      "type": "string",
+      "description": "YYYY-MM-DD. Only notices published after this date.",
+      "editor": "textfield",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "nullable": true
+    },
+    "maxResults": {
+      "title": "Max results",
+      "type": "integer",
+      "description": "Stop after this many tender records (you are charged per record).",
+      "default": 200,
+      "minimum": 1,
+      "maximum": 10000
+    },
+    "sinceLastRun": {
+      "title": "Only new tenders since last run",
+      "type": "boolean",
+      "description": "Incremental mode: remembers the newest publication date per filter set; scheduled runs return only new notices.",
+      "default": false
+    }
+  },
+  "required": []
+}

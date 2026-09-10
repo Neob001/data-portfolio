@@ -1,0 +1,16 @@
+{
+  "name": "uk-company-lookup",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "UK company lookup via the official Companies House API.",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "apify": "^3.2.6"
+  },
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node --test 'tests/*.test.mjs'"
+  }
+}

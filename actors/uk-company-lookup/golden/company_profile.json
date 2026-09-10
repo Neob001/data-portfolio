@@ -1,0 +1,29 @@
+{
+  "_fixture_note": "Handcrafted from the documented Companies House companyProfile schema; replace with a live capture once an API key exists (see LEARNINGS.md).",
+  "company_name": "EXAMPLE WIDGETS LIMITED",
+  "company_number": "01234567",
+  "company_status": "active",
+  "type": "ltd",
+  "jurisdiction": "england-wales",
+  "date_of_creation": "2012-03-15",
+  "sic_codes": ["62012", "62020"],
+  "registered_office_address": {
+    "premises": "1",
+    "address_line_1": "Example Street",
+    "locality": "London",
+    "region": "Greater London",
+    "postal_code": "EC1A 1AA",
+    "country": "England"
+  },
+  "accounts": {
+    "next_due": "2026-12-31",
+    "overdue": false
+  },
+  "confirmation_statement": {
+    "next_due": "2026-11-15",
+    "overdue": false
+  },
+  "has_insolvency_history": false,
+  "has_charges": true,
+  "links": { "self": "/company/01234567" }
+}

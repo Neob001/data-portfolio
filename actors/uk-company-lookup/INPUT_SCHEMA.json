@@ -1,0 +1,30 @@
+{
+  "title": "UK Company Lookup (Companies House)",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "companyNumbers": {
+      "title": "Company numbers",
+      "type": "array",
+      "description": "Companies House numbers, e.g. 01234567 or SC123456. Cheapest and fastest lookup path.",
+      "editor": "stringList",
+      "nullable": true
+    },
+    "companyNames": {
+      "title": "Company names",
+      "type": "array",
+      "description": "Company names to resolve via official search (best match) and then look up.",
+      "editor": "stringList",
+      "nullable": true
+    },
+    "apiKey": {
+      "title": "Companies House API key",
+      "type": "string",
+      "description": "Free API key from developer.company-information.service.gov.uk (takes 2 minutes). Stored encrypted.",
+      "editor": "textfield",
+      "isSecret": true,
+      "nullable": true
+    }
+  },
+  "required": []
+}

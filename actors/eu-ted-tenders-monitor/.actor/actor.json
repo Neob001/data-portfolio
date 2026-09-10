@@ -1,0 +1,24 @@
+{
+  "actorSpecification": 1,
+  "name": "eu-ted-tenders-monitor",
+  "title": "EU Tenders (TED) Search & Monitor",
+  "description": "Search and monitor EU public procurement notices from TED by CPV code, country, keyword. Official TED API v3, flat records, incremental mode, pay per tender.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "categories": ["BUSINESS", "LEAD_GENERATION"],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "tenders": {
+          "title": "Tenders",
+          "transformation": { "fields": ["published_at", "title", "buyer_name", "submission_deadline", "notice_url"] },
+          "display": { "component": "table" }
+        }
+      }
+    }
+  }
+}

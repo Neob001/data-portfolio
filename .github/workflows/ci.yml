@@ -1,0 +1,32 @@
+name: ci
+on:
+  push:
+    branches: ['main', 'claude/**']
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Shared lib drift check
+        run: python3 scripts/sync_shared.py --check
+      - name: Actor unit + golden tests
+        run: |
+          set -e
+          for a in actors/*/; do
+            echo "=== $a"
+            (cd "$a" && node --test tests/*.test.mjs)
+          done
+      - name: Registry is valid JSON and covers every actor dir
+        run: |
+          python3 - <<'EOF'
+          import json, pathlib
+          reg = json.load(open('registry.json'))['actors']
+          dirs = {p.name for p in pathlib.Path('actors').iterdir() if p.is_dir()}
+          missing = dirs - set(reg)
+          assert not missing, f"actors missing from registry.json: {missing}"
+          EOF
