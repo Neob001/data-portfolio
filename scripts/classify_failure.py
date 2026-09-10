@@ -39,10 +39,8 @@ def main() -> None:
     else:
         # Truncated log only: last 200 lines, never feed full logs anywhere.
         import urllib.request
-        from apify_api import BASE, token
-        req = urllib.request.Request(
-            f"{BASE}/logs/{sys.argv[1]}", headers={"Authorization": f"Bearer {token()}"},
-        )
+        from apify_api import BASE, auth_headers
+        req = urllib.request.Request(f"{BASE}/logs/{sys.argv[1]}", headers=auth_headers())
         with urllib.request.urlopen(req, timeout=30) as r:
             text = "\n".join(r.read().decode(errors="replace").splitlines()[-200:])
     print(classify(text))
