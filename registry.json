@@ -16,7 +16,8 @@
       "launched_at": null,
       "last_fix_date": null,
       "kpis": {},
-      "staging_started_at": "2026-09-10T16:46:05Z"
+      "staging_started_at": "2026-09-10T16:46:05Z",
+      "staging_validated": true
     },
     "eu-ted-tenders-monitor": {
       "apify_actor_id": "uw85K3A58AQE2zbUa",
@@ -33,7 +34,8 @@
       "launched_at": null,
       "last_fix_date": null,
       "kpis": {},
-      "staging_started_at": "2026-09-10T16:46:05Z"
+      "staging_started_at": "2026-09-10T16:46:05Z",
+      "staging_validated": true
     },
     "uk-company-lookup": {
       "apify_actor_id": "wfcdwJw5mWYbpxaPp",
@@ -50,8 +52,9 @@
       "launched_at": null,
       "last_fix_date": null,
       "kpis": {},
-      "notes": "Users supply their own free CH API key (input, secret). Officers/PSC variant requires owner legal approval \u2014 asked in WEEKLY_REPORT.md.",
-      "staging_started_at": "2026-09-10T16:46:05Z"
+      "notes": "Users supply their own free CH API key (input, secret). Staging validated 2026-09-11 with real key (owner's test key at ~/.companies_house_key, never shipped). Officers/PSC variant requires owner legal approval.",
+      "staging_started_at": "2026-09-10T16:46:05Z",
+      "staging_validated": true
     }
   },
   "apify_account": "capacious_threshold",
