@@ -7,7 +7,6 @@
       "type": "string",
       "title": "Filings",
       "description": "SEC filing records matching the search",
-      "resourceType": "dataset",
       "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=filings"
     }
   }

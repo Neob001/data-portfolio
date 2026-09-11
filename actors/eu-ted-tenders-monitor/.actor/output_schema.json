@@ -7,7 +7,6 @@
       "type": "string",
       "title": "Tenders",
       "description": "EU procurement notice records matching the filters",
-      "resourceType": "dataset",
       "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=tenders"
     }
   }
