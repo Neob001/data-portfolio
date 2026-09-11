@@ -23,12 +23,20 @@ test('maps golden company profile to flat record', () => {
   }
 });
 
-test('search match prefers exact normalized title', () => {
+test('search match prefers exact title, then token-subset confidence', () => {
   const s = load('company_search.json');
-  assert.equal(bestSearchMatch(s, 'Example Widgets Ltd.'), '07654321'); // no exact -> first
   assert.equal(bestSearchMatch(s, 'example widgets limited'), '01234567'); // exact wins
+  assert.equal(bestSearchMatch(s, 'Example Widgets Ltd.'), '07654321'); // tokens subset -> first confident
+  assert.equal(bestSearchMatch(s, 'Example Widgets (Holdings) Ltd'), '07654321');
   assert.equal(bestSearchMatch({ items: [] }, 'x'), null);
   assert.throws(() => bestSearchMatch({ bad: true }, 'x'), (e) => e.failureClass === 'schema_change');
+});
+
+test('vague or unrelated queries return null so misses are never charged', () => {
+  const s = load('company_search.json');
+  assert.equal(bestSearchMatch(s, 'Zzz Nonexistent Widgets 1234 Ltd'), null);
+  assert.equal(bestSearchMatch(s, 'Acme Rockets'), null);
+  assert.equal(bestSearchMatch(s, 'Ltd'), null); // only suffix tokens
 });
 
 test('normalizes company numbers', () => {

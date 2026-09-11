@@ -34,7 +34,16 @@ export function profileToRecord(p) {
   };
 }
 
-/** Search response -> best match company number for a name (or null). */
+const LEGAL_SUFFIXES = new Set(['LTD', 'LIMITED', 'PLC', 'LLP', 'LP', 'CO', 'COMPANY', 'THE']);
+const norm = (s) => (s || '').toUpperCase().replace(/[^A-Z0-9 ]/g, '').replace(/\s+/g, ' ').trim();
+const tokens = (s) => norm(s).split(' ').filter((t) => t && !LEGAL_SUFFIXES.has(t));
+
+/**
+ * Search response -> confidently matched company number, or null.
+ * Exact normalized title wins; otherwise every significant token of the
+ * query must appear in the candidate title. A vague query returns null so
+ * the customer is never charged for the wrong company.
+ */
 export function bestSearchMatch(searchResponse, name) {
   const items = searchResponse?.items;
   if (!Array.isArray(items)) {
@@ -43,10 +52,16 @@ export function bestSearchMatch(searchResponse, name) {
     throw e;
   }
   if (items.length === 0) return null;
-  const norm = (s) => (s || '').toUpperCase().replace(/[^A-Z0-9 ]/g, '').replace(/\s+/g, ' ').trim();
   const target = norm(name);
   const exact = items.find((i) => norm(i.title) === target);
-  return (exact || items[0]).company_number || null;
+  if (exact) return exact.company_number || null;
+  const queryTokens = tokens(name);
+  if (queryTokens.length === 0) return null;
+  const confident = items.find((i) => {
+    const titleTokens = new Set(tokens(i.title));
+    return queryTokens.every((t) => titleTokens.has(t));
+  });
+  return confident ? confident.company_number || null : null;
 }
 
 /** Normalize a user-supplied company number: pad to 8 chars for numeric ids. */
