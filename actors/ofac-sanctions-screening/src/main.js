@@ -1,12 +1,13 @@
 import { Actor } from 'apify';
 import { stamp } from './lib/records.js';
 import { writeRunSummary } from './lib/run_summary.js';
-import { parseCsv, buildEntries, screenName, SDN_URL, ALT_URL } from './transform.js';
+import { parseCsv, buildEntries, screenName, thresholdFromInput, SDN_URL, ALT_URL } from './transform.js';
 
 await Actor.init();
 const started = Date.now();
 const input = (await Actor.getInput()) ?? {};
-const { names = [], minScore = 0.85, includeAliases = true } = input;
+const { names = [], minScore = 85, includeAliases = true } = input;
+const threshold = thresholdFromInput(minScore);
 
 if (!Array.isArray(names) || names.length === 0) {
   throw new Error('Provide at least one name to screen in "names".');
@@ -36,7 +37,7 @@ try {
 
   for (const name of names) {
     if (typeof name !== 'string' || !name.trim()) continue;
-    const result = screenName(name, entries, minScore);
+    const result = screenName(name, entries, threshold);
     await Actor.pushData(stamp({ ...result, list_publish_info: publishInfo }, SDN_URL));
     pushed += 1;
     // PPE: every completed screening (match or clear) is a delivered result.

@@ -96,6 +96,13 @@ export function scoreNames(queryNorm, queryTokens, candidate) {
   return Math.round((0.6 * containment + 0.4 * jaccard) * 1000) / 1000;
 }
 
+/** Input minScore may be a percent (85) or fraction (0.85); normalize to 0..1. */
+export function thresholdFromInput(v, fallback = 0.85) {
+  const n = Number(v);
+  if (!Number.isFinite(n) || n <= 0) return fallback;
+  return n > 1 ? Math.min(n, 100) / 100 : n;
+}
+
 /** Screen one name against all entries -> flat result record. */
 export function screenName(query, entries, minScore = 0.85, maxMatches = 10) {
   const queryNorm = normalizeName(query);

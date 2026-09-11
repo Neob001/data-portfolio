@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { parseCsv, buildEntries, screenName, normalizeName, scoreNames, nameTokens } from '../src/transform.js';
+import { parseCsv, buildEntries, screenName, normalizeName, scoreNames, nameTokens, thresholdFromInput } from '../src/transform.js';
 
 const load = (f) => readFileSync(fileURLToPath(new URL(`../golden/${f}`, import.meta.url)), 'latin1');
 const entries = buildEntries(parseCsv(load('sdn_sample.csv')), parseCsv(load('alt_sample.csv')));
@@ -43,6 +43,18 @@ test('normalization strips accents/punctuation; corporate stopwords ignored', ()
   const q = 'Anglo Caribbean';
   const s = scoreNames(normalizeName(q), nameTokens(q), 'ANGLO-CARIBBEAN CO., LTD.');
   assert.ok(s >= 0.99, `expected ~1, got ${s}`);
+});
+
+test('threshold accepts percent or fraction (staging bug 2026-09-11)', () => {
+  assert.equal(thresholdFromInput(85), 0.85);
+  assert.equal(thresholdFromInput(100), 1);
+  assert.equal(thresholdFromInput(0.9), 0.9);
+  assert.equal(thresholdFromInput(undefined), 0.85);
+  assert.equal(thresholdFromInput(0), 0.85);
+  // The exact failure from staging: percent threshold must still match exact hits.
+  const r = screenName('Banco Nacional de Cuba', entries, thresholdFromInput(85));
+  assert.equal(r.matched, true);
+  assert.equal(r.top_match_score, 1);
 });
 
 test('empty SDN raises schema_change', () => {
