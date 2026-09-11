@@ -44,7 +44,7 @@ Company facts only — this Actor deliberately returns **no personal data** (no 
 |---|---|---|
 | `companyNumbers` | string[] | e.g. `01234567`, `SC123456` |
 | `companyNames` | string[] | Resolved via official search, best match |
-| `apiKey` | secret string | Free key from [developer.company-information.service.gov.uk](https://developer.company-information.service.gov.uk/) — takes 2 minutes |
+| `apiKey` | secret string, optional | Works out of the box with no key. Optionally bring your own free key from [developer.company-information.service.gov.uk](https://developer.company-information.service.gov.uk/) for dedicated rate limits |
 
 ## Pricing (pay per event)
 

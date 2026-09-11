@@ -8,6 +8,7 @@
       "type": "array",
       "description": "Companies House numbers, e.g. 01234567 or SC123456. Cheapest and fastest lookup path.",
       "editor": "stringList",
+      "prefill": ["00445790"],
       "nullable": true
     },
     "companyNames": {
@@ -20,7 +21,7 @@
     "apiKey": {
       "title": "Companies House API key",
       "type": "string",
-      "description": "Free API key from developer.company-information.service.gov.uk (takes 2 minutes). Stored encrypted.",
+      "description": "Optional: your own free key from developer.company-information.service.gov.uk for dedicated rate limits. The Actor works without it out of the box.",
       "editor": "textfield",
       "isSecret": true,
       "nullable": true
