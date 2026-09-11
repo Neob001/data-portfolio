@@ -134,10 +134,10 @@
       "notes": "Blocked by Store limit of 5 publications/day; publish after 2026-09-11T09:45Z approx (owner clicks Publish + T&C)."
     },
     "company-jobs-scraper": {
-      "apify_actor_id": null,
+      "apify_actor_id": "7DuuakEPLtkToqkxI",
       "source": "Greenhouse/Lever/Ashby public job-board APIs",
       "variant": "lookup (company -> jobs)",
-      "status": "building",
+      "status": "priced-awaiting-publish",
       "approval": "AUTO-APPROVED standing decision 2026-09-12 (replacements)",
       "origin": "replacement",
       "incumbent_actor_id": "piotrv1001/company-career-page-scraper",
@@ -151,13 +151,15 @@
       "pricing_rationale": "Incumbent failing 39% of 1.7k runs/30d; official-API replacement, priced per job row.",
       "launched_at": null,
       "last_fix_date": null,
-      "kpis": {}
+      "kpis": {},
+      "staging_validated": true,
+      "monetization_configured": true
     },
     "sitemap-url-extractor": {
-      "apify_actor_id": null,
+      "apify_actor_id": "s1dbHjTJTSoeYEefz",
       "source": "robots.txt + sitemap XML (machine-readable by design)",
       "variant": "full extraction + status check",
-      "status": "building",
+      "status": "priced-awaiting-publish",
       "approval": "AUTO-APPROVED standing decision 2026-09-12 (replacements)",
       "origin": "replacement",
       "incumbent_actor_id": "apify/sitemap-extractor",
@@ -171,7 +173,9 @@
       "pricing_rationale": "Incumbent free but failing 17%; we add index traversal + status checks; $0.30/1000 URLs.",
       "launched_at": null,
       "last_fix_date": null,
-      "kpis": {}
+      "kpis": {},
+      "staging_validated": true,
+      "monetization_configured": true
     }
   },
   "apify_account": "factpipe",
