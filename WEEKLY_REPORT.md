@@ -1,7 +1,7 @@
-# Weekly report — updated 2026-09-11 (launch armed)
+# Weekly report — updated 2026-09-11 (LIVE)
 
 ## Money
-No revenue yet. All 3 Actors staged, PPE-priced, and **scheduled to auto-publish 2026-09-12 17:30 UTC** as `factpipe` (apify.com/factpipe). D1-D6 are DONE: payout verified, token credential in cloud env, CH key created, username `factpipe`, public profile live, monetization configured ($0.008 filing / $0.01 tender / $0.004 lookup; no start fees, empty runs free).
+**ALL 3 ACTORS ARE LIVE ON THE STORE** (published 2026-09-11 at owner's instruction, ahead of the 48h window): apify.com/factpipe/sec-edgar-filings-search ($0.008/filing), /eu-ted-tenders-monitor ($0.01/tender), /uk-company-lookup ($0.004/lookup, keyless). Revenue tracking starts now; first paying users typically take days-weeks of Store discovery.
 
 ## Health
 - Repo home: https://github.com/Neob001/data-portfolio (public; local machine pushes via deploy key).
