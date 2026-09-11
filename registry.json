@@ -132,6 +132,46 @@
       "staging_validated": true,
       "monetization_configured": true,
       "notes": "Blocked by Store limit of 5 publications/day; publish after 2026-09-11T09:45Z approx (owner clicks Publish + T&C)."
+    },
+    "company-jobs-scraper": {
+      "apify_actor_id": null,
+      "source": "Greenhouse/Lever/Ashby public job-board APIs",
+      "variant": "lookup (company -> jobs)",
+      "status": "building",
+      "approval": "AUTO-APPROVED standing decision 2026-09-12 (replacements)",
+      "origin": "replacement",
+      "incumbent_actor_id": "piotrv1001/company-career-page-scraper",
+      "veto_until": "2026-09-12T16:16:20Z",
+      "first_paid_run_date": null,
+      "ppe_events": {
+        "job-result": {
+          "proposed_price_usd": 0.002
+        }
+      },
+      "pricing_rationale": "Incumbent failing 39% of 1.7k runs/30d; official-API replacement, priced per job row.",
+      "launched_at": null,
+      "last_fix_date": null,
+      "kpis": {}
+    },
+    "sitemap-url-extractor": {
+      "apify_actor_id": null,
+      "source": "robots.txt + sitemap XML (machine-readable by design)",
+      "variant": "full extraction + status check",
+      "status": "building",
+      "approval": "AUTO-APPROVED standing decision 2026-09-12 (replacements)",
+      "origin": "replacement",
+      "incumbent_actor_id": "apify/sitemap-extractor",
+      "veto_until": "2026-09-12T16:16:20Z",
+      "first_paid_run_date": null,
+      "ppe_events": {
+        "url-result": {
+          "proposed_price_usd": 0.0003
+        }
+      },
+      "pricing_rationale": "Incumbent free but failing 17%; we add index traversal + status checks; $0.30/1000 URLs.",
+      "launched_at": null,
+      "last_fix_date": null,
+      "kpis": {}
     }
   },
   "apify_account": "factpipe",

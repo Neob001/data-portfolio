@@ -1,0 +1,33 @@
+{
+  "title": "Sitemap URL Extractor",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "websiteUrls": {
+      "title": "Websites or sitemap URLs",
+      "type": "array",
+      "description": "Site roots (sitemap discovered via robots.txt and common paths) or direct sitemap.xml URLs.",
+      "editor": "stringList",
+      "prefill": [
+        "https://www.sitemaps.org"
+      ]
+    },
+    "checkStatus": {
+      "title": "Check HTTP status of each URL",
+      "type": "boolean",
+      "default": false,
+      "description": "HEAD-checks every URL (slower). Status and ok fields stay null when off."
+    },
+    "maxUrlsPerSite": {
+      "title": "Max URLs per site",
+      "type": "integer",
+      "default": 2000,
+      "minimum": 1,
+      "maximum": 50000,
+      "description": "Cap on charged URL records per site."
+    }
+  },
+  "required": [
+    "websiteUrls"
+  ]
+}

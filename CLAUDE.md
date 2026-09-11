@@ -23,3 +23,9 @@ Flat typed records, ISO dates, `source_url` + `fetched_at` on every record; expl
 
 ## Workflow
 After editing shared/js: run `python3 scripts/sync_shared.py` and commit the synced copies. Per-actor check: `cd actors/<slug> && npm test`. Model-written fixes go to `claude/*` branches, never straight to main.
+
+## Fast-revenue modules (addendum, 2026-09-12)
+Two engines on top of the base system: (1) `broken_incumbent_scan` — find high-demand Store Actors currently failing users, ship a compatible replacement in ≤48h (24h staging), same-or-superset input schema, PPE 10–20% below incumbent; (2) `demand_capture` — find public "where can I get this data" questions (official/public APIs only; skip any source whose ToS forbids automated reading), draft useful disclosed replies.
+Standing decisions in DECISIONS.md: replacements in the daily top-3 with legal_flag false auto-build+publish (owner veto ≤24h via INC-id); demand builds ≤6h auto-build+stage (veto via DC-id); community replies are NEVER auto-posted — owner ticks [x] in DAILY_APPROVALS.md first, no exceptions, never propose changing this rule.
+Ethics: never post in incumbents' issue tabs, never copy their code/README/screenshots, neutral "Switching from X" field map only. Anti-spam: ≤5 posts/platform/day, 1 per thread, disclose affiliation, reply must be useful without the link. Legal blocklist unchanged and absolute; replacements only for public, no-login targets.
+State: targets/incumbents.json, targets/demand_signals.json, DAILY_APPROVALS.md. Every actor gains registry fields origin ("replacement"|"demand"|"scan"), incumbent_actor_id, first_paid_run_date, source_question_url.

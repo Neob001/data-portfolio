@@ -1,0 +1,109 @@
+{
+  "actorSpecification": 1,
+  "name": "sitemap-url-extractor",
+  "title": "Sitemap URL Extractor & Status Checker",
+  "description": "Extract every URL from a website's sitemaps (robots.txt discovery, sitemap indexes, lastmod/priority) and optionally check each URL's HTTP status. Flat records, pay per URL. Working replacement, verified Sep 2026.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "outputSchema": "./output_schema.json",
+  "categories": [
+    "SEO_TOOLS",
+    "DEVELOPER_TOOLS"
+  ],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "urls": {
+          "title": "URLs",
+          "transformation": {
+            "fields": [
+              "site",
+              "url",
+              "lastmod",
+              "http_status",
+              "ok"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "site": {
+            "type": "string"
+          },
+          "found": {
+            "type": "boolean"
+          },
+          "sitemap_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri"
+          },
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri"
+          },
+          "lastmod": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "changefreq": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "priority": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "http_status": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "ok": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}
