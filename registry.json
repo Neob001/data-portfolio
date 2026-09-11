@@ -63,7 +63,7 @@
       "apify_actor_id": "jsCTapvAxeme0S1ZH",
       "source": "Federal Register official API (federalregister.gov)",
       "variant": "full+incremental",
-      "status": "priced-awaiting-publish",
+      "status": "live",
       "approval": "Q1 APPROVED by owner 2026-09-11 (chat)",
       "ppe_events": {
         "document-result": {
@@ -71,7 +71,7 @@
         }
       },
       "pricing_rationale": "Cheap build, 5.0-rated incumbents but tiny catalog; regulatory-monitoring buyers",
-      "launched_at": null,
+      "launched_at": "2026-09-11T09:51:12Z",
       "last_fix_date": null,
       "kpis": {},
       "staging_validated": true,
@@ -93,13 +93,14 @@
       "last_fix_date": null,
       "kpis": {},
       "staging_validated": true,
-      "monetization_configured": true
+      "monetization_configured": true,
+      "notes": "Blocked by Store limit of 5 publications/day; publish after 2026-09-11T09:45Z approx (owner clicks Publish + T&C)."
     },
     "ofac-sanctions-screening": {
       "apify_actor_id": "eBGN9jH7yYqR3n2q3",
       "source": "US Treasury OFAC SDN + ALT files (treasury.gov)",
       "variant": "lookup/screening",
-      "status": "priced-awaiting-publish",
+      "status": "live",
       "approval": "Q1 APPROVED by owner 2026-09-11 (chat)",
       "ppe_events": {
         "name-screened": {
@@ -107,7 +108,7 @@
         }
       },
       "pricing_rationale": "Compliance buyers pay premium; incumbents unrated",
-      "launched_at": null,
+      "launched_at": "2026-09-11T09:51:12Z",
       "last_fix_date": null,
       "kpis": {},
       "staging_validated": true,
@@ -129,7 +130,8 @@
       "last_fix_date": null,
       "kpis": {},
       "staging_validated": true,
-      "monetization_configured": true
+      "monetization_configured": true,
+      "notes": "Blocked by Store limit of 5 publications/day; publish after 2026-09-11T09:45Z approx (owner clicks Publish + T&C)."
     }
   },
   "apify_account": "factpipe",
