@@ -8,15 +8,121 @@
   "input": "../INPUT_SCHEMA.json",
   "readme": "../README.md",
   "dockerfile": "./Dockerfile",
-  "categories": ["BUSINESS", "LEAD_GENERATION"],
+  "categories": [
+    "BUSINESS",
+    "LEAD_GENERATION"
+  ],
   "storages": {
     "dataset": {
       "actorSpecification": 1,
       "views": {
         "tenders": {
           "title": "Tenders",
-          "transformation": { "fields": ["published_at", "title", "buyer_name", "submission_deadline", "notice_url"] },
-          "display": { "component": "table" }
+          "transformation": {
+            "fields": [
+              "published_at",
+              "title",
+              "buyer_name",
+              "submission_deadline",
+              "notice_url"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "publication_number": {
+            "type": "string",
+            "title": "Publication number"
+          },
+          "title": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Title"
+          },
+          "buyer_name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Buyer"
+          },
+          "buyer_country": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Buyer country"
+          },
+          "published_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date",
+            "title": "Published"
+          },
+          "submission_deadline": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Submission deadline"
+          },
+          "cpv_codes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "CPV codes"
+          },
+          "places_of_performance": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "Places of performance"
+          },
+          "contract_nature": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Contract nature"
+          },
+          "notice_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri",
+            "title": "Notice URL"
+          },
+          "pdf_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri",
+            "title": "PDF URL"
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri",
+            "title": "Source URL"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fetched at"
+          }
         }
       }
     }

@@ -8,15 +8,117 @@
   "input": "../INPUT_SCHEMA.json",
   "readme": "../README.md",
   "dockerfile": "./Dockerfile",
-  "categories": ["BUSINESS", "NEWS"],
+  "categories": [
+    "BUSINESS",
+    "NEWS"
+  ],
   "storages": {
     "dataset": {
       "actorSpecification": 1,
       "views": {
         "filings": {
           "title": "Filings",
-          "transformation": { "fields": ["filed_at", "company_name", "form_type", "accession_number", "document_url"] },
-          "display": { "component": "table" }
+          "transformation": {
+            "fields": [
+              "filed_at",
+              "company_name",
+              "form_type",
+              "accession_number",
+              "document_url"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "accession_number": {
+            "type": "string",
+            "title": "Accession number"
+          },
+          "cik": {
+            "type": "string",
+            "title": "CIK"
+          },
+          "company_name": {
+            "type": "string",
+            "title": "Company name"
+          },
+          "form_type": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Form type"
+          },
+          "file_type": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "File type"
+          },
+          "filed_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date",
+            "title": "Filed at"
+          },
+          "period_ending": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date",
+            "title": "Period ending"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "8-K items"
+          },
+          "sic_codes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "SIC codes"
+          },
+          "incorporated_in": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "State of incorporation"
+          },
+          "document_url": {
+            "type": "string",
+            "format": "uri",
+            "title": "Document URL"
+          },
+          "filing_index_url": {
+            "type": "string",
+            "format": "uri",
+            "title": "Filing index URL"
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri",
+            "title": "Source URL"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fetched at"
+          }
         }
       }
     }

@@ -8,15 +8,171 @@
   "input": "../INPUT_SCHEMA.json",
   "readme": "../README.md",
   "dockerfile": "./Dockerfile",
-  "categories": ["BUSINESS", "LEAD_GENERATION"],
+  "categories": [
+    "BUSINESS",
+    "LEAD_GENERATION"
+  ],
   "storages": {
     "dataset": {
       "actorSpecification": 1,
       "views": {
         "companies": {
           "title": "Companies",
-          "transformation": { "fields": ["query", "found", "company_number", "company_name", "status", "incorporated_on", "company_url"] },
-          "display": { "component": "table" }
+          "transformation": {
+            "fields": [
+              "query",
+              "found",
+              "company_number",
+              "company_name",
+              "status",
+              "incorporated_on",
+              "company_url"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "title": "Query"
+          },
+          "found": {
+            "type": "boolean",
+            "title": "Found"
+          },
+          "company_number": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Company number"
+          },
+          "company_name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Company name"
+          },
+          "status": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Status"
+          },
+          "company_type": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Company type"
+          },
+          "jurisdiction": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Jurisdiction"
+          },
+          "incorporated_on": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date",
+            "title": "Incorporated on"
+          },
+          "dissolved_on": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date",
+            "title": "Dissolved on"
+          },
+          "sic_codes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "SIC codes"
+          },
+          "registered_office": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Registered office"
+          },
+          "registered_office_postcode": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Postcode"
+          },
+          "accounts_next_due": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date",
+            "title": "Accounts next due"
+          },
+          "accounts_overdue": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "Accounts overdue"
+          },
+          "confirmation_statement_next_due": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date",
+            "title": "Confirmation statement due"
+          },
+          "has_insolvency_history": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "Insolvency history"
+          },
+          "has_charges": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "Has charges"
+          },
+          "company_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri",
+            "title": "Company URL"
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri",
+            "title": "Source URL"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fetched at"
+          }
         }
       }
     }
