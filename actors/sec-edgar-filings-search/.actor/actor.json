@@ -122,5 +122,6 @@
         }
       }
     }
-  }
+  },
+  "outputSchema": "./output_schema.json"
 }

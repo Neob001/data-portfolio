@@ -1,0 +1,14 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Output of sec-edgar-filings-search",
+  "type": "object",
+  "properties": {
+    "resultsDatasetUrl": {
+      "type": "string",
+      "title": "Filings",
+      "description": "SEC filing records matching the search",
+      "resourceType": "dataset",
+      "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=filings"
+    }
+  }
+}

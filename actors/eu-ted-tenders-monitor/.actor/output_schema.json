@@ -1,0 +1,14 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Output of eu-ted-tenders-monitor",
+  "type": "object",
+  "properties": {
+    "resultsDatasetUrl": {
+      "type": "string",
+      "title": "Tenders",
+      "description": "EU procurement notice records matching the filters",
+      "resourceType": "dataset",
+      "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=tenders"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Output of uk-company-lookup",
+  "type": "object",
+  "properties": {
+    "resultsDatasetUrl": {
+      "type": "string",
+      "title": "Companies",
+      "description": "UK company registry records for the requested lookups",
+      "resourceType": "dataset",
+      "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=companies"
+    }
+  }
+}
