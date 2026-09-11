@@ -60,10 +60,10 @@
       "monetization_configured": true
     },
     "federal-register-monitor": {
-      "apify_actor_id": null,
+      "apify_actor_id": "jsCTapvAxeme0S1ZH",
       "source": "Federal Register official API (federalregister.gov)",
       "variant": "full+incremental",
-      "status": "building",
+      "status": "priced-awaiting-publish",
       "approval": "Q1 APPROVED by owner 2026-09-11 (chat)",
       "ppe_events": {
         "document-result": {
@@ -73,13 +73,15 @@
       "pricing_rationale": "Cheap build, 5.0-rated incumbents but tiny catalog; regulatory-monitoring buyers",
       "launched_at": null,
       "last_fix_date": null,
-      "kpis": {}
+      "kpis": {},
+      "staging_validated": true,
+      "monetization_configured": true
     },
     "fda-recalls-monitor": {
-      "apify_actor_id": null,
+      "apify_actor_id": "smk2CKKwsLyKuxIzY",
       "source": "openFDA enforcement API (api.fda.gov)",
       "variant": "full+incremental",
-      "status": "building",
+      "status": "priced-awaiting-publish",
       "approval": "Q1 APPROVED by owner 2026-09-11 (chat)",
       "ppe_events": {
         "recall-result": {
@@ -89,13 +91,15 @@
       "pricing_rationale": "Official source, supply-chain risk buyers",
       "launched_at": null,
       "last_fix_date": null,
-      "kpis": {}
+      "kpis": {},
+      "staging_validated": true,
+      "monetization_configured": true
     },
     "ofac-sanctions-screening": {
-      "apify_actor_id": null,
+      "apify_actor_id": "eBGN9jH7yYqR3n2q3",
       "source": "US Treasury OFAC SDN + ALT files (treasury.gov)",
       "variant": "lookup/screening",
-      "status": "building",
+      "status": "priced-awaiting-publish",
       "approval": "Q1 APPROVED by owner 2026-09-11 (chat)",
       "ppe_events": {
         "name-screened": {
@@ -105,13 +109,15 @@
       "pricing_rationale": "Compliance buyers pay premium; incumbents unrated",
       "launched_at": null,
       "last_fix_date": null,
-      "kpis": {}
+      "kpis": {},
+      "staging_validated": true,
+      "monetization_configured": true
     },
     "us-weather-forecast": {
-      "apify_actor_id": null,
+      "apify_actor_id": "zCqFs1GRTgDcS0yeI",
       "source": "NWS api.weather.gov (US public domain)",
       "variant": "lookup",
-      "status": "building",
+      "status": "priced-awaiting-publish",
       "approval": "Q1 APPROVED by owner 2026-09-11 (chat)",
       "ppe_events": {
         "location-forecast": {
@@ -121,7 +127,9 @@
       "pricing_rationale": "Cheapest build; volume + agent-friendly",
       "launched_at": null,
       "last_fix_date": null,
-      "kpis": {}
+      "kpis": {},
+      "staging_validated": true,
+      "monetization_configured": true
     }
   },
   "apify_account": "factpipe",
