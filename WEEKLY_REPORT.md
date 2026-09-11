@@ -1,7 +1,7 @@
-# Weekly report — updated 2026-09-11 (go-live day)
+# Weekly report — updated 2026-09-11 (launch armed)
 
 ## Money
-No revenue yet. All 3 Actors are **built and running on Apify in private staging** (account `capacious_threshold`). Public launch follows the 48h staging window (~2026-09-12 17:00 UTC) — but see D1/D2 below: monetization must be enabled first.
+No revenue yet. All 3 Actors staged, PPE-priced, and **scheduled to auto-publish 2026-09-12 17:30 UTC** as `factpipe` (apify.com/factpipe). D1-D6 are DONE: payout verified, token credential in cloud env, CH key created, username `factpipe`, public profile live, monetization configured ($0.008 filing / $0.01 tender / $0.004 lookup; no start fees, empty runs free).
 
 ## Health
 - Repo home: https://github.com/Neob001/data-portfolio (public; local machine pushes via deploy key).
