@@ -1,0 +1,29 @@
+{
+ "properties": {
+  "forecast": "https://api.weather.gov/gridpoints/OKX/33,42/forecast",
+  "forecastHourly": "https://api.weather.gov/gridpoints/OKX/33,42/forecast/hourly",
+  "gridId": "OKX",
+  "relativeLocation": {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.9386769,
+     40.6627117
+    ]
+   },
+   "properties": {
+    "city": "New York",
+    "state": "NY",
+    "distance": {
+     "unitCode": "wmoUnit:m",
+     "value": 0
+    },
+    "bearing": {
+     "unitCode": "wmoUnit:degree_(angle)",
+     "value": 0
+    }
+   }
+  }
+ }
+}

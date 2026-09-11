@@ -1,0 +1,16 @@
+{
+  "name": "fda-recalls-monitor",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Search and monitor FDA enforcement reports and recalls for food, drugs and devices via the official openFDA API. Flat re",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "apify": "^3.2.6"
+  },
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node --test 'tests/*.test.mjs'"
+  }
+}

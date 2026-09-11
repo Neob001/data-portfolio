@@ -58,6 +58,70 @@
       "staging_started_at": "2026-09-10T16:46:05Z",
       "staging_validated": true,
       "monetization_configured": true
+    },
+    "federal-register-monitor": {
+      "apify_actor_id": null,
+      "source": "Federal Register official API (federalregister.gov)",
+      "variant": "full+incremental",
+      "status": "building",
+      "approval": "Q1 APPROVED by owner 2026-09-11 (chat)",
+      "ppe_events": {
+        "document-result": {
+          "proposed_price_usd": 0.005
+        }
+      },
+      "pricing_rationale": "Cheap build, 5.0-rated incumbents but tiny catalog; regulatory-monitoring buyers",
+      "launched_at": null,
+      "last_fix_date": null,
+      "kpis": {}
+    },
+    "fda-recalls-monitor": {
+      "apify_actor_id": null,
+      "source": "openFDA enforcement API (api.fda.gov)",
+      "variant": "full+incremental",
+      "status": "building",
+      "approval": "Q1 APPROVED by owner 2026-09-11 (chat)",
+      "ppe_events": {
+        "recall-result": {
+          "proposed_price_usd": 0.005
+        }
+      },
+      "pricing_rationale": "Official source, supply-chain risk buyers",
+      "launched_at": null,
+      "last_fix_date": null,
+      "kpis": {}
+    },
+    "ofac-sanctions-screening": {
+      "apify_actor_id": null,
+      "source": "US Treasury OFAC SDN + ALT files (treasury.gov)",
+      "variant": "lookup/screening",
+      "status": "building",
+      "approval": "Q1 APPROVED by owner 2026-09-11 (chat)",
+      "ppe_events": {
+        "name-screened": {
+          "proposed_price_usd": 0.01
+        }
+      },
+      "pricing_rationale": "Compliance buyers pay premium; incumbents unrated",
+      "launched_at": null,
+      "last_fix_date": null,
+      "kpis": {}
+    },
+    "us-weather-forecast": {
+      "apify_actor_id": null,
+      "source": "NWS api.weather.gov (US public domain)",
+      "variant": "lookup",
+      "status": "building",
+      "approval": "Q1 APPROVED by owner 2026-09-11 (chat)",
+      "ppe_events": {
+        "location-forecast": {
+          "proposed_price_usd": 0.002
+        }
+      },
+      "pricing_rationale": "Cheapest build; volume + agent-friendly",
+      "launched_at": null,
+      "last_fix_date": null,
+      "kpis": {}
     }
   },
   "apify_account": "factpipe",

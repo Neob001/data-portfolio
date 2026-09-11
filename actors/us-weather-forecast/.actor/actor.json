@@ -1,0 +1,136 @@
+{
+  "actorSpecification": 1,
+  "name": "us-weather-forecast",
+  "title": "US Weather Forecast (NWS Official)",
+  "description": "Official US National Weather Service forecasts for any US coordinates: daily and hourly periods as flat records. Public-domain data, no key, pay per location forecast.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "outputSchema": "./output_schema.json",
+  "categories": [
+    "TRAVEL",
+    "DEVELOPER_TOOLS"
+  ],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "forecasts": {
+          "title": "Forecast periods",
+          "transformation": {
+            "fields": [
+              "location",
+              "period_name",
+              "start_time",
+              "temperature",
+              "short_forecast"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
+          },
+          "grid_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "period_number": {
+            "type": "integer"
+          },
+          "period_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "start_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "end_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "is_daytime": {
+            "type": "boolean"
+          },
+          "temperature": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "temperature_unit": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "precipitation_probability_pct": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "wind_speed": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "wind_direction": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "short_forecast": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "detailed_forecast": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "forecast_updated_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "federal-register-monitor",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Search and monitor US Federal Register documents (rules, proposed rules, notices, executive orders) by keyword, agency, ",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "apify": "^3.2.6"
+  },
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node --test 'tests/*.test.mjs'"
+  }
+}

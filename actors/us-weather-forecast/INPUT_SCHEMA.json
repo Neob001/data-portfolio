@@ -1,0 +1,34 @@
+{
+  "title": "US Weather Forecast (NWS)",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "coordinates": {
+      "title": "Coordinates",
+      "type": "array",
+      "description": "US locations as \"lat,lon\" strings, e.g. \"40.7128,-74.0060\" (NYC).",
+      "editor": "stringList",
+      "prefill": [
+        "40.7128,-74.0060",
+        "34.0522,-118.2437"
+      ]
+    },
+    "hourly": {
+      "title": "Hourly forecast",
+      "type": "boolean",
+      "description": "Hourly periods instead of day/night periods.",
+      "default": false
+    },
+    "maxPeriodsPerLocation": {
+      "title": "Max periods per location",
+      "type": "integer",
+      "description": "Forecast periods returned per location.",
+      "default": 14,
+      "minimum": 1,
+      "maximum": 156
+    }
+  },
+  "required": [
+    "coordinates"
+  ]
+}

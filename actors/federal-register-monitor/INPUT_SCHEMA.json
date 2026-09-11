@@ -1,0 +1,51 @@
+{
+  "title": "Federal Register Search & Monitor",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "searchTerm": {
+      "title": "Search term",
+      "type": "string",
+      "description": "Keyword or phrase searched across Federal Register documents.",
+      "editor": "textfield",
+      "prefill": "artificial intelligence"
+    },
+    "documentTypes": {
+      "title": "Document types",
+      "type": "array",
+      "description": "Optional: RULE, PRORULE (proposed rule), NOTICE, PRESDOCU (presidential document).",
+      "editor": "stringList",
+      "nullable": true
+    },
+    "agencySlugs": {
+      "title": "Agencies",
+      "type": "array",
+      "description": "Optional agency slugs, e.g. securities-and-exchange-commission, environmental-protection-agency.",
+      "editor": "stringList",
+      "nullable": true
+    },
+    "publishedAfter": {
+      "title": "Published after",
+      "type": "string",
+      "description": "YYYY-MM-DD lower bound.",
+      "editor": "textfield",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "nullable": true
+    },
+    "maxResults": {
+      "title": "Max results",
+      "type": "integer",
+      "description": "Cap on charged document records.",
+      "default": 100,
+      "minimum": 1,
+      "maximum": 10000
+    },
+    "sinceLastRun": {
+      "title": "Only new documents since last run",
+      "type": "boolean",
+      "description": "Incremental monitoring mode for schedules.",
+      "default": false
+    }
+  },
+  "required": []
+}

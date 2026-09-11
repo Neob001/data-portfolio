@@ -1,0 +1,84 @@
+{
+  "actorSpecification": 1,
+  "name": "ofac-sanctions-screening",
+  "title": "OFAC Sanctions Screening (SDN List)",
+  "description": "Screen names against the official US OFAC SDN sanctions list, including aliases. Deterministic matching with scores. Pay per name screened; compliance-grade source data fetched fresh every run.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "outputSchema": "./output_schema.json",
+  "categories": [
+    "BUSINESS"
+  ],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "screenings": {
+          "title": "Screenings",
+          "transformation": {
+            "fields": [
+              "query",
+              "matched",
+              "match_count",
+              "top_match_name",
+              "top_match_score"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "matched": {
+            "type": "boolean"
+          },
+          "match_count": {
+            "type": "integer"
+          },
+          "top_match_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "top_match_score": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "matches": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "list_publish_info": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

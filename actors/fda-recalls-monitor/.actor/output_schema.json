@@ -1,0 +1,12 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Output of fda-recalls-monitor",
+  "type": "object",
+  "properties": {
+    "resultsDatasetUrl": {
+      "type": "string",
+      "title": "Recalls",
+      "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=recalls"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "us-weather-forecast",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Official US National Weather Service forecasts for any US coordinates: daily and hourly periods as flat records. Public-",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "apify": "^3.2.6"
+  },
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node --test 'tests/*.test.mjs'"
+  }
+}

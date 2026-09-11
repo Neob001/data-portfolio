@@ -1,0 +1,62 @@
+{
+  "title": "FDA Recalls Search & Monitor",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "category": {
+      "title": "Category",
+      "type": "string",
+      "description": "Which FDA enforcement database to search.",
+      "editor": "select",
+      "enum": [
+        "food",
+        "drug",
+        "device"
+      ],
+      "enumTitles": [
+        "Food",
+        "Drugs",
+        "Medical devices"
+      ],
+      "default": "food"
+    },
+    "searchTerm": {
+      "title": "Search term",
+      "type": "string",
+      "description": "Optional keyword(s), e.g. listeria, salmonella, insulin.",
+      "editor": "textfield",
+      "prefill": "listeria",
+      "nullable": true
+    },
+    "classifications": {
+      "title": "Classifications",
+      "type": "array",
+      "description": "Optional: Class I (most serious), Class II, Class III.",
+      "editor": "stringList",
+      "nullable": true
+    },
+    "reportedAfter": {
+      "title": "Reported after",
+      "type": "string",
+      "description": "YYYY-MM-DD lower bound on FDA report date.",
+      "editor": "textfield",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "nullable": true
+    },
+    "maxResults": {
+      "title": "Max results",
+      "type": "integer",
+      "description": "Cap on charged recall records.",
+      "default": 100,
+      "minimum": 1,
+      "maximum": 10000
+    },
+    "sinceLastRun": {
+      "title": "Only new recalls since last run",
+      "type": "boolean",
+      "description": "Incremental monitoring mode for schedules.",
+      "default": false
+    }
+  },
+  "required": []
+}

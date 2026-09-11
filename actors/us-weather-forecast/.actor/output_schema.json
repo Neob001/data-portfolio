@@ -1,0 +1,12 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Output of us-weather-forecast",
+  "type": "object",
+  "properties": {
+    "resultsDatasetUrl": {
+      "type": "string",
+      "title": "Forecast periods",
+      "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=forecasts"
+    }
+  }
+}

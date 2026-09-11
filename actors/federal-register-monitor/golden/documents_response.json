@@ -1,0 +1,61 @@
+{
+ "description": "Documents matching 'artificial intelligence'",
+ "count": 1564,
+ "total_pages": 50,
+ "next_page_url": "https://www.federalregister.gov/api/v1/documents?conditions%5Bterm%5D=artificial+intelligence&format=json&page=2&per_page=3",
+ "results": [
+  {
+   "title": "NIST Artificial Intelligence Consortium",
+   "type": "Notice",
+   "abstract": "The National Institute of Standards and Technology (NIST), an agency of the United States Department of Commerce, previously announced the formation of the Artificial Intelligence Safety Institute Consortium (\"AISIC\") through a publication dated November 2, 2023 (88 FR 75276). AISIC brought together",
+   "document_number": "2026-10779",
+   "html_url": "https://www.federalregister.gov/documents/2026/05/29/2026-10779/nist-artificial-intelligence-consortium",
+   "pdf_url": "https://www.govinfo.gov/content/pkg/FR-2026-05-29/pdf/2026-10779.pdf",
+   "public_inspection_pdf_url": "https://public-inspection.federalregister.gov/2026-10779.pdf?1779972326",
+   "publication_date": "2026-05-29",
+   "agencies": [
+    {
+     "raw_name": "DEPARTMENT OF COMMERCE",
+     "name": "Commerce Department",
+     "id": 54,
+     "url": "https://www.federalregister.gov/agencies/commerce-department",
+     "json_url": "https://www.federalregister.gov/api/v1/agencies/54",
+     "parent_id": null,
+     "slug": "commerce-department"
+    },
+    {
+     "raw_name": "National Institute of Standards and Technology",
+     "name": "National Institute of Standards and Technology",
+     "id": 352,
+     "url": "https://www.federalregister.gov/agencies/national-institute-of-standards-and-technology",
+     "json_url": "https://www.federalregister.gov/api/v1/agencies/352",
+     "parent_id": 54,
+     "slug": "national-institute-of-standards-and-technology"
+    }
+   ],
+   "excerpts": "products, data, and/or models to enable innovation, standardization, and interoperability within AI systems. The full project can be viewed at: \n https://www.nist.gov/<span class=\"match\">artificial</s"
+  },
+  {
+   "title": "Policy Statement Concerning the Suppression of Accuracy in Artificial Intelligence Systems",
+   "type": "Notice",
+   "abstract": "The Federal Trade Commission (\"Commission\") is proposing a policy statement regarding the application of the prohibition on deceptive acts or practices in section 5 of the Federal Trade Commission Act to companies that market artificial intelligence (\"AI\") systems.",
+   "document_number": "2026-13628",
+   "html_url": "https://www.federalregister.gov/documents/2026/07/07/2026-13628/policy-statement-concerning-the-suppression-of-accuracy-in-artificial-intelligence-systems",
+   "pdf_url": "https://www.govinfo.gov/content/pkg/FR-2026-07-07/pdf/2026-13628.pdf",
+   "public_inspection_pdf_url": "https://public-inspection.federalregister.gov/2026-13628.pdf?1783341907",
+   "publication_date": "2026-07-07",
+   "agencies": [
+    {
+     "raw_name": "FEDERAL TRADE COMMISSION",
+     "name": "Federal Trade Commission",
+     "id": 192,
+     "url": "https://www.federalregister.gov/agencies/federal-trade-commission",
+     "json_url": "https://www.federalregister.gov/api/v1/agencies/192",
+     "parent_id": null,
+     "slug": "federal-trade-commission"
+    }
+   ],
+   "excerpts": "Economic Advisors, Executive Office of the President, \n <span class=\"match\">Artificial</span> <span class=\"match\">Intelligence</span> and the Great Divergence \n at 1 (Jan. 2026), \n https://www.whiteho"
+  }
+ ]
+}
