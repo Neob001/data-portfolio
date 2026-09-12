@@ -5,7 +5,7 @@ One-person, AI-native data business: narrow pay-per-event Actors on Apify Store 
 ## Hard constraints (never violate)
 1. **No Anthropic API key anywhere.** No model calls at Actor runtime — Actors are deterministic Node.js. All model work runs as Claude Code Routines under the Max subscription.
 2. **Zero-token first.** Every job tries scripts/ before any model. Escalation: script → Haiku → Sonnet → Opus/Fable, each only when the previous explicitly fails. Repair scope = one actor dir, make golden tests pass, no refactors. Max 1 Opus repair/actor/day.
-3. **Legal:** public data only; no PII (no officers/PSC/person profiles); no login walls; no ToS-forbidden sources; avoid LinkedIn/Amazon/Instagram/Facebook. New sources need an APPROVE line in DECISIONS.md first.
+3. **Legal:** public data only; no PII (no officers/PSC/person profiles); no login walls; no ToS-forbidden sources; avoid LinkedIn/Amazon/Instagram/Facebook. Never pursue sources requiring photo-ID + selfie identity verification (ID.me or equivalent) — standing owner REJECT 2026-09-12. A source whose ToS page is bot-gated (CAPTCHA) is auto-rejected. New sources need an APPROVE line in DECISIONS.md first.
 4. **Pricing:** PPE only (rentals retired). Charge only successful non-empty results. Launch 10–20% below incumbent per-result cost; changes go through scripts/pricing.py proposals + owner approval.
 5. Truncate everything fed to a model: last 200 log lines, tiny golden samples, one actor dir.
 
