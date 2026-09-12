@@ -101,6 +101,29 @@ def github():
     return hits
 
 
+def hackernews():
+    """Official, open Algolia HN API - no auth, no registration."""
+    hits = []
+    for q in ("api for data", "dataset", "sec filings", "sanctions list", "job postings api", "sitemap"):
+        url = (f"https://hn.algolia.com/api/v1/search_by_date?query={urllib.parse.quote(q)}"
+               f"&tags=ask_hn&hitsPerPage=10")
+        try:
+            for it in fetch(url).get("hits", []):
+                hits.append({
+                    "platform": "hackernews",
+                    "url": f"https://news.ycombinator.com/item?id={it.get('objectID')}",
+                    "title": it.get("title") or "",
+                    "body": (it.get("story_text") or "")[:400],
+                    "created_at": it.get("created_at"),
+                    "engagement": (it.get("points") or 0) + (it.get("num_comments") or 0),
+                    "answered": False,
+                })
+            time.sleep(0.4)
+        except Exception as e:
+            print(f"WARN hackernews '{q}': {e}", file=sys.stderr)
+    return hits
+
+
 def apify_forum():
     hits = []
     for q in ("data api", "scraper for"):
@@ -153,7 +176,7 @@ def main() -> None:
     seen = {s["url"] for s in existing["signals"]}
 
     new = 0
-    for hit in stackexchange() + github() + apify_forum():
+    for hit in stackexchange() + github() + hackernews() + apify_forum():
         if not hit["url"] or hit["url"] in seen:
             continue
         fh = freshness_hours(hit["created_at"])
