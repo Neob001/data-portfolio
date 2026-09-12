@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-11",
+  "updated_at": "2026-09-12",
   "actors": {
     "sec-edgar-filings-search": {
       "apify_actor_id": "alNg1FFs9rdVhfX1T",
@@ -118,7 +118,7 @@
       "apify_actor_id": "zCqFs1GRTgDcS0yeI",
       "source": "NWS api.weather.gov (US public domain)",
       "variant": "lookup",
-      "status": "priced-awaiting-publish",
+      "status": "live",
       "approval": "Q1 APPROVED by owner 2026-09-11 (chat)",
       "ppe_events": {
         "location-forecast": {
@@ -126,18 +126,17 @@
         }
       },
       "pricing_rationale": "Cheapest build; volume + agent-friendly",
-      "launched_at": null,
+      "launched_at": "2026-09-12T09:33:41Z",
       "last_fix_date": null,
       "kpis": {},
       "staging_validated": true,
-      "monetization_configured": true,
-      "notes": "Blocked by Store limit of 5 publications/day; publish after 2026-09-11T09:45Z approx (owner clicks Publish + T&C)."
+      "monetization_configured": true
     },
     "company-jobs-scraper": {
       "apify_actor_id": "7DuuakEPLtkToqkxI",
       "source": "Greenhouse/Lever/Ashby public job-board APIs",
       "variant": "lookup (company -> jobs)",
-      "status": "priced-awaiting-publish",
+      "status": "live",
       "approval": "AUTO-APPROVED standing decision 2026-09-12 (replacements)",
       "origin": "replacement",
       "incumbent_actor_id": "piotrv1001/company-career-page-scraper",
@@ -149,7 +148,7 @@
         }
       },
       "pricing_rationale": "Incumbent failing 39% of 1.7k runs/30d; official-API replacement, priced per job row.",
-      "launched_at": null,
+      "launched_at": "2026-09-12T09:33:41Z",
       "last_fix_date": null,
       "kpis": {},
       "staging_validated": true,
@@ -159,7 +158,7 @@
       "apify_actor_id": "s1dbHjTJTSoeYEefz",
       "source": "robots.txt + sitemap XML (machine-readable by design)",
       "variant": "full extraction + status check",
-      "status": "priced-awaiting-publish",
+      "status": "live",
       "approval": "AUTO-APPROVED standing decision 2026-09-12 (replacements)",
       "origin": "replacement",
       "incumbent_actor_id": "apify/sitemap-extractor",
@@ -171,7 +170,7 @@
         }
       },
       "pricing_rationale": "Incumbent free but failing 17%; we add index traversal + status checks; $0.30/1000 URLs.",
-      "launched_at": null,
+      "launched_at": "2026-09-12T09:33:41Z",
       "last_fix_date": null,
       "kpis": {},
       "staging_validated": true,
