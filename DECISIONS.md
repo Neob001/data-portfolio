@@ -11,3 +11,4 @@ Item ids come from WEEKLY_REPORT.md. Nothing ships to a new data source, changes
 2026-09-12 | APPROVE | AUTO-APPROVE replacements: yes | Top-3 opportunity_score per day, legal_flag == false, public site, no login. Build and publish without asking. Owner may veto within 24h by adding a REJECT line with the INC-id; a veto unpublishes the Actor.
 2026-09-12 | APPROVE | AUTO-APPROVE demand builds ≤ 6h: yes | Buildable demand hits with estimated build ≤ 6h, legal_flag == false, no personal data. Build and stage without asking. Owner may veto within 24h by adding a REJECT line with the DC-id.
 2026-09-12 | REJECT | AUTO-POST community replies | Never. Community replies are posted only after the owner ticks [x] in DAILY_APPROVALS.md.
+2026-09-12 | REJECT | INC-3 | Europages replacement rejected (owner, in chat): CAPTCHA-gated ToS = no automated access; anti-bot arms race contradicts official-API moat. Official EU registries (INSEE/Sirene) queued as alternative.
