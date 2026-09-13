@@ -13,25 +13,27 @@ One record per article:
   "language": "en",
   "page_id": 2696619,
   "title": "Web scraping",
-  "description": "Data scraping used for extracting data from websites",
-  "summary": "Web scraping, web harvesting, or web data extraction is data scraping used for extracting data from websites...",
+  "description": "Method of extracting data from websites",
+  "summary": "Web scraping, web harvesting, or web data extraction is data scraping used for extracting data from websites. Web scraping software may directly access the Worl...",
   "full_text": null,
   "word_count": null,
   "is_disambiguation": false,
-  "categories": ["Web scraping"],
+  "categories": [
+    "Web scraping"
+  ],
   "wikidata_id": "Q665452",
   "thumbnail_url": null,
   "latitude": null,
   "longitude": null,
-  "last_edited_at": "2026-09-01T10:12:44Z",
-  "revision_id": 1309876543,
-  "length_bytes": 31254,
+  "last_edited_at": "2026-09-09T23:43:46Z",
+  "revision_id": 1374117169,
+  "length_bytes": 34806,
   "article_url": "https://en.wikipedia.org/wiki/Web_scraping",
   "license": "CC BY-SA 4.0",
   "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
   "attribution_url": "https://en.wikipedia.org/w/index.php?curid=2696619&action=history",
   "source_url": "https://en.wikipedia.org/w/api.php?...",
-  "fetched_at": "2026-09-13T12:00:00.000Z"
+  "fetched_at": "2026-09-13T12:27:04.922Z"
 }
 ```
 

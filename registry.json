@@ -303,10 +303,10 @@
       }
     },
     "wikipedia-scraper": {
-      "apify_actor_id": null,
+      "apify_actor_id": "FFe1if47hnnV8Rejh",
       "source": "Wikipedia MediaWiki Action API + Wikidata (official, keyless; content CC BY-SA 4.0)",
       "variant": "lookup + search",
-      "status": "building",
+      "status": "priced-awaiting-publish",
       "approval": "W3 APPROVED by owner 2026-09-13 (chat): build and publish",
       "origin": "scan",
       "incumbent_actor_id": null,
@@ -322,7 +322,7 @@
       "launched_at": null,
       "last_fix_date": null,
       "kpis": {},
-      "staging_validated": false,
+      "staging_validated": true,
       "monetization_configured": false,
       "listing": {
         "title": "Wikipedia Scraper API \u2014 Articles, Summaries & Full Text",
@@ -333,13 +333,15 @@
           "AI",
           "DEVELOPER_TOOLS"
         ]
-      }
+      },
+      "staging_started_at": "2026-09-13T12:25:39Z",
+      "notes": "Staging 2026-09-13: default-input + adversarial runs SUCCEEDED; uncharged paths verified (not found, invalid, duplicates, person articles / unknown barcodes, no search results). PPE pricing via API is 403 -> Console only."
     },
     "open-food-facts-scraper": {
-      "apify_actor_id": null,
+      "apify_actor_id": "TKY03UDcrJK4pkhYn",
       "source": "Open Food Facts product API v2 + search.openfoodfacts.org (official, keyless; ODbL)",
       "variant": "lookup + search",
-      "status": "building",
+      "status": "priced-awaiting-publish",
       "approval": "W4 APPROVED by owner 2026-09-13 (chat): build and publish",
       "origin": "scan",
       "incumbent_actor_id": null,
@@ -355,7 +357,7 @@
       "launched_at": null,
       "last_fix_date": null,
       "kpis": {},
-      "staging_validated": false,
+      "staging_validated": true,
       "monetization_configured": false,
       "listing": {
         "title": "Open Food Facts Scraper \u2014 Nutrition & Barcode Lookup API",
@@ -366,7 +368,9 @@
           "ECOMMERCE",
           "DEVELOPER_TOOLS"
         ]
-      }
+      },
+      "staging_started_at": "2026-09-13T12:25:46Z",
+      "notes": "Staging 2026-09-13: default-input + adversarial runs SUCCEEDED; uncharged paths verified (not found, invalid, duplicates, person articles / unknown barcodes, no search results). PPE pricing via API is 403 -> Console only."
     }
   },
   "apify_account": "factpipe",

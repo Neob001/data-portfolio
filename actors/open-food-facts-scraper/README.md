@@ -12,18 +12,42 @@ One record per product:
   "found": true,
   "barcode": "3017624010701",
   "product_name": "Nutella",
-  "brands": ["Ferrero"],
+  "brands": [
+    "Ferrero"
+  ],
   "quantity": "400.0 g",
-  "serving_size": "15 g",
-  "categories": ["breakfasts", "spreads", "sweet-spreads"],
-  "countries": ["france", "united-kingdom"],
-  "labels": ["no-gluten"],
-  "packaging": ["glass-jar"],
-  "ingredients_text": "Sugar, palm oil, hazelnuts 13%, skimmed milk powder 8.7%, fat-reduced cocoa 7.4%, emulsifier: lecithins (soy), vanillin.",
-  "allergens": ["milk", "nuts", "soybeans"],
-  "traces": ["nuts"],
+  "serving_size": null,
+  "categories": [
+    "breakfasts",
+    "spreads",
+    "sweet-spreads",
+    "pates-a-tartiner",
+    "hazelnut-spreads",
+    "chocolate-spreads",
+    "cocoa-and-hazelnuts-spreads",
+    "Other"
+  ],
+  "countries": [
+    "france",
+    "united-kingdom"
+  ],
+  "labels": [
+    "no-gluten"
+  ],
+  "packaging": [
+    "glass-jar"
+  ],
+  "ingredients_text": "sugar, palm oil, hazelnuts, skimmed milk powder, fat reduced cocoa, emulsifier, vanillin",
+  "allergens": [
+    "nuts"
+  ],
+  "traces": [
+    "milk",
+    "nuts",
+    "soybeans"
+  ],
   "nutriscore_grade": "e",
-  "nova_group": 4,
+  "nova_group": null,
   "ecoscore_grade": "d",
   "energy_kcal_100g": 539,
   "fat_100g": 30.9,
@@ -32,15 +56,15 @@ One record per product:
   "sugars_100g": 56.3,
   "fiber_100g": null,
   "proteins_100g": 6.3,
-  "salt_100g": 0.107,
-  "sodium_100g": 0.0428,
+  "salt_100g": 0.1075,
+  "sodium_100g": 0.043,
   "image_url": "https://images.openfoodfacts.org/images/products/301/762/401/0701/front_en.100.400.jpg",
-  "last_modified_at": "2026-08-05T12:48:26.000Z",
+  "last_modified_at": "2026-08-05T16:48:26.000Z",
   "product_url": "https://world.openfoodfacts.org/product/3017624010701",
   "license": "ODbL 1.0 (Open Food Facts contributors)",
   "license_url": "https://opendatacommons.org/licenses/odbl/1-0/",
   "source_url": "https://world.openfoodfacts.org/api/v2/product/3017624010701.json?fields=...",
-  "fetched_at": "2026-09-13T12:00:00.000Z"
+  "fetched_at": "2026-09-13T12:27:15.518Z"
 }
 ```
 
