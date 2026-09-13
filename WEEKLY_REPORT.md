@@ -1,28 +1,36 @@
-# Weekly report — updated 2026-09-11 (LIVE)
+# Weekly report — 2026-09-13
 
 ## Money
-**ALL 3 ACTORS ARE LIVE ON THE STORE** (published 2026-09-11 at owner's instruction, ahead of the 48h window): apify.com/factpipe/sec-edgar-filings-search ($0.008/filing), /eu-ted-tenders-monitor ($0.01/tender), /uk-company-lookup ($0.004/lookup, keyless). Revenue tracking starts now; first paying users typically take days-weeks of Store discovery.
+- **Revenue: not visible via API.** No actor has any user besides us yet (see below), so it's almost certainly **$0**. For the exact number, check [Console → Insights → Monetization](https://console.apify.com/actors/insights). Final monthly numbers show up on the payout invoice.
+- **9/9 actors public with pay-per-event pricing.** The registry still listed fda-recalls as awaiting publish, but the API says it's public. Registry fixed.
+- Leading indicators (all-time runs / users in the last 30 days): SEC 10/1 · TED 10/1 · UK-CH 7/1 · OFAC 5/1 · FedReg 4/1 · weather 3/1 · jobs 3/1 · sitemap 3/1 · FDA 2/1. **Every actor has exactly 1 user in the last 30 days, and that's us.** No outside users 2 days after launch.
 
 ## Health
-- Repo home: https://github.com/Neob001/data-portfolio (public; local machine pushes via deploy key).
-- Builds: 3/3 SUCCEEDED from GitHub source. Staging runs: SEC + TED SUCCEEDED with real data; UK failed by design with the correct "bring your own key" message (needs a real-key staging run — D3).
-- Staging schedules run 2×/day (06:00/18:00 UTC) exercising incremental mode.
-- Routine `health-daily` created (Haiku, daily 22:00 UTC): https://claude.ai/code/routines/trig_01Bd1cDMFA3uBNmHM5yWJHWu — solo for 3 days to measure usage, per plan.
+- `health.py`: **0 flags**, 8 live actors checked. 0 failed runs in the last 24h. No actor has failed 2+ runs in a row.
+- Staging schedules `staging-sec-edgar` and `staging-eu-ted` are on. Last run 2026-09-13 06:00Z, both SUCCEEDED. All 9 actors passed staging. Our only failed run ever is UK-CH on 2026-09-10, before the keyless fix, and it was expected.
+- The Store runs a daily auto-test on each public actor, but those runs happen under Apify's account, so the API can't show them. No "under maintenance" flags seen.
+- ⚠ Blind spot: the row-count-drop check is inactive because `datasetItemCount` reads 0.
+- ⚠ Script problems this run:
+  - `pricing.py` crashes on the system Python 3.9 (it can't parse a `Z` timestamp), so I ran it with Python 3.12. It found 0 price changes to suggest; all actors are still in their 60-day launch-pricing period.
+  - `health.py` failed twice with an SSL EOF error through the local proxy, then passed on retry.
 
-## Decisions / actions needed (answer in DECISIONS.md or just do them)
-- **D1 (owner-only, blocking revenue)**: Enable Actor monetization on Apify — payout details + tax info at Console → Settings → Monetization. I don't touch payment/banking data, so this stays with you (~10 min).
-- **D2**: After D1, I set PPE prices (A1–A3 from last report: $0.008/filing, $0.01/tender, $0.004/lookup) and flip the 3 Actors public. Approve?
-- **D3**: Create a free Companies House API key (developer.company-information.service.gov.uk, 2 min) and paste it into DECISIONS.md or a message so I can run one real staging test of uk-company-lookup. (Customers use their own keys; ours is only for testing.)
-- **D4**: Add `APIFY_TOKEN` as an environment credential in claude.ai Code → environment "Default" so cloud routines can call the Apify API. (Value = the token from Apify Console → Settings → API & Integrations.)
-- **D5**: Install the Claude GitHub App on `Neob001/data-portfolio` (claude.ai/code/onboarding?magic=github-app-setup) so the future `repair` routine can push fix branches. Not needed for health-daily.
-- **D6 (branding, optional)**: Apify username is the auto-generated `capacious_threshold`; Store URLs read apify.com/capacious_threshold/…. Rename in Apify settings if you want a brand — before public launch, ideally.
-- **L1 (legal, carried over)**: Companies House officers/PSC variant (personal data of directors) — build or skip?
-- **Q1 (carried over)**: Approve next build queue P1–P5 (sanctions-lists, uspto-trademarks, federal-register, fda-recalls, weather-data), 2/week?
+## Decisions needed (answer in DECISIONS.md)
+1. **W1**: Rewrite titles, SEO descriptions and READMEs for all 9 actors to help people find them on the Store? No code changes. yes/no
+2. **W2**: Harden `scripts/` (retry on SSL/network errors, date parsing that works on Python 3.9, fix the `datasetItemCount` field)? No actor code touched. yes/no
+3. **W3**: Build `wikipedia-data` next (official MediaWiki API, about 4h, 230 runs and 21 users/month across competitors, scan score 1.32)? yes/no
+4. **W4**: Build `open-food-facts` (about 5h, score 1.48)? Its ODbL license requires attribution, and data we derive from it may have to be shared under the same license. yes/no
+5. **W5**: Build an INSEE/Sirene French company-register actor (official open API; the alternative queued after rejecting INC-3)? yes/no
+6. **L1** (carried over): Build a Companies House officers/PSC variant? That data includes directors' personal details. yes/no
 
 ## What we learned
-- Actor creation + builds + runs are fully API-drivable from scripts; GIT_REPO source against the public monorepo needs zero per-actor setup.
-- Cloud routines can't attach a GitHub repo without a claude.ai GitHub connection — but cloning a public repo from inside the routine works fine and keeps the routine read-only by construction.
-- The free Apify plan ($5/mo credit) is enough for staging; monetized public Actors bill compute to users, so the plan is not a launch blocker — payout setup (D1) is.
+- **Staging with bad inputs catches billing bugs.** It caught two before launch: Companies House fuzzy-matching nonsense queries (which we would have charged for) and OFAC's percent-vs-fraction threshold mix-up. Every lookup actor now needs a staging run with a query that must return no match.
+- **Store launch limits:** at most 5 publications per 24h. Publishing and accepting T&C can only be done by the owner in the Console. Every actor needs a keyless default input that returns results, or the daily auto-test will flag it as under maintenance.
+- **Where our wedge is:** broken incumbents with high demand are mostly social or personal-data scrapers we can't legally replace; the replaceable ones sit around Store ranks 1000–3000. Auto-reject any target whose ToS page is itself behind bot checks (Europages) or that requires ID verification (USPTO).
 
-## Next (no owner input needed)
-Monitor staging runs through 2026-09-12; verify health-daily's scheduled fires and usage consumption for 3 days; then (after D1/D2) publish with PPE pricing and start `issues-daily` + `weekly-report` routines and the repair webhook.
+## Top build proposals (state/opportunities.json, excluding ones already built or rejected)
+| # | Slug | Source | Build | Competitors' demand (30d) | Score |
+|---|---|---|---|---|---|
+| 1 | open-food-facts | Open Food Facts API (ODbL) | 5h | 271 runs / 9 users, 7.4% fail | 1.48 |
+| 2 | wikipedia-data | MediaWiki APIs | 4h | 230 runs / 21 users | 1.32 |
+| 3 | github-repos | GitHub REST API | 6h | 472 runs / 25 users | 0.82 |
+| 4 | clinical-trials | ClinicalTrials.gov v2 | 6h | 258 runs / 8 users | 0.41 |

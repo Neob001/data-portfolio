@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-12",
+  "updated_at": "2026-09-13",
   "actors": {
     "sec-edgar-filings-search": {
       "apify_actor_id": "alNg1FFs9rdVhfX1T",
@@ -15,7 +15,11 @@
       "pricing_rationale": "Leading incumbent charges ~$0.01/filing-fetched; launch ~20% below.",
       "launched_at": "2026-09-11T08:35:36Z",
       "last_fix_date": null,
-      "kpis": {},
+      "kpis": {
+        "as_of": "2026-09-13",
+        "totalRuns": 10,
+        "totalUsers30Days": 1
+      },
       "staging_started_at": "2026-09-10T16:46:05Z",
       "staging_validated": true,
       "monetization_configured": true
@@ -34,7 +38,11 @@
       "pricing_rationale": "Incumbents rental/PPR at higher effective cost and 13.7% failure rate; undercut + reliability.",
       "launched_at": "2026-09-11T08:35:36Z",
       "last_fix_date": null,
-      "kpis": {},
+      "kpis": {
+        "as_of": "2026-09-13",
+        "totalRuns": 10,
+        "totalUsers30Days": 1
+      },
       "staging_started_at": "2026-09-10T16:46:05Z",
       "staging_validated": true,
       "monetization_configured": true
@@ -53,7 +61,11 @@
       "pricing_rationale": "Highest-demand safe niche (21.7k runs/30d across incumbents); per-lookup pricing beats per-run incumbents on small batches.",
       "launched_at": "2026-09-11T08:35:36Z",
       "last_fix_date": null,
-      "kpis": {},
+      "kpis": {
+        "as_of": "2026-09-13",
+        "totalRuns": 7,
+        "totalUsers30Days": 1
+      },
       "notes": "Keyless by default: owner's CH key set as secret env var COMPANIES_HOUSE_API_KEY (shared 600 req/5min quota; revisit if volume grows). Customers may bring their own key. Officers/PSC variant still requires owner legal approval (L1).",
       "staging_started_at": "2026-09-10T16:46:05Z",
       "staging_validated": true,
@@ -73,7 +85,11 @@
       "pricing_rationale": "Cheap build, 5.0-rated incumbents but tiny catalog; regulatory-monitoring buyers",
       "launched_at": "2026-09-11T09:51:12Z",
       "last_fix_date": null,
-      "kpis": {},
+      "kpis": {
+        "as_of": "2026-09-13",
+        "totalRuns": 4,
+        "totalUsers30Days": 1
+      },
       "staging_validated": true,
       "monetization_configured": true
     },
@@ -81,7 +97,7 @@
       "apify_actor_id": "smk2CKKwsLyKuxIzY",
       "source": "openFDA enforcement API (api.fda.gov)",
       "variant": "full+incremental",
-      "status": "priced-awaiting-publish",
+      "status": "live",
       "approval": "Q1 APPROVED by owner 2026-09-11 (chat)",
       "ppe_events": {
         "recall-result": {
@@ -91,10 +107,14 @@
       "pricing_rationale": "Official source, supply-chain risk buyers",
       "launched_at": null,
       "last_fix_date": null,
-      "kpis": {},
+      "kpis": {
+        "as_of": "2026-09-13",
+        "totalRuns": 2,
+        "totalUsers30Days": 1
+      },
       "staging_validated": true,
       "monetization_configured": true,
-      "notes": "Blocked by Store limit of 5 publications/day; publish after 2026-09-11T09:45Z approx (owner clicks Publish + T&C)."
+      "notes": "Confirmed public via GET /v2/acts isPublic=true on 2026-09-13 (weekly report); exact publish time not recorded."
     },
     "ofac-sanctions-screening": {
       "apify_actor_id": "eBGN9jH7yYqR3n2q3",
@@ -110,7 +130,11 @@
       "pricing_rationale": "Compliance buyers pay premium; incumbents unrated",
       "launched_at": "2026-09-11T09:51:12Z",
       "last_fix_date": null,
-      "kpis": {},
+      "kpis": {
+        "as_of": "2026-09-13",
+        "totalRuns": 5,
+        "totalUsers30Days": 1
+      },
       "staging_validated": true,
       "monetization_configured": true
     },
@@ -128,7 +152,11 @@
       "pricing_rationale": "Cheapest build; volume + agent-friendly",
       "launched_at": "2026-09-12T09:33:41Z",
       "last_fix_date": null,
-      "kpis": {},
+      "kpis": {
+        "as_of": "2026-09-13",
+        "totalRuns": 3,
+        "totalUsers30Days": 1
+      },
       "staging_validated": true,
       "monetization_configured": true
     },
@@ -150,7 +178,11 @@
       "pricing_rationale": "Incumbent failing 39% of 1.7k runs/30d; official-API replacement, priced per job row.",
       "launched_at": "2026-09-12T09:33:41Z",
       "last_fix_date": null,
-      "kpis": {},
+      "kpis": {
+        "as_of": "2026-09-13",
+        "totalRuns": 3,
+        "totalUsers30Days": 1
+      },
       "staging_validated": true,
       "monetization_configured": true
     },
@@ -172,7 +204,11 @@
       "pricing_rationale": "Incumbent free but failing 17%; we add index traversal + status checks; $0.30/1000 URLs.",
       "launched_at": "2026-09-12T09:33:41Z",
       "last_fix_date": null,
-      "kpis": {},
+      "kpis": {
+        "as_of": "2026-09-13",
+        "totalRuns": 3,
+        "totalUsers30Days": 1
+      },
       "staging_validated": true,
       "monetization_configured": true
     }
