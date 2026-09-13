@@ -2,7 +2,7 @@
 
 ## Money
 - **Revenue: not visible via API.** No actor has any user besides us yet (see below), so it's almost certainly **$0**. For the exact number, check [Console → Insights → Monetization](https://console.apify.com/actors/insights). Final monthly numbers show up on the payout invoice.
-- **9/9 actors public with pay-per-event pricing.** The registry still listed fda-recalls as awaiting publish, but the API says it's public. Registry fixed.
+- **11/11 actors public (9 + wikipedia and open-food-facts added 2026-09-13) with pay-per-event pricing.** The registry still listed fda-recalls as awaiting publish, but the API says it's public. Registry fixed.
 - Leading indicators (all-time runs / users in the last 30 days): SEC 10/1 · TED 10/1 · UK-CH 7/1 · OFAC 5/1 · FedReg 4/1 · weather 3/1 · jobs 3/1 · sitemap 3/1 · FDA 2/1. **Every actor has exactly 1 user in the last 30 days, and that's us.** No outside users 2 days after launch.
 
 ## Health
@@ -17,8 +17,8 @@
 ## Decisions needed (answer in DECISIONS.md)
 1. ~~W1~~ **DONE 2026-09-13** (owner approved in chat): keyword-first titles, descriptions, SEO fields, categories (they were missing) and README pricing/FAQ are live on all 9 actors.
 2. **W2**: Harden `scripts/` (retry on SSL/network errors, date parsing that works on Python 3.9, fix the `datasetItemCount` field)? No actor code touched. yes/no
-3. **W3**: Build `wikipedia-data` next (official MediaWiki API, about 4h, 230 runs and 21 users/month across competitors, scan score 1.32)? yes/no
-4. **W4**: Build `open-food-facts` (about 5h, score 1.48)? Its ODbL license requires attribution, and data we derive from it may have to be shared under the same license. yes/no
+3. ~~W3~~ **LIVE 2026-09-13**: apify.com/factpipe/wikipedia-scraper ($1/1K articles, person articles excluded and never charged).
+4. ~~W4~~ **LIVE 2026-09-13**: apify.com/factpipe/open-food-facts-scraper ($1/1K products, ODbL attribution on every record).
 5. **W5**: Build an INSEE/Sirene French company-register actor (official open API; the alternative queued after rejecting INC-3)? yes/no
 6. **L1** (carried over): Build a Companies House officers/PSC variant? That data includes directors' personal details. yes/no
 
