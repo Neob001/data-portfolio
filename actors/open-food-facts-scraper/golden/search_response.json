@@ -1,0 +1,119 @@
+{
+ "hits": [
+  {
+   "code": "0851087000687",
+   "brands": [
+    "Peanut Butter & Co"
+   ],
+   "lang": "en",
+   "categories_tags": [
+    "en:plant-based-foods-and-beverages",
+    "en:plant-based-foods",
+    "en:legumes-and-their-products",
+    "en:spreads"
+   ],
+   "countries_tags": [
+    "en:united-states"
+   ],
+   "ecoscore_grade": "d",
+   "last_modified_t": 1672758687,
+   "nutriments": {
+    "energy-kcal_100g": 562.5,
+    "fat_100g": 46.875,
+    "saturated-fat_100g": 9.375,
+    "carbohydrates_100g": 25,
+    "sugars_100g": 12.5,
+    "fiber_100g": 6.25,
+    "proteins_100g": 21.875
+   },
+   "nutriscore_grade": "unknown",
+   "product_name": "Peanut Butter",
+   "image_url": "https://images.openfoodfacts.org/images/products/085/108/700/0687/front_en.3.400.jpg"
+  },
+  {
+   "code": "0851087000250",
+   "brands": [
+    "Peanut Butter & Co"
+   ],
+   "lang": "en",
+   "categories_tags": [
+    "en:plant-based-foods-and-beverages",
+    "en:plant-based-foods",
+    "en:legumes-and-their-products",
+    "en:fats"
+   ],
+   "labels_tags": [
+    "en:no-gluten",
+    "fr:green-palm-sustainability"
+   ],
+   "countries_tags": [
+    "en:united-states"
+   ],
+   "ecoscore_grade": "e",
+   "last_modified_t": 1683368822,
+   "allergens_tags": [
+    "en:peanuts"
+   ],
+   "nova_group": 4,
+   "nutriments": {
+    "energy-kcal_100g": 562.5,
+    "fat_100g": 43.75,
+    "saturated-fat_100g": 7.81,
+    "carbohydrates_100g": 31.25,
+    "sugars_100g": 18.75,
+    "fiber_100g": 6.2,
+    "proteins_100g": 18.75,
+    "salt_100g": 0.4763,
+    "sodium_100g": 0.19052
+   },
+   "nutriscore_grade": "c",
+   "product_name": "Peanut butter",
+   "image_url": "https://images.openfoodfacts.org/images/products/085/108/700/0250/front_en.5.400.jpg"
+  },
+  {
+   "code": "0075450040432",
+   "brands": [
+    "creamy peanut butter"
+   ],
+   "lang": "en",
+   "quantity": "40 oz",
+   "categories_tags": [
+    "en:plant-based-foods-and-beverages",
+    "en:plant-based-foods",
+    "en:legumes-and-their-products",
+    "en:fats"
+   ],
+   "countries_tags": [
+    "en:united-states"
+   ],
+   "ecoscore_grade": "d",
+   "last_modified_t": 1644525944,
+   "allergens_tags": [
+    "en:peanuts",
+    "en:soybeans"
+   ],
+   "nova_group": 2,
+   "nutriments": {
+    "energy-kcal_100g": 562.5,
+    "fat_100g": 46.88,
+    "saturated-fat_100g": 6.25,
+    "carbohydrates_100g": 25,
+    "sugars_100g": 9.38,
+    "fiber_100g": 6.2,
+    "proteins_100g": 21.88,
+    "salt_100g": 1.1113,
+    "sodium_100g": 0.44452
+   },
+   "nutriscore_grade": "a",
+   "traces_tags": [
+    "en:peanuts"
+   ],
+   "product_name": "Creamy Peanut Butter",
+   "image_url": "https://images.openfoodfacts.org/images/products/007/545/004/0432/front_en.4.400.jpg"
+  }
+ ],
+ "page": 1,
+ "page_size": 3,
+ "page_count": 3334,
+ "count": 10000
+}

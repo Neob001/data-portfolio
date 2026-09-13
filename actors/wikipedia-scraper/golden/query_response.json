@@ -1,0 +1,194 @@
+{
+ "batchcomplete": true,
+ "query": {
+  "normalized": [
+   {
+    "fromencoded": false,
+    "from": "web_scraping",
+    "to": "Web scraping"
+   }
+  ],
+  "redirects": [
+   {
+    "from": "UK",
+    "to": "United Kingdom"
+   }
+  ],
+  "pages": [
+   {
+    "ns": 0,
+    "title": "Nonexistent page zz",
+    "missing": true,
+    "fullurl": "https://en.wikipedia.org/wiki/Nonexistent_page_zz",
+    "canonicalurl": "https://en.wikipedia.org/wiki/Nonexistent_page_zz"
+   },
+   {
+    "pageid": 19007,
+    "ns": 0,
+    "title": "Mercury",
+    "extract": "Mercury most commonly refers to:\n\nMercury (planet), the closest planet to the Sun\nMercury (element), a chemical element\nMercury (mythology), a Roman deity\nMercury or The Mercury may also refer to:\n\n",
+    "pageprops": {
+     "disambiguation": "",
+     "wikibase_item": "Q48397"
+    },
+    "lastrevid": 1374228209,
+    "length": 8348,
+    "fullurl": "https://en.wikipedia.org/wiki/Mercury",
+    "canonicalurl": "https://en.wikipedia.org/wiki/Mercury",
+    "description": "Topics referred to by the same term",
+    "descriptionsource": "local",
+    "categories": [
+     {
+      "ns": 14,
+      "title": "Category:Disambiguation pages"
+     },
+     {
+      "ns": 14,
+      "title": "Category:Place name disambiguation pages"
+     },
+     {
+      "ns": 14,
+      "title": "Category:Ship disambiguation pages"
+     }
+    ],
+    "revisions": [
+     {
+      "revid": 1374228209,
+      "parentid": 1373509566,
+      "timestamp": "2026-09-10T17:28:22Z"
+     }
+    ]
+   },
+   {
+    "pageid": 31717,
+    "ns": 0,
+    "title": "United Kingdom",
+    "extract": "The United Kingdom of Great Britain and Northern Ireland, commonly known as the United Kingdom (UK) or Britain, is a country in northwestern Europe, off the coast of the continental mainland. It comprises England, Scotland, Wales and Northern Ireland, with a population of over 69 million in 2024. Th",
+    "pageprops": {
+     "wikibase_item": "Q145"
+    },
+    "coordinates": [
+     {
+      "lat": 55,
+      "lon": -3,
+      "primary": true,
+      "globe": "earth"
+     }
+    ],
+    "lastrevid": 1374410900,
+    "length": 371199,
+    "fullurl": "https://en.wikipedia.org/wiki/United_Kingdom",
+    "canonicalurl": "https://en.wikipedia.org/wiki/United_Kingdom",
+    "thumbnail": {
+     "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Flag_of_the_United_Kingdom_%281-2%29.svg/960px-Flag_of_the_United_Kingdom_%281-2%29.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+     "width": 640,
+     "height": 320
+    },
+    "description": "Country in northwestern Europe",
+    "descriptionsource": "local",
+    "categories": [
+     {
+      "ns": 14,
+      "title": "Category:British Islands"
+     },
+     {
+      "ns": 14,
+      "title": "Category:Countries and territories where English is an official language"
+     },
+     {
+      "ns": 14,
+      "title": "Category:Countries in Europe"
+     },
+     {
+      "ns": 14,
+      "title": "Category:G20 members"
+     }
+    ],
+    "revisions": [
+     {
+      "revid": 1374410900,
+      "parentid": 1373110457,
+      "timestamp": "2026-09-11T22:37:12Z"
+     }
+    ]
+   },
+   {
+    "pageid": 534366,
+    "ns": 0,
+    "title": "Barack Obama",
+    "extract": "Barack Hussein Obama II (born August 4, 1961) is an American politician who served as the 44th president of the United States from 2009 to 2017. A member of the Democratic Party, he was the first African American  to serve as president. Obama represented Illinois in the United States Senate from 200",
+    "pageprops": {
+     "wikibase_item": "Q76"
+    },
+    "lastrevid": 1374459923,
+    "length": 356960,
+    "fullurl": "https://en.wikipedia.org/wiki/Barack_Obama",
+    "canonicalurl": "https://en.wikipedia.org/wiki/Barack_Obama",
+    "thumbnail": {
+     "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8d/President_Barack_Obama.jpg/960px-President_Barack_Obama.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+     "width": 640,
+     "height": 799
+    },
+    "description": "President of the United States from 2009 to 2017",
+    "descriptionsource": "local",
+    "categories": [
+     {
+      "ns": 14,
+      "title": "Category:1961 births"
+     },
+     {
+      "ns": 14,
+      "title": "Category:20th-century African-American academics"
+     },
+     {
+      "ns": 14,
+      "title": "Category:20th-century African-American lawyers"
+     },
+     {
+      "ns": 14,
+      "title": "Category:20th-century American academics"
+     }
+    ],
+    "revisions": [
+     {
+      "revid": 1374459923,
+      "parentid": 1373930876,
+      "timestamp": "2026-09-12T04:38:20Z"
+     }
+    ]
+   },
+   {
+    "pageid": 2696619,
+    "ns": 0,
+    "title": "Web scraping",
+    "extract": "Web scraping, web harvesting, or web data extraction is data scraping used for extracting data from websites. Web scraping software may directly access the World Wide Web using the Hypertext Transfer Protocol or a web browser. While web scraping can be done manually by a software user, the term typi",
+    "pageprops": {
+     "wikibase_item": "Q665452"
+    },
+    "lastrevid": 1374117169,
+    "length": 34806,
+    "fullurl": "https://en.wikipedia.org/wiki/Web_scraping",
+    "canonicalurl": "https://en.wikipedia.org/wiki/Web_scraping",
+    "description": "Method of extracting data from websites",
+    "descriptionsource": "local",
+    "categories": [
+     {
+      "ns": 14,
+      "title": "Category:Web scraping"
+     }
+    ],
+    "revisions": [
+     {
+      "revid": 1374117169,
+      "parentid": 1372414872,
+      "timestamp": "2026-09-09T23:43:46Z"
+     }
+    ]
+   }
+  ]
+ },
+ "limits": {
+  "extracts": 20,
+  "categories": 500
+ }
+}

@@ -1,0 +1,41 @@
+{
+  "title": "Open Food Facts Scraper",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "barcodes": {
+      "title": "Barcodes",
+      "type": "array",
+      "editor": "stringList",
+      "description": "EAN-13, EAN-8, UPC-A or GTIN-14 barcodes. Fastest path; unknown barcodes are free.",
+      "prefill": [
+        "3017624010701",
+        "0851087000250"
+      ]
+    },
+    "searchTerms": {
+      "title": "Search terms",
+      "type": "array",
+      "editor": "stringList",
+      "description": "Product keywords, e.g. peanut butter, oat milk, protein bar.",
+      "prefill": [
+        "oat milk"
+      ]
+    },
+    "country": {
+      "title": "Country filter",
+      "type": "string",
+      "editor": "textfield",
+      "description": "Optional: restrict searches to products sold in a country, e.g. united-states, france, germany, united-kingdom."
+    },
+    "maxResultsPerSearch": {
+      "title": "Max results per search",
+      "type": "integer",
+      "description": "Products returned (and charged) per search term.",
+      "default": 50,
+      "prefill": 10,
+      "minimum": 1,
+      "maximum": 1000
+    }
+  }
+}

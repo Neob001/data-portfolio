@@ -1,0 +1,29 @@
+{
+ "batchcomplete": true,
+ "continue": {
+  "sroffset": 3,
+  "continue": "-||"
+ },
+ "query": {
+  "searchinfo": {
+   "totalhits": 2116
+  },
+  "search": [
+   {
+    "ns": 0,
+    "title": "Web scraping",
+    "pageid": 2696619
+   },
+   {
+    "ns": 0,
+    "title": "Data scraping",
+    "pageid": 46471245
+   },
+   {
+    "ns": 0,
+    "title": "Perplexity AI",
+    "pageid": 75743156
+   }
+  ]
+ }
+}

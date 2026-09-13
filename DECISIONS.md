@@ -14,3 +14,5 @@ Item ids come from WEEKLY_REPORT.md. Nothing ships to a new data source, changes
 2026-09-12 | REJECT | INC-3 | Europages replacement rejected (owner, in chat): CAPTCHA-gated ToS = no automated access; anti-bot arms race contradicts official-API moat. Official EU registries (INSEE/Sirene) queued as alternative.
 2026-09-12 | REJECT | identity-verified sources (standing) | Owner, in chat: never pursue any data source or API whose access requires photo-ID + selfie identity verification (ID.me or equivalent). USPTO ODP dropped from the build queue under this rule. Applies to all future scans and proposals.
 2026-09-13 | APPROVE | W1 | Owner, in chat: rewrite Store titles/descriptions for discovery immediately; goal = revenue ASAP.
+2026-09-13 | APPROVE | W3 | Owner, in chat: build and publish wikipedia-data (official MediaWiki/Wikidata APIs, CC BY-SA attribution fields on every record; living/any person articles excluded per no-person-profiles rule).
+2026-09-13 | APPROVE | W4 | Owner, in chat: build and publish open-food-facts (official OFF API, ODbL attribution on every record; contributor usernames excluded).

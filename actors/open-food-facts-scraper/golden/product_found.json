@@ -1,0 +1,57 @@
+{
+ "code": "3017624010701",
+ "product": {
+  "allergens_tags": [
+   "en:nuts"
+  ],
+  "brands": "Ferrero",
+  "categories_tags": [
+   "en:breakfasts",
+   "en:spreads",
+   "en:sweet-spreads",
+   "fr:pates-a-tartiner"
+  ],
+  "code": "3017624010701",
+  "countries_tags": [
+   "en:france",
+   "en:united-kingdom"
+  ],
+  "ecoscore_grade": "d",
+  "generic_name": "",
+  "image_url": "https://images.openfoodfacts.org/images/products/301/762/401/0701/front_en.100.400.jpg",
+  "ingredients_text": "sugar, palm oil, hazelnuts, skimmed milk powder, fat reduced cocoa, emulsifier, vanillin",
+  "labels_tags": [
+   "en:no-gluten"
+  ],
+  "lang": "de",
+  "last_modified_t": 1785948506,
+  "nutriments": {
+   "energy-kcal_100g": 539,
+   "fat_100g": 30.9,
+   "saturated-fat_100g": 10.6,
+   "carbohydrates_100g": 57.5,
+   "sugars_100g": 56.3,
+   "proteins_100g": 6.3,
+   "salt_100g": 0.1075,
+   "sodium_100g": 0.043
+  },
+  "nutriscore_grade": "e",
+  "nutrition_data": "on",
+  "nutrition_data_per": "100g",
+  "nutrition_data_prepared_per": "100g",
+  "packaging_tags": [
+   "en:glass-jar"
+  ],
+  "product_name": "Nutella",
+  "product_quantity": 400,
+  "product_quantity_unit": "g",
+  "quantity": "400.0 g",
+  "traces_tags": [
+   "en:milk",
+   "en:nuts",
+   "en:soybeans"
+  ]
+ },
+ "status": 1,
+ "status_verbose": "product found"
+}

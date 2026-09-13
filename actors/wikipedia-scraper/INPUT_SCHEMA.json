@@ -1,0 +1,48 @@
+{
+  "title": "Wikipedia Scraper",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "articles": {
+      "title": "Articles",
+      "type": "array",
+      "editor": "stringList",
+      "description": "Article titles (e.g. Eiffel Tower) or full Wikipedia URLs in any language (e.g. https://de.wikipedia.org/wiki/Berlin).",
+      "prefill": [
+        "https://en.wikipedia.org/wiki/Web_scraping",
+        "Eiffel Tower"
+      ]
+    },
+    "searchQueries": {
+      "title": "Search queries",
+      "type": "array",
+      "editor": "stringList",
+      "description": "Keywords to search; the top matching articles are returned for each.",
+      "prefill": [
+        "renewable energy storage"
+      ]
+    },
+    "language": {
+      "title": "Language",
+      "type": "string",
+      "editor": "textfield",
+      "description": "Wikipedia language code for titles and searches, e.g. en, de, fr, es, ja. URLs keep their own language.",
+      "default": "en"
+    },
+    "maxArticlesPerSearch": {
+      "title": "Max articles per search",
+      "type": "integer",
+      "description": "Top N articles returned (and charged) per search query.",
+      "default": 10,
+      "prefill": 3,
+      "minimum": 1,
+      "maximum": 500
+    },
+    "fullText": {
+      "title": "Include full text",
+      "type": "boolean",
+      "description": "Add the complete plain-text article body (full_text, word_count). Summary is always included.",
+      "default": false
+    }
+  }
+}

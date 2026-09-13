@@ -1,0 +1,265 @@
+{
+  "actorSpecification": 1,
+  "name": "open-food-facts-scraper",
+  "title": "Open Food Facts Scraper \u2014 Nutrition & Barcode Lookup API",
+  "description": "Look up food products by barcode (EAN/UPC) or keyword on Open Food Facts: nutrition per 100g, ingredients, allergens, Nutri-Score, NOVA, Eco-Score, brands. No API key. $1 per 1,000 products.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "outputSchema": "./output_schema.json",
+  "categories": [
+    "ECOMMERCE",
+    "DEVELOPER_TOOLS"
+  ],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "products": {
+          "title": "Products",
+          "transformation": {
+            "fields": [
+              "barcode",
+              "product_name",
+              "brands",
+              "nutriscore_grade",
+              "energy_kcal_100g",
+              "product_url"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "title": "Query"
+          },
+          "found": {
+            "type": "boolean",
+            "title": "Found"
+          },
+          "barcode": {
+            "type": "string",
+            "title": "Barcode"
+          },
+          "product_name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Product name"
+          },
+          "brands": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "Brands"
+          },
+          "quantity": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Quantity"
+          },
+          "serving_size": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Serving size"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "Categories"
+          },
+          "countries": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "Countries"
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "Labels"
+          },
+          "packaging": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "Packaging"
+          },
+          "ingredients_text": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Ingredients text"
+          },
+          "allergens": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "Allergens"
+          },
+          "traces": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "Traces"
+          },
+          "nutriscore_grade": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Nutriscore grade"
+          },
+          "nova_group": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "title": "Nova group"
+          },
+          "ecoscore_grade": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Ecoscore grade"
+          },
+          "energy_kcal_100g": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "Energy kcal per 100g"
+          },
+          "fat_100g": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "Fat per 100g"
+          },
+          "saturated_fat_100g": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "Saturated fat per 100g"
+          },
+          "carbohydrates_100g": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "Carbohydrates per 100g"
+          },
+          "sugars_100g": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "Sugars per 100g"
+          },
+          "fiber_100g": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "Fiber per 100g"
+          },
+          "proteins_100g": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "Proteins per 100g"
+          },
+          "salt_100g": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "Salt per 100g"
+          },
+          "sodium_100g": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "Sodium per 100g"
+          },
+          "image_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri",
+            "title": "Image url"
+          },
+          "last_modified_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "title": "Last modified at"
+          },
+          "product_url": {
+            "type": "string",
+            "format": "uri",
+            "title": "Product url"
+          },
+          "license": {
+            "type": "string",
+            "title": "License"
+          },
+          "license_url": {
+            "type": "string",
+            "format": "uri",
+            "title": "License url"
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Error"
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri",
+            "title": "Source url"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fetched at"
+          }
+        }
+      }
+    }
+  }
+}

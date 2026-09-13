@@ -1,0 +1,193 @@
+{
+  "actorSpecification": 1,
+  "name": "wikipedia-scraper",
+  "title": "Wikipedia Scraper API \u2014 Articles, Summaries & Full Text",
+  "description": "Get Wikipedia articles by title, URL or keyword search in any language: summary, full plain text, categories, Wikidata ID, coordinates, thumbnail, last edit. Official API, no key. $1 per 1,000 articles.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "outputSchema": "./output_schema.json",
+  "categories": [
+    "AI",
+    "DEVELOPER_TOOLS"
+  ],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "articles": {
+          "title": "Articles",
+          "transformation": {
+            "fields": [
+              "title",
+              "language",
+              "description",
+              "summary",
+              "article_url"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "title": "Query"
+          },
+          "found": {
+            "type": "boolean",
+            "title": "Found"
+          },
+          "language": {
+            "type": "string",
+            "title": "Language"
+          },
+          "page_id": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "title": "Page ID"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Description"
+          },
+          "summary": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Summary"
+          },
+          "full_text": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Full text"
+          },
+          "word_count": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "title": "Word count"
+          },
+          "is_disambiguation": {
+            "type": "boolean",
+            "title": "Is disambiguation"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "Categories"
+          },
+          "wikidata_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Wikidata ID"
+          },
+          "thumbnail_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri",
+            "title": "Thumbnail url"
+          },
+          "latitude": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "Latitude"
+          },
+          "longitude": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "Longitude"
+          },
+          "last_edited_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "title": "Last edited at"
+          },
+          "revision_id": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "title": "Revision ID"
+          },
+          "length_bytes": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "title": "Length bytes"
+          },
+          "article_url": {
+            "type": "string",
+            "format": "uri",
+            "title": "Article url"
+          },
+          "license": {
+            "type": "string",
+            "title": "License"
+          },
+          "license_url": {
+            "type": "string",
+            "format": "uri",
+            "title": "License url"
+          },
+          "attribution_url": {
+            "type": "string",
+            "format": "uri",
+            "title": "Attribution url"
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Error"
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri",
+            "title": "Source url"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fetched at"
+          }
+        }
+      }
+    }
+  }
+}
