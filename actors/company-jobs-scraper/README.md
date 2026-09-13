@@ -1,4 +1,4 @@
-# Company Career Page Jobs Scraper — working (verified Sep 2026)
+# Career Page Jobs Scraper — Greenhouse, Lever & Ashby API
 
 Give it **any company website** — it finds the careers page, detects the ATS, and pulls every live job posting through the **official public job-board APIs** of Greenhouse, Lever, and Ashby. No brittle HTML scraping of career pages, no anti-bot fights: the same JSON feeds the career pages themselves use. Direct board URLs (e.g. `boards.greenhouse.io/gitlab`) work too.
 
@@ -47,9 +47,25 @@ Same idea, same inputs: a list of company URLs in, flat job records out. Field m
 
 ## Pricing (pay per event)
 
-| Event | Meaning |
-|---|---|
-| `job-result` | One live job posting delivered. **Detection misses, empty boards, and empty runs are never charged.** |
+| Event | Price | Meaning |
+|---|---|---|
+| `job-result` | **$2.00 per 1,000** ($0.002 each) | One live job posting delivered. **Detection misses, empty boards, and empty runs are never charged.** |
+
+Example: 1,000 jobs cost **$2.00**. You only pay for delivered results.
+
+## FAQ
+
+**Which applicant tracking systems are supported?**
+Greenhouse, Lever and Ashby, via their official public job-board APIs. Give a company homepage and the Actor detects the ATS, or pass a board URL directly.
+
+**Can I track hiring at many companies on a schedule?**
+Yes. Put a list of company URLs in `companyUrls` and schedule the Actor; each run returns every live posting with title, department, location, remote flag and apply URL.
+
+**What if a company uses another ATS?**
+The company is reported as not found and nothing is charged.
+
+**Can I call it from Python, JavaScript, Make, Zapier or an AI agent?**
+Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server. Input is small and output is deterministic flat JSON.
 
 ## Reliability
 

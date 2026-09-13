@@ -1,8 +1,8 @@
 {
   "actorSpecification": 1,
   "name": "fda-recalls-monitor",
-  "title": "FDA Recalls Search & Monitor (Food, Drug, Device)",
-  "description": "Search and monitor FDA enforcement reports and recalls for food, drugs and devices via the official openFDA API. Flat records, incremental mode, pay per recall record.",
+  "title": "FDA Recalls Scraper API \u2014 Food, Drug & Device Recalls",
+  "description": "Search and monitor FDA recalls and enforcement reports for food, drugs and medical devices via official openFDA. Filter by keyword, Class I/II/III, date. No key, flat JSON, alerts. $5 per 1,000.",
   "version": "0.1",
   "buildTag": "latest",
   "input": "../INPUT_SCHEMA.json",
@@ -10,8 +10,8 @@
   "dockerfile": "./Dockerfile",
   "outputSchema": "./output_schema.json",
   "categories": [
-    "NEWS",
-    "BUSINESS"
+    "BUSINESS",
+    "NEWS"
   ],
   "storages": {
     "dataset": {

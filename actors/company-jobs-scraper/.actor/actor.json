@@ -1,8 +1,8 @@
 {
   "actorSpecification": 1,
   "name": "company-jobs-scraper",
-  "title": "Company Career Page Jobs Scraper (Greenhouse, Lever, Ashby)",
-  "description": "Give it any company website - it finds the careers page, detects the ATS (Greenhouse, Lever, Ashby) and pulls every live job posting via official public job-board APIs. Flat records, pay per job. Working replacement, verified Sep 2026.",
+  "title": "Career Page Jobs Scraper \u2014 Greenhouse, Lever & Ashby API",
+  "description": "Paste company websites: finds each careers page, detects Greenhouse, Lever or Ashby and returns every open job (title, location, remote, department, apply link) as flat JSON. $2 per 1,000 jobs.",
   "version": "0.1",
   "buildTag": "latest",
   "input": "../INPUT_SCHEMA.json",
@@ -11,7 +11,7 @@
   "outputSchema": "./output_schema.json",
   "categories": [
     "JOBS",
-    "BUSINESS"
+    "LEAD_GENERATION"
   ],
   "storages": {
     "dataset": {

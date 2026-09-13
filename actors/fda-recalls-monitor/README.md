@@ -1,4 +1,4 @@
-# FDA Recalls Search & Monitor (Food, Drug, Device)
+# FDA Recalls Scraper API — Food, Drug & Device Recalls
 
 Search and monitor **FDA recalls and enforcement reports** across food, drugs, and medical devices via the **official openFDA API**. Filter by keyword, classification (Class I/II/III), and report date; run on a schedule in incremental mode to catch every new recall the day FDA publishes it. Clean, flat JSON records for supply-chain risk, QA, retail compliance, and news monitoring.
 
@@ -47,9 +47,25 @@ Search and monitor **FDA recalls and enforcement reports** across food, drugs, a
 
 ## Pricing (pay per event)
 
-| Event | Meaning |
-|---|---|
-| `recall-result` | One recall record delivered. **Empty runs are never charged.** |
+| Event | Price | Meaning |
+|---|---|---|
+| `recall-result` | **$5.00 per 1,000** ($0.005 each) | One recall record delivered. **Empty runs are never charged.** |
+
+Example: 1,000 recall records cost **$5.00**. You only pay for delivered results.
+
+## FAQ
+
+**Do I need an openFDA API key?**
+No. The Actor calls the official openFDA enforcement endpoints without a key and respects their rate limits.
+
+**Can I get only serious (Class I) recalls?**
+Yes. Set `classifications` to `Class I` and schedule daily with `sinceLastRun: true` for a new-recall alert feed.
+
+**Which recalls are covered?**
+All openFDA enforcement reports for food, drugs and medical devices, with recalling firm, product, reason, quantity and distribution pattern.
+
+**Can I call it from Python, JavaScript, Make, Zapier or an AI agent?**
+Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server. Input is small and output is deterministic flat JSON.
 
 ## Reliability
 

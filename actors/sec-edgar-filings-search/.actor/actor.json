@@ -1,8 +1,8 @@
 {
   "actorSpecification": 1,
   "name": "sec-edgar-filings-search",
-  "title": "SEC EDGAR Filings Search & Monitor",
-  "description": "Full-text search SEC filings (10-K, 10-Q, 8-K, S-1, Form 4...) via official SEC APIs. Flat records, incremental mode, pay per result.",
+  "title": "SEC EDGAR Filings Scraper API \u2014 10-K, 10-Q, 8-K Full-Text",
+  "description": "Full-text search and monitor SEC EDGAR filings (10-K, 10-Q, 8-K, S-1, Form 4, 13F) by keyword via the official SEC API. No API key, flat JSON, new-filing alerts. $8 per 1,000 filings.",
   "version": "0.1",
   "buildTag": "latest",
   "input": "../INPUT_SCHEMA.json",

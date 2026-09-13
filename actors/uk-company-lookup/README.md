@@ -1,4 +1,4 @@
-# UK Company Lookup (Companies House)
+# UK Companies House Lookup API — Company Data, No API Key
 
 Look up **UK companies** by company number or name and get a clean, flat JSON record from the **official Companies House API**: legal status, incorporation date, SIC codes, registered office, accounts and confirmation-statement deadlines, insolvency and charges flags. Built for KYB checks, lead enrichment, and AI-agent pipelines. **You are only charged for successful lookups** — misses are free.
 
@@ -48,9 +48,25 @@ Company facts only — this Actor deliberately returns **no personal data** (no 
 
 ## Pricing (pay per event)
 
-| Event | Meaning |
-|---|---|
-| `company-found` | One company successfully found and delivered. **Not-found lookups and empty runs are never charged.** |
+| Event | Price | Meaning |
+|---|---|---|
+| `company-found` | **$4.00 per 1,000** ($0.004 each) | One company successfully found and delivered. **Not-found lookups and empty runs are never charged.** |
+
+Example: 1,000 companies found cost **$4.00**. You only pay for delivered results.
+
+## FAQ
+
+**Do I need a Companies House API key?**
+No. It works out of the box. If you run very large volumes you can optionally add your own free key for dedicated rate limits.
+
+**Can I check a list of UK companies in bulk?**
+Yes. Pass hundreds of company numbers (fastest) or names in one run; each company becomes one flat record. Not-found lookups are free.
+
+**What data do I get for each company?**
+Status (active, dissolved, liquidation...), company type, incorporation and dissolution dates, SIC codes, registered office and postcode, next accounts and confirmation statement due dates, overdue flag, insolvency history and charges. Company facts only — no officer or PSC personal data.
+
+**Can I call it from Python, JavaScript, Make, Zapier or an AI agent?**
+Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server. Input is small and output is deterministic flat JSON.
 
 ## Reliability
 

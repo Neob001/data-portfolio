@@ -22,7 +22,17 @@
       },
       "staging_started_at": "2026-09-10T16:46:05Z",
       "staging_validated": true,
-      "monetization_configured": true
+      "monetization_configured": true,
+      "listing": {
+        "title": "SEC EDGAR Filings Scraper API \u2014 10-K, 10-Q, 8-K Full-Text",
+        "description": "Full-text search and monitor SEC EDGAR filings (10-K, 10-Q, 8-K, S-1, Form 4, 13F) by keyword via the official SEC API. No API key, flat JSON, new-filing alerts. $8 per 1,000 filings.",
+        "seoTitle": "SEC EDGAR Full-Text Search API: 10-K, 8-K Filings Scraper",
+        "seoDescription": "Search the full text of SEC EDGAR filings by keyword and get flat JSON: 10-K, 10-Q, 8-K, S-1, Form 4. Official SEC API, no key, scheduled monitoring.",
+        "categories": [
+          "BUSINESS",
+          "NEWS"
+        ]
+      }
     },
     "eu-ted-tenders-monitor": {
       "apify_actor_id": "uw85K3A58AQE2zbUa",
@@ -45,7 +55,17 @@
       },
       "staging_started_at": "2026-09-10T16:46:05Z",
       "staging_validated": true,
-      "monetization_configured": true
+      "monetization_configured": true,
+      "listing": {
+        "title": "EU Tenders Scraper \u2014 TED Public Procurement Notices API",
+        "description": "Search and monitor EU public tenders and procurement notices from TED by CPV code, country and keyword. Official TED API, no key, flat JSON with deadlines, new-tender alerts. $10 per 1,000.",
+        "seoTitle": "EU Tenders API: TED Public Procurement Notices Scraper",
+        "seoDescription": "Find EU public tenders by CPV code, country and keyword from the official TED API. Deadlines, buyers and PDF links as flat JSON; daily new-tender alerts.",
+        "categories": [
+          "BUSINESS",
+          "LEAD_GENERATION"
+        ]
+      }
     },
     "uk-company-lookup": {
       "apify_actor_id": "wfcdwJw5mWYbpxaPp",
@@ -69,7 +89,17 @@
       "notes": "Keyless by default: owner's CH key set as secret env var COMPANIES_HOUSE_API_KEY (shared 600 req/5min quota; revisit if volume grows). Customers may bring their own key. Officers/PSC variant still requires owner legal approval (L1).",
       "staging_started_at": "2026-09-10T16:46:05Z",
       "staging_validated": true,
-      "monetization_configured": true
+      "monetization_configured": true,
+      "listing": {
+        "title": "UK Companies House Lookup API \u2014 Company Data, No API Key",
+        "description": "Look up UK companies by number or name on Companies House: status, incorporation date, SIC codes, registered office, overdue accounts, insolvency. Bulk lists, no API key. $4 per 1,000 found.",
+        "seoTitle": "UK Companies House API Lookup: Company Data in Bulk",
+        "seoDescription": "Bulk-check UK companies on Companies House by number or name: status, SIC codes, address, overdue accounts, insolvency history. Official API, no key needed.",
+        "categories": [
+          "BUSINESS",
+          "LEAD_GENERATION"
+        ]
+      }
     },
     "federal-register-monitor": {
       "apify_actor_id": "jsCTapvAxeme0S1ZH",
@@ -91,7 +121,17 @@
         "totalUsers30Days": 1
       },
       "staging_validated": true,
-      "monetization_configured": true
+      "monetization_configured": true,
+      "listing": {
+        "title": "Federal Register Scraper \u2014 US Rules & Regulations Monitor",
+        "description": "Search and monitor the US Federal Register: final rules, proposed rules, notices and presidential documents by keyword and agency. Official API, no key, flat JSON, new-document alerts. $5 per 1,000.",
+        "seoTitle": "Federal Register API: Monitor US Rules & Proposed Rules",
+        "seoDescription": "Track new US federal rules, proposed rules, notices and presidential documents by keyword and agency. Official Federal Register API, flat JSON, daily alerts.",
+        "categories": [
+          "BUSINESS",
+          "NEWS"
+        ]
+      }
     },
     "fda-recalls-monitor": {
       "apify_actor_id": "smk2CKKwsLyKuxIzY",
@@ -114,7 +154,17 @@
       },
       "staging_validated": true,
       "monetization_configured": true,
-      "notes": "Confirmed public via GET /v2/acts isPublic=true on 2026-09-13 (weekly report); exact publish time not recorded."
+      "notes": "Confirmed public via GET /v2/acts isPublic=true on 2026-09-13 (weekly report); exact publish time not recorded.",
+      "listing": {
+        "title": "FDA Recalls Scraper API \u2014 Food, Drug & Device Recalls",
+        "description": "Search and monitor FDA recalls and enforcement reports for food, drugs and medical devices via official openFDA. Filter by keyword, Class I/II/III, date. No key, flat JSON, alerts. $5 per 1,000.",
+        "seoTitle": "FDA Recalls API: Food, Drug & Device Recall Monitor",
+        "seoDescription": "Get FDA food, drug and medical device recalls as flat JSON from official openFDA: firm, product, reason, Class I/II/III, distribution. Daily new-recall alerts.",
+        "categories": [
+          "BUSINESS",
+          "NEWS"
+        ]
+      }
     },
     "ofac-sanctions-screening": {
       "apify_actor_id": "eBGN9jH7yYqR3n2q3",
@@ -136,7 +186,17 @@
         "totalUsers30Days": 1
       },
       "staging_validated": true,
-      "monetization_configured": true
+      "monetization_configured": true,
+      "listing": {
+        "title": "OFAC Sanctions Screening API \u2014 SDN List Check for AML/KYC",
+        "description": "Screen people and companies against the official US Treasury OFAC SDN sanctions list, incl. aliases, with fuzzy match scores. Bulk name lists for AML/KYC and vendor checks. No API key. $0.01 per name.",
+        "seoTitle": "OFAC Sanctions Screening API: Bulk SDN Name Check",
+        "seoDescription": "Bulk-screen names against the US Treasury OFAC SDN list with aliases and fuzzy match scores. Fresh official data each run, no API key. For AML/KYC compliance.",
+        "categories": [
+          "BUSINESS",
+          "AUTOMATION"
+        ]
+      }
     },
     "us-weather-forecast": {
       "apify_actor_id": "zCqFs1GRTgDcS0yeI",
@@ -158,7 +218,17 @@
         "totalUsers30Days": 1
       },
       "staging_validated": true,
-      "monetization_configured": true
+      "monetization_configured": true,
+      "listing": {
+        "title": "US Weather Forecast API \u2014 NWS/NOAA Hourly & 7-Day, No Key",
+        "description": "Official National Weather Service (NOAA) forecasts for any US latitude/longitude: hourly or 7-day periods with temperature, rain chance and wind. Bulk locations, no API key. $2 per 1,000 locations.",
+        "seoTitle": "US Weather Forecast API: NWS Hourly & 7-Day Forecasts",
+        "seoDescription": "Bulk US weather forecasts from the official National Weather Service: hourly or 7-day periods, temperature, precipitation chance, wind, as flat JSON. No key.",
+        "categories": [
+          "TRAVEL",
+          "DEVELOPER_TOOLS"
+        ]
+      }
     },
     "company-jobs-scraper": {
       "apify_actor_id": "7DuuakEPLtkToqkxI",
@@ -184,7 +254,17 @@
         "totalUsers30Days": 1
       },
       "staging_validated": true,
-      "monetization_configured": true
+      "monetization_configured": true,
+      "listing": {
+        "title": "Career Page Jobs Scraper \u2014 Greenhouse, Lever & Ashby API",
+        "description": "Paste company websites: finds each careers page, detects Greenhouse, Lever or Ashby and returns every open job (title, location, remote, department, apply link) as flat JSON. $2 per 1,000 jobs.",
+        "seoTitle": "Greenhouse, Lever & Ashby Jobs Scraper API",
+        "seoDescription": "Scrape open jobs from any company's career page: auto-detects Greenhouse, Lever and Ashby, returns title, location, remote flag and apply URL as flat JSON.",
+        "categories": [
+          "JOBS",
+          "LEAD_GENERATION"
+        ]
+      }
     },
     "sitemap-url-extractor": {
       "apify_actor_id": "s1dbHjTJTSoeYEefz",
@@ -210,7 +290,17 @@
         "totalUsers30Days": 1
       },
       "staging_validated": true,
-      "monetization_configured": true
+      "monetization_configured": true,
+      "listing": {
+        "title": "Sitemap URL Extractor & 404 Checker \u2014 XML Sitemap Scraper",
+        "description": "Extract every URL from any website's XML sitemaps: robots.txt discovery, nested sitemap indexes, lastmod and priority. Optional HTTP status check finds 404s and redirects. $0.30 per 1,000 URLs.",
+        "seoTitle": "Sitemap URL Extractor: Get All URLs from XML Sitemaps",
+        "seoDescription": "Extract all URLs from any site's sitemap.xml, including sitemap indexes, with lastmod and optional HTTP status checks to find broken 404 links and redirects.",
+        "categories": [
+          "SEO_TOOLS",
+          "DEVELOPER_TOOLS"
+        ]
+      }
     }
   },
   "apify_account": "factpipe",

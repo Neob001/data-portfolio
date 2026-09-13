@@ -47,6 +47,17 @@ def post(path: str, payload: dict) -> dict:
         return json.load(r)
 
 
+def put(path: str, payload: dict) -> dict:
+    req = urllib.request.Request(
+        f"{BASE}{path}",
+        data=json.dumps(payload).encode(),
+        headers={**auth_headers(), "Content-Type": "application/json"},
+        method="PUT",
+    )
+    with urllib.request.urlopen(req, timeout=60) as r:
+        return json.load(r)
+
+
 if __name__ == "__main__":
     import sys
     ok = check_auth()

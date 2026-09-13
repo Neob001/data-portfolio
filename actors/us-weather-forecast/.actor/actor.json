@@ -1,8 +1,8 @@
 {
   "actorSpecification": 1,
   "name": "us-weather-forecast",
-  "title": "US Weather Forecast (NWS Official)",
-  "description": "Official US National Weather Service forecasts for any US coordinates: daily and hourly periods as flat records. Public-domain data, no key, pay per location forecast.",
+  "title": "US Weather Forecast API \u2014 NWS/NOAA Hourly & 7-Day, No Key",
+  "description": "Official National Weather Service (NOAA) forecasts for any US latitude/longitude: hourly or 7-day periods with temperature, rain chance and wind. Bulk locations, no API key. $2 per 1,000 locations.",
   "version": "0.1",
   "buildTag": "latest",
   "input": "../INPUT_SCHEMA.json",

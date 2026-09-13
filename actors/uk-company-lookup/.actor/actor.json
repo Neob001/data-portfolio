@@ -1,8 +1,8 @@
 {
   "actorSpecification": 1,
   "name": "uk-company-lookup",
-  "title": "UK Company Lookup (Companies House)",
-  "description": "Look up UK companies by number or name via the official Companies House API: status, incorporation date, SIC codes, registered office, filing deadlines. Pay per successful lookup.",
+  "title": "UK Companies House Lookup API \u2014 Company Data, No API Key",
+  "description": "Look up UK companies by number or name on Companies House: status, incorporation date, SIC codes, registered office, overdue accounts, insolvency. Bulk lists, no API key. $4 per 1,000 found.",
   "version": "0.1",
   "buildTag": "latest",
   "input": "../INPUT_SCHEMA.json",

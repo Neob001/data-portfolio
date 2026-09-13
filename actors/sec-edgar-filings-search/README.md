@@ -1,4 +1,4 @@
-# SEC EDGAR Filings Search & Monitor
+# SEC EDGAR Filings Scraper API — 10-K, 10-Q, 8-K Full-Text
 
 Search the **full text of SEC filings** (10-K, 10-Q, 8-K, S-1, Form 4, 13F and every other form) and get clean, flat JSON records — or run it on a schedule in **incremental mode** to monitor only *new* filings mentioning your keyword. Uses only **official SEC APIs** (efts.sec.gov): no anti-bot fights, no proxies, no missed runs.
 
@@ -44,9 +44,25 @@ One record per matching filing document:
 
 ## Pricing (pay per event)
 
-| Event | Meaning |
-|---|---|
-| `filing-result` | One filing record delivered to the dataset. **Empty runs are never charged.** |
+| Event | Price | Meaning |
+|---|---|---|
+| `filing-result` | **$8.00 per 1,000** ($0.008 each) | One filing record delivered to the dataset. **Empty runs are never charged.** |
+
+Example: 500 filings cost **$4.00**. You only pay for delivered results.
+
+## FAQ
+
+**Do I need an SEC API key or EDGAR account?**
+No. The Actor uses SEC's public EDGAR full-text search and data APIs with a compliant User-Agent. No key, no proxy, no login.
+
+**How do I get alerts when a company files a new 8-K or 10-K?**
+Schedule the Actor (e.g. daily) with `sinceLastRun: true` and your keyword or company name. Each run returns only filings newer than the last run; connect Slack, email or a webhook to get notified.
+
+**Which SEC forms can I search?**
+Any form indexed by EDGAR full-text search (filings since 2001): 10-K, 10-Q, 8-K, S-1, DEF 14A, Form 4, 13F-HR, 13D/13G and more. Leave `forms` empty to search all.
+
+**Can I call it from Python, JavaScript, Make, Zapier or an AI agent?**
+Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server. Input is small and output is deterministic flat JSON.
 
 ## Reliability
 

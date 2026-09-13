@@ -1,8 +1,8 @@
 {
   "actorSpecification": 1,
   "name": "eu-ted-tenders-monitor",
-  "title": "EU Tenders (TED) Search & Monitor",
-  "description": "Search and monitor EU public procurement notices from TED by CPV code, country, keyword. Official TED API v3, flat records, incremental mode, pay per tender.",
+  "title": "EU Tenders Scraper \u2014 TED Public Procurement Notices API",
+  "description": "Search and monitor EU public tenders and procurement notices from TED by CPV code, country and keyword. Official TED API, no key, flat JSON with deadlines, new-tender alerts. $10 per 1,000.",
   "version": "0.1",
   "buildTag": "latest",
   "input": "../INPUT_SCHEMA.json",

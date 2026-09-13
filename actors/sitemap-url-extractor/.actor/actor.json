@@ -1,8 +1,8 @@
 {
   "actorSpecification": 1,
   "name": "sitemap-url-extractor",
-  "title": "Sitemap URL Extractor & Status Checker",
-  "description": "Extract every URL from a website's sitemaps (robots.txt discovery, sitemap indexes, lastmod/priority) and optionally check each URL's HTTP status. Flat records, pay per URL. Working replacement, verified Sep 2026.",
+  "title": "Sitemap URL Extractor & 404 Checker \u2014 XML Sitemap Scraper",
+  "description": "Extract every URL from any website's XML sitemaps: robots.txt discovery, nested sitemap indexes, lastmod and priority. Optional HTTP status check finds 404s and redirects. $0.30 per 1,000 URLs.",
   "version": "0.1",
   "buildTag": "latest",
   "input": "../INPUT_SCHEMA.json",

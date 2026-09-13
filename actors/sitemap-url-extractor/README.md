@@ -1,4 +1,4 @@
-# Sitemap URL Extractor & Status Checker — working (verified Sep 2026)
+# Sitemap URL Extractor & 404 Checker — XML Sitemap Scraper
 
 Extract **every URL from a website's sitemaps** with one input: the site root. Discovers sitemaps via robots.txt and common paths, walks sitemap indexes, and returns flat records with `lastmod`, `changefreq`, and `priority` — optionally HEAD-checking each URL's HTTP status to find broken pages. Sitemaps are built for machines; this is the clean, reliable way to read them.
 
@@ -41,9 +41,25 @@ Same input idea (website URLs in, URL records out), plus: robots.txt discovery, 
 
 ## Pricing (pay per event)
 
-| Event | Meaning |
-|---|---|
-| `url-result` | One URL record delivered. **Sites with no discoverable sitemap and empty runs are never charged.** |
+| Event | Price | Meaning |
+|---|---|---|
+| `url-result` | **$0.30 per 1,000** ($0.0003 each) | One URL record delivered. **Sites with no discoverable sitemap and empty runs are never charged.** |
+
+Example: 10,000 URLs cost **$3.00**. You only pay for delivered results.
+
+## FAQ
+
+**How do I get all URLs of a website?**
+Enter the site root. The Actor discovers sitemaps from robots.txt and common paths, follows nested sitemap indexes and returns one record per URL with lastmod, changefreq and priority.
+
+**Can it find broken links (404s) in my sitemap?**
+Yes. Set `checkStatus: true` and every URL gets an HTTP status and an `ok` flag, so 404s and redirects in the sitemap are easy to filter.
+
+**What if a site has no sitemap?**
+It is reported as not found and never charged.
+
+**Can I call it from Python, JavaScript, Make, Zapier or an AI agent?**
+Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server. Input is small and output is deterministic flat JSON.
 
 ## Reliability
 

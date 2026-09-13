@@ -1,4 +1,4 @@
-# US Weather Forecast (NWS Official)
+# US Weather Forecast API — NWS/NOAA Hourly & 7-Day, No Key
 
 Official **US National Weather Service** forecasts for any US coordinates — daily or hourly periods as clean, flat JSON records. Public-domain government data, no API key, no rate-limit anxiety. Feed logistics planning, event ops, energy forecasting, or AI agents with the same forecast data NOAA publishes.
 
@@ -48,9 +48,25 @@ US coverage only (NWS). Non-US coordinates return an uncharged `outside_us_cover
 
 ## Pricing (pay per event)
 
-| Event | Meaning |
-|---|---|
-| `location-forecast` | One location successfully forecast (all its period records included). Invalid or out-of-coverage locations are never charged. |
+| Event | Price | Meaning |
+|---|---|---|
+| `location-forecast` | **$2.00 per 1,000** ($0.002 each) | One location successfully forecast (all its period records included). Invalid or out-of-coverage locations are never charged. |
+
+Example: 1,000 locations cost **$2.00**. You only pay for delivered results.
+
+## FAQ
+
+**Do I need a weather API key?**
+No. Data comes from the official US National Weather Service (api.weather.gov), which is public domain and keyless.
+
+**Can I get hourly forecasts for many locations at once?**
+Yes. Pass any number of `lat,lon` coordinates and set `hourly: true`; you pay once per location, all its forecast periods included.
+
+**Does it work outside the US?**
+No. NWS forecasts cover US locations only; out-of-coverage locations are skipped and never charged.
+
+**Can I call it from Python, JavaScript, Make, Zapier or an AI agent?**
+Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server. Input is small and output is deterministic flat JSON.
 
 ## Reliability
 
