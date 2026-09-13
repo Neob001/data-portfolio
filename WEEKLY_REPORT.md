@@ -15,7 +15,7 @@
   - `health.py` failed twice with an SSL EOF error through the local proxy, then passed on retry.
 
 ## Decisions needed (answer in DECISIONS.md)
-1. **W1**: Rewrite titles, SEO descriptions and READMEs for all 9 actors to help people find them on the Store? No code changes. yes/no
+1. ~~W1~~ **DONE 2026-09-13** (owner approved in chat): keyword-first titles, descriptions, SEO fields, categories (they were missing) and README pricing/FAQ are live on all 9 actors.
 2. **W2**: Harden `scripts/` (retry on SSL/network errors, date parsing that works on Python 3.9, fix the `datasetItemCount` field)? No actor code touched. yes/no
 3. **W3**: Build `wikipedia-data` next (official MediaWiki API, about 4h, 230 runs and 21 users/month across competitors, scan score 1.32)? yes/no
 4. **W4**: Build `open-food-facts` (about 5h, score 1.48)? Its ODbL license requires attribution, and data we derive from it may have to be shared under the same license. yes/no
