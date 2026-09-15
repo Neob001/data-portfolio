@@ -41,7 +41,7 @@ One flat record per opportunity:
 }
 ```
 
-Personal contact details of individual contracting officers (names, emails, phones) are intentionally not included; every record links to the full notice on SAM.gov.
+Personal contact details of individual contracting officers are intentionally not included: the contact name, email and phone columns are dropped, and email addresses and phone numbers embedded in titles or descriptions are masked. Every record links to the full notice on SAM.gov.
 
 ## Use cases
 

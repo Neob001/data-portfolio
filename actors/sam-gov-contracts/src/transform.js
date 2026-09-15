@@ -62,6 +62,16 @@ const money = (v) => {
   return t !== '' && Number.isFinite(n) ? n : null;
 };
 
+const EMAIL_RX = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
+// Separators are required so solicitation numbers, NAICS/PSC codes and dollar amounts survive.
+const PHONE_RX = /(?:\+?1[\s.-]?)?(?:\(\d{3}\)\s?|\b\d{3}[\s.-])\d{3}[\s.-]\d{4}\b(?:\s?(?:x|ext\.?)\s?\d{1,5})?/gi;
+
+/** Mask contact emails and phone numbers that notices embed in free text. */
+export function redactContacts(text) {
+  if (!text) return text;
+  return text.replace(EMAIL_RX, '[email redacted]').replace(PHONE_RX, '[phone redacted]');
+}
+
 /** Header row -> index lookup; throws schema_change when key columns disappear. */
 export function headerIndex(header) {
   const idx = Object.fromEntries(header.map((h, i) => [h.trim(), i]));
@@ -83,10 +93,10 @@ export function rowToRecord(row, idx, descriptionChars = 2000) {
   const g = (k) => (k in idx ? row[idx[k]] : undefined);
   const id = s(g('NoticeId'));
   if (!id) return null;
-  const desc = s(g('Description'));
+  const desc = redactContacts(s(g('Description')));
   return {
     notice_id: id,
-    title: s(g('Title')),
+    title: redactContacts(s(g('Title'))),
     solicitation_number: s(g('Sol#')),
     department: s(g('Department/Ind.Agency')),
     sub_tier: s(g('Sub-Tier')),

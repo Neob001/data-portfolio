@@ -2,7 +2,17 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { createCsvParser, headerIndex, rowToRecord, buildMatcher } from '../src/transform.js';
+import { createCsvParser, headerIndex, rowToRecord, buildMatcher, redactContacts } from '../src/transform.js';
+
+test('free-text contact emails and phones are masked; codes and amounts survive (staging bug 2026-09-15)', () => {
+  const t = 'Contact John at john.doe@deca.mil or (703) 555-0123, alt 703.555.0199 x12 / +1 571-555-0100. '
+    + 'NAICS 541512, PSC D302, solicitation W91CRB-26-R-0001, award $1,234,567.89, DUNS 123456789, phone 4906313523128.';
+  const r = redactContacts(t);
+  assert.ok(!/@/.test(r), r);
+  assert.ok(!/555-01/.test(r), r);
+  assert.ok(r.includes('541512') && r.includes('W91CRB-26-R-0001') && r.includes('$1,234,567.89') && r.includes('123456789'), r);
+  assert.equal(redactContacts(null), null);
+});
 
 const raw = readFileSync(fileURLToPath(new URL('../golden/opportunities_head.csv', import.meta.url)), 'utf8');
 

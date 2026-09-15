@@ -499,7 +499,7 @@
       "notes": "Staging 2026-09-15: default + adversarial SUCCEEDED; invalid URL, NXDOMAIN (both devices) and duplicate URL uncharged. Compute ~$0.003 per successful audit at 2 GB (24.8s run incl. Chrome start) vs $0.01 price."
     },
     "sam-gov-contracts": {
-      "apify_actor_id": null,
+      "apify_actor_id": "Fs9vFlYGCXT0NyKZt",
       "source": "SAM.gov Contract Opportunities public data extract (GSA, daily CSV, keyless, public domain)",
       "variant": "full+incremental",
       "status": "building",

@@ -2,6 +2,7 @@ import { Actor } from 'apify';
 import { fetchJson, rateLimiter } from './lib/http.js';
 import { stamp } from './lib/records.js';
 import { writeRunSummary } from './lib/run_summary.js';
+import { loadTracker } from './lib/incremental.js';
 import { parseFtsResponse, buildFtsUrl } from './transform.js';
 
 // SEC fair-access policy: max 10 req/s; we stay far below and identify ourselves.
@@ -24,19 +25,13 @@ if (!query || typeof query !== 'string') {
   throw new Error('Input "query" (search phrase) is required.');
 }
 
-// Incremental mode: remember the newest filed_at we've seen for this query.
-const store = await Actor.openKeyValueStore();
-const cursorKey = `CURSOR-${query.replace(/\W+/g, '_').slice(0, 60)}`;
-let effectiveStart = startDate;
-if (sinceLastRun) {
-  const cursor = await store.getValue(cursorKey);
-  if (cursor?.last_filed_at) effectiveStart = cursor.last_filed_at;
-}
+// Incremental mode: named-store cursor; the boundary date is re-read and deduplicated by document.
+const inc = sinceLastRun ? await loadTracker(Actor, 'sec-edgar-filings-search', { query, forms, endDate }) : null;
+const effectiveStart = inc?.tracker.since || startDate;
 
 const limit = rateLimiter(350);
 let pushed = 0;
 let charged = 0;
-let newestFiledAt = null;
 let failureClass = null;
 
 try {
@@ -49,15 +44,15 @@ try {
 
     for (const rec of records) {
       if (pushed >= maxResults) break;
-      if (rec.filed_at && (!newestFiledAt || rec.filed_at > newestFiledAt)) {
-        newestFiledAt = rec.filed_at;
-      }
+      if (inc?.tracker.isDuplicate(rec.filed_at, rec.document_url)) continue;
       await Actor.pushData(stamp(rec, rec.document_url));
+      inc?.tracker.observe(rec.filed_at, rec.document_url);
       pushed += 1;
       // PPE: charge only for real, non-empty filing records.
       const { eventChargeLimitReached } = await Actor.charge({ eventName: 'filing-result' });
       charged += 1;
       if (eventChargeLimitReached) {
+        await inc?.save();
         await writeRunSummary(Actor, { rows: pushed, charged_events: charged, duration_ms: Date.now() - started });
         await Actor.exit('Charge limit reached', { statusMessage: 'Charge limit reached' });
       }
@@ -65,9 +60,7 @@ try {
     if (records.length < PAGE_SIZE) break;
   }
 
-  if (sinceLastRun && newestFiledAt) {
-    await store.setValue(cursorKey, { last_filed_at: newestFiledAt });
-  }
+  await inc?.save();
 } catch (e) {
   failureClass = e.failureClass || 'unknown';
   await writeRunSummary(Actor, {

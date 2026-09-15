@@ -2,6 +2,7 @@ import { Actor } from 'apify';
 import { fetchJson, rateLimiter } from './lib/http.js';
 import { stamp } from './lib/records.js';
 import { writeRunSummary } from './lib/run_summary.js';
+import { loadTracker } from './lib/incremental.js';
 import { parseDocumentsResponse, buildUrl } from './transform.js';
 
 const PER_PAGE = 100;
@@ -18,18 +19,13 @@ const {
   sinceLastRun = false,
 } = input;
 
-const store = await Actor.openKeyValueStore();
-const cursorKey = `CURSOR-${[searchTerm || '', ...documentTypes, ...agencySlugs].join('_').replace(/\W+/g, '_').slice(0, 60)}`;
-let effectiveAfter = publishedAfter;
-if (sinceLastRun) {
-  const cursor = await store.getValue(cursorKey);
-  if (cursor?.last_published_at) effectiveAfter = cursor.last_published_at;
-}
+// Incremental mode: named-store cursor; the API date filter is inclusive, boundary day deduplicated.
+const inc = sinceLastRun ? await loadTracker(Actor, 'federal-register-monitor', { searchTerm, documentTypes, agencySlugs }) : null;
+const effectiveAfter = inc?.tracker.since || publishedAfter;
 
 const limit = rateLimiter(600);
 let pushed = 0;
 let charged = 0;
-let newest = null;
 
 try {
   for (let page = 1; pushed < maxResults; page += 1) {
@@ -40,19 +36,21 @@ try {
     if (records.length === 0) break;
     for (const rec of records) {
       if (pushed >= maxResults) break;
-      if (rec.published_at && (!newest || rec.published_at > newest)) newest = rec.published_at;
+      if (inc?.tracker.isDuplicate(rec.published_at, rec.document_number)) continue;
       await Actor.pushData(stamp(rec, rec.html_url || 'https://www.federalregister.gov'));
+      inc?.tracker.observe(rec.published_at, rec.document_number);
       pushed += 1;
       const { eventChargeLimitReached } = await Actor.charge({ eventName: 'document-result' });
       charged += 1;
       if (eventChargeLimitReached) {
+        await inc?.save();
         await writeRunSummary(Actor, { rows: pushed, charged_events: charged, duration_ms: Date.now() - started });
         await Actor.exit('Charge limit reached', { statusMessage: 'Charge limit reached' });
       }
     }
     if (records.length < PER_PAGE) break;
   }
-  if (sinceLastRun && newest) await store.setValue(cursorKey, { last_published_at: newest });
+  await inc?.save();
 } catch (e) {
   await writeRunSummary(Actor, {
     rows: pushed, charged_events: charged, errors: 1, failure_class: e.failureClass || 'unknown',

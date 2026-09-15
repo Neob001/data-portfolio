@@ -2,10 +2,10 @@ import { Actor } from 'apify';
 import { FetchError } from './lib/http.js';
 import { stamp } from './lib/records.js';
 import { writeRunSummary } from './lib/run_summary.js';
+import { loadTracker } from './lib/incremental.js';
 import { SAM_CSV_URL, createCsvParser, headerIndex, rowToRecord, buildMatcher } from './transform.js';
 
 const DEFAULT_LOOKBACK_DAYS = 3;
-const MAX_CURSOR_IDS = 5000;
 
 await Actor.init();
 const started = Date.now();
@@ -18,22 +18,17 @@ const {
 if (postedAfter && !/^\d{4}-\d{2}-\d{2}$/.test(postedAfter)) throw new Error('postedAfter must be YYYY-MM-DD.');
 
 const matches = buildMatcher({ keywords, naicsCodes, setAsideCodes, noticeTypes, agencies, states });
-const store = await Actor.openKeyValueStore();
-const cursorKey = `CURSOR-${JSON.stringify([keywords, naicsCodes, setAsideCodes, noticeTypes, agencies, states]).replace(/\W+/g, '_').slice(0, 80)}`;
-const cursor = sinceLastRun ? await store.getValue(cursorKey) : null;
+const inc = sinceLastRun ? await loadTracker(Actor, 'sam-gov-contracts', { keywords, naicsCodes, setAsideCodes, noticeTypes, agencies, states }) : null;
 
 const defaultCutoff = new Date(Date.now() - DEFAULT_LOOKBACK_DAYS * 86400000).toISOString().slice(0, 10);
-// Incremental mode re-reads the cursor's own date and skips IDs already delivered that day.
-const cutoff = cursor?.last_posted_date || postedAfter || defaultCutoff;
-const seenOnCutoffDay = new Set(cursor?.ids_on_last_date || []);
+// Incremental mode re-reads the cursor's own date and skips notices already delivered that day.
+const cutoff = inc?.tracker.since || postedAfter || defaultCutoff;
 
 let pushed = 0;
 let charged = 0;
 let scanned = 0;
 let idx = null;
 let stop = false;
-let newestDate = null;
-let newestIds = [];
 const pending = [];
 
 const parser = createCsvParser((row) => {
@@ -43,7 +38,7 @@ const parser = createCsvParser((row) => {
   if (!rec || !rec.posted_date) return true;
   scanned += 1;
   if (rec.posted_date < cutoff) { stop = true; return false; } // file is sorted newest-first
-  if (rec.posted_date === cutoff && seenOnCutoffDay.has(rec.notice_id)) return true;
+  if (inc?.tracker.isDuplicate(rec.posted_date, rec.notice_id)) return true;
   if (!matches(rec)) return true;
   pending.push(rec);
   return true;
@@ -54,9 +49,8 @@ async function drain() {
     const rec = pending.shift();
     if (pushed >= maxResults) { stop = true; return; }
     await Actor.pushData(stamp(rec, rec.notice_url || SAM_CSV_URL));
+    inc?.tracker.observe(rec.posted_date, rec.notice_id);
     pushed += 1;
-    if (!newestDate || rec.posted_date > newestDate) { newestDate = rec.posted_date; newestIds = []; }
-    if (rec.posted_date === newestDate && newestIds.length < MAX_CURSOR_IDS) newestIds.push(rec.notice_id);
     // PPE: one charge per matching opportunity delivered; scanned non-matches are free.
     const { eventChargeLimitReached } = await Actor.charge({ eventName: 'opportunity-result' });
     charged += 1;
@@ -90,10 +84,7 @@ try {
     e.failureClass = 'schema_change';
     throw e;
   }
-  if (sinceLastRun && newestDate) {
-    const carry = newestDate === cursor?.last_posted_date ? [...seenOnCutoffDay, ...newestIds] : newestIds;
-    await store.setValue(cursorKey, { last_posted_date: newestDate, ids_on_last_date: carry.slice(-MAX_CURSOR_IDS) });
-  }
+  await inc?.save();
 } catch (e) {
   if (!(e.name === 'AbortError' && stop)) {
     await writeRunSummary(Actor, {
