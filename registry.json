@@ -600,7 +600,7 @@
       "monetization_configured": true
     },
     "dns-records-lookup": {
-      "apify_actor_id": null,
+      "apify_actor_id": "NkEh2R51jHatGtCA3",
       "source": "Public DNS resolvers (1.1.1.1, 8.8.8.8, 9.9.9.9)",
       "variant": "lookup (bulk)",
       "status": "staging",
@@ -630,7 +630,8 @@
         ]
       },
       "staging_validated": false,
-      "monetization_configured": false
+      "monetization_configured": false,
+      "staging_started_at": "2026-09-15T11:06:08Z"
     }
   },
   "apify_account": "factpipe",
