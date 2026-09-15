@@ -1,3 +1,36 @@
 {
-  "signals": []
+  "signals": [
+    {
+      "platform": "stackoverflow",
+      "url": "https://stackoverflow.com/questions/80002427/what-is-a-good-design-for-custom-extensions-to-a-java-class",
+      "title": "What is a good design for custom extensions to a Java class?",
+      "body": "company data api",
+      "created_at": "2026-09-11T14:42:08+00:00",
+      "engagement": 3,
+      "answered": true,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 1.68,
+      "status": "filtered",
+      "detected_at": "2026-09-15T08:59:42.735722+00:00",
+      "filter_reason": "false positive: Java OO design question, not a data-access request (keyword match on 'company data api'); already answered",
+      "filtered_at": "2026-09-15"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/mpospisil/gleanvolt/issues/193",
+      "title": "A \u0160koda configured as itself: an API key from the web UI, read through My\u0160koda's public API",
+      "body": "> *\"Create a WI to provide better integration with \u0160koda EVs.\"*\n>\n> *\"I want to be able to configure a \u0160koda car in the configuration \u2014 a different configuration than my ID.4. It will require other changes \u2014 login in the web UI and a new service for getting data instead of the volkswagen.de source.\"*\n\nOn **2026-08-31** (MySkoda app 8.16) \u0160koda released a free, documented REST API for owners: the [",
+      "created_at": "2026-09-13T20:20:59Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 0.396,
+      "status": "filtered",
+      "detected_at": "2026-09-15T08:59:42.738220+00:00",
+      "filter_reason": "not legal-safe for us: MySkoda API needs owner login/API key and returns personal vehicle data (no-login + no-personal-data rules)",
+      "filtered_at": "2026-09-15"
+    }
+  ]
 }
