@@ -37,6 +37,11 @@ test('example.com real DNS: null-MX style domain with -all and p=reject', () => 
   assert.equal(r.spf_all, '-all');
   assert.equal(r.dmarc_policy, 'reject');
   assert.equal(r.dmarc_pct, 100);
+  // Staging bug 2026-09-15: RFC 7505 null MX ("0 .") was reported as mx_records ["0 "].
+  assert.equal(r.null_mx, true);
+  assert.equal(r.accepts_mail, false);
+  assert.deepEqual(r.mx_records, []);
+  assert.ok(!r.issues.some((i) => /No MX/.test(i)));
 });
 
 test('nonexistent domain detected (never charged)', () => {

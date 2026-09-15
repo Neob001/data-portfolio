@@ -66,7 +66,7 @@ try {
     charged += 1;
     if (eventChargeLimitReached) break;
   }
-  for (const c of [...unknown, ...discontinued]) {
+  for (const c of new Set([...discontinued, ...unknown])) {
     if (quotes.includes(c) || c === base) {
       await Actor.pushData(stamp({ currency: c, found: false, reason: discontinued.includes(c) ? 'discontinued_by_ecb' : 'unknown_currency_or_no_data' }, url));
     }

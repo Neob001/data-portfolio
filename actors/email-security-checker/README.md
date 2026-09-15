@@ -9,28 +9,36 @@ Audit the **email authentication setup of any domain** — SPF, DKIM, DMARC, MX,
   "query": "github.com",
   "found": true,
   "domain": "github.com",
-  "score": 72,
-  "grade": "C",
+  "score": 77,
+  "grade": "B",
   "issues": [
     "SPF ends in ~all (softfail); -all is stricter.",
     "DMARC policy is quarantine; reject gives full spoofing protection."
   ],
+  "accepts_mail": true,
+  "null_mx": false,
   "mx_records": [
-    "1 aspmx.l.google.com"
+    "0 github-com.mail.protection.outlook.com"
   ],
   "spf_present": true,
+  "spf_record": "v=spf1 ip4:192.30.252.0/22 include:spf.protection.outlook.com include:_netblocks.google.com include:_netblocks2.google.com include:mail.zendesk.com include:_spf.salesforce.com include:servers.mcsv.net include:mktomail.com include:sendgrid.net ip4:62.253.227.114 ip4:166.78.69.169 ip4:166.78.69.170 ip4:166.78.71.131 ~all",
   "spf_all": "~all",
-  "spf_dns_lookups": 9,
+  "spf_dns_lookups": 8,
   "dmarc_present": true,
   "dmarc_policy": "quarantine",
   "dmarc_subdomain_policy": "reject",
   "dmarc_pct": 100,
+  "dmarc_record": "v=DMARC1; p=quarantine; sp=reject; pct=100; rua=mailto:***@github.com; ruf=mailto:***@github.com; fo=1",
   "dmarc_report_domains": [
     "github.com"
   ],
   "dkim_selectors_found": [
     "google",
-    "selector1"
+    "selector1",
+    "k1",
+    "k2",
+    "s1",
+    "s2"
   ],
   "mta_sts": false,
   "tls_rpt": false,

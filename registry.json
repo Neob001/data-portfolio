@@ -373,7 +373,7 @@
       "notes": "Staging 2026-09-13: default-input + adversarial runs SUCCEEDED; uncharged paths verified (not found, invalid, duplicates, person articles / unknown barcodes, no search results). PPE pricing via API is 403 -> Console only."
     },
     "ecb-exchange-rates": {
-      "apify_actor_id": null,
+      "apify_actor_id": "wL3rvAFzZkdp3GJgh",
       "source": "ECB data API (data-api.ecb.europa.eu), official, keyless",
       "variant": "lookup + history",
       "status": "building",
@@ -404,7 +404,7 @@
       }
     },
     "email-security-checker": {
-      "apify_actor_id": null,
+      "apify_actor_id": "LNGrubmo3gKNWsdgh",
       "source": "Public DNS (SPF/DMARC/DKIM/MX/MTA-STS/TLS-RPT)",
       "variant": "lookup (bulk)",
       "status": "building",
@@ -435,7 +435,7 @@
       }
     },
     "eu-vat-validation": {
-      "apify_actor_id": null,
+      "apify_actor_id": "U215BxIiP2pibZ7NJ",
       "source": "European Commission VIES REST API, official, keyless",
       "variant": "lookup (bulk)",
       "status": "building",

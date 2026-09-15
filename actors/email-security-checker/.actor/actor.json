@@ -164,6 +164,18 @@
           "fetched_at": {
             "type": "string",
             "format": "date-time"
+          },
+          "accepts_mail": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "null_mx": {
+            "type": [
+              "boolean",
+              "null"
+            ]
           }
         }
       }

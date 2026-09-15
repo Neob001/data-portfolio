@@ -63,10 +63,12 @@ export function parseDmarc(txtAnswer) {
 export const hasVersionRecord = (answer, prefix) => joinTxt(answer).some((t) => t.trim().toLowerCase().startsWith(prefix));
 
 /** Score 0-100 plus a human-readable issue list. */
-export function grade({ mxCount, spf, dmarc, dkimSelectors, mtaSts, tlsRpt }) {
+export function grade({ mxCount, nullMx = false, spf, dmarc, dkimSelectors, mtaSts, tlsRpt }) {
   const issues = [];
   let score = 0;
-  if (mxCount > 0) score += 10; else issues.push('No MX records: domain cannot receive mail (fine for non-mail domains, but then SPF should be "-all").');
+  if (nullMx) score += 10; // RFC 7505 null MX: an explicit, correct "this domain handles no mail"
+  else if (mxCount > 0) score += 10;
+  else issues.push('No MX records: domain cannot receive mail (fine for non-mail domains, but then SPF should be "-all").');
   if (spf.present) {
     score += 15;
     if (spf.multiple) issues.push('Multiple SPF records: receivers treat this as a permanent error.');
@@ -94,7 +96,9 @@ export function grade({ mxCount, spf, dmarc, dkimSelectors, mtaSts, tlsRpt }) {
 
 /** Assemble the output record from raw DNS answers for one domain. */
 export function evaluate(domain, answers) {
-  const mx = Array.isArray(answers.mx) ? answers.mx.slice().sort((a, b) => a.priority - b.priority) : [];
+  const rawMx = Array.isArray(answers.mx) ? answers.mx.slice().sort((a, b) => a.priority - b.priority) : [];
+  const nullMx = rawMx.length === 1 && ['', '.'].includes(rawMx[0].exchange);
+  const mx = nullMx ? [] : rawMx;
   const spf = parseSpf(answers.txt);
   const dmarc = parseDmarc(answers.dmarc);
   const dkimSelectors = Object.entries(answers.dkim || {})
@@ -102,12 +106,14 @@ export function evaluate(domain, answers) {
     .map(([s]) => s);
   const mtaSts = hasVersionRecord(answers.mtasts, 'v=stsv1');
   const tlsRpt = hasVersionRecord(answers.tlsrpt, 'v=tlsrptv1');
-  const g = grade({ mxCount: mx.length, spf, dmarc, dkimSelectors, mtaSts, tlsRpt });
+  const g = grade({ mxCount: mx.length, nullMx, spf, dmarc, dkimSelectors, mtaSts, tlsRpt });
   return {
     domain,
     score: g.score,
     grade: g.grade,
     issues: g.issues,
+    accepts_mail: !nullMx && mx.length > 0,
+    null_mx: nullMx,
     mx_records: mx.map((m) => `${m.priority} ${m.exchange}`),
     spf_present: spf.present,
     spf_record: spf.record,
