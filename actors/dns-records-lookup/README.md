@@ -2,6 +2,12 @@
 
 **Bulk DNS lookups for any list of domains.** Resolve A, AAAA, MX, TXT, NS, CNAME, SOA and CAA records at scale, plus derived hints you'd otherwise have to build yourself: mail provider (Google Workspace, Microsoft 365, Zoho, Proton, Fastmail, Mimecast, Proofpoint, Amazon SES), authoritative DNS provider (Cloudflare, AWS Route 53, Google Cloud DNS, Azure DNS, GoDaddy, Namecheap, DigitalOcean, Vercel, NS1), SPF/DMARC presence and TXT-based verification tokens (Google, Microsoft, Facebook, Atlassian, Apple, Stripe, DocuSign, Zoom). Public DNS only: no API key, no login, no personal data.
 
+## Quick start
+
+1. Click **Start** with the two prefilled domains (`github.com`, `example.com`). It finishes in seconds.
+2. You get one record per domain with A, AAAA, MX, TXT, NS, SOA and CAA records, plus mail provider, DNS provider and SPF/DMARC flags.
+3. That first run costs $0.003, well within Apify's free monthly credit. Then paste your own domain list.
+
 ## What you get
 
 ```json
