@@ -14,7 +14,7 @@
       },
       "pricing_rationale": "Leading incumbent charges ~$0.01/filing-fetched; launch ~20% below.",
       "launched_at": "2026-09-11T08:35:36Z",
-      "last_fix_date": null,
+      "last_fix_date": "2026-09-15",
       "kpis": {
         "as_of": "2026-09-13",
         "totalRuns": 10,
@@ -32,7 +32,10 @@
           "BUSINESS",
           "NEWS"
         ]
-      }
+      },
+      "fix_log": [
+        "2026-09-15: incremental cursor moved to named store with truncation-aware dedupe; pagination judged on raw API counts; SEC dateRange=custom + 100-hit paging + in-run dedupe. Verified live: two-pass runs, capped-run continuation with zero overlap, counts match API totals."
+      ]
     },
     "eu-ted-tenders-monitor": {
       "apify_actor_id": "uw85K3A58AQE2zbUa",
@@ -47,7 +50,7 @@
       },
       "pricing_rationale": "Incumbents rental/PPR at higher effective cost and 13.7% failure rate; undercut + reliability.",
       "launched_at": "2026-09-11T08:35:36Z",
-      "last_fix_date": null,
+      "last_fix_date": "2026-09-15",
       "kpis": {
         "as_of": "2026-09-13",
         "totalRuns": 10,
@@ -65,7 +68,10 @@
           "BUSINESS",
           "LEAD_GENERATION"
         ]
-      }
+      },
+      "fix_log": [
+        "2026-09-15: incremental cursor moved to named store with truncation-aware dedupe; pagination judged on raw API counts. Verified live: two-pass runs, capped-run continuation with zero overlap, counts match API totals."
+      ]
     },
     "uk-company-lookup": {
       "apify_actor_id": "wfcdwJw5mWYbpxaPp",
@@ -114,7 +120,7 @@
       },
       "pricing_rationale": "Cheap build, 5.0-rated incumbents but tiny catalog; regulatory-monitoring buyers",
       "launched_at": "2026-09-11T09:51:12Z",
-      "last_fix_date": null,
+      "last_fix_date": "2026-09-15",
       "kpis": {
         "as_of": "2026-09-13",
         "totalRuns": 4,
@@ -131,7 +137,10 @@
           "BUSINESS",
           "NEWS"
         ]
-      }
+      },
+      "fix_log": [
+        "2026-09-15: incremental cursor moved to named store with truncation-aware dedupe; pagination judged on raw API counts. Verified live: two-pass runs, capped-run continuation with zero overlap, counts match API totals."
+      ]
     },
     "fda-recalls-monitor": {
       "apify_actor_id": "smk2CKKwsLyKuxIzY",
@@ -146,7 +155,7 @@
       },
       "pricing_rationale": "Official source, supply-chain risk buyers",
       "launched_at": null,
-      "last_fix_date": null,
+      "last_fix_date": "2026-09-15",
       "kpis": {
         "as_of": "2026-09-13",
         "totalRuns": 2,
@@ -164,7 +173,10 @@
           "BUSINESS",
           "NEWS"
         ]
-      }
+      },
+      "fix_log": [
+        "2026-09-15: incremental cursor moved to named store with truncation-aware dedupe; pagination judged on raw API counts; openFDA sort=report_date:desc. Verified live: two-pass runs, capped-run continuation with zero overlap, counts match API totals."
+      ]
     },
     "ofac-sanctions-screening": {
       "apify_actor_id": "eBGN9jH7yYqR3n2q3",
@@ -376,7 +388,7 @@
       "apify_actor_id": "wL3rvAFzZkdp3GJgh",
       "source": "ECB data API (data-api.ecb.europa.eu), official, keyless",
       "variant": "lookup + history",
-      "status": "building",
+      "status": "staged-awaiting-pricing-and-publish",
       "approval": "N3 APPROVED by owner 2026-09-15 (chat)",
       "origin": "scan",
       "incumbent_actor_id": null,
@@ -401,13 +413,14 @@
           "DEVELOPER_TOOLS",
           "BUSINESS"
         ]
-      }
+      },
+      "staging_validated": true
     },
     "email-security-checker": {
       "apify_actor_id": "LNGrubmo3gKNWsdgh",
       "source": "Public DNS (SPF/DMARC/DKIM/MX/MTA-STS/TLS-RPT)",
       "variant": "lookup (bulk)",
-      "status": "building",
+      "status": "staged-awaiting-pricing-and-publish",
       "approval": "N2 APPROVED by owner 2026-09-15 (chat)",
       "origin": "scan",
       "incumbent_actor_id": null,
@@ -432,13 +445,14 @@
           "DEVELOPER_TOOLS",
           "LEAD_GENERATION"
         ]
-      }
+      },
+      "staging_validated": true
     },
     "eu-vat-validation": {
       "apify_actor_id": "U215BxIiP2pibZ7NJ",
       "source": "European Commission VIES REST API, official, keyless",
       "variant": "lookup (bulk)",
-      "status": "building",
+      "status": "staged-awaiting-pricing-and-publish",
       "approval": "N4 APPROVED by owner 2026-09-15 (chat)",
       "origin": "scan",
       "incumbent_actor_id": null,
@@ -463,13 +477,14 @@
           "BUSINESS",
           "DEVELOPER_TOOLS"
         ]
-      }
+      },
+      "staging_validated": true
     },
     "lighthouse-auditor": {
       "apify_actor_id": "Quxlir4keE4Up8hGE",
       "source": "Open-source Lighthouse 12 (Apache-2.0) in headless Chrome; no Google API",
       "variant": "lookup (bulk)",
-      "status": "building",
+      "status": "staged-awaiting-pricing-and-publish",
       "approval": "INC-4 standing replacement decision (DECISIONS.md 2026-09-15)",
       "origin": "replacement",
       "incumbent_actor_id": "nexgendata/page-speed-analyzer",
@@ -502,7 +517,7 @@
       "apify_actor_id": "Fs9vFlYGCXT0NyKZt",
       "source": "SAM.gov Contract Opportunities public data extract (GSA, daily CSV, keyless, public domain)",
       "variant": "full+incremental",
-      "status": "building",
+      "status": "staged-awaiting-pricing-and-publish",
       "approval": "N1 APPROVED by owner 2026-09-15 (chat); keyless public extract, no login/ID needed",
       "origin": "scan",
       "incumbent_actor_id": null,
@@ -528,7 +543,8 @@
           "BUSINESS"
         ]
       },
-      "notes": "Contracting officer names/emails/phones dropped by policy (personal data); notice_url links to them on SAM.gov."
+      "notes": "Contracting officer names/emails/phones dropped by policy (personal data); notice_url links to them on SAM.gov. Staging 2026-09-15: default 68 results in 13s ($0.001 compute); two-pass incremental verified; free-text emails/phones masked (0 raw emails in 68 records).",
+      "staging_validated": true
     }
   },
   "apify_account": "factpipe",
