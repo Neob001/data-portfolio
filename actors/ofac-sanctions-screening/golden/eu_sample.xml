@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<export xmlns="http://eu.europa.ec/fpi/fsd/export" generationDate="2026-08-05T16:47:04.449+02:00" globalFileId="184961">
+    <sanctionEntity designationDetails="" unitedNationId="" euReferenceNumber="EU.27.28" logicalId="13">
+        <remark>UNSC RESOLUTION 1483</remark>
+        <regulation regulationType="regulation" organisationType="commission" publicationDate="2003-07-08" entryIntoForceDate="2003-07-07" numberTitle="1210/2003 (OJ L169)" programme="IRQ" logicalId="348">
+            <publicationUrl>http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2003:169:0006:0023:EN:PDF</publicationUrl>
+        </regulation>
+        <subjectType code="person" classificationCode="P"/>
+        <nameAlias firstName="Saddam" middleName="" lastName="Hussein Al-Tikriti" wholeName="Saddam Hussein Al-Tikriti" function="" gender="M" title="" nameLanguage="" strong="true" regulationLanguage="en" logicalId="17">
+        </nameAlias>
+        <nameAlias firstName="" middleName="" lastName="" wholeName="Abu Ali" function="" title="" nameLanguage="" strong="true" regulationLanguage="en" logicalId="19">
+        </nameAlias>
+        <nameAlias firstName="" middleName="" lastName="" wholeName="Abou Ali" function="" title="" nameLanguage="FR" strong="true" regulationLanguage="en" logicalId="380">
+        </nameAlias>
+    </sanctionEntity>
+    <sanctionEntity designationDetails="" unitedNationId="" euReferenceNumber="EU.39.56" logicalId="20">
+        <remark>Saddam's second son</remark>
+        <regulation regulationType="regulation" organisationType="commission" publicationDate="2003-07-08" entryIntoForceDate="2003-07-07" numberTitle="1210/2003 (OJ L169)" programme="IRQ" logicalId="348">
+            <publicationUrl>http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2003:169:0006:0023:EN:PDF</publicationUrl>
+        </regulation>
+        <subjectType code="person" classificationCode="P"/>
+        <nameAlias firstName="Qoussaï" middleName="Saddam" lastName="Hussein Al-Tikriti" wholeName="Qoussaï Saddam Hussein Al-Tikriti" function="" title="" nameLanguage="FR" strong="true" regulationLanguage="en" logicalId="381">
+        </nameAlias>
+        <nameAlias firstName="Qusay" middleName="Saddam" lastName="Hussein Al-Tikriti" wholeName="Qusay Saddam Hussein Al-Tikriti" function="Oversaw Special Republican Guard, Special Security Organisation, and Republican Guard" gender="M" title="" nameLanguage="" strong="true" regulationLanguage="en" logicalId="26">
+        </nameAlias>
+    </sanctionEntity>
+    <sanctionEntity designationDate="2014-06-30" designationDetails="" unitedNationId="" euReferenceNumber="EU.3651.51" logicalId="7539">
+        <remark>The Allied Democratic Forces (ADF) was created in 1995 and is located in the mountainous DRC-Uganda border area.</remark>
+        <regulation regulationType="amendment" organisationType="council" publicationDate="2020-10-19" entryIntoForceDate="2020-10-20" numberTitle="2020/1507 (OJ L345)" programme="COD" logicalId="132497">
+            <publicationUrl>https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.L_.2020.345.01.0001.01.ENG&amp;toc=OJ:L:2020:345:TOC</publicationUrl>
+        </regulation>
+        <subjectType code="enterprise" classificationCode="E"/>
+        <nameAlias firstName="" middleName="" lastName="" wholeName="ADF (Allied Democratic Forces)" function="" title="" nameLanguage="" strong="true" regulationLanguage="en" logicalId="18450">
+        </nameAlias>
+        <nameAlias firstName="" middleName="" lastName="" wholeName="Forces Democratiques Alliees-Armee Nationale de Liberation de l'Ouganda" function="" title="" nameLanguage="" strong="true" regulationLanguage="en" logicalId="18451">
+        </nameAlias>
+        <nameAlias firstName="" middleName="" lastName="" wholeName="ADF/NALU" function="" title="" nameLanguage="" strong="true" regulationLanguage="en" logicalId="18452">
+        </nameAlias>
+        <nameAlias firstName="" middleName="" lastName="" wholeName="NALU" function="" title="" nameLanguage="EN" strong="true" regulationLanguage="en" logicalId="110793">
+        </nameAlias>
+    </sanctionEntity>
+    <sanctionEntity designationDate="2002-06-18" designationDetails="" unitedNationId="" euReferenceNumber="EU.3502.46" logicalId="201">
+        <regulation regulationType="amendment" organisationType="council" publicationDate="2025-01-31" entryIntoForceDate="2025-02-01" numberTitle="2025/206 (L 202500206)" programme="TERR" logicalId="207667">
+            <publicationUrl>https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500206</publicationUrl>
+        </regulation>
+        <subjectType code="enterprise" classificationCode="E"/>
+        <nameAlias firstName="" middleName="" lastName="" wholeName="Organização Abu Nidal" function="" title="" nameLanguage="PT" strong="true" regulationLanguage="en" logicalId="123121">
+        </nameAlias>
+        <nameAlias firstName="" middleName="" lastName="" wholeName="Lucht Mheán Fómhair Dubh" function="" title="" nameLanguage="GA" strong="true" regulationLanguage="en" logicalId="123060">
+        </nameAlias>
+        <nameAlias firstName="" middleName="" lastName="" wholeName="na Briogáidí Réabhlóideacha Arabacha" function="" title="" nameLanguage="GA" strong="true" regulationLanguage="en" logicalId="123061">
+        </nameAlias>
+        <nameAlias firstName="" middleName="" lastName="" wholeName="Comhairle Réabhlóide Fatah" function="" title="" nameLanguage="GA" strong="true" regulationLanguage="en" logicalId="123062">
+        </nameAlias>
+        <nameAlias firstName="" middleName="" lastName="" wholeName="Eagraíocht Abu Nidal" function="" title="" nameLanguage="GA" strong="true" regulationLanguage="en" logicalId="123063">
+        </nameAlias>
+        <nameAlias firstName="" middleName="" lastName="" wholeName="Επαναστατική Οργάνωση Σοσιαλιστών Μουσουλμάνων" function="" title="" nameLanguage="EL" strong="true" regulationLanguage="en" logicalId="123069">
+        </nameAlias>
+        <nameAlias firstName="" middleName="" lastName="" wholeName="Abu Nidal Organisation" function="" title="" nameLanguage="EN" strong="true" regulationLanguage="en" logicalId="311">
+        </nameAlias>
+        <nameAlias firstName="" middleName="" lastName="" wholeName="ANO" function="" title="" nameLanguage="EN" strong="true" regulationLanguage="en" logicalId="312">
+        </nameAlias>
+        <nameAlias firstName="" middleName="" lastName="" wholeName="Revolutionary Organisation of Socialist Muslims" function="" title="" nameLanguage="EN" strong="true" regulationLanguage="en" logicalId="316">
+        </nameAlias>
+    </sanctionEntity>
+    <sanctionEntity designationDate="2001-01-25" designationDetails="" unitedNationId="" euReferenceNumber="EU.449.72" logicalId="623">
+        <remark>Family is originally from Neka District, Paktia Province, Afghanistan.
+Belongs to Zadran tribe. Review pursuant to Security Council Resolution 1822 (2008) was concluded on 23 Jul. 2010. INTERPOL-UN Security Council Special Notice web link: https://www.interpol.int/en/notice/ search/un/1493564</remark>
+        <regulation regulationType="amendment" organisationType="council" publicationDate="2017-03-09" entryIntoForceDate="2017-03-10" numberTitle="2017/404 (OJ L63)" programme="AFG" logicalId="101046">
+            <publicationUrl>http://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32017R0404&amp;from=EN</publicationUrl>
+        </regulation>
+        <subjectType code="person" classificationCode="P"/>
+        <nameAlias firstName="" middleName="" lastName="" wholeName="Kabir Abdul" function="Second Deputy" title="Maulavi" nameLanguage="" strong="true" regulationLanguage="en" logicalId="1409">
+        </nameAlias>
+        <nameAlias firstName="" middleName="" lastName="" wholeName="A. Kabir" function="" title="" nameLanguage="" strong="true" regulationLanguage="en" logicalId="5961">
+        </nameAlias>
+        <nameAlias firstName="Abdul Kabir" middleName="" lastName="Mohammad Jan" wholeName="Abdul Kabir Mohammad Jan" function="(a) Second Deputy, Economic Affairs, Council of Ministers under the Taliban regime, (b) Governor of Nangarhar Province under the Taliban regime, (c) Head of Eastern Zone under the Taliban regime." title="Maulavi" nameLanguage="" strong="true" regulationLanguage="en" logicalId="101898">
+        </nameAlias>
+    </sanctionEntity>
+</export>

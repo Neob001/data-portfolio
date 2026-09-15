@@ -1,8 +1,8 @@
 {
   "actorSpecification": 1,
   "name": "ofac-sanctions-screening",
-  "title": "OFAC Sanctions Screening API \u2014 SDN List Check for AML/KYC",
-  "description": "Screen people and companies against the official US Treasury OFAC SDN sanctions list, incl. aliases, with fuzzy match scores. Bulk name lists for AML/KYC and vendor checks. No API key. $0.003 per name.",
+  "title": "Sanctions Screening API — OFAC, EU, UK & UN Lists (AML/KYC)",
+  "description": "Screen people, companies and vessels against the official OFAC SDN, EU, UK and UN Security Council sanctions lists, incl. aliases, with fuzzy match scores. Bulk AML/KYC checks. No API key. $3 per 1,000 names.",
   "version": "0.1",
   "buildTag": "latest",
   "input": "../INPUT_SCHEMA.json",
@@ -24,8 +24,11 @@
               "query",
               "matched",
               "match_count",
+              "best_score",
               "top_match_name",
-              "top_match_score"
+              "lists_matched",
+              "lists_screened",
+              "lists_unavailable"
             ]
           },
           "display": {
@@ -58,10 +61,75 @@
               "null"
             ]
           },
+          "best_score": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "lists_matched": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
           "matches": {
             "type": "array",
             "items": {
-              "type": "object"
+              "type": "object",
+              "properties": {
+                "list": {
+                  "type": "string"
+                },
+                "list_entry_id": {
+                  "type": "string"
+                },
+                "primary_name": {
+                  "type": "string"
+                },
+                "matched_name": {
+                  "type": "string"
+                },
+                "score": {
+                  "type": "number"
+                },
+                "entity_type": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "programs": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "program_list": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "listed_on": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "uid": {
+                  "type": "string"
+                },
+                "sdn_name": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
             }
           },
           "list_publish_info": {
@@ -69,6 +137,41 @@
               "string",
               "null"
             ]
+          },
+          "lists_screened": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "lists_unavailable": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "lists_info": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "list": {
+                  "type": "string"
+                },
+                "entries": {
+                  "type": "integer"
+                },
+                "source_url": {
+                  "type": "string"
+                },
+                "publication_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
           },
           "source_url": {
             "type": "string",

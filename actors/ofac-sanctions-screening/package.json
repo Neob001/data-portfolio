@@ -2,7 +2,7 @@
   "name": "ofac-sanctions-screening",
   "version": "0.1.0",
   "type": "module",
-  "description": "Screen names against the official US OFAC SDN sanctions list, including aliases. Deterministic matching with scores. Pay",
+  "description": "Screen names against the official OFAC SDN, EU, UK and UN sanctions lists, including aliases. Deterministic matching with scores. Pay per name screened.",
   "engines": {
     "node": ">=22"
   },

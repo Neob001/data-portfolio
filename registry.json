@@ -220,7 +220,7 @@
     },
     "ofac-sanctions-screening": {
       "apify_actor_id": "eBGN9jH7yYqR3n2q3",
-      "source": "US Treasury OFAC SDN + ALT files (treasury.gov)",
+      "source": "OFAC SDN (treasury.gov) + EU FSF consolidated list + UK Sanctions List (FCDO) + UN Security Council consolidated list",
       "variant": "lookup/screening",
       "status": "live",
       "approval": "Q1 APPROVED by owner 2026-09-11 (chat)",
@@ -240,10 +240,10 @@
       "staging_validated": true,
       "monetization_configured": true,
       "listing": {
-        "title": "OFAC Sanctions Screening API — SDN List Check for AML/KYC",
-        "description": "Screen people and companies against the official US Treasury OFAC SDN sanctions list, incl. aliases, with fuzzy match scores. Bulk name lists for AML/KYC and vendor checks. No API key. $0.003 per name.",
-        "seoTitle": "OFAC Sanctions Screening API: Bulk SDN Name Check",
-        "seoDescription": "Bulk-screen names against the US Treasury OFAC SDN list with aliases and fuzzy match scores. Fresh official data each run, no API key. For AML/KYC compliance.",
+        "title": "Sanctions Screening API — OFAC, EU, UK & UN Lists (AML/KYC)",
+        "description": "Screen people, companies and vessels against the official OFAC SDN, EU, UK and UN Security Council sanctions lists, incl. aliases, with fuzzy match scores. Bulk AML/KYC checks. No API key. $3 per 1,000 names.",
+        "seoTitle": "Sanctions Screening API: OFAC, EU, UK & UN List Check",
+        "seoDescription": "Bulk-screen names against official OFAC SDN, EU, UK and UN sanctions lists with aliases and fuzzy match scores. Fresh data each run, no API key. AML/KYC.",
         "categories": [
           "BUSINESS",
           "AUTOMATION"
@@ -255,6 +255,12 @@
           "event": "name-screened",
           "from": 0.01,
           "to": 0.003
+        }
+      ],
+      "fix_log": [
+        {
+          "date": "2026-09-15",
+          "change": "N5 upgrade: EU, UK, UN lists added (lists input, default all four); price unchanged $3/1k"
         }
       ]
     },

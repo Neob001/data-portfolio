@@ -1,16 +1,43 @@
 {
-  "title": "OFAC Sanctions Screening",
+  "title": "Sanctions Screening (OFAC, EU, UK, UN)",
   "type": "object",
   "schemaVersion": 1,
   "properties": {
     "names": {
       "title": "Names to screen",
       "type": "array",
-      "description": "People or organizations to screen against the OFAC SDN list.",
+      "description": "People, organizations or vessels to screen. Each name is screened against every selected sanctions list and returns one result record.",
       "editor": "stringList",
       "prefill": [
         "Banco Nacional de Cuba",
         "Wholesome Bakery of Vermont"
+      ]
+    },
+    "lists": {
+      "title": "Sanctions lists",
+      "type": "array",
+      "description": "Which official lists to screen against: OFAC_SDN (US Treasury SDN list), EU (EU consolidated financial sanctions list), UK (FCDO UK Sanctions List), UN (UN Security Council consolidated list). Price is the same per name however many lists you select. Leave empty for all four.",
+      "editor": "select",
+      "items": {
+        "type": "string",
+        "enum": [
+          "OFAC_SDN",
+          "EU",
+          "UK",
+          "UN"
+        ],
+        "enumTitles": [
+          "US OFAC SDN list",
+          "EU consolidated financial sanctions list",
+          "UK Sanctions List (FCDO)",
+          "UN Security Council consolidated list"
+        ]
+      },
+      "default": [
+        "OFAC_SDN",
+        "EU",
+        "UK",
+        "UN"
       ]
     },
     "minScore": {
@@ -24,7 +51,7 @@
     "includeAliases": {
       "title": "Screen against aliases (AKAs)",
       "type": "boolean",
-      "description": "Also match against the official alternate-names list.",
+      "description": "Also match against official alternate names, spelling variations and transliterations on every selected list.",
       "default": true
     }
   },
