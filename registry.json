@@ -436,7 +436,7 @@
       "apify_actor_id": "wL3rvAFzZkdp3GJgh",
       "source": "ECB data API (data-api.ecb.europa.eu), official, keyless",
       "variant": "lookup + history",
-      "status": "staged-awaiting-pricing-and-publish",
+      "status": "live",
       "approval": "N3 APPROVED by owner 2026-09-15 (chat)",
       "origin": "scan",
       "incumbent_actor_id": null,
@@ -449,7 +449,7 @@
         }
       },
       "pricing_rationale": "At/below competitor median from niche scan 2026-09-15.",
-      "launched_at": null,
+      "launched_at": "2026-09-15T09:30:00Z",
       "last_fix_date": null,
       "kpis": {},
       "listing": {
@@ -462,13 +462,14 @@
           "BUSINESS"
         ]
       },
-      "staging_validated": true
+      "staging_validated": true,
+      "monetization_configured": true
     },
     "email-security-checker": {
       "apify_actor_id": "LNGrubmo3gKNWsdgh",
       "source": "Public DNS (SPF/DMARC/DKIM/MX/MTA-STS/TLS-RPT)",
       "variant": "lookup (bulk)",
-      "status": "staged-awaiting-pricing-and-publish",
+      "status": "live",
       "approval": "N2 APPROVED by owner 2026-09-15 (chat)",
       "origin": "scan",
       "incumbent_actor_id": null,
@@ -481,7 +482,7 @@
         }
       },
       "pricing_rationale": "At/below competitor median from niche scan 2026-09-15.",
-      "launched_at": null,
+      "launched_at": "2026-09-15T09:30:00Z",
       "last_fix_date": null,
       "kpis": {},
       "listing": {
@@ -494,13 +495,14 @@
           "LEAD_GENERATION"
         ]
       },
-      "staging_validated": true
+      "staging_validated": true,
+      "monetization_configured": true
     },
     "eu-vat-validation": {
       "apify_actor_id": "U215BxIiP2pibZ7NJ",
       "source": "European Commission VIES REST API, official, keyless",
       "variant": "lookup (bulk)",
-      "status": "staged-awaiting-pricing-and-publish",
+      "status": "live",
       "approval": "N4 APPROVED by owner 2026-09-15 (chat)",
       "origin": "scan",
       "incumbent_actor_id": null,
@@ -513,7 +515,7 @@
         }
       },
       "pricing_rationale": "At/below competitor median from niche scan 2026-09-15.",
-      "launched_at": null,
+      "launched_at": "2026-09-15T09:30:00Z",
       "last_fix_date": null,
       "kpis": {},
       "listing": {
@@ -526,13 +528,14 @@
           "DEVELOPER_TOOLS"
         ]
       },
-      "staging_validated": true
+      "staging_validated": true,
+      "monetization_configured": true
     },
     "lighthouse-auditor": {
       "apify_actor_id": "Quxlir4keE4Up8hGE",
       "source": "Open-source Lighthouse 12 (Apache-2.0) in headless Chrome; no Google API",
       "variant": "lookup (bulk)",
-      "status": "staged-awaiting-pricing-and-publish",
+      "status": "live",
       "approval": "INC-4 standing replacement decision (DECISIONS.md 2026-09-15)",
       "origin": "replacement",
       "incumbent_actor_id": "nexgendata/page-speed-analyzer",
@@ -545,7 +548,7 @@
         }
       },
       "pricing_rationale": "Competitors $2-100/1k, active cluster $10-20; compute-heavy (headless Chrome), verify margin in staging.",
-      "launched_at": null,
+      "launched_at": "2026-09-15T09:30:00Z",
       "last_fix_date": null,
       "kpis": {},
       "listing": {
@@ -559,13 +562,14 @@
         ]
       },
       "staging_validated": true,
-      "notes": "Staging 2026-09-15: default + adversarial SUCCEEDED; invalid URL, NXDOMAIN (both devices) and duplicate URL uncharged. Compute ~$0.003 per successful audit at 2 GB (24.8s run incl. Chrome start) vs $0.01 price."
+      "notes": "Staging 2026-09-15: default + adversarial SUCCEEDED; invalid URL, NXDOMAIN (both devices) and duplicate URL uncharged. Compute ~$0.003 per successful audit at 2 GB (24.8s run incl. Chrome start) vs $0.01 price.",
+      "monetization_configured": true
     },
     "sam-gov-contracts": {
       "apify_actor_id": "Fs9vFlYGCXT0NyKZt",
       "source": "SAM.gov Contract Opportunities public data extract (GSA, daily CSV, keyless, public domain)",
       "variant": "full+incremental",
-      "status": "staged-awaiting-pricing-and-publish",
+      "status": "live",
       "approval": "N1 APPROVED by owner 2026-09-15 (chat); keyless public extract, no login/ID needed",
       "origin": "scan",
       "incumbent_actor_id": null,
@@ -578,7 +582,7 @@
         }
       },
       "pricing_rationale": "Competitor cluster $2.5-3/1k (leader rated 1.0); $2/1k.",
-      "launched_at": null,
+      "launched_at": "2026-09-15T09:30:00Z",
       "last_fix_date": null,
       "kpis": {},
       "listing": {
@@ -592,7 +596,8 @@
         ]
       },
       "notes": "Contracting officer names/emails/phones dropped by policy (personal data); notice_url links to them on SAM.gov. Staging 2026-09-15: default 68 results in 13s ($0.001 compute); two-pass incremental verified; free-text emails/phones masked (0 raw emails in 68 records).",
-      "staging_validated": true
+      "staging_validated": true,
+      "monetization_configured": true
     }
   },
   "apify_account": "factpipe",
