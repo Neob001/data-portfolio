@@ -238,10 +238,22 @@ export function latinName(s) {
   return isLatinName(fixed) ? fixed : null;
 }
 
+/**
+ * "PJSC Sberbank (Public Joint-Stock Company Sberbank)" -> also index "PJSC Sberbank" and
+ * "Public Joint-Stock Company Sberbank": long parentheticals otherwise dilute the token score.
+ */
+export function parentheticalVariants(name) {
+  const s = String(name || '');
+  if (!/\([^()]+\)/.test(s)) return [];
+  const outside = s.replace(/\([^()]*\)/g, ' ').replace(/\s+/g, ' ').trim();
+  const inside = [...s.matchAll(/\(([^()]+)\)/g)].map((m) => m[1].trim());
+  return [outside, ...inside].filter((v) => normalizeName(v).length >= 3 && nameTokens(v).length > 0);
+}
+
 function dedupeNames(names) {
   const seen = new Set();
   const out = [];
-  for (const n of names) {
+  for (const n of names.flatMap((x) => (x ? [x, ...parentheticalVariants(x)] : []))) {
     if (!n) continue;
     const k = normalizeName(n);
     if (!k || seen.has(k)) continue;

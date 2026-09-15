@@ -267,3 +267,20 @@ test('publish info lists each screened list', () => {
   ], 'T');
   assert.equal(s, 'OFAC SDN list, 10 entries; UN Security Council consolidated list, 4 entries (published 2026-09-14), downloaded T');
 });
+
+test('parenthetical names are indexed as separate variants (UK list style)', async () => {
+  const { parentheticalVariants, buildIndex, screenName } = await import('../src/transform.js');
+  assert.deepEqual(
+    parentheticalVariants('PJSC Sberbank (Public Joint-Stock Company Sberbank)'),
+    ['PJSC Sberbank', 'Public Joint-Stock Company Sberbank'],
+  );
+  assert.deepEqual(parentheticalVariants('ACME (LTD)'), ['ACME']);
+  assert.deepEqual(parentheticalVariants('No parentheses'), []);
+  const entries = parseUkXml(load('uk_sample.xml')).entries;
+  const adf = entries.find((e) => e.names.some((n) => n === 'ADF (Allied Democratic Forces)'));
+  assert.ok(adf, 'fixture contains the parenthetical UK name');
+  assert.ok(adf.names.includes('Allied Democratic Forces'));
+  const r = screenName('Allied Democratic Forces', buildIndex(entries), 0.95);
+  assert.equal(r.matched, true);
+  assert.equal(r.best_score, 1);
+});
