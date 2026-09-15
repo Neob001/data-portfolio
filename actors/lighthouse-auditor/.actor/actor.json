@@ -1,0 +1,222 @@
+{
+  "actorSpecification": 1,
+  "name": "lighthouse-auditor",
+  "title": "Lighthouse & Core Web Vitals Checker API — Bulk PageSpeed",
+  "description": "Run real Google Lighthouse audits in bulk: performance, SEO, accessibility and best-practices scores, LCP/CLS/TBT with pass/fail, and top fixes. Mobile and desktop. No API key or quota. $10 per 1,000 audits.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "minMemoryMbytes": 2048,
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "outputSchema": "./output_schema.json",
+  "categories": [
+    "SEO_TOOLS",
+    "DEVELOPER_TOOLS"
+  ],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "audits": {
+          "title": "Audits",
+          "transformation": {
+            "fields": [
+              "final_url",
+              "strategy",
+              "performance_score",
+              "seo_score",
+              "lcp_ms",
+              "cls",
+              "tbt_ms",
+              "core_web_vitals_lab"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "requested_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "final_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "strategy": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "performance_score": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "accessibility_score": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "best_practices_score": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "seo_score": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "lcp_ms": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "cls": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "tbt_ms": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "fcp_ms": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "speed_index_ms": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "time_to_interactive_ms": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "server_response_ms": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "total_byte_weight_kb": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "lcp_rating": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "cls_rating": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "tbt_rating": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "core_web_vitals_lab": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "lighthouse_version": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "audited_at": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "error_code": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "error_message": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source_url": {
+            "type": "string"
+          },
+          "fetched_at": {
+            "type": "string"
+          },
+          "top_opportunities": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "failing_insights": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "failing_seo_audits": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "failing_accessibility_audits": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

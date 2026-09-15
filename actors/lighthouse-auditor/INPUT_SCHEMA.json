@@ -1,0 +1,44 @@
+{
+  "title": "Lighthouse & Core Web Vitals Checker",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "urls": {
+      "title": "URLs",
+      "type": "array",
+      "editor": "stringList",
+      "prefill": [
+        "https://example.com"
+      ],
+      "description": "Pages to audit. Domains without https:// are accepted."
+    },
+    "strategy": {
+      "title": "Device",
+      "type": "string",
+      "editor": "select",
+      "enum": [
+        "mobile",
+        "desktop",
+        "both"
+      ],
+      "enumTitles": [
+        "Mobile (Lighthouse default)",
+        "Desktop",
+        "Both (two audits per URL)"
+      ],
+      "default": "mobile",
+      "description": "Mobile uses Lighthouse's emulated mid-tier phone and throttled network; desktop uses the desktop preset."
+    },
+    "maxUrls": {
+      "title": "Max URLs",
+      "type": "integer",
+      "default": 100,
+      "minimum": 1,
+      "maximum": 10000,
+      "description": "Cap on URLs audited in one run."
+    }
+  },
+  "required": [
+    "urls"
+  ]
+}

@@ -464,6 +464,37 @@
           "DEVELOPER_TOOLS"
         ]
       }
+    },
+    "lighthouse-auditor": {
+      "apify_actor_id": null,
+      "source": "Open-source Lighthouse 12 (Apache-2.0) in headless Chrome; no Google API",
+      "variant": "lookup (bulk)",
+      "status": "building",
+      "approval": "INC-4 standing replacement decision (DECISIONS.md 2026-09-15)",
+      "origin": "replacement",
+      "incumbent_actor_id": "nexgendata/page-speed-analyzer",
+      "first_paid_run_date": null,
+      "ppe_events": {
+        "page-audited": {
+          "proposed_price_usd": 0.01,
+          "title": "Page audited",
+          "description": "One completed Lighthouse audit (URL x device). Unreachable pages, invalid URLs and failed audits are never charged."
+        }
+      },
+      "pricing_rationale": "Competitors $2-100/1k, active cluster $10-20; compute-heavy (headless Chrome), verify margin in staging.",
+      "launched_at": null,
+      "last_fix_date": null,
+      "kpis": {},
+      "listing": {
+        "title": "Lighthouse & Core Web Vitals Checker API — Bulk PageSpeed",
+        "description": "Run real Google Lighthouse audits in bulk: performance, SEO, accessibility and best-practices scores, LCP/CLS/TBT with pass/fail, and top fixes. Mobile and desktop. No API key or quota. $10 per 1,000 audits.",
+        "seoTitle": "Bulk Lighthouse & Core Web Vitals Checker (PageSpeed API)",
+        "seoDescription": "Audit thousands of URLs with Lighthouse: performance, SEO, accessibility scores, LCP, CLS, TBT and top fixes. Mobile & desktop, no quota. Pay per audit.",
+        "categories": [
+          "SEO_TOOLS",
+          "DEVELOPER_TOOLS"
+        ]
+      }
     }
   },
   "apify_account": "factpipe",

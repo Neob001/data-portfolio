@@ -1,0 +1,202 @@
+{
+ "lighthouseVersion": "12.8.2",
+ "requestedUrl": "https://example.com/",
+ "finalDisplayedUrl": "https://example.com/",
+ "fetchTime": "2026-09-15T07:48:46.814Z",
+ "configSettings": {
+  "formFactor": "mobile",
+  "throttlingMethod": "simulate"
+ },
+ "categories": {
+  "performance": {
+   "id": "performance",
+   "title": "Performance",
+   "score": 1,
+   "auditRefs": [
+    {
+     "id": "first-contentful-paint",
+     "weight": 10
+    },
+    {
+     "id": "largest-contentful-paint",
+     "weight": 25
+    },
+    {
+     "id": "total-blocking-time",
+     "weight": 30
+    },
+    {
+     "id": "cumulative-layout-shift",
+     "weight": 25
+    },
+    {
+     "id": "speed-index",
+     "weight": 10
+    },
+    {
+     "id": "document-latency-insight",
+     "weight": 0
+    },
+    {
+     "id": "forced-reflow-insight",
+     "weight": 0
+    },
+    {
+     "id": "interactive",
+     "weight": 0
+    },
+    {
+     "id": "server-response-time",
+     "weight": 0
+    },
+    {
+     "id": "total-byte-weight",
+     "weight": 0
+    }
+   ]
+  },
+  "accessibility": {
+   "id": "accessibility",
+   "title": "Accessibility",
+   "score": 1,
+   "auditRefs": []
+  },
+  "best-practices": {
+   "id": "best-practices",
+   "title": "Best Practices",
+   "score": 0.96,
+   "auditRefs": [
+    {
+     "id": "charset",
+     "weight": 1
+    }
+   ]
+  },
+  "seo": {
+   "id": "seo",
+   "title": "SEO",
+   "score": 0.8,
+   "auditRefs": [
+    {
+     "id": "meta-description",
+     "weight": 1
+    },
+    {
+     "id": "link-text",
+     "weight": 1
+    }
+   ]
+  }
+ },
+ "audits": {
+  "first-contentful-paint": {
+   "id": "first-contentful-paint",
+   "title": "First Contentful Paint",
+   "score": 1,
+   "numericValue": 901,
+   "numericUnit": "millisecond",
+   "displayValue": "0.9 s"
+  },
+  "largest-contentful-paint": {
+   "id": "largest-contentful-paint",
+   "title": "Largest Contentful Paint",
+   "score": 1,
+   "numericValue": 901,
+   "numericUnit": "millisecond",
+   "displayValue": "0.9 s"
+  },
+  "speed-index": {
+   "id": "speed-index",
+   "title": "Speed Index",
+   "score": 0.95,
+   "numericValue": 2862.962400078773,
+   "numericUnit": "millisecond",
+   "displayValue": "2.9 s"
+  },
+  "total-blocking-time": {
+   "id": "total-blocking-time",
+   "title": "Total Blocking Time",
+   "score": 1,
+   "numericValue": 9,
+   "numericUnit": "millisecond",
+   "displayValue": "10 ms"
+  },
+  "cumulative-layout-shift": {
+   "id": "cumulative-layout-shift",
+   "title": "Cumulative Layout Shift",
+   "score": 1,
+   "numericValue": 0,
+   "numericUnit": "unitless",
+   "displayValue": "0",
+   "details": {
+    "type": "debugdata"
+   }
+  },
+  "server-response-time": {
+   "id": "server-response-time",
+   "title": "Reduce initial server response time",
+   "score": 0,
+   "numericValue": 607.116,
+   "numericUnit": "millisecond",
+   "displayValue": "Root document took 610 ms",
+   "details": {
+    "type": "opportunity"
+   }
+  },
+  "interactive": {
+   "id": "interactive",
+   "title": "Time to Interactive",
+   "score": 1,
+   "numericValue": 938.4000000000001,
+   "numericUnit": "millisecond",
+   "displayValue": "0.9 s"
+  },
+  "total-byte-weight": {
+   "id": "total-byte-weight",
+   "title": "Avoids enormous network payloads",
+   "score": 1,
+   "numericValue": 474,
+   "numericUnit": "byte",
+   "displayValue": "Total size was 0 KiB",
+   "details": {
+    "type": "table"
+   }
+  },
+  "charset": {
+   "id": "charset",
+   "title": "Charset declaration is missing or occurs too late in the HTML",
+   "score": 0
+  },
+  "meta-description": {
+   "id": "meta-description",
+   "title": "Document does not have a meta description",
+   "score": 0
+  },
+  "link-text": {
+   "id": "link-text",
+   "title": "Links do not have descriptive text",
+   "score": 0,
+   "displayValue": "1 link found",
+   "details": {
+    "type": "table"
+   }
+  },
+  "document-latency-insight": {
+   "id": "document-latency-insight",
+   "title": "Document request latency",
+   "score": 0,
+   "displayValue": "Est savings of 510 ms",
+   "details": {
+    "type": "checklist"
+   }
+  },
+  "forced-reflow-insight": {
+   "id": "forced-reflow-insight",
+   "title": "Forced reflow",
+   "score": 0,
+   "details": {
+    "type": "list"
+   }
+  }
+ }
+}

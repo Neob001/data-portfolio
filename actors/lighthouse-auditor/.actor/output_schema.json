@@ -1,0 +1,12 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Output of lighthouse-auditor",
+  "type": "object",
+  "properties": {
+    "resultsDatasetUrl": {
+      "type": "string",
+      "title": "Audits",
+      "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=audits"
+    }
+  }
+}

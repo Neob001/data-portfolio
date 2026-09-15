@@ -1,0 +1,219 @@
+{
+ "lighthouseVersion": "12.8.2",
+ "requestedUrl": "https://www.wikipedia.org/",
+ "finalDisplayedUrl": "https://www.wikipedia.org/",
+ "fetchTime": "2026-09-15T07:49:19.524Z",
+ "configSettings": {
+  "formFactor": "desktop",
+  "throttlingMethod": "simulate"
+ },
+ "categories": {
+  "performance": {
+   "id": "performance",
+   "title": "Performance",
+   "score": 0.98,
+   "auditRefs": [
+    {
+     "id": "first-contentful-paint",
+     "weight": 10
+    },
+    {
+     "id": "largest-contentful-paint",
+     "weight": 25
+    },
+    {
+     "id": "total-blocking-time",
+     "weight": 30
+    },
+    {
+     "id": "cumulative-layout-shift",
+     "weight": 25
+    },
+    {
+     "id": "speed-index",
+     "weight": 10
+    },
+    {
+     "id": "cache-insight",
+     "weight": 0
+    },
+    {
+     "id": "image-delivery-insight",
+     "weight": 0
+    },
+    {
+     "id": "lcp-discovery-insight",
+     "weight": 0
+    },
+    {
+     "id": "network-dependency-tree-insight",
+     "weight": 0
+    },
+    {
+     "id": "interactive",
+     "weight": 0
+    },
+    {
+     "id": "modern-image-formats",
+     "weight": 0
+    },
+    {
+     "id": "server-response-time",
+     "weight": 0
+    },
+    {
+     "id": "total-byte-weight",
+     "weight": 0
+    }
+   ]
+  },
+  "accessibility": {
+   "id": "accessibility",
+   "title": "Accessibility",
+   "score": 1,
+   "auditRefs": []
+  },
+  "best-practices": {
+   "id": "best-practices",
+   "title": "Best Practices",
+   "score": 1,
+   "auditRefs": []
+  },
+  "seo": {
+   "id": "seo",
+   "title": "SEO",
+   "score": 0.92,
+   "auditRefs": [
+    {
+     "id": "robots-txt",
+     "weight": 1
+    }
+   ]
+  }
+ },
+ "audits": {
+  "first-contentful-paint": {
+   "id": "first-contentful-paint",
+   "title": "First Contentful Paint",
+   "score": 1,
+   "numericValue": 316,
+   "numericUnit": "millisecond",
+   "displayValue": "0.3 s"
+  },
+  "largest-contentful-paint": {
+   "id": "largest-contentful-paint",
+   "title": "Largest Contentful Paint",
+   "score": 1,
+   "numericValue": 377.5,
+   "numericUnit": "millisecond",
+   "displayValue": "0.4 s"
+  },
+  "speed-index": {
+   "id": "speed-index",
+   "title": "Speed Index",
+   "score": 0.78,
+   "numericValue": 1638.5750587668017,
+   "numericUnit": "millisecond",
+   "displayValue": "1.6 s"
+  },
+  "total-blocking-time": {
+   "id": "total-blocking-time",
+   "title": "Total Blocking Time",
+   "score": 1,
+   "numericValue": 16.5,
+   "numericUnit": "millisecond",
+   "displayValue": "20 ms"
+  },
+  "cumulative-layout-shift": {
+   "id": "cumulative-layout-shift",
+   "title": "Cumulative Layout Shift",
+   "score": 1,
+   "numericValue": 0.01746067054840499,
+   "numericUnit": "unitless",
+   "displayValue": "0.017",
+   "details": {
+    "type": "debugdata"
+   }
+  },
+  "server-response-time": {
+   "id": "server-response-time",
+   "title": "Initial server response time was short",
+   "score": 1,
+   "numericValue": 324.63099999999986,
+   "numericUnit": "millisecond",
+   "displayValue": "Root document took 320 ms",
+   "details": {
+    "type": "opportunity"
+   }
+  },
+  "interactive": {
+   "id": "interactive",
+   "title": "Time to Interactive",
+   "score": 1,
+   "numericValue": 399.95000000000005,
+   "numericUnit": "millisecond",
+   "displayValue": "0.4 s"
+  },
+  "total-byte-weight": {
+   "id": "total-byte-weight",
+   "title": "Avoids enormous network payloads",
+   "score": 1,
+   "numericValue": 81675,
+   "numericUnit": "byte",
+   "displayValue": "Total size was 80 KiB",
+   "details": {
+    "type": "table"
+   }
+  },
+  "modern-image-formats": {
+   "id": "modern-image-formats",
+   "title": "Serve images in next-gen formats",
+   "score": 0,
+   "numericValue": 40,
+   "numericUnit": "millisecond",
+   "displayValue": "Est savings of 9 KiB",
+   "details": {
+    "type": "opportunity"
+   }
+  },
+  "robots-txt": {
+   "id": "robots-txt",
+   "title": "robots.txt is not valid",
+   "score": 0
+  },
+  "cache-insight": {
+   "id": "cache-insight",
+   "title": "Use efficient cache lifetimes",
+   "score": 0,
+   "displayValue": "Est savings of 19 KiB",
+   "details": {
+    "type": "table"
+   }
+  },
+  "image-delivery-insight": {
+   "id": "image-delivery-insight",
+   "title": "Improve image delivery",
+   "score": 0,
+   "displayValue": "Est savings of 10 KiB",
+   "details": {
+    "type": "table"
+   }
+  },
+  "lcp-discovery-insight": {
+   "id": "lcp-discovery-insight",
+   "title": "LCP request discovery",
+   "score": 0,
+   "details": {
+    "type": "list"
+   }
+  },
+  "network-dependency-tree-insight": {
+   "id": "network-dependency-tree-insight",
+   "title": "Network dependency tree",
+   "score": 0,
+   "details": {
+    "type": "list"
+   }
+  }
+ }
+}

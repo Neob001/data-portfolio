@@ -1,0 +1,97 @@
+{
+ "lighthouseVersion": "12.8.2",
+ "requestedUrl": "https://thisdomaindoesnotexist-factpipe-4821.com/",
+ "finalDisplayedUrl": "chrome-error://chromewebdata/",
+ "fetchTime": "2026-09-15T07:49:35.571Z",
+ "runtimeError": {
+  "code": "CHROME_INTERSTITIAL_ERROR",
+  "message": "Chrome prevented page load with an interstitial. Make sure you are testing the correct URL and that the server is properly responding to all requests."
+ },
+ "configSettings": {
+  "formFactor": "mobile",
+  "throttlingMethod": "simulate"
+ },
+ "categories": {
+  "performance": {
+   "id": "performance",
+   "title": "Performance",
+   "score": null,
+   "auditRefs": [
+    {
+     "id": "first-contentful-paint",
+     "weight": 10
+    },
+    {
+     "id": "largest-contentful-paint",
+     "weight": 25
+    },
+    {
+     "id": "total-blocking-time",
+     "weight": 30
+    },
+    {
+     "id": "cumulative-layout-shift",
+     "weight": 25
+    },
+    {
+     "id": "speed-index",
+     "weight": 10
+    },
+    {
+     "id": "interactive",
+     "weight": 0
+    },
+    {
+     "id": "server-response-time",
+     "weight": 0
+    },
+    {
+     "id": "total-byte-weight",
+     "weight": 0
+    }
+   ]
+  }
+ },
+ "audits": {
+  "first-contentful-paint": {
+   "id": "first-contentful-paint",
+   "title": "First Contentful Paint",
+   "score": null
+  },
+  "largest-contentful-paint": {
+   "id": "largest-contentful-paint",
+   "title": "Largest Contentful Paint",
+   "score": null
+  },
+  "speed-index": {
+   "id": "speed-index",
+   "title": "Speed Index",
+   "score": null
+  },
+  "total-blocking-time": {
+   "id": "total-blocking-time",
+   "title": "Total Blocking Time",
+   "score": null
+  },
+  "cumulative-layout-shift": {
+   "id": "cumulative-layout-shift",
+   "title": "Cumulative Layout Shift",
+   "score": null
+  },
+  "server-response-time": {
+   "id": "server-response-time",
+   "title": "Initial server response time was short",
+   "score": null
+  },
+  "interactive": {
+   "id": "interactive",
+   "title": "Time to Interactive",
+   "score": null
+  },
+  "total-byte-weight": {
+   "id": "total-byte-weight",
+   "title": "Avoids enormous network payloads",
+   "score": null
+  }
+ }
+}
