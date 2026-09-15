@@ -29,6 +29,7 @@ let charged = 0;
 let scanned = 0;
 let idx = null;
 let stop = false;
+let chargeLimitHit = false;
 const pending = [];
 
 const parser = createCsvParser((row) => {
@@ -54,7 +55,7 @@ async function drain() {
     // PPE: one charge per matching opportunity delivered; scanned non-matches are free.
     const { eventChargeLimitReached } = await Actor.charge({ eventName: 'opportunity-result' });
     charged += 1;
-    if (eventChargeLimitReached) { stop = true; return; }
+    if (eventChargeLimitReached) { stop = true; chargeLimitHit = true; return; }
   }
 }
 
@@ -84,7 +85,7 @@ try {
     e.failureClass = 'schema_change';
     throw e;
   }
-  await inc?.save();
+  await inc?.save({ truncated: pushed >= maxResults || chargeLimitHit, runSince: cutoff });
 } catch (e) {
   if (!(e.name === 'AbortError' && stop)) {
     await writeRunSummary(Actor, {

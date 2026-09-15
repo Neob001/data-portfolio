@@ -44,6 +44,7 @@ export function parseFtsResponse(response) {
   }
   return {
     total: response.hits.total?.value ?? hits.length,
+    rawCount: hits.length,
     records: hits.map(hitToRecord).filter(Boolean),
   };
 }
@@ -52,8 +53,12 @@ export function parseFtsResponse(response) {
 export function buildFtsUrl({ query, forms, startDate, endDate, from = 0 }) {
   const p = new URLSearchParams({ q: `"${query}"` });
   if (forms && forms.length) p.set('forms', forms.join(','));
-  if (startDate) p.set('startdt', startDate);
-  if (endDate) p.set('enddt', endDate);
+  if (startDate || endDate) {
+    // EDGAR ignores startdt/enddt unless dateRange=custom and both bounds are present.
+    p.set('dateRange', 'custom');
+    p.set('startdt', startDate || '2001-01-01');
+    p.set('enddt', endDate || new Date().toISOString().slice(0, 10));
+  }
   if (from > 0) p.set('from', String(from));
   return `https://efts.sec.gov/LATEST/search-index?${p.toString()}`;
 }

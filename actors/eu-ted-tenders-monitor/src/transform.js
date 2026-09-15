@@ -54,6 +54,7 @@ export function parseSearchResponse(response) {
   return {
     total: response.totalNoticeCount ?? response.notices.length,
     nextToken: response.iterationNextToken || null,
+    rawCount: response.notices.length,
     records: response.notices.map(noticeToRecord).filter(Boolean),
   };
 }

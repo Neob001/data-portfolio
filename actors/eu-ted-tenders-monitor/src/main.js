@@ -39,8 +39,8 @@ try {
       headers: { 'content-type': 'application/json' },
       body: { query, fields: TED_FIELDS, page, limit: PAGE_SIZE },
     });
-    const { records } = parseSearchResponse(response);
-    if (records.length === 0) break;
+    const { records, rawCount } = parseSearchResponse(response);
+    if (rawCount === 0) break;
 
     for (const rec of records) {
       if (pushed >= maxResults) break;
@@ -52,15 +52,15 @@ try {
       const { eventChargeLimitReached } = await Actor.charge({ eventName: 'tender-result' });
       charged += 1;
       if (eventChargeLimitReached) {
-        await inc?.save();
+        await inc?.save({ truncated: true, runSince: inc?.tracker.since || publishedAfter });
         await writeRunSummary(Actor, { rows: pushed, charged_events: charged, duration_ms: Date.now() - started });
         await Actor.exit('Charge limit reached', { statusMessage: 'Charge limit reached' });
       }
     }
-    if (records.length < PAGE_SIZE) break;
+    if (rawCount < PAGE_SIZE) break;
   }
 
-  await inc?.save();
+  await inc?.save({ truncated: pushed >= maxResults, runSince: inc?.tracker.since || publishedAfter });
 } catch (e) {
   failureClass = e.failureClass || 'unknown';
   await writeRunSummary(Actor, {

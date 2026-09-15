@@ -39,5 +39,9 @@ test('builds FTS urls with filters and paging', () => {
   assert.ok(url.startsWith('https://efts.sec.gov/LATEST/search-index?'));
   assert.ok(url.includes('forms=8-K%2C10-K'));
   assert.ok(url.includes('startdt=2026-01-01'));
+  // Regression 2026-09-15: without dateRange=custom + enddt, EDGAR silently ignored the dates.
+  assert.ok(url.includes('dateRange=custom'));
+  assert.match(url, /enddt=\d{4}-\d{2}-\d{2}/);
+  assert.ok(!buildFtsUrl({ query: 'x' }).includes('dateRange'));
   assert.ok(url.includes('from=20'));
 });

@@ -39,8 +39,8 @@ try {
       if (e instanceof FetchError && e.status === 404) break;
       throw e;
     }
-    const { records } = parseEnforcementResponse(response);
-    if (records.length === 0) break;
+    const { records, rawCount } = parseEnforcementResponse(response);
+    if (rawCount === 0) break;
     for (const rec of records) {
       if (pushed >= maxResults) break;
       if (inc?.tracker.isDuplicate(rec.report_date, rec.recall_number)) continue;
@@ -50,14 +50,15 @@ try {
       const { eventChargeLimitReached } = await Actor.charge({ eventName: 'recall-result' });
       charged += 1;
       if (eventChargeLimitReached) {
-        await inc?.save();
+        await inc?.save({ truncated: true, runSince: effectiveAfter });
         await writeRunSummary(Actor, { rows: pushed, charged_events: charged, duration_ms: Date.now() - started });
         await Actor.exit('Charge limit reached', { statusMessage: 'Charge limit reached' });
       }
     }
-    if (records.length < PAGE) break;
+    // Page size is judged on the raw API count: a malformed record must not end pagination early.
+    if (rawCount < PAGE) break;
   }
-  await inc?.save();
+  await inc?.save({ truncated: pushed >= maxResults, runSince: effectiveAfter });
 } catch (e) {
   await writeRunSummary(Actor, {
     rows: pushed, charged_events: charged, errors: 1, failure_class: e.failureClass || 'unknown',

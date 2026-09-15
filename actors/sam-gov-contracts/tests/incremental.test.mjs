@@ -2,30 +2,64 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createTracker, cursorKeyFor, storeNameFor } from '../src/lib/incremental.js';
 
-test('first run: nothing is a duplicate, cursor records newest date and its ids', () => {
-  const t = createTracker(null);
-  assert.equal(t.since, null);
-  assert.equal(t.isDuplicate('2026-09-14', 'a'), false);
-  t.observe('2026-09-13', 'x');
-  t.observe('2026-09-14', 'a');
-  t.observe('2026-09-14', 'b');
-  assert.deepEqual(t.next(), { last_date: '2026-09-14', ids_on_last_date: ['a', 'b'] });
+// Simulates a source that returns records in arbitrary (non-date) order.
+function runOnce(cursor, records, maxResults, runSince) {
+  const t = createTracker(cursor);
+  const delivered = [];
+  for (const r of records) {
+    if (delivered.length >= maxResults) break;
+    if (t.isDuplicate(r.date, r.id)) continue;
+    t.observe(r.date, r.id);
+    delivered.push(r.id);
+  }
+  const truncated = delivered.length >= maxResults;
+  const next = t.next({ truncated, runSince: t.since ?? runSince }) ?? cursor;
+  return { delivered, next, since: t.since };
+}
+
+const unsorted = [
+  { id: 'a', date: '2026-09-14' }, { id: 'b', date: '2026-09-02' }, { id: 'c', date: '2026-09-10' },
+  { id: 'd', date: '2026-09-14' }, { id: 'e', date: '2026-09-05' }, { id: 'f', date: '2026-09-12' },
+];
+
+test('complete run then rerun: zero duplicates', () => {
+  const r1 = runOnce(null, unsorted, 100, '2026-09-01');
+  assert.deepEqual(r1.delivered, ['a', 'b', 'c', 'd', 'e', 'f']);
+  assert.deepEqual(r1.next, { complete: true, last_date: '2026-09-14', ids: ['a', 'd'] });
+  const r2 = runOnce(r1.next, unsorted.filter((x) => x.date >= r1.next.last_date), 100);
+  assert.deepEqual(r2.delivered, []);
 });
 
-test('second run: same records are duplicates, new same-day and later records are not', () => {
-  const t = createTracker({ last_date: '2026-09-14', ids_on_last_date: ['a', 'b'] });
-  assert.equal(t.since, '2026-09-14');
-  assert.equal(t.isDuplicate('2026-09-13', 'x'), true);
-  assert.equal(t.isDuplicate('2026-09-14', 'a'), true);
-  assert.equal(t.isDuplicate('2026-09-14', 'c'), false);
-  assert.equal(t.isDuplicate('2026-09-15', 'a'), false);
-  t.observe('2026-09-14', 'c');
-  assert.deepEqual(t.next(), { last_date: '2026-09-14', ids_on_last_date: ['a', 'b', 'c'] });
+test('truncated run on unsorted source: next runs finish the window without duplicates or gaps', () => {
+  const r1 = runOnce(null, unsorted, 2, '2026-09-01');
+  assert.deepEqual(r1.delivered, ['a', 'b']);
+  assert.equal(r1.next.complete, false);
+  assert.equal(r1.next.since, '2026-09-01');
+  const r2 = runOnce(r1.next, unsorted, 2);
+  assert.equal(r2.since, '2026-09-01', 'truncated cursor must not advance the query window');
+  assert.deepEqual(r2.delivered, ['c', 'd']);
+  const r3 = runOnce(r2.next, unsorted, 100);
+  assert.deepEqual(r3.delivered, ['e', 'f']);
+  assert.equal(r3.next.complete, true);
+  assert.equal(r3.next.last_date, '2026-09-14');
+  const all = [...r1.delivered, ...r2.delivered, ...r3.delivered].sort();
+  assert.deepEqual(all, ['a', 'b', 'c', 'd', 'e', 'f']);
+  const r4 = runOnce(r3.next, unsorted.filter((x) => x.date >= '2026-09-14'), 100);
+  assert.deepEqual(r4.delivered, []);
 });
 
-test('no new records keeps the old cursor (next() is null)', () => {
-  const t = createTracker({ last_date: '2026-09-14', ids_on_last_date: ['a'] });
-  assert.equal(t.next(), null);
+test('new records published later on the boundary date are delivered once', () => {
+  const r1 = runOnce(null, unsorted, 100, '2026-09-01');
+  const later = [...unsorted, { id: 'g', date: '2026-09-14' }, { id: 'h', date: '2026-09-15' }];
+  const r2 = runOnce(r1.next, later.filter((x) => x.date >= r1.next.last_date), 100);
+  assert.deepEqual(r2.delivered, ['g', 'h']);
+  const r3 = runOnce(r2.next, later.filter((x) => x.date >= r2.next.last_date), 100);
+  assert.deepEqual(r3.delivered, []);
+});
+
+test('duplicate ids inside one response are delivered once', () => {
+  const r = runOnce(null, [{ id: 'x', date: '2026-09-01' }, { id: 'x', date: '2026-09-01' }], 100, null);
+  assert.deepEqual(r.delivered, ['x']);
 });
 
 test('store names and cursor keys are valid and stable', () => {

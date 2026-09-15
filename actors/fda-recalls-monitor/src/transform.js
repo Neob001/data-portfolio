@@ -41,6 +41,7 @@ export function parseEnforcementResponse(response) {
   }
   return {
     total: response.meta?.results?.total ?? response.results.length,
+    rawCount: response.results.length,
     records: response.results.map(recallToRecord).filter(Boolean),
   };
 }
@@ -56,7 +57,7 @@ export function buildUrl({ category = 'food', searchTerm = null, classifications
   if (searchTerm) clauses.push(`(${searchTerm.replace(/[^\w\s"'-]/g, ' ').trim().split(/\s+/).map((w) => `"${w}"`).join('+AND+')})`);
   if (classifications.length) clauses.push(`(${classifications.map((c) => `classification:"${c}"`).join('+OR+')})`);
   if (reportedAfter) clauses.push(`report_date:[${reportedAfter.replace(/-/g, '')}+TO+99991231]`);
-  const params = [`limit=${limit}`];
+  const params = [`limit=${limit}`, 'sort=report_date:desc'];
   if (skip > 0) params.push(`skip=${skip}`);
   if (clauses.length) params.push(`search=${clauses.join('+AND+')}`);
   return `https://api.fda.gov/${category}/enforcement.json?${params.join('&')}`;

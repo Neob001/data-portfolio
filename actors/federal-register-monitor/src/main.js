@@ -32,8 +32,8 @@ try {
     await limit();
     const url = buildUrl({ term: searchTerm, documentTypes, agencySlugs, publishedAfter: effectiveAfter, page, perPage: PER_PAGE });
     const response = await fetchJson(url);
-    const { records } = parseDocumentsResponse(response);
-    if (records.length === 0) break;
+    const { records, rawCount } = parseDocumentsResponse(response);
+    if (rawCount === 0) break;
     for (const rec of records) {
       if (pushed >= maxResults) break;
       if (inc?.tracker.isDuplicate(rec.published_at, rec.document_number)) continue;
@@ -43,14 +43,14 @@ try {
       const { eventChargeLimitReached } = await Actor.charge({ eventName: 'document-result' });
       charged += 1;
       if (eventChargeLimitReached) {
-        await inc?.save();
+        await inc?.save({ truncated: true, runSince: effectiveAfter });
         await writeRunSummary(Actor, { rows: pushed, charged_events: charged, duration_ms: Date.now() - started });
         await Actor.exit('Charge limit reached', { statusMessage: 'Charge limit reached' });
       }
     }
-    if (records.length < PER_PAGE) break;
+    if (rawCount < PER_PAGE) break;
   }
-  await inc?.save();
+  await inc?.save({ truncated: pushed >= maxResults, runSince: effectiveAfter });
 } catch (e) {
   await writeRunSummary(Actor, {
     rows: pushed, charged_events: charged, errors: 1, failure_class: e.failureClass || 'unknown',

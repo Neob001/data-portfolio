@@ -7,7 +7,7 @@ import { parseFtsResponse, buildFtsUrl } from './transform.js';
 
 // SEC fair-access policy: max 10 req/s; we stay far below and identify ourselves.
 const SEC_HEADERS = { 'User-Agent': 'apify-actor-sec-edgar-filings-search contact@apify.com' };
-const PAGE_SIZE = 10; // fixed by the SEC FTS API
+const PAGE_SIZE = 100; // EDGAR full-text search returns 100 hits per page; `from` must advance by 100
 
 await Actor.init();
 const started = Date.now();
@@ -32,6 +32,7 @@ const effectiveStart = inc?.tracker.since || startDate;
 const limit = rateLimiter(350);
 let pushed = 0;
 let charged = 0;
+const seenInRun = new Set();
 let failureClass = null;
 
 try {
@@ -39,12 +40,13 @@ try {
     await limit();
     const url = buildFtsUrl({ query, forms, startDate: effectiveStart, endDate, from });
     const response = await fetchJson(url, { headers: SEC_HEADERS });
-    const { records } = parseFtsResponse(response);
-    if (records.length === 0) break;
+    const { records, rawCount } = parseFtsResponse(response);
+    if (rawCount === 0) break;
 
     for (const rec of records) {
       if (pushed >= maxResults) break;
-      if (inc?.tracker.isDuplicate(rec.filed_at, rec.document_url)) continue;
+      if (seenInRun.has(rec.document_url) || inc?.tracker.isDuplicate(rec.filed_at, rec.document_url)) continue;
+      seenInRun.add(rec.document_url);
       await Actor.pushData(stamp(rec, rec.document_url));
       inc?.tracker.observe(rec.filed_at, rec.document_url);
       pushed += 1;
@@ -52,15 +54,15 @@ try {
       const { eventChargeLimitReached } = await Actor.charge({ eventName: 'filing-result' });
       charged += 1;
       if (eventChargeLimitReached) {
-        await inc?.save();
+        await inc?.save({ truncated: true, runSince: effectiveStart });
         await writeRunSummary(Actor, { rows: pushed, charged_events: charged, duration_ms: Date.now() - started });
         await Actor.exit('Charge limit reached', { statusMessage: 'Charge limit reached' });
       }
     }
-    if (records.length < PAGE_SIZE) break;
+    if (rawCount < PAGE_SIZE) break;
   }
 
-  await inc?.save();
+  await inc?.save({ truncated: pushed >= maxResults, runSince: effectiveStart });
 } catch (e) {
   failureClass = e.failureClass || 'unknown';
   await writeRunSummary(Actor, {

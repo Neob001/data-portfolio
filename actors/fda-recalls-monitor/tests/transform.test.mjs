@@ -35,3 +35,11 @@ test('buildUrl composes search clauses and validates category', () => {
   assert.ok(url.includes('skip=100'));
   assert.throws(() => buildUrl({ category: 'toys' }));
 });
+
+test('rawCount counts malformed records so pagination does not stop early (bug 2026-09-15)', () => {
+  const good = JSON.parse(readFileSync(fileURLToPath(new URL('../golden/enforcement_response.json', import.meta.url)), 'utf8')).results[0];
+  const page = { meta: { results: { total: 133 } }, results: [...Array.from({ length: 99 }, (_, i) => ({ ...good, recall_number: `F-${i}` })), { status: 'broken' }] };
+  const { records, rawCount } = parseEnforcementResponse(page);
+  assert.equal(records.length, 99);
+  assert.equal(rawCount, 100);
+});

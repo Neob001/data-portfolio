@@ -27,6 +27,7 @@ export function parseDocumentsResponse(response) {
   }
   return {
     total: response.count ?? response.results.length,
+    rawCount: response.results.length,
     records: response.results.map(docToRecord).filter(Boolean),
   };
 }
