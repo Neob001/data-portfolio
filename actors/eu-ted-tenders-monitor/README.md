@@ -50,6 +50,12 @@ At least one of `cpvCodes`, `countries`, or `fullTextSearch` is required.
 
 Example: 1,000 tenders cost **$10.00**. You only pay for delivered results.
 
+## Related factpipe Actors
+
+- [SAM.gov Contract Opportunities Scraper — Federal Bids API](https://apify.com/factpipe/sam-gov-contracts) — US federal contract opportunities
+- [EU VAT Number Validation API — VIES Bulk Checker](https://apify.com/factpipe/eu-vat-validation) — EU VAT number validation via VIES
+- [ECB Exchange Rates API — Official Euro FX Rates, History](https://apify.com/factpipe/ecb-exchange-rates) — official ECB euro exchange rates
+
 ## FAQ
 
 **Do I need a TED API key?**

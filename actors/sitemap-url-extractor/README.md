@@ -47,6 +47,12 @@ Same input idea (website URLs in, URL records out), plus: robots.txt discovery, 
 
 Example: 10,000 URLs cost **$3.00**. You only pay for delivered results.
 
+## Related factpipe Actors
+
+- [Lighthouse & Core Web Vitals Checker API — Bulk PageSpeed](https://apify.com/factpipe/lighthouse-auditor) — bulk Lighthouse and Core Web Vitals audits
+- [Email Security Checker — SPF, DKIM, DMARC & MX Audit](https://apify.com/factpipe/email-security-checker) — SPF, DKIM and DMARC domain audits
+- [Career Page Jobs Scraper — Greenhouse, Lever & Ashby API](https://apify.com/factpipe/company-jobs-scraper) — live job postings from Greenhouse, Lever and Ashby
+
 ## FAQ
 
 **How do I get all URLs of a website?**

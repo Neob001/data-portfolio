@@ -44,6 +44,12 @@ Search and monitor **US Federal Register documents** — final rules, proposed r
 
 Example: 1,000 documents cost **$5.00**. You only pay for delivered results.
 
+## Related factpipe Actors
+
+- [FDA Recalls Scraper API — Food, Drug & Device Recalls](https://apify.com/factpipe/fda-recalls-monitor) — FDA food, drug and device recalls
+- [SAM.gov Contract Opportunities Scraper — Federal Bids API](https://apify.com/factpipe/sam-gov-contracts) — US federal contract opportunities
+- [SEC EDGAR Filings Scraper API — 10-K, 10-Q, 8-K Full-Text](https://apify.com/factpipe/sec-edgar-filings-search) — full-text search of SEC filings
+
 ## FAQ
 
 **Do I need an API key?**

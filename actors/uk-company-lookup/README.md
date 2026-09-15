@@ -54,6 +54,12 @@ Company facts only — this Actor deliberately returns **no personal data** (no 
 
 Example: 1,000 companies found cost **$4.00**. You only pay for delivered results.
 
+## Related factpipe Actors
+
+- [EU VAT Number Validation API — VIES Bulk Checker](https://apify.com/factpipe/eu-vat-validation) — EU VAT number validation via VIES
+- [OFAC Sanctions Screening API — SDN List Check for AML/KYC](https://apify.com/factpipe/ofac-sanctions-screening) — OFAC SDN sanctions screening
+- [SEC EDGAR Filings Scraper API — 10-K, 10-Q, 8-K Full-Text](https://apify.com/factpipe/sec-edgar-filings-search) — full-text search of SEC filings
+
 ## FAQ
 
 **Do I need a Companies House API key?**

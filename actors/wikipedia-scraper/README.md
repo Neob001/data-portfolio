@@ -66,6 +66,11 @@ Redirects (e.g. `UK` → `United Kingdom`) are followed automatically. Disambigu
 
 Example: 5,000 articles cost **$5.00**. You only pay for delivered results.
 
+## Related factpipe Actors
+
+- [Open Food Facts Scraper — Nutrition & Barcode Lookup API](https://apify.com/factpipe/open-food-facts-scraper) — food product and nutrition data
+- [SEC EDGAR Filings Scraper API — 10-K, 10-Q, 8-K Full-Text](https://apify.com/factpipe/sec-edgar-filings-search) — full-text search of SEC filings
+
 ## FAQ
 
 **Do I need a Wikipedia API key?**

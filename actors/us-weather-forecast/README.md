@@ -54,6 +54,11 @@ US coverage only (NWS). Non-US coordinates return an uncharged `outside_us_cover
 
 Example: 1,000 locations cost **$2.00**. You only pay for delivered results.
 
+## Related factpipe Actors
+
+- [ECB Exchange Rates API — Official Euro FX Rates, History](https://apify.com/factpipe/ecb-exchange-rates) — official ECB euro exchange rates
+- [Wikipedia Scraper API — Articles, Summaries & Full Text](https://apify.com/factpipe/wikipedia-scraper) — Wikipedia articles and summaries
+
 ## FAQ
 
 **Do I need a weather API key?**

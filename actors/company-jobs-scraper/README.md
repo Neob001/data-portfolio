@@ -53,6 +53,12 @@ Same idea, same inputs: a list of company URLs in, flat job records out. Field m
 
 Example: 1,000 jobs cost **$2.00**. You only pay for delivered results.
 
+## Related factpipe Actors
+
+- [UK Companies House Lookup API — Company Data, No API Key](https://apify.com/factpipe/uk-company-lookup) — UK company registry records
+- [Email Security Checker — SPF, DKIM, DMARC & MX Audit](https://apify.com/factpipe/email-security-checker) — SPF, DKIM and DMARC domain audits
+- [Sitemap URL Extractor & 404 Checker — XML Sitemap Scraper](https://apify.com/factpipe/sitemap-url-extractor) — every URL from a site's sitemaps
+
 ## FAQ
 
 **Which applicant tracking systems are supported?**

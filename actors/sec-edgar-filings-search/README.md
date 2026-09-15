@@ -50,6 +50,12 @@ One record per matching filing document:
 
 Example: 500 filings cost **$4.00**. You only pay for delivered results.
 
+## Related factpipe Actors
+
+- [Federal Register Scraper — US Rules & Regulations Monitor](https://apify.com/factpipe/federal-register-monitor) — US rules and regulations
+- [OFAC Sanctions Screening API — SDN List Check for AML/KYC](https://apify.com/factpipe/ofac-sanctions-screening) — OFAC SDN sanctions screening
+- [UK Companies House Lookup API — Company Data, No API Key](https://apify.com/factpipe/uk-company-lookup) — UK company registry records
+
 ## FAQ
 
 **Do I need an SEC API key or EDGAR account?**

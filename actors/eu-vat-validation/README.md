@@ -43,6 +43,12 @@ Validate **EU VAT numbers in bulk** against the **official European Commission V
 
 Example: validating 1,000 VAT numbers costs **$2.00**. Numbers VIES could not answer are free. No start fee. You only pay for delivered results.
 
+## Related factpipe Actors
+
+- [UK Companies House Lookup API — Company Data, No API Key](https://apify.com/factpipe/uk-company-lookup) — UK company registry records
+- [OFAC Sanctions Screening API — SDN List Check for AML/KYC](https://apify.com/factpipe/ofac-sanctions-screening) — OFAC SDN sanctions screening
+- [ECB Exchange Rates API — Official Euro FX Rates, History](https://apify.com/factpipe/ecb-exchange-rates) — official ECB euro exchange rates
+
 ## FAQ
 
 **Why do some countries return no name or address?**

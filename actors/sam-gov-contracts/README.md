@@ -72,6 +72,11 @@ Personal contact details of individual contracting officers are intentionally no
 
 Example: 300 new opportunities a month for your NAICS codes cost **/bin/zsh.60**. No start fee.
 
+## Related factpipe Actors
+
+- [EU Tenders Scraper — TED Public Procurement Notices API](https://apify.com/factpipe/eu-ted-tenders-monitor) — EU public procurement tenders
+- [Federal Register Scraper — US Rules & Regulations Monitor](https://apify.com/factpipe/federal-register-monitor) — US rules and regulations
+
 ## FAQ
 
 **Do I need a SAM.gov account or API key?**

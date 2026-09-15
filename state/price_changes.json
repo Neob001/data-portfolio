@@ -1,0 +1,8 @@
+{
+  "sec-edgar-filings-search": {"event": "filing-result", "new_price_usd": 0.002, "approval": "P1 2026-09-15"},
+  "eu-ted-tenders-monitor": {"event": "tender-result", "new_price_usd": 0.003, "approval": "P1 2026-09-15"},
+  "ofac-sanctions-screening": {"event": "name-screened", "new_price_usd": 0.003, "approval": "P1 2026-09-15"},
+  "federal-register-monitor": {"event": "document-result", "new_price_usd": 0.0025, "approval": "P1 2026-09-15"},
+  "fda-recalls-monitor": {"event": "recall-result", "new_price_usd": 0.003, "approval": "P1 2026-09-15"},
+  "uk-company-lookup": {"event": "company-found", "new_price_usd": 0.0025, "approval": "P1 2026-09-15"}
+}

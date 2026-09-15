@@ -43,6 +43,11 @@ Get the **official European Central Bank euro reference exchange rates** — the
 
 Example: one year of daily rates for 4 currencies (~1,020 rows) costs **about $1.02**. No start fee. You only pay for delivered results.
 
+## Related factpipe Actors
+
+- [EU VAT Number Validation API — VIES Bulk Checker](https://apify.com/factpipe/eu-vat-validation) — EU VAT number validation via VIES
+- [EU Tenders Scraper — TED Public Procurement Notices API](https://apify.com/factpipe/eu-ted-tenders-monitor) — EU public procurement tenders
+
 ## FAQ
 
 **Do I need an API key?**

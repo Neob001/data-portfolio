@@ -69,6 +69,12 @@ Audit the **email authentication setup of any domain** — SPF, DKIM, DMARC, MX,
 
 Example: auditing 1,000 domains costs **$3.00**. No start fee. You only pay for delivered results.
 
+## Related factpipe Actors
+
+- [Sitemap URL Extractor & 404 Checker — XML Sitemap Scraper](https://apify.com/factpipe/sitemap-url-extractor) — every URL from a site's sitemaps
+- [Lighthouse & Core Web Vitals Checker API — Bulk PageSpeed](https://apify.com/factpipe/lighthouse-auditor) — bulk Lighthouse and Core Web Vitals audits
+- [Career Page Jobs Scraper — Greenhouse, Lever & Ashby API](https://apify.com/factpipe/company-jobs-scraper) — live job postings from Greenhouse, Lever and Ashby
+
 ## FAQ
 
 **Why is DKIM sometimes reported as not found?**

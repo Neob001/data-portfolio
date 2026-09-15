@@ -53,6 +53,11 @@ Search and monitor **FDA recalls and enforcement reports** across food, drugs, a
 
 Example: 1,000 recall records cost **$5.00**. You only pay for delivered results.
 
+## Related factpipe Actors
+
+- [Federal Register Scraper — US Rules & Regulations Monitor](https://apify.com/factpipe/federal-register-monitor) — US rules and regulations
+- [Open Food Facts Scraper — Nutrition & Barcode Lookup API](https://apify.com/factpipe/open-food-facts-scraper) — food product and nutrition data
+
 ## FAQ
 
 **Do I need an openFDA API key?**

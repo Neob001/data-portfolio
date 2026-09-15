@@ -94,6 +94,11 @@ Crowd-sourced data: some products have incomplete fields; missing values are `nu
 
 Example: 10,000 products cost **$10.00**. You only pay for delivered results.
 
+## Related factpipe Actors
+
+- [FDA Recalls Scraper API — Food, Drug & Device Recalls](https://apify.com/factpipe/fda-recalls-monitor) — FDA food, drug and device recalls
+- [Wikipedia Scraper API — Articles, Summaries & Full Text](https://apify.com/factpipe/wikipedia-scraper) — Wikipedia articles and summaries
+
 ## FAQ
 
 **Do I need an Open Food Facts API key?**

@@ -66,6 +66,11 @@ This Actor runs the open-source Lighthouse engine itself in headless Chrome — 
 
 Example: auditing 500 URLs on mobile and desktop (1,000 audits) costs **$10.00**. No start fee.
 
+## Related factpipe Actors
+
+- [Sitemap URL Extractor & 404 Checker — XML Sitemap Scraper](https://apify.com/factpipe/sitemap-url-extractor) — every URL from a site's sitemaps
+- [Email Security Checker — SPF, DKIM, DMARC & MX Audit](https://apify.com/factpipe/email-security-checker) — SPF, DKIM and DMARC domain audits
+
 ## FAQ
 
 **Is this the same as Google PageSpeed Insights?**

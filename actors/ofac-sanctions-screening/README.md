@@ -51,6 +51,12 @@ Deterministic and auditable — no AI guessing: names are normalized (case, acce
 
 Example: 1,000 names screened cost **$10.00**. You only pay for delivered results.
 
+## Related factpipe Actors
+
+- [UK Companies House Lookup API — Company Data, No API Key](https://apify.com/factpipe/uk-company-lookup) — UK company registry records
+- [EU VAT Number Validation API — VIES Bulk Checker](https://apify.com/factpipe/eu-vat-validation) — EU VAT number validation via VIES
+- [SEC EDGAR Filings Scraper API — 10-K, 10-Q, 8-K Full-Text](https://apify.com/factpipe/sec-edgar-filings-search) — full-text search of SEC filings
+
 ## FAQ
 
 **Is the OFAC SDN list up to date?**
