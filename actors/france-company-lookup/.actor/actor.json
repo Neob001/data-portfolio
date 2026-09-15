@@ -1,0 +1,526 @@
+{
+  "actorSpecification": 1,
+  "name": "france-company-lookup",
+  "title": "France Company Lookup API — SIREN, SIRET & Sirene Data",
+  "description": "Look up French companies by SIREN, SIRET or name in the official Sirene registry: legal form, NAF code, head office, headcount, status, computed VAT number. Bulk, no API key, no personal data. $3 per 1,000 found.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "categories": [
+    "LEAD_GENERATION",
+    "BUSINESS"
+  ],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "companies": {
+          "title": "Companies",
+          "transformation": {
+            "fields": [
+              "query",
+              "found",
+              "company_name",
+              "siren",
+              "naf_code",
+              "head_office_city",
+              "employee_range",
+              "is_active"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "title": "Query"
+          },
+          "found": {
+            "type": "boolean",
+            "title": "Found"
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Reason"
+          },
+          "siren": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "SIREN"
+          },
+          "siret_head_office": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Head office SIRET"
+          },
+          "company_name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Company name"
+          },
+          "company_full_name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Company full name"
+          },
+          "acronym": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Acronym"
+          },
+          "legal_form_code": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Legal form code"
+          },
+          "legal_form": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Legal form"
+          },
+          "naf_code": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "NAF code"
+          },
+          "naf_label": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "NAF label"
+          },
+          "naf_2025_code": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "NAF 2025 code"
+          },
+          "activity_section": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Activity section"
+          },
+          "activity_section_label": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Activity section label"
+          },
+          "employee_range_code": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Employee range code"
+          },
+          "employee_range": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Employee range"
+          },
+          "employee_range_year": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "title": "Employee range year"
+          },
+          "company_category": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Company category"
+          },
+          "company_category_label": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Company category label"
+          },
+          "creation_date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Creation date",
+            "format": "date"
+          },
+          "closure_date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Closure date",
+            "format": "date"
+          },
+          "is_active": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "Is active"
+          },
+          "head_office_address": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Head office address"
+          },
+          "head_office_street": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Head office street"
+          },
+          "head_office_postal_code": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Head office postal code"
+          },
+          "head_office_city": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Head office city"
+          },
+          "head_office_department_code": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Head office department code"
+          },
+          "head_office_department": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Head office department"
+          },
+          "head_office_region_code": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Head office region code"
+          },
+          "head_office_region": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Head office region"
+          },
+          "head_office_country": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Head office country"
+          },
+          "head_office_latitude": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "Head office latitude"
+          },
+          "head_office_longitude": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "Head office longitude"
+          },
+          "establishments_count": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "title": "Establishments count"
+          },
+          "open_establishments_count": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "title": "Open establishments count"
+          },
+          "revenue_eur": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "title": "Revenue (EUR)"
+          },
+          "net_income_eur": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "title": "Net income (EUR)"
+          },
+          "financials_year": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "title": "Financials year"
+          },
+          "is_ess": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "Social & solidarity economy (ESS)"
+          },
+          "is_association": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "Is association"
+          },
+          "is_public_administration": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "Is public administration"
+          },
+          "is_mission_company": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "Is mission company"
+          },
+          "is_entertainment_licensee": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "Is entertainment licensee"
+          },
+          "is_training_organization": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "Is training organization"
+          },
+          "is_qualiopi_certified": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "Qualiopi certified"
+          },
+          "is_rge_certified": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "RGE certified"
+          },
+          "is_organic_certified": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "Is organic certified"
+          },
+          "is_siae": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "Work integration structure (SIAE)"
+          },
+          "is_finess": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "Health/social registry (FINESS)"
+          },
+          "is_living_heritage_company": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "Is living heritage company"
+          },
+          "has_responsible_purchasing_label": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "Has responsible purchasing label"
+          },
+          "has_egapro_index": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "Egapro index published"
+          },
+          "has_ghg_report": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "GHG report published"
+          },
+          "vat_number_computed": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "VAT number (computed)"
+          },
+          "matched_siret": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Matched SIRET"
+          },
+          "establishment_is_head_office": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "Establishment is head office"
+          },
+          "establishment_is_active": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "Establishment is active"
+          },
+          "establishment_address": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Establishment address"
+          },
+          "establishment_postal_code": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Establishment postal code"
+          },
+          "establishment_city": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Establishment city"
+          },
+          "establishment_naf_code": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Establishment naf code"
+          },
+          "establishment_employee_range_code": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Establishment employee range code"
+          },
+          "establishment_creation_date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Establishment creation date",
+            "format": "date"
+          },
+          "establishment_closure_date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Establishment closure date",
+            "format": "date"
+          },
+          "last_update": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Last update",
+            "format": "date"
+          },
+          "annuaire_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Annuaire des Entreprises URL",
+            "format": "uri"
+          },
+          "source_url": {
+            "type": "string",
+            "title": "Source URL",
+            "format": "uri"
+          },
+          "fetched_at": {
+            "type": "string",
+            "title": "Fetched at",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  },
+  "outputSchema": "./output_schema.json"
+}

@@ -1,0 +1,13 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Output of france-company-lookup",
+  "type": "object",
+  "properties": {
+    "resultsDatasetUrl": {
+      "type": "string",
+      "title": "Companies",
+      "description": "French company records (Sirene) for the requested SIREN, SIRET and name queries",
+      "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=companies"
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "title": "France Company Lookup (SIREN, SIRET, Sirene)",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "queries": {
+      "title": "Queries",
+      "type": "array",
+      "description": "Company names, 9-digit SIREN numbers or 14-digit SIRET numbers (spaces allowed). A SIREN/SIRET returns exactly that company; a name returns ranked search results.",
+      "editor": "stringList",
+      "prefill": ["Airbus", "552081317"]
+    },
+    "maxResultsPerQuery": {
+      "title": "Max results per name query",
+      "type": "integer",
+      "description": "Companies returned per name search (1-100). Set to 1 for single best-match mode: only a confident name match is returned, otherwise the query is reported as not found (and not charged). Ignored for SIREN/SIRET lookups.",
+      "editor": "number",
+      "default": 5,
+      "minimum": 1,
+      "maximum": 100
+    },
+    "postalCode": {
+      "title": "Postal code filter",
+      "type": "string",
+      "description": "Name searches only: 5-digit French postal code of an establishment, e.g. 75008. Comma-separated list allowed.",
+      "editor": "textfield",
+      "nullable": true
+    },
+    "department": {
+      "title": "Department filter",
+      "type": "string",
+      "description": "Name searches only: department code, e.g. 75, 69, 2A, 971. Comma-separated list allowed.",
+      "editor": "textfield",
+      "nullable": true
+    },
+    "nafCode": {
+      "title": "NAF / APE activity code filter",
+      "type": "string",
+      "description": "Name searches only: main activity code (NAF rev. 2), e.g. 62.01Z. Comma-separated list allowed.",
+      "editor": "textfield",
+      "nullable": true
+    },
+    "onlyActive": {
+      "title": "Only active companies",
+      "type": "boolean",
+      "description": "Name searches only: skip ceased companies. SIREN/SIRET lookups always return the company with its is_active flag.",
+      "default": true
+    },
+    "minEmployeeRange": {
+      "title": "Minimum employee range",
+      "type": "string",
+      "description": "Name searches only: keep companies whose INSEE headcount band is at least this size.",
+      "editor": "select",
+      "enum": ["01", "03", "11", "12", "21", "22", "32", "41", "51", "53"],
+      "enumTitles": ["1+ employees", "6+ employees", "10+ employees", "20+ employees", "50+ employees", "100+ employees", "250+ employees", "500+ employees", "2,000+ employees", "10,000+ employees"],
+      "nullable": true
+    }
+  },
+  "required": ["queries"]
+}

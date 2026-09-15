@@ -604,7 +604,7 @@
       "source": "Public DNS resolvers (1.1.1.1, 8.8.8.8, 9.9.9.9)",
       "variant": "lookup (bulk)",
       "status": "staging",
-      "approval": "N8 APPROVED by owner 2026-09-15 (chat)",
+      "approval": "N8 APPROVED by owner 2026-09-15 (chat); PUB-3 publish approved",
       "origin": "scan",
       "incumbent_actor_id": null,
       "first_paid_run_date": null,
@@ -632,6 +632,40 @@
       "staging_validated": false,
       "monetization_configured": false,
       "staging_started_at": "2026-09-15T11:06:08Z"
+    },
+    "france-company-lookup": {
+      "apify_actor_id": null,
+      "source": "API Recherche d'entreprises (recherche-entreprises.api.gouv.fr; INSEE Sirene + RNE open data, Licence Ouverte 2.0)",
+      "variant": "lookup (bulk)",
+      "status": "staging",
+      "approval": "france-sirene source APPROVED by owner 2026-09-15 (chat); PUB-3 publish approved",
+      "origin": "scan",
+      "incumbent_actor_id": null,
+      "first_paid_run_date": null,
+      "ppe_events": {
+        "company-found": {
+          "proposed_price_usd": 0.003,
+          "title": "Company found",
+          "description": "One French company record delivered. Not found, invalid identifiers, excluded sole proprietors and API failures are never charged."
+        }
+      },
+      "pricing_rationale": "Below niche median $5.99/1k (dltik $8, epicscrapers $4, logiover $3.50); gap_validation 2026-09-15.",
+      "launched_at": null,
+      "last_fix_date": null,
+      "kpis": {},
+      "listing": {
+        "title": "France Company Lookup API — SIREN, SIRET & Sirene Data",
+        "description": "Look up French companies by SIREN, SIRET or name in the official Sirene registry: legal form, NAF code, head office, headcount, status, computed VAT number. Bulk, no API key, no personal data. $3 per 1,000 found.",
+        "seoTitle": "France Company Lookup API: SIREN, SIRET & Sirene Data",
+        "seoDescription": "Look up French companies by SIREN, SIRET or name from official Sirene open data: legal form, NAF code, address, headcount, VAT. No key, no personal data.",
+        "categories": [
+          "LEAD_GENERATION",
+          "BUSINESS"
+        ]
+      },
+      "notes": "No officers (minimal=true), sole proprietors and natural-person groupings excluded; API rate limit 7 req/s per IP and 30 req/s per ASN (watch 429s on Apify cloud).",
+      "staging_validated": false,
+      "monetization_configured": false
     }
   },
   "apify_account": "factpipe",

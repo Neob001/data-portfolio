@@ -1,0 +1,16 @@
+{
+  "name": "france-company-lookup",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "France company lookup by SIREN, SIRET or name via the official API Recherche d'entreprises (Sirene open data).",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "apify": "^3.2.6"
+  },
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node --test 'tests/*.test.mjs'"
+  }
+}
