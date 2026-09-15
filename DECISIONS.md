@@ -22,3 +22,9 @@ Item ids come from WEEKLY_REPORT.md. Nothing ships to a new data source, changes
 2026-09-15 | APPROVE | N3 ecb-exchange-rates | Owner, in chat: official ECB reference rates.
 2026-09-15 | APPROVE | N4 eu-vat-validation | Owner, in chat: official EU VIES VAT number validation.
 2026-09-15 | APPROVE | INC-4 lighthouse-auditor | Standing replacement decision: nexgendata/page-speed-analyzer fails 26.6% of 6,851 runs/30d; niche 7.5k-11.6k runs/mo at 15-24% failure. Built on open-source Lighthouse (Apache-2.0), not the Google PSI API (Google API terms forbid re-offering the API to third parties).
+2026-09-15 | APPROVE | S1a suite README sections | Owner, in chat ("approve all"): replace "Related factpipe Actors" with factpipe Compliance Suite / Website Audit Toolkit sections in 11 READMEs (drafts/readme_suite), then rebuild.
+2026-09-15 | APPROVE | N8 dns-records-lookup | Owner, in chat: public DNS resolvers; build + stage; publish after owner publish approval.
+2026-09-15 | APPROVE | N7 broken-link-checker | Owner, in chat: user-supplied public URLs; build + stage; publish after owner publish approval.
+2026-09-15 | APPROVE | N5 global sanctions as OFAC upgrade | Owner, in chat: add EU FSF consolidated list, UK Sanctions List and UN Security Council consolidated list to ofac-sanctions-screening (no new SKU, price unchanged).
+2026-09-15 | APPROVE | france-sirene source | Owner, in chat: French company registry via official open-data APIs (recherche-entreprises.api.gouv.fr keyless / INSEE Sirene). No dirigeants/officers; sole-proprietor (personne physique) names excluded per no-PII rule.
+2026-09-15 | REJECT | park uk-vat, cpsc-recalls, eu-safety-gate, grants-gov, sec-form4 | Owner, in chat: parked until gap_validation shows real demand (organic users).
