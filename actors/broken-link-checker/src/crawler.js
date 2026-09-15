@@ -196,6 +196,7 @@ function emptySummary(startUrl, status) {
     links_checked: 0,
     broken_links: 0,
     rate_limited_unverified: 0,
+    blocked_unverified: 0,
     external_links_checked: 0,
     top_broken: [],
     status,
@@ -374,6 +375,7 @@ export async function crawlSite(startUrlRaw, options, deps) {
   let linksChecked = 0;
   let brokenLinks = 0;
   let rateLimitedUnverified = 0;
+  let blockedUnverified = 0;
   let externalLinksChecked = 0;
   const topBroken = [];
 
@@ -382,16 +384,20 @@ export async function crawlSite(startUrlRaw, options, deps) {
     linksChecked += 1;
     if (e.linkType === 'external') externalLinksChecked += 1;
     const r = e.result;
-    const c = classifyResult({ status: r.status ?? null, errorCode: r.errorCode ?? null, redirectCount: r.redirectCount ?? 0 });
+    const c = classifyResult({
+      status: r.status ?? null, errorCode: r.errorCode ?? null, redirectCount: r.redirectCount ?? 0, external: e.linkType === 'external',
+    });
     if (c.reason === 'rate_limited_unverified') rateLimitedUnverified += 1;
+    if (c.reason === 'blocked_unverified') blockedUnverified += 1;
+    const unverified = c.reason.endsWith('_unverified');
     if (c.is_broken) {
       brokenLinks += 1;
       if (topBroken.length < 10) topBroken.push(url);
     }
-    if (!c.is_broken && !includeOkLinks) continue;
+    if (!c.is_broken && !unverified && !includeOkLinks) continue;
     // eslint-disable-next-line no-await-in-loop
     await pushData(stamp({
-      record_type: c.is_broken ? 'broken_link' : 'ok_link',
+      record_type: c.is_broken ? 'broken_link' : unverified ? 'unverified_link' : 'ok_link',
       site: startUrl,
       link_url: url,
       final_url: r.finalUrl || url,
@@ -423,6 +429,7 @@ export async function crawlSite(startUrlRaw, options, deps) {
     links_checked: linksChecked,
     broken_links: brokenLinks,
     rate_limited_unverified: rateLimitedUnverified,
+    blocked_unverified: blockedUnverified,
     external_links_checked: externalLinksChecked,
     top_broken: topBroken,
     status,

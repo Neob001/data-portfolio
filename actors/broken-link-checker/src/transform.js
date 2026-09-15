@@ -144,9 +144,15 @@ export function robotsDisallows(robotsTxt, pathAndQuery) {
  * `errorCode`: a transport failure code or 'rate_limited', or null; `redirectCount`: hops
  * followed. Never marks a 429 broken — "don't cry wolf" on rate limiting.
  */
-export function classifyResult({ status = null, errorCode = null, redirectCount = 0 } = {}) {
+// External sites that answer bots with these codes (Stack Overflow, npm, LinkedIn's 999) usually work in a browser.
+const BOT_BLOCK_STATUSES = new Set([401, 403, 999]);
+
+export function classifyResult({ status = null, errorCode = null, redirectCount = 0, external = false } = {}) {
   if (errorCode === 'rate_limited') {
     return { is_broken: false, reason: 'rate_limited_unverified', error: null };
+  }
+  if (!errorCode && external && BOT_BLOCK_STATUSES.has(status)) {
+    return { is_broken: false, reason: 'blocked_unverified', error: null };
   }
   if (errorCode) {
     const error = REDIRECT_LIKE_ERRORS.has(errorCode) ? errorCode : errorCode;

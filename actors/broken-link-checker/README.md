@@ -2,11 +2,17 @@
 
 Crawl **any website and find every broken link**: 404s, dead images, dead scripts and stylesheets, DNS failures, timeouts and redirect loops. Give it a start URL, it walks the site breadth-first (same hostname, robots.txt aware) and returns one flat row per broken link — where it was found, how many pages link to it, and the anchor text — so you know exactly what to fix and where.
 
+## Quick start
+
+1. Click **Start** with the prefilled site (`https://crawlee.dev`, 20 pages, 3-minute limit). It finishes in about 2–3 minutes.
+2. You get one row per broken or unverifiable link (where it appears, how many pages link to it, anchor text) plus a `site_summary` row with totals.
+3. That first run costs $0.03, well within Apify's free monthly credit. Then enter your own site and raise the page limit.
+
 ## What you get
 
 The dataset holds two kinds of row, told apart by `record_type`:
 
-- **`broken_link`** (and `ok_link` if you enable `includeOkLinks`) — one row per unique link found:
+- **`broken_link`** (plus `unverified_link` for links a site refused to verify, and `ok_link` if you enable `includeOkLinks`) — one row per unique link found:
 
 ```json
 {
@@ -45,6 +51,7 @@ The dataset holds two kinds of row, told apart by `record_type`:
   "links_checked": 1206,
   "broken_links": 3,
   "rate_limited_unverified": 0,
+  "blocked_unverified": 0,
   "external_links_checked": 722,
   "top_broken": [
     "https://crawlee.dev/docs/old-guide"
@@ -120,6 +127,9 @@ No. This Actor reads the raw HTML response for each page, the same way a fast, n
 
 **What happens if a site rate-limits the crawl?**
 A 429 response is retried once after the `Retry-After` delay (capped at 10 seconds). If it's still 429, the link is reported with `status_code: 429` and `reason: "rate_limited_unverified"` — it is never marked broken, since a rate limit says nothing about whether the link actually works.
+
+**Why are some external links marked `unverified_link` instead of broken?**
+Many large sites (Stack Overflow, npm, LinkedIn and others) answer automated checks with 401, 403 or LinkedIn's 999 even though the page works in a browser. For external links those responses are reported as `record_type: "unverified_link"` with `reason: "blocked_unverified"` and counted in `blocked_unverified`, not as broken. On your own site, a 401 or 403 is still reported as broken.
 
 **What counts as "broken"?**
 Any HTTP status ≥ 400, plus DNS failures, connection refused, TLS/certificate errors, redirect loops, too-many-redirects, and timeouts after the retry. Working links (including ones that resolve after a redirect) are `is_broken: false` and only appear in the output if `includeOkLinks` is enabled.

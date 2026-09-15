@@ -216,3 +216,11 @@ test('deriveSiteStatus: charge limit outranks time limit, which outranks page li
   assert.equal(deriveSiteStatus({ timeLimitReached: true, pageLimitReached: true }), 'time_limit_reached');
   assert.equal(deriveSiteStatus({ pageLimitReached: true }), 'page_limit_reached');
 });
+
+test('classifyResult: external 401/403/999 are bot blocks, not broken; internal 403 is broken', () => {
+  for (const status of [401, 403, 999]) {
+    assert.deepEqual(classifyResult({ status, external: true }), { is_broken: false, reason: 'blocked_unverified', error: null });
+  }
+  assert.equal(classifyResult({ status: 403, external: false }).is_broken, true);
+  assert.equal(classifyResult({ status: 404, external: true }).is_broken, true);
+});

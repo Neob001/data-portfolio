@@ -95,6 +95,9 @@
           "rate_limited_unverified": {
             "type": "integer"
           },
+          "blocked_unverified": {
+            "type": "integer"
+          },
           "external_links_checked": {
             "type": "integer"
           },
