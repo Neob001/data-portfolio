@@ -30,6 +30,7 @@
 4. **N7 — Broken link checker**: 52 users and 4k runs/mo; SEO bundle with the sitemap extractor and Lighthouse auditor. About 4h. yes/no
 5. **N8 — DNS records lookup** (clone of the email-security checker's resolver): 74 users/mo in "dns lookup". About 2h. yes/no
 6. **L1** (carried over): Companies House officers/PSC variant (directors' personal data). yes/no
+7. **S1 — Action 0 + cross-promotion batch (2026-09-15, awaiting owner):** see state/gap_validation.md and drafts/readme_suite/PREVIEW.md. (a) Replace "Related factpipe Actors" with the cluster suite sections in 11 READMEs, then rebuild. (b) Builds: N8 DNS lookup, N7 broken links. (c) Park CPSC, EU Safety Gate, UK VAT, Grants.gov and Form 4 (no real demand). Fold global sanctions (N5) into the existing OFAC Actor rather than launching a new SKU. (d) France Sirene: needs new-source approval first.
 
 ## Analysis: what to launch next, and why
 - **The official-data niches are small and crowded.** Across the top 10 competitors combined: SEC 26 users/30d, sanctions 9–12, clinical trials 8, VIN decoder 12. Large catalogs of AI-built Actors (ryanclinton, nexgendata) sit in almost every niche.

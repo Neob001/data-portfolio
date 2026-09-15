@@ -1,0 +1,2066 @@
+{
+  "generated_at": "2026-09-15T09:53:32.747972+00:00",
+  "candidates": [
+    {
+      "id": "broken-links",
+      "label": "Broken link checker (pending N7)",
+      "queries": [
+        "broken link checker",
+        "broken links",
+        "dead link"
+      ],
+      "store_results_max": 21088,
+      "competitors_relevant": 44,
+      "users30": 45,
+      "runs30": 3608,
+      "weighted_fail_rate": 0.005,
+      "weighted_rating": 2.75,
+      "rated_top10": 1,
+      "reviews_top10": 3,
+      "stale_demand_share": 0.02,
+      "unrated_demand_share": 0.91,
+      "organic_actors": 8,
+      "median_ppe_per_1k": 2.0,
+      "price_range_per_1k": [
+        0.5,
+        5.0
+      ],
+      "strong_incumbent": false,
+      "effort_days": 3,
+      "access": 1.0,
+      "access_note": "User-supplied public URLs",
+      "score": 1.89,
+      "recommendation": "MAYBE",
+      "top_competitors": [
+        {
+          "actor": "khadinakbar/broken-link-checker",
+          "title": "Broken Link Checker for Technical SEO Audits",
+          "users30": 15,
+          "runs30": 45,
+          "raw_users30": 16,
+          "raw_runs30": 75,
+          "fail_rate": 0.027,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            1.0
+          ],
+          "last_build_days": 47,
+          "modified_days": 37
+        },
+        {
+          "actor": "logiover/bulk-url-status-checker",
+          "title": "Bulk URL Status Checker \u2013 Broken Link & Redirect Audit",
+          "users30": 14,
+          "runs30": 2936,
+          "raw_users30": 15,
+          "raw_runs30": 2966,
+          "fail_rate": 0.001,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            2.5
+          ],
+          "last_build_days": 3,
+          "modified_days": 3
+        },
+        {
+          "actor": "logiover/broken-link-checker",
+          "title": "Broken Link Checker - Find Dead 404 Links",
+          "users30": 7,
+          "runs30": 17,
+          "raw_users30": 8,
+          "raw_runs30": 47,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            5.0
+          ],
+          "last_build_days": 13,
+          "modified_days": 13
+        },
+        {
+          "actor": "parseforge/broken-link-checker",
+          "title": "Broken Link Checker",
+          "users30": 4,
+          "runs30": 540,
+          "raw_users30": 5,
+          "raw_runs30": 570,
+          "fail_rate": 0.012,
+          "rating": 2.75,
+          "reviews": 3,
+          "pricing": [
+            "PAY_PER_EVENT",
+            1.2
+          ],
+          "last_build_days": 7,
+          "modified_days": 7
+        },
+        {
+          "actor": "hipersoft/bulk-url-checker",
+          "title": "Bulk URL Status Checker \u2014 Broken Links, Redirects & SSL",
+          "users30": 2,
+          "runs30": 5,
+          "raw_users30": 3,
+          "raw_runs30": 35,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            2.0
+          ],
+          "last_build_days": 35,
+          "modified_days": 33
+        }
+      ]
+    },
+    {
+      "id": "dns-lookup",
+      "label": "DNS records lookup (pending N8)",
+      "queries": [
+        "dns lookup",
+        "dns records",
+        "domain dns"
+      ],
+      "store_results_max": 1355,
+      "competitors_relevant": 60,
+      "users30": 78,
+      "runs30": 595,
+      "weighted_fail_rate": 0.011,
+      "weighted_rating": 5.0,
+      "rated_top10": 1,
+      "reviews_top10": 2,
+      "stale_demand_share": 0.01,
+      "unrated_demand_share": 0.97,
+      "organic_actors": 19,
+      "median_ppe_per_1k": 5.0,
+      "price_range_per_1k": [
+        1.0,
+        1000
+      ],
+      "strong_incumbent": false,
+      "effort_days": 1,
+      "access": 1.0,
+      "access_note": "Public DNS resolvers",
+      "score": 1.75,
+      "recommendation": "MAYBE",
+      "top_competitors": [
+        {
+          "actor": "santamaria-automations/domain-whois-dns",
+          "title": "Domain WHOIS & DNS Lookup - Bulk Domain Intelligence",
+          "users30": 22,
+          "runs30": 158,
+          "raw_users30": 23,
+          "raw_runs30": 188,
+          "fail_rate": 0.005,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            3.0
+          ],
+          "last_build_days": 13,
+          "modified_days": 11
+        },
+        {
+          "actor": "automation-lab/domain-availability-checker",
+          "title": "Domain Availability Checker \u2014 Bulk DNS & WHOIS Lookup",
+          "users30": 17,
+          "runs30": 107,
+          "raw_users30": 18,
+          "raw_runs30": 137,
+          "fail_rate": 0.044,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            2.3
+          ],
+          "last_build_days": 3,
+          "modified_days": 3
+        },
+        {
+          "actor": "superlativetech/dns-lookup",
+          "title": "DNS Lookup",
+          "users30": 10,
+          "runs30": 22,
+          "raw_users30": 11,
+          "raw_runs30": 52,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "FREE",
+            null
+          ],
+          "last_build_days": 12,
+          "modified_days": 12
+        },
+        {
+          "actor": "gochujang/email-domain-osint",
+          "title": "Email & Domain OSINT (WHOIS + DNS + SSL + Breach)",
+          "users30": 6,
+          "runs30": 7,
+          "raw_users30": 7,
+          "raw_runs30": 37,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            5.0
+          ],
+          "last_build_days": 8,
+          "modified_days": 8
+        },
+        {
+          "actor": "blazing_stake/dns-records-lookup",
+          "title": "DNS Records Lookup",
+          "users30": 5,
+          "runs30": 5,
+          "raw_users30": 6,
+          "raw_runs30": 35,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            2.0
+          ],
+          "last_build_days": 59,
+          "modified_days": 59
+        }
+      ]
+    },
+    {
+      "id": "uk-vat",
+      "label": "UK VAT validation (HMRC)",
+      "queries": [
+        "uk vat",
+        "hmrc vat",
+        "vat number validation"
+      ],
+      "store_results_max": 230,
+      "competitors_relevant": 24,
+      "users30": 2,
+      "runs30": 6331,
+      "weighted_fail_rate": 0.0,
+      "weighted_rating": null,
+      "rated_top10": 1,
+      "reviews_top10": 1,
+      "stale_demand_share": 0.5,
+      "unrated_demand_share": 1.0,
+      "organic_actors": 2,
+      "median_ppe_per_1k": 5.0,
+      "price_range_per_1k": [
+        1.0,
+        15.0
+      ],
+      "strong_incumbent": false,
+      "effort_days": 2,
+      "access": 0.9,
+      "access_note": "HMRC 'Check a UK VAT number' API: free developer-hub app, no ID check",
+      "score": 1.74,
+      "recommendation": "LOW DEMAND (build only as cheap suite add-on)",
+      "top_competitors": [
+        {
+          "actor": "nocodeventure/uk-vat-hmrc-api",
+          "title": "UK VAT HMRC API",
+          "users30": 1,
+          "runs30": 11,
+          "raw_users30": 1,
+          "raw_runs30": 41,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            5.0
+          ],
+          "last_build_days": 123,
+          "modified_days": 123
+        },
+        {
+          "actor": "ryanclinton/eu-vat-validator",
+          "title": "EU VAT Validator \u2014 Compliance Monitoring & Alerts",
+          "users30": 1,
+          "runs30": 6320,
+          "raw_users30": 1,
+          "raw_runs30": 6350,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            4.0
+          ],
+          "last_build_days": 21,
+          "modified_days": 21
+        },
+        {
+          "actor": "scrapemint/vat-number-checker",
+          "title": "EU VAT Number Checker: Validate & Get Company Details",
+          "users30": 0,
+          "runs30": 0,
+          "raw_users30": 1,
+          "raw_runs30": 29,
+          "fail_rate": 0.0,
+          "rating": 5,
+          "reviews": 1,
+          "pricing": [
+            "PAY_PER_EVENT",
+            3.0
+          ],
+          "last_build_days": 62,
+          "modified_days": 46
+        },
+        {
+          "actor": "dltik/vies-vat-validator",
+          "title": "VIES VAT Validator: Check EU VAT Numbers (Bulk)",
+          "users30": 0,
+          "runs30": 0,
+          "raw_users30": 1,
+          "raw_runs30": 10,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            5.0
+          ],
+          "last_build_days": 12,
+          "modified_days": 10
+        },
+        {
+          "actor": "scrapesage/eu-vat-vies-validator",
+          "title": "EU VAT Validator - VIES Check & Company Data",
+          "users30": 0,
+          "runs30": 0,
+          "raw_users30": 1,
+          "raw_runs30": 21,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            2.0
+          ],
+          "last_build_days": 11,
+          "modified_days": 11
+        }
+      ]
+    },
+    {
+      "id": "france-sirene",
+      "label": "France Sirene company registry",
+      "queries": [
+        "sirene",
+        "french company",
+        "siret",
+        "france company data"
+      ],
+      "store_results_max": 1143,
+      "competitors_relevant": 69,
+      "users30": 44,
+      "runs30": 664,
+      "weighted_fail_rate": 0.0,
+      "weighted_rating": 2.98,
+      "rated_top10": 1,
+      "reviews_top10": 2,
+      "stale_demand_share": 0.19,
+      "unrated_demand_share": 0.86,
+      "organic_actors": 18,
+      "median_ppe_per_1k": 5.99,
+      "price_range_per_1k": [
+        0.99,
+        24.0
+      ],
+      "strong_incumbent": false,
+      "effort_days": 4,
+      "access": 0.85,
+      "access_note": "INSEE Sirene API: free portal account + key (no ID check); annuaire-entreprises API keyless",
+      "score": 1.28,
+      "recommendation": "MAYBE",
+      "top_competitors": [
+        {
+          "actor": "dltik/pappers-sirene-scraper",
+          "title": "Pappers / Sirene Scraper: 26M French Companies SIREN/SIRET",
+          "users30": 11,
+          "runs30": 380,
+          "raw_users30": 12,
+          "raw_runs30": 410,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            8.0
+          ],
+          "last_build_days": 18,
+          "modified_days": 18
+        },
+        {
+          "actor": "epicscrapers/pappers-scraper",
+          "title": "Pappers.fr Company Scraper",
+          "users30": 5,
+          "runs30": 52,
+          "raw_users30": 6,
+          "raw_runs30": 82,
+          "fail_rate": 0.0,
+          "rating": 2.98,
+          "reviews": 2,
+          "pricing": [
+            "PAY_PER_EVENT",
+            4.0
+          ],
+          "last_build_days": 110,
+          "modified_days": 110
+        },
+        {
+          "actor": "tagadanar/french-company-contacts",
+          "title": "French Company Email Finder \ud83c\uddeb\ud83c\uddf7 (SIREN, dirigeants, contacts)",
+          "users30": 4,
+          "runs30": 15,
+          "raw_users30": 5,
+          "raw_runs30": 45,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            2.0
+          ],
+          "last_build_days": 13,
+          "modified_days": 13
+        },
+        {
+          "actor": "corent1robert/recherche-entreprises-scraper",
+          "title": "French Companies \u00b7 Search & SIREN Enrich",
+          "users30": 3,
+          "runs30": 62,
+          "raw_users30": 4,
+          "raw_runs30": 92,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            5.99
+          ],
+          "last_build_days": 13,
+          "modified_days": 13
+        },
+        {
+          "actor": "logiover/france-company-registry-scraper",
+          "title": "France Company Registry Scraper - SIREN B2B Leads",
+          "users30": 3,
+          "runs30": 15,
+          "raw_users30": 4,
+          "raw_runs30": 45,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            3.5
+          ],
+          "last_build_days": 2,
+          "modified_days": 2
+        }
+      ]
+    },
+    {
+      "id": "gleif-lei",
+      "label": "GLEIF LEI company lookup (pending N6)",
+      "queries": [
+        "lei lookup",
+        "legal entity identifier",
+        "gleif"
+      ],
+      "store_results_max": 1254,
+      "competitors_relevant": 53,
+      "users30": 11,
+      "runs30": 100,
+      "weighted_fail_rate": 0.0,
+      "weighted_rating": null,
+      "rated_top10": 0,
+      "reviews_top10": 0,
+      "stale_demand_share": 0.0,
+      "unrated_demand_share": 1.0,
+      "organic_actors": 5,
+      "median_ppe_per_1k": 3.0,
+      "price_range_per_1k": [
+        0.01,
+        50.0
+      ],
+      "strong_incumbent": false,
+      "effort_days": 2,
+      "access": 1.0,
+      "access_note": "GLEIF API, keyless, CC0",
+      "score": 1.25,
+      "recommendation": "LOW DEMAND (build only as cheap suite add-on)",
+      "top_competitors": [
+        {
+          "actor": "logiover/gleif-lei-company-registry-scraper",
+          "title": "LEI Scraper \u2014 GLEIF Legal Entity & Company Registry Data",
+          "users30": 6,
+          "runs30": 11,
+          "raw_users30": 7,
+          "raw_runs30": 41,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            3.0
+          ],
+          "last_build_days": 3,
+          "modified_days": 3
+        },
+        {
+          "actor": "ryanclinton/gleif-lei-lookup",
+          "title": "GLEIF LEI Lookup \u2014 Counterparty Decision Engine",
+          "users30": 2,
+          "runs30": 65,
+          "raw_users30": 3,
+          "raw_runs30": 95,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            2.0
+          ],
+          "last_build_days": 22,
+          "modified_days": 22
+        },
+        {
+          "actor": "haketa/gleif-lei",
+          "title": "GLEIF LEI Lookup & Corporate Ownership for AI Agents",
+          "users30": 1,
+          "runs30": 1,
+          "raw_users30": 2,
+          "raw_runs30": 31,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            2.0
+          ],
+          "last_build_days": 63,
+          "modified_days": 50
+        },
+        {
+          "actor": "adobeflex/gleif-lei-lite",
+          "title": "GLEIF LEI Search \u2014 Legal Entity Identifier",
+          "users30": 1,
+          "runs30": 0,
+          "raw_users30": 2,
+          "raw_runs30": 30,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            1.0
+          ],
+          "last_build_days": 61,
+          "modified_days": 59
+        },
+        {
+          "actor": "nexgendata/gleif-lei-entity-resolution",
+          "title": "GLEIF LEI Entity Resolution \u2014 Reference Data API",
+          "users30": 1,
+          "runs30": 23,
+          "raw_users30": 2,
+          "raw_runs30": 53,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            50.0
+          ],
+          "last_build_days": 9,
+          "modified_days": 9
+        }
+      ]
+    },
+    {
+      "id": "grants-gov",
+      "label": "Grants.gov federal grants",
+      "queries": [
+        "grants.gov",
+        "federal grants",
+        "grant opportunities"
+      ],
+      "store_results_max": 477,
+      "competitors_relevant": 62,
+      "users30": 7,
+      "runs30": 26,
+      "weighted_fail_rate": 0.002,
+      "weighted_rating": null,
+      "rated_top10": 0,
+      "reviews_top10": 0,
+      "stale_demand_share": 0.29,
+      "unrated_demand_share": 1.0,
+      "organic_actors": 6,
+      "median_ppe_per_1k": 3.0,
+      "price_range_per_1k": [
+        0.01,
+        10.0
+      ],
+      "strong_incumbent": false,
+      "effort_days": 2,
+      "access": 1.0,
+      "access_note": "Grants.gov Search2 REST API and XML extract, keyless",
+      "score": 1.18,
+      "recommendation": "LOW DEMAND (build only as cheap suite add-on)",
+      "top_competitors": [
+        {
+          "actor": "signalcrawl/federal-grant-fit-finder",
+          "title": "Federal Grant Fit Finder",
+          "users30": 2,
+          "runs30": 20,
+          "raw_users30": 3,
+          "raw_runs30": 50,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            2.0
+          ],
+          "last_build_days": 117,
+          "modified_days": 117
+        },
+        {
+          "actor": "solidcode/grants-gov-scraper",
+          "title": "Grants.gov Federal Grants Scraper",
+          "users30": 1,
+          "runs30": 2,
+          "raw_users30": 2,
+          "raw_runs30": 32,
+          "fail_rate": 0.031,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            9.6
+          ],
+          "last_build_days": 2,
+          "modified_days": 2
+        },
+        {
+          "actor": "alizarin_refrigerator-owner/grants-gov-api---federal-grant-opportunities",
+          "title": "Grants.gov API - Federal Grant Opportunities",
+          "users30": 1,
+          "runs30": 0,
+          "raw_users30": 2,
+          "raw_runs30": 29,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            0.01
+          ],
+          "last_build_days": 3,
+          "modified_days": 3
+        },
+        {
+          "actor": "great_pistachio/grants-gov-scraper",
+          "title": "Grants Gov Scraper",
+          "users30": 1,
+          "runs30": 0,
+          "raw_users30": 2,
+          "raw_runs30": 29,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            10.0
+          ],
+          "last_build_days": 50,
+          "modified_days": 49
+        },
+        {
+          "actor": "preservable_mocha/us-federal-grants-aggregator",
+          "title": "US Federal Grants Aggregator (Grants.gov)",
+          "users30": 1,
+          "runs30": 1,
+          "raw_users30": 2,
+          "raw_runs30": 31,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            3.0
+          ],
+          "last_build_days": 22,
+          "modified_days": 22
+        }
+      ]
+    },
+    {
+      "id": "sec-form4",
+      "label": "SEC Form 4 insider trading feed",
+      "queries": [
+        "insider trading",
+        "form 4",
+        "sec insider"
+      ],
+      "store_results_max": 47680,
+      "competitors_relevant": 61,
+      "users30": 10,
+      "runs30": 748,
+      "weighted_fail_rate": 0.0,
+      "weighted_rating": 5.0,
+      "rated_top10": 1,
+      "reviews_top10": 1,
+      "stale_demand_share": 0.1,
+      "unrated_demand_share": 0.9,
+      "organic_actors": 7,
+      "median_ppe_per_1k": 5.0,
+      "price_range_per_1k": [
+        2.0,
+        50.0
+      ],
+      "strong_incumbent": false,
+      "effort_days": 3,
+      "access": 1.0,
+      "access_note": "SEC EDGAR APIs, keyless (User-Agent)",
+      "score": 0.76,
+      "recommendation": "LOW DEMAND (build only as cheap suite add-on)",
+      "top_competitors": [
+        {
+          "actor": "ryanclinton/sec-insider-trading",
+          "title": "SEC Insider Trading Tracker \u2014 Form 4 API",
+          "users30": 4,
+          "runs30": 278,
+          "raw_users30": 5,
+          "raw_runs30": 308,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            2.0
+          ],
+          "last_build_days": 22,
+          "modified_days": 22
+        },
+        {
+          "actor": "scrapemint/sec-form4-insider-tracker",
+          "title": "SEC Form 4 Insider Trading Tracker: Every Insider Buy and Sell",
+          "users30": 1,
+          "runs30": 179,
+          "raw_users30": 1,
+          "raw_runs30": 209,
+          "fail_rate": 0.0,
+          "rating": 5,
+          "reviews": 1,
+          "pricing": [
+            "PAY_PER_EVENT",
+            25.0
+          ],
+          "last_build_days": 38,
+          "modified_days": 28
+        },
+        {
+          "actor": "straightforward_hydra/sec-form4-insider-trading-monitor",
+          "title": "SEC Insider Trading Monitor (Form 4)",
+          "users30": 1,
+          "runs30": 127,
+          "raw_users30": 1,
+          "raw_runs30": 157,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            5.0
+          ],
+          "last_build_days": 35,
+          "modified_days": 35
+        },
+        {
+          "actor": "lokki/sec-insider-intelligence",
+          "title": "SEC Insider Intelligence \u2014 Form 4 Trading Signals",
+          "users30": 1,
+          "runs30": 55,
+          "raw_users30": 1,
+          "raw_runs30": 85,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            5.0
+          ],
+          "last_build_days": 138,
+          "modified_days": 113
+        },
+        {
+          "actor": "khadinakbar/sec-edgar-all-in-one-scraper",
+          "title": "SEC EDGAR Scraper \u2014 10-K, 8-K, Form 4 & 13F",
+          "users30": 1,
+          "runs30": 99,
+          "raw_users30": 1,
+          "raw_runs30": 129,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            5.0
+          ],
+          "last_build_days": 47,
+          "modified_days": 37
+        }
+      ]
+    },
+    {
+      "id": "eu-safety-gate",
+      "label": "EU Safety Gate (RAPEX) product alerts",
+      "queries": [
+        "safety gate",
+        "rapex",
+        "product recalls eu",
+        "dangerous products"
+      ],
+      "store_results_max": 4651,
+      "competitors_relevant": 13,
+      "users30": 2,
+      "runs30": 40,
+      "weighted_fail_rate": 0.0,
+      "weighted_rating": null,
+      "rated_top10": 0,
+      "reviews_top10": 0,
+      "stale_demand_share": 0.0,
+      "unrated_demand_share": 1.0,
+      "organic_actors": 2,
+      "median_ppe_per_1k": 9.0,
+      "price_range_per_1k": [
+        0.5,
+        50.0
+      ],
+      "strong_incumbent": false,
+      "effort_days": 2,
+      "access": 0.9,
+      "access_note": "Safety Gate public portal and export; confirm reuse terms before build",
+      "score": 0.69,
+      "recommendation": "LOW DEMAND (build only as cheap suite add-on)",
+      "top_competitors": [
+        {
+          "actor": "parseforge/eu-safety-gate-rapex-scraper",
+          "title": "EU Safety Gate RAPEX Product Alerts Scraper",
+          "users30": 1,
+          "runs30": 0,
+          "raw_users30": 2,
+          "raw_runs30": 29,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            9.0
+          ],
+          "last_build_days": 0,
+          "modified_days": 0
+        },
+        {
+          "actor": "crawlerbros/eu-safety-gate-scraper",
+          "title": "EU Safety Gate Scraper",
+          "users30": 1,
+          "runs30": 38,
+          "raw_users30": 2,
+          "raw_runs30": 68,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            5.0
+          ],
+          "last_build_days": 34,
+          "modified_days": 34
+        },
+        {
+          "actor": "studio-amba/safetygate-scraper",
+          "title": "Safety Gate Scraper \u2014 EU Product Safety Alerts (RAPEX)",
+          "users30": 0,
+          "runs30": 0,
+          "raw_users30": 0,
+          "raw_runs30": 30,
+          "fail_rate": 0.467,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            12.0
+          ],
+          "last_build_days": 8,
+          "modified_days": 8
+        },
+        {
+          "actor": "q_services/sql-safety-gate-mcp",
+          "title": "SQL Safety Gate MCP",
+          "users30": 0,
+          "runs30": 0,
+          "raw_users30": 1,
+          "raw_runs30": 1,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            5.0
+          ],
+          "last_build_days": 65,
+          "modified_days": 47
+        },
+        {
+          "actor": "studio-amba/safety-gate-scraper",
+          "title": "EU Safety Gate (RAPEX) Scraper - Product Recalls & Alerts",
+          "users30": 0,
+          "runs30": 0,
+          "raw_users30": 1,
+          "raw_runs30": 29,
+          "fail_rate": 0.034,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            2.0
+          ],
+          "last_build_days": 71,
+          "modified_days": 63
+        }
+      ]
+    },
+    {
+      "id": "global-sanctions",
+      "label": "Global sanctions screening (OFAC+EU+UK+UN)",
+      "queries": [
+        "sanctions screening",
+        "sanctions list",
+        "ofac",
+        "pep sanctions"
+      ],
+      "store_results_max": 13659,
+      "competitors_relevant": 71,
+      "users30": 12,
+      "runs30": 295,
+      "weighted_fail_rate": 0.003,
+      "weighted_rating": 5.0,
+      "rated_top10": 1,
+      "reviews_top10": 1,
+      "stale_demand_share": 0.0,
+      "unrated_demand_share": 0.75,
+      "organic_actors": 8,
+      "median_ppe_per_1k": 5.0,
+      "price_range_per_1k": [
+        1.5,
+        200.0
+      ],
+      "strong_incumbent": false,
+      "effort_days": 3,
+      "access": 1.0,
+      "access_note": "EU FSF, UK OFSI and UN XML lists are public downloads, no key",
+      "score": 0.59,
+      "recommendation": "LOW DEMAND (build only as cheap suite add-on)",
+      "top_competitors": [
+        {
+          "actor": "brasildados/sanctions-check",
+          "title": "Brazil Sanctions Check - CPF & CNPJ Screening",
+          "users30": 3,
+          "runs30": 74,
+          "raw_users30": 4,
+          "raw_runs30": 104,
+          "fail_rate": 0.0,
+          "rating": 5,
+          "reviews": 1,
+          "pricing": [
+            "PAY_PER_EVENT",
+            10.0
+          ],
+          "last_build_days": 1,
+          "modified_days": 1
+        },
+        {
+          "actor": "ryanclinton/opensanctions-search",
+          "title": "Sanctions & Watchlist Screening \u2014 Risk-Scored Decisions",
+          "users30": 2,
+          "runs30": 72,
+          "raw_users30": 3,
+          "raw_runs30": 102,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            3.0
+          ],
+          "last_build_days": 22,
+          "modified_days": 22
+        },
+        {
+          "actor": "zinin/sanctions-screening",
+          "title": "Sanctions Screening API",
+          "users30": 2,
+          "runs30": 3,
+          "raw_users30": 3,
+          "raw_runs30": 33,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            5.0
+          ],
+          "last_build_days": 33,
+          "modified_days": 19
+        },
+        {
+          "actor": "mooseandraven/ofac-sanctions-screening-suite",
+          "title": "OFAC Sanctions Screening API - No API Key Required",
+          "users30": 1,
+          "runs30": 6,
+          "raw_users30": 2,
+          "raw_runs30": 36,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            4.0
+          ],
+          "last_build_days": 51,
+          "modified_days": 51
+        },
+        {
+          "actor": "bgfc97/ofac-sanctions-name-screening",
+          "title": "OFAC Sanctions Name Screening (AML/KYC)",
+          "users30": 1,
+          "runs30": 1,
+          "raw_users30": 2,
+          "raw_runs30": 31,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            1.5
+          ],
+          "last_build_days": 61,
+          "modified_days": 44
+        }
+      ]
+    },
+    {
+      "id": "trademarks",
+      "label": "USPTO / EUIPO trademark search",
+      "queries": [
+        "trademark search",
+        "uspto",
+        "euipo",
+        "trademark"
+      ],
+      "store_results_max": 2852,
+      "competitors_relevant": 79,
+      "users30": 97,
+      "runs30": 44765,
+      "weighted_fail_rate": 0.001,
+      "weighted_rating": null,
+      "rated_top10": 0,
+      "reviews_top10": 0,
+      "stale_demand_share": 0.28,
+      "unrated_demand_share": 1.0,
+      "organic_actors": 29,
+      "median_ppe_per_1k": 6.0,
+      "price_range_per_1k": [
+        0.04,
+        50.0
+      ],
+      "strong_incumbent": false,
+      "effort_days": 5,
+      "access": 0.3,
+      "access_note": "BLOCKED for USPTO (ID.me standing REJECT 2026-09-12); EUIPO API needs OAuth app registration",
+      "score": 0.59,
+      "recommendation": "SKIP (access blocked)",
+      "top_competitors": [
+        {
+          "actor": "dltik/euipo-trademarks-scraper",
+          "title": "EUIPO Trademarks Scraper: 100M+ EU/Global Trademarks via TMview",
+          "users30": 19,
+          "runs30": 2322,
+          "raw_users30": 20,
+          "raw_runs30": 2352,
+          "fail_rate": 0.01,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            0.05
+          ],
+          "last_build_days": 11,
+          "modified_days": 11
+        },
+        {
+          "actor": "dev00/uspto-trademark-api",
+          "title": "USPTO Trademark Batch Search API",
+          "users30": 16,
+          "runs30": 39554,
+          "raw_users30": 17,
+          "raw_runs30": 39584,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            3.0
+          ],
+          "last_build_days": 119,
+          "modified_days": 117
+        },
+        {
+          "actor": "nexgendata/uspto-trademark-search",
+          "title": "Trademark Search \u2014 USPTO Serial + IP Australia Name Search",
+          "users30": 13,
+          "runs30": 761,
+          "raw_users30": 14,
+          "raw_runs30": 791,
+          "fail_rate": 0.008,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            50.0
+          ],
+          "last_build_days": 2,
+          "modified_days": 2
+        },
+        {
+          "actor": "hanamira/patent-trademark-search",
+          "title": "Patent Trademark Search",
+          "users30": 4,
+          "runs30": 19,
+          "raw_users30": 5,
+          "raw_runs30": 49,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            4.0
+          ],
+          "last_build_days": 243,
+          "modified_days": 243
+        },
+        {
+          "actor": "scrapesage/uspto-trademark-scraper",
+          "title": "USPTO Trademark Scraper - Brand-Owner & Attorney Leads",
+          "users30": 4,
+          "runs30": 20,
+          "raw_users30": 5,
+          "raw_runs30": 50,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            4.0
+          ],
+          "last_build_days": 11,
+          "modified_days": 11
+        }
+      ]
+    },
+    {
+      "id": "cpsc-recalls",
+      "label": "US CPSC consumer product recalls",
+      "queries": [
+        "cpsc recalls",
+        "product recalls",
+        "consumer product safety"
+      ],
+      "store_results_max": 584,
+      "competitors_relevant": 41,
+      "users30": 0,
+      "runs30": 0,
+      "weighted_fail_rate": 0.0,
+      "weighted_rating": null,
+      "rated_top10": 0,
+      "reviews_top10": 0,
+      "stale_demand_share": 0.0,
+      "unrated_demand_share": 0.0,
+      "organic_actors": 0,
+      "median_ppe_per_1k": 5.0,
+      "price_range_per_1k": [
+        2.0,
+        100.0
+      ],
+      "strong_incumbent": false,
+      "effort_days": 2,
+      "access": 1.0,
+      "access_note": "CPSC Recalls REST API, keyless, public domain",
+      "score": 0.0,
+      "recommendation": "LOW DEMAND (build only as cheap suite add-on)",
+      "top_competitors": [
+        {
+          "actor": "fortuitous_pirate/cpsc-recalls-scraper",
+          "title": "CPSC Product Recalls Scraper",
+          "users30": 0,
+          "runs30": 0,
+          "raw_users30": 1,
+          "raw_runs30": 30,
+          "fail_rate": 0.033,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            10.0
+          ],
+          "last_build_days": 139,
+          "modified_days": 120
+        },
+        {
+          "actor": "blaidlink/cpsc-supplier-recall-monitor",
+          "title": "CPSC Product Recalls & Supplier Exposure Monitor",
+          "users30": 0,
+          "runs30": 0,
+          "raw_users30": 1,
+          "raw_runs30": 29,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            50.0
+          ],
+          "last_build_days": 58,
+          "modified_days": 48
+        },
+        {
+          "actor": "maydit/us-product-recalls-scraper",
+          "title": "CPSC Product Recalls Scraper - SaferProducts Data",
+          "users30": 0,
+          "runs30": 0,
+          "raw_users30": 1,
+          "raw_runs30": 29,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            4.0
+          ],
+          "last_build_days": 46,
+          "modified_days": 46
+        },
+        {
+          "actor": "zenolvepro/cpsc-recalls",
+          "title": "CPSC Product Recall Monitor Scraper",
+          "users30": 0,
+          "runs30": 0,
+          "raw_users30": 1,
+          "raw_runs30": 29,
+          "fail_rate": 0.0,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            5.0
+          ],
+          "last_build_days": 68,
+          "modified_days": 67
+        },
+        {
+          "actor": "johnatan029/cpsc-recalls-monitor",
+          "title": "CPSC Product Recalls & Safety Data Monitor",
+          "users30": 0,
+          "runs30": 0,
+          "raw_users30": 1,
+          "raw_runs30": 29,
+          "fail_rate": 0.034,
+          "rating": null,
+          "reviews": 0,
+          "pricing": [
+            "PAY_PER_EVENT",
+            4.0
+          ],
+          "last_build_days": 32,
+          "modified_days": 32
+        }
+      ]
+    }
+  ],
+  "own_ranks": {
+    "ofac-sanctions-screening": [
+      {
+        "query": "sanctions screening",
+        "total_results": 417,
+        "rank": 18,
+        "beating_us": [
+          {
+            "actor": "mooseandraven/ofac-sanctions-screening-suite",
+            "users30": 2,
+            "rating": null,
+            "price_per_1k": 4.0
+          },
+          {
+            "actor": "ryanclinton/opensanctions-search",
+            "users30": 3,
+            "rating": null,
+            "price_per_1k": 3.0
+          },
+          {
+            "actor": "pink_comic/ofac-sanctions-screening",
+            "users30": 0,
+            "rating": null,
+            "price_per_1k": 2.0
+          }
+        ]
+      },
+      {
+        "query": "ofac",
+        "total_results": 13658,
+        "rank": 39,
+        "beating_us": [
+          {
+            "actor": "mooseandraven/ofac-sanctions-screening-suite",
+            "users30": 2,
+            "rating": null,
+            "price_per_1k": 4.0
+          },
+          {
+            "actor": "ryanclinton/ofac-sanctions-search",
+            "users30": 2,
+            "rating": null,
+            "price_per_1k": 2.0
+          },
+          {
+            "actor": "gochujang/crypto-address-sanctions-checker",
+            "users30": 0,
+            "rating": null,
+            "price_per_1k": 10.0
+          }
+        ]
+      }
+    ],
+    "eu-vat-validation": [
+      {
+        "query": "vat validation",
+        "total_results": 158,
+        "rank": 8,
+        "beating_us": [
+          {
+            "actor": "scrapers_lat/eu-vat-vies-validation-scraper",
+            "users30": 1,
+            "rating": null,
+            "price_per_1k": 15.0
+          },
+          {
+            "actor": "n1ckyta/eu-invoice-vat-extractor",
+            "users30": 1,
+            "rating": null,
+            "price_per_1k": 40.0
+          },
+          {
+            "actor": "devilscrapes/vies-vat-number-validator",
+            "users30": 1,
+            "rating": null,
+            "price_per_1k": 1.0
+          }
+        ]
+      },
+      {
+        "query": "vies",
+        "total_results": 29075,
+        "rank": 27,
+        "beating_us": [
+          {
+            "actor": "benthepythondev/vies-vat-validator",
+            "users30": 1,
+            "rating": null,
+            "price_per_1k": 2.0
+          },
+          {
+            "actor": "scrapers_lat/eu-vat-vies-validation-scraper",
+            "users30": 1,
+            "rating": null,
+            "price_per_1k": 15.0
+          },
+          {
+            "actor": "bgfc97/eu-vat-vies-validator",
+            "users30": 1,
+            "rating": null,
+            "price_per_1k": 5.0
+          }
+        ]
+      }
+    ],
+    "uk-company-lookup": [
+      {
+        "query": "companies house",
+        "total_results": 3278,
+        "rank": null,
+        "beating_us": [
+          {
+            "actor": "logiover/uk-companies-house-bulk-scraper",
+            "users30": 9,
+            "rating": null,
+            "price_per_1k": 1.5
+          },
+          {
+            "actor": "scrapesage/companies-house-scraper",
+            "users30": 34,
+            "rating": null,
+            "price_per_1k": 4.0
+          },
+          {
+            "actor": "parseforge/uk-companies-house-scraper",
+            "users30": 4,
+            "rating": null,
+            "price_per_1k": 7.5
+          }
+        ]
+      },
+      {
+        "query": "uk company lookup",
+        "total_results": 2017,
+        "rank": 4,
+        "beating_us": [
+          {
+            "actor": "ryanclinton/uk-companies-house",
+            "users30": 2,
+            "rating": null,
+            "price_per_1k": 2.0
+          },
+          {
+            "actor": "automation-lab/companies-house-uk-company-search-scraper",
+            "users30": 4,
+            "rating": null,
+            "price_per_1k": 0.06
+          },
+          {
+            "actor": "corent1robert/uk-companies-house-scraper",
+            "users30": 1,
+            "rating": null,
+            "price_per_1k": 2.0
+          }
+        ]
+      }
+    ],
+    "sec-edgar-filings-search": [
+      {
+        "query": "sec edgar",
+        "total_results": 1124,
+        "rank": null,
+        "beating_us": [
+          {
+            "actor": "constructive_calm/sec-edgar-scraper",
+            "users30": 7,
+            "rating": 5,
+            "price_per_1k": 0.4
+          },
+          {
+            "actor": "logiover/sec-edgar-form-d-scraper",
+            "users30": 10,
+            "rating": 1,
+            "price_per_1k": 3.5
+          },
+          {
+            "actor": "nexgendata/business-registration-lookup",
+            "users30": 0,
+            "rating": null,
+            "price_per_1k": 50.0
+          }
+        ]
+      },
+      {
+        "query": "sec filings",
+        "total_results": 1278,
+        "rank": null,
+        "beating_us": [
+          {
+            "actor": "benthepythondev/sec-edgar-filings-intelligence",
+            "users30": 2,
+            "rating": null,
+            "price_per_1k": 29.0
+          },
+          {
+            "actor": "constant_quadruped/sec-edgar-filings-scraper",
+            "users30": 22,
+            "rating": null,
+            "price_per_1k": null
+          },
+          {
+            "actor": "ryanclinton/edgar-filing-search",
+            "users30": 1,
+            "rating": null,
+            "price_per_1k": 2.0
+          }
+        ]
+      }
+    ],
+    "sam-gov-contracts": [
+      {
+        "query": "sam.gov",
+        "total_results": 326,
+        "rank": null,
+        "beating_us": [
+          {
+            "actor": "scrapesage/sam-gov-scraper",
+            "users30": 10,
+            "rating": null,
+            "price_per_1k": 2.5
+          },
+          {
+            "actor": "automation-lab/samgov-government-contracts-scraper",
+            "users30": 4,
+            "rating": null,
+            "price_per_1k": 0.12
+          },
+          {
+            "actor": "fortuitous_pirate/sam-gov-scraper",
+            "users30": 12,
+            "rating": null,
+            "price_per_1k": 3.0
+          }
+        ]
+      },
+      {
+        "query": "government contracts",
+        "total_results": 2667,
+        "rank": null,
+        "beating_us": [
+          {
+            "actor": "automation-lab/samgov-government-contracts-scraper",
+            "users30": 4,
+            "rating": null,
+            "price_per_1k": 0.12
+          },
+          {
+            "actor": "nexgendata/singapore-gebiz-tenders",
+            "users30": 0,
+            "rating": null,
+            "price_per_1k": 50.0
+          },
+          {
+            "actor": "lofomachines/public-tenders-scraper",
+            "users30": 6,
+            "rating": null,
+            "price_per_1k": 4.0
+          }
+        ]
+      }
+    ],
+    "eu-ted-tenders-monitor": [
+      {
+        "query": "public tenders",
+        "total_results": 2632,
+        "rank": null,
+        "beating_us": [
+          {
+            "actor": "foxlabs/ted-tenders",
+            "users30": 14,
+            "rating": 5.0,
+            "price_per_1k": 4.0
+          },
+          {
+            "actor": "dltik/ted-europa-scraper",
+            "users30": 3,
+            "rating": 3,
+            "price_per_1k": 5.0
+          },
+          {
+            "actor": "lofomachines/public-tenders-scraper",
+            "users30": 6,
+            "rating": null,
+            "price_per_1k": 4.0
+          }
+        ]
+      },
+      {
+        "query": "eu tenders",
+        "total_results": 691,
+        "rank": null,
+        "beating_us": [
+          {
+            "actor": "foxlabs/ted-tenders",
+            "users30": 14,
+            "rating": 5.0,
+            "price_per_1k": 4.0
+          },
+          {
+            "actor": "maximedupre/eu-funding-tenders-scraper",
+            "users30": 3,
+            "rating": null,
+            "price_per_1k": 0.01
+          },
+          {
+            "actor": "scrapers_lat/eu-ted-tenders-scraper",
+            "users30": 0,
+            "rating": 5,
+            "price_per_1k": 2.6
+          }
+        ]
+      }
+    ],
+    "fda-recalls-monitor": [
+      {
+        "query": "fda recalls",
+        "total_results": 355,
+        "rank": 35,
+        "beating_us": [
+          {
+            "actor": "scrapers_lat/openfda-food-recalls-scraper",
+            "users30": 3,
+            "rating": 5,
+            "price_per_1k": 8.0
+          },
+          {
+            "actor": "benthepythondev/fda-recall-intelligence",
+            "users30": 0,
+            "rating": null,
+            "price_per_1k": 50.0
+          },
+          {
+            "actor": "ryanclinton/fda-food-recall-monitor",
+            "users30": 0,
+            "rating": null,
+            "price_per_1k": 2.0
+          }
+        ]
+      },
+      {
+        "query": "fda",
+        "total_results": 633,
+        "rank": null,
+        "beating_us": [
+          {
+            "actor": "scrapers_lat/openfda-food-recalls-scraper",
+            "users30": 3,
+            "rating": 5,
+            "price_per_1k": 8.0
+          },
+          {
+            "actor": "parseforge/fda-warning-letters-scraper",
+            "users30": 2,
+            "rating": null,
+            "price_per_1k": 21.0
+          },
+          {
+            "actor": "benthepythondev/fda-recall-intelligence",
+            "users30": 0,
+            "rating": null,
+            "price_per_1k": 50.0
+          }
+        ]
+      }
+    ],
+    "federal-register-monitor": [
+      {
+        "query": "federal register",
+        "total_results": 1372,
+        "rank": 33,
+        "beating_us": [
+          {
+            "actor": "ryanclinton/federal-register-search",
+            "users30": 0,
+            "rating": null,
+            "price_per_1k": 2.0
+          },
+          {
+            "actor": "pink_comic/federal-register-search",
+            "users30": 0,
+            "rating": null,
+            "price_per_1k": 2.0
+          },
+          {
+            "actor": "benthepythondev/federal-register-intelligence",
+            "users30": 0,
+            "rating": null,
+            "price_per_1k": 2.0
+          }
+        ]
+      },
+      {
+        "query": "regulations monitor",
+        "total_results": 3579,
+        "rank": 4,
+        "beating_us": [
+          {
+            "actor": "viniman27/ai-regulation-updates-monitor",
+            "users30": 1,
+            "rating": null,
+            "price_per_1k": 100.0
+          },
+          {
+            "actor": "agentictools/federal-register-monitor",
+            "users30": 1,
+            "rating": null,
+            "price_per_1k": 1.0
+          },
+          {
+            "actor": "great_pistachio/us-federal-regulations-monitor",
+            "users30": 1,
+            "rating": null,
+            "price_per_1k": 10.0
+          }
+        ]
+      }
+    ],
+    "lighthouse-auditor": [
+      {
+        "query": "lighthouse",
+        "total_results": 161,
+        "rank": 19,
+        "beating_us": [
+          {
+            "actor": "nexgendata/page-speed-analyzer",
+            "users30": 13,
+            "rating": null,
+            "price_per_1k": 100.0
+          },
+          {
+            "actor": "constant_quadruped/lighthouse-auditor",
+            "users30": 33,
+            "rating": null,
+            "price_per_1k": null
+          },
+          {
+            "actor": "perryay/website-performance-auditor",
+            "users30": 9,
+            "rating": null,
+            "price_per_1k": 10.0
+          }
+        ]
+      },
+      {
+        "query": "core web vitals",
+        "total_results": 219,
+        "rank": 13,
+        "beating_us": [
+          {
+            "actor": "alizarin_refrigerator-owner/pagespeed-insights",
+            "users30": 5,
+            "rating": null,
+            "price_per_1k": 0.01
+          },
+          {
+            "actor": "alizarin_refrigerator-owner/google-lighthouse-checker",
+            "users30": 1,
+            "rating": null,
+            "price_per_1k": 0.01
+          },
+          {
+            "actor": "fetchbase/website-performance-audit",
+            "users30": 4,
+            "rating": null,
+            "price_per_1k": 20.0
+          }
+        ]
+      }
+    ],
+    "sitemap-url-extractor": [
+      {
+        "query": "sitemap",
+        "total_results": 1675,
+        "rank": null,
+        "beating_us": [
+          {
+            "actor": "apify/sitemap-extractor",
+            "users30": 54,
+            "rating": 3.24,
+            "price_per_1k": 0.5
+          },
+          {
+            "actor": "onescales/sitemap-url-extractor",
+            "users30": 16,
+            "rating": 5,
+            "price_per_1k": 30.0
+          },
+          {
+            "actor": "crawlerbros/sitemap-url-extractor",
+            "users30": 17,
+            "rating": 5,
+            "price_per_1k": 2.0
+          }
+        ]
+      },
+      {
+        "query": "broken links",
+        "total_results": 2948,
+        "rank": null,
+        "beating_us": [
+          {
+            "actor": "logiover/bulk-url-status-checker",
+            "users30": 15,
+            "rating": null,
+            "price_per_1k": 2.5
+          },
+          {
+            "actor": "parseforge/broken-link-checker",
+            "users30": 5,
+            "rating": 2.75,
+            "price_per_1k": 1.2
+          },
+          {
+            "actor": "khadinakbar/broken-link-checker",
+            "users30": 16,
+            "rating": null,
+            "price_per_1k": 1.0
+          }
+        ]
+      }
+    ],
+    "email-security-checker": [
+      {
+        "query": "dmarc",
+        "total_results": 1583,
+        "rank": 39,
+        "beating_us": [
+          {
+            "actor": "ryanclinton/dns-record-lookup",
+            "users30": 2,
+            "rating": null,
+            "price_per_1k": 3.0
+          },
+          {
+            "actor": "apivault_labs/email-deliverability-checker",
+            "users30": 4,
+            "rating": null,
+            "price_per_1k": 1.2
+          },
+          {
+            "actor": "onescales/dmarc-checker",
+            "users30": 1,
+            "rating": 5,
+            "price_per_1k": 10.0
+          }
+        ]
+      },
+      {
+        "query": "spf dkim",
+        "total_results": 187,
+        "rank": 21,
+        "beating_us": [
+          {
+            "actor": "ryanclinton/dns-record-lookup",
+            "users30": 2,
+            "rating": null,
+            "price_per_1k": 3.0
+          },
+          {
+            "actor": "apivault_labs/email-deliverability-checker",
+            "users30": 4,
+            "rating": null,
+            "price_per_1k": 1.2
+          },
+          {
+            "actor": "mambalabs/domain-deliverability-checker",
+            "users30": 4,
+            "rating": null,
+            "price_per_1k": 5.0
+          }
+        ]
+      }
+    ],
+    "company-jobs-scraper": [
+      {
+        "query": "greenhouse jobs",
+        "total_results": 1385,
+        "rank": null,
+        "beating_us": [
+          {
+            "actor": "fantastic-jobs/greenhouse-jobs-api",
+            "users30": 134,
+            "rating": 3,
+            "price_per_1k": 2.0
+          },
+          {
+            "actor": "automation-lab/greenhouse-jobs-scraper",
+            "users30": 31,
+            "rating": 4,
+            "price_per_1k": 2.0
+          },
+          {
+            "actor": "jobo.world/greenhouse-jobs-scraper-api",
+            "users30": 60,
+            "rating": 5,
+            "price_per_1k": 4.0
+          }
+        ]
+      },
+      {
+        "query": "career page",
+        "total_results": 3453,
+        "rank": 25,
+        "beating_us": [
+          {
+            "actor": "hirebase/job-search",
+            "users30": 92,
+            "rating": 5,
+            "price_per_1k": 3.0
+          },
+          {
+            "actor": "piotrv1001/company-career-page-scraper",
+            "users30": 37,
+            "rating": null,
+            "price_per_1k": 3.0
+          },
+          {
+            "actor": "fabro.dev/company-career-page-jobs",
+            "users30": 18,
+            "rating": null,
+            "price_per_1k": 2.0
+          }
+        ]
+      }
+    ],
+    "ecb-exchange-rates": [
+      {
+        "query": "exchange rates",
+        "total_results": 2142,
+        "rank": null,
+        "beating_us": [
+          {
+            "actor": "ryanclinton/exchange-rate-tracker",
+            "users30": 4,
+            "rating": null,
+            "price_per_1k": null
+          },
+          {
+            "actor": "maged120/central-bank-of-egypt-todays-rates",
+            "users30": 4,
+            "rating": null,
+            "price_per_1k": 15.0
+          },
+          {
+            "actor": "moving_beacon-owner1/binance-exchange-rate-scraper",
+            "users30": 7,
+            "rating": null,
+            "price_per_1k": 10.0
+          }
+        ]
+      },
+      {
+        "query": "ecb",
+        "total_results": 145,
+        "rank": 17,
+        "beating_us": [
+          {
+            "actor": "benthepythondev/forex-exchange-intelligence",
+            "users30": 4,
+            "rating": null,
+            "price_per_1k": 1.0
+          },
+          {
+            "actor": "hypebridge/economic-calendar-api",
+            "users30": 1,
+            "rating": null,
+            "price_per_1k": 4.5
+          },
+          {
+            "actor": "chrisp1211/currency-exchange-scraper-max",
+            "users30": 1,
+            "rating": null,
+            "price_per_1k": 0.4
+          }
+        ]
+      }
+    ],
+    "wikipedia-scraper": [
+      {
+        "query": "wikipedia",
+        "total_results": 942,
+        "rank": null,
+        "beating_us": [
+          {
+            "actor": "automation-lab/wikipedia-scraper",
+            "users30": 8,
+            "rating": null,
+            "price_per_1k": 1.15
+          },
+          {
+            "actor": "santamaria-automations/wikipedia-scraper",
+            "users30": 2,
+            "rating": null,
+            "price_per_1k": 2.0
+          },
+          {
+            "actor": "fatihtahta/wikipedia-scraper",
+            "users30": 1,
+            "rating": null,
+            "price_per_1k": 4.99
+          }
+        ]
+      }
+    ],
+    "open-food-facts-scraper": [
+      {
+        "query": "open food facts",
+        "total_results": 1907,
+        "rank": 27,
+        "beating_us": [
+          {
+            "actor": "benthepythondev/open-food-facts-product-intelligence",
+            "users30": 0,
+            "rating": null,
+            "price_per_1k": 20.0
+          },
+          {
+            "actor": "gentle_cloud/open-food-facts-scraper",
+            "users30": 0,
+            "rating": null,
+            "price_per_1k": null
+          },
+          {
+            "actor": "crawlerbros/openfoodfacts-scraper",
+            "users30": 3,
+            "rating": null,
+            "price_per_1k": 5.0
+          }
+        ]
+      }
+    ],
+    "us-weather-forecast": [
+      {
+        "query": "weather forecast",
+        "total_results": 365,
+        "rank": 24,
+        "beating_us": [
+          {
+            "actor": "xtracto/ventusky-weather-scraper",
+            "users30": 3,
+            "rating": null,
+            "price_per_1k": 0.8
+          },
+          {
+            "actor": "fortuitous_pirate/windguru-forecast-agent",
+            "users30": 2,
+            "rating": null,
+            "price_per_1k": 3.5
+          },
+          {
+            "actor": "lulzasaur/nws-weather-scraper",
+            "users30": 7,
+            "rating": null,
+            "price_per_1k": 10.0
+          }
+        ]
+      }
+    ]
+  }
+}
