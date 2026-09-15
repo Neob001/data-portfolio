@@ -16,3 +16,9 @@ Item ids come from WEEKLY_REPORT.md. Nothing ships to a new data source, changes
 2026-09-13 | APPROVE | W1 | Owner, in chat: rewrite Store titles/descriptions for discovery immediately; goal = revenue ASAP.
 2026-09-13 | APPROVE | W3 | Owner, in chat: build and publish wikipedia-data (official MediaWiki/Wikidata APIs, CC BY-SA attribution fields on every record; living/any person articles excluded per no-person-profiles rule).
 2026-09-13 | APPROVE | W4 | Owner, in chat: build and publish open-food-facts (official OFF API, ODbL attribution on every record; contributor usernames excluded).
+2026-09-15 | APPROVE | P1 price realignment | Owner, in chat: cut to competitor median — sec-edgar $8->$2, eu-ted $10->$3, ofac $10->$3, federal-register $5->$2.50, fda-recalls $5->$3, uk-company $4->$2.50 per 1,000. Evidence: niche scan 2026-09-15, we were 2-4x median with zero reviews.
+2026-09-15 | APPROVE | N1 sam-gov-contracts | Owner, in chat: SAM.gov contract opportunities (official API, free key). Drop if key issuance requires photo-ID verification (standing rule).
+2026-09-15 | APPROVE | N2 email-security-checker | Owner, in chat: SPF/DKIM/DMARC/MX domain audit via public DNS.
+2026-09-15 | APPROVE | N3 ecb-exchange-rates | Owner, in chat: official ECB reference rates.
+2026-09-15 | APPROVE | N4 eu-vat-validation | Owner, in chat: official EU VIES VAT number validation.
+2026-09-15 | APPROVE | INC-4 lighthouse-auditor | Standing replacement decision: nexgendata/page-speed-analyzer fails 26.6% of 6,851 runs/30d; niche 7.5k-11.6k runs/mo at 15-24% failure. Built on open-source Lighthouse (Apache-2.0), not the Google PSI API (Google API terms forbid re-offering the API to third parties).
