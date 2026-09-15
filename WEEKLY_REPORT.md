@@ -1,36 +1,42 @@
-# Weekly report — 2026-09-13
+# Weekly report — updated 2026-09-15 (revenue sprint)
 
 ## Money
-- **Revenue: not visible via API.** No actor has any user besides us yet (see below), so it's almost certainly **$0**. For the exact number, check [Console → Insights → Monetization](https://console.apify.com/actors/insights). Final monthly numbers show up on the payout invoice.
-- **11/11 actors public (9 + wikipedia and open-food-facts added 2026-09-13) with pay-per-event pricing.** The registry still listed fda-recalls as awaiting publish, but the API says it's public. Registry fixed.
-- Leading indicators (all-time runs / users in the last 30 days): SEC 10/1 · TED 10/1 · UK-CH 7/1 · OFAC 5/1 · FedReg 4/1 · weather 3/1 · jobs 3/1 · sitemap 3/1 · FDA 2/1. **Every actor has exactly 1 user in the last 30 days, and that's us.** No outside users 2 days after launch.
+- **Revenue: still ~$0.** 11 live Actors. The first real outside user showed up: `us-weather-forecast` has 3 users (2 in the last 7 days); every other Actor is just us plus Apify's auto-tester.
+- **Main cause, from market data:** our prices were **2–4× the competitor median** (SEC $8 vs $2, TED $10 vs $4, OFAC $10 vs $3), and generic search results are ranked by popularity. For queries like "sec edgar", "companies house", "wikipedia" or "sitemap" we rank below position 50; for narrower queries we sit around 18–39.
+- **Price cuts approved (P1), waiting on the Console step:** SEC $2, TED $3, OFAC $3, Federal Register $2.50, FDA $3, UK companies $2.50 per 1,000. Once the live prices change, `scripts/apply_price_changes.py` rewrites the listings and READMEs, but only after it confirms each price on Apify.
 
 ## Health
-- `health.py`: **0 flags**, 8 live actors checked. 0 failed runs in the last 24h. No actor has failed 2+ runs in a row.
-- Staging schedules `staging-sec-edgar` and `staging-eu-ted` are on. Last run 2026-09-13 06:00Z, both SUCCEEDED. All 9 actors passed staging. Our only failed run ever is UK-CH on 2026-09-10, before the keyless fix, and it was expected.
-- The Store runs a daily auto-test on each public actor, but those runs happen under Apify's account, so the API can't show them. No "under maintenance" flags seen.
-- ⚠ Blind spot: the row-count-drop check is inactive because `datasetItemCount` reads 0.
-- ⚠ Script problems this run:
-  - `pricing.py` crashes on the system Python 3.9 (it can't parse a `Z` timestamp), so I ran it with Python 3.12. It found 0 price changes to suggest; all actors are still in their 60-day launch-pricing period.
-  - `health.py` failed twice with an SSL EOF error through the local proxy, then passed on retry.
+- **Four bugs found and fixed in live Actors before any outside user ran into them** (all verified with live runs):
+  1. `sinceLastRun` never worked on SEC, TED, Federal Register and FDA. The cursor was stored in the run's temporary storage, so scheduled customers would have been charged again for the same records every day. It now uses a persistent named store and handles capped runs correctly.
+  2. SEC ignored `startDate` and `endDate`, returning results from 2004–2018 for "since Sept 1".
+  3. SEC runs over 100 results **charged about 90% duplicates** because pages overlapped.
+  4. SEC, TED, Federal Register and FDA stopped paginating early when a page contained one malformed record (FDA returned 99 of 133).
+- **Verification:** repeat runs deliver 0 records and charge 0. Capped runs pick up where they left off with 0 overlapping IDs. Federal Register returned 139 of 139 against the API total.
+- All 16 Actors rebuilt today and every build succeeded. The free plan's 16 GB memory cap allows only 4 builds at a time.
 
-## Decisions needed (answer in DECISIONS.md)
-1. ~~W1~~ **DONE 2026-09-13** (owner approved in chat): keyword-first titles, descriptions, SEO fields, categories (they were missing) and README pricing/FAQ are live on all 9 actors.
-2. **W2**: Harden `scripts/` (retry on SSL/network errors, date parsing that works on Python 3.9, fix the `datasetItemCount` field)? No actor code touched. yes/no
-3. ~~W3~~ **LIVE 2026-09-13**: apify.com/factpipe/wikipedia-scraper ($1/1K articles, person articles excluded and never charged).
-4. ~~W4~~ **LIVE 2026-09-13**: apify.com/factpipe/open-food-facts-scraper ($1/1K products, ODbL attribution on every record).
-5. **W5**: Build an INSEE/Sirene French company-register actor (official open API; the alternative queued after rejecting INC-3)? yes/no
-6. **L1** (carried over): Build a Companies House officers/PSC variant? That data includes directors' personal details. yes/no
+## Staged today, ready to publish (5/5 of today's publish limit)
+| Actor | Why this niche | Price | Staging |
+|---|---|---|---|
+| lighthouse-auditor | 7.5k–11.6k runs/mo, **15–24% of competitor runs fail**, only 158 competitors (page 1) | $10/1k audits (compute ~$0.003) | ✅ mobile/desktop, failures not charged |
+| sam-gov-contracts | 9k runs/mo, top competitor rated 1.0/5; keyless official extract | $2/1k | ✅ incremental verified, contact emails/phones masked |
+| email-security-checker | SPF/DKIM/DMARC, 198 competitors (page 1) | $3/1k domains | ✅ null MX and nonexistent domains handled |
+| eu-vat-validation | 6.6k runs/mo from heavy B2B users | $2/1k checks | ✅ VIES throttling retried, never charged |
+| ecb-exchange-rates | only 92 competitors (page 1 guaranteed) | $1/1k rows | ✅ cross rates, discontinued currencies not charged |
+
+## Decisions / actions needed
+1. **A1 — Owner, about 2 minutes:** reconnect the Claude in Chrome extension (open Chrome → Claude side panel → sign in). With it, Claude applies the P1 price cuts and pricing on the 5 new Actors, then publishes them. Otherwise, do it yourself in the Console: Monetization wizard, delete the two prefilled events (`apify-actor-start`, `apify-default-dataset-item`), add the event from registry.json → Publish.
+2. **N5 — Global sanctions screening** (EU + UN + UK consolidated lists alongside OFAC, one listing): compliance buyers, highest willingness to pay, sanctions competitors unrated. About 5h. yes/no
+3. **N6 — GLEIF LEI company lookup** (CC0 official API): 42 users/mo, 0% competitor failures, completes a KYB bundle with UK company, VAT and OFAC. About 3h. yes/no
+4. **N7 — Broken link checker**: 52 users and 4k runs/mo; SEO bundle with the sitemap extractor and Lighthouse auditor. About 4h. yes/no
+5. **N8 — DNS records lookup** (clone of the email-security checker's resolver): 74 users/mo in "dns lookup". About 2h. yes/no
+6. **L1** (carried over): Companies House officers/PSC variant (directors' personal data). yes/no
+
+## Analysis: what to launch next, and why
+- **The official-data niches are small and crowded.** Across the top 10 competitors combined: SEC 26 users/30d, sanctions 9–12, clinical trials 8, VIN decoder 12. Large catalogs of AI-built Actors (ryanclinton, nexgendata) sit in almost every niche.
+- **The pattern that wins first users:** a small total result set (under 300, so we land on page 1 by default), plus proven run volume, plus competitors that fail or rate poorly. Today's 5 builds were chosen that way. N5–N8 are the next best by the same rule, and each links into the catalog (KYB bundle, SEO bundle).
+- **Build less, distribute more, once today's batch is live.** Revenue is currently limited by discovery, not catalog size. After the price cuts, measure search ranks and users for 7 days (re-measure 2026-09-22) before adding more than N5–N8.
 
 ## What we learned
-- **Staging with bad inputs catches billing bugs.** It caught two before launch: Companies House fuzzy-matching nonsense queries (which we would have charged for) and OFAC's percent-vs-fraction threshold mix-up. Every lookup actor now needs a staging run with a query that must return no match.
-- **Store launch limits:** at most 5 publications per 24h. Publishing and accepting T&C can only be done by the owner in the Console. Every actor needs a keyless default input that returns results, or the daily auto-test will flag it as under maintenance.
-- **Where our wedge is:** broken incumbents with high demand are mostly social or personal-data scrapers we can't legally replace; the replaceable ones sit around Store ranks 1000–3000. Auto-reject any target whose ToS page is itself behind bot checks (Europages) or that requires ID verification (USPTO).
-
-## Top build proposals (state/opportunities.json, excluding ones already built or rejected)
-| # | Slug | Source | Build | Competitors' demand (30d) | Score |
-|---|---|---|---|---|---|
-| 1 | open-food-facts | Open Food Facts API (ODbL) | 5h | 271 runs / 9 users, 7.4% fail | 1.48 |
-| 2 | wikipedia-data | MediaWiki APIs | 4h | 230 runs / 21 users | 1.32 |
-| 3 | github-repos | GitHub REST API | 6h | 472 runs / 25 users | 0.82 |
-| 4 | clinical-trials | ClinicalTrials.gov v2 | 6h | 258 runs / 8 users | 0.41 |
+- **Checking for non-empty output isn't enough.** Staging must compare delivered counts to the API total, and incremental Actors must pass a repeat-run test. That's how today's four live bugs surfaced.
+- **Pricing must be benchmarked against the competitor median in the niche**, not against one incumbent. With zero reviews, price is one of the few levers we control.
+- **Drop contact columns *and* redact free text** (SAM.gov descriptions embed officers' emails and phone numbers). And direct connections are 13× faster than the local proxy for Store API scans.
