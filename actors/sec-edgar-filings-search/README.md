@@ -46,9 +46,9 @@ One record per matching filing document:
 
 | Event | Price | Meaning |
 |---|---|---|
-| `filing-result` | **$8.00 per 1,000** ($0.008 each) | One filing record delivered to the dataset. **Empty runs are never charged.** |
+| `filing-result` | **$2.00 per 1,000** ($0.002 each) | One filing record delivered to the dataset. **Empty runs are never charged.** |
 
-Example: 500 filings cost **$4.00**. You only pay for delivered results.
+Example: 500 filings cost **$1.00**. You only pay for delivered results.
 
 ## Related factpipe Actors
 

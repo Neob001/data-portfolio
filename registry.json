@@ -9,7 +9,7 @@
       "approval": "AUTO-APPROVED-PENDING-REVIEW (US federal public data)",
       "ppe_events": {
         "filing-result": {
-          "proposed_price_usd": 0.008
+          "proposed_price_usd": 0.002
         }
       },
       "pricing_rationale": "Leading incumbent charges ~$0.01/filing-fetched; launch ~20% below.",
@@ -25,7 +25,7 @@
       "monetization_configured": true,
       "listing": {
         "title": "SEC EDGAR Filings Scraper API — 10-K, 10-Q, 8-K Full-Text",
-        "description": "Full-text search and monitor SEC EDGAR filings (10-K, 10-Q, 8-K, S-1, Form 4, 13F) by keyword via the official SEC API. No API key, flat JSON, new-filing alerts. $8 per 1,000 filings.",
+        "description": "Full-text search and monitor SEC EDGAR filings (10-K, 10-Q, 8-K, S-1, Form 4, 13F) by keyword via the official SEC API. No API key, flat JSON, new-filing alerts. $2 per 1,000 filings.",
         "seoTitle": "SEC EDGAR Full-Text Search API: 10-K, 8-K Filings Scraper",
         "seoDescription": "Search the full text of SEC EDGAR filings by keyword and get flat JSON: 10-K, 10-Q, 8-K, S-1, Form 4. Official SEC API, no key, scheduled monitoring.",
         "categories": [
@@ -35,6 +35,14 @@
       },
       "fix_log": [
         "2026-09-15: incremental cursor moved to named store with truncation-aware dedupe; pagination judged on raw API counts; SEC dateRange=custom + 100-hit paging + in-run dedupe. Verified live: two-pass runs, capped-run continuation with zero overlap, counts match API totals."
+      ],
+      "price_history": [
+        {
+          "date": "2026-09-15",
+          "event": "filing-result",
+          "from": 0.008,
+          "to": 0.002
+        }
       ]
     },
     "eu-ted-tenders-monitor": {
@@ -45,7 +53,7 @@
       "approval": "AUTO-APPROVED-PENDING-REVIEW (EU official public data)",
       "ppe_events": {
         "tender-result": {
-          "proposed_price_usd": 0.01
+          "proposed_price_usd": 0.003
         }
       },
       "pricing_rationale": "Incumbents rental/PPR at higher effective cost and 13.7% failure rate; undercut + reliability.",
@@ -61,7 +69,7 @@
       "monetization_configured": true,
       "listing": {
         "title": "EU Tenders Scraper — TED Public Procurement Notices API",
-        "description": "Search and monitor EU public tenders and procurement notices from TED by CPV code, country and keyword. Official TED API, no key, flat JSON with deadlines, new-tender alerts. $10 per 1,000.",
+        "description": "Search and monitor EU public tenders and procurement notices from TED by CPV code, country and keyword. Official TED API, no key, flat JSON with deadlines, new-tender alerts. $3 per 1,000.",
         "seoTitle": "EU Tenders API: TED Public Procurement Notices Scraper",
         "seoDescription": "Find EU public tenders by CPV code, country and keyword from the official TED API. Deadlines, buyers and PDF links as flat JSON; daily new-tender alerts.",
         "categories": [
@@ -71,6 +79,14 @@
       },
       "fix_log": [
         "2026-09-15: incremental cursor moved to named store with truncation-aware dedupe; pagination judged on raw API counts. Verified live: two-pass runs, capped-run continuation with zero overlap, counts match API totals."
+      ],
+      "price_history": [
+        {
+          "date": "2026-09-15",
+          "event": "tender-result",
+          "from": 0.01,
+          "to": 0.003
+        }
       ]
     },
     "uk-company-lookup": {
@@ -81,7 +97,7 @@
       "approval": "AUTO-APPROVED-PENDING-REVIEW (UK statutory register, company facts only)",
       "ppe_events": {
         "company-found": {
-          "proposed_price_usd": 0.004
+          "proposed_price_usd": 0.0025
         }
       },
       "pricing_rationale": "Highest-demand safe niche (21.7k runs/30d across incumbents); per-lookup pricing beats per-run incumbents on small batches.",
@@ -98,14 +114,22 @@
       "monetization_configured": true,
       "listing": {
         "title": "UK Companies House Lookup API — Company Data, No API Key",
-        "description": "Look up UK companies by number or name on Companies House: status, incorporation date, SIC codes, registered office, overdue accounts, insolvency. Bulk lists, no API key. $4 per 1,000 found.",
+        "description": "Look up UK companies by number or name on Companies House: status, incorporation date, SIC codes, registered office, overdue accounts, insolvency. Bulk lists, no API key. $2.50 per 1,000 found.",
         "seoTitle": "UK Companies House API Lookup: Company Data in Bulk",
         "seoDescription": "Bulk-check UK companies on Companies House by number or name: status, SIC codes, address, overdue accounts, insolvency history. Official API, no key needed.",
         "categories": [
           "BUSINESS",
           "LEAD_GENERATION"
         ]
-      }
+      },
+      "price_history": [
+        {
+          "date": "2026-09-15",
+          "event": "company-found",
+          "from": 0.004,
+          "to": 0.0025
+        }
+      ]
     },
     "federal-register-monitor": {
       "apify_actor_id": "jsCTapvAxeme0S1ZH",
@@ -115,7 +139,7 @@
       "approval": "Q1 APPROVED by owner 2026-09-11 (chat)",
       "ppe_events": {
         "document-result": {
-          "proposed_price_usd": 0.005
+          "proposed_price_usd": 0.0025
         }
       },
       "pricing_rationale": "Cheap build, 5.0-rated incumbents but tiny catalog; regulatory-monitoring buyers",
@@ -130,7 +154,7 @@
       "monetization_configured": true,
       "listing": {
         "title": "Federal Register Scraper — US Rules & Regulations Monitor",
-        "description": "Search and monitor the US Federal Register: final rules, proposed rules, notices and presidential documents by keyword and agency. Official API, no key, flat JSON, new-document alerts. $5 per 1,000.",
+        "description": "Search and monitor the US Federal Register: final rules, proposed rules, notices and presidential documents by keyword and agency. Official API, no key, flat JSON, new-document alerts. $2.50 per 1,000.",
         "seoTitle": "Federal Register API: Monitor US Rules & Proposed Rules",
         "seoDescription": "Track new US federal rules, proposed rules, notices and presidential documents by keyword and agency. Official Federal Register API, flat JSON, daily alerts.",
         "categories": [
@@ -140,6 +164,14 @@
       },
       "fix_log": [
         "2026-09-15: incremental cursor moved to named store with truncation-aware dedupe; pagination judged on raw API counts. Verified live: two-pass runs, capped-run continuation with zero overlap, counts match API totals."
+      ],
+      "price_history": [
+        {
+          "date": "2026-09-15",
+          "event": "document-result",
+          "from": 0.005,
+          "to": 0.0025
+        }
       ]
     },
     "fda-recalls-monitor": {
@@ -150,7 +182,7 @@
       "approval": "Q1 APPROVED by owner 2026-09-11 (chat)",
       "ppe_events": {
         "recall-result": {
-          "proposed_price_usd": 0.005
+          "proposed_price_usd": 0.003
         }
       },
       "pricing_rationale": "Official source, supply-chain risk buyers",
@@ -166,7 +198,7 @@
       "notes": "Confirmed public via GET /v2/acts isPublic=true on 2026-09-13 (weekly report); exact publish time not recorded.",
       "listing": {
         "title": "FDA Recalls Scraper API — Food, Drug & Device Recalls",
-        "description": "Search and monitor FDA recalls and enforcement reports for food, drugs and medical devices via official openFDA. Filter by keyword, Class I/II/III, date. No key, flat JSON, alerts. $5 per 1,000.",
+        "description": "Search and monitor FDA recalls and enforcement reports for food, drugs and medical devices via official openFDA. Filter by keyword, Class I/II/III, date. No key, flat JSON, alerts. $3 per 1,000.",
         "seoTitle": "FDA Recalls API: Food, Drug & Device Recall Monitor",
         "seoDescription": "Get FDA food, drug and medical device recalls as flat JSON from official openFDA: firm, product, reason, Class I/II/III, distribution. Daily new-recall alerts.",
         "categories": [
@@ -176,6 +208,14 @@
       },
       "fix_log": [
         "2026-09-15: incremental cursor moved to named store with truncation-aware dedupe; pagination judged on raw API counts; openFDA sort=report_date:desc. Verified live: two-pass runs, capped-run continuation with zero overlap, counts match API totals."
+      ],
+      "price_history": [
+        {
+          "date": "2026-09-15",
+          "event": "recall-result",
+          "from": 0.005,
+          "to": 0.003
+        }
       ]
     },
     "ofac-sanctions-screening": {
@@ -186,7 +226,7 @@
       "approval": "Q1 APPROVED by owner 2026-09-11 (chat)",
       "ppe_events": {
         "name-screened": {
-          "proposed_price_usd": 0.01
+          "proposed_price_usd": 0.003
         }
       },
       "pricing_rationale": "Compliance buyers pay premium; incumbents unrated",
@@ -201,14 +241,22 @@
       "monetization_configured": true,
       "listing": {
         "title": "OFAC Sanctions Screening API — SDN List Check for AML/KYC",
-        "description": "Screen people and companies against the official US Treasury OFAC SDN sanctions list, incl. aliases, with fuzzy match scores. Bulk name lists for AML/KYC and vendor checks. No API key. $0.01 per name.",
+        "description": "Screen people and companies against the official US Treasury OFAC SDN sanctions list, incl. aliases, with fuzzy match scores. Bulk name lists for AML/KYC and vendor checks. No API key. $0.003 per name.",
         "seoTitle": "OFAC Sanctions Screening API: Bulk SDN Name Check",
         "seoDescription": "Bulk-screen names against the US Treasury OFAC SDN list with aliases and fuzzy match scores. Fresh official data each run, no API key. For AML/KYC compliance.",
         "categories": [
           "BUSINESS",
           "AUTOMATION"
         ]
-      }
+      },
+      "price_history": [
+        {
+          "date": "2026-09-15",
+          "event": "name-screened",
+          "from": 0.01,
+          "to": 0.003
+        }
+      ]
     },
     "us-weather-forecast": {
       "apify_actor_id": "zCqFs1GRTgDcS0yeI",

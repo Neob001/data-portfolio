@@ -2,7 +2,7 @@
   "actorSpecification": 1,
   "name": "ofac-sanctions-screening",
   "title": "OFAC Sanctions Screening API \u2014 SDN List Check for AML/KYC",
-  "description": "Screen people and companies against the official US Treasury OFAC SDN sanctions list, incl. aliases, with fuzzy match scores. Bulk name lists for AML/KYC and vendor checks. No API key. $0.01 per name.",
+  "description": "Screen people and companies against the official US Treasury OFAC SDN sanctions list, incl. aliases, with fuzzy match scores. Bulk name lists for AML/KYC and vendor checks. No API key. $0.003 per name.",
   "version": "0.1",
   "buildTag": "latest",
   "input": "../INPUT_SCHEMA.json",

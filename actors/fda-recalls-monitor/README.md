@@ -49,9 +49,9 @@ Search and monitor **FDA recalls and enforcement reports** across food, drugs, a
 
 | Event | Price | Meaning |
 |---|---|---|
-| `recall-result` | **$5.00 per 1,000** ($0.005 each) | One recall record delivered. **Empty runs are never charged.** |
+| `recall-result` | **$3.00 per 1,000** ($0.003 each) | One recall record delivered. **Empty runs are never charged.** |
 
-Example: 1,000 recall records cost **$5.00**. You only pay for delivered results.
+Example: 1,000 recall records cost **$3.00**. You only pay for delivered results.
 
 ## Related factpipe Actors
 

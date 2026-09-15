@@ -40,9 +40,9 @@ Search and monitor **US Federal Register documents** — final rules, proposed r
 
 | Event | Price | Meaning |
 |---|---|---|
-| `document-result` | **$5.00 per 1,000** ($0.005 each) | One document record delivered. **Empty runs are never charged.** |
+| `document-result` | **$2.50 per 1,000** ($0.0025 each) | One document record delivered. **Empty runs are never charged.** |
 
-Example: 1,000 documents cost **$5.00**. You only pay for delivered results.
+Example: 1,000 documents cost **$2.50**. You only pay for delivered results.
 
 ## Related factpipe Actors
 

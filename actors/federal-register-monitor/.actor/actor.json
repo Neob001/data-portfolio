@@ -2,7 +2,7 @@
   "actorSpecification": 1,
   "name": "federal-register-monitor",
   "title": "Federal Register Scraper \u2014 US Rules & Regulations Monitor",
-  "description": "Search and monitor the US Federal Register: final rules, proposed rules, notices and presidential documents by keyword and agency. Official API, no key, flat JSON, new-document alerts. $5 per 1,000.",
+  "description": "Search and monitor the US Federal Register: final rules, proposed rules, notices and presidential documents by keyword and agency. Official API, no key, flat JSON, new-document alerts. $2.50 per 1,000.",
   "version": "0.1",
   "buildTag": "latest",
   "input": "../INPUT_SCHEMA.json",

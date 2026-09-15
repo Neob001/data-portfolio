@@ -47,9 +47,9 @@ Deterministic and auditable — no AI guessing: names are normalized (case, acce
 
 | Event | Price | Meaning |
 |---|---|---|
-| `name-screened` | **$10.00 per 1,000** ($0.01 each) | One name fully screened against the current list — both matches and documented "clear" results. Invalid/empty names are never charged. |
+| `name-screened` | **$3.00 per 1,000** ($0.003 each) | One name fully screened against the current list — both matches and documented "clear" results. Invalid/empty names are never charged. |
 
-Example: 1,000 names screened cost **$10.00**. You only pay for delivered results.
+Example: 1,000 names screened cost **$3.00**. You only pay for delivered results.
 
 ## Related factpipe Actors
 

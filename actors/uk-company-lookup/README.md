@@ -50,9 +50,9 @@ Company facts only — this Actor deliberately returns **no personal data** (no 
 
 | Event | Price | Meaning |
 |---|---|---|
-| `company-found` | **$4.00 per 1,000** ($0.004 each) | One company successfully found and delivered. **Not-found lookups and empty runs are never charged.** |
+| `company-found` | **$2.50 per 1,000** ($0.0025 each) | One company successfully found and delivered. **Not-found lookups and empty runs are never charged.** |
 
-Example: 1,000 companies found cost **$4.00**. You only pay for delivered results.
+Example: 1,000 companies found cost **$2.50**. You only pay for delivered results.
 
 ## Related factpipe Actors
 

@@ -46,9 +46,9 @@ At least one of `cpvCodes`, `countries`, or `fullTextSearch` is required.
 
 | Event | Price | Meaning |
 |---|---|---|
-| `tender-result` | **$10.00 per 1,000** ($0.01 each) | One tender record delivered to the dataset. **Empty runs are never charged.** |
+| `tender-result` | **$3.00 per 1,000** ($0.003 each) | One tender record delivered to the dataset. **Empty runs are never charged.** |
 
-Example: 1,000 tenders cost **$10.00**. You only pay for delivered results.
+Example: 1,000 tenders cost **$3.00**. You only pay for delivered results.
 
 ## Related factpipe Actors
 
