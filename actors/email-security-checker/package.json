@@ -1,0 +1,16 @@
+{
+  "name": "email-security-checker",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Audit any domain's email authentication: SPF (lookups, -all), DMARC policy, DKIM keys, MX, MTA-STS and TLS-RPT, with a 0",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "apify": "^3.2.6"
+  },
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node --test 'tests/*.test.mjs'"
+  }
+}

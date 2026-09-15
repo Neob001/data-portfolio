@@ -1,0 +1,172 @@
+{
+  "actorSpecification": 1,
+  "name": "email-security-checker",
+  "title": "Email Security Checker — SPF, DKIM, DMARC & MX Audit",
+  "description": "Audit any domain's email authentication: SPF (lookups, -all), DMARC policy, DKIM keys, MX, MTA-STS and TLS-RPT, with a 0-100 score and fix list. Bulk domains, no key. $3 per 1,000 domains.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "outputSchema": "./output_schema.json",
+  "categories": [
+    "DEVELOPER_TOOLS",
+    "LEAD_GENERATION"
+  ],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "audits": {
+          "title": "Audits",
+          "transformation": {
+            "fields": [
+              "domain",
+              "grade",
+              "score",
+              "spf_all",
+              "dmarc_policy",
+              "dkim_selectors_found"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "found": {
+            "type": "boolean"
+          },
+          "domain": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "score": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "grade": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "issues": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "mx_records": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "spf_present": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "spf_record": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "spf_all": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "spf_dns_lookups": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "dmarc_present": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "dmarc_policy": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "dmarc_subdomain_policy": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "dmarc_pct": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "dmarc_record": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "dmarc_report_domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "dkim_selectors_found": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "mta_sts": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "tls_rpt": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source_url": {
+            "type": "string"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

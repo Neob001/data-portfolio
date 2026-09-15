@@ -1,0 +1,77 @@
+{
+  "actorSpecification": 1,
+  "name": "ecb-exchange-rates",
+  "title": "ECB Exchange Rates API — Official Euro FX Rates, History",
+  "description": "Official European Central Bank euro reference exchange rates: latest or full daily history since 1999 for 30+ currencies, any base currency via cross rates. No API key. $1 per 1,000 rates.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "outputSchema": "./output_schema.json",
+  "categories": [
+    "DEVELOPER_TOOLS",
+    "BUSINESS"
+  ],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "rates": {
+          "title": "Exchange rates",
+          "transformation": {
+            "fields": [
+              "date",
+              "base_currency",
+              "quote_currency",
+              "rate",
+              "inverse_rate"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "base_currency": {
+            "type": "string"
+          },
+          "quote_currency": {
+            "type": "string"
+          },
+          "rate": {
+            "type": "number"
+          },
+          "inverse_rate": {
+            "type": "number"
+          },
+          "eur_per_base": {
+            "type": "number"
+          },
+          "eur_per_quote": {
+            "type": "number"
+          },
+          "source": {
+            "type": "string"
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

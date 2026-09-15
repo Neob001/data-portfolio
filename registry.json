@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-13",
+  "updated_at": "2026-09-15",
   "actors": {
     "sec-edgar-filings-search": {
       "apify_actor_id": "alNg1FFs9rdVhfX1T",
@@ -24,7 +24,7 @@
       "staging_validated": true,
       "monetization_configured": true,
       "listing": {
-        "title": "SEC EDGAR Filings Scraper API \u2014 10-K, 10-Q, 8-K Full-Text",
+        "title": "SEC EDGAR Filings Scraper API — 10-K, 10-Q, 8-K Full-Text",
         "description": "Full-text search and monitor SEC EDGAR filings (10-K, 10-Q, 8-K, S-1, Form 4, 13F) by keyword via the official SEC API. No API key, flat JSON, new-filing alerts. $8 per 1,000 filings.",
         "seoTitle": "SEC EDGAR Full-Text Search API: 10-K, 8-K Filings Scraper",
         "seoDescription": "Search the full text of SEC EDGAR filings by keyword and get flat JSON: 10-K, 10-Q, 8-K, S-1, Form 4. Official SEC API, no key, scheduled monitoring.",
@@ -57,7 +57,7 @@
       "staging_validated": true,
       "monetization_configured": true,
       "listing": {
-        "title": "EU Tenders Scraper \u2014 TED Public Procurement Notices API",
+        "title": "EU Tenders Scraper — TED Public Procurement Notices API",
         "description": "Search and monitor EU public tenders and procurement notices from TED by CPV code, country and keyword. Official TED API, no key, flat JSON with deadlines, new-tender alerts. $10 per 1,000.",
         "seoTitle": "EU Tenders API: TED Public Procurement Notices Scraper",
         "seoDescription": "Find EU public tenders by CPV code, country and keyword from the official TED API. Deadlines, buyers and PDF links as flat JSON; daily new-tender alerts.",
@@ -91,7 +91,7 @@
       "staging_validated": true,
       "monetization_configured": true,
       "listing": {
-        "title": "UK Companies House Lookup API \u2014 Company Data, No API Key",
+        "title": "UK Companies House Lookup API — Company Data, No API Key",
         "description": "Look up UK companies by number or name on Companies House: status, incorporation date, SIC codes, registered office, overdue accounts, insolvency. Bulk lists, no API key. $4 per 1,000 found.",
         "seoTitle": "UK Companies House API Lookup: Company Data in Bulk",
         "seoDescription": "Bulk-check UK companies on Companies House by number or name: status, SIC codes, address, overdue accounts, insolvency history. Official API, no key needed.",
@@ -123,7 +123,7 @@
       "staging_validated": true,
       "monetization_configured": true,
       "listing": {
-        "title": "Federal Register Scraper \u2014 US Rules & Regulations Monitor",
+        "title": "Federal Register Scraper — US Rules & Regulations Monitor",
         "description": "Search and monitor the US Federal Register: final rules, proposed rules, notices and presidential documents by keyword and agency. Official API, no key, flat JSON, new-document alerts. $5 per 1,000.",
         "seoTitle": "Federal Register API: Monitor US Rules & Proposed Rules",
         "seoDescription": "Track new US federal rules, proposed rules, notices and presidential documents by keyword and agency. Official Federal Register API, flat JSON, daily alerts.",
@@ -156,7 +156,7 @@
       "monetization_configured": true,
       "notes": "Confirmed public via GET /v2/acts isPublic=true on 2026-09-13 (weekly report); exact publish time not recorded.",
       "listing": {
-        "title": "FDA Recalls Scraper API \u2014 Food, Drug & Device Recalls",
+        "title": "FDA Recalls Scraper API — Food, Drug & Device Recalls",
         "description": "Search and monitor FDA recalls and enforcement reports for food, drugs and medical devices via official openFDA. Filter by keyword, Class I/II/III, date. No key, flat JSON, alerts. $5 per 1,000.",
         "seoTitle": "FDA Recalls API: Food, Drug & Device Recall Monitor",
         "seoDescription": "Get FDA food, drug and medical device recalls as flat JSON from official openFDA: firm, product, reason, Class I/II/III, distribution. Daily new-recall alerts.",
@@ -188,7 +188,7 @@
       "staging_validated": true,
       "monetization_configured": true,
       "listing": {
-        "title": "OFAC Sanctions Screening API \u2014 SDN List Check for AML/KYC",
+        "title": "OFAC Sanctions Screening API — SDN List Check for AML/KYC",
         "description": "Screen people and companies against the official US Treasury OFAC SDN sanctions list, incl. aliases, with fuzzy match scores. Bulk name lists for AML/KYC and vendor checks. No API key. $0.01 per name.",
         "seoTitle": "OFAC Sanctions Screening API: Bulk SDN Name Check",
         "seoDescription": "Bulk-screen names against the US Treasury OFAC SDN list with aliases and fuzzy match scores. Fresh official data each run, no API key. For AML/KYC compliance.",
@@ -220,7 +220,7 @@
       "staging_validated": true,
       "monetization_configured": true,
       "listing": {
-        "title": "US Weather Forecast API \u2014 NWS/NOAA Hourly & 7-Day, No Key",
+        "title": "US Weather Forecast API — NWS/NOAA Hourly & 7-Day, No Key",
         "description": "Official National Weather Service (NOAA) forecasts for any US latitude/longitude: hourly or 7-day periods with temperature, rain chance and wind. Bulk locations, no API key. $2 per 1,000 locations.",
         "seoTitle": "US Weather Forecast API: NWS Hourly & 7-Day Forecasts",
         "seoDescription": "Bulk US weather forecasts from the official National Weather Service: hourly or 7-day periods, temperature, precipitation chance, wind, as flat JSON. No key.",
@@ -256,7 +256,7 @@
       "staging_validated": true,
       "monetization_configured": true,
       "listing": {
-        "title": "Career Page Jobs Scraper \u2014 Greenhouse, Lever & Ashby API",
+        "title": "Career Page Jobs Scraper — Greenhouse, Lever & Ashby API",
         "description": "Paste company websites: finds each careers page, detects Greenhouse, Lever or Ashby and returns every open job (title, location, remote, department, apply link) as flat JSON. $2 per 1,000 jobs.",
         "seoTitle": "Greenhouse, Lever & Ashby Jobs Scraper API",
         "seoDescription": "Scrape open jobs from any company's career page: auto-detects Greenhouse, Lever and Ashby, returns title, location, remote flag and apply URL as flat JSON.",
@@ -292,7 +292,7 @@
       "staging_validated": true,
       "monetization_configured": true,
       "listing": {
-        "title": "Sitemap URL Extractor & 404 Checker \u2014 XML Sitemap Scraper",
+        "title": "Sitemap URL Extractor & 404 Checker — XML Sitemap Scraper",
         "description": "Extract every URL from any website's XML sitemaps: robots.txt discovery, nested sitemap indexes, lastmod and priority. Optional HTTP status check finds 404s and redirects. $0.30 per 1,000 URLs.",
         "seoTitle": "Sitemap URL Extractor: Get All URLs from XML Sitemaps",
         "seoDescription": "Extract all URLs from any site's sitemap.xml, including sitemap indexes, with lastmod and optional HTTP status checks to find broken 404 links and redirects.",
@@ -325,7 +325,7 @@
       "staging_validated": true,
       "monetization_configured": true,
       "listing": {
-        "title": "Wikipedia Scraper API \u2014 Articles, Summaries & Full Text",
+        "title": "Wikipedia Scraper API — Articles, Summaries & Full Text",
         "description": "Get Wikipedia articles by title, URL or keyword search in any language: summary, full plain text, categories, Wikidata ID, coordinates, thumbnail, last edit. Official API, no key. $1 per 1,000 articles.",
         "seoTitle": "Wikipedia Scraper API: Article Text, Summary & Metadata",
         "seoDescription": "Extract Wikipedia articles in any language as flat JSON: summary, full text, categories, Wikidata ID, coordinates. Official MediaWiki API, CC BY-SA attribution.",
@@ -360,7 +360,7 @@
       "staging_validated": true,
       "monetization_configured": true,
       "listing": {
-        "title": "Open Food Facts Scraper \u2014 Nutrition & Barcode Lookup API",
+        "title": "Open Food Facts Scraper — Nutrition & Barcode Lookup API",
         "description": "Look up food products by barcode (EAN/UPC) or keyword on Open Food Facts: nutrition per 100g, ingredients, allergens, Nutri-Score, NOVA, Eco-Score, brands. No API key. $1 per 1,000 products.",
         "seoTitle": "Food Barcode & Nutrition API: Open Food Facts Scraper",
         "seoDescription": "Get nutrition facts, ingredients, allergens and Nutri-Score for any food barcode (EAN/UPC) or keyword from Open Food Facts as flat JSON. No API key needed.",
@@ -371,6 +371,99 @@
       },
       "staging_started_at": "2026-09-13T12:25:46Z",
       "notes": "Staging 2026-09-13: default-input + adversarial runs SUCCEEDED; uncharged paths verified (not found, invalid, duplicates, person articles / unknown barcodes, no search results). PPE pricing via API is 403 -> Console only."
+    },
+    "ecb-exchange-rates": {
+      "apify_actor_id": null,
+      "source": "ECB data API (data-api.ecb.europa.eu), official, keyless",
+      "variant": "lookup + history",
+      "status": "building",
+      "approval": "N3 APPROVED by owner 2026-09-15 (chat)",
+      "origin": "scan",
+      "incumbent_actor_id": null,
+      "first_paid_run_date": null,
+      "ppe_events": {
+        "rate-result": {
+          "proposed_price_usd": 0.001,
+          "title": "Rate result",
+          "description": "One exchange rate row (date + currency pair) delivered. Unknown or discontinued currencies and empty runs are never charged."
+        }
+      },
+      "pricing_rationale": "At/below competitor median from niche scan 2026-09-15.",
+      "launched_at": null,
+      "last_fix_date": null,
+      "kpis": {},
+      "listing": {
+        "title": "ECB Exchange Rates API — Official Euro FX Rates, History",
+        "description": "Official European Central Bank euro reference exchange rates: latest or full daily history since 1999 for 30+ currencies, any base currency via cross rates. No API key. $1 per 1,000 rates.",
+        "seoTitle": "ECB Exchange Rates API: Official Daily FX Rates & History",
+        "seoDescription": "Get official ECB euro reference exchange rates as JSON: latest or historical daily rates, 30+ currencies, any base currency. No key, pay per rate.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "BUSINESS"
+        ]
+      }
+    },
+    "email-security-checker": {
+      "apify_actor_id": null,
+      "source": "Public DNS (SPF/DMARC/DKIM/MX/MTA-STS/TLS-RPT)",
+      "variant": "lookup (bulk)",
+      "status": "building",
+      "approval": "N2 APPROVED by owner 2026-09-15 (chat)",
+      "origin": "scan",
+      "incumbent_actor_id": null,
+      "first_paid_run_date": null,
+      "ppe_events": {
+        "domain-audited": {
+          "proposed_price_usd": 0.003,
+          "title": "Domain audited",
+          "description": "One domain fully audited (SPF, DMARC, DKIM, MX, MTA-STS, TLS-RPT). Invalid, nonexistent or unreachable domains are never charged."
+        }
+      },
+      "pricing_rationale": "At/below competitor median from niche scan 2026-09-15.",
+      "launched_at": null,
+      "last_fix_date": null,
+      "kpis": {},
+      "listing": {
+        "title": "Email Security Checker — SPF, DKIM, DMARC & MX Audit",
+        "description": "Audit any domain's email authentication: SPF (lookups, -all), DMARC policy, DKIM keys, MX, MTA-STS and TLS-RPT, with a 0-100 score and fix list. Bulk domains, no key. $3 per 1,000 domains.",
+        "seoTitle": "SPF, DKIM & DMARC Checker API: Bulk Email Security Audit",
+        "seoDescription": "Check SPF, DKIM, DMARC, MX, MTA-STS and TLS-RPT for thousands of domains. Score, grade and fix list per domain. No key, pay per domain.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "LEAD_GENERATION"
+        ]
+      }
+    },
+    "eu-vat-validation": {
+      "apify_actor_id": null,
+      "source": "European Commission VIES REST API, official, keyless",
+      "variant": "lookup (bulk)",
+      "status": "building",
+      "approval": "N4 APPROVED by owner 2026-09-15 (chat)",
+      "origin": "scan",
+      "incumbent_actor_id": null,
+      "first_paid_run_date": null,
+      "ppe_events": {
+        "vat-checked": {
+          "proposed_price_usd": 0.002,
+          "title": "VAT number checked",
+          "description": "One definitive VIES answer (valid or invalid) delivered. Unrecognized formats and checks VIES could not answer are never charged."
+        }
+      },
+      "pricing_rationale": "At/below competitor median from niche scan 2026-09-15.",
+      "launched_at": null,
+      "last_fix_date": null,
+      "kpis": {},
+      "listing": {
+        "title": "EU VAT Number Validation API — VIES Bulk Checker",
+        "description": "Validate EU VAT numbers in bulk against the official EU VIES service: valid/invalid, registered company name and address, check timestamp. Handles VIES throttling. $2 per 1,000 checks.",
+        "seoTitle": "EU VAT Number Validation API: Bulk VIES VAT Checker",
+        "seoDescription": "Validate EU VAT numbers in bulk via official VIES: validity, company name, address, timestamp. Automatic retries on VIES throttling. Pay per check.",
+        "categories": [
+          "BUSINESS",
+          "DEVELOPER_TOOLS"
+        ]
+      }
     }
   },
   "apify_account": "factpipe",

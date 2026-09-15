@@ -1,0 +1,119 @@
+{
+  "actorSpecification": 1,
+  "name": "eu-vat-validation",
+  "title": "EU VAT Number Validation API — VIES Bulk Checker",
+  "description": "Validate EU VAT numbers in bulk against the official EU VIES service: valid/invalid, registered company name and address, check timestamp. Handles VIES throttling. $2 per 1,000 checks.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "outputSchema": "./output_schema.json",
+  "categories": [
+    "BUSINESS",
+    "DEVELOPER_TOOLS"
+  ],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "checks": {
+          "title": "VAT checks",
+          "transformation": {
+            "fields": [
+              "full_vat_number",
+              "valid",
+              "name",
+              "address",
+              "checked_at"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "checked": {
+            "type": "boolean"
+          },
+          "country_code": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "vat_number": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "full_vat_number": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "valid": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "address": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "checked_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "consultation_number": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "vies_error": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

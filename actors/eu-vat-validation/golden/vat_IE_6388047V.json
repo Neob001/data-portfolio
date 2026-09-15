@@ -1,0 +1,19 @@
+{
+  "countryCode" : "IE",
+  "vatNumber" : "6388047V",
+  "requestDate" : "2026-09-15T07:36:47.788Z",
+  "valid" : true,
+  "requestIdentifier" : "",
+  "name" : "GOOGLE IRELAND LIMITED",
+  "address" : "3RD FLOOR, GORDON HOUSE, BARROW STREET, DUBLIN 4",
+  "traderName" : "---",
+  "traderStreet" : "---",
+  "traderPostalCode" : "---",
+  "traderCity" : "---",
+  "traderCompanyType" : "---",
+  "traderNameMatch" : "NOT_PROCESSED",
+  "traderStreetMatch" : "NOT_PROCESSED",
+  "traderPostalCodeMatch" : "NOT_PROCESSED",
+  "traderCityMatch" : "NOT_PROCESSED",
+  "traderCompanyTypeMatch" : "NOT_PROCESSED"
+}

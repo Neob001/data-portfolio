@@ -1,0 +1,27 @@
+{
+  "title": "Email Security Checker",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "domains": {
+      "title": "Domains",
+      "type": "array",
+      "editor": "stringList",
+      "prefill": [
+        "github.com",
+        "example.com"
+      ],
+      "description": "Domain names, website URLs or email addresses (the domain is extracted). Duplicates are checked once."
+    },
+    "extraDkimSelectors": {
+      "title": "Extra DKIM selectors",
+      "type": "array",
+      "editor": "stringList",
+      "nullable": true,
+      "description": "Custom DKIM selectors to test in addition to 18 common ones (google, selector1, selector2, k1, s1, mailchimp-style keys...)."
+    }
+  },
+  "required": [
+    "domains"
+  ]
+}

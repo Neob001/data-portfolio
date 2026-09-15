@@ -1,0 +1,16 @@
+{
+  "name": "eu-vat-validation",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Validate EU VAT numbers in bulk against the official EU VIES service: valid/invalid, registered company name and address",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "apify": "^3.2.6"
+  },
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node --test 'tests/*.test.mjs'"
+  }
+}

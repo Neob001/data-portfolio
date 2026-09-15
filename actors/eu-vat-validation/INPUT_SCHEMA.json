@@ -1,0 +1,27 @@
+{
+  "title": "EU VAT Number Validation",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "vatNumbers": {
+      "title": "VAT numbers",
+      "type": "array",
+      "editor": "stringList",
+      "prefill": [
+        "IE6388047V",
+        "CZ04788290"
+      ],
+      "description": "EU VAT numbers with country prefix, e.g. IE6388047V, DE811569869. Spaces, dots and dashes are ignored; GR is accepted for Greece (EL)."
+    },
+    "defaultCountryCode": {
+      "title": "Default country code",
+      "type": "string",
+      "editor": "textfield",
+      "nullable": true,
+      "description": "Two-letter EU country code applied to numbers entered without a prefix."
+    }
+  },
+  "required": [
+    "vatNumbers"
+  ]
+}

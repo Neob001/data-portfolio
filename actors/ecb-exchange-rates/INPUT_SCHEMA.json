@@ -1,0 +1,51 @@
+{
+  "title": "ECB Exchange Rates",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "currencies": {
+      "title": "Currencies",
+      "type": "array",
+      "editor": "stringList",
+      "prefill": [
+        "USD",
+        "GBP",
+        "JPY",
+        "CHF"
+      ],
+      "description": "ISO 4217 codes to quote, e.g. USD, GBP, JPY. Leave empty for all currencies the ECB publishes."
+    },
+    "baseCurrency": {
+      "title": "Base currency",
+      "type": "string",
+      "editor": "textfield",
+      "default": "EUR",
+      "description": "Rates are expressed as units of each currency per 1 unit of this base. EUR gives official ECB values; any other code uses exact cross rates via EUR."
+    },
+    "startDate": {
+      "title": "Start date",
+      "type": "string",
+      "editor": "textfield",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "nullable": true,
+      "description": "YYYY-MM-DD. Leave both dates empty for the latest rates."
+    },
+    "endDate": {
+      "title": "End date",
+      "type": "string",
+      "editor": "textfield",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "nullable": true,
+      "description": "YYYY-MM-DD, inclusive."
+    },
+    "maxResults": {
+      "title": "Max results",
+      "type": "integer",
+      "default": 10000,
+      "minimum": 1,
+      "maximum": 1000000,
+      "description": "Cap on charged rate rows."
+    }
+  },
+  "required": []
+}

@@ -1,0 +1,12 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Output of ecb-exchange-rates",
+  "type": "object",
+  "properties": {
+    "resultsDatasetUrl": {
+      "type": "string",
+      "title": "Exchange rates",
+      "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=rates"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "countryCode" : "CZ",
+  "vatNumber" : "04788290",
+  "requestDate" : "2026-09-15T07:36:45.954Z",
+  "valid" : true,
+  "requestIdentifier" : "",
+  "name" : "Apify Technologies s.r.o.",
+  "address" : "Vodičkova 704/36\nPRAHA 1 - NOVÉ MĚSTO\n110 00  PRAHA 1",
+  "traderName" : "---",
+  "traderStreet" : "---",
+  "traderPostalCode" : "---",
+  "traderCity" : "---",
+  "traderCompanyType" : "---",
+  "traderNameMatch" : "NOT_PROCESSED",
+  "traderStreetMatch" : "NOT_PROCESSED",
+  "traderPostalCodeMatch" : "NOT_PROCESSED",
+  "traderCityMatch" : "NOT_PROCESSED",
+  "traderCompanyTypeMatch" : "NOT_PROCESSED"
+}
