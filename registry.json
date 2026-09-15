@@ -635,12 +635,13 @@
           "SEO_TOOLS"
         ]
       },
-      "staging_validated": false,
-      "monetization_configured": false,
-      "staging_started_at": "2026-09-15T11:06:08Z"
+      "staging_validated": true,
+      "monetization_configured": true,
+      "staging_started_at": "2026-09-15T11:06:08Z",
+      "notes": "Publish blocked 2026-09-15 by Apify 5/24h limit; publish after 2026-09-16 09:40Z."
     },
     "france-company-lookup": {
-      "apify_actor_id": null,
+      "apify_actor_id": "2k7EuEL3MiftrabLt",
       "source": "API Recherche d'entreprises (recherche-entreprises.api.gouv.fr; INSEE Sirene + RNE open data, Licence Ouverte 2.0)",
       "variant": "lookup (bulk)",
       "status": "staging",
@@ -669,9 +670,10 @@
           "BUSINESS"
         ]
       },
-      "notes": "No officers (minimal=true), sole proprietors and natural-person groupings excluded; API rate limit 7 req/s per IP and 30 req/s per ASN (watch 429s on Apify cloud).",
-      "staging_validated": false,
-      "monetization_configured": false
+      "notes": "No officers (minimal=true), sole proprietors and natural-person groupings excluded; API rate limit 7 req/s per IP and 30 req/s per ASN (watch 429s on Apify cloud). Publish blocked 2026-09-15 by Apify 5/24h limit; publish after 2026-09-16 09:40Z.",
+      "staging_validated": true,
+      "monetization_configured": true,
+      "staging_started_at": "2026-09-15T11:21:02Z"
     }
   },
   "apify_account": "factpipe",

@@ -1,7 +1,7 @@
 {
   "actorSpecification": 1,
   "name": "ofac-sanctions-screening",
-  "title": "Sanctions Screening API — OFAC, EU, UK & UN Lists (AML/KYC)",
+  "title": "Sanctions Screening API \u2014 OFAC, EU, UK & UN Lists (AML/KYC)",
   "description": "Screen people, companies and vessels against the official OFAC SDN, EU, UK and UN Security Council sanctions lists, incl. aliases, with fuzzy match scores. Bulk AML/KYC checks. No API key. $3 per 1,000 names.",
   "version": "0.1",
   "buildTag": "latest",
