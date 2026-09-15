@@ -1,0 +1,182 @@
+{
+  "actorSpecification": 1,
+  "name": "dns-records-lookup",
+  "title": "DNS Records Lookup API — Bulk A, MX, TXT, NS, CNAME & CAA",
+  "description": "Bulk DNS lookups for any list of domains: A, AAAA, MX, TXT, NS, CNAME, SOA and CAA records, plus mail/DNS provider detection, SPF/DMARC presence and TXT verification tokens. No API key. $1.50 per 1,000 domains.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "outputSchema": "./output_schema.json",
+  "categories": [
+    "DEVELOPER_TOOLS",
+    "SEO_TOOLS"
+  ],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "records": {
+          "title": "DNS Records",
+          "transformation": {
+            "fields": [
+              "domain",
+              "found",
+              "a",
+              "mx",
+              "ns",
+              "mail_provider",
+              "dns_provider"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "domain": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "found": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "a": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "aaaa": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "mx": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "null_mx": {
+            "type": "boolean"
+          },
+          "txt": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "ns": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "cname": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "soa_primary_ns": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "soa_serial": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "soa_minimum_ttl": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "caa": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "mail_provider": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "dns_provider": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "has_spf": {
+            "type": "boolean"
+          },
+          "has_dmarc": {
+            "type": "boolean"
+          },
+          "verification_tokens": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "record_count": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "source_url": {
+            "type": "string"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

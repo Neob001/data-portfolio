@@ -1,0 +1,12 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Output of dns-records-lookup",
+  "type": "object",
+  "properties": {
+    "resultsDatasetUrl": {
+      "type": "string",
+      "title": "DNS Records",
+      "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=records"
+    }
+  }
+}

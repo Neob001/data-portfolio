@@ -1,0 +1,55 @@
+{
+  "title": "DNS Records Lookup",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "domains": {
+      "title": "Domains",
+      "type": "array",
+      "editor": "stringList",
+      "prefill": [
+        "github.com",
+        "example.com"
+      ],
+      "description": "Domain names, website URLs or email addresses (the host is extracted). Subdomains are kept intact, e.g. mail.example.com. Duplicates are looked up once."
+    },
+    "recordTypes": {
+      "title": "Record types",
+      "type": "array",
+      "editor": "select",
+      "items": {
+        "type": "string",
+        "enum": [
+          "A",
+          "AAAA",
+          "MX",
+          "TXT",
+          "NS",
+          "CNAME",
+          "SOA",
+          "CAA"
+        ]
+      },
+      "default": [
+        "A",
+        "AAAA",
+        "MX",
+        "TXT",
+        "NS",
+        "CNAME",
+        "SOA",
+        "CAA"
+      ],
+      "description": "Which record types to resolve and return per domain. Types not selected are returned as null."
+    },
+    "stripWww": {
+      "title": "Strip leading www.",
+      "type": "boolean",
+      "default": false,
+      "description": "If enabled, a leading \"www.\" is removed before lookup (mail.example.com and other subdomains are always kept as-is)."
+    }
+  },
+  "required": [
+    "domains"
+  ]
+}

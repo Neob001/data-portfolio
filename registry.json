@@ -598,6 +598,39 @@
       "notes": "Contracting officer names/emails/phones dropped by policy (personal data); notice_url links to them on SAM.gov. Staging 2026-09-15: default 68 results in 13s ($0.001 compute); two-pass incremental verified; free-text emails/phones masked (0 raw emails in 68 records).",
       "staging_validated": true,
       "monetization_configured": true
+    },
+    "dns-records-lookup": {
+      "apify_actor_id": null,
+      "source": "Public DNS resolvers (1.1.1.1, 8.8.8.8, 9.9.9.9)",
+      "variant": "lookup (bulk)",
+      "status": "staging",
+      "approval": "N8 APPROVED by owner 2026-09-15 (chat)",
+      "origin": "scan",
+      "incumbent_actor_id": null,
+      "first_paid_run_date": null,
+      "ppe_events": {
+        "domain-resolved": {
+          "proposed_price_usd": 0.0015,
+          "title": "Domain resolved",
+          "description": "One existing domain resolved with at least one DNS record returned. Invalid, nonexistent, unreachable or empty domains are never charged."
+        }
+      },
+      "pricing_rationale": "Below niche median $5/1k and leaders $2-3/1k (gap_validation 2026-09-15).",
+      "launched_at": null,
+      "last_fix_date": null,
+      "kpis": {},
+      "listing": {
+        "title": "DNS Records Lookup API — Bulk A, MX, TXT, NS, CNAME & CAA",
+        "description": "Bulk DNS lookups for any list of domains: A, AAAA, MX, TXT, NS, CNAME, SOA and CAA records, plus mail/DNS provider detection, SPF/DMARC presence and TXT verification tokens. No API key. $1.50 per 1,000 domains.",
+        "seoTitle": "DNS Lookup API: Bulk A, MX, TXT, NS & CAA Records",
+        "seoDescription": "Bulk DNS records lookup for any domain list: A, AAAA, MX, TXT, NS, CNAME, SOA, CAA plus mail and DNS provider detection. No API key, pay per domain.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "SEO_TOOLS"
+        ]
+      },
+      "staging_validated": false,
+      "monetization_configured": false
     }
   },
   "apify_account": "factpipe",
