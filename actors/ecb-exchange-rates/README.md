@@ -2,6 +2,12 @@
 
 Get the **official European Central Bank euro reference exchange rates** — the benchmark used for invoicing, accounting and VAT conversions across Europe — as clean, flat JSON. Latest rates or full **daily history back to 1999**, for every currency the ECB publishes, with **any base currency** through exact cross rates. Straight from the ECB data API: no key, no scraping, no stale mirrors.
 
+## Quick start
+
+1. Click **Start** with the four prefilled currencies with no dates. It finishes in under a minute.
+2. You get the latest official ECB reference rate for USD, GBP, JPY and CHF.
+3. That first run costs $0.004, well within Apify's free monthly credit. Then swap in your own input or schedule it.
+
 ## What you get
 
 ```json

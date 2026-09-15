@@ -19,7 +19,8 @@
       "default": 200,
       "minimum": 1,
       "maximum": 5000,
-      "description": "Cap on charged job records per company."
+      "description": "Cap on charged job records per company.",
+      "prefill": 25
     }
   },
   "required": [

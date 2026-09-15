@@ -4,6 +4,12 @@ Run **real Google Lighthouse audits in bulk** and get one clean JSON record per 
 
 This Actor runs the open-source Lighthouse engine itself in headless Chrome — **no PageSpeed Insights API key, no daily quota, no 429 errors** — so large URL lists finish reliably.
 
+## Quick start
+
+1. Click **Start** with the prefilled URL `https://example.com`. It usually finishes in one to two minutes.
+2. You get one full mobile Lighthouse audit: performance, accessibility, SEO and best-practices scores plus Core Web Vitals.
+3. That first run costs $0.01, well within Apify's free monthly credit. Then swap in your own input or schedule it.
+
 ## What you get
 
 ```json

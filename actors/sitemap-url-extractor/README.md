@@ -2,6 +2,12 @@
 
 Extract **every URL from a website's sitemaps** with one input: the site root. Discovers sitemaps via robots.txt and common paths, walks sitemap indexes, and returns flat records with `lastmod`, `changefreq`, and `priority` — optionally HEAD-checking each URL's HTTP status to find broken pages. Sitemaps are built for machines; this is the clean, reliable way to read them.
 
+## Quick start
+
+1. Click **Start** with the prefilled site `https://www.sitemaps.org`. It finishes in under a minute.
+2. You get up to 200 URLs with lastmod and priority (tick **Check HTTP status** to also flag 404s and redirects).
+3. That first run costs at most $0.06, well within Apify's free monthly credit. Then swap in your own input or schedule it.
+
 ## What you get
 
 ```json
@@ -62,6 +68,9 @@ Bulk technical checks for agencies, SEO teams and deliverability owners, all pay
 - **Full-site audit:** extract URLs here, send the live pages to [Lighthouse Auditor](https://apify.com/factpipe/lighthouse-auditor) for Core Web Vitals, and check the domain's mail setup with [Email Security Checker](https://apify.com/factpipe/email-security-checker).
 
 ## FAQ
+
+**How do I find 404 URLs listed in a sitemap?**
+Enter the site root and set `checkStatus: true`. The Actor extracts every URL from the sitemaps and HEAD-checks each one, so 404s, other errors and redirects show up in the status fields of each record.
 
 **How do I get all URLs of a website?**
 Enter the site root. The Actor discovers sitemaps from robots.txt and common paths, follows nested sitemap indexes and returns one record per URL with lastmod, changefreq and priority.

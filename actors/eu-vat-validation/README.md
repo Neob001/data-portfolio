@@ -1,6 +1,12 @@
-# EU VAT Number Validation API — VIES Bulk Checker
+# EU VAT Validation API — VIES VAT Number Checker (Bulk)
 
 Validate **EU VAT numbers in bulk** against the **official European Commission VIES service** and get a clean record per number: valid or invalid, the registered trader name and address (where the member state provides them), and the check timestamp. VIES throttles heavily and member-state services go offline often — this Actor retries automatically and **only charges for definitive answers**.
+
+## Quick start
+
+1. Click **Start** with the two prefilled VAT numbers. It finishes in under a minute.
+2. You get a valid/invalid answer per number with the registered trader name and address where the member state provides them.
+3. That first run costs $0.004, well within Apify's free monthly credit. Then swap in your own input or schedule it.
 
 ## What you get
 

@@ -2,6 +2,12 @@
 
 Search the **full text of SEC filings** (10-K, 10-Q, 8-K, S-1, Form 4, 13F and every other form) and get clean, flat JSON records — or run it on a schedule in **incremental mode** to monitor only *new* filings mentioning your keyword. Uses only **official SEC APIs** (efts.sec.gov): no anti-bot fights, no proxies, no missed runs.
 
+## Quick start
+
+1. Click **Start** with the prefilled phrase `artificial intelligence` in 8-K filings. It finishes in under a minute.
+2. You get up to 25 matching filings with company, form, filing date and document links.
+3. That first run costs at most $0.05, well within Apify's free monthly credit. Then swap in your own input or schedule it.
+
 ## What you get
 
 One record per matching filing document:
@@ -71,6 +77,9 @@ Official-source compliance data, all pay-per-result and runnable from one Apify 
 - **Counterparty checks:** screen issuers and subsidiaries with [OFAC Sanctions Screening](https://apify.com/factpipe/ofac-sanctions-screening).
 
 ## FAQ
+
+**How do I use EDGAR full-text search through an API?**
+Put a word or exact phrase in `query`, optionally pick `forms` and a date range, and run the Actor via the Apify API, a client library or a schedule. It calls SEC's official EDGAR full-text search and returns one flat JSON record per filing, with no SEC key or account.
 
 **Do I need an SEC API key or EDGAR account?**
 No. The Actor uses SEC's public EDGAR full-text search and data APIs with a compliant User-Agent. No key, no proxy, no login.

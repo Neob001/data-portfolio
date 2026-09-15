@@ -24,7 +24,8 @@
       "default": 2000,
       "minimum": 1,
       "maximum": 50000,
-      "description": "Cap on charged URL records per site."
+      "description": "Cap on charged URL records per site.",
+      "prefill": 200
     }
   },
   "required": [

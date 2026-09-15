@@ -2,6 +2,12 @@
 
 Search and monitor **FDA recalls and enforcement reports** across food, drugs, and medical devices via the **official openFDA API**. Filter by keyword, classification (Class I/II/III), and report date; run on a schedule in incremental mode to catch every new recall the day FDA publishes it. Clean, flat JSON records for supply-chain risk, QA, retail compliance, and news monitoring.
 
+## Quick start
+
+1. Click **Start** with the prefilled search `listeria` in food recalls. It finishes in under a minute.
+2. You get up to 25 recall reports with firm, product, reason and classification.
+3. That first run costs at most $0.08, well within Apify's free monthly credit. Then swap in your own input or schedule it.
+
 ## What you get
 
 ```json

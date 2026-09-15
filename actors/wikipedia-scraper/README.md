@@ -2,6 +2,12 @@
 
 Get **Wikipedia articles** as clean, flat JSON — by title, by URL, or by **keyword search** — in **any Wikipedia language**. Every record has the lead summary, optional full plain text, categories, Wikidata ID, coordinates, thumbnail and last-edit timestamp. Uses only the **official MediaWiki API**: no HTML parsing, no proxies, no broken selectors. Built for RAG pipelines, knowledge graphs, content enrichment and AI agents.
 
+## Quick start
+
+1. Click **Start** with the prefilled article, title and search. It finishes in under a minute.
+2. You get up to 5 Wikipedia articles as clean JSON with summary, categories and links.
+3. That first run costs at most $0.005, well within Apify's free monthly credit. Then swap in your own input or schedule it.
+
 ## What you get
 
 One record per article:

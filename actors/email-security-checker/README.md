@@ -2,6 +2,12 @@
 
 Audit the **email authentication setup of any domain** — SPF, DKIM, DMARC, MX, MTA-STS and TLS-RPT — and get a **0–100 score, a letter grade and a plain-English fix list** per domain. Check one domain or thousands in bulk. Uses public DNS only: no API key, no mailbox access, no personal data.
 
+## Quick start
+
+1. Click **Start** with the two prefilled domains. It finishes in under a minute.
+2. You get a 0–100 score, grade and fix list per domain covering SPF, DKIM, DMARC, MX, MTA-STS and TLS-RPT.
+3. That first run costs $0.006, well within Apify's free monthly credit. Then swap in your own input or schedule it.
+
 ## What you get
 
 ```json

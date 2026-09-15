@@ -2,6 +2,12 @@
 
 Search and monitor **EU public procurement notices** from TED (Tenders Electronic Daily) by CPV category, buyer country, and keyword — and get clean, flat JSON records. Run it on a schedule in **incremental mode** to receive only tenders published since the last run: a ready-made pipeline of B2G sales leads. Uses the **official TED Search API v3**: no anti-bot fights, no failed runs from blocking.
 
+## Quick start
+
+1. Click **Start** with the prefilled CPV code `72000000` (IT services). It finishes in under a minute.
+2. You get up to 25 EU tender notices with buyer, country, deadline and links.
+3. That first run costs at most $0.08, well within Apify's free monthly credit. Then swap in your own input or schedule it.
+
 ## What you get
 
 One record per procurement notice:
@@ -71,6 +77,9 @@ Official-source compliance data, all pay-per-result and runnable from one Apify 
 - **Buyer and consortium checks:** validate EU partners with [EU VAT Validation](https://apify.com/factpipe/eu-vat-validation) and screen them with [OFAC Sanctions Screening](https://apify.com/factpipe/ofac-sanctions-screening).
 
 ## FAQ
+
+**How do I get TED tender notices by CPV code?**
+Enter one or more CPV codes in `cpvCodes` (for example `72000000` for IT services), optionally add buyer countries or a keyword, and run it. For a daily feed, schedule it with `sinceLastRun: true` so each run returns only newly published notices.
 
 **Do I need a TED API key?**
 No. The official TED Search API v3 is open; the Actor needs no key or account.

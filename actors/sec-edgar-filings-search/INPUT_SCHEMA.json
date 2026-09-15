@@ -15,7 +15,9 @@
       "type": "array",
       "description": "Optional filing form filters, e.g. 10-K, 10-Q, 8-K, S-1, 4, 13F-HR.",
       "editor": "stringList",
-      "prefill": ["8-K"]
+      "prefill": [
+        "8-K"
+      ]
     },
     "startDate": {
       "title": "Filed on or after",
@@ -39,7 +41,8 @@
       "description": "Stop after this many filing records (you are charged per result).",
       "default": 100,
       "minimum": 1,
-      "maximum": 10000
+      "maximum": 10000,
+      "prefill": 25
     },
     "sinceLastRun": {
       "title": "Only new filings since last run",
@@ -48,5 +51,7 @@
       "default": false
     }
   },
-  "required": ["query"]
+  "required": [
+    "query"
+  ]
 }

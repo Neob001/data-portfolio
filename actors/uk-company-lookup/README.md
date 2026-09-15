@@ -2,6 +2,12 @@
 
 Look up **UK companies** by company number or name and get a clean, flat JSON record from the **official Companies House API**: legal status, incorporation date, SIC codes, registered office, accounts and confirmation-statement deadlines, insolvency and charges flags. Built for KYB checks, lead enrichment, and AI-agent pipelines. **You are only charged for successful lookups** — misses are free.
 
+## Quick start
+
+1. Click **Start** with the prefilled company number `00445790`. It finishes in under a minute.
+2. You get one Companies House record with status, SIC codes, registered office and deadlines.
+3. That first run costs $0.0025, well within Apify's free monthly credit. Then swap in your own input or schedule it.
+
 ## What you get
 
 ```json
@@ -74,6 +80,9 @@ Official-source compliance data, all pay-per-result and runnable from one Apify 
 - **KYB file:** confirm the company is active here, screen the registered name with [OFAC Sanctions Screening](https://apify.com/factpipe/ofac-sanctions-screening), and validate EU trading partners with [EU VAT Validation](https://apify.com/factpipe/eu-vat-validation).
 
 ## FAQ
+
+**Is there a Companies House API I can use without registering?**
+Yes, this Actor works out of the box with no key: give it company numbers or names and it returns official Companies House data. If you need dedicated rate limits, you can optionally add your own free Companies House key.
 
 **Do I need a Companies House API key?**
 No. It works out of the box. If you run very large volumes you can optionally add your own free key for dedicated rate limits.

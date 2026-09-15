@@ -2,6 +2,12 @@
 
 Search and monitor **US federal government contract opportunities** — solicitations, RFPs, combined synopses, sources-sought notices, presolicitations and award notices — straight from the **official SAM.gov Contract Opportunities data extract** published daily by GSA. Filter by keyword, NAICS code, set-aside, notice type, agency and place of performance, then schedule it with incremental mode to get **only new bids every morning**. No SAM.gov account, no API key, no rate limits.
 
+## Quick start
+
+1. Click **Start** with the prefilled keyword `software`. It finishes in under a minute.
+2. You get up to 25 current federal contract opportunities with deadlines, NAICS and set-aside codes.
+3. That first run costs at most $0.05, well within Apify's free monthly credit. Then swap in your own input or schedule it.
+
 ## What you get
 
 One flat record per opportunity:
@@ -93,6 +99,9 @@ Official-source compliance data, all pay-per-result and runnable from one Apify 
 - **Teaming-partner due diligence:** screen partner names with [OFAC Sanctions Screening](https://apify.com/factpipe/ofac-sanctions-screening).
 
 ## FAQ
+
+**How do I get SAM.gov contract opportunities without an API key?**
+Use this Actor. It reads the public Contract Opportunities data extract that GSA publishes daily, so you need no SAM.gov account, no login.gov and no API key. Filter by keyword, NAICS, set-aside, agency or state.
 
 **Do I need a SAM.gov account or API key?**
 No. The Actor reads the public Contract Opportunities data extract that GSA publishes for everyone, updated daily.

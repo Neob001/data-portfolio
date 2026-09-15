@@ -2,6 +2,12 @@
 
 Look up **food products by barcode (EAN/UPC)** or **keyword** and get clean, flat JSON from **Open Food Facts**, the largest open food database (millions of products worldwide): **nutrition facts per 100 g**, ingredients, allergens, traces, **Nutri-Score**, **NOVA group**, **Eco-Score**, brands, categories, labels and product image. Uses only the official Open Food Facts APIs — no HTML scraping, no proxies. Unknown barcodes are free.
 
+## Quick start
+
+1. Click **Start** with the two prefilled barcodes and the search `oat milk`. It finishes in under a minute.
+2. You get up to 12 products with nutrition facts, ingredients, Nutri-Score and allergens.
+3. That first run costs at most $0.012, well within Apify's free monthly credit. Then swap in your own input or schedule it.
+
 ## What you get
 
 One record per product:

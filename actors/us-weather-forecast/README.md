@@ -2,6 +2,12 @@
 
 Official **US National Weather Service** forecasts for any US coordinates — daily or hourly periods as clean, flat JSON records. Public-domain government data, no API key, no rate-limit anxiety. Feed logistics planning, event ops, energy forecasting, or AI agents with the same forecast data NOAA publishes.
 
+## Quick start
+
+1. Click **Start** with the two prefilled coordinates (New York, Los Angeles). It finishes in under a minute.
+2. You get the official NWS 7-day forecast for each location.
+3. That first run costs $0.004, well within Apify's free monthly credit. Then swap in your own input or schedule it.
+
 ## What you get
 
 One record per forecast period per location:

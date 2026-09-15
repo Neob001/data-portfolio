@@ -28,3 +28,7 @@ Item ids come from WEEKLY_REPORT.md. Nothing ships to a new data source, changes
 2026-09-15 | APPROVE | N5 global sanctions as OFAC upgrade | Owner, in chat: add EU FSF consolidated list, UK Sanctions List and UN Security Council consolidated list to ofac-sanctions-screening (no new SKU, price unchanged).
 2026-09-15 | APPROVE | france-sirene source | Owner, in chat: French company registry via official open-data APIs (recherche-entreprises.api.gouv.fr keyless / INSEE Sirene). No dirigeants/officers; sole-proprietor (personne physique) names excluded per no-PII rule.
 2026-09-15 | REJECT | park uk-vat, cpsc-recalls, eu-safety-gate, grants-gov, sec-form4 | Owner, in chat: parked until gap_validation shows real demand (organic users).
+2026-09-15 | APPROVE | PUB-3 publish dns-records-lookup, broken-link-checker, france-company-lookup | Owner, in chat: publish after clean staging at $1.50/1k domains, $1.50/1k pages, $3/1k companies.
+2026-09-15 | APPROVE | A1-F first-run prefills + Quick start | Owner, in chat: small prefilled caps (defaults unchanged) + Quick start block in every README, then rebuild.
+2026-09-15 | APPROVE | A1-S listing copy | Owner, in chat: eu-vat-validation title "EU VAT Validation API — VIES VAT Number Checker (Bulk)" + long-tail FAQ entries (SEC, SAM.gov, Companies House, EU tenders, sitemap).
+2026-09-15 | APPROVE | A1-P pricing guard | Owner, in chat: rules-based weekly pricing guard in the scorecard; proposals only, no price changes until an Actor has >=5 organic users/30d.

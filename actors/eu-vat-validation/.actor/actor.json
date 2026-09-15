@@ -1,7 +1,7 @@
 {
   "actorSpecification": 1,
   "name": "eu-vat-validation",
-  "title": "EU VAT Number Validation API — VIES Bulk Checker",
+  "title": "EU VAT Validation API — VIES VAT Number Checker (Bulk)",
   "description": "Validate EU VAT numbers in bulk against the official EU VIES service: valid/invalid, registered company name and address, check timestamp. Handles VIES throttling. $2 per 1,000 checks.",
   "version": "0.1",
   "buildTag": "latest",

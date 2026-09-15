@@ -49,7 +49,8 @@
       "description": "Cap on charged recall records.",
       "default": 100,
       "minimum": 1,
-      "maximum": 10000
+      "maximum": 10000,
+      "prefill": 25
     },
     "sinceLastRun": {
       "title": "Only new recalls since last run",

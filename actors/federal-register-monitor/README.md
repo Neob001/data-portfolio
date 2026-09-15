@@ -2,6 +2,12 @@
 
 Search and monitor **US Federal Register documents** — final rules, proposed rules, notices, and presidential documents — by keyword, agency, and type. Get clean, flat JSON records from the **official federalregister.gov API**, or schedule with incremental mode to receive only documents published since the last run: an automated regulatory-monitoring pipeline for compliance, policy, and government-affairs teams.
 
+## Quick start
+
+1. Click **Start** with the prefilled search `artificial intelligence`. It finishes in under a minute.
+2. You get up to 25 Federal Register documents with agency, type, dates and links.
+3. That first run costs at most $0.07, well within Apify's free monthly credit. Then swap in your own input or schedule it.
+
 ## What you get
 
 ```json

@@ -2,6 +2,12 @@
 
 Give it **any company website** — it finds the careers page, detects the ATS, and pulls every live job posting through the **official public job-board APIs** of Greenhouse, Lever, and Ashby. No brittle HTML scraping of career pages, no anti-bot fights: the same JSON feeds the career pages themselves use. Direct board URLs (e.g. `boards.greenhouse.io/gitlab`) work too.
 
+## Quick start
+
+1. Click **Start** with the two prefilled career pages (GitLab on Greenhouse, Ramp on Ashby). It finishes in under a minute.
+2. You get up to 25 open jobs per company with title, location, department and apply link.
+3. That first run costs at most $0.10, well within Apify's free monthly credit. Then swap in your own input or schedule it.
+
 ## What you get
 
 One flat record per live job posting:
