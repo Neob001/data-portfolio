@@ -1,0 +1,12 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Output of broken-link-checker",
+  "type": "object",
+  "properties": {
+    "resultsDatasetUrl": {
+      "type": "string",
+      "title": "Broken links",
+      "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=broken_links"
+    }
+  }
+}

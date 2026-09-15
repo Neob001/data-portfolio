@@ -1,0 +1,16 @@
+{
+  "name": "broken-link-checker",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Crawl any website and find every broken link, 404 and dead asset: BFS same-host crawl, HEAD/GET checks with redirect and retry handling, robots.txt aware.",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "apify": "^3.2.6"
+  },
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node --test 'tests/*.test.mjs'"
+  }
+}

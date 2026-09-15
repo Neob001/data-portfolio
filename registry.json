@@ -674,6 +674,39 @@
       "staging_validated": true,
       "monetization_configured": true,
       "staging_started_at": "2026-09-15T11:21:02Z"
+    },
+    "broken-link-checker": {
+      "apify_actor_id": null,
+      "source": "User-supplied public websites (HTTP HEAD/GET, robots.txt respected for crawling)",
+      "variant": "crawl",
+      "status": "staging",
+      "approval": "N7 APPROVED by owner 2026-09-15 (chat); PUB-3 publish approved",
+      "origin": "scan",
+      "incumbent_actor_id": null,
+      "first_paid_run_date": null,
+      "ppe_events": {
+        "page-scanned": {
+          "proposed_price_usd": 0.0015,
+          "title": "Page scanned",
+          "description": "One HTML page fetched with all its links checked. Unreachable start URLs and pages whose links were not checked are never charged."
+        }
+      },
+      "pricing_rationale": "Niche median $2/1k (khadinakbar $1, parseforge $1.20, logiover $2.50-5); every link on a page included.",
+      "launched_at": null,
+      "last_fix_date": null,
+      "kpis": {},
+      "listing": {
+        "title": "Broken Link Checker — Find 404s & Dead Links on Any Website",
+        "description": "Crawl any website and find every broken link: 404s, dead images, dead scripts and stylesheets, DNS failures, redirect loops. BFS same-host crawl, robots.txt aware. $1.50 per 1,000 pages scanned.",
+        "seoTitle": "Broken Link Checker API: Find 404s & Dead Links in Bulk",
+        "seoDescription": "Crawl any website and find broken links, 404s, dead images and redirect loops. Shows where each link appears and its anchor text. Pay per page scanned.",
+        "categories": [
+          "SEO_TOOLS",
+          "DEVELOPER_TOOLS"
+        ]
+      },
+      "staging_validated": false,
+      "monetization_configured": false
     }
   },
   "apify_account": "factpipe",

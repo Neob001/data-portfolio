@@ -1,0 +1,61 @@
+{
+  "title": "Broken Link Checker",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "startUrls": {
+      "title": "Start URLs",
+      "type": "array",
+      "editor": "stringList",
+      "description": "Website URLs to crawl. Each is crawled breadth-first across pages on the same hostname (www-insensitive).",
+      "prefill": [
+        "https://crawlee.dev"
+      ]
+    },
+    "maxPagesPerSite": {
+      "title": "Max pages per site",
+      "type": "integer",
+      "default": 50,
+      "prefill": 20,
+      "minimum": 1,
+      "maximum": 5000,
+      "description": "Cap on same-site HTML pages crawled (and charged) per start URL."
+    },
+    "checkExternalLinks": {
+      "title": "Check external links",
+      "type": "boolean",
+      "default": true,
+      "description": "Also check links pointing to other hostnames (checked, not crawled)."
+    },
+    "checkImagesAndAssets": {
+      "title": "Check images and assets",
+      "type": "boolean",
+      "default": true,
+      "description": "Also check img[src], script[src] and link[rel=stylesheet][href]."
+    },
+    "includeOkLinks": {
+      "title": "Include working links in output",
+      "type": "boolean",
+      "default": false,
+      "description": "By default only broken links are returned. Enable to also get one row per working link."
+    },
+    "respectRobotsTxt": {
+      "title": "Respect robots.txt",
+      "type": "boolean",
+      "default": true,
+      "description": "Honor Disallow rules for user-agent * when deciding which pages to crawl. Does not affect checking already-discovered links."
+    },
+    "maxRunMinutes": {
+      "title": "Max run time (minutes)",
+      "type": "integer",
+      "default": 30,
+      "prefill": 3,
+      "minimum": 1,
+      "maximum": 1440,
+      "description": "Hard wall-clock budget for the whole run. As it nears, the Actor stops crawling new pages, gives in-flight checks up to 15s to finish, writes each site's summary (status \"time_limit_reached\" if it was cut short) and exits successfully. Pages whose links were not fully checked are never charged."
+    }
+  },
+  "required": [
+    "startUrls"
+  ]
+}

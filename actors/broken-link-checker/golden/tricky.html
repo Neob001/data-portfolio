@@ -1,0 +1,28 @@
+<!-- Synthetic fixture exercising extraction/normalization edge cases: relative "../", a base tag,
+fragments, mailto/tel/javascript/data schemes, protocol-relative //cdn, uppercase tags,
+single-quoted and unquoted attributes, and srcset (must be ignored entirely). -->
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<BASE href="https://example.com/blog/2026/">
+<LINK REL="stylesheet" HREF="../../assets/site.css">
+<link rel='preload' href='/img/hero.png' as='image'>
+</HEAD>
+<BODY>
+<A HREF="../about">Uppercase tag, relative parent</A>
+<a href='post-42?ref=home#comments'>Single-quoted, query kept, fragment stripped</a>
+<a href="mailto:hello@example.com">Email us</a>
+<a href="tel:+1-555-0100">Call us</a>
+<a href="javascript:void(0)">JS no-op</a>
+<a href="data:text/plain,hello">Data URI</a>
+<a href=//cdn.example.com/lib.js>Protocol-relative unquoted</a>
+<a href=unquoted-page.html target=_blank>Unquoted href</a>
+<a href="">Empty href</a>
+<a>No href at all</a>
+<img src="//cdn.example.com/logo.png" srcset="//cdn.example.com/logo@2x.png 2x, //cdn.example.com/logo@3x.png 3x" alt="logo">
+<img srcset="/img/only-srcset.png 1x" alt="srcset only, must be ignored (no src)">
+<script src=/js/app.js></script>
+<script>console.log('inline script has no src, must be ignored');</script>
+<link rel="icon" href="/favicon.ico">
+</BODY>
+</HTML>

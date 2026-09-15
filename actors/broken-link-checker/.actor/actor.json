@@ -1,0 +1,188 @@
+{
+  "actorSpecification": 1,
+  "name": "broken-link-checker",
+  "title": "Broken Link Checker — Find 404s & Dead Links on Any Website",
+  "description": "Crawl any website and find every broken link: 404s, dead images, dead scripts and stylesheets, DNS failures, redirect loops. BFS same-host crawl, robots.txt aware. $1.50 per 1,000 pages scanned.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "outputSchema": "./output_schema.json",
+  "categories": [
+    "SEO_TOOLS",
+    "DEVELOPER_TOOLS"
+  ],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "broken_links": {
+          "title": "Broken links",
+          "transformation": {
+            "fields": [
+              "record_type",
+              "link_url",
+              "status_code",
+              "error",
+              "found_on_url",
+              "found_on_count",
+              "anchor_text"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        },
+        "summary": {
+          "title": "Site summary",
+          "transformation": {
+            "fields": [
+              "record_type",
+              "site",
+              "start_url",
+              "status",
+              "pages_scanned",
+              "links_checked",
+              "broken_links",
+              "rate_limited_unverified",
+              "external_links_checked"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "record_type": {
+            "type": "string",
+            "enum": [
+              "broken_link",
+              "ok_link",
+              "site_summary"
+            ]
+          },
+          "site": {
+            "type": "string"
+          },
+          "start_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "completed",
+              "page_limit_reached",
+              "charge_limit_reached",
+              "time_limit_reached",
+              "start_url_unreachable"
+            ]
+          },
+          "pages_scanned": {
+            "type": "integer"
+          },
+          "links_checked": {
+            "type": "integer"
+          },
+          "broken_links": {
+            "type": "integer"
+          },
+          "rate_limited_unverified": {
+            "type": "integer"
+          },
+          "external_links_checked": {
+            "type": "integer"
+          },
+          "top_broken": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "link_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "final_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri"
+          },
+          "status_code": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "is_broken": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "link_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "element": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "found_on_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri"
+          },
+          "found_on_count": {
+            "type": "integer"
+          },
+          "found_on_sample": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "anchor_text": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "redirect_count": {
+            "type": "integer"
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}
