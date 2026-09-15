@@ -1,0 +1,219 @@
+{
+  "actorSpecification": 1,
+  "name": "sam-gov-contracts",
+  "title": "SAM.gov Contract Opportunities Scraper \u2014 Federal Bids API",
+  "description": "US federal contract opportunities from the official SAM.gov data extract: solicitations, sources sought, awards. Filter by keyword, NAICS, set-aside, agency, state; daily new-bid alerts. No key. $2 per 1,000.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "outputSchema": "./output_schema.json",
+  "categories": [
+    "LEAD_GENERATION",
+    "BUSINESS"
+  ],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "opportunities": {
+          "title": "Opportunities",
+          "transformation": {
+            "fields": [
+              "posted_date",
+              "title",
+              "department",
+              "notice_type",
+              "naics_code",
+              "set_aside",
+              "response_deadline",
+              "notice_url"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "notice_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "title": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "solicitation_number": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "department": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sub_tier": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "office": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "posted_date": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "notice_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "base_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "response_deadline": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "archive_date": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "set_aside_code": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "set_aside": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "naics_code": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "psc_code": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "place_of_performance_city": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "place_of_performance_state": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "place_of_performance_zip": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "place_of_performance_country": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "award_number": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "award_date": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "awardee": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "organization_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "notice_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "additional_info_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "award_amount": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "source_url": {
+            "type": "string"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

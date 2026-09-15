@@ -17,13 +17,13 @@ This Actor runs the open-source Lighthouse engine itself in headless Chrome — 
   "accessibility_score": 100,
   "best_practices_score": 96,
   "seo_score": 80,
-  "lcp_ms": 901,
+  "lcp_ms": 754,
   "cls": 0,
-  "tbt_ms": 9,
-  "fcp_ms": 901,
-  "speed_index_ms": 2863,
-  "time_to_interactive_ms": 938,
-  "server_response_ms": 607,
+  "tbt_ms": 0,
+  "fcp_ms": 754,
+  "speed_index_ms": 754,
+  "time_to_interactive_ms": 754,
+  "server_response_ms": 7,
   "total_byte_weight_kb": 0,
   "lcp_rating": "good",
   "cls_rating": "good",
@@ -32,11 +32,12 @@ This Actor runs the open-source Lighthouse engine itself in headless Chrome — 
   "top_opportunities": [],
   "failing_insights": [],
   "failing_seo_audits": [
-    "meta-description"
+    "meta-description",
+    "link-text"
   ],
   "failing_accessibility_audits": [],
   "lighthouse_version": "12.8.2",
-  "audited_at": "2026-09-15T07:48:12.000Z",
+  "audited_at": "2026-09-15T07:54:17.472Z",
   "source_url": "https://example.com/",
   "fetched_at": "2026-09-15T12:00:00.000Z"
 }

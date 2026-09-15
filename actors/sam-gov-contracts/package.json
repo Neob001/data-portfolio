@@ -1,0 +1,16 @@
+{
+  "name": "sam-gov-contracts",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "US federal contract opportunities from the official SAM.gov extract.",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "apify": "^3.2.6"
+  },
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node --test 'tests/*.test.mjs'"
+  }
+}

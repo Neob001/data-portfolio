@@ -1,0 +1,12 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Output of sam-gov-contracts",
+  "type": "object",
+  "properties": {
+    "resultsDatasetUrl": {
+      "type": "string",
+      "title": "Opportunities",
+      "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=opportunities"
+    }
+  }
+}
