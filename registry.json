@@ -609,7 +609,7 @@
       "apify_actor_id": "NkEh2R51jHatGtCA3",
       "source": "Public DNS resolvers (1.1.1.1, 8.8.8.8, 9.9.9.9)",
       "variant": "lookup (bulk)",
-      "status": "staging",
+      "status": "live",
       "approval": "N8 APPROVED by owner 2026-09-15 (chat); PUB-3 publish approved",
       "origin": "scan",
       "incumbent_actor_id": null,
@@ -622,7 +622,7 @@
         }
       },
       "pricing_rationale": "Below niche median $5/1k and leaders $2-3/1k (gap_validation 2026-09-15).",
-      "launched_at": null,
+      "launched_at": "2026-09-17T09:36:18Z",
       "last_fix_date": null,
       "kpis": {},
       "listing": {
@@ -637,14 +637,13 @@
       },
       "staging_validated": true,
       "monetization_configured": true,
-      "staging_started_at": "2026-09-15T11:06:08Z",
-      "notes": "Publish blocked 2026-09-15 by Apify 5/24h limit; publish after 2026-09-16 09:40Z."
+      "staging_started_at": "2026-09-15T11:06:08Z"
     },
     "france-company-lookup": {
       "apify_actor_id": "2k7EuEL3MiftrabLt",
       "source": "API Recherche d'entreprises (recherche-entreprises.api.gouv.fr; INSEE Sirene + RNE open data, Licence Ouverte 2.0)",
       "variant": "lookup (bulk)",
-      "status": "staging",
+      "status": "live",
       "approval": "france-sirene source APPROVED by owner 2026-09-15 (chat); PUB-3 publish approved",
       "origin": "scan",
       "incumbent_actor_id": null,
@@ -657,7 +656,7 @@
         }
       },
       "pricing_rationale": "Below niche median $5.99/1k (dltik $8, epicscrapers $4, logiover $3.50); gap_validation 2026-09-15.",
-      "launched_at": null,
+      "launched_at": "2026-09-17T09:36:18Z",
       "last_fix_date": null,
       "kpis": {},
       "listing": {
@@ -670,7 +669,7 @@
           "BUSINESS"
         ]
       },
-      "notes": "No officers (minimal=true), sole proprietors and natural-person groupings excluded; API rate limit 7 req/s per IP and 30 req/s per ASN (watch 429s on Apify cloud). Publish blocked 2026-09-15 by Apify 5/24h limit; publish after 2026-09-16 09:40Z.",
+      "notes": "No officers (minimal=true), sole proprietors and natural-person groupings excluded; API rate limit 7 req/s per IP and 30 req/s per ASN (watch 429s on Apify cloud).",
       "staging_validated": true,
       "monetization_configured": true,
       "staging_started_at": "2026-09-15T11:21:02Z"
