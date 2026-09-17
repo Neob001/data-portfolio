@@ -12,3 +12,6 @@ Replies are NEVER posted without a tick. Standing decision 2026-09-12.
 ## 2026-09-15
 (no drafts today — demand_monitor: 2 raw hits, 0 passed filters: SO 80002427 was a Java design question that matched only on a keyword, and gleanvolt#193 (MySkoda API) needs an owner login and returns personal vehicle data. Both marked 'filtered' in demand_signals.json. No DC proposals. Sources polled: Stack Exchange API, GitHub Search API, HN Algolia API. The Apify forum still returns non-JSON. No owner ticks pending.)
 2026-09-15 (later run): demand_monitor 0 new hits, 0 open signals; Apify forum still non-JSON; no owner ticks pending.
+
+## 2026-09-17
+(no drafts today — demand_monitor: 0 new hits, 0 open signals; Apify forum still non-JSON; no owner ticks pending)
