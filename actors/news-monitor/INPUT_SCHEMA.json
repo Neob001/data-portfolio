@@ -8,15 +8,24 @@
       "type": "array",
       "description": "One or more GDELT search queries. Quote exact phrases (\"OpenAI\"), combine with GDELT boolean syntax, e.g. (apple OR microsoft). Each query is run and charged separately.",
       "editor": "stringList",
-      "prefill": ["\"OpenAI\"", "\"supply chain\" recall"]
+      "prefill": [
+        "\"OpenAI\"",
+        "\"supply chain\" recall"
+      ]
     },
     "mode": {
       "title": "Mode",
       "type": "string",
       "description": "\"news\" returns all matching coverage. \"adverse_media\" ANDs every query with a curated risk-term group: (fraud OR bribery OR corruption OR \"money laundering\" OR sanctions OR lawsuit OR indictment OR investigation OR scandal OR bankruptcy OR \"data breach\" OR recall), for KYC/AML-style screening.",
       "editor": "select",
-      "enum": ["news", "adverse_media"],
-      "enumTitles": ["News", "Adverse media"],
+      "enum": [
+        "news",
+        "adverse_media"
+      ],
+      "enumTitles": [
+        "News",
+        "Adverse media"
+      ],
       "default": "news"
     },
     "languages": {
@@ -63,7 +72,21 @@
       "minimum": 1,
       "maximum": 5000,
       "prefill": 20
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "editor": "proxy",
+      "description": "GDELT allows one request every 5 seconds per IP and many cloud IPs are already over that limit. Apify Proxy (default) rotates IPs so requests get through.",
+      "prefill": {
+        "useApifyProxy": true
+      },
+      "default": {
+        "useApifyProxy": true
+      }
     }
   },
-  "required": ["queries"]
+  "required": [
+    "queries"
+  ]
 }

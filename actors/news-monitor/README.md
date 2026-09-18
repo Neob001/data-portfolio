@@ -49,6 +49,7 @@ Monitor **company or keyword news** across global media, or screen for **adverse
 | `lookbackHours` | integer | How far back to search from now. Default 24, max 2160 (~90 days). |
 | `sinceLastRun` | boolean | Incremental mode for schedules: only articles newer than the last successful run. |
 | `maxResultsPerQuery` | integer | Cap on charged results per query. Default 100, prefill 20. |
+| `proxyConfiguration` | proxy | Apify Proxy is on by default: GDELT allows one request every 5 seconds per IP, and shared cloud IPs often exceed that. |
 
 **Adverse-media risk terms:** `fraud`, `bribery`, `corruption`, `"money laundering"`, `sanctions`, `lawsuit`, `indictment`, `investigation`, `scandal`, `bankruptcy`, `"data breach"`, `recall` — ANDed with your query, and (best-effort, title-only) reported per article in `matched_risk_terms`.
 

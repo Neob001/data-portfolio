@@ -1,4 +1,5 @@
-import { Actor } from 'apify';
+import { Actor, log } from 'apify';
+import { ProxyAgent, fetch as undiciFetch } from 'undici';
 import { writeRunSummary } from './lib/run_summary.js';
 import { loadTracker } from './lib/incremental.js';
 import { createGdeltFetcher } from './client.js';
@@ -25,9 +26,23 @@ if (mode !== 'news' && mode !== 'adverse_media') {
   throw new Error('mode must be "news" or "adverse_media".');
 }
 
+// Shared cloud IPs are routinely over GDELT's per-IP limit (staging 2026-09-18: the first request
+// of a run got 429), so on the platform every request goes out through a fresh Apify Proxy session.
+let proxyConfiguration = null;
+if (Actor.isAtHome() && input.proxyConfiguration?.useApifyProxy !== false) {
+  proxyConfiguration = await Actor.createProxyConfiguration(input.proxyConfiguration ?? { useApifyProxy: true })
+    .catch((e) => { log.warning(`Apify Proxy unavailable, calling GDELT directly: ${e.message}`); return null; });
+}
+const fetchImpl = proxyConfiguration
+  ? async (url, opts) => {
+    const proxyUrl = await proxyConfiguration.newUrl(`gdelt${Math.floor(Math.random() * 1e9)}`);
+    return undiciFetch(url, { ...opts, dispatcher: new ProxyAgent(proxyUrl) });
+  }
+  : fetch;
+
 // One shared, throttled fetcher for the whole run: GDELT asks for one request per 5 seconds
 // regardless of how many queries/windows this run makes.
-const fetchGdelt = createGdeltFetcher();
+const fetchGdelt = createGdeltFetcher({ fetchImpl });
 
 let pushed = 0;
 let charged = 0;
