@@ -725,7 +725,7 @@
       ]
     },
     "news-monitor": {
-      "apify_actor_id": null,
+      "apify_actor_id": "erOCWrZbLKr5oiGhU",
       "source": "GDELT DOC 2.0 API (open data; attribution required)",
       "variant": "monitor",
       "status": "staging",
@@ -755,10 +755,11 @@
         ]
       },
       "staging_validated": false,
-      "monetization_configured": false
+      "monetization_configured": false,
+      "staging_started_at": "2026-09-18T15:11:56Z"
     },
     "website-screenshot": {
-      "apify_actor_id": null,
+      "apify_actor_id": "c5dIrkAu5TJY7QEb2",
       "source": "User-supplied public URLs rendered in headless Chrome",
       "variant": "bulk",
       "status": "staging",
@@ -788,7 +789,8 @@
         ]
       },
       "staging_validated": false,
-      "monetization_configured": false
+      "monetization_configured": false,
+      "staging_started_at": "2026-09-18T15:11:46Z"
     }
   },
   "apify_account": "factpipe",
