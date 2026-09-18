@@ -1,14 +1,36 @@
-// Jobs-index format shared by the builder (scripts/jobs_index/build_index.mjs) and the Actor.
+// Jobs search-index format (v2) shared by the builder (scripts/jobs_index/build_index.mjs) and the Actor.
 //
-//   <base>/manifest.json         { format, built_at, boards, jobs, bytes, ats_counts, directory, shards: [...] }
-//   <base>/directory.json.gz     [[ats, token, company_name, jobs, [shardIndex, ...]], ...]
-//   <base>/shards/<file>.jsonl.gz one output record per line, newest posted_at first
+//   <base>/manifest.json             { format: 2, codec, built_at, boards, jobs, bytes, ats_counts, directory, shards: [...] }
+//   <base>/directory.json.gz         [[ats, token, company_name, jobs, [shardIndex, ...]], ...]
+//   <base>/shards/<file>.jsonl.br    brotli (or .gz) JSON lines:
+//       line 1: {"_boards": {"<ats>:<token>": {"t": token, "r"?: "eu", "f": fetched_at, "kw": board words}}}
+//       then one slim record per job (SLIM_FIELDS + kw), grouped by board.
+//
+// Slim records hold only searchable/filterable fields. Full descriptions are NOT in the index: the
+// Actor fetches them live from the ATS for the jobs it delivers. Omitted-but-derivable fields:
+// apply_url (when it follows the ATS default), source_url (ATS API URL of the board), fetched_at
+// (per board), duplicate_sources (when empty).
 //
 // A shard holds one ATS and one posted-date band, so the Actor can skip whole shards for the
-// `ats`, `postedWithinDays`, `sinceLastRun` and `companies` filters and stream the rest newest-first.
+// `ats`, `postedWithinDays`, `sinceLastRun` and `companies` filters.
 import { companyMatches } from './filters.js';
 
-export const INDEX_FORMAT = 1;
+export const INDEX_FORMAT = 2;
+
+export const SLIM_FIELDS = [
+  'job_id', 'title', 'company_name', 'company_board', 'ats', 'department', 'team', 'employment_type', 'workplace_type',
+  'locations', 'country_codes', 'remote', 'salary_min', 'salary_max', 'salary_currency', 'salary_period', 'posted_at',
+  'updated_at', 'apply_url', 'job_url', 'description_snippet', 'duplicate_sources',
+];
+
+/** apply_url each ATS uses by default for a job_url (stored in the index only when different). */
+export function defaultApplyUrl(ats, jobUrl) {
+  if (!jobUrl) return null;
+  if (ats === 'lever' || ats === 'workable') return `${jobUrl}/apply`;
+  if (ats === 'ashby') return `${jobUrl}/application`;
+  if (ats === 'recruitee') return `${jobUrl}/c/new`;
+  return jobUrl;
+}
 
 /** Posted-date bands, in days before build time: [minAgeDays, maxAgeDays). null posted_at -> last band. */
 export const AGE_BANDS = [[0, 2], [2, 4], [4, 8], [8, 15], [15, 31], [31, 61], [61, 121], [121, 366], [366, Infinity]];

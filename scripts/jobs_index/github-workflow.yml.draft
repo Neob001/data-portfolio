@@ -1,0 +1,76 @@
+# DRAFT - not active. To enable: copy to .github/workflows/jobs-index.yml (owner decision) and add
+# nothing else: it uses the built-in GITHUB_TOKEN (contents: write) to publish the release assets.
+# Daily: re-validate known boards (skipping any ATS under a recorded Retry-After ban), build the
+# slim jobs index, publish it as assets of the `jobs-index` release (publish_index.sh, option a).
+name: jobs-index daily
+
+on:
+  schedule:
+    - cron: '0 3 * * *'   # 03:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: jobs-index
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    defaults:
+      run:
+        working-directory: scripts/jobs_index
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # validate.jsonl checkpoint + bans.json (Retry-After bans) survive between daily runs.
+      - name: Restore validation state
+        uses: actions/cache/restore@v4
+        with:
+          path: scripts/jobs_index/state
+          key: jobs-index-state-${{ github.run_id }}
+          restore-keys: jobs-index-state-
+
+      - name: Show active rate-limit bans
+        run: cat state/bans.json 2>/dev/null || echo "no bans"
+
+      # Re-checks every board in boards.json not checked in the last 20 h. An ATS with an active
+      # ban in state/bans.json (e.g. Workable after a 429 with a long Retry-After) is skipped;
+      # a new long Retry-After records a ban and stops calling that ATS for this run.
+      - name: Refresh board validation
+        timeout-minutes: 180
+        run: python3 validate_boards.py --max-age-hours 20
+
+      # Builder also honours state/bans.json and trips its own breaker after 5 consecutive 429s.
+      - name: Build slim index
+        timeout-minutes: 120
+        run: node --max-old-space-size=6144 build_index.mjs --codec br
+
+      - name: Save validation state
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: scripts/jobs_index/state
+          key: jobs-index-state-${{ github.run_id }}
+
+      - name: Publish (GitHub release assets)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          source ./publish_index.sh
+          publish_github_release "${{ github.repository }}"
+
+      - name: Build report
+        if: always()
+        run: cat index/build_report.json || true

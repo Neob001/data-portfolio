@@ -33,11 +33,16 @@ test('no filters -> everything', () => {
 });
 
 test('keywords any/all over title + description; excludeKeywords on title', () => {
-  assert.deepEqual(run({ keywords: ['security engineer'] }), ['ashby:ramp:34413f8d-26bf-4bbc-8ade-eb309a0e2245']);
+  assert.ok(run({ keywords: ['security engineer'] }).includes('greenhouse:gitlab:8556658002'), 'description scope: every word present (AI Engineer mentions security)');
   const anyHits = run({ keywords: ['engineer', 'maintenance'] });
   assert.ok(anyHits.includes('workable:blueground:6C6B4B42F5'));
   assert.ok(anyHits.includes('greenhouse:gitlab:8556658002'));
-  assert.deepEqual(run({ keywords: ['engineer', 'cloud'], keywordMatch: 'all' }), ['ashby:ramp:34413f8d-26bf-4bbc-8ade-eb309a0e2245']);
+  const both = run({ keywords: ['engineer', 'cloud'], keywordMatch: 'all' });
+  assert.ok(both.includes('ashby:ramp:34413f8d-26bf-4bbc-8ade-eb309a0e2245'));
+  assert.ok(both.length < run({ keywords: ['engineer'] }).length, 'all is stricter than any');
+  assert.deepEqual(run({ keywords: ['security engineer'], keywordScope: 'title' }), ['ashby:ramp:34413f8d-26bf-4bbc-8ade-eb309a0e2245']);
+  assert.ok(run({ keywords: ['engineer'], keywordScope: 'title' }).every((id) => !id.startsWith('recruitee:')), 'title scope ignores descriptions');
+  assert.throws(() => normalizeInput({ keywordScope: 'body' }), /keywordScope/);
   const excl = run({ keywords: ['engineer'], excludeKeywords: ['AI'] });
   assert.ok(!excl.includes('greenhouse:gitlab:8556658002'));
 });

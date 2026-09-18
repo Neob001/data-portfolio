@@ -35,6 +35,23 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 CANDIDATES = os.path.join(HERE, 'candidates.json')
 BOARDS = os.path.join(HERE, 'boards.json')
 CHECKPOINT = os.path.join(HERE, 'state', 'validate.jsonl')
+BANS = os.path.join(HERE, 'state', 'bans.json')  # {ats: unix time until which we must not call it}
+
+
+def load_bans():
+    try:
+        with open(BANS) as f:
+            return {k: v for k, v in json.load(f).items() if v > time.time()}
+    except (OSError, ValueError):
+        return {}
+
+
+def save_ban(ats, seconds):
+    bans = load_bans()
+    bans[ats] = max(bans.get(ats, 0), time.time() + seconds)
+    os.makedirs(os.path.dirname(BANS), exist_ok=True)
+    with open(BANS, 'w') as f:
+        json.dump(bans, f)
 UA = 'factpipe-jobs-index/1.0 (+https://apify.com/factpipe; job-board syndication)'
 
 # Per-ATS: worker count and minimum seconds between requests on that host.
@@ -79,7 +96,7 @@ def get(url, pacer, retries=3, timeout=90, want_json=True):
         except urllib.error.HTTPError as e:
             ra = e.headers.get('Retry-After') if e.headers else None
             if e.code == 429 and ra and ra.isdigit() and int(ra) > 300:
-                pacer.blocked = True  # long block: stop calling this host (circuit breaker)
+                pacer.blocked = int(ra)  # long block: stop calling this host (circuit breaker), remember it
                 return 429, None
             if e.code in (429, 500, 502, 503, 504) and attempt < retries:
                 time.sleep(min(60, int(ra)) if ra and ra.isdigit() else delay)
@@ -167,8 +184,10 @@ def main():
     os.makedirs(os.path.dirname(CHECKPOINT), exist_ok=True)
 
     todo = {}
-    with open(CANDIDATES) as f:
-        cands = json.load(f)
+    cands = {}
+    if os.path.exists(CANDIDATES):  # absent in CI: then only the known boards in boards.json are re-checked
+        with open(CANDIDATES) as f:
+            cands = json.load(f)
     for key, tokens in cands.items():
         ats, _, region = key.partition(':')
         for t in tokens:
@@ -188,9 +207,12 @@ def main():
                     continue
                 done[(r['ats'], r['token'].lower(), r.get('region'))] = r
     fresh = time.time() - args.max_age_hours * 3600
+    bans = load_bans()
+    for ats, until in bans.items():
+        log(f'{ats}: skipped, rate-limit ban until {time.strftime("%Y-%m-%d %H:%M", time.gmtime(until))} UTC')
     per_ats = {}
     for (ats, low, region), tok in sorted(todo.items(), key=lambda kv: (kv[0][0], kv[0][1], kv[0][2] or "")):
-        if only and ats not in only:
+        if (only and ats not in only) or ats in bans:
             continue
         prev = done.get((ats, low, region))
         # Definitive answers (200 / 404 / 410) are reused while fresh; transient failures are retried.
@@ -235,7 +257,8 @@ def main():
             pool.shutdown(wait=True)
     for ats in per_ats:
         if pacers[ats].blocked:
-            log(f'{ats}: rate-limited with a long Retry-After; remaining boards left for the next run')
+            save_ban(ats, pacers[ats].blocked)
+            log(f'{ats}: rate-limited (Retry-After {pacers[ats].blocked}s); ban recorded in state/bans.json, rest left for later')
 
     boards = []
     for (ats, low, region), r in done.items():

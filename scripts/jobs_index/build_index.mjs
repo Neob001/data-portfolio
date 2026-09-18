@@ -4,6 +4,7 @@
 //   node scripts/jobs_index/build_index.mjs                     # all boards -> scripts/jobs_index/index/
 //   node scripts/jobs_index/build_index.mjs --limit 500         # first 500 boards (spread across ATSs)
 //   node scripts/jobs_index/build_index.mjs --ats greenhouse,ashby --out /tmp/idx
+//   node scripts/jobs_index/build_index.mjs --skip-ats workable --transport curl --codec br
 //
 // Polite per-host limits (same as validate_boards.py): Greenhouse 8 parallel, Ashby 6,
 // Recruitee 8, Workable 1 @ >=3s spacing, Lever <=8 in flight @ >=1s between request starts (robots.txt Crawl-delay).
@@ -38,6 +39,8 @@ const { values: args } = parseArgs({
     // "curl" routes requests through the curl binary, which honours HTTP(S)_PROXY (Node 22's fetch
     // does not); useful in sandboxes that only have a proxied route out.
     transport: { type: 'string', default: 'fetch' },
+    codec: { type: 'string', default: 'br' }, // br (brotli q11, 16 MB window) or gz
+    'skip-ats': { type: 'string', default: '' }, // e.g. workable while it is rate-limit banned
   },
 });
 
@@ -83,6 +86,13 @@ async function main() {
   let boards = JSON.parse(await readFile(args.boards, 'utf8'));
   const only = new Set(args.ats.split(',').filter(Boolean));
   if (only.size) boards = boards.filter((b) => only.has(b.ats));
+  const skip = new Set(args['skip-ats'].split(',').filter(Boolean));
+  // Honour rate-limit bans recorded by validate_boards.py (state/bans.json).
+  try {
+    const bans = JSON.parse(await readFile(join(HERE, 'state', 'bans.json'), 'utf8'));
+    for (const [ats, until] of Object.entries(bans)) if (until * 1000 > Date.now()) { skip.add(ats); console.error(`${ats}: skipped, banned until ${new Date(until * 1000).toISOString()}`); }
+  } catch { /* no bans */ }
+  if (skip.size) boards = boards.filter((b) => !skip.has(b.ats));
   const limit = Number(args.limit) || 0;
   if (limit && boards.length > limit) {
     // Round-robin across ATSs so a subset build is representative.
@@ -98,7 +108,7 @@ async function main() {
     boards = picked;
   }
   console.error(`building index from ${boards.length} boards -> ${args.out}`);
-  const writer = await new IndexWriter(resolve(args.out), { builtAt: new Date() }).open();
+  const writer = await new IndexWriter(resolve(args.out), { builtAt: new Date(), codec: args.codec }).open();
   const stats = { ok: 0, failed: 0, empty: 0, by_ats: {} };
   const failures = [];
   const queues = new Map();
@@ -147,6 +157,7 @@ async function main() {
   }));
 
   const fetchSec = (Date.now() - t0) / 1000;
+  console.error(`fetched in ${fetchSec.toFixed(0)}s; deduping, sharding and compressing...`);
   const manifest = await writer.finish();
   const totalSec = (Date.now() - t0) / 1000;
   const report = {
@@ -160,9 +171,12 @@ async function main() {
     jobs_before_dedupe: manifest.jobs_before_dedupe,
     jobs: manifest.jobs,
     shards: manifest.shards.length,
-    gz_bytes: manifest.bytes,
+    codec: manifest.codec,
+    total_bytes: manifest.bytes,
+    raw_bytes: manifest.shards.reduce((a, s) => a + s.raw_bytes, 0),
     largest_shard_bytes: Math.max(0, ...manifest.shards.map((s) => s.bytes)),
     fetch_seconds: Math.round(fetchSec),
+    shard_seconds: Math.round(totalSec - fetchSec),
     total_seconds: Math.round(totalSec),
     failures_sample: failures.slice(0, 30),
   };

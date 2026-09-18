@@ -2,6 +2,7 @@
 import { ATS_LIST, EMPLOYMENT_TYPES, parseBoardRef, boardKey } from './transform.js';
 import { normKey, companyKey } from './text.js';
 import { isCountryCode } from './geo.js';
+import { compileKeyword, keywordHit, normText, jobKeywordTokens } from './keywords.js';
 
 const strList = (v) => (Array.isArray(v) ? v : typeof v === 'string' && v.trim() ? v.split(',') : [])
   .map((x) => String(x ?? '').trim())
@@ -11,6 +12,8 @@ const strList = (v) => (Array.isArray(v) ? v : typeof v === 'string' && v.trim()
 export function normalizeInput(input = {}) {
   const remote = input.remote ?? 'any';
   if (!['any', 'remote_only', 'onsite_only'].includes(remote)) throw new Error(`"remote" must be any, remote_only or onsite_only (got ${remote})`);
+  const keywordScope = input.keywordScope ?? 'title_and_description';
+  if (!['title', 'title_and_description'].includes(keywordScope)) throw new Error(`"keywordScope" must be title or title_and_description (got ${keywordScope})`);
   const keywordMatch = input.keywordMatch ?? 'any';
   if (!['any', 'all'].includes(keywordMatch)) throw new Error(`"keywordMatch" must be any or all (got ${keywordMatch})`);
   const ats = strList(input.ats).map((a) => a.toLowerCase());
@@ -40,6 +43,7 @@ export function normalizeInput(input = {}) {
     badRefs,
     keywords: strList(input.keywords),
     keywordMatch,
+    keywordScope,
     excludeKeywords: strList(input.excludeKeywords),
     locations: strList(input.locations),
     remote,
@@ -62,6 +66,7 @@ export function filterIdentity(opts) {
     boards: opts.boards.map(boardKey).sort(),
     keywords: sorted(opts.keywords),
     keywordMatch: opts.keywordMatch,
+    keywordScope: opts.keywordScope,
     excludeKeywords: sorted(opts.excludeKeywords),
     locations: sorted(opts.locations),
     remote: opts.remote,
@@ -92,7 +97,8 @@ export function companyMatches(term, job) {
  * (except keywords with keywordMatch "all").
  */
 export function compileFilter(opts) {
-  const kws = opts.keywords.map(lc);
+  const kws = opts.keywords.map(compileKeyword).filter((k) => k.phrase);
+  const scope = opts.keywordScope || 'title_and_description';
   const excl = opts.excludeKeywords.map(lc);
   const locTerms = opts.locations.map((l) => ({ raw: l, text: normKey(l), code: isCountryCode(l) ? l.toUpperCase().replace(/^UK$/, 'GB') : null }));
   const depts = opts.departments.map(lc);
@@ -122,8 +128,15 @@ export function compileFilter(opts) {
     const title = lc(job.title);
     if (excl.length && excl.some((x) => title.includes(x))) return false;
     if (kws.length) {
-      const hay = `${title}\n${lc(job.description_text)}`;
-      const ok = opts.keywordMatch === 'all' ? kws.every((k) => hay.includes(k)) : kws.some((k) => hay.includes(k));
+      const titleNorm = normText(job.title);
+      let vocab = null;
+      // Index rows carry `kw` (job words + the board's shared words); live rows are tokenized here.
+      const getVocab = () => vocab || (vocab = new Set([
+        ...titleNorm.split(' '),
+        ...(typeof job.kw === 'string' ? job.kw.split(' ') : jobKeywordTokens(job)),
+      ]));
+      const hit = (k) => keywordHit(k, titleNorm, getVocab, scope);
+      const ok = opts.keywordMatch === 'all' ? kws.every(hit) : kws.some(hit);
       if (!ok) return false;
     }
     return true;

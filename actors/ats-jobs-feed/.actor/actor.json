@@ -228,6 +228,15 @@
               "null"
             ]
           },
+          "description_status": {
+            "type": "string",
+            "enum": [
+              "included",
+              "not_requested",
+              "unavailable"
+            ],
+            "description": "included: full text fetched live from the ATS; not_requested: includeDescription=false; unavailable: live fetch failed or the ATS has no text"
+          },
           "duplicate_sources": {
             "type": "array",
             "items": {

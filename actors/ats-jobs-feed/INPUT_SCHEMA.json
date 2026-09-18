@@ -6,18 +6,41 @@
     "keywords": {
       "title": "Keywords",
       "type": "array",
-      "description": "Words or phrases to find in the job title or description (case-insensitive). Leave empty for all jobs.",
+      "description": "Words or phrases to find (case-insensitive). A title matches at a word start (\"engineer\" matches \"Engineering Manager\"); description matching needs every word of the keyword, and covers the first ~1,500 characters. Leave empty for all jobs.",
       "editor": "stringList",
-      "prefill": ["engineer"]
+      "prefill": [
+        "engineer"
+      ]
     },
     "keywordMatch": {
       "title": "Keyword match",
       "type": "string",
       "description": "\"any\": a job needs at least one keyword. \"all\": a job needs every keyword.",
       "editor": "select",
-      "enum": ["any", "all"],
-      "enumTitles": ["Any keyword", "All keywords"],
+      "enum": [
+        "any",
+        "all"
+      ],
+      "enumTitles": [
+        "Any keyword",
+        "All keywords"
+      ],
       "default": "any"
+    },
+    "keywordScope": {
+      "title": "Keyword scope",
+      "type": "string",
+      "editor": "select",
+      "description": "title: keywords must appear in the job title. title_and_description: in the title, or (every word of the keyword) in the department, team or the first ~1,500 characters of the description.",
+      "enum": [
+        "title",
+        "title_and_description"
+      ],
+      "enumTitles": [
+        "Title only",
+        "Title and description (first ~1,500 chars)"
+      ],
+      "default": "title_and_description"
     },
     "excludeKeywords": {
       "title": "Exclude keywords (title)",
@@ -36,8 +59,16 @@
       "type": "string",
       "description": "remote_only: remote jobs only. onsite_only: excludes jobs marked remote (on-site, hybrid and unspecified remain).",
       "editor": "select",
-      "enum": ["any", "remote_only", "onsite_only"],
-      "enumTitles": ["Any", "Remote only", "Exclude remote"],
+      "enum": [
+        "any",
+        "remote_only",
+        "onsite_only"
+      ],
+      "enumTitles": [
+        "Any",
+        "Remote only",
+        "Exclude remote"
+      ],
       "default": "any",
       "prefill": "remote_only"
     },
@@ -62,8 +93,20 @@
       "editor": "select",
       "items": {
         "type": "string",
-        "enum": ["greenhouse", "lever", "ashby", "workable", "recruitee"],
-        "enumTitles": ["Greenhouse", "Lever", "Ashby", "Workable", "Recruitee"]
+        "enum": [
+          "greenhouse",
+          "lever",
+          "ashby",
+          "workable",
+          "recruitee"
+        ],
+        "enumTitles": [
+          "Greenhouse",
+          "Lever",
+          "Ashby",
+          "Workable",
+          "Recruitee"
+        ]
       }
     },
     "departments": {
@@ -79,8 +122,22 @@
       "editor": "select",
       "items": {
         "type": "string",
-        "enum": ["full_time", "part_time", "contract", "temporary", "internship", "other"],
-        "enumTitles": ["Full-time", "Part-time", "Contract", "Temporary", "Internship", "Other"]
+        "enum": [
+          "full_time",
+          "part_time",
+          "contract",
+          "temporary",
+          "internship",
+          "other"
+        ],
+        "enumTitles": [
+          "Full-time",
+          "Part-time",
+          "Contract",
+          "Temporary",
+          "Internship",
+          "Other"
+        ]
       }
     },
     "maxResults": {
@@ -95,7 +152,7 @@
     "includeDescription": {
       "title": "Include full description",
       "type": "boolean",
-      "description": "Full plain-text job description (HTML stripped, contact details redacted, max 20,000 characters). A 300-character snippet is always included.",
+      "description": "Fetch the full plain-text description (HTML stripped, contact details redacted, max 20,000 characters) live from the company's ATS for every delivered job. Adds a few seconds per company. A 300-character snippet is always included.",
       "default": true
     },
     "sinceLastRun": {

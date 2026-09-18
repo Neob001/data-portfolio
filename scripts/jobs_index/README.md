@@ -3,7 +3,7 @@
 Zero-token pipeline (stdlib Python + Node 22, no model calls, no API keys) that produces:
 
 1. **`boards.json`**: the company directory. Every public ATS job board we know about that had at least one open job when it was last checked. This file is committed.
-2. **`index/`**: the jobs index that the Actor downloads in search mode. It is rebuilt daily, hosted at the Actor's `INDEX_BASE_URL`, and not committed.
+2. **`index/`**: the slim jobs search index that the Actor reads in search mode (~40–60 MB). It is rebuilt daily, hosted at the Actor's `INDEX_BASE_URL`, and not committed. Full descriptions are fetched live by the Actor.
 
 ```
 discover_boards.py  ->  candidates.json  ->  validate_boards.py  ->  boards.json  ->  build_index.mjs  ->  index/
@@ -18,11 +18,11 @@ cd scripts/jobs_index
 ~/.local/bin/python3.12 discover_boards.py            # latest 2 crawls; auto walk-back for hosts with no pages
 ~/.local/bin/python3.12 validate_boards.py            # rechecks boards not checked in the last 20h
 # (b) build the index (from the repo root or anywhere)
-node build_index.mjs                                  # -> index/  (add --transport curl behind an HTTP proxy)
+node build_index.mjs                                  # -> index/  (--transport curl behind an HTTP proxy; --skip-ats workable; --codec gz)
 node build_index.mjs --limit 500 --out /tmp/idx       # representative subset (round-robin across ATSs)
 ```
 
-Then upload `index/` (manifest.json, directory.json.gz, shards/) to the host behind `INDEX_BASE_URL`.
+Then publish with `publish_index.sh` (see Publishing and hosting).
 
 ## Sources and terms (checked 2026-09-18)
 
@@ -58,26 +58,55 @@ This is best-effort, and it over-redacts contact lines rather than under-redacti
 - Results are checkpointed in `state/validate.jsonl`. A re-run only re-checks boards older than `--max-age-hours`, plus any earlier transient failures (429, 5xx, timeouts).
 - Circuit breaker: a `429` with `Retry-After` > 300 s stops all calls to that ATS for the rest of the run. The builder does the same after 5 consecutive 429s.
 
-## Index format (v1)
+## Index format (v2: slim search index)
 
 ```
 index/
-  manifest.json          {format, built_at, boards, boards_fetched, jobs, jobs_before_dedupe, bytes,
-                          ats_counts, age_bands_days, directory, shards:[{file, ats, band, part, jobs,
-                          bytes, posted_from, posted_to, newest, oldest}]}
+  manifest.json          {format: 2, codec: "brotli", built_at, boards, boards_fetched, jobs, jobs_before_dedupe,
+                          bytes, ats_counts, age_bands_days, directory, shards:[{file, ats, band, part, jobs,
+                          bytes, raw_bytes, posted_from, posted_to, newest, oldest}]}
   directory.json.gz      [[ats, token, company_name, jobs, [shard indices]], ...]
-  shards/<ats>-b<band>-p<part>.jsonl.gz   one Actor output record per line, newest posted_at first
+  shards/<ats>-b<band>-p<part>.jsonl.br   brotli (quality 11, 16 MB window); .jsonl.gz with --codec gz
   build_report.json      timings and failures of the build (not needed by the Actor)
 ```
 
-- **Records** are exactly the Actor's output rows: same parsers (`actors/ats-jobs-feed/src/transform.js`), description truncated to 20,000 characters, `source_url` = the ATS API URL, and `fetched_at` = when the builder fetched the board.
-- **Dedupe:** the same normalized company + title + locations across boards or ATSs is kept once (the most complete copy). The other job ids go in `duplicate_sources`.
-- **Sharding:** one ATS × one posted-date band (0–2, 2–4, 4–8, 8–15, 15–31, 31–61, 61–121, 121–366 and 366+ days before `built_at`; undated jobs go in the last band). A band is split into parts of ≤5 MB gzip. This lets the Actor skip whole shards:
+**Shard content:**
+- Line 1 is the board header: `{"_boards": {"<ats>:<token>": {"t": token, "r": "eu"?, "f": fetched_at, "kw": board words}}}`.
+- Every other line is one slim job record. It carries `job_id, title, company_name, company_board, ats, department, team, employment_type, workplace_type, locations, country_codes, remote, salary_*, posted_at, updated_at, job_url, description_snippet`, plus `kw`.
+- `apply_url` and `duplicate_sources` are included only when they are not the ATS default or empty. `source_url` (the ATS API URL) and `fetched_at` come from the board header.
+- **No full descriptions.** The Actor fetches them live for the jobs it delivers (one API call per board).
+
+**`kw` field** (`actors/ats-jobs-feed/src/keywords.js`):
+- It holds the distinct lowercase words (stopwords removed) of the department, team and the first 1,500 description characters, minus the title's words. It is capped at 500 characters per job.
+- Words found in ≥60% of a board's postings (company boilerplate, EEO text) are stored once per board in the header, and the Actor merges them back at read time.
+- Title matching is phrase-at-word-start. Description matching needs every word of the keyword (or its plural). Adjacency inside descriptions is not preserved.
+
+**Why these choices (measured on the real index, per 60k-job sample):**
+
+| Layout | 270k jobs | 355k (+Workable) |
+|---|---|---|
+| slim fields, no kw, gzip | 40 MB | 53 MB |
+| + 1,500-char kw, gzip | ~130 MB | ~170 MB |
+| + distinct-word kw, board-shared words factored, cap 500, gzip | 70 MB | 92 MB |
+| same, **brotli** q11/16 MB window (chosen) | **44 MB** | **58 MB** |
+
+- Gzip cannot meet the ≤60 MB target with any useful `kw`. Brotli's large window folds each company's repeated text across the board's postings, because shards are ordered by board. Node decompresses it natively.
+- **Sharding:** one ATS × one posted-date band (0–2, 2–4, 4–8, 8–15, 15–31, 31–61, 61–121, 121–366 and 366+ days before `built_at`). Each shard holds ≤32 MB raw and ≤5 MB compressed, with records grouped by board. The Actor skips whole shards:
   - `ats` filter → other ATSs are never downloaded.
-  - `postedWithinDays` / `sinceLastRun` → bands older than the cutoff are skipped.
+  - `postedWithinDays` / `sinceLastRun` → older bands are skipped.
   - `companies` → `directory.json.gz` maps the matching boards to their shards.
-  - The rest is streamed shard by shard (gunzip + line reader, bounded memory), newest band first, and the run stops at `maxResults`.
-- **Hosting:** any static HTTPS host (S3/R2/GCS bucket, GitHub Pages or release assets, an Apify key-value store with public URLs) that serves `GET {INDEX_BASE_URL}/manifest.json`, `/directory.json.gz` and `/shards/*.jsonl.gz` as-is (no content-encoding rewriting of the `.gz` files). For local testing, `INDEX_BASE_URL`/`JOBS_INDEX_URL` also accepts a `file://` URL or an absolute path.
+- Within each shard the Actor sorts matches by `posted_at` before delivering, newest band first.
+- **Dedupe:** the same normalized company + title + locations is kept once (the most complete copy). The other ids go in `duplicate_sources`.
+
+## Publishing and hosting
+
+- The Actor reads `JOBS_INDEX_URL` (env var), else the `INDEX_BASE_URL` constant in `src/feed.js`. It needs `GET {base}/manifest.json`, `{base}/directory.json.gz` and each `{base}/<shard file>` as raw bytes. Redirects are fine (GitHub release downloads redirect). `file://` URLs and absolute paths work for local tests.
+- `publish_index.sh` (not run by the build; `source` it and call one function):
+  - `publish_github_release OWNER/REPO`: uses `$GITHUB_TOKEN` to delete the old assets of release `jobs-index`, then uploads `directory.json.gz` and `shard-<n>.jsonl.br`, with `manifest.json` last. It prints `INDEX_BASE_URL=https://github.com/OWNER/REPO/releases/download/jobs-index`.
+  - `publish_apify_kvs STORE`: uses `$APIFY_TOKEN` to PUT each record (`manifest.json`, `directory.json.gz`, `shard-<n>.jsonl.*`) and delete stale extra shards. It prints `INDEX_BASE_URL=https://api.apify.com/v2/key-value-stores/STORE/records`. The store must be publicly readable.
+  - Both publish flat names, with the manifest rewritten to match.
+- `github-workflow.yml.draft` is a daily GitHub Actions job (03:00 UTC, 330 min timeout). It restores `state/` from the Actions cache, re-validates boards (any ATS with an active ban in `state/bans.json` is skipped), builds the slim index, saves state and publishes to the release. To enable it, copy it to `.github/workflows/` (owner decision).
+- **Rate-limit bans:** a `429` with `Retry-After` > 300 s makes `validate_boards.py` stop calling that ATS and record `{ats: until}` in `state/bans.json`. Both scripts skip a banned ATS until the ban expires. The builder also stops an ATS after 5 consecutive 429s.
 
 ## Measured (2026-09-18/19, this sandbox, via a local HTTP proxy)
 
@@ -93,8 +122,16 @@ index/
 | Lever | 1,626 | 53,754 | tokens from 2025 crawls, ~54% still live |
 | Recruitee | 777 | 13,129 | |
 
-**Full index build** (all ATSs except Workable, which was blocked; `--transport curl`): **9,084 boards → 277,273 jobs → 269,391 after dedupe**. Output: **441.8 MB gzip in 120 shards** (largest 4.9 MB), built in **29 min** (1,696 s fetch plus 46 s dedupe/shard), 0 failed boards. That is ~1.6 KB gz per job. Adding Workable's ~85k jobs extrapolates to ~355k jobs and ~580 MB. At ≥3 s per Workable request it adds ~1.7 h, but it runs in parallel with the other ATSs.
+**v1 full-description index build** (superseded by v2 below; all ATSs except Workable, which was blocked; `--transport curl`): **9,084 boards → 277,273 jobs → 269,391 after dedupe**. Output: **441.8 MB gzip in 120 shards** (largest 4.9 MB), built in **29 min** (1,696 s fetch plus 46 s dedupe/shard), 0 failed boards. That is ~1.6 KB gz per job. Adding Workable's ~85k jobs extrapolates to ~355k jobs and ~580 MB. At ≥3 s per Workable request it adds ~1.7 h, but it runs in parallel with the other ATSs.
 
-**Actor against the full local index:**
-- Prefill input (engineer, remote_only, 7 days, 20 results): 1 shard read, 30 ms.
-- A worst-case query matching almost nothing: all 120 shards streamed in ~7 s, peak RSS ~140 MB.
+**Full-description index (v1, superseded):** 441.8 MB gzip for 269,391 jobs.
+
+**Slim search index (v2), 2026-09-19** (all ATSs except Workable, which is banned; `--transport curl --codec br`):
+- **Size:** 269,386 jobs from 9,070 boards (277,276 before dedupe). **43.4 MB total** (brotli, 38 shards; largest 3.6 MB; 374.7 MB raw JSONL).
+- **Build time:** 33.7 min (27.8 min fetching, bounded by Lever's 1 request/s; 5.9 min dedupe + brotli-11).
+- **With Workable:** ~85k more jobs extrapolate to ~57 MB.
+
+**Actor against the local slim index (live description fetches from this sandbox):**
+- **Prefill** (engineer, remote_only, 7 days, 20 results, includeDescription true): 1 shard read, 17 boards fetched live for descriptions, **3.7 s**, peak memory 246 MB.
+- **Worst-case keyword query** (`["kubernetes operator"]` all, all 38 shards, includeDescription true, maxResults 100): 67 matches from 45 boards, **84 s**, peak memory 307 MB. Most of that time is the live description calls. Large Greenhouse boards return multi-MB `content=true` payloads, and Lever is paced at 1 request/s.
+- **Pure scan of all 38 shards with no match:** 3.4 s, 43 MB read.
