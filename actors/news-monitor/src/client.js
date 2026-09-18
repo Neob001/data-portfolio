@@ -54,7 +54,7 @@ export function createGdeltFetcher({ fetchImpl = fetch, retries = 5, timeoutMs =
         if (e.name === 'AbortError') {
           lastErr = Object.assign(new Error(`Timeout after ${timeoutMs}ms at ${url}`), { failureClass: 'timeout' });
         } else if (!e.failureClass) {
-          lastErr = Object.assign(new Error(`${e.message} at ${url}`), { failureClass: 'site_down' });
+          lastErr = Object.assign(new Error(`${e.message}${e.cause ? ` (${e.cause.code || e.cause.message})` : ''} at ${url}`), { failureClass: 'site_down' });
         } else {
           lastErr = e;
         }

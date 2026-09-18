@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "apify": "^3.2.6",
-    "undici": "^6.21.0"
+    "got-scraping": "^4.1.1"
   },
   "scripts": {
     "start": "node src/main.js",

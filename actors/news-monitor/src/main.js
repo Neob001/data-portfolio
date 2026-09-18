@@ -1,5 +1,5 @@
 import { Actor, log } from 'apify';
-import { ProxyAgent, fetch as undiciFetch } from 'undici';
+import { gotScraping } from 'got-scraping';
 import { writeRunSummary } from './lib/run_summary.js';
 import { loadTracker } from './lib/incremental.js';
 import { createGdeltFetcher } from './client.js';
@@ -34,9 +34,12 @@ if (Actor.isAtHome() && input.proxyConfiguration?.useApifyProxy !== false) {
     .catch((e) => { log.warning(`Apify Proxy unavailable, calling GDELT directly: ${e.message}`); return null; });
 }
 const fetchImpl = proxyConfiguration
-  ? async (url, opts) => {
+  ? async (url, opts = {}) => {
     const proxyUrl = await proxyConfiguration.newUrl(`gdelt${Math.floor(Math.random() * 1e9)}`);
-    return undiciFetch(url, { ...opts, dispatcher: new ProxyAgent(proxyUrl) });
+    const res = await gotScraping({
+      url, proxyUrl, headers: opts.headers, signal: opts.signal, throwHttpErrors: false, responseType: 'text', retry: { limit: 0 },
+    });
+    return { status: res.statusCode, ok: res.statusCode >= 200 && res.statusCode < 300, text: async () => res.body };
   }
   : fetch;
 
