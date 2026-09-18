@@ -790,7 +790,7 @@
         ]
       },
       "staging_validated": true,
-      "monetization_configured": false,
+      "monetization_configured": true,
       "staging_started_at": "2026-09-18T15:11:46Z"
     }
   },
