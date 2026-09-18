@@ -39,3 +39,4 @@ Item ids come from WEEKLY_REPORT.md. Nothing ships to a new data source, changes
 2026-09-18 | APPROVE | A2 App Store reviews | Owner, in chat: Apple's official public customer-reviews RSS feed; reviewer names dropped.
 2026-09-18 | APPROVE | F1 freeze official-data niches | Owner, in chat: no new small official-data Actors; existing 19 are maintenance-only; spike monitor shelved.
 2026-09-18 | APPROVE | D2 distribution pages | Owner, in chat: one-time static tutorial pages (GitHub Pages) per Actor with API examples.
+2026-09-18 | REJECT | A2 App Store reviews | Auto-rejected under standing ToS rule (CLAUDE.md rule 3) before any code: Apple Media Services Terms (apple.com/legal/internet-services/itunes/us/terms.html) limit Content to personal, noncommercial use and prohibit automated scraping/analysis; the iTunes Search API terms grant no commercial redistribution. Owner's A2 approval superseded.
