@@ -37,6 +37,9 @@ async function rawFetch(fetchImpl, url, method, timeoutMs, userAgent, extraSigna
     });
     return { res };
   } catch (e) {
+    // Cut off by the run's time budget: the link was never really checked, so it must not be
+    // reported as a timeout (staging 2026-09-18: 979 false "broken" links on a 50-page run).
+    if (extraSignal?.aborted) return { errorCode: 'aborted' };
     return { errorCode: classifyFetchError(e) || 'connection_refused' };
   }
 }
@@ -84,9 +87,11 @@ async function fetchChain(fetchImpl, startUrl, { method, readBody, timeoutMs, us
 async function performCheck(fetchImpl, url, { timeoutMs, userAgent, readBody, forceGet, extraSignal }) {
   let method = forceGet ? 'GET' : 'HEAD';
   let result = await fetchChain(fetchImpl, url, { method, readBody: forceGet ? readBody : false, timeoutMs, userAgent, extraSignal });
+  if (result.errorCode === 'aborted') return result;
   if (!forceGet && (result.errorCode || METHOD_FALLBACK_STATUSES.has(result.status))) {
     method = 'GET';
     result = await fetchChain(fetchImpl, url, { method, readBody, timeoutMs, userAgent, extraSignal });
+    if (result.errorCode === 'aborted') return result;
   }
   if (result.errorCode === 'timeout' || (typeof result.status === 'number' && result.status >= 500)) {
     result = await fetchChain(fetchImpl, url, { method, readBody, timeoutMs, userAgent, extraSignal }); // 1 retry
@@ -271,7 +276,9 @@ export async function crawlSite(startUrlRaw, options, deps) {
     if (timeUp()) return Promise.resolve({ skipped: true });
     entry._checkPromise = checkPool
       .add(hostKey(url), async () => {
-        entry.result = await checkLink(fetchImpl, url, { timeoutMs, userAgent, extraSignal: timeState.signal });
+        const r = await checkLink(fetchImpl, url, { timeoutMs, userAgent, extraSignal: timeState.signal });
+        if (r.errorCode === 'aborted') return { skipped: true };
+        entry.result = r;
         return { skipped: false };
       })
       .catch(() => ({ skipped: true }));
@@ -283,6 +290,7 @@ export async function crawlSite(startUrlRaw, options, deps) {
     visitedForCrawl.add(pageUrl);
 
     const result = await fetchPage(fetchImpl, pageUrl, { timeoutMs, userAgent, extraSignal: timeState.signal });
+    if (result.errorCode === 'aborted') return; // time budget ran out mid-fetch: page neither scanned nor charged
     const entry = ensureEntry(pageUrl, 'a', 'internal');
     if (entry.result === undefined) entry.result = result;
 

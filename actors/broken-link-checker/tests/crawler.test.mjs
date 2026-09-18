@@ -441,7 +441,7 @@ test('maxRunMinutes: once the deadline has passed, a page still crawls fine but 
   assert.ok(!rows.some((r) => r.link_url && r.link_url.includes('never-crawled')), 'never-crawled was discovered too late to be enqueued');
 });
 
-test('maxRunMinutes: a check already in flight when the deadline passes is aborted after the grace period, but still counts as checked', async () => {
+test('maxRunMinutes: a check still in flight at deadline+grace is aborted, never reported as broken, and its page is not charged', async () => {
   const slow = http.createServer((req, res) => {
     setTimeout(() => { res.writeHead(200, { 'content-type': 'text/plain' }); res.end('ok'); }, 3000);
   });
@@ -474,13 +474,11 @@ test('maxRunMinutes: a check already in flight when the deadline passes is abort
 
   await Promise.all([new Promise((r) => site.close(r)), new Promise((r) => slow.close(r))]);
 
-  // The check started well within the 30ms deadline (home resolves almost instantly locally), so
-  // it is not skipped -- it is aborted by the wind-down signal at deadline+grace (~330ms) rather
-  // than running the full 3s, and the page that discovered it is still charged.
+  // The wind-down signal cuts the 3s hang short at deadline+grace (~330ms). An interrupted check
+  // is unknown, not broken: no row for it, and the page whose links were not all checked is free.
   assert.ok(elapsed < 2000, `expected the wind-down abort to cut the 3s hang short, took ${elapsed}ms`);
-  assert.equal(chargeCalls, 1);
-  const slowRow = rows.find((r) => r.link_url === slowUrl);
-  assert.equal(slowRow.is_broken, true);
-  assert.equal(slowRow.error, 'timeout');
+  assert.equal(chargeCalls, 0);
+  assert.equal(rows.find((r) => r.link_url === slowUrl), undefined);
+  assert.equal(summaries[0].broken_links, 0);
   assert.equal(summaries[0].status, 'time_limit_reached');
 });
