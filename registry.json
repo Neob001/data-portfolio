@@ -792,6 +792,40 @@
       "staging_validated": true,
       "monetization_configured": true,
       "staging_started_at": "2026-09-18T15:11:46Z"
+    },
+    "ats-jobs-feed": {
+      "apify_actor_id": null,
+      "source": "Public ATS job-board APIs: Greenhouse, Lever, Ashby, Workable, Recruitee (SmartRecruiters excluded: robots.txt). Board directory from Common Crawl index.",
+      "variant": "search index + live",
+      "status": "building",
+      "approval": "J1 APPROVED by owner 2026-09-18 (chat)",
+      "origin": "scan",
+      "incumbent_actor_id": null,
+      "first_paid_run_date": null,
+      "ppe_events": {
+        "job-result": {
+          "proposed_price_usd": 0.003,
+          "title": "Job result",
+          "description": "One job posting delivered. Nothing else is charged."
+        }
+      },
+      "pricing_rationale": "Leader fantastic-jobs/career-site-job-listing-api $12/1k with 1,441 real users; we launch at $3/1k.",
+      "launched_at": null,
+      "last_fix_date": null,
+      "kpis": {},
+      "listing": {
+        "title": "Jobs Feed API — Greenhouse, Lever, Ashby & More Job Boards",
+        "description": "Search live openings from thousands of companies' official Greenhouse, Lever, Ashby, Workable and Recruitee job boards. Deduplicated JSON with salary, remote and location filters. $3 per 1,000 jobs.",
+        "seoTitle": "Jobs Feed API: Greenhouse, Lever, Ashby & Workable Jobs",
+        "seoDescription": "Search 270k+ open jobs from 11k company career sites (Greenhouse, Lever, Ashby, Workable, Recruitee). Daily new-jobs feed, salary, remote filters. Pay per job.",
+        "categories": [
+          "JOBS",
+          "LEAD_GENERATION"
+        ]
+      },
+      "notes": "Index hosting pending owner decision (public GitHub release vs private Apify storage). Workable returned 429 with 23h back-off after ~3,650 requests at 1-2 rps; builder now paces 3s.",
+      "staging_validated": false,
+      "monetization_configured": false
     }
   },
   "apify_account": "factpipe",

@@ -1,0 +1,115 @@
+{
+  "title": "Jobs Feed API",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "keywords": {
+      "title": "Keywords",
+      "type": "array",
+      "description": "Words or phrases to find in the job title or description (case-insensitive). Leave empty for all jobs.",
+      "editor": "stringList",
+      "prefill": ["engineer"]
+    },
+    "keywordMatch": {
+      "title": "Keyword match",
+      "type": "string",
+      "description": "\"any\": a job needs at least one keyword. \"all\": a job needs every keyword.",
+      "editor": "select",
+      "enum": ["any", "all"],
+      "enumTitles": ["Any keyword", "All keywords"],
+      "default": "any"
+    },
+    "excludeKeywords": {
+      "title": "Exclude keywords (title)",
+      "type": "array",
+      "description": "Drop jobs whose title contains any of these, e.g. \"senior\", \"intern\".",
+      "editor": "stringList"
+    },
+    "locations": {
+      "title": "Locations",
+      "type": "array",
+      "description": "City, state, country or region as written in the posting (e.g. \"Berlin\", \"California\", \"Remote (EU)\"), or a 2-letter ISO country code (e.g. \"US\", \"DE\"). A job matches if any location matches.",
+      "editor": "stringList"
+    },
+    "remote": {
+      "title": "Remote",
+      "type": "string",
+      "description": "remote_only: remote jobs only. onsite_only: excludes jobs marked remote (on-site, hybrid and unspecified remain).",
+      "editor": "select",
+      "enum": ["any", "remote_only", "onsite_only"],
+      "enumTitles": ["Any", "Remote only", "Exclude remote"],
+      "default": "any",
+      "prefill": "remote_only"
+    },
+    "postedWithinDays": {
+      "title": "Posted within (days)",
+      "type": "integer",
+      "description": "Only jobs first published in the last N days. Empty = any age.",
+      "minimum": 1,
+      "maximum": 3650,
+      "prefill": 7
+    },
+    "companies": {
+      "title": "Companies",
+      "type": "array",
+      "description": "Only these companies: company names (\"Datadog\") or board tokens (\"datadog\", \"greenhouse:datadog\").",
+      "editor": "stringList"
+    },
+    "ats": {
+      "title": "Job-board platforms",
+      "type": "array",
+      "description": "Only jobs from these applicant tracking systems. Empty = all.",
+      "editor": "select",
+      "items": {
+        "type": "string",
+        "enum": ["greenhouse", "lever", "ashby", "workable", "recruitee"],
+        "enumTitles": ["Greenhouse", "Lever", "Ashby", "Workable", "Recruitee"]
+      }
+    },
+    "departments": {
+      "title": "Departments",
+      "type": "array",
+      "description": "Substring match on department or team, e.g. \"engineering\", \"sales\".",
+      "editor": "stringList"
+    },
+    "employmentTypes": {
+      "title": "Employment types",
+      "type": "array",
+      "description": "Normalized employment type. Jobs whose ATS does not state one (most Greenhouse boards) are excluded when this is set.",
+      "editor": "select",
+      "items": {
+        "type": "string",
+        "enum": ["full_time", "part_time", "contract", "temporary", "internship", "other"],
+        "enumTitles": ["Full-time", "Part-time", "Contract", "Temporary", "Internship", "Other"]
+      }
+    },
+    "maxResults": {
+      "title": "Max results",
+      "type": "integer",
+      "description": "Maximum number of jobs to return (and charge for). Newest first.",
+      "default": 100,
+      "minimum": 1,
+      "maximum": 1000000,
+      "prefill": 20
+    },
+    "includeDescription": {
+      "title": "Include full description",
+      "type": "boolean",
+      "description": "Full plain-text job description (HTML stripped, contact details redacted, max 20,000 characters). A 300-character snippet is always included.",
+      "default": true
+    },
+    "sinceLastRun": {
+      "title": "Only new jobs since last run",
+      "type": "boolean",
+      "description": "Incremental feed: remembers delivered jobs per filter combination (in a named key-value store in your account) and returns only jobs posted since, so a scheduled run never re-delivers or re-charges a job.",
+      "default": false
+    },
+    "companyUrls": {
+      "title": "Live mode: job-board URLs",
+      "type": "array",
+      "description": "Optional. Fetch these boards live instead of searching the index, e.g. https://job-boards.greenhouse.io/gitlab, https://jobs.lever.co/acme, https://jobs.ashbyhq.com/acme, https://apply.workable.com/acme, https://acme.recruitee.com or \"greenhouse:gitlab\". All filters above still apply.",
+      "editor": "stringList",
+      "sectionCaption": "Live mode (companies not yet in the index)"
+    }
+  }
+}

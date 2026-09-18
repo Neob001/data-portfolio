@@ -1,0 +1,5 @@
+# Rebuildable artefacts: only boards.json (the company directory) is committed.
+index/
+state/
+candidates.json
+__pycache__/

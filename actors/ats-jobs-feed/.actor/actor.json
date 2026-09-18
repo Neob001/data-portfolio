@@ -1,0 +1,249 @@
+{
+  "actorSpecification": 1,
+  "name": "ats-jobs-feed",
+  "title": "Jobs Feed API — Greenhouse, Lever, Ashby & More Job Boards",
+  "description": "Search live openings from thousands of companies' official Greenhouse, Lever, Ashby, Workable and Recruitee job boards. Deduplicated JSON with salary, remote and location filters. $3 per 1,000 jobs.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "outputSchema": "./output_schema.json",
+  "categories": [
+    "JOBS",
+    "LEAD_GENERATION"
+  ],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "jobs": {
+          "title": "Jobs",
+          "transformation": {
+            "fields": [
+              "title",
+              "company_name",
+              "locations",
+              "workplace_type",
+              "salary_min",
+              "salary_max",
+              "salary_currency",
+              "posted_at",
+              "ats",
+              "job_url"
+            ]
+          },
+          "display": {
+            "component": "table",
+            "properties": {
+              "title": {
+                "label": "Title",
+                "format": "text"
+              },
+              "company_name": {
+                "label": "Company",
+                "format": "text"
+              },
+              "locations": {
+                "label": "Locations",
+                "format": "array"
+              },
+              "workplace_type": {
+                "label": "Workplace",
+                "format": "text"
+              },
+              "salary_min": {
+                "label": "Salary min",
+                "format": "number"
+              },
+              "salary_max": {
+                "label": "Salary max",
+                "format": "number"
+              },
+              "salary_currency": {
+                "label": "Currency",
+                "format": "text"
+              },
+              "posted_at": {
+                "label": "Posted",
+                "format": "date"
+              },
+              "ats": {
+                "label": "ATS",
+                "format": "text"
+              },
+              "job_url": {
+                "label": "Job",
+                "format": "link"
+              }
+            }
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "job_id": {
+            "type": "string",
+            "description": "Stable id: ats:board:posting_id"
+          },
+          "title": {
+            "type": "string"
+          },
+          "company_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "company_board": {
+            "type": "string"
+          },
+          "ats": {
+            "type": "string",
+            "enum": [
+              "greenhouse",
+              "lever",
+              "ashby",
+              "workable",
+              "recruitee"
+            ]
+          },
+          "department": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "team": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "employment_type": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "full_time",
+              "part_time",
+              "contract",
+              "temporary",
+              "internship",
+              "other"
+            ]
+          },
+          "workplace_type": {
+            "type": "string",
+            "enum": [
+              "remote",
+              "hybrid",
+              "onsite",
+              "unknown"
+            ]
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "country_codes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "remote": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "salary_min": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "salary_max": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "salary_currency": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "salary_period": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "year",
+              "month",
+              "week",
+              "day",
+              "hour"
+            ]
+          },
+          "posted_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "apply_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "job_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "description_text": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "description_snippet": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "duplicate_sources": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

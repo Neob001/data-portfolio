@@ -1,0 +1,17 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Output of ats-jobs-feed",
+  "type": "object",
+  "properties": {
+    "resultsDatasetUrl": {
+      "type": "string",
+      "title": "Jobs",
+      "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=jobs"
+    },
+    "runSummary": {
+      "type": "string",
+      "title": "Run summary",
+      "template": "{{actorRun.defaultKeyValueStoreUrl}}/records/RUN_SUMMARY"
+    }
+  }
+}
