@@ -678,7 +678,7 @@
       "apify_actor_id": "FErlINXi1bzBIRoAD",
       "source": "User-supplied public websites (HTTP HEAD/GET, robots.txt respected for crawling)",
       "variant": "crawl",
-      "status": "staging",
+      "status": "live",
       "approval": "N7 APPROVED by owner 2026-09-15 (chat); PUB-3 publish approved",
       "origin": "scan",
       "incumbent_actor_id": null,
@@ -704,9 +704,16 @@
           "DEVELOPER_TOOLS"
         ]
       },
-      "staging_validated": false,
+      "staging_validated": true,
       "monetization_configured": false,
-      "staging_started_at": "2026-09-15T13:02:52Z"
+      "staging_started_at": "2026-09-15T13:02:52Z",
+      "notes": "Public since ~2026-09-16 on pay-per-usage (no PPE) — PPE $0.0015/page pending owner OK on 14-day user notice. Auto-test flagged UNDER_MAINTENANCE 2026-09-18 (dataset enum bug); fixed + flag cleared 2026-09-18.",
+      "fix_log": [
+        {
+          "date": "2026-09-18",
+          "change": "auto-test failures: dataset record_type enum lacked unverified_link (fix was never pushed); budget-aborted checks reported as timeouts (979 false broken); default maxRunMinutes 30->3"
+        }
+      ]
     }
   },
   "apify_account": "factpipe",
