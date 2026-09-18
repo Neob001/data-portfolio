@@ -705,13 +705,22 @@
         ]
       },
       "staging_validated": true,
-      "monetization_configured": false,
+      "monetization_configured": true,
       "staging_started_at": "2026-09-15T13:02:52Z",
-      "notes": "Public since ~2026-09-16 on pay-per-usage (no PPE) — PPE $0.0015/page pending owner OK on 14-day user notice. Auto-test flagged UNDER_MAINTENANCE 2026-09-18 (dataset enum bug); fixed + flag cleared 2026-09-18.",
+      "notes": "PPE page-scanned $0.0015 configured 2026-09-18, effective 2026-10-02 (14-day notice; users emailed). Pay-per-usage until then. Auto-test incident 2026-09-18 fixed, maintenance flag cleared.",
       "fix_log": [
         {
           "date": "2026-09-18",
           "change": "auto-test failures: dataset record_type enum lacked unverified_link (fix was never pushed); budget-aborted checks reported as timeouts (979 false broken); default maxRunMinutes 30->3"
+        }
+      ],
+      "price_history": [
+        {
+          "date": "2026-09-18",
+          "event": "page-scanned",
+          "from": "pay-per-usage",
+          "to": 0.0015,
+          "effective": "2026-10-02"
         }
       ]
     }
