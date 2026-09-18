@@ -1,0 +1,41 @@
+query                        realUsers(top20) results leader(users,$/1k,rating) share
+instagram scraper                      120558    5546 apify/instagram-scraper (43264,2.7,4.7) 36%
+google maps scraper                     56175    9286 compass/crawler-google-places (37206,4.0,4.7) 66%
+tiktok scraper                          45350    4391 clockworks/tiktok-scraper (23069,3.7,4.8) 51%
+linkedin jobs                           31825    5655 curious_coder/linkedin-jobs-scraper (18033,2.0,4.6) 57%
+reviews scraper                         30130   28574 compass/Google-Maps-Reviews-Scraper (6872,0.6,4.9) 23%
+google search results                   19828   14498 apify/google-search-scraper (17681,4.5,4.7) 89%
+twitter scraper                         18485   14884 apidojo/tweet-scraper (7712,0.4,3.9) 42%
+reddit scraper                          15047    2364 trudax/reddit-scraper-lite (7411,4.0,4.6) 49%
+website content crawler                 11503   10944 apify/website-content-crawler (11289,None,4.6) 98%
+youtube transcript                       9247    2335 pintostudio/youtube-transcript-scraper (2384,10.0,3.7) 26%
+indeed jobs                              8417    1794 valig/indeed-jobs-scraper (3943,0.1,4.7) 47%
+amazon product                           2893    3447 junglee/Amazon-crawler (2019,5.0,4.2) 70%
+zillow                                   2731    1286 maxcopell/zillow-detail-scraper (1014,3.6,4.3) 37%
+job listings                             2720   10124 fantastic-jobs/career-site-job-listing-a (1441,12.0,4.1) 53%
+contact details scraper                  2396   18960 vdrmota/contact-info-scraper (2158,2.0,4.7) 90%
+trustpilot reviews                       1638    1316 memo23/trustpilot-scraper-ppe (705,0.75,4.8) 43%
+news scraper                             1146   33922 data_xplorer/google-news-scraper-fast (488,4.0,4.9) 43%
+screenshot website                       1134     957 apify/screenshot-url (956,None,3.9) 84%
+app store reviews                         653    5539 thewolves/appstore-reviews-scraper (341,0.1,5.0) 52%
+shopify store                             613    2432 clearpath/shopify-store-leads (199,5.99,4.4) 32%
+booking hotels                            382    1357 santamaria-automations/booking-com-scrap (253,3.0,0) 66%
+serp api                                  367    2613 s-r/free-google-search-results-serp---on (157,0.35,4.5) 43%
+stock prices                              359    8286 zen-studio/shopee-product-scraper (196,4.99,0) 55%
+weather                                   176    1029 bigdavidson/kalshi-weather-markets (88,1.0,5) 50%
+email extractor website                   142   13102 aitorsm/email-extractor (44,4.0,2) 31%
+rss feed                                  130    6218 automation-lab/rss-feed-reader (41,1.15,0) 32%
+real estate listings                      129    8272 swerve/madlan-scraper (25,2.0,3) 19%
+website tech stack                        109    1974 misterkhan/website-tech-stack-scanner (34,100.0,5) 31%
+company enrichment                        107    5996 foxlabs/company-enrichment (65,1.0,5) 61%
+domain whois                              100    2870 santamaria-automations/domain-whois-dns (42,3.0,0) 42%
+ecommerce product scraper                  48    4742 fetch_cat/ecommerce-product-page-scraper (21,0.39,0) 44%
+sec edgar                                  40    1184 constant_quadruped/sec-edgar-filings-scr (20,None,0) 50%
+github repositories                        29    1786 moving_beacon-owner1/github----repositor (11,10.0,0) 38%
+pdf to text                                22    1893 eliai/pdf-text-extractor (8,3.0,0) 36%
+crypto prices                              22    1334 andok/binance-ticker-scraper (4,1.0,0) 18%
+markdown for llm                            8    1116 brilliant_gum/web-content-crawler (2,20.0,0) 25%
+sanctions screening                         6     438 zinin/sanctions-screening (3,5.0,0) 50%
+vat validation                              3     280 andok/contact-scraper (2,1.0,0) 67%
+rag web scraper                             2    1008 craftbox/fast-markdown-for-rag (1,1.5,0) 50%
+ssl certificate                             1     374 santamaria-automations/ssl-certificate-i (1,1.0,0) 100%

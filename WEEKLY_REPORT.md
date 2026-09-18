@@ -1,3 +1,18 @@
+# Revenue diagnosis — 2026-09-18 (owner asked: why so slow?)
+
+- **Revenue $0. Real users 0.** All 19 Actors show exactly 1 user in 30 days: Apify's daily auto-tester.
+- **Root cause: we built in the wrong part of the market.** Broad Store scan (state/broad_demand_scan_2026-09-18.txt), real users across the top 20 Actors per query: Instagram 120k, Google Maps 56k, TikTok 45k, LinkedIn jobs 32k, Indeed 8k, career-site job listings 2.7k — versus SEC EDGAR 40, sanctions 6, VAT 3. Our official-data niches are 100–10,000x smaller than where buyers are.
+- **Most big demand is off-limits under our rules** (Google, social networks, LinkedIn, Indeed, Amazon forbid automated access). The largest legal-safe pool is **job listings from companies' public applicant-tracking-system (ATS) job boards** (Greenhouse, Lever, Ashby: public APIs built for syndication). The leader there serves 1,441 real users at $12 per 1,000.
+- **Cold start:** Store ranking favors Actors that already have users; new Actors with 0 users sit below position 50 for head terms.
+
+## Decisions needed (reply yes/no per item)
+- **J1 Jobs feed (flagship):** aggregate public ATS job boards (Greenhouse, Lever, Ashby; plus Workable, SmartRecruiters, Recruitee as new sources) into a searchable, deduplicated daily feed. $3 per 1,000 jobs. About 3 days.
+- **S2 Website screenshot:** bulk screenshots of user-supplied URLs; 1.1k real users, leader rated 3.9. About 1 day.
+- **N9 News monitor via GDELT (open data):** keyword and company news; also adverse-media screening next to sanctions. About 2 days.
+- **A2 App Store reviews via Apple's official public RSS feed:** reviewer names dropped. About 1 day.
+- **F1 Freeze:** no new official-data niche builds; the 19 existing Actors are maintenance-only.
+- **D2 Distribution:** static tutorial pages (GitHub Pages) for each Actor, with copy-paste API examples. One-time content; no ongoing interaction.
+
 # Weekly report — updated 2026-09-15 (revenue sprint — shipped)
 
 ## Money
