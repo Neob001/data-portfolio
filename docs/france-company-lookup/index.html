@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>France Company Lookup API: SIREN, SIRET &amp; Sirene Data</title>
+<meta name="description" content="Look up French companies by SIREN, SIRET or name from official Sirene open data: legal form, NAF code, address, headcount, VAT. No key, no personal data.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/france-company-lookup/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="France Company Lookup API: SIREN, SIRET &amp; Sirene Data">
+<meta property="og:description" content="Look up French companies by SIREN, SIRET or name from official Sirene open data: legal form, NAF code, address, headcount, VAT. No key, no personal data.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/france-company-lookup/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "France Company Lookup API \u2014 SIREN, SIRET & Sirene Data",
+  "description": "Look up French companies by SIREN, SIRET or name in the official Sirene registry: legal form, NAF code, head office, headcount, status, computed VAT number. Bulk, no API key, no personal data. $3 per 1,000 found.",
+  "url": "https://neob001.github.io/data-portfolio/france-company-lookup/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "3",
+    "description": "Pay-per-result pricing: $3 per 1,000 company founds",
+    "url": "https://apify.com/factpipe/france-company-lookup"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>France Company Lookup API — SIREN, SIRET &amp; Sirene Company Data</h1>
+<p>Look up <strong>French companies</strong> by <strong>SIREN</strong>, <strong>SIRET</strong> or company name and get a clean, flat JSON record from the official French government <strong>API Recherche d&#x27;entreprises</strong> (INSEE Sirene + RNE open data): legal form, NAF/APE activity code, head office address, headcount band, SME/ETI/GE category, creation and closure dates, active status, latest revenue, labels (ESS, RGE, Qualiopi...) and a computed intra-EU <strong>VAT number</strong>. Built for KYB checks, lead enrichment, CRM cleanup and AI-agent pipelines. <strong>You are only charged for companies found</strong> — misses are free.</p>
+<p><em>Mots-clés : recherche entreprise par SIREN, SIRET, nom ; base Sirene INSEE ; fiche entreprise ; code NAF / APE ; forme juridique ; numéro de TVA intracommunautaire ; annuaire des entreprises.</em></p>
+<div class="quick-facts"><span class="badge">$3 / 1,000</span><a class="button" href="https://apify.com/factpipe/france-company-lookup" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the prefilled queries (the name <code>Airbus</code> and EDF&#x27;s SIREN <code>552081317</code>). It finishes in seconds.</li><li>You get up to 6 company records with legal form, NAF code, head office, headcount band, status and computed VAT number.</li><li>That first run costs at most $0.018, well within Apify&#x27;s free monthly credit. Then swap in your own list or schedule it.</li></ol>
+<h2 id="what-you-get">What you get</h2>
+<pre><code class="language-json">{
+  &quot;query&quot;: &quot;552 081 317&quot;,
+  &quot;found&quot;: true,
+  &quot;reason&quot;: null,
+  &quot;siren&quot;: &quot;552081317&quot;,
+  &quot;siret_head_office&quot;: &quot;55208131766522&quot;,
+  &quot;company_name&quot;: &quot;ELECTRICITE DE FRANCE&quot;,
+  &quot;company_full_name&quot;: &quot;ELECTRICITE DE FRANCE (EDF)&quot;,
+  &quot;acronym&quot;: &quot;EDF&quot;,
+  &quot;legal_form_code&quot;: &quot;5599&quot;,
+  &quot;legal_form&quot;: &quot;SA à conseil d&#x27;administration (s.a.i.)&quot;,
+  &quot;naf_code&quot;: &quot;35.11Z&quot;,
+  &quot;naf_label&quot;: &quot;Production d’électricité&quot;,
+  &quot;naf_2025_code&quot;: &quot;35.11Y&quot;,
+  &quot;activity_section&quot;: &quot;D&quot;,
+  &quot;activity_section_label&quot;: &quot;Electricity, gas, steam and air conditioning supply&quot;,
+  &quot;employee_range_code&quot;: &quot;53&quot;,
+  &quot;employee_range&quot;: &quot;10,000+ employees&quot;,
+  &quot;employee_range_year&quot;: 2023,
+  &quot;company_category&quot;: &quot;GE&quot;,
+  &quot;company_category_label&quot;: &quot;Large enterprise (GE)&quot;,
+  &quot;creation_date&quot;: &quot;1955-01-01&quot;,
+  &quot;closure_date&quot;: null,
+  &quot;is_active&quot;: true,
+  &quot;head_office_address&quot;: &quot;22-30 22 AVENUE DE WAGRAM 75008 PARIS&quot;,
+  &quot;head_office_street&quot;: &quot;22 AVENUE DE WAGRAM&quot;,
+  &quot;head_office_postal_code&quot;: &quot;75008&quot;,
+  &quot;head_office_city&quot;: &quot;PARIS&quot;,
+  &quot;head_office_department_code&quot;: &quot;75&quot;,
+  &quot;head_office_department&quot;: &quot;Paris&quot;,
+  &quot;head_office_region_code&quot;: &quot;11&quot;,
+  &quot;head_office_region&quot;: &quot;Île-de-France&quot;,
+  &quot;head_office_country&quot;: &quot;France&quot;,
+  &quot;head_office_latitude&quot;: 48.876235098,
+  &quot;head_office_longitude&quot;: 2.2979350788,
+  &quot;establishments_count&quot;: 9157,
+  &quot;open_establishments_count&quot;: 3556,
+  &quot;revenue_eur&quot;: 118690000000,
+  &quot;net_income_eur&quot;: 11854000000,
+  &quot;financials_year&quot;: 2024,
+  &quot;is_ess&quot;: false,
+  &quot;is_association&quot;: false,
+  &quot;is_public_administration&quot;: false,
+  &quot;is_mission_company&quot;: false,
+  &quot;is_entertainment_licensee&quot;: false,
+  &quot;is_training_organization&quot;: true,
+  &quot;is_qualiopi_certified&quot;: true,
+  &quot;is_rge_certified&quot;: true,
+  &quot;is_organic_certified&quot;: false,
+  &quot;is_siae&quot;: false,
+  &quot;is_finess&quot;: true,
+  &quot;is_living_heritage_company&quot;: false,
+  &quot;has_responsible_purchasing_label&quot;: true,
+  &quot;has_egapro_index&quot;: true,
+  &quot;has_ghg_report&quot;: true,
+  &quot;vat_number_computed&quot;: &quot;FR03552081317&quot;,
+  &quot;matched_siret&quot;: null,
+  &quot;establishment_is_head_office&quot;: null,
+  &quot;establishment_is_active&quot;: null,
+  &quot;establishment_address&quot;: null,
+  &quot;establishment_postal_code&quot;: null,
+  &quot;establishment_city&quot;: null,
+  &quot;establishment_naf_code&quot;: null,
+  &quot;establishment_employee_range_code&quot;: null,
+  &quot;establishment_creation_date&quot;: null,
+  &quot;establishment_closure_date&quot;: null,
+  &quot;last_update&quot;: &quot;2026-09-14&quot;,
+  &quot;annuaire_url&quot;: &quot;https://annuaire-entreprises.data.gouv.fr/entreprise/552081317&quot;,
+  &quot;source_url&quot;: &quot;https://recherche-entreprises.api.gouv.fr/search?q=552081317&amp;page=1&amp;per_page=5&amp;minimal=true&amp;include=siege%2Ccomplements%2Cfinances%2Cmatching_etablissements&quot;,
+  &quot;fetched_at&quot;: &quot;2026-09-15T12:00:00.000Z&quot;
+}</code></pre>
+<p>For a <strong>SIRET</strong> query you get the same company record plus the <code>establishment_*</code> fields of that exact establishment (address, status, activity, headcount band). Queries that do not resolve come back as <code>{&quot;query&quot;: &quot;...&quot;, &quot;found&quot;: false, &quot;reason&quot;: &quot;not_found&quot;}</code> and are never charged.</p>
+<h2 id="no-personal-data">No personal data</h2>
+<p>Company facts only. This Actor <strong>never returns officers (dirigeants), shareholders or any person&#x27;s name</strong>. <strong>Officers and sole-proprietor records are excluded</strong>: an <em>entrepreneur individuel</em> (legal form 1000) is registered under the owner&#x27;s own name and home address, so a SIREN/SIRET lookup for one returns <code>found: false, reason: &quot;individual_entrepreneur_excluded&quot;</code> and name searches silently skip them — never charged. Non-diffusible units (statut de diffusion partiel/non diffusible) and groupings of natural persons (indivisions) are excluded the same way. Name searches also ignore companies matched only through an officer&#x27;s name, so a person&#x27;s name cannot be turned into a list of their companies.</p>
+<h2 id="use-cases">Use cases</h2>
+<ul><li><strong>KYB / customer onboarding</strong>: verify that a French counterparty exists, is active, and check its legal form, age and registered head office in bulk.</li><li><strong>Lead enrichment</strong>: turn company names or SIRENs into NAF sector, headcount band, SME/ETI/GE category, revenue and location for segmentation and scoring.</li><li><strong>CRM cleanup</strong>: normalise company names, fix SIREN/SIRET typos (checksums validated before any call) and flag closed companies.</li><li><strong>Supplier &amp; procurement checks</strong>: confirm supplier status, compute the intra-EU VAT number, spot RGE / Qualiopi / ESS labels.</li><li><strong>AI agents</strong>: tiny input schema, deterministic flat JSON — ideal via the Apify API or MCP.</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/france-company-lookup" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~france-company-lookup/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;queries&quot;: [&quot;Airbus&quot;, &quot;552081317&quot;]}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;queries&quot;: [
+    &quot;Airbus&quot;,
+    &quot;552081317&quot;
+  ]
+}
+
+run = client.actor(&quot;factpipe/france-company-lookup&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;queries&quot;: [
+    &quot;Airbus&quot;,
+    &quot;552081317&quot;
+  ]
+};
+
+const run = await client.actor(&#x27;factpipe/france-company-lookup&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>queries</code></td><td>string[], required</td><td>Company names, 9-digit SIREN or 14-digit SIRET (spaces allowed), e.g. <code>Airbus</code>, <code>552081317</code>, <code>383 474 814 00100</code></td></tr><tr><td><code>maxResultsPerQuery</code></td><td>integer, default 5 (1-100)</td><td>Companies per name search. <code>1</code> = single best-match mode: only a confident name match is returned, otherwise not found (free)</td></tr><tr><td><code>postalCode</code></td><td>string, optional</td><td>Name searches: establishment postal code, e.g. <code>75008</code></td></tr><tr><td><code>department</code></td><td>string, optional</td><td>Name searches: department code, e.g. <code>69</code>, <code>2A</code>, <code>971</code></td></tr><tr><td><code>nafCode</code></td><td>string, optional</td><td>Name searches: NAF/APE code, e.g. <code>62.01Z</code></td></tr><tr><td><code>onlyActive</code></td><td>boolean, default <code>true</code></td><td>Name searches: skip ceased companies. SIREN/SIRET lookups always return the company with <code>is_active</code></td></tr><tr><td><code>minEmployeeRange</code></td><td>select, optional</td><td>Name searches: minimum INSEE headcount band (1+, 10+, 50+, 250+ ... employees)</td></tr></tbody></table></div>
+<p>SIREN/SIRET lookups ignore filters and always return exactly that company. Invalid identifiers (failed Luhn checksum, wrong length) are reported without calling the API. The official API caps a search at 10,000 results (25 per page); this Actor pages automatically up to <code>maxResultsPerQuery</code>.</p>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>company-found</code></td><td><strong>$3 per 1,000</strong> ($0.003 each)</td><td>One company record delivered with <code>found: true</code>. <strong>Not-found queries, invalid identifiers, excluded sole proprietors and API failures are never charged.</strong></td></tr></tbody></table></div>
+<p>Example: looking up 1,000 SIRENs that all resolve costs <strong>$3</strong>. A name search with <code>maxResultsPerQuery: 5</code> that returns 5 companies costs $0.015. Set a maximum charge per run in Apify and the Actor stops cleanly when it is reached.</p>
+<h2 id="source-and-licence">Source and licence</h2>
+<ul><li>Data: <a href="https://recherche-entreprises.api.gouv.fr/docs/">API Recherche d&#x27;entreprises</a> operated by the Direction interministérielle du numérique (DINUM), aggregating the INSEE Sirene register, the RNE (INPI) and public labels. Open access, no account or API key.</li><li>Licence: Sirene and Annuaire des Entreprises datasets are published on data.gouv.fr under the <a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence">Licence Ouverte / Open Licence 2.0</a>, which allows reuse including commercial reuse with attribution. Source: INSEE (base Sirene), INPI (RNE), DINUM (Annuaire des Entreprises).</li><li>Every record carries <code>source_url</code> (the exact API request) and <code>annuaire_url</code> (the public company page).</li><li><code>vat_number_computed</code> is <strong>computed</strong> from the SIREN with the standard French key formula (<code>FR</code> + key + SIREN). It shows what the VAT number is if the company is VAT-registered; it does not prove registration. Verify it with <a href="../eu-vat-validation/">EU VAT Validation</a>.</li><li>Labels (<code>legal_form</code>, <code>naf_label</code>) are the official INSEE nomenclature labels in French.</li></ul>
+<h2 id="factpipe-compliance-suite">factpipe Compliance Suite</h2>
+<p>Official-source compliance data, all pay-per-result and runnable from one Apify account. Same conventions everywhere: flat records, ISO dates, <code>source_url</code> and <code>fetched_at</code> on every row, and no charge for empty or failed lookups, so outputs join cleanly in a single KYB, AML or GRC pipeline.</p>
+<div class="table-wrap"><table><thead><tr><th>Workflow</th><th>Actor</th><th>What it does</th><th>Price</th></tr></thead><tbody><tr><td>Counterparty &amp; KYB checks</td><td><a href="../ofac-sanctions-screening/">OFAC Sanctions Screening</a></td><td>Screen names against the US Treasury SDN list with fuzzy matching</td><td>$3/1k</td></tr><tr><td>Counterparty &amp; KYB checks</td><td><a href="../eu-vat-validation/">EU VAT Validation</a></td><td>Validate EU VAT numbers in bulk against VIES, with registered name and address</td><td>$2/1k</td></tr><tr><td>Counterparty &amp; KYB checks</td><td><a href="../uk-company-lookup/">UK Companies House Lookup</a></td><td>Company status, SIC codes and registered office from Companies House</td><td>$2.50/1k</td></tr><tr><td>Counterparty &amp; KYB checks</td><td><strong>France Company Lookup</strong> (this Actor)</td><td>SIREN/SIRET, legal form, NAF code, head office and status from the Sirene register</td><td>$3/1k</td></tr><tr><td>Public-sector sales intelligence</td><td><a href="../sam-gov-contracts/">SAM.gov Contracts</a></td><td>Federal contract opportunities, set-asides and deadlines from SAM.gov</td><td>$2/1k</td></tr><tr><td>Public-sector sales intelligence</td><td><a href="../eu-ted-tenders-monitor/">EU Tenders (TED)</a></td><td>EU public procurement notices from TED, filterable by CPV and country</td><td>$3/1k</td></tr><tr><td>Regulatory &amp; disclosure monitoring</td><td><a href="../federal-register-monitor/">Federal Register Monitor</a></td><td>New US rules, proposed rules and notices by agency or keyword</td><td>$2.50/1k</td></tr><tr><td>Regulatory &amp; disclosure monitoring</td><td><a href="../fda-recalls-monitor/">FDA Recalls Monitor</a></td><td>FDA food, drug and device recall enforcement reports</td><td>$3/1k</td></tr><tr><td>Regulatory &amp; disclosure monitoring</td><td><a href="../sec-edgar-filings-search/">SEC EDGAR Filings</a></td><td>Full-text search across 10-K, 10-Q, 8-K and other SEC filings</td><td>$2/1k</td></tr></tbody></table></div>
+<p><strong>Use it together:</strong></p>
+<ul><li><strong>VAT check:</strong> take <code>vat_number_computed</code> from this Actor and confirm it is live in VIES with <a href="../eu-vat-validation/">EU VAT Validation</a>, which also returns the registered name and address.</li><li><strong>KYB file:</strong> confirm the French company is active here, then screen its registered name with <a href="../ofac-sanctions-screening/">OFAC Sanctions Screening</a>.</li></ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>Do I need an INSEE or API key?</strong><br>
+No. The official API Recherche d&#x27;entreprises is open access with no account. The Actor handles rate limits (the API allows 7 requests per second per IP; the Actor stays below 5) and retries with backoff.</p>
+<p><strong>Can I look up a list of SIREN or SIRET numbers in bulk?</strong><br>
+Yes. Pass hundreds or thousands of identifiers in one run; each resolves to one flat record. Checksums are validated first (including the La Poste SIRET exception), and not-found or invalid numbers are free.</p>
+<p><strong>What is the difference between SIREN and SIRET?</strong><br>
+SIREN (9 digits) identifies the company (unité légale). SIRET (14 digits = SIREN + 5-digit NIC) identifies one establishment. A SIRET query returns the company plus that establishment&#x27;s address, status and activity.</p>
+<p><strong>Is the VAT number official?</strong><br>
+It is computed from the SIREN with the official key formula, which is how French intra-community VAT numbers are built. Only VAT-registered companies actually use it; validate it with <a href="../eu-vat-validation/">EU VAT Validation</a>.</p>
+<p><strong>Why is a small business missing?</strong><br>
+Sole proprietors (entrepreneurs individuels) and companies that opted out of public diffusion are deliberately excluded because their records identify a private person. Everything else in the public Sirene register is searchable.</p>
+<p><strong>How fresh is the data?</strong><br>
+The government API is updated daily from INSEE Sirene and the RNE; each record includes <code>last_update</code> and <code>fetched_at</code>.</p>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier or an AI agent?</strong><br>
+Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server.</p>
+<h2 id="reliability">Reliability</h2>
+<p>Official government API, polite rate limiting under the published quota, retries with backoff on 429/5xx, structured failure reporting per query, daily issue triage.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>

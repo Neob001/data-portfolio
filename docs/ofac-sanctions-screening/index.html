@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sanctions Screening API: OFAC, EU, UK &amp; UN List Check</title>
+<meta name="description" content="Bulk-screen names against official OFAC SDN, EU, UK and UN sanctions lists with aliases and fuzzy match scores. Fresh data each run, no API key. AML/KYC.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/ofac-sanctions-screening/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sanctions Screening API: OFAC, EU, UK &amp; UN List Check">
+<meta property="og:description" content="Bulk-screen names against official OFAC SDN, EU, UK and UN sanctions lists with aliases and fuzzy match scores. Fresh data each run, no API key. AML/KYC.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/ofac-sanctions-screening/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Sanctions Screening API \u2014 OFAC, EU, UK & UN Lists (AML/KYC)",
+  "description": "Screen people, companies and vessels against the official OFAC SDN, EU, UK and UN Security Council sanctions lists, incl. aliases, with fuzzy match scores. Bulk AML/KYC checks. No API key. $3 per 1,000 names.",
+  "url": "https://neob001.github.io/data-portfolio/ofac-sanctions-screening/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "3",
+    "description": "Pay-per-result pricing: $3 per 1,000 name screeneds",
+    "url": "https://apify.com/factpipe/ofac-sanctions-screening"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>Sanctions Screening API — OFAC, EU, UK &amp; UN Lists for AML/KYC</h1>
+<p>Screen customer, vendor, counterparty and vessel names against <strong>four official government sanctions lists in one run</strong> — the <strong>US Treasury OFAC SDN list</strong>, the <strong>EU consolidated financial sanctions list</strong>, the <strong>UK Sanctions List</strong> (FCDO) and the <strong>UN Security Council consolidated list</strong> — including official aliases (AKAs), and get one deterministic, auditable match result per name. Every selected list is downloaded <strong>fresh from the official publisher on every run</strong>, so results reflect the current lists. Built for KYC/AML onboarding, sanctions and watchlist screening, vendor due diligence and payment screening.</p>
+<p><strong>One price per name, however many lists you screen: $3 per 1,000 names.</strong></p>
+<div class="quick-facts"><span class="badge">$3 / 1,000</span><a class="button" href="https://apify.com/factpipe/ofac-sanctions-screening" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the two prefilled names (<code>Banco Nacional de Cuba</code>, <code>Wholesome Bakery of Vermont</code>). It downloads all four lists fresh, which usually takes about a minute.</li><li>You get one result per name: the first is a confirmed OFAC match with score and program, the second a documented clear result.</li><li>That first run costs $0.006, well within Apify&#x27;s free monthly credit. Then paste your own customer or vendor names.</li></ol>
+<h2 id="lists-covered">Lists covered</h2>
+<div class="table-wrap"><table><thead><tr><th><code>lists</code> value</th><th>Official list</th><th>Publisher &amp; source</th><th>Terms</th></tr></thead><tbody><tr><td><code>OFAC_SDN</code></td><td>Specially Designated Nationals and Blocked Persons (SDN) list, incl. alternate names</td><td>US Treasury OFAC — treasury.gov <code>sdn.csv</code> + <code>alt.csv</code></td><td>US government public data</td></tr><tr><td><code>EU</code></td><td>Consolidated list of persons, groups and entities subject to EU financial sanctions</td><td>European Commission Financial Sanctions Files (FSF), public XML</td><td>Public EU dataset (data.europa.eu)</td></tr><tr><td><code>UK</code></td><td>UK Sanctions List (all UK designations; replaced the OFSI Consolidated List on 28 January 2026)</td><td>FCDO — sanctionslist.fcdo.gov.uk XML</td><td>Open Government Licence v3.0</td></tr><tr><td><code>UN</code></td><td>United Nations Security Council Consolidated List</td><td>UN Security Council — scsanctions.un.org XML</td><td>Public UN data</td></tr></tbody></table></div>
+<p><strong>Not covered:</strong> PEP (politically exposed persons) lists, adverse media, OFAC&#x27;s non-SDN lists (e.g. SSI, NS-MBS, CAPTA), national lists of individual EU member states, and other countries&#x27; sanctions lists. Screening is by name only; no dates of birth, ID numbers or addresses are returned.</p>
+<h2 id="what-you-get">What you get</h2>
+<p>One record per screened name — including clean &quot;no match&quot; results for your audit trail. Matches from all lists are merged, sorted by score and capped at the 10 best:</p>
+<pre><code class="language-json">{
+  &quot;query&quot;: &quot;Abu Nidal Organisation&quot;,
+  &quot;matched&quot;: true,
+  &quot;match_count&quot;: 2,
+  &quot;best_score&quot;: 1,
+  &quot;top_match_name&quot;: &quot;Abu Nidal Organisation&quot;,
+  &quot;top_match_score&quot;: 1,
+  &quot;lists_matched&quot;: [&quot;EU&quot;, &quot;UK&quot;],
+  &quot;matches&quot;: [
+    {
+      &quot;list&quot;: &quot;EU&quot;,
+      &quot;list_entry_id&quot;: &quot;EU.3502.46&quot;,
+      &quot;primary_name&quot;: &quot;Abu Nidal Organisation&quot;,
+      &quot;matched_name&quot;: &quot;Abu Nidal Organisation&quot;,
+      &quot;score&quot;: 1,
+      &quot;entity_type&quot;: &quot;entity&quot;,
+      &quot;programs&quot;: &quot;TERR&quot;,
+      &quot;program_list&quot;: [&quot;TERR&quot;],
+      &quot;listed_on&quot;: &quot;2002-06-18&quot;,
+      &quot;uid&quot;: &quot;EU.3502.46&quot;,
+      &quot;sdn_name&quot;: &quot;Abu Nidal Organisation&quot;,
+      &quot;type&quot;: &quot;entity&quot;
+    },
+    {
+      &quot;list&quot;: &quot;UK&quot;,
+      &quot;list_entry_id&quot;: &quot;CTI0022&quot;,
+      &quot;primary_name&quot;: &quot;Abu Nidal Organisation&quot;,
+      &quot;matched_name&quot;: &quot;Abu Nidal Organisation&quot;,
+      &quot;score&quot;: 1,
+      &quot;entity_type&quot;: &quot;entity&quot;,
+      &quot;programs&quot;: &quot;The Counter-Terrorism (International Sanctions) (EU Exit) Regulations 2019&quot;,
+      &quot;program_list&quot;: [&quot;The Counter-Terrorism (International Sanctions) (EU Exit) Regulations 2019&quot;],
+      &quot;listed_on&quot;: &quot;2020-12-31&quot;,
+      &quot;uid&quot;: &quot;CTI0022&quot;,
+      &quot;sdn_name&quot;: &quot;Abu Nidal Organisation&quot;,
+      &quot;type&quot;: &quot;entity&quot;
+    }
+  ],
+  &quot;lists_screened&quot;: [&quot;OFAC_SDN&quot;, &quot;EU&quot;, &quot;UK&quot;, &quot;UN&quot;],
+  &quot;lists_unavailable&quot;: [],
+  &quot;lists_info&quot;: [
+    { &quot;list&quot;: &quot;OFAC_SDN&quot;, &quot;entries&quot;: 19388, &quot;source_url&quot;: &quot;https://www.treasury.gov/ofac/downloads/sdn.csv&quot;, &quot;publication_date&quot;: null },
+    { &quot;list&quot;: &quot;EU&quot;, &quot;entries&quot;: 6234, &quot;source_url&quot;: &quot;https://webgate.ec.europa.eu/fsd/fsf/public/files/xmlFullSanctionsList_1_1/content?token=dG9rZW4tMjAxNw&quot;, &quot;publication_date&quot;: &quot;2026-08-05&quot; },
+    { &quot;list&quot;: &quot;UK&quot;, &quot;entries&quot;: 6340, &quot;source_url&quot;: &quot;https://sanctionslist.fcdo.gov.uk/docs/UK-Sanctions-List.xml&quot;, &quot;publication_date&quot;: &quot;2026-09-11&quot; },
+    { &quot;list&quot;: &quot;UN&quot;, &quot;entries&quot;: 1011, &quot;source_url&quot;: &quot;https://scsanctions.un.org/resources/xml/en/consolidated.xml&quot;, &quot;publication_date&quot;: &quot;2026-09-14&quot; }
+  ],
+  &quot;list_publish_info&quot;: &quot;OFAC SDN list, 19388 entries; EU consolidated financial sanctions list, 6234 entries (published 2026-08-05); UK Sanctions List, 6340 entries (published 2026-09-11); UN Security Council consolidated list, 1011 entries (published 2026-09-14), downloaded 2026-09-15T12:00:00.000Z&quot;,
+  &quot;source_url&quot;: &quot;https://webgate.ec.europa.eu/fsd/fsf/public/files/xmlFullSanctionsList_1_1/content?token=dG9rZW4tMjAxNw&quot;,
+  &quot;fetched_at&quot;: &quot;2026-09-15T12:00:00.000Z&quot;
+}</code></pre>
+<p>Field notes:</p>
+<ul><li><code>list</code> / <code>list_entry_id</code> — which list matched and its official reference (OFAC UID, EU reference number, UK Unique ID, UN reference number).</li><li><code>entity_type</code> — <code>individual</code>, <code>entity</code>, <code>vessel</code>, <code>aircraft</code> or <code>null</code> when the list does not say.</li><li><code>programs</code> (text) and <code>program_list</code> (array) — sanctions programmes/regimes (e.g. <code>CUBA</code>, <code>IRQ</code>, <code>DRC</code>, UK regulation name). <code>listed_on</code> is the designation date when the list publishes one (OFAC&#x27;s SDN file does not).</li><li><code>source_url</code> — the download URL of the list that produced the best match; for a clear result, the first list screened.</li><li><code>lists_unavailable</code> — lists that could not be downloaded this run (see Reliability). Legacy OFAC fields (<code>uid</code>, <code>sdn_name</code>, <code>type</code>, <code>top_match_*</code>, <code>list_publish_info</code>) are kept for existing integrations.</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/ofac-sanctions-screening" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~ofac-sanctions-screening/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;names&quot;: [&quot;Banco Nacional de Cuba&quot;, &quot;Wholesome Bakery of Vermont&quot;]}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;names&quot;: [
+    &quot;Banco Nacional de Cuba&quot;,
+    &quot;Wholesome Bakery of Vermont&quot;
+  ]
+}
+
+run = client.actor(&quot;factpipe/ofac-sanctions-screening&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;names&quot;: [
+    &quot;Banco Nacional de Cuba&quot;,
+    &quot;Wholesome Bakery of Vermont&quot;
+  ]
+};
+
+const run = await client.actor(&#x27;factpipe/ofac-sanctions-screening&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="how-matching-works">How matching works</h2>
+<p>Deterministic and auditable — no AI guessing: names are normalized (case, accents and diacritics, punctuation, corporate suffixes), so <code>Qoussaï</code> matches <code>Qoussai</code>, then matched exactly and by token overlap against every listed name <strong>and its official aliases, spelling variations and transliterations</strong> on each selected list. Non-Latin-script originals are not matched. You control the threshold with <code>minScore</code> (85 is a sensible compliance default; 100 = exact matches only). Scores and the matched alias are reported so reviewers can verify every hit.</p>
+<blockquote><p><strong>Note</strong>: screening is a decision-support tool. Potential matches should be reviewed by a human before action, per OFAC, OFSI and EU guidance.</p></blockquote>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>names</code></td><td>string[], required</td><td>People, organizations or vessels to screen</td></tr><tr><td><code>lists</code></td><td>string[]</td><td>Any of <code>OFAC_SDN</code>, <code>EU</code>, <code>UK</code>, <code>UN</code> (default: all four)</td></tr><tr><td><code>minScore</code></td><td>integer 50–100</td><td>Match threshold in percent (default 85)</td></tr><tr><td><code>includeAliases</code></td><td>boolean</td><td>Screen against official AKAs and name variations on all lists (default true)</td></tr></tbody></table></div>
+<pre><code class="language-json">{ &quot;names&quot;: [&quot;Banco Nacional de Cuba&quot;, &quot;Wholesome Bakery of Vermont&quot;], &quot;lists&quot;: [&quot;OFAC_SDN&quot;, &quot;EU&quot;, &quot;UK&quot;, &quot;UN&quot;], &quot;minScore&quot;: 85 }</code></pre>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>name-screened</code></td><td><strong>$3 per 1,000</strong> ($0.003 each)</td><td>One name fully screened against all selected lists that were available — both matches and documented &quot;clear&quot; results. One charge per name, regardless of how many lists you select. Invalid/empty names are never charged, and nothing is charged if none of the selected lists could be downloaded.</td></tr></tbody></table></div>
+<p>Example: 1,000 names screened against all four lists cost <strong>$3.00</strong>. You only pay for delivered results.</p>
+<h2 id="factpipe-compliance-suite">factpipe Compliance Suite</h2>
+<p>Official-source compliance data, all pay-per-result and runnable from one Apify account. Same conventions everywhere: flat records, ISO dates, <code>source_url</code> and <code>fetched_at</code> on every row, and no charge for empty or failed lookups, so outputs join cleanly in a single KYB, AML or GRC pipeline.</p>
+<div class="table-wrap"><table><thead><tr><th>Workflow</th><th>Actor</th><th>What it does</th><th>Price</th></tr></thead><tbody><tr><td>Counterparty &amp; KYB checks</td><td><strong>OFAC Sanctions Screening</strong> (this Actor)</td><td>Screen names against OFAC, EU, UK and UN sanctions lists with fuzzy matching</td><td>$3/1k</td></tr><tr><td>Counterparty &amp; KYB checks</td><td><a href="../eu-vat-validation/">EU VAT Validation</a></td><td>Validate EU VAT numbers in bulk against VIES, with registered name and address</td><td>$2/1k</td></tr><tr><td>Counterparty &amp; KYB checks</td><td><a href="../uk-company-lookup/">UK Companies House Lookup</a></td><td>Company status, SIC codes and registered office from Companies House</td><td>$2.50/1k</td></tr><tr><td>Public-sector sales intelligence</td><td><a href="../sam-gov-contracts/">SAM.gov Contracts</a></td><td>Federal contract opportunities, set-asides and deadlines from SAM.gov</td><td>$2/1k</td></tr><tr><td>Public-sector sales intelligence</td><td><a href="../eu-ted-tenders-monitor/">EU Tenders (TED)</a></td><td>EU public procurement notices from TED, filterable by CPV and country</td><td>$3/1k</td></tr><tr><td>Regulatory &amp; disclosure monitoring</td><td><a href="../federal-register-monitor/">Federal Register Monitor</a></td><td>New US rules, proposed rules and notices by agency or keyword</td><td>$2.50/1k</td></tr><tr><td>Regulatory &amp; disclosure monitoring</td><td><a href="../fda-recalls-monitor/">FDA Recalls Monitor</a></td><td>FDA food, drug and device recall enforcement reports</td><td>$3/1k</td></tr><tr><td>Regulatory &amp; disclosure monitoring</td><td><a href="../sec-edgar-filings-search/">SEC EDGAR Filings</a></td><td>Full-text search across 10-K, 10-Q, 8-K and other SEC filings</td><td>$2/1k</td></tr></tbody></table></div>
+<p><strong>Use it together:</strong></p>
+<ul><li><strong>Supplier onboarding:</strong> screen the company name here, confirm the VAT number with <a href="../eu-vat-validation/">EU VAT Validation</a>, then pull status and registered office from <a href="../uk-company-lookup/">UK Companies House Lookup</a>.</li><li><strong>Public-sector bidding:</strong> screen the agencies and awardees you find with <a href="../sam-gov-contracts/">SAM.gov Contracts</a> or <a href="../eu-ted-tenders-monitor/">EU Tenders</a>.</li></ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>Which sanctions lists does it check?</strong><br>
+The US OFAC SDN list, the EU consolidated financial sanctions list, the UK Sanctions List (FCDO) and the UN Security Council consolidated list. Pick any combination with <code>lists</code>; the price per name stays the same.</p>
+<p><strong>Are the lists up to date?</strong><br>
+Every selected list is downloaded fresh from its official publisher on every run. Each record carries <code>lists_info</code> with entry counts and the publication date each publisher states in its file (the OFAC SDN CSV does not include one).</p>
+<p><strong>What about the OFSI Consolidated List?</strong><br>
+OFSI&#x27;s Consolidated List closed on 28 January 2026; the FCDO UK Sanctions List is now the single source for all UK designations, and that is the list used here.</p>
+<p><strong>How does fuzzy matching work?</strong><br>
+Names are normalized (case, accents, punctuation, corporate suffixes), then scored by exact and token-overlap matching against every listed name and, optionally, its official aliases. <code>minScore</code> sets the threshold in percent; 85 is a sensible compliance default, 100 means exact only.</p>
+<p><strong>Does it cover PEPs or adverse media?</strong><br>
+No. This Actor screens official government sanctions lists only. It does not include politically exposed persons (PEP) databases, adverse media, or commercial watchlists.</p>
+<p><strong>Is this enough for AML/KYC compliance?</strong><br>
+It is a fast, documented first-line sanctions screen across the four major official lists. Your compliance program decides whether additional lists, PEP checks or manual review are required; potential matches should always be reviewed by a person.</p>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier or an AI agent?</strong><br>
+Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server. Input is small and output is deterministic flat JSON.</p>
+<h2 id="reliability">Reliability</h2>
+<p>Official source files, fetched fresh each run in parallel, with retries and backoff; deterministic matching; structured failure reporting; daily issue triage. If one list cannot be downloaded after retries, the run continues with the others and every record lists it in <code>lists_unavailable</code> (also recorded in the run&#x27;s <code>RUN_SUMMARY</code>). If none of the selected lists can be downloaded, the run fails and nothing is charged.</p>
+<p>Source licences: UK Sanctions List contains public sector information licensed under the Open Government Licence v3.0. OFAC, EU and UN lists are official public government publications.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>

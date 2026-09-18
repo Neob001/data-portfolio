@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wikipedia Scraper API: Article Text, Summary &amp; Metadata</title>
+<meta name="description" content="Extract Wikipedia articles in any language as flat JSON: summary, full text, categories, Wikidata ID, coordinates. Official MediaWiki API, CC BY-SA attribution.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/wikipedia-scraper/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Wikipedia Scraper API: Article Text, Summary &amp; Metadata">
+<meta property="og:description" content="Extract Wikipedia articles in any language as flat JSON: summary, full text, categories, Wikidata ID, coordinates. Official MediaWiki API, CC BY-SA attribution.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/wikipedia-scraper/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Wikipedia Scraper API \u2014 Articles, Summaries & Full Text",
+  "description": "Get Wikipedia articles by title, URL or keyword search in any language: summary, full plain text, categories, Wikidata ID, coordinates, thumbnail, last edit. Official API, no key. $1 per 1,000 articles.",
+  "url": "https://neob001.github.io/data-portfolio/wikipedia-scraper/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "1",
+    "description": "Pay-per-result pricing: $1 per 1,000 article results",
+    "url": "https://apify.com/factpipe/wikipedia-scraper"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>Wikipedia Scraper API — Articles, Summaries &amp; Full Text</h1>
+<p>Get <strong>Wikipedia articles</strong> as clean, flat JSON — by title, by URL, or by <strong>keyword search</strong> — in <strong>any Wikipedia language</strong>. Every record has the lead summary, optional full plain text, categories, Wikidata ID, coordinates, thumbnail and last-edit timestamp. Uses only the <strong>official MediaWiki API</strong>: no HTML parsing, no proxies, no broken selectors. Built for RAG pipelines, knowledge graphs, content enrichment and AI agents.</p>
+<div class="quick-facts"><span class="badge">$1 / 1,000</span><a class="button" href="https://apify.com/factpipe/wikipedia-scraper" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the prefilled article, title and search. It finishes in under a minute.</li><li>You get up to 5 Wikipedia articles as clean JSON with summary, categories and links.</li><li>That first run costs at most $0.005, well within Apify&#x27;s free monthly credit. Then swap in your own input or schedule it.</li></ol>
+<h2 id="what-you-get">What you get</h2>
+<p>One record per article:</p>
+<pre><code class="language-json">{
+  &quot;query&quot;: &quot;https://en.wikipedia.org/wiki/Web_scraping&quot;,
+  &quot;found&quot;: true,
+  &quot;language&quot;: &quot;en&quot;,
+  &quot;page_id&quot;: 2696619,
+  &quot;title&quot;: &quot;Web scraping&quot;,
+  &quot;description&quot;: &quot;Method of extracting data from websites&quot;,
+  &quot;summary&quot;: &quot;Web scraping, web harvesting, or web data extraction is data scraping used for extracting data from websites. Web scraping software may directly access the Worl...&quot;,
+  &quot;full_text&quot;: null,
+  &quot;word_count&quot;: null,
+  &quot;is_disambiguation&quot;: false,
+  &quot;categories&quot;: [
+    &quot;Web scraping&quot;
+  ],
+  &quot;wikidata_id&quot;: &quot;Q665452&quot;,
+  &quot;thumbnail_url&quot;: null,
+  &quot;latitude&quot;: null,
+  &quot;longitude&quot;: null,
+  &quot;last_edited_at&quot;: &quot;2026-09-09T23:43:46Z&quot;,
+  &quot;revision_id&quot;: 1374117169,
+  &quot;length_bytes&quot;: 34806,
+  &quot;article_url&quot;: &quot;https://en.wikipedia.org/wiki/Web_scraping&quot;,
+  &quot;license&quot;: &quot;CC BY-SA 4.0&quot;,
+  &quot;license_url&quot;: &quot;https://creativecommons.org/licenses/by-sa/4.0/&quot;,
+  &quot;attribution_url&quot;: &quot;https://en.wikipedia.org/w/index.php?curid=2696619&amp;action=history&quot;,
+  &quot;source_url&quot;: &quot;https://en.wikipedia.org/w/api.php?...&quot;,
+  &quot;fetched_at&quot;: &quot;2026-09-13T12:27:04.922Z&quot;
+}</code></pre>
+<h2 id="use-cases">Use cases</h2>
+<ul><li><strong>RAG &amp; LLM grounding</strong>: pull summaries or full text for a list of topics in one run, with stable page IDs and revision IDs for citations.</li><li><strong>Entity enrichment</strong>: map names or keywords to Wikipedia pages, Wikidata IDs, categories and coordinates.</li><li><strong>Research datasets</strong>: collect articles for a keyword in any of 300+ languages.</li><li><strong>AI agents</strong>: tiny input schema, deterministic output — ideal via API or MCP.</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/wikipedia-scraper" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~wikipedia-scraper/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;articles&quot;: [&quot;https://en.wikipedia.org/wiki/Web_scraping&quot;, &quot;Eiffel Tower&quot;], &quot;searchQueries&quot;: [&quot;renewable energy storage&quot;], &quot;maxArticlesPerSearch&quot;: 3}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;articles&quot;: [
+    &quot;https://en.wikipedia.org/wiki/Web_scraping&quot;,
+    &quot;Eiffel Tower&quot;
+  ],
+  &quot;searchQueries&quot;: [
+    &quot;renewable energy storage&quot;
+  ],
+  &quot;maxArticlesPerSearch&quot;: 3
+}
+
+run = client.actor(&quot;factpipe/wikipedia-scraper&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;articles&quot;: [
+    &quot;https://en.wikipedia.org/wiki/Web_scraping&quot;,
+    &quot;Eiffel Tower&quot;
+  ],
+  &quot;searchQueries&quot;: [
+    &quot;renewable energy storage&quot;
+  ],
+  &quot;maxArticlesPerSearch&quot;: 3
+};
+
+const run = await client.actor(&#x27;factpipe/wikipedia-scraper&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>articles</code></td><td>string[]</td><td>Titles (<code>Eiffel Tower</code>) or URLs (<code>https://de.wikipedia.org/wiki/Berlin</code>)</td></tr><tr><td><code>searchQueries</code></td><td>string[]</td><td>Keywords; top matching articles per query</td></tr><tr><td><code>language</code></td><td>string</td><td>Language code for titles and searches (default <code>en</code>)</td></tr><tr><td><code>maxArticlesPerSearch</code></td><td>integer</td><td>Top N per search query (default 10, max 500)</td></tr><tr><td><code>fullText</code></td><td>boolean</td><td>Include the complete plain-text body (default false)</td></tr></tbody></table></div>
+<p>Redirects (e.g. <code>UK</code> → <code>United Kingdom</code>) are followed automatically. Disambiguation pages are flagged with <code>is_disambiguation: true</code>.</p>
+<p><strong>Policy:</strong> articles about individual people (Wikidata &quot;instance of: human&quot;) are skipped and never charged. This Actor is for topics, places, organizations, products and concepts — not person profiles.</p>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>article-result</code></td><td><strong>$1 per 1,000</strong> ($0.001 each)</td><td>One article delivered. <strong>Not-found titles, skipped person articles, duplicates and empty runs are never charged.</strong> No start fee.</td></tr></tbody></table></div>
+<p>Example: 5,000 articles cost <strong>$5.00</strong>. You only pay for delivered results.</p>
+<h2 id="related-factpipe-actors">Related factpipe Actors</h2>
+<ul><li><a href="../open-food-facts-scraper/">Open Food Facts Scraper — Nutrition &amp; Barcode Lookup API</a> — food product and nutrition data</li><li><a href="../sec-edgar-filings-search/">SEC EDGAR Filings Scraper API — 10-K, 10-Q, 8-K Full-Text</a> — full-text search of SEC filings</li></ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>Do I need a Wikipedia API key?</strong><br>
+No. The official MediaWiki API is open. The Actor identifies itself per Wikimedia&#x27;s User-Agent policy and paces its requests.</p>
+<p><strong>Can I get the full article text, not just the summary?</strong><br>
+Yes. Set <code>fullText: true</code> to add the complete plain-text body and a word count to every record.</p>
+<p><strong>Which languages are supported?</strong><br>
+Every Wikipedia language edition. Set <code>language</code> (e.g. <code>de</code>, <code>fr</code>, <code>ja</code>) or pass URLs from any edition in the same run.</p>
+<p><strong>Can I use Wikipedia content commercially?</strong><br>
+Wikipedia text is licensed CC BY-SA 4.0: reuse is allowed, including commercially, with attribution and share-alike. Every record carries <code>license</code>, <code>article_url</code> and <code>attribution_url</code> so you can attribute correctly.</p>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier or an AI agent?</strong><br>
+Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server. Input is small and output is deterministic flat JSON.</p>
+<h2 id="reliability">Reliability</h2>
+<p>Official MediaWiki and Wikidata APIs, batched requests, retries with backoff, polite rate limiting, structured failure reporting, daily health checks and issue triage.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>

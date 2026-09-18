@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SAM.gov Contract Opportunities API: Federal Bids &amp; RFPs</title>
+<meta name="description" content="Search and monitor US federal contract opportunities from official SAM.gov data: RFPs, sources sought, awards. NAICS, set-aside filters. No key.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/sam-gov-contracts/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SAM.gov Contract Opportunities API: Federal Bids &amp; RFPs">
+<meta property="og:description" content="Search and monitor US federal contract opportunities from official SAM.gov data: RFPs, sources sought, awards. NAICS, set-aside filters. No key.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/sam-gov-contracts/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "SAM.gov Contract Opportunities Scraper \u2014 Federal Bids API",
+  "description": "US federal contract opportunities from the official SAM.gov data extract: solicitations, sources sought, awards. Filter by keyword, NAICS, set-aside, agency, state; daily new-bid alerts. No key. $2 per 1,000.",
+  "url": "https://neob001.github.io/data-portfolio/sam-gov-contracts/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "2",
+    "description": "Pay-per-result pricing: $2 per 1,000 opportunity results",
+    "url": "https://apify.com/factpipe/sam-gov-contracts"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>SAM.gov Contract Opportunities Scraper — Federal Bids API</h1>
+<p>Search and monitor <strong>US federal government contract opportunities</strong> — solicitations, RFPs, combined synopses, sources-sought notices, presolicitations and award notices — straight from the <strong>official SAM.gov Contract Opportunities data extract</strong> published daily by GSA. Filter by keyword, NAICS code, set-aside, notice type, agency and place of performance, then schedule it with incremental mode to get <strong>only new bids every morning</strong>. No SAM.gov account, no API key, no rate limits.</p>
+<div class="quick-facts"><span class="badge">$2 / 1,000</span><a class="button" href="https://apify.com/factpipe/sam-gov-contracts" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the prefilled keyword <code>software</code>. It finishes in under a minute.</li><li>You get up to 25 current federal contract opportunities with deadlines, NAICS and set-aside codes.</li><li>That first run costs at most $0.05, well within Apify&#x27;s free monthly credit. Then swap in your own input or schedule it.</li></ol>
+<h2 id="what-you-get">What you get</h2>
+<p>One flat record per opportunity:</p>
+<pre><code class="language-json">{
+  &quot;notice_id&quot;: &quot;ef50a91c02f24bfab3db66e9e91d95e7&quot;,
+  &quot;title&quot;: &quot;Coburn Gore LPOE Art in Architecture Project&quot;,
+  &quot;solicitation_number&quot;: &quot;0332CG-AIA&quot;,
+  &quot;department&quot;: &quot;GENERAL SERVICES ADMINISTRATION&quot;,
+  &quot;sub_tier&quot;: &quot;PUBLIC BUILDINGS SERVICE&quot;,
+  &quot;office&quot;: &quot;PBS PROJECT DELIVERY CAPITAL CONSTRUCTION - BRANCH NORTHEAST&quot;,
+  &quot;posted_date&quot;: &quot;2026-09-14&quot;,
+  &quot;notice_type&quot;: &quot;Combined Synopsis/Solicitation&quot;,
+  &quot;base_type&quot;: &quot;Combined Synopsis/Solicitation&quot;,
+  &quot;response_deadline&quot;: &quot;2026-10-22T12:00:00-04:00&quot;,
+  &quot;archive_date&quot;: &quot;2026-11-06&quot;,
+  &quot;set_aside_code&quot;: &quot;SBA&quot;,
+  &quot;set_aside&quot;: &quot;Small Business Set Aside - Total&quot;,
+  &quot;naics_code&quot;: &quot;711510&quot;,
+  &quot;psc_code&quot;: &quot;T001&quot;,
+  &quot;place_of_performance_city&quot;: &quot;Coburn Gore&quot;,
+  &quot;place_of_performance_state&quot;: &quot;ME&quot;,
+  &quot;place_of_performance_zip&quot;: &quot;04936&quot;,
+  &quot;place_of_performance_country&quot;: &quot;USA&quot;,
+  &quot;active&quot;: true,
+  &quot;award_number&quot;: null,
+  &quot;award_date&quot;: null,
+  &quot;award_amount&quot;: null,
+  &quot;awardee&quot;: null,
+  &quot;organization_type&quot;: &quot;OFFICE&quot;,
+  &quot;notice_url&quot;: &quot;https://sam.gov/workspace/contract/opp/ef50a91c02f24bfab3db66e9e91d95e7/view&quot;,
+  &quot;additional_info_url&quot;: null,
+  &quot;description&quot;: &quot;Document Added &amp; Updated: 0332CG-AIA- Coburn Gore AIA Questions &amp; Answers V2 Dated 09 September 2026 The U.S. General Services Administration (GSA) Art in Architecture Program commissions American artists (citizens and Lawful Permanent Residents or Permanent Workers of the United States) to create p&quot;,
+  &quot;source_url&quot;: &quot;https://sam.gov/workspace/contract/opp/ef50a91c02f24bfab3db66e9e91d95e7/view&quot;,
+  &quot;fetched_at&quot;: &quot;2026-09-15T12:00:00.000Z&quot;
+}</code></pre>
+<p>Personal contact details of individual contracting officers are intentionally not included: the contact name, email and phone columns are dropped, and email addresses and phone numbers embedded in titles or descriptions are masked. Every record links to the full notice on SAM.gov.</p>
+<h2 id="use-cases">Use cases</h2>
+<ul><li><strong>GovCon bid pipelines</strong>: daily alerts for your NAICS codes and set-asides, pushed to Slack, email, HubSpot or Google Sheets.</li><li><strong>Small businesses &amp; 8(a)/WOSB/SDVOSB firms</strong>: find set-aside opportunities before competitors.</li><li><strong>Market intelligence</strong>: track which agencies buy what, award notices and award amounts.</li><li><strong>AI agents</strong>: small input, deterministic flat JSON via API or the Apify MCP server.</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/sam-gov-contracts" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~sam-gov-contracts/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;keywords&quot;: [&quot;software&quot;], &quot;maxResults&quot;: 25}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;keywords&quot;: [
+    &quot;software&quot;
+  ],
+  &quot;maxResults&quot;: 25
+}
+
+run = client.actor(&quot;factpipe/sam-gov-contracts&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;keywords&quot;: [
+    &quot;software&quot;
+  ],
+  &quot;maxResults&quot;: 25
+};
+
+const run = await client.actor(&#x27;factpipe/sam-gov-contracts&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>keywords</code></td><td>string[]</td><td>Any keyword in title or description</td></tr><tr><td><code>naicsCodes</code></td><td>string[]</td><td>NAICS codes or prefixes, e.g. <code>5415</code></td></tr><tr><td><code>setAsideCodes</code></td><td>string[]</td><td>e.g. <code>SBA</code>, <code>8A</code>, <code>SDVOSBC</code>, <code>WOSB</code></td></tr><tr><td><code>noticeTypes</code></td><td>string[]</td><td>e.g. <code>Solicitation</code>, <code>Sources Sought</code>, <code>Award Notice</code></td></tr><tr><td><code>agencies</code></td><td>string[]</td><td>Department / sub-tier / office name match</td></tr><tr><td><code>states</code></td><td>string[]</td><td>Place-of-performance state codes</td></tr><tr><td><code>postedAfter</code></td><td><code>YYYY-MM-DD</code></td><td>Default: last 3 days</td></tr><tr><td><code>sinceLastRun</code></td><td>boolean</td><td>Only notices not delivered before</td></tr><tr><td><code>maxResults</code></td><td>integer</td><td>Cap on charged results (default 1,000)</td></tr></tbody></table></div>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>opportunity-result</code></td><td><strong>$2 per 1,000</strong> ($0.002 each)</td><td>One matching opportunity delivered. Scanned non-matching notices and empty runs are never charged.</td></tr></tbody></table></div>
+<p>Example: 300 new opportunities a month for your NAICS codes cost <strong>/bin/zsh.60</strong>. No start fee.</p>
+<h2 id="factpipe-compliance-suite">factpipe Compliance Suite</h2>
+<p>Official-source compliance data, all pay-per-result and runnable from one Apify account. Same conventions everywhere: flat records, ISO dates, <code>source_url</code> and <code>fetched_at</code> on every row, and no charge for empty or failed lookups, so outputs join cleanly in a single KYB, AML or GRC pipeline.</p>
+<div class="table-wrap"><table><thead><tr><th>Workflow</th><th>Actor</th><th>What it does</th><th>Price</th></tr></thead><tbody><tr><td>Counterparty &amp; KYB checks</td><td><a href="../ofac-sanctions-screening/">OFAC Sanctions Screening</a></td><td>Screen names against the US Treasury SDN list with fuzzy matching</td><td>$3/1k</td></tr><tr><td>Counterparty &amp; KYB checks</td><td><a href="../eu-vat-validation/">EU VAT Validation</a></td><td>Validate EU VAT numbers in bulk against VIES, with registered name and address</td><td>$2/1k</td></tr><tr><td>Counterparty &amp; KYB checks</td><td><a href="../uk-company-lookup/">UK Companies House Lookup</a></td><td>Company status, SIC codes and registered office from Companies House</td><td>$2.50/1k</td></tr><tr><td>Public-sector sales intelligence</td><td><strong>SAM.gov Contracts</strong> (this Actor)</td><td>Federal contract opportunities, set-asides and deadlines from SAM.gov</td><td>$2/1k</td></tr><tr><td>Public-sector sales intelligence</td><td><a href="../eu-ted-tenders-monitor/">EU Tenders (TED)</a></td><td>EU public procurement notices from TED, filterable by CPV and country</td><td>$3/1k</td></tr><tr><td>Regulatory &amp; disclosure monitoring</td><td><a href="../federal-register-monitor/">Federal Register Monitor</a></td><td>New US rules, proposed rules and notices by agency or keyword</td><td>$2.50/1k</td></tr><tr><td>Regulatory &amp; disclosure monitoring</td><td><a href="../fda-recalls-monitor/">FDA Recalls Monitor</a></td><td>FDA food, drug and device recall enforcement reports</td><td>$3/1k</td></tr><tr><td>Regulatory &amp; disclosure monitoring</td><td><a href="../sec-edgar-filings-search/">SEC EDGAR Filings</a></td><td>Full-text search across 10-K, 10-Q, 8-K and other SEC filings</td><td>$2/1k</td></tr></tbody></table></div>
+<p><strong>Use it together:</strong></p>
+<ul><li><strong>Bid pipeline across both markets:</strong> run this with <code>sinceLastRun</code> on a daily schedule next to <a href="../eu-ted-tenders-monitor/">EU Tenders</a>, and watch <a href="../federal-register-monitor/">Federal Register</a> for rule changes affecting your contract categories.</li><li><strong>Teaming-partner due diligence:</strong> screen partner names with <a href="../ofac-sanctions-screening/">OFAC Sanctions Screening</a>.</li></ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>How do I get SAM.gov contract opportunities without an API key?</strong><br>
+Use this Actor. It reads the public Contract Opportunities data extract that GSA publishes daily, so you need no SAM.gov account, no login.gov and no API key. Filter by keyword, NAICS, set-aside, agency or state.</p>
+<p><strong>Do I need a SAM.gov account or API key?</strong><br>
+No. The Actor reads the public Contract Opportunities data extract that GSA publishes for everyone, updated daily.</p>
+<p><strong>How fresh is the data?</strong><br>
+SAM.gov regenerates the extract once a day (early morning US Eastern time), so new notices appear the next day. Schedule the Actor daily with <code>sinceLastRun: true</code> for a morning digest.</p>
+<p><strong>Can I search older opportunities?</strong><br>
+Yes. Set <code>postedAfter</code> to an earlier date. The dataset is ordered newest first, so recent searches are fastest.</p>
+<p><strong>Where are the contracting officer contacts?</strong><br>
+Individual names, emails and phone numbers are excluded by design. Open <code>notice_url</code> for the full notice, attachments and points of contact on SAM.gov.</p>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier or an AI agent?</strong><br>
+Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server.</p>
+<h2 id="reliability">Reliability</h2>
+<p>Official government data, streaming download with early stop, retries with backoff, structured failure reporting, daily health checks.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>

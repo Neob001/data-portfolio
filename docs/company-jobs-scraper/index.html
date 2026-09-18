@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Greenhouse, Lever &amp; Ashby Jobs Scraper API</title>
+<meta name="description" content="Scrape open jobs from any company&#x27;s career page: auto-detects Greenhouse, Lever and Ashby, returns title, location, remote flag and apply URL as flat JSON.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/company-jobs-scraper/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Greenhouse, Lever &amp; Ashby Jobs Scraper API">
+<meta property="og:description" content="Scrape open jobs from any company&#x27;s career page: auto-detects Greenhouse, Lever and Ashby, returns title, location, remote flag and apply URL as flat JSON.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/company-jobs-scraper/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Career Page Jobs Scraper \u2014 Greenhouse, Lever & Ashby API",
+  "description": "Paste company websites: finds each careers page, detects Greenhouse, Lever or Ashby and returns every open job (title, location, remote, department, apply link) as flat JSON. $2 per 1,000 jobs.",
+  "url": "https://neob001.github.io/data-portfolio/company-jobs-scraper/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "2",
+    "description": "Pay-per-result pricing: $2 per 1,000 job results",
+    "url": "https://apify.com/factpipe/company-jobs-scraper"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>Career Page Jobs Scraper — Greenhouse, Lever &amp; Ashby API</h1>
+<p>Give it <strong>any company website</strong> — it finds the careers page, detects the ATS, and pulls every live job posting through the <strong>official public job-board APIs</strong> of Greenhouse, Lever, and Ashby. No brittle HTML scraping of career pages, no anti-bot fights: the same JSON feeds the career pages themselves use. Direct board URLs (e.g. <code>boards.greenhouse.io/gitlab</code>) work too.</p>
+<div class="quick-facts"><span class="badge">$2 / 1,000</span><a class="button" href="https://apify.com/factpipe/company-jobs-scraper" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the two prefilled career pages (GitLab on Greenhouse, Ramp on Ashby). It finishes in under a minute.</li><li>You get up to 25 open jobs per company with title, location, department and apply link.</li><li>That first run costs at most $0.10, well within Apify&#x27;s free monthly credit. Then swap in your own input or schedule it.</li></ol>
+<h2 id="what-you-get">What you get</h2>
+<p>One flat record per live job posting:</p>
+<pre><code class="language-json">{
+  &quot;query&quot;: &quot;https://boards.greenhouse.io/gitlab&quot;,
+  &quot;found&quot;: true,
+  &quot;ats&quot;: &quot;greenhouse&quot;,
+  &quot;board&quot;: &quot;gitlab&quot;,
+  &quot;company&quot;: &quot;GitLab&quot;,
+  &quot;job_id&quot;: &quot;855665800&quot;,
+  &quot;title&quot;: &quot;Senior Backend Engineer&quot;,
+  &quot;department&quot;: null,
+  &quot;location&quot;: &quot;Remote&quot;,
+  &quot;remote&quot;: true,
+  &quot;employment_type&quot;: null,
+  &quot;published_at&quot;: &quot;2026-08-14&quot;,
+  &quot;job_url&quot;: &quot;https://job-boards.greenhouse.io/gitlab/jobs/855665800&quot;,
+  &quot;apply_url&quot;: &quot;https://job-boards.greenhouse.io/gitlab/jobs/855665800&quot;,
+  &quot;source_url&quot;: &quot;https://boards-api.greenhouse.io/v1/boards/gitlab/jobs&quot;,
+  &quot;fetched_at&quot;: &quot;2026-09-12T12:00:00.000Z&quot;
+}</code></pre>
+<h2 id="use-cases">Use cases</h2>
+<ul><li><strong>Recruiting &amp; talent intelligence</strong>: track competitors&#x27; live openings by team and location.</li><li><strong>Sales signals</strong>: hiring bursts reveal budgets and priorities — feed your CRM on a schedule.</li><li><strong>Job boards &amp; aggregators</strong>: clean, deduplicated postings straight from source APIs.</li><li><strong>AI agents</strong>: tiny input schema, deterministic output — ideal via API or MCP.</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/company-jobs-scraper" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~company-jobs-scraper/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;companyUrls&quot;: [&quot;https://boards.greenhouse.io/gitlab&quot;, &quot;https://jobs.ashbyhq.com/ramp&quot;], &quot;maxJobsPerCompany&quot;: 25}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;companyUrls&quot;: [
+    &quot;https://boards.greenhouse.io/gitlab&quot;,
+    &quot;https://jobs.ashbyhq.com/ramp&quot;
+  ],
+  &quot;maxJobsPerCompany&quot;: 25
+}
+
+run = client.actor(&quot;factpipe/company-jobs-scraper&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;companyUrls&quot;: [
+    &quot;https://boards.greenhouse.io/gitlab&quot;,
+    &quot;https://jobs.ashbyhq.com/ramp&quot;
+  ],
+  &quot;maxJobsPerCompany&quot;: 25
+};
+
+const run = await client.actor(&#x27;factpipe/company-jobs-scraper&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="switching-from-another-career-page-scraper">Switching from another career-page scraper</h2>
+<p>Same idea, same inputs: a list of company URLs in, flat job records out. Field mapping: <code>text/title → title</code>, <code>hostedUrl/absolute_url → job_url</code>, <code>categories.location/location.name → location</code>. Plus <code>source_url</code> and <code>fetched_at</code> on every record. <strong>You are only charged per job row delivered — companies where no supported ATS is detected are free.</strong></p>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>companyUrls</code></td><td>string[], required</td><td>Company homepages or direct Greenhouse/Lever/Ashby board URLs</td></tr><tr><td><code>maxJobsPerCompany</code></td><td>integer</td><td>Cap on charged rows per company (default 200)</td></tr></tbody></table></div>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>job-result</code></td><td><strong>$2 per 1,000</strong> ($0.002 each)</td><td>One live job posting delivered. <strong>Detection misses, empty boards, and empty runs are never charged.</strong></td></tr></tbody></table></div>
+<p>Example: 1,000 jobs cost <strong>$2.00</strong>. You only pay for delivered results.</p>
+<h2 id="related-factpipe-actors">Related factpipe Actors</h2>
+<ul><li><a href="../uk-company-lookup/">UK Companies House Lookup API — Company Data, No API Key</a> — UK company registry records</li><li><a href="../email-security-checker/">Email Security Checker — SPF, DKIM, DMARC &amp; MX Audit</a> — SPF, DKIM and DMARC domain audits</li><li><a href="../sitemap-url-extractor/">Sitemap URL Extractor &amp; 404 Checker — XML Sitemap Scraper</a> — every URL from a site&#x27;s sitemaps</li></ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>Which applicant tracking systems are supported?</strong><br>
+Greenhouse, Lever and Ashby, via their official public job-board APIs. Give a company homepage and the Actor detects the ATS, or pass a board URL directly.</p>
+<p><strong>Can I track hiring at many companies on a schedule?</strong><br>
+Yes. Put a list of company URLs in <code>companyUrls</code> and schedule the Actor; each run returns every live posting with title, department, location, remote flag and apply URL.</p>
+<p><strong>What if a company uses another ATS?</strong><br>
+The company is reported as not found and nothing is charged.</p>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier or an AI agent?</strong><br>
+Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server. Input is small and output is deterministic flat JSON.</p>
+<h2 id="reliability">Reliability</h2>
+<p>Official ATS APIs, retries with backoff, structured failure reporting, health-checked daily, issues triaged daily.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>

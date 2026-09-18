@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Food Barcode &amp; Nutrition API: Open Food Facts Scraper</title>
+<meta name="description" content="Get nutrition facts, ingredients, allergens and Nutri-Score for any food barcode (EAN/UPC) or keyword from Open Food Facts as flat JSON. No API key needed.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/open-food-facts-scraper/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Food Barcode &amp; Nutrition API: Open Food Facts Scraper">
+<meta property="og:description" content="Get nutrition facts, ingredients, allergens and Nutri-Score for any food barcode (EAN/UPC) or keyword from Open Food Facts as flat JSON. No API key needed.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/open-food-facts-scraper/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Open Food Facts Scraper \u2014 Nutrition & Barcode Lookup API",
+  "description": "Look up food products by barcode (EAN/UPC) or keyword on Open Food Facts: nutrition per 100g, ingredients, allergens, Nutri-Score, NOVA, Eco-Score, brands. No API key. $1 per 1,000 products.",
+  "url": "https://neob001.github.io/data-portfolio/open-food-facts-scraper/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "1",
+    "description": "Pay-per-result pricing: $1 per 1,000 product results",
+    "url": "https://apify.com/factpipe/open-food-facts-scraper"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>Open Food Facts Scraper — Nutrition &amp; Barcode Lookup API</h1>
+<p>Look up <strong>food products by barcode (EAN/UPC)</strong> or <strong>keyword</strong> and get clean, flat JSON from <strong>Open Food Facts</strong>, the largest open food database (millions of products worldwide): <strong>nutrition facts per 100 g</strong>, ingredients, allergens, traces, <strong>Nutri-Score</strong>, <strong>NOVA group</strong>, <strong>Eco-Score</strong>, brands, categories, labels and product image. Uses only the official Open Food Facts APIs — no HTML scraping, no proxies. Unknown barcodes are free.</p>
+<div class="quick-facts"><span class="badge">$1 / 1,000</span><a class="button" href="https://apify.com/factpipe/open-food-facts-scraper" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the two prefilled barcodes and the search <code>oat milk</code>. It finishes in under a minute.</li><li>You get up to 12 products with nutrition facts, ingredients, Nutri-Score and allergens.</li><li>That first run costs at most $0.012, well within Apify&#x27;s free monthly credit. Then swap in your own input or schedule it.</li></ol>
+<h2 id="what-you-get">What you get</h2>
+<p>One record per product:</p>
+<pre><code class="language-json">{
+  &quot;query&quot;: &quot;3017624010701&quot;,
+  &quot;found&quot;: true,
+  &quot;barcode&quot;: &quot;3017624010701&quot;,
+  &quot;product_name&quot;: &quot;Nutella&quot;,
+  &quot;brands&quot;: [
+    &quot;Ferrero&quot;
+  ],
+  &quot;quantity&quot;: &quot;400.0 g&quot;,
+  &quot;serving_size&quot;: null,
+  &quot;categories&quot;: [
+    &quot;breakfasts&quot;,
+    &quot;spreads&quot;,
+    &quot;sweet-spreads&quot;,
+    &quot;pates-a-tartiner&quot;,
+    &quot;hazelnut-spreads&quot;,
+    &quot;chocolate-spreads&quot;,
+    &quot;cocoa-and-hazelnuts-spreads&quot;,
+    &quot;Other&quot;
+  ],
+  &quot;countries&quot;: [
+    &quot;france&quot;,
+    &quot;united-kingdom&quot;
+  ],
+  &quot;labels&quot;: [
+    &quot;no-gluten&quot;
+  ],
+  &quot;packaging&quot;: [
+    &quot;glass-jar&quot;
+  ],
+  &quot;ingredients_text&quot;: &quot;sugar, palm oil, hazelnuts, skimmed milk powder, fat reduced cocoa, emulsifier, vanillin&quot;,
+  &quot;allergens&quot;: [
+    &quot;nuts&quot;
+  ],
+  &quot;traces&quot;: [
+    &quot;milk&quot;,
+    &quot;nuts&quot;,
+    &quot;soybeans&quot;
+  ],
+  &quot;nutriscore_grade&quot;: &quot;e&quot;,
+  &quot;nova_group&quot;: null,
+  &quot;ecoscore_grade&quot;: &quot;d&quot;,
+  &quot;energy_kcal_100g&quot;: 539,
+  &quot;fat_100g&quot;: 30.9,
+  &quot;saturated_fat_100g&quot;: 10.6,
+  &quot;carbohydrates_100g&quot;: 57.5,
+  &quot;sugars_100g&quot;: 56.3,
+  &quot;fiber_100g&quot;: null,
+  &quot;proteins_100g&quot;: 6.3,
+  &quot;salt_100g&quot;: 0.1075,
+  &quot;sodium_100g&quot;: 0.043,
+  &quot;image_url&quot;: &quot;https://images.openfoodfacts.org/images/products/301/762/401/0701/front_en.100.400.jpg&quot;,
+  &quot;last_modified_at&quot;: &quot;2026-08-05T16:48:26.000Z&quot;,
+  &quot;product_url&quot;: &quot;https://world.openfoodfacts.org/product/3017624010701&quot;,
+  &quot;license&quot;: &quot;ODbL 1.0 (Open Food Facts contributors)&quot;,
+  &quot;license_url&quot;: &quot;https://opendatacommons.org/licenses/odbl/1-0/&quot;,
+  &quot;source_url&quot;: &quot;https://world.openfoodfacts.org/api/v2/product/3017624010701.json?fields=...&quot;,
+  &quot;fetched_at&quot;: &quot;2026-09-13T12:27:15.518Z&quot;
+}</code></pre>
+<h2 id="use-cases">Use cases</h2>
+<ul><li><strong>Nutrition &amp; diet apps</strong>: resolve scanned barcodes to calories, macros, allergens and Nutri-Score.</li><li><strong>E-commerce &amp; grocery catalogs</strong>: enrich product listings with ingredients, allergens, labels and images.</li><li><strong>Food research &amp; market analysis</strong>: collect products by keyword and country with Nutri-Score and NOVA processing level.</li><li><strong>AI agents</strong>: tiny input schema, deterministic output — ideal via API or MCP.</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/open-food-facts-scraper" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~open-food-facts-scraper/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;barcodes&quot;: [&quot;3017624010701&quot;, &quot;0851087000250&quot;], &quot;searchTerms&quot;: [&quot;oat milk&quot;], &quot;maxResultsPerSearch&quot;: 10}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;barcodes&quot;: [
+    &quot;3017624010701&quot;,
+    &quot;0851087000250&quot;
+  ],
+  &quot;searchTerms&quot;: [
+    &quot;oat milk&quot;
+  ],
+  &quot;maxResultsPerSearch&quot;: 10
+}
+
+run = client.actor(&quot;factpipe/open-food-facts-scraper&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;barcodes&quot;: [
+    &quot;3017624010701&quot;,
+    &quot;0851087000250&quot;
+  ],
+  &quot;searchTerms&quot;: [
+    &quot;oat milk&quot;
+  ],
+  &quot;maxResultsPerSearch&quot;: 10
+};
+
+const run = await client.actor(&#x27;factpipe/open-food-facts-scraper&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>barcodes</code></td><td>string[]</td><td>EAN-13, EAN-8, UPC-A or GTIN-14</td></tr><tr><td><code>searchTerms</code></td><td>string[]</td><td>Product keywords, e.g. <code>peanut butter</code></td></tr><tr><td><code>country</code></td><td>string</td><td>Optional search filter, e.g. <code>united-states</code>, <code>france</code></td></tr><tr><td><code>maxResultsPerSearch</code></td><td>integer</td><td>Products per search term (default 50, max 1000)</td></tr></tbody></table></div>
+<p>Crowd-sourced data: some products have incomplete fields; missing values are <code>null</code>, never guessed.</p>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>product-result</code></td><td><strong>$1 per 1,000</strong> ($0.001 each)</td><td>One product with a name or nutrition data delivered. <strong>Unknown barcodes, empty products, duplicates and empty runs are never charged.</strong> No start fee.</td></tr></tbody></table></div>
+<p>Example: 10,000 products cost <strong>$10.00</strong>. You only pay for delivered results.</p>
+<h2 id="related-factpipe-actors">Related factpipe Actors</h2>
+<ul><li><a href="../fda-recalls-monitor/">FDA Recalls Scraper API — Food, Drug &amp; Device Recalls</a> — FDA food, drug and device recalls</li><li><a href="../wikipedia-scraper/">Wikipedia Scraper API — Articles, Summaries &amp; Full Text</a> — Wikipedia articles and summaries</li></ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>Do I need an Open Food Facts API key?</strong><br>
+No. The official Open Food Facts API is keyless. The Actor sends an identifying User-Agent as Open Food Facts requests and respects its published rate limits.</p>
+<p><strong>Can I look up UPC barcodes from US products?</strong><br>
+Yes. UPC-A (12 digits), EAN-13, EAN-8 and GTIN-14 are accepted; spaces and dashes are removed automatically.</p>
+<p><strong>Can I use the data commercially?</strong><br>
+Open Food Facts data is licensed under the Open Database License (ODbL): commercial use is allowed with attribution, and databases you publish that are derived from it must stay under ODbL. Every record carries <code>license</code> and <code>product_url</code> for attribution.</p>
+<p><strong>Does it include contributor or user data?</strong><br>
+No. Only product facts are requested; contributor usernames are never collected.</p>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier or an AI agent?</strong><br>
+Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server. Input is small and output is deterministic flat JSON.</p>
+<h2 id="reliability">Reliability</h2>
+<p>Official Open Food Facts APIs, rate limits respected (product reads and searches paced separately), retries with backoff, structured failure reporting, daily health checks and issue triage.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>

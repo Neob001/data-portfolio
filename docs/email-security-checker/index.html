@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SPF, DKIM &amp; DMARC Checker API: Bulk Email Security Audit</title>
+<meta name="description" content="Check SPF, DKIM, DMARC, MX, MTA-STS and TLS-RPT for thousands of domains. Score, grade and fix list per domain. No key, pay per domain.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/email-security-checker/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SPF, DKIM &amp; DMARC Checker API: Bulk Email Security Audit">
+<meta property="og:description" content="Check SPF, DKIM, DMARC, MX, MTA-STS and TLS-RPT for thousands of domains. Score, grade and fix list per domain. No key, pay per domain.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/email-security-checker/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Email Security Checker \u2014 SPF, DKIM, DMARC & MX Audit",
+  "description": "Audit any domain's email authentication: SPF (lookups, -all), DMARC policy, DKIM keys, MX, MTA-STS and TLS-RPT, with a 0-100 score and fix list. Bulk domains, no key. $3 per 1,000 domains.",
+  "url": "https://neob001.github.io/data-portfolio/email-security-checker/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "3",
+    "description": "Pay-per-result pricing: $3 per 1,000 domain auditeds",
+    "url": "https://apify.com/factpipe/email-security-checker"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>Email Security Checker — SPF, DKIM, DMARC &amp; MX Audit</h1>
+<p>Audit the <strong>email authentication setup of any domain</strong> — SPF, DKIM, DMARC, MX, MTA-STS and TLS-RPT — and get a <strong>0–100 score, a letter grade and a plain-English fix list</strong> per domain. Check one domain or thousands in bulk. Uses public DNS only: no API key, no mailbox access, no personal data.</p>
+<div class="quick-facts"><span class="badge">$3 / 1,000</span><a class="button" href="https://apify.com/factpipe/email-security-checker" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the two prefilled domains. It finishes in under a minute.</li><li>You get a 0–100 score, grade and fix list per domain covering SPF, DKIM, DMARC, MX, MTA-STS and TLS-RPT.</li><li>That first run costs $0.006, well within Apify&#x27;s free monthly credit. Then swap in your own input or schedule it.</li></ol>
+<h2 id="what-you-get">What you get</h2>
+<pre><code class="language-json">{
+  &quot;query&quot;: &quot;github.com&quot;,
+  &quot;found&quot;: true,
+  &quot;domain&quot;: &quot;github.com&quot;,
+  &quot;score&quot;: 77,
+  &quot;grade&quot;: &quot;B&quot;,
+  &quot;issues&quot;: [
+    &quot;SPF ends in ~all (softfail); -all is stricter.&quot;,
+    &quot;DMARC policy is quarantine; reject gives full spoofing protection.&quot;
+  ],
+  &quot;accepts_mail&quot;: true,
+  &quot;null_mx&quot;: false,
+  &quot;mx_records&quot;: [
+    &quot;0 github-com.mail.protection.outlook.com&quot;
+  ],
+  &quot;spf_present&quot;: true,
+  &quot;spf_record&quot;: &quot;v=spf1 ip4:192.30.252.0/22 include:spf.protection.outlook.com include:_netblocks.google.com include:_netblocks2.google.com include:mail.zendesk.com include:_spf.salesforce.com include:servers.mcsv.net include:mktomail.com include:sendgrid.net ip4:62.253.227.114 ip4:166.78.69.169 ip4:166.78.69.170 ip4:166.78.71.131 ~all&quot;,
+  &quot;spf_all&quot;: &quot;~all&quot;,
+  &quot;spf_dns_lookups&quot;: 8,
+  &quot;dmarc_present&quot;: true,
+  &quot;dmarc_policy&quot;: &quot;quarantine&quot;,
+  &quot;dmarc_subdomain_policy&quot;: &quot;reject&quot;,
+  &quot;dmarc_pct&quot;: 100,
+  &quot;dmarc_record&quot;: &quot;v=DMARC1; p=quarantine; sp=reject; pct=100; rua=mailto:***@github.com; ruf=mailto:***@github.com; fo=1&quot;,
+  &quot;dmarc_report_domains&quot;: [
+    &quot;github.com&quot;
+  ],
+  &quot;dkim_selectors_found&quot;: [
+    &quot;google&quot;,
+    &quot;selector1&quot;,
+    &quot;k1&quot;,
+    &quot;k2&quot;,
+    &quot;s1&quot;,
+    &quot;s2&quot;
+  ],
+  &quot;mta_sts&quot;: false,
+  &quot;tls_rpt&quot;: false,
+  &quot;source_url&quot;: &quot;dns:github.com&quot;,
+  &quot;fetched_at&quot;: &quot;2026-09-15T12:00:00.000Z&quot;
+}</code></pre>
+<h2 id="use-cases">Use cases</h2>
+<ul><li><strong>Deliverability teams &amp; ESPs</strong>: find clients whose SPF exceeds 10 lookups or whose DMARC is still <code>p=none</code>.</li><li><strong>Security &amp; vendor risk</strong>: flag suppliers whose domains can be spoofed (missing DMARC, SPF <code>+all</code>).</li><li><strong>Agencies &amp; MSPs</strong>: generate a prospect list of domains with fixable email security gaps.</li><li><strong>AI agents &amp; automations</strong>: deterministic JSON per domain via API, Make, Zapier or MCP.</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/email-security-checker" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~email-security-checker/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;domains&quot;: [&quot;github.com&quot;, &quot;example.com&quot;]}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;domains&quot;: [
+    &quot;github.com&quot;,
+    &quot;example.com&quot;
+  ]
+}
+
+run = client.actor(&quot;factpipe/email-security-checker&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;domains&quot;: [
+    &quot;github.com&quot;,
+    &quot;example.com&quot;
+  ]
+};
+
+const run = await client.actor(&#x27;factpipe/email-security-checker&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>domains</code></td><td>string[], required</td><td>Domains, URLs or email addresses</td></tr><tr><td><code>extraDkimSelectors</code></td><td>string[]</td><td>Custom DKIM selectors to test</td></tr></tbody></table></div>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>domain-audited</code></td><td><strong>$3 per 1,000</strong> ($0.003 each)</td><td>One domain fully audited (SPF, DMARC, DKIM, MX, MTA-STS, TLS-RPT). Invalid, nonexistent or unreachable domains are never charged.</td></tr></tbody></table></div>
+<p>Example: auditing 1,000 domains costs <strong>$3.00</strong>. No start fee. You only pay for delivered results.</p>
+<h2 id="factpipe-website-audit-toolkit">factpipe Website Audit Toolkit</h2>
+<p>Bulk technical checks for agencies, SEO teams and deliverability owners, all pay-per-result. Feed a list of sites in, get one flat row per page or domain out.</p>
+<div class="table-wrap"><table><thead><tr><th>Workflow</th><th>Actor</th><th>What it does</th><th>Price</th></tr></thead><tbody><tr><td>Website audit</td><td><a href="../sitemap-url-extractor/">Sitemap URL Extractor &amp; 404 Checker</a></td><td>Extract every URL from XML sitemaps and flag 404s and broken entries</td><td>$0.30/1k</td></tr><tr><td>Website audit</td><td><a href="../lighthouse-auditor/">Lighthouse Auditor</a></td><td>Lighthouse scores and Core Web Vitals for many pages, mobile or desktop</td><td>$10/1k</td></tr><tr><td>Website audit</td><td><strong>Email Security Checker</strong> (this Actor)</td><td>SPF, DKIM, DMARC and MX audit for any list of domains</td><td>$3/1k</td></tr></tbody></table></div>
+<p><strong>Use it together:</strong></p>
+<ul><li><strong>Agency site-and-domain health report:</strong> combine these results with <a href="../lighthouse-auditor/">Lighthouse Auditor</a> performance scores and <a href="../sitemap-url-extractor/">Sitemap URL Extractor &amp; 404 Checker</a> broken-URL counts.</li></ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>Why is DKIM sometimes reported as not found?</strong><br>
+DKIM keys live under selector names that cannot be listed from DNS. The Actor tests 18 common selectors (Google Workspace, Microsoft 365, and major ESPs) plus any you add in <code>extraDkimSelectors</code>.</p>
+<p><strong>What does the SPF lookup count mean?</strong><br>
+SPF allows at most 10 DNS-querying mechanisms (include, a, mx, ptr, exists, redirect). More than 10 makes SPF fail with a permanent error at receivers, so the Actor flags it.</p>
+<p><strong>Do you store or expose DMARC report email addresses?</strong><br>
+No. Only the receiving domains of DMARC reports are returned; mailbox names are masked.</p>
+<p><strong>Am I charged for domains that don&#x27;t exist?</strong><br>
+No. Invalid inputs, nonexistent domains and DNS failures are returned as not found and never charged.</p>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier or an AI agent?</strong><br>
+Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server. Input is small and output is deterministic flat JSON.</p>
+<h2 id="reliability">Reliability</h2>
+<p>Deterministic code against official sources, automatic retries with backoff, structured failure reporting, daily health checks and issue triage.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>

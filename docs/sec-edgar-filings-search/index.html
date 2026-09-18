@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SEC EDGAR Full-Text Search API: 10-K, 8-K Filings Scraper</title>
+<meta name="description" content="Search the full text of SEC EDGAR filings by keyword and get flat JSON: 10-K, 10-Q, 8-K, S-1, Form 4. Official SEC API, no key, scheduled monitoring.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/sec-edgar-filings-search/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SEC EDGAR Full-Text Search API: 10-K, 8-K Filings Scraper">
+<meta property="og:description" content="Search the full text of SEC EDGAR filings by keyword and get flat JSON: 10-K, 10-Q, 8-K, S-1, Form 4. Official SEC API, no key, scheduled monitoring.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/sec-edgar-filings-search/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "SEC EDGAR Filings Scraper API \u2014 10-K, 10-Q, 8-K Full-Text",
+  "description": "Full-text search and monitor SEC EDGAR filings (10-K, 10-Q, 8-K, S-1, Form 4, 13F) by keyword via the official SEC API. No API key, flat JSON, new-filing alerts. $2 per 1,000 filings.",
+  "url": "https://neob001.github.io/data-portfolio/sec-edgar-filings-search/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "2",
+    "description": "Pay-per-result pricing: $2 per 1,000 filing results",
+    "url": "https://apify.com/factpipe/sec-edgar-filings-search"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>SEC EDGAR Filings Scraper API — 10-K, 10-Q, 8-K Full-Text</h1>
+<p>Search the <strong>full text of SEC filings</strong> (10-K, 10-Q, 8-K, S-1, Form 4, 13F and every other form) and get clean, flat JSON records — or run it on a schedule in <strong>incremental mode</strong> to monitor only <em>new</em> filings mentioning your keyword. Uses only <strong>official SEC APIs</strong> (efts.sec.gov): no anti-bot fights, no proxies, no missed runs.</p>
+<div class="quick-facts"><span class="badge">$2 / 1,000</span><a class="button" href="https://apify.com/factpipe/sec-edgar-filings-search" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the prefilled phrase <code>artificial intelligence</code> in 8-K filings. It finishes in under a minute.</li><li>You get up to 25 matching filings with company, form, filing date and document links.</li><li>That first run costs at most $0.05, well within Apify&#x27;s free monthly credit. Then swap in your own input or schedule it.</li></ol>
+<h2 id="what-you-get">What you get</h2>
+<p>One record per matching filing document:</p>
+<pre><code class="language-json">{
+  &quot;accession_number&quot;: &quot;0001144204-11-036302&quot;,
+  &quot;cik&quot;: &quot;1334699&quot;,
+  &quot;company_name&quot;: &quot;Li3 Energy, Inc.&quot;,
+  &quot;form_type&quot;: &quot;8-K&quot;,
+  &quot;file_type&quot;: &quot;EX-99.1&quot;,
+  &quot;filed_at&quot;: &quot;2011-06-17&quot;,
+  &quot;period_ending&quot;: &quot;2011-06-17&quot;,
+  &quot;items&quot;: [&quot;7.01&quot;, &quot;9.01&quot;],
+  &quot;sic_codes&quot;: [&quot;3990&quot;],
+  &quot;incorporated_in&quot;: &quot;NV&quot;,
+  &quot;document_url&quot;: &quot;https://www.sec.gov/Archives/edgar/data/1334699/000114420411036302/v226209_ex99-1.htm&quot;,
+  &quot;filing_index_url&quot;: &quot;https://www.sec.gov/Archives/edgar/data/1334699/000114420411036302/0001144204-11-036302-index.htm&quot;,
+  &quot;source_url&quot;: &quot;https://www.sec.gov/Archives/edgar/data/1334699/000114420411036302/v226209_ex99-1.htm&quot;,
+  &quot;fetched_at&quot;: &quot;2026-09-11T12:00:00.000Z&quot;
+}</code></pre>
+<h2 id="use-cases">Use cases</h2>
+<ul><li><strong>Monitor competitors / customers</strong>: schedule with <code>sinceLastRun: true</code> and get only new 8-Ks that mention them.</li><li><strong>Deal &amp; risk signals</strong>: track phrases like &quot;material weakness&quot;, &quot;going concern&quot;, &quot;data breach&quot;, &quot;short seller&quot;.</li><li><strong>Investor research</strong>: pull every S-1 or 13D/G mentioning a sector keyword.</li><li><strong>AI agents</strong>: small input schema, deterministic output — ideal for automated pipelines via API or MCP.</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/sec-edgar-filings-search" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~sec-edgar-filings-search/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;query&quot;: &quot;artificial intelligence&quot;, &quot;forms&quot;: [&quot;8-K&quot;], &quot;maxResults&quot;: 25}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;query&quot;: &quot;artificial intelligence&quot;,
+  &quot;forms&quot;: [
+    &quot;8-K&quot;
+  ],
+  &quot;maxResults&quot;: 25
+}
+
+run = client.actor(&quot;factpipe/sec-edgar-filings-search&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;query&quot;: &quot;artificial intelligence&quot;,
+  &quot;forms&quot;: [
+    &quot;8-K&quot;
+  ],
+  &quot;maxResults&quot;: 25
+};
+
+const run = await client.actor(&#x27;factpipe/sec-edgar-filings-search&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>query</code></td><td>string, required</td><td>Exact phrase searched in filing full text</td></tr><tr><td><code>forms</code></td><td>string[]</td><td>Optional form filter, e.g. <code>[&quot;8-K&quot;,&quot;10-K&quot;]</code></td></tr><tr><td><code>startDate</code> / <code>endDate</code></td><td><code>YYYY-MM-DD</code></td><td>Optional date window</td></tr><tr><td><code>maxResults</code></td><td>integer</td><td>Cap on charged results (default 100)</td></tr><tr><td><code>sinceLastRun</code></td><td>boolean</td><td>Incremental monitoring mode</td></tr></tbody></table></div>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>filing-result</code></td><td><strong>$2 per 1,000</strong> ($0.002 each)</td><td>One filing record delivered to the dataset. <strong>Empty runs are never charged.</strong></td></tr></tbody></table></div>
+<p>Example: 500 filings cost <strong>$1.00</strong>. You only pay for delivered results.</p>
+<h2 id="factpipe-compliance-suite">factpipe Compliance Suite</h2>
+<p>Official-source compliance data, all pay-per-result and runnable from one Apify account. Same conventions everywhere: flat records, ISO dates, <code>source_url</code> and <code>fetched_at</code> on every row, and no charge for empty or failed lookups, so outputs join cleanly in a single KYB, AML or GRC pipeline.</p>
+<div class="table-wrap"><table><thead><tr><th>Workflow</th><th>Actor</th><th>What it does</th><th>Price</th></tr></thead><tbody><tr><td>Counterparty &amp; KYB checks</td><td><a href="../ofac-sanctions-screening/">OFAC Sanctions Screening</a></td><td>Screen names against the US Treasury SDN list with fuzzy matching</td><td>$3/1k</td></tr><tr><td>Counterparty &amp; KYB checks</td><td><a href="../eu-vat-validation/">EU VAT Validation</a></td><td>Validate EU VAT numbers in bulk against VIES, with registered name and address</td><td>$2/1k</td></tr><tr><td>Counterparty &amp; KYB checks</td><td><a href="../uk-company-lookup/">UK Companies House Lookup</a></td><td>Company status, SIC codes and registered office from Companies House</td><td>$2.50/1k</td></tr><tr><td>Public-sector sales intelligence</td><td><a href="../sam-gov-contracts/">SAM.gov Contracts</a></td><td>Federal contract opportunities, set-asides and deadlines from SAM.gov</td><td>$2/1k</td></tr><tr><td>Public-sector sales intelligence</td><td><a href="../eu-ted-tenders-monitor/">EU Tenders (TED)</a></td><td>EU public procurement notices from TED, filterable by CPV and country</td><td>$3/1k</td></tr><tr><td>Regulatory &amp; disclosure monitoring</td><td><a href="../federal-register-monitor/">Federal Register Monitor</a></td><td>New US rules, proposed rules and notices by agency or keyword</td><td>$2.50/1k</td></tr><tr><td>Regulatory &amp; disclosure monitoring</td><td><a href="../fda-recalls-monitor/">FDA Recalls Monitor</a></td><td>FDA food, drug and device recall enforcement reports</td><td>$3/1k</td></tr><tr><td>Regulatory &amp; disclosure monitoring</td><td><strong>SEC EDGAR Filings</strong> (this Actor)</td><td>Full-text search across 10-K, 10-Q, 8-K and other SEC filings</td><td>$2/1k</td></tr></tbody></table></div>
+<p><strong>Use it together:</strong></p>
+<ul><li><strong>Disclosure and risk research:</strong> combine filing searches with <a href="../federal-register-monitor/">Federal Register</a> rule changes and <a href="../fda-recalls-monitor/">FDA Recalls</a> enforcement history for the same companies.</li><li><strong>Counterparty checks:</strong> screen issuers and subsidiaries with <a href="../ofac-sanctions-screening/">OFAC Sanctions Screening</a>.</li></ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>How do I use EDGAR full-text search through an API?</strong><br>
+Put a word or exact phrase in <code>query</code>, optionally pick <code>forms</code> and a date range, and run the Actor via the Apify API, a client library or a schedule. It calls SEC&#x27;s official EDGAR full-text search and returns one flat JSON record per filing, with no SEC key or account.</p>
+<p><strong>Do I need an SEC API key or EDGAR account?</strong><br>
+No. The Actor uses SEC&#x27;s public EDGAR full-text search and data APIs with a compliant User-Agent. No key, no proxy, no login.</p>
+<p><strong>How do I get alerts when a company files a new 8-K or 10-K?</strong><br>
+Schedule the Actor (e.g. daily) with <code>sinceLastRun: true</code> and your keyword or company name. Each run returns only filings newer than the last run; connect Slack, email or a webhook to get notified.</p>
+<p><strong>Which SEC forms can I search?</strong><br>
+Any form indexed by EDGAR full-text search (filings since 2001): 10-K, 10-Q, 8-K, S-1, DEF 14A, Form 4, 13F-HR, 13D/13G and more. Leave <code>forms</code> empty to search all.</p>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier or an AI agent?</strong><br>
+Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server. Input is small and output is deterministic flat JSON.</p>
+<h2 id="reliability">Reliability</h2>
+<p>Deterministic code against official SEC endpoints, automatic retries with backoff, SEC fair-access rate limits respected, structured failure reporting. Issues are triaged daily.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>

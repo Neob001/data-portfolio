@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://neob001.github.io/data-portfolio/sitemap.xml

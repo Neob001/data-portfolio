@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DNS Lookup API: Bulk A, MX, TXT, NS &amp; CAA Records</title>
+<meta name="description" content="Bulk DNS records lookup for any domain list: A, AAAA, MX, TXT, NS, CNAME, SOA, CAA plus mail and DNS provider detection. No API key, pay per domain.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/dns-records-lookup/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DNS Lookup API: Bulk A, MX, TXT, NS &amp; CAA Records">
+<meta property="og:description" content="Bulk DNS records lookup for any domain list: A, AAAA, MX, TXT, NS, CNAME, SOA, CAA plus mail and DNS provider detection. No API key, pay per domain.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/dns-records-lookup/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "DNS Records Lookup API \u2014 Bulk A, MX, TXT, NS, CNAME & CAA",
+  "description": "Bulk DNS lookups for any list of domains: A, AAAA, MX, TXT, NS, CNAME, SOA and CAA records, plus mail/DNS provider detection, SPF/DMARC presence and TXT verification tokens. No API key. $1.50 per 1,000 domains.",
+  "url": "https://neob001.github.io/data-portfolio/dns-records-lookup/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "1.5",
+    "description": "Pay-per-result pricing: $1.50 per 1,000 domain resolveds",
+    "url": "https://apify.com/factpipe/dns-records-lookup"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>DNS Records Lookup API — Bulk A, MX, TXT, NS, CNAME, SOA, CAA</h1>
+<p><strong>Bulk DNS lookups for any list of domains.</strong> Resolve A, AAAA, MX, TXT, NS, CNAME, SOA and CAA records at scale, plus derived hints you&#x27;d otherwise have to build yourself: mail provider (Google Workspace, Microsoft 365, Zoho, Proton, Fastmail, Mimecast, Proofpoint, Amazon SES), authoritative DNS provider (Cloudflare, AWS Route 53, Google Cloud DNS, Azure DNS, GoDaddy, Namecheap, DigitalOcean, Vercel, NS1), SPF/DMARC presence and TXT-based verification tokens (Google, Microsoft, Facebook, Atlassian, Apple, Stripe, DocuSign, Zoom). Public DNS only: no API key, no login, no personal data.</p>
+<div class="quick-facts"><span class="badge">$1.50 / 1,000</span><a class="button" href="https://apify.com/factpipe/dns-records-lookup" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the two prefilled domains (<code>github.com</code>, <code>example.com</code>). It finishes in seconds.</li><li>You get one record per domain with A, AAAA, MX, TXT, NS, SOA and CAA records, plus mail provider, DNS provider and SPF/DMARC flags.</li><li>That first run costs $0.003, well within Apify&#x27;s free monthly credit. Then paste your own domain list.</li></ol>
+<h2 id="what-you-get">What you get</h2>
+<pre><code class="language-json">{
+  &quot;query&quot;: &quot;github.com&quot;,
+  &quot;domain&quot;: &quot;github.com&quot;,
+  &quot;found&quot;: true,
+  &quot;reason&quot;: null,
+  &quot;a&quot;: [&quot;20.205.243.166&quot;],
+  &quot;aaaa&quot;: [],
+  &quot;mx&quot;: [&quot;0 github-com.mail.protection.outlook.com&quot;],
+  &quot;txt&quot;: [
+    &quot;MS=6BF03E6AF5CB689E315FB6199603BABF2C88D805&quot;,
+    &quot;google-site-verification=82Le34Flgtd15ojYhHlGF_6g72muSjamlMVThBOJpks&quot;,
+    &quot;v=spf1 ip4:192.30.252.0/22 include:spf.protection.outlook.com ... ~all&quot;
+  ],
+  &quot;ns&quot;: [
+    &quot;dns1.p08.nsone.net&quot;,
+    &quot;ns-1283.awsdns-32.org&quot;,
+    &quot;ns-1707.awsdns-21.co.uk&quot;
+  ],
+  &quot;cname&quot;: null,
+  &quot;soa_primary_ns&quot;: &quot;ns-1707.awsdns-21.co.uk&quot;,
+  &quot;soa_serial&quot;: 1,
+  &quot;soa_minimum_ttl&quot;: 86400,
+  &quot;caa&quot;: [&quot;0 issue \&quot;letsencrypt.org\&quot;&quot;, &quot;0 issuewild \&quot;digicert.com\&quot;&quot;],
+  &quot;mail_provider&quot;: &quot;Microsoft 365&quot;,
+  &quot;dns_provider&quot;: &quot;AWS Route 53&quot;,
+  &quot;has_spf&quot;: true,
+  &quot;has_dmarc&quot;: true,
+  &quot;verification_tokens&quot;: [&quot;microsoft&quot;, &quot;apple&quot;, &quot;atlassian&quot;, &quot;docusign&quot;, &quot;facebook&quot;, &quot;google&quot;, &quot;stripe&quot;],
+  &quot;record_count&quot;: 42,
+  &quot;source_url&quot;: &quot;dns:github.com&quot;,
+  &quot;fetched_at&quot;: &quot;2026-09-15T12:00:00.000Z&quot;
+}</code></pre>
+<h2 id="use-cases">Use cases</h2>
+<ul><li><strong>Domain inventory &amp; asset audits</strong>: bulk-resolve every domain you own or manage into one flat table (IPs, mail routing, name servers) for security and compliance reviews.</li><li><strong>Lead enrichment &amp; sales intelligence</strong>: detect a prospect&#x27;s email provider (<code>mail_provider</code>) and marketing/SaaS stack signals (<code>verification_tokens</code>) from public DNS alone — no crawling, no login.</li><li><strong>DNS migration checks</strong>: confirm A/AAAA, MX and NS records point where they should before and after a cutover, across hundreds of domains at once.</li><li><strong>Security &amp; vendor risk</strong>: spot domains with no SPF or DMARC (<code>has_spf</code>, <code>has_dmarc</code>), unexpected CAA issuers, or DNS hosted with an unapproved provider.</li><li><strong>SaaS &amp; tool discovery</strong>: <code>verification_tokens</code> reveals which domains have verified with Google Workspace, Microsoft 365, Atlassian, Stripe, DocuSign, Zoom and more via TXT records.</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/dns-records-lookup" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~dns-records-lookup/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;domains&quot;: [&quot;github.com&quot;, &quot;example.com&quot;]}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;domains&quot;: [
+    &quot;github.com&quot;,
+    &quot;example.com&quot;
+  ]
+}
+
+run = client.actor(&quot;factpipe/dns-records-lookup&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;domains&quot;: [
+    &quot;github.com&quot;,
+    &quot;example.com&quot;
+  ]
+};
+
+const run = await client.actor(&#x27;factpipe/dns-records-lookup&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>domains</code></td><td>string[], required</td><td>Domain names, website URLs or email addresses (the host is extracted). Subdomains are kept intact, e.g. <code>mail.example.com</code>. Duplicates are looked up once.</td></tr><tr><td><code>recordTypes</code></td><td>string[]</td><td>Which record types to resolve: any of <code>A</code>, <code>AAAA</code>, <code>MX</code>, <code>TXT</code>, <code>NS</code>, <code>CNAME</code>, <code>SOA</code>, <code>CAA</code>. Defaults to all eight. Types not selected are returned as <code>null</code>.</td></tr><tr><td><code>stripWww</code></td><td>boolean</td><td>If enabled, a leading <code>www.</code> is removed before lookup. Off by default — other subdomains are always kept as-is.</td></tr></tbody></table></div>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>domain-resolved</code></td><td><strong>$1.50 per 1,000</strong> ($0.0015 each)</td><td>One domain that exists and returned at least one requested DNS record.</td></tr></tbody></table></div>
+<p>Nonexistent, invalid and unreachable domains are never charged. A domain that exists but has zero records of the requested types is delivered but not charged either.</p>
+<p>Example: resolving 1,000 domains costs <strong>$1.50</strong>. No start fee. You only pay for delivered results.</p>
+<h2 id="related-factpipe-actors">Related factpipe Actors</h2>
+<ul><li><a href="../email-security-checker/">Email Security Checker</a> — full SPF/DKIM/DMARC audit with a 0–100 score and fix list (this Actor only reports SPF/DMARC presence as a quick signal; use Email Security Checker for the deep audit).</li><li><a href="../lighthouse-auditor/">Lighthouse Auditor</a> — Lighthouse scores and Core Web Vitals for many pages, mobile or desktop.</li><li><a href="../sitemap-url-extractor/">Sitemap URL Extractor &amp; 404 Checker</a> — extract every URL from XML sitemaps and flag 404s and broken entries.</li></ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>What does <code>null_mx: true</code> mean?</strong><br>
+The domain publishes an RFC 7505 &quot;null MX&quot; record, explicitly declaring that it accepts no mail. <code>mx</code> is then an empty list.</p>
+<p><strong>Why is <code>cname</code> usually <code>null</code>?</strong><br>
+Most domains (especially apex/root domains) have no CNAME — A/AAAA records are set directly, or via other record types. <code>cname</code> is populated for hostnames that are genuinely aliased, e.g. <code>www.github.com</code> → <code>github.com</code>. When a name has a CNAME, its A/AAAA records resolve through that alias automatically.</p>
+<p><strong>Am I charged for domains that don&#x27;t exist?</strong><br>
+No. Invalid inputs, nonexistent domains (NXDOMAIN) and DNS failures are returned as not found and never charged. A domain that resolves but has none of the requested record types is also not charged.</p>
+<p><strong>How is <code>mail_provider</code> / <code>dns_provider</code> detected?</strong><br>
+From well-known hostname patterns in the MX and NS records (e.g. <code><em>.protection.outlook.com</code> → Microsoft 365, <code></em>.awsdns-*.{com,net,org,co.uk}</code> → AWS Route 53). Providers outside the detected list, or domains with no matching pattern, return <code>null</code>.</p>
+<p><strong>Do you store or expose mailbox addresses found in DNS?</strong><br>
+No. Any mailbox local-part found in a TXT record (e.g. a DMARC <code>rua=mailto:</code> reporting address) is masked as <code>***@domain</code>.</p>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier or an AI agent?</strong><br>
+Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server. Input is small and output is deterministic flat JSON.</p>
+<h2 id="reliability">Reliability</h2>
+<p>Deterministic code against public DNS resolvers (1.1.1.1, 8.8.8.8, 9.9.9.9) with automatic retries and backoff on transient failures, structured failure reporting, daily health checks and issue triage.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>

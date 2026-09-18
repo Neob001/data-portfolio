@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ECB Exchange Rates API: Official Daily FX Rates &amp; History</title>
+<meta name="description" content="Get official ECB euro reference exchange rates as JSON: latest or historical daily rates, 30+ currencies, any base currency. No key, pay per rate.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/ecb-exchange-rates/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ECB Exchange Rates API: Official Daily FX Rates &amp; History">
+<meta property="og:description" content="Get official ECB euro reference exchange rates as JSON: latest or historical daily rates, 30+ currencies, any base currency. No key, pay per rate.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/ecb-exchange-rates/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ECB Exchange Rates API \u2014 Official Euro FX Rates, History",
+  "description": "Official European Central Bank euro reference exchange rates: latest or full daily history since 1999 for 30+ currencies, any base currency via cross rates. No API key. $1 per 1,000 rates.",
+  "url": "https://neob001.github.io/data-portfolio/ecb-exchange-rates/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "1",
+    "description": "Pay-per-result pricing: $1 per 1,000 rate results",
+    "url": "https://apify.com/factpipe/ecb-exchange-rates"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>ECB Exchange Rates API — Official Euro FX Rates, History</h1>
+<p>Get the <strong>official European Central Bank euro reference exchange rates</strong> — the benchmark used for invoicing, accounting and VAT conversions across Europe — as clean, flat JSON. Latest rates or full <strong>daily history back to 1999</strong>, for every currency the ECB publishes, with <strong>any base currency</strong> through exact cross rates. Straight from the ECB data API: no key, no scraping, no stale mirrors.</p>
+<div class="quick-facts"><span class="badge">$1 / 1,000</span><a class="button" href="https://apify.com/factpipe/ecb-exchange-rates" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the four prefilled currencies with no dates. It finishes in under a minute.</li><li>You get the latest official ECB reference rate for USD, GBP, JPY and CHF.</li><li>That first run costs $0.004, well within Apify&#x27;s free monthly credit. Then swap in your own input or schedule it.</li></ol>
+<h2 id="what-you-get">What you get</h2>
+<pre><code class="language-json">{
+  &quot;date&quot;: &quot;2026-09-14&quot;,
+  &quot;base_currency&quot;: &quot;EUR&quot;,
+  &quot;quote_currency&quot;: &quot;USD&quot;,
+  &quot;rate&quot;: 1.1551,
+  &quot;inverse_rate&quot;: 0.86572591,
+  &quot;eur_per_base&quot;: 1,
+  &quot;eur_per_quote&quot;: 0.86572591,
+  &quot;source&quot;: &quot;ECB euro foreign exchange reference rates&quot;,
+  &quot;source_url&quot;: &quot;https://data-api.ecb.europa.eu/service/data/EXR/D.USD.EUR.SP00.A?format=csvdata&amp;detail=dataonly&amp;lastNObservations=1&quot;,
+  &quot;fetched_at&quot;: &quot;2026-09-15T12:00:00.000Z&quot;
+}</code></pre>
+<h2 id="use-cases">Use cases</h2>
+<ul><li><strong>Accounting &amp; invoicing</strong>: convert foreign-currency invoices at the official ECB reference rate for the invoice date.</li><li><strong>Finance dashboards</strong>: daily scheduled run pushes the latest rates to Google Sheets, Slack or your database.</li><li><strong>Backtesting &amp; analytics</strong>: pull decades of daily history for any currency pair in one run.</li><li><strong>AI agents</strong>: tiny input, deterministic output — ideal via API or the Apify MCP server.</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/ecb-exchange-rates" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~ecb-exchange-rates/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;currencies&quot;: [&quot;USD&quot;, &quot;GBP&quot;, &quot;JPY&quot;, &quot;CHF&quot;]}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;currencies&quot;: [
+    &quot;USD&quot;,
+    &quot;GBP&quot;,
+    &quot;JPY&quot;,
+    &quot;CHF&quot;
+  ]
+}
+
+run = client.actor(&quot;factpipe/ecb-exchange-rates&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;currencies&quot;: [
+    &quot;USD&quot;,
+    &quot;GBP&quot;,
+    &quot;JPY&quot;,
+    &quot;CHF&quot;
+  ]
+};
+
+const run = await client.actor(&#x27;factpipe/ecb-exchange-rates&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>currencies</code></td><td>string[]</td><td>ISO codes, e.g. <code>USD</code>, <code>GBP</code>; empty = all</td></tr><tr><td><code>baseCurrency</code></td><td>string</td><td>Default <code>EUR</code>; others via cross rates</td></tr><tr><td><code>startDate</code> / <code>endDate</code></td><td><code>YYYY-MM-DD</code></td><td>Leave empty for the latest rates</td></tr><tr><td><code>maxResults</code></td><td>integer</td><td>Cap on charged rows (default 10,000)</td></tr></tbody></table></div>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>rate-result</code></td><td><strong>$1 per 1,000</strong> ($0.001 each)</td><td>One exchange rate row (date + currency pair) delivered. Unknown or discontinued currencies and empty runs are never charged.</td></tr></tbody></table></div>
+<p>Example: one year of daily rates for 4 currencies (~1,020 rows) costs <strong>about $1.02</strong>. No start fee. You only pay for delivered results.</p>
+<h2 id="related-factpipe-actors">Related factpipe Actors</h2>
+<ul><li><a href="../eu-vat-validation/">EU VAT Number Validation API — VIES Bulk Checker</a> — EU VAT number validation via VIES</li><li><a href="../eu-ted-tenders-monitor/">EU Tenders Scraper — TED Public Procurement Notices API</a> — EU public procurement tenders</li></ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>Do I need an API key?</strong><br>
+No. The ECB data API is open. The Actor needs no key or account.</p>
+<p><strong>How often are rates updated?</strong><br>
+The ECB publishes reference rates once per working day at around 16:00 CET. There are no rates on weekends and TARGET holidays, so those dates are simply absent.</p>
+<p><strong>Can I get USD-based or GBP-based rates?</strong><br>
+Yes. Set <code>baseCurrency</code> to any published currency. Cross rates are computed exactly from the two ECB euro rates for the same date.</p>
+<p><strong>What about currencies the ECB stopped publishing?</strong><br>
+Discontinued currencies (for example ARS, or BGN after Bulgaria adopted the euro) are reported as not found in latest-rate mode and never charged. Their history is still available with a date range.</p>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier or an AI agent?</strong><br>
+Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server. Input is small and output is deterministic flat JSON.</p>
+<h2 id="reliability">Reliability</h2>
+<p>Deterministic code against official sources, automatic retries with backoff, structured failure reporting, daily health checks and issue triage.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>

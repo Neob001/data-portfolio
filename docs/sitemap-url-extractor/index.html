@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sitemap URL Extractor: Get All URLs from XML Sitemaps</title>
+<meta name="description" content="Extract all URLs from any site&#x27;s sitemap.xml, including sitemap indexes, with lastmod and optional HTTP status checks to find broken 404 links and redirects.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/sitemap-url-extractor/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sitemap URL Extractor: Get All URLs from XML Sitemaps">
+<meta property="og:description" content="Extract all URLs from any site&#x27;s sitemap.xml, including sitemap indexes, with lastmod and optional HTTP status checks to find broken 404 links and redirects.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/sitemap-url-extractor/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Sitemap URL Extractor & 404 Checker \u2014 XML Sitemap Scraper",
+  "description": "Extract every URL from any website's XML sitemaps: robots.txt discovery, nested sitemap indexes, lastmod and priority. Optional HTTP status check finds 404s and redirects. $0.30 per 1,000 URLs.",
+  "url": "https://neob001.github.io/data-portfolio/sitemap-url-extractor/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "0.3",
+    "description": "Pay-per-result pricing: $0.30 per 1,000 url results",
+    "url": "https://apify.com/factpipe/sitemap-url-extractor"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>Sitemap URL Extractor &amp; 404 Checker — XML Sitemap Scraper</h1>
+<p>Extract <strong>every URL from a website&#x27;s sitemaps</strong> with one input: the site root. Discovers sitemaps via robots.txt and common paths, walks sitemap indexes, and returns flat records with <code>lastmod</code>, <code>changefreq</code>, and <code>priority</code> — optionally HEAD-checking each URL&#x27;s HTTP status to find broken pages. Sitemaps are built for machines; this is the clean, reliable way to read them.</p>
+<div class="quick-facts"><span class="badge">$0.30 / 1,000</span><a class="button" href="https://apify.com/factpipe/sitemap-url-extractor" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the prefilled site <code>https://www.sitemaps.org</code>. It finishes in under a minute.</li><li>You get up to 200 URLs with lastmod and priority (tick <strong>Check HTTP status</strong> to also flag 404s and redirects).</li><li>That first run costs at most $0.06, well within Apify&#x27;s free monthly credit. Then swap in your own input or schedule it.</li></ol>
+<h2 id="what-you-get">What you get</h2>
+<pre><code class="language-json">{
+  &quot;site&quot;: &quot;https://www.example.com&quot;,
+  &quot;found&quot;: true,
+  &quot;sitemap_url&quot;: &quot;https://www.example.com/sitemap.xml&quot;,
+  &quot;url&quot;: &quot;https://www.example.com/blog/post-42&quot;,
+  &quot;lastmod&quot;: &quot;2026-08-30&quot;,
+  &quot;changefreq&quot;: &quot;weekly&quot;,
+  &quot;priority&quot;: 0.8,
+  &quot;http_status&quot;: 200,
+  &quot;ok&quot;: true,
+  &quot;source_url&quot;: &quot;https://www.example.com/sitemap.xml&quot;,
+  &quot;fetched_at&quot;: &quot;2026-09-12T12:00:00.000Z&quot;
+}</code></pre>
+<h2 id="use-cases">Use cases</h2>
+<ul><li><strong>SEO audits</strong>: full URL inventory with freshness signals; find 404s and redirects in the sitemap (<code>checkStatus: true</code>).</li><li><strong>Site migrations</strong>: before/after URL inventories to verify nothing was lost.</li><li><strong>Crawl seeding</strong>: feed complete URL lists into other scrapers and agents.</li><li><strong>Monitoring</strong>: schedule it to detect new/removed pages on any site you track.</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/sitemap-url-extractor" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~sitemap-url-extractor/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;websiteUrls&quot;: [&quot;https://www.sitemaps.org&quot;], &quot;maxUrlsPerSite&quot;: 200}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;websiteUrls&quot;: [
+    &quot;https://www.sitemaps.org&quot;
+  ],
+  &quot;maxUrlsPerSite&quot;: 200
+}
+
+run = client.actor(&quot;factpipe/sitemap-url-extractor&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;websiteUrls&quot;: [
+    &quot;https://www.sitemaps.org&quot;
+  ],
+  &quot;maxUrlsPerSite&quot;: 200
+};
+
+const run = await client.actor(&#x27;factpipe/sitemap-url-extractor&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="switching-from-another-sitemap-extractor">Switching from another sitemap extractor</h2>
+<p>Same input idea (website URLs in, URL records out), plus: robots.txt discovery, sitemap-index traversal, <code>lastmod/changefreq/priority</code> preserved, optional live status checks, and <code>source_url</code>/<code>fetched_at</code> on every record. <strong>Charged per URL row delivered — sites without sitemaps are free.</strong></p>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>websiteUrls</code></td><td>string[], required</td><td>Site roots or direct sitemap.xml URLs</td></tr><tr><td><code>checkStatus</code></td><td>boolean</td><td>HEAD-check each URL (default false)</td></tr><tr><td><code>maxUrlsPerSite</code></td><td>integer</td><td>Cap on charged rows per site (default 2000)</td></tr></tbody></table></div>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>url-result</code></td><td><strong>$0.30 per 1,000</strong> ($0.0003 each)</td><td>One URL record delivered. <strong>Sites with no discoverable sitemap and empty runs are never charged.</strong></td></tr></tbody></table></div>
+<p>Example: 10,000 URLs cost <strong>$3.00</strong>. You only pay for delivered results.</p>
+<h2 id="factpipe-website-audit-toolkit">factpipe Website Audit Toolkit</h2>
+<p>Bulk technical checks for agencies, SEO teams and deliverability owners, all pay-per-result. Feed a list of sites in, get one flat row per page or domain out.</p>
+<div class="table-wrap"><table><thead><tr><th>Workflow</th><th>Actor</th><th>What it does</th><th>Price</th></tr></thead><tbody><tr><td>Website audit</td><td><strong>Sitemap URL Extractor &amp; 404 Checker</strong> (this Actor)</td><td>Extract every URL from XML sitemaps and flag 404s and broken entries</td><td>$0.30/1k</td></tr><tr><td>Website audit</td><td><a href="../lighthouse-auditor/">Lighthouse Auditor</a></td><td>Lighthouse scores and Core Web Vitals for many pages, mobile or desktop</td><td>$10/1k</td></tr><tr><td>Website audit</td><td><a href="../email-security-checker/">Email Security Checker</a></td><td>SPF, DKIM, DMARC and MX audit for any list of domains</td><td>$3/1k</td></tr></tbody></table></div>
+<p><strong>Use it together:</strong></p>
+<ul><li><strong>Full-site audit:</strong> extract URLs here, send the live pages to <a href="../lighthouse-auditor/">Lighthouse Auditor</a> for Core Web Vitals, and check the domain&#x27;s mail setup with <a href="../email-security-checker/">Email Security Checker</a>.</li></ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>How do I find 404 URLs listed in a sitemap?</strong><br>
+Enter the site root and set <code>checkStatus: true</code>. The Actor extracts every URL from the sitemaps and HEAD-checks each one, so 404s, other errors and redirects show up in the status fields of each record.</p>
+<p><strong>How do I get all URLs of a website?</strong><br>
+Enter the site root. The Actor discovers sitemaps from robots.txt and common paths, follows nested sitemap indexes and returns one record per URL with lastmod, changefreq and priority.</p>
+<p><strong>Can it find broken links (404s) in my sitemap?</strong><br>
+Yes. Set <code>checkStatus: true</code> and every URL gets an HTTP status and an <code>ok</code> flag, so 404s and redirects in the sitemap are easy to filter.</p>
+<p><strong>What if a site has no sitemap?</strong><br>
+It is reported as not found and never charged.</p>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier or an AI agent?</strong><br>
+Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server. Input is small and output is deterministic flat JSON.</p>
+<h2 id="reliability">Reliability</h2>
+<p>Deterministic XML parsing, retries with backoff, polite rate limiting, structured failure reporting, daily health checks and issue triage.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>

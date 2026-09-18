@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bulk Lighthouse &amp; Core Web Vitals Checker (PageSpeed API)</title>
+<meta name="description" content="Audit thousands of URLs with Lighthouse: performance, SEO, accessibility scores, LCP, CLS, TBT and top fixes. Mobile &amp; desktop, no quota. Pay per audit.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/lighthouse-auditor/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bulk Lighthouse &amp; Core Web Vitals Checker (PageSpeed API)">
+<meta property="og:description" content="Audit thousands of URLs with Lighthouse: performance, SEO, accessibility scores, LCP, CLS, TBT and top fixes. Mobile &amp; desktop, no quota. Pay per audit.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/lighthouse-auditor/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Lighthouse & Core Web Vitals Checker API \u2014 Bulk PageSpeed",
+  "description": "Run real Google Lighthouse audits in bulk: performance, SEO, accessibility and best-practices scores, LCP/CLS/TBT with pass/fail, and top fixes. Mobile and desktop. No API key or quota. $10 per 1,000 audits.",
+  "url": "https://neob001.github.io/data-portfolio/lighthouse-auditor/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "10",
+    "description": "Pay-per-result pricing: $10 per 1,000 page auditeds",
+    "url": "https://apify.com/factpipe/lighthouse-auditor"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>Lighthouse &amp; Core Web Vitals Checker API — Bulk PageSpeed</h1>
+<p>Run <strong>real Google Lighthouse audits in bulk</strong> and get one clean JSON record per page: <strong>Performance, SEO, Accessibility and Best-Practices scores</strong>, lab <strong>Core Web Vitals (LCP, CLS, TBT)</strong> with good / needs-improvement / poor ratings and an overall pass/fail, plus the <strong>top optimization opportunities</strong> ranked by estimated time saved. Mobile, desktop or both.</p>
+<p>This Actor runs the open-source Lighthouse engine itself in headless Chrome — <strong>no PageSpeed Insights API key, no daily quota, no 429 errors</strong> — so large URL lists finish reliably.</p>
+<div class="quick-facts"><span class="badge">$10 / 1,000</span><a class="button" href="https://apify.com/factpipe/lighthouse-auditor" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the prefilled URL <code>https://example.com</code>. It usually finishes in one to two minutes.</li><li>You get one full mobile Lighthouse audit: performance, accessibility, SEO and best-practices scores plus Core Web Vitals.</li><li>That first run costs $0.01, well within Apify&#x27;s free monthly credit. Then swap in your own input or schedule it.</li></ol>
+<h2 id="what-you-get">What you get</h2>
+<pre><code class="language-json">{
+  &quot;query&quot;: &quot;https://example.com&quot;,
+  &quot;ok&quot;: true,
+  &quot;requested_url&quot;: &quot;https://example.com/&quot;,
+  &quot;final_url&quot;: &quot;https://example.com/&quot;,
+  &quot;strategy&quot;: &quot;mobile&quot;,
+  &quot;performance_score&quot;: 100,
+  &quot;accessibility_score&quot;: 100,
+  &quot;best_practices_score&quot;: 96,
+  &quot;seo_score&quot;: 80,
+  &quot;lcp_ms&quot;: 754,
+  &quot;cls&quot;: 0,
+  &quot;tbt_ms&quot;: 0,
+  &quot;fcp_ms&quot;: 754,
+  &quot;speed_index_ms&quot;: 754,
+  &quot;time_to_interactive_ms&quot;: 754,
+  &quot;server_response_ms&quot;: 7,
+  &quot;total_byte_weight_kb&quot;: 0,
+  &quot;lcp_rating&quot;: &quot;good&quot;,
+  &quot;cls_rating&quot;: &quot;good&quot;,
+  &quot;tbt_rating&quot;: &quot;good&quot;,
+  &quot;core_web_vitals_lab&quot;: &quot;pass&quot;,
+  &quot;top_opportunities&quot;: [],
+  &quot;failing_insights&quot;: [],
+  &quot;failing_seo_audits&quot;: [
+    &quot;meta-description&quot;,
+    &quot;link-text&quot;
+  ],
+  &quot;failing_accessibility_audits&quot;: [],
+  &quot;lighthouse_version&quot;: &quot;12.8.2&quot;,
+  &quot;audited_at&quot;: &quot;2026-09-15T07:54:17.472Z&quot;,
+  &quot;source_url&quot;: &quot;https://example.com/&quot;,
+  &quot;fetched_at&quot;: &quot;2026-09-15T12:00:00.000Z&quot;
+}</code></pre>
+<h2 id="use-cases">Use cases</h2>
+<ul><li><strong>SEO &amp; performance monitoring</strong>: schedule weekly audits of your key pages and alert when scores or Core Web Vitals regress.</li><li><strong>Agencies</strong>: audit every page in a client&#x27;s sitemap (pair it with our Sitemap URL Extractor) and prioritize fixes by estimated savings.</li><li><strong>Competitor benchmarking</strong>: compare performance and SEO scores across a market&#x27;s top websites.</li><li><strong>CI &amp; AI agents</strong>: call via API or the Apify MCP server with a list of URLs; deterministic flat output.</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/lighthouse-auditor" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~lighthouse-auditor/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;urls&quot;: [&quot;https://example.com&quot;]}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;urls&quot;: [
+    &quot;https://example.com&quot;
+  ]
+}
+
+run = client.actor(&quot;factpipe/lighthouse-auditor&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;urls&quot;: [
+    &quot;https://example.com&quot;
+  ]
+};
+
+const run = await client.actor(&#x27;factpipe/lighthouse-auditor&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>urls</code></td><td>string[], required</td><td>Pages to audit; <code>example.com</code> works too</td></tr><tr><td><code>strategy</code></td><td><code>mobile</code> \</td><td><code>desktop</code> \</td><td><code>both</code></td><td><code>both</code> runs two audits per URL</td></tr><tr><td><code>maxUrls</code></td><td>integer</td><td>Cap on URLs per run (default 100)</td></tr></tbody></table></div>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>page-audited</code></td><td><strong>$10 per 1,000</strong> ($0.01 each)</td><td>One completed Lighthouse audit (URL x device). Unreachable pages, invalid URLs and failed audits are never charged.</td></tr></tbody></table></div>
+<p>Example: auditing 500 URLs on mobile and desktop (1,000 audits) costs <strong>$10.00</strong>. No start fee.</p>
+<h2 id="factpipe-website-audit-toolkit">factpipe Website Audit Toolkit</h2>
+<p>Bulk technical checks for agencies, SEO teams and deliverability owners, all pay-per-result. Feed a list of sites in, get one flat row per page or domain out.</p>
+<div class="table-wrap"><table><thead><tr><th>Workflow</th><th>Actor</th><th>What it does</th><th>Price</th></tr></thead><tbody><tr><td>Website audit</td><td><a href="../sitemap-url-extractor/">Sitemap URL Extractor &amp; 404 Checker</a></td><td>Extract every URL from XML sitemaps and flag 404s and broken entries</td><td>$0.30/1k</td></tr><tr><td>Website audit</td><td><strong>Lighthouse Auditor</strong> (this Actor)</td><td>Lighthouse scores and Core Web Vitals for many pages, mobile or desktop</td><td>$10/1k</td></tr><tr><td>Website audit</td><td><a href="../email-security-checker/">Email Security Checker</a></td><td>SPF, DKIM, DMARC and MX audit for any list of domains</td><td>$3/1k</td></tr></tbody></table></div>
+<p><strong>Use it together:</strong></p>
+<ul><li><strong>Audit every page, not just the homepage:</strong> get the full URL list from <a href="../sitemap-url-extractor/">Sitemap URL Extractor &amp; 404 Checker</a> first, then audit it here.</li><li><strong>Client health report:</strong> add SPF/DKIM/DMARC results from <a href="../email-security-checker/">Email Security Checker</a>.</li></ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>Is this the same as Google PageSpeed Insights?</strong><br>
+It runs the same open-source Lighthouse engine that powers PageSpeed Insights&#x27; lab data, with the same mobile emulation and simulated throttling defaults. It does not return PageSpeed&#x27;s field (CrUX) data, which comes from real Chrome users.</p>
+<p><strong>Why does my score differ slightly between runs?</strong><br>
+Lab scores vary a few points with network and server conditions; that is normal Lighthouse behavior. For monitoring, compare trends across scheduled runs.</p>
+<p><strong>What is TBT and why no INP?</strong><br>
+INP needs real user interaction and is only available as field data. Total Blocking Time (TBT) is Lighthouse&#x27;s lab proxy for responsiveness and is rated against Core Web Vitals-aligned thresholds.</p>
+<p><strong>Am I charged when a page fails to load?</strong><br>
+No. DNS errors, blocked pages, timeouts and invalid URLs are returned with an <code>error_code</code> and are never charged.</p>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier or an AI agent?</strong><br>
+Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server.</p>
+<h2 id="reliability">Reliability</h2>
+<p>Deterministic Lighthouse runs in an isolated headless Chrome, automatic browser restart on hangs, per-audit timeouts, structured failure reporting, daily health checks.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>

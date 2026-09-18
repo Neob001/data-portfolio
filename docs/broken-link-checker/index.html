@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Broken Link Checker API: Find 404s &amp; Dead Links in Bulk</title>
+<meta name="description" content="Crawl any website and find broken links, 404s, dead images and redirect loops. Shows where each link appears and its anchor text. Pay per page scanned.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/broken-link-checker/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Broken Link Checker API: Find 404s &amp; Dead Links in Bulk">
+<meta property="og:description" content="Crawl any website and find broken links, 404s, dead images and redirect loops. Shows where each link appears and its anchor text. Pay per page scanned.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/broken-link-checker/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Broken Link Checker \u2014 Find 404s & Dead Links on Any Website",
+  "description": "Crawl any website and find every broken link: 404s, dead images, dead scripts and stylesheets, DNS failures, redirect loops. BFS same-host crawl, robots.txt aware. $1.50 per 1,000 pages scanned.",
+  "url": "https://neob001.github.io/data-portfolio/broken-link-checker/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "1.5",
+    "description": "Pay-per-result pricing: $1.50 per 1,000 page scanneds",
+    "url": "https://apify.com/factpipe/broken-link-checker"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>Broken Link Checker — Find 404s &amp; Dead Links on Any Website</h1>
+<p>Crawl <strong>any website and find every broken link</strong>: 404s, dead images, dead scripts and stylesheets, DNS failures, timeouts and redirect loops. Give it a start URL, it walks the site breadth-first (same hostname, robots.txt aware) and returns one flat row per broken link — where it was found, how many pages link to it, and the anchor text — so you know exactly what to fix and where.</p>
+<div class="quick-facts"><span class="badge">$1.50 / 1,000</span><a class="button" href="https://apify.com/factpipe/broken-link-checker" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the prefilled site (<code>https://crawlee.dev</code>, 20 pages, 3-minute limit). It finishes in about 2–3 minutes.</li><li>You get one row per broken or unverifiable link (where it appears, how many pages link to it, anchor text) plus a <code>site_summary</code> row with totals.</li><li>That first run costs $0.03, well within Apify&#x27;s free monthly credit. Then enter your own site and raise the page limit.</li></ol>
+<h2 id="what-you-get">What you get</h2>
+<p>The dataset holds two kinds of row, told apart by <code>record_type</code>:</p>
+<ul><li><strong><code>broken_link</code></strong> (plus <code>unverified_link</code> for links a site refused to verify, and <code>ok_link</code> if you enable <code>includeOkLinks</code>) — one row per unique link found:</li></ul>
+<pre><code class="language-json">{
+  &quot;record_type&quot;: &quot;broken_link&quot;,
+  &quot;site&quot;: &quot;https://crawlee.dev&quot;,
+  &quot;link_url&quot;: &quot;https://crawlee.dev/docs/old-guide&quot;,
+  &quot;final_url&quot;: &quot;https://crawlee.dev/docs/old-guide&quot;,
+  &quot;status_code&quot;: 404,
+  &quot;error&quot;: null,
+  &quot;is_broken&quot;: true,
+  &quot;reason&quot;: &quot;http_404&quot;,
+  &quot;link_type&quot;: &quot;internal&quot;,
+  &quot;element&quot;: &quot;a&quot;,
+  &quot;found_on_url&quot;: &quot;https://crawlee.dev/&quot;,
+  &quot;found_on_count&quot;: 3,
+  &quot;found_on_sample&quot;: [
+    &quot;https://crawlee.dev/&quot;,
+    &quot;https://crawlee.dev/blog&quot;,
+    &quot;https://crawlee.dev/docs/quick-start&quot;
+  ],
+  &quot;anchor_text&quot;: &quot;Read the old guide&quot;,
+  &quot;redirect_count&quot;: 0,
+  &quot;source_url&quot;: &quot;https://crawlee.dev/docs/old-guide&quot;,
+  &quot;fetched_at&quot;: &quot;2026-09-15T12:00:00.000Z&quot;
+}</code></pre>
+<ul><li><strong><code>site_summary</code></strong> — exactly one row per start URL, pushed at the end of that site&#x27;s crawl, so every run produces at least one row even on a perfectly healthy site with <code>includeOkLinks</code> off:</li></ul>
+<pre><code class="language-json">{
+  &quot;record_type&quot;: &quot;site_summary&quot;,
+  &quot;site&quot;: &quot;https://crawlee.dev/&quot;,
+  &quot;start_url&quot;: &quot;https://crawlee.dev/&quot;,
+  &quot;pages_scanned&quot;: 20,
+  &quot;links_checked&quot;: 1206,
+  &quot;broken_links&quot;: 3,
+  &quot;rate_limited_unverified&quot;: 0,
+  &quot;blocked_unverified&quot;: 0,
+  &quot;external_links_checked&quot;: 722,
+  &quot;top_broken&quot;: [
+    &quot;https://crawlee.dev/docs/old-guide&quot;
+  ],
+  &quot;status&quot;: &quot;completed&quot;,
+  &quot;source_url&quot;: &quot;https://crawlee.dev/&quot;,
+  &quot;fetched_at&quot;: &quot;2026-09-15T12:00:00.000Z&quot;
+}</code></pre>
+<p><code>status</code> is <code>&quot;completed&quot;</code>, <code>&quot;page_limit_reached&quot;</code> (hit <code>maxPagesPerSite</code>), <code>&quot;charge_limit_reached&quot;</code> (hit your max-cost-per-run setting), <code>&quot;time_limit_reached&quot;</code> (hit <code>maxRunMinutes</code>), or <code>&quot;start_url_unreachable&quot;</code> (the start URL itself never loaded — that row is free).</p>
+<h2 id="use-cases">Use cases</h2>
+<ul><li><strong>SEO audits</strong>: find and fix every dead internal/external link before it costs you rankings.</li><li><strong>Site migrations</strong>: verify nothing broke after a redesign, CMS switch or URL restructure.</li><li><strong>Agencies&#x27; client reports</strong>: run one crawl per client site, hand over a clean broken-link list.</li><li><strong>Content QA</strong>: catch dead links in blog posts and docs before or right after publishing.</li><li><strong>Scheduled monitoring</strong>: schedule weekly runs to catch link rot (expired external sites, moved pages) as it happens.</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/broken-link-checker" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~broken-link-checker/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;startUrls&quot;: [&quot;https://crawlee.dev&quot;], &quot;maxPagesPerSite&quot;: 20, &quot;maxRunMinutes&quot;: 3}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;startUrls&quot;: [
+    &quot;https://crawlee.dev&quot;
+  ],
+  &quot;maxPagesPerSite&quot;: 20,
+  &quot;maxRunMinutes&quot;: 3
+}
+
+run = client.actor(&quot;factpipe/broken-link-checker&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;startUrls&quot;: [
+    &quot;https://crawlee.dev&quot;
+  ],
+  &quot;maxPagesPerSite&quot;: 20,
+  &quot;maxRunMinutes&quot;: 3
+};
+
+const run = await client.actor(&#x27;factpipe/broken-link-checker&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>startUrls</code></td><td>string[], required</td><td>Website URLs to crawl (prefilled with <code>https://crawlee.dev</code>)</td></tr><tr><td><code>maxPagesPerSite</code></td><td>integer</td><td>Cap on pages crawled and charged per site (default 50, max 5000)</td></tr><tr><td><code>checkExternalLinks</code></td><td>boolean</td><td>Also check links to other hostnames (default true)</td></tr><tr><td><code>checkImagesAndAssets</code></td><td>boolean</td><td>Also check <code>img</code>, <code>script</code> and stylesheet <code>link</code> tags (default true)</td></tr><tr><td><code>includeOkLinks</code></td><td>boolean</td><td>Return working links too, not just broken ones (default false)</td></tr><tr><td><code>respectRobotsTxt</code></td><td>boolean</td><td>Honor <code>Disallow</code> for <code>user-agent: *</code> when deciding what to crawl (default true)</td></tr><tr><td><code>maxRunMinutes</code></td><td>integer</td><td>Hard wall-clock budget for the whole run (default 3, max 1440). Raise it for large sites; a run that hits it still succeeds and reports <code>time_limit_reached</code></td></tr></tbody></table></div>
+<p>Crawling is breadth-first over pages on the same hostname as each start URL (<code>www.</code> is ignored), up to <code>maxPagesPerSite</code> pages. Every link on every scanned page is checked: HEAD first, falling back to GET on 403/405/501 or a network oddity; redirects are followed (up to 5 hops) and recorded as <code>final_url</code>/<code>redirect_count</code>; timeouts and 5xx get one retry; a 429 is reported as <code>rate_limited_unverified</code> rather than marked broken, so a rate limiter never gets flagged as a dead link. External and asset checks run in their own pool (24 at once across the whole run, at most 4 per host) alongside the page crawl, so a page full of external links doesn&#x27;t stall the crawl behind it. If <code>maxRunMinutes</code> is reached, the Actor stops crawling new pages, gives whatever&#x27;s already in flight up to 15 more seconds, writes each site&#x27;s <code>site_summary</code> row (<code>status: &quot;time_limit_reached&quot;</code> where it was cut short) and finishes successfully — a page whose links weren&#x27;t all checked in time is never charged.</p>
+<p>The dataset has two views: <strong>Broken links</strong> (the link-level rows) and <strong>Site summary</strong> (one row per site).</p>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>page-scanned</code></td><td><strong>$1.50 per 1,000</strong> ($0.0015 each)</td><td>One HTML page successfully crawled and every link on it checked.</td></tr></tbody></table></div>
+<p>Every link found on a scanned page — internal, external, images, scripts, stylesheets — is checked at no extra charge. A start URL that can&#x27;t be reached at all (DNS failure, connection refused, timeout) is reported as broken and is <strong>never charged</strong>.</p>
+<p>Example: auditing a 200-page site costs <strong>$0.30</strong>.</p>
+<h2 id="how-it-compares">How it compares</h2>
+<p>Most link checkers either charge per link checked (so one page with 40 links costs 40x more than it should) or require a full headless browser for every page. This Actor charges per page scanned, not per link — a page with 200 links costs the same as a page with 2 — and runs on plain HTTP requests (no browser), which keeps it fast and cheap for large sites. The trade-off: it doesn&#x27;t see links injected by client-side JavaScript (see FAQ).</p>
+<h2 id="factpipe-website-audit-toolkit">factpipe Website Audit Toolkit</h2>
+<p>Bulk technical checks for agencies, SEO teams and deliverability owners, all pay-per-result. Feed a list of sites in, get one flat row per page, link or domain out.</p>
+<div class="table-wrap"><table><thead><tr><th>Workflow</th><th>Actor</th><th>What it does</th><th>Price</th></tr></thead><tbody><tr><td>Website audit</td><td><a href="../sitemap-url-extractor/">Sitemap URL Extractor &amp; 404 Checker</a></td><td>Extract every URL from XML sitemaps and flag 404s and broken entries</td><td>$0.30/1k</td></tr><tr><td>Website audit</td><td><a href="../lighthouse-auditor/">Lighthouse Auditor</a></td><td>Lighthouse scores and Core Web Vitals for many pages, mobile or desktop</td><td>$10/1k</td></tr><tr><td>Website audit</td><td><a href="../email-security-checker/">Email Security Checker</a></td><td>SPF, DKIM, DMARC and MX audit for any list of domains</td><td>$3/1k</td></tr><tr><td>Website audit</td><td><strong>Broken Link Checker</strong> (this Actor)</td><td>Crawl a site and find every 404, dead asset and broken link</td><td>$1.50/1k</td></tr></tbody></table></div>
+<p><strong>Use it together:</strong></p>
+<ul><li><strong>Full-site health report:</strong> pull the URL inventory from <a href="../sitemap-url-extractor/">Sitemap URL Extractor</a>, crawl it here for a deep broken-link sweep (following actual on-page navigation, not just the sitemap), check Core Web Vitals with <a href="../lighthouse-auditor/">Lighthouse Auditor</a>, and audit the domain&#x27;s mail setup with <a href="../email-security-checker/">Email Security Checker</a>.</li></ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>Does it respect robots.txt?</strong><br>
+Yes, by default. It won&#x27;t crawl (follow links into) pages disallowed for <code>user-agent: *</code>. It still checks whether a disallowed URL itself is broken when another page links to it — robots.txt controls crawling, not link-checking.</p>
+<p><strong>Will it find links added by JavaScript?</strong><br>
+No. This Actor reads the raw HTML response for each page, the same way a fast, non-rendering crawler or a search engine&#x27;s basic fetcher does. Links, images and scripts injected client-side after the page loads (React/Vue apps that render navigation in the browser) are not seen. If your site&#x27;s navigation depends on JavaScript, its link inventory will be incomplete.</p>
+<p><strong>What happens if a site rate-limits the crawl?</strong><br>
+A 429 response is retried once after the <code>Retry-After</code> delay (capped at 10 seconds). If it&#x27;s still 429, the link is reported with <code>status_code: 429</code> and <code>reason: &quot;rate_limited_unverified&quot;</code> — it is never marked broken, since a rate limit says nothing about whether the link actually works.</p>
+<p><strong>Why are some external links marked <code>unverified_link</code> instead of broken?</strong><br>
+Many large sites (Stack Overflow, npm, LinkedIn and others) answer automated checks with 401, 403 or LinkedIn&#x27;s 999 even though the page works in a browser. For external links those responses are reported as <code>record_type: &quot;unverified_link&quot;</code> with <code>reason: &quot;blocked_unverified&quot;</code> and counted in <code>blocked_unverified</code>, not as broken. On your own site, a 401 or 403 is still reported as broken.</p>
+<p><strong>What counts as &quot;broken&quot;?</strong><br>
+Any HTTP status ≥ 400, plus DNS failures, connection refused, TLS/certificate errors, redirect loops, too-many-redirects, and timeouts after the retry. Working links (including ones that resolve after a redirect) are <code>is_broken: false</code> and only appear in the output if <code>includeOkLinks</code> is enabled.</p>
+<p><strong>Will I ever get an empty result?</strong><br>
+No. Even a perfectly healthy site with <code>includeOkLinks</code> off produces a <code>site_summary</code> row (pages scanned, links checked, 0 broken) — you always get at least one row confirming the run actually checked something.</p>
+<p><strong>What happens on a very large or slow site?</strong><br>
+<code>maxRunMinutes</code> caps the whole run. As it nears, no new pages are crawled and no new checks start; whatever&#x27;s already in flight gets up to 15 more seconds before being cut off. The site&#x27;s <code>site_summary</code> row reports <code>status: &quot;time_limit_reached&quot;</code>, and any page whose links weren&#x27;t all checked in time is never charged — you&#x27;re only billed for pages that were fully audited.</p>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier or an AI agent?</strong><br>
+Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server. Input is small and output is deterministic flat JSON.</p>
+<h2 id="reliability">Reliability</h2>
+<p>Deterministic HTTP crawling (no browser), retries with backoff, structured failure reporting, daily health checks and issue triage.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EU VAT Number Validation API: Bulk VIES VAT Checker</title>
+<meta name="description" content="Validate EU VAT numbers in bulk via official VIES: validity, company name, address, timestamp. Automatic retries on VIES throttling. Pay per check.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/eu-vat-validation/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="EU VAT Number Validation API: Bulk VIES VAT Checker">
+<meta property="og:description" content="Validate EU VAT numbers in bulk via official VIES: validity, company name, address, timestamp. Automatic retries on VIES throttling. Pay per check.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/eu-vat-validation/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "EU VAT Validation API \u2014 VIES VAT Number Checker (Bulk)",
+  "description": "Validate EU VAT numbers in bulk against the official EU VIES service: valid/invalid, registered company name and address, check timestamp. Handles VIES throttling. $2 per 1,000 checks.",
+  "url": "https://neob001.github.io/data-portfolio/eu-vat-validation/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "2",
+    "description": "Pay-per-result pricing: $2 per 1,000 vat checkeds",
+    "url": "https://apify.com/factpipe/eu-vat-validation"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>EU VAT Validation API — VIES VAT Number Checker (Bulk)</h1>
+<p>Validate <strong>EU VAT numbers in bulk</strong> against the <strong>official European Commission VIES service</strong> and get a clean record per number: valid or invalid, the registered trader name and address (where the member state provides them), and the check timestamp. VIES throttles heavily and member-state services go offline often — this Actor retries automatically and <strong>only charges for definitive answers</strong>.</p>
+<div class="quick-facts"><span class="badge">$2 / 1,000</span><a class="button" href="https://apify.com/factpipe/eu-vat-validation" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the two prefilled VAT numbers. It finishes in under a minute.</li><li>You get a valid/invalid answer per number with the registered trader name and address where the member state provides them.</li><li>That first run costs $0.004, well within Apify&#x27;s free monthly credit. Then swap in your own input or schedule it.</li></ol>
+<h2 id="what-you-get">What you get</h2>
+<pre><code class="language-json">{
+  &quot;query&quot;: &quot;IE6388047V&quot;,
+  &quot;checked&quot;: true,
+  &quot;country_code&quot;: &quot;IE&quot;,
+  &quot;vat_number&quot;: &quot;6388047V&quot;,
+  &quot;full_vat_number&quot;: &quot;IE6388047V&quot;,
+  &quot;valid&quot;: true,
+  &quot;name&quot;: &quot;GOOGLE IRELAND LIMITED&quot;,
+  &quot;address&quot;: &quot;3RD FLOOR, GORDON HOUSE, BARROW STREET, DUBLIN 4&quot;,
+  &quot;checked_at&quot;: &quot;2026-09-15T07:36:47.788Z&quot;,
+  &quot;consultation_number&quot;: null,
+  &quot;source_url&quot;: &quot;https://ec.europa.eu/taxation_customs/vies/rest-api/check-vat-number&quot;,
+  &quot;fetched_at&quot;: &quot;2026-09-15T12:00:00.000Z&quot;
+}</code></pre>
+<h2 id="use-cases">Use cases</h2>
+<ul><li><strong>Invoicing &amp; reverse charge</strong>: verify a customer&#x27;s VAT number before issuing a zero-rated B2B invoice.</li><li><strong>Onboarding &amp; KYB</strong>: validate company VAT numbers in bulk and match the registered name.</li><li><strong>CRM hygiene</strong>: schedule re-validation of your customer base and catch deregistered numbers.</li><li><strong>AI agents &amp; automations</strong>: call from Make, Zapier, n8n or MCP with a list of numbers.</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/eu-vat-validation" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~eu-vat-validation/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;vatNumbers&quot;: [&quot;IE6388047V&quot;, &quot;CZ04788290&quot;]}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;vatNumbers&quot;: [
+    &quot;IE6388047V&quot;,
+    &quot;CZ04788290&quot;
+  ]
+}
+
+run = client.actor(&quot;factpipe/eu-vat-validation&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;vatNumbers&quot;: [
+    &quot;IE6388047V&quot;,
+    &quot;CZ04788290&quot;
+  ]
+};
+
+const run = await client.actor(&#x27;factpipe/eu-vat-validation&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>vatNumbers</code></td><td>string[], required</td><td>e.g. <code>IE6388047V</code>, <code>DE 811 569 869</code></td></tr><tr><td><code>defaultCountryCode</code></td><td>string</td><td>Applied to numbers without a prefix</td></tr></tbody></table></div>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>vat-checked</code></td><td><strong>$2 per 1,000</strong> ($0.002 each)</td><td>One definitive VIES answer (valid or invalid) delivered. Unrecognized formats and checks VIES could not answer are never charged.</td></tr></tbody></table></div>
+<p>Example: validating 1,000 VAT numbers costs <strong>$2.00</strong>. Numbers VIES could not answer are free. No start fee. You only pay for delivered results.</p>
+<h2 id="factpipe-compliance-suite">factpipe Compliance Suite</h2>
+<p>Official-source compliance data, all pay-per-result and runnable from one Apify account. Same conventions everywhere: flat records, ISO dates, <code>source_url</code> and <code>fetched_at</code> on every row, and no charge for empty or failed lookups, so outputs join cleanly in a single KYB, AML or GRC pipeline.</p>
+<div class="table-wrap"><table><thead><tr><th>Workflow</th><th>Actor</th><th>What it does</th><th>Price</th></tr></thead><tbody><tr><td>Counterparty &amp; KYB checks</td><td><a href="../ofac-sanctions-screening/">OFAC Sanctions Screening</a></td><td>Screen names against the US Treasury SDN list with fuzzy matching</td><td>$3/1k</td></tr><tr><td>Counterparty &amp; KYB checks</td><td><strong>EU VAT Validation</strong> (this Actor)</td><td>Validate EU VAT numbers in bulk against VIES, with registered name and address</td><td>$2/1k</td></tr><tr><td>Counterparty &amp; KYB checks</td><td><a href="../uk-company-lookup/">UK Companies House Lookup</a></td><td>Company status, SIC codes and registered office from Companies House</td><td>$2.50/1k</td></tr><tr><td>Public-sector sales intelligence</td><td><a href="../sam-gov-contracts/">SAM.gov Contracts</a></td><td>Federal contract opportunities, set-asides and deadlines from SAM.gov</td><td>$2/1k</td></tr><tr><td>Public-sector sales intelligence</td><td><a href="../eu-ted-tenders-monitor/">EU Tenders (TED)</a></td><td>EU public procurement notices from TED, filterable by CPV and country</td><td>$3/1k</td></tr><tr><td>Regulatory &amp; disclosure monitoring</td><td><a href="../federal-register-monitor/">Federal Register Monitor</a></td><td>New US rules, proposed rules and notices by agency or keyword</td><td>$2.50/1k</td></tr><tr><td>Regulatory &amp; disclosure monitoring</td><td><a href="../fda-recalls-monitor/">FDA Recalls Monitor</a></td><td>FDA food, drug and device recall enforcement reports</td><td>$3/1k</td></tr><tr><td>Regulatory &amp; disclosure monitoring</td><td><a href="../sec-edgar-filings-search/">SEC EDGAR Filings</a></td><td>Full-text search across 10-K, 10-Q, 8-K and other SEC filings</td><td>$2/1k</td></tr></tbody></table></div>
+<p><strong>Use it together:</strong></p>
+<ul><li><strong>Invoice and onboarding checks:</strong> validate the VAT number here, screen the returned legal name with <a href="../ofac-sanctions-screening/">OFAC Sanctions Screening</a>, and for UK entities add <a href="../uk-company-lookup/">UK Companies House Lookup</a>.</li></ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>Why do some countries return no name or address?</strong><br>
+Some member states (Germany, for example) do not disclose trader details through VIES. The validity result is still authoritative.</p>
+<p><strong>What happens when VIES is busy or a country&#x27;s service is down?</strong><br>
+The Actor retries with backoff. If VIES still cannot answer, the number is returned with <code>checked: false</code> and the VIES error code, and it is not charged.</p>
+<p><strong>Is this the official validation?</strong><br>
+Yes. Every result comes from the European Commission&#x27;s VIES REST service; <code>checked_at</code> is the timestamp VIES returned.</p>
+<p><strong>Does it work for UK VAT numbers?</strong><br>
+Only Northern Ireland (XI prefix) is in VIES. Great Britain (GB) numbers are validated by HMRC and are reported as not recognized, never charged.</p>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier or an AI agent?</strong><br>
+Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server. Input is small and output is deterministic flat JSON.</p>
+<h2 id="reliability">Reliability</h2>
+<p>Deterministic code against official sources, automatic retries with backoff, structured failure reporting, daily health checks and issue triage.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>

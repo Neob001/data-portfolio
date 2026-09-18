@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>US Weather Forecast API: NWS Hourly &amp; 7-Day Forecasts</title>
+<meta name="description" content="Bulk US weather forecasts from the official National Weather Service: hourly or 7-day periods, temperature, precipitation chance, wind, as flat JSON. No key.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/us-weather-forecast/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="US Weather Forecast API: NWS Hourly &amp; 7-Day Forecasts">
+<meta property="og:description" content="Bulk US weather forecasts from the official National Weather Service: hourly or 7-day periods, temperature, precipitation chance, wind, as flat JSON. No key.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/us-weather-forecast/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "US Weather Forecast API \u2014 NWS/NOAA Hourly & 7-Day, No Key",
+  "description": "Official National Weather Service (NOAA) forecasts for any US latitude/longitude: hourly or 7-day periods with temperature, rain chance and wind. Bulk locations, no API key. $2 per 1,000 locations.",
+  "url": "https://neob001.github.io/data-portfolio/us-weather-forecast/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "2",
+    "description": "Pay-per-result pricing: $2 per 1,000 location forecasts",
+    "url": "https://apify.com/factpipe/us-weather-forecast"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>US Weather Forecast API — NWS/NOAA Hourly &amp; 7-Day, No Key</h1>
+<p>Official <strong>US National Weather Service</strong> forecasts for any US coordinates — daily or hourly periods as clean, flat JSON records. Public-domain government data, no API key, no rate-limit anxiety. Feed logistics planning, event ops, energy forecasting, or AI agents with the same forecast data NOAA publishes.</p>
+<div class="quick-facts"><span class="badge">$2 / 1,000</span><a class="button" href="https://apify.com/factpipe/us-weather-forecast" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the two prefilled coordinates (New York, Los Angeles). It finishes in under a minute.</li><li>You get the official NWS 7-day forecast for each location.</li><li>That first run costs $0.004, well within Apify&#x27;s free monthly credit. Then swap in your own input or schedule it.</li></ol>
+<h2 id="what-you-get">What you get</h2>
+<p>One record per forecast period per location:</p>
+<pre><code class="language-json">{
+  &quot;location&quot;: &quot;Manhattan, NY&quot;,
+  &quot;latitude&quot;: 40.7128,
+  &quot;longitude&quot;: -74.006,
+  &quot;grid_id&quot;: &quot;OKX&quot;,
+  &quot;period_number&quot;: 1,
+  &quot;period_name&quot;: &quot;Overnight&quot;,
+  &quot;start_time&quot;: &quot;2026-09-11T04:00:00-04:00&quot;,
+  &quot;end_time&quot;: &quot;2026-09-11T06:00:00-04:00&quot;,
+  &quot;is_daytime&quot;: false,
+  &quot;temperature&quot;: 70,
+  &quot;temperature_unit&quot;: &quot;F&quot;,
+  &quot;precipitation_probability_pct&quot;: 17,
+  &quot;wind_speed&quot;: &quot;8 mph&quot;,
+  &quot;wind_direction&quot;: &quot;N&quot;,
+  &quot;short_forecast&quot;: &quot;Chance Rain Showers&quot;,
+  &quot;detailed_forecast&quot;: &quot;A chance of rain showers. Mostly cloudy. Low around 70...&quot;,
+  &quot;forecast_updated_at&quot;: &quot;2026-09-11T07:32:00+00:00&quot;,
+  &quot;source_url&quot;: &quot;https://api.weather.gov/gridpoints/OKX/33,42/forecast&quot;,
+  &quot;fetched_at&quot;: &quot;2026-09-11T12:00:00.000Z&quot;
+}</code></pre>
+<h2 id="use-cases">Use cases</h2>
+<ul><li><strong>Logistics &amp; field ops</strong>: batch forecasts for all your depots/sites in one scheduled run.</li><li><strong>Events &amp; staffing</strong>: precipitation probability and wind for the next 7 days per venue.</li><li><strong>Data pipelines &amp; agents</strong>: deterministic records, tiny input schema — ideal via API or MCP.</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/us-weather-forecast" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~us-weather-forecast/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;coordinates&quot;: [&quot;40.7128,-74.0060&quot;, &quot;34.0522,-118.2437&quot;]}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;coordinates&quot;: [
+    &quot;40.7128,-74.0060&quot;,
+    &quot;34.0522,-118.2437&quot;
+  ]
+}
+
+run = client.actor(&quot;factpipe/us-weather-forecast&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;coordinates&quot;: [
+    &quot;40.7128,-74.0060&quot;,
+    &quot;34.0522,-118.2437&quot;
+  ]
+};
+
+const run = await client.actor(&#x27;factpipe/us-weather-forecast&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>coordinates</code></td><td>string[], required</td><td>US locations as <code>&quot;lat,lon&quot;</code>, e.g. <code>&quot;40.7128,-74.0060&quot;</code></td></tr><tr><td><code>hourly</code></td><td>boolean</td><td>Hourly periods instead of day/night (default false)</td></tr><tr><td><code>maxPeriodsPerLocation</code></td><td>integer</td><td>Periods per location (default 14 = 7 days)</td></tr></tbody></table></div>
+<p>US coverage only (NWS). Non-US coordinates return an uncharged <code>outside_us_coverage</code> record.</p>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>location-forecast</code></td><td><strong>$2 per 1,000</strong> ($0.002 each)</td><td>One location successfully forecast (all its period records included). Invalid or out-of-coverage locations are never charged.</td></tr></tbody></table></div>
+<p>Example: 1,000 locations cost <strong>$2.00</strong>. You only pay for delivered results.</p>
+<h2 id="related-factpipe-actors">Related factpipe Actors</h2>
+<ul><li><a href="../ecb-exchange-rates/">ECB Exchange Rates API — Official Euro FX Rates, History</a> — official ECB euro exchange rates</li><li><a href="../wikipedia-scraper/">Wikipedia Scraper API — Articles, Summaries &amp; Full Text</a> — Wikipedia articles and summaries</li></ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>Do I need a weather API key?</strong><br>
+No. Data comes from the official US National Weather Service (api.weather.gov), which is public domain and keyless.</p>
+<p><strong>Can I get hourly forecasts for many locations at once?</strong><br>
+Yes. Pass any number of <code>lat,lon</code> coordinates and set <code>hourly: true</code>; you pay once per location, all its forecast periods included.</p>
+<p><strong>Does it work outside the US?</strong><br>
+No. NWS forecasts cover US locations only; out-of-coverage locations are skipped and never charged.</p>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier or an AI agent?</strong><br>
+Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server. Input is small and output is deterministic flat JSON.</p>
+<h2 id="reliability">Reliability</h2>
+<p>Official api.weather.gov, retries with backoff, structured failure reporting, daily issue triage.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>

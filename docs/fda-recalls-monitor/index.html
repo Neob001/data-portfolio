@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FDA Recalls API: Food, Drug &amp; Device Recall Monitor</title>
+<meta name="description" content="Get FDA food, drug and medical device recalls as flat JSON from official openFDA: firm, product, reason, Class I/II/III, distribution. Daily new-recall alerts.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/fda-recalls-monitor/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FDA Recalls API: Food, Drug &amp; Device Recall Monitor">
+<meta property="og:description" content="Get FDA food, drug and medical device recalls as flat JSON from official openFDA: firm, product, reason, Class I/II/III, distribution. Daily new-recall alerts.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/fda-recalls-monitor/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "FDA Recalls Scraper API \u2014 Food, Drug & Device Recalls",
+  "description": "Search and monitor FDA recalls and enforcement reports for food, drugs and medical devices via official openFDA. Filter by keyword, Class I/II/III, date. No key, flat JSON, alerts. $3 per 1,000.",
+  "url": "https://neob001.github.io/data-portfolio/fda-recalls-monitor/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "3",
+    "description": "Pay-per-result pricing: $3 per 1,000 recall results",
+    "url": "https://apify.com/factpipe/fda-recalls-monitor"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>FDA Recalls Scraper API — Food, Drug &amp; Device Recalls</h1>
+<p>Search and monitor <strong>FDA recalls and enforcement reports</strong> across food, drugs, and medical devices via the <strong>official openFDA API</strong>. Filter by keyword, classification (Class I/II/III), and report date; run on a schedule in incremental mode to catch every new recall the day FDA publishes it. Clean, flat JSON records for supply-chain risk, QA, retail compliance, and news monitoring.</p>
+<div class="quick-facts"><span class="badge">$3 / 1,000</span><a class="button" href="https://apify.com/factpipe/fda-recalls-monitor" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the prefilled search <code>listeria</code> in food recalls. It finishes in under a minute.</li><li>You get up to 25 recall reports with firm, product, reason and classification.</li><li>That first run costs at most $0.08, well within Apify&#x27;s free monthly credit. Then swap in your own input or schedule it.</li></ol>
+<h2 id="what-you-get">What you get</h2>
+<pre><code class="language-json">{
+  &quot;recall_number&quot;: &quot;F-0609-2015&quot;,
+  &quot;event_id&quot;: &quot;69516&quot;,
+  &quot;product_type&quot;: &quot;Food&quot;,
+  &quot;classification&quot;: &quot;Class I&quot;,
+  &quot;status&quot;: &quot;Terminated&quot;,
+  &quot;recalling_firm&quot;: &quot;Oasis Brands, Inc&quot;,
+  &quot;city&quot;: &quot;Miami&quot;,
+  &quot;state&quot;: &quot;FL&quot;,
+  &quot;country&quot;: &quot;United States&quot;,
+  &quot;product_description&quot;: &quot;Crema GuateLinda (Guatemalan Style Cream)...&quot;,
+  &quot;reason_for_recall&quot;: &quot;Virginia State (VDACS) found Listeria monocytogenes...&quot;,
+  &quot;product_quantity&quot;: &quot;144 pieces&quot;,
+  &quot;distribution_pattern&quot;: &quot;FL, GA, NC, and TN&quot;,
+  &quot;voluntary_mandated&quot;: &quot;Voluntary: Firm initiated&quot;,
+  &quot;recall_initiation_date&quot;: &quot;2014-10-01&quot;,
+  &quot;report_date&quot;: &quot;2014-10-15&quot;,
+  &quot;source_url&quot;: &quot;https://api.fda.gov/food/enforcement.json?...&quot;,
+  &quot;fetched_at&quot;: &quot;2026-09-11T12:00:00.000Z&quot;
+}</code></pre>
+<h2 id="use-cases">Use cases</h2>
+<ul><li><strong>Supply-chain risk</strong>: monitor recalls touching your suppliers, ingredients, or product categories.</li><li><strong>Retail &amp; food-service compliance</strong>: daily incremental runs feed your QA workflow automatically.</li><li><strong>Healthcare &amp; pharmacovigilance</strong>: track drug and device Class I recalls as they publish.</li><li><strong>AI agents</strong>: small input schema, deterministic output — ideal via API or MCP.</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/fda-recalls-monitor" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~fda-recalls-monitor/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;searchTerm&quot;: &quot;listeria&quot;, &quot;maxResults&quot;: 25}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;searchTerm&quot;: &quot;listeria&quot;,
+  &quot;maxResults&quot;: 25
+}
+
+run = client.actor(&quot;factpipe/fda-recalls-monitor&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;searchTerm&quot;: &quot;listeria&quot;,
+  &quot;maxResults&quot;: 25
+};
+
+const run = await client.actor(&#x27;factpipe/fda-recalls-monitor&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>category</code></td><td><code>food</code> \</td><td><code>drug</code> \</td><td><code>device</code></td><td>Which enforcement database</td></tr><tr><td><code>searchTerm</code></td><td>string</td><td>Optional keywords</td></tr><tr><td><code>classifications</code></td><td>string[]</td><td><code>Class I</code>, <code>Class II</code>, <code>Class III</code></td></tr><tr><td><code>reportedAfter</code></td><td><code>YYYY-MM-DD</code></td><td>Lower bound on report date</td></tr><tr><td><code>maxResults</code></td><td>integer</td><td>Cap on charged results (default 100)</td></tr><tr><td><code>sinceLastRun</code></td><td>boolean</td><td>Incremental monitoring mode</td></tr></tbody></table></div>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>recall-result</code></td><td><strong>$3 per 1,000</strong> ($0.003 each)</td><td>One recall record delivered. <strong>Empty runs are never charged.</strong></td></tr></tbody></table></div>
+<p>Example: 1,000 recall records cost <strong>$3.00</strong>. You only pay for delivered results.</p>
+<h2 id="factpipe-compliance-suite">factpipe Compliance Suite</h2>
+<p>Official-source compliance data, all pay-per-result and runnable from one Apify account. Same conventions everywhere: flat records, ISO dates, <code>source_url</code> and <code>fetched_at</code> on every row, and no charge for empty or failed lookups, so outputs join cleanly in a single KYB, AML or GRC pipeline.</p>
+<div class="table-wrap"><table><thead><tr><th>Workflow</th><th>Actor</th><th>What it does</th><th>Price</th></tr></thead><tbody><tr><td>Counterparty &amp; KYB checks</td><td><a href="../ofac-sanctions-screening/">OFAC Sanctions Screening</a></td><td>Screen names against the US Treasury SDN list with fuzzy matching</td><td>$3/1k</td></tr><tr><td>Counterparty &amp; KYB checks</td><td><a href="../eu-vat-validation/">EU VAT Validation</a></td><td>Validate EU VAT numbers in bulk against VIES, with registered name and address</td><td>$2/1k</td></tr><tr><td>Counterparty &amp; KYB checks</td><td><a href="../uk-company-lookup/">UK Companies House Lookup</a></td><td>Company status, SIC codes and registered office from Companies House</td><td>$2.50/1k</td></tr><tr><td>Public-sector sales intelligence</td><td><a href="../sam-gov-contracts/">SAM.gov Contracts</a></td><td>Federal contract opportunities, set-asides and deadlines from SAM.gov</td><td>$2/1k</td></tr><tr><td>Public-sector sales intelligence</td><td><a href="../eu-ted-tenders-monitor/">EU Tenders (TED)</a></td><td>EU public procurement notices from TED, filterable by CPV and country</td><td>$3/1k</td></tr><tr><td>Regulatory &amp; disclosure monitoring</td><td><a href="../federal-register-monitor/">Federal Register Monitor</a></td><td>New US rules, proposed rules and notices by agency or keyword</td><td>$2.50/1k</td></tr><tr><td>Regulatory &amp; disclosure monitoring</td><td><strong>FDA Recalls Monitor</strong> (this Actor)</td><td>FDA food, drug and device recall enforcement reports</td><td>$3/1k</td></tr><tr><td>Regulatory &amp; disclosure monitoring</td><td><a href="../sec-edgar-filings-search/">SEC EDGAR Filings</a></td><td>Full-text search across 10-K, 10-Q, 8-K and other SEC filings</td><td>$2/1k</td></tr></tbody></table></div>
+<p><strong>Use it together:</strong></p>
+<ul><li><strong>Product safety and supplier risk:</strong> track new recalls here, follow related rulemaking with <a href="../federal-register-monitor/">Federal Register</a>, and check recalling firms&#x27; disclosures in <a href="../sec-edgar-filings-search/">SEC EDGAR Filings</a>.</li></ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>Do I need an openFDA API key?</strong><br>
+No. The Actor calls the official openFDA enforcement endpoints without a key and respects their rate limits.</p>
+<p><strong>Can I get only serious (Class I) recalls?</strong><br>
+Yes. Set <code>classifications</code> to <code>Class I</code> and schedule daily with <code>sinceLastRun: true</code> for a new-recall alert feed.</p>
+<p><strong>Which recalls are covered?</strong><br>
+All openFDA enforcement reports for food, drugs and medical devices, with recalling firm, product, reason, quantity and distribution pattern.</p>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier or an AI agent?</strong><br>
+Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server. Input is small and output is deterministic flat JSON.</p>
+<h2 id="reliability">Reliability</h2>
+<p>Official openFDA API, polite rate limiting, retries with backoff, structured failure reporting, daily issue triage.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>
