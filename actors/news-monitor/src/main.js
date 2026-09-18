@@ -39,6 +39,7 @@ const fetchImpl = proxyConfiguration
     const res = await gotScraping({
       url, proxyUrl, headers: opts.headers, signal: opts.signal, throwHttpErrors: false, responseType: 'text', retry: { limit: 0 },
     });
+    log.info(`GDELT ${res.statusCode} ${String(res.body).length}B ${String(res.body).slice(0, 80).replace(/\s+/g, ' ')}`);
     return { status: res.statusCode, ok: res.statusCode >= 200 && res.statusCode < 300, text: async () => res.body };
   }
   : fetch;
