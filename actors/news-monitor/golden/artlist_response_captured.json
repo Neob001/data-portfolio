@@ -1,0 +1,34 @@
+{
+  "articles": [
+    {
+      "url": "https://www.haberler.com/haberler/15-ilde-dugmeye-basildi-ailem-guvende-20232870-haberi/",
+      "url_mobile": "https://www.haberler.com/amp/15-ilde-dugmeye-basildi-ailem-guvende-20232870-haberi/",
+      "title": "15 ilde düğmeye basıldı !  Ailem Güvende  operasyonundan ilk görüntüler",
+      "seendate": "20260913T091500Z",
+      "socialimage": "https://foto.haberler.com/haber/2026/09/13/15-ilde-dugmeye-basildi-ailem-guvende-20232870_4401_amp.jpg",
+      "domain": "haberler.com",
+      "language": "Turkish",
+      "sourcecountry": "Turkey"
+    },
+    {
+      "url": "https://thenorthlines.com/brics-turns-shared-vision-into-win-win-collaboration-pm-modi/",
+      "url_mobile": "",
+      "title": "BRICS Turns Shared Vision Into Win - Win Collaboration : PM Modi",
+      "seendate": "20260913T091500Z",
+      "socialimage": "https://thenorthlines.com/wp-content/uploads/2026/09/Modi-2.png",
+      "domain": "thenorthlines.com",
+      "language": "English",
+      "sourcecountry": "India"
+    },
+    {
+      "url": "https://kaernten.orf.at/stories/3370806/",
+      "url_mobile": "",
+      "title": "Welt - Sepsis - Tag : Jede Minute zählt",
+      "seendate": "20260913T091500Z",
+      "socialimage": "https://oekastatic.orf.at/mims/2019/28/44/crops/w=1200,h=627,q=75/220114_master_62044_on-2019-07-11-12h40m42s551.jpg?s=af350486855c545fbf6637c36eacfc953f666964",
+      "domain": "kaernten.orf.at",
+      "language": "German",
+      "sourcecountry": "Austria"
+    }
+  ]
+}

@@ -723,6 +723,72 @@
           "effective": "2026-10-02"
         }
       ]
+    },
+    "news-monitor": {
+      "apify_actor_id": null,
+      "source": "GDELT DOC 2.0 API (open data; attribution required)",
+      "variant": "monitor",
+      "status": "staging",
+      "approval": "N9 APPROVED by owner 2026-09-18 (chat)",
+      "origin": "scan",
+      "incumbent_actor_id": null,
+      "first_paid_run_date": null,
+      "ppe_events": {
+        "article-result": {
+          "proposed_price_usd": 0.002,
+          "title": "Article result",
+          "description": "One news article delivered. Empty results and API failures are never charged."
+        }
+      },
+      "pricing_rationale": "News scraper leaders $4/1k (google-news); open-data source, $2/1k.",
+      "launched_at": null,
+      "last_fix_date": null,
+      "kpis": {},
+      "listing": {
+        "title": "News Monitor — Company News & Adverse Media (GDELT)",
+        "description": "Monitor company or keyword news and screen for adverse media (fraud, sanctions, lawsuits, recalls) from GDELT's open global news index. Flat JSON, incremental mode, no API key. $2 per 1,000 articles.",
+        "seoTitle": "News Monitoring API: Company News & Adverse Media Screening",
+        "seoDescription": "Monitor news about any company or keyword and screen for adverse media (fraud, sanctions, lawsuits) from GDELT open data. Daily alerts, pay per article.",
+        "categories": [
+          "NEWS",
+          "BUSINESS"
+        ]
+      },
+      "staging_validated": false,
+      "monetization_configured": false
+    },
+    "website-screenshot": {
+      "apify_actor_id": null,
+      "source": "User-supplied public URLs rendered in headless Chrome",
+      "variant": "bulk",
+      "status": "staging",
+      "approval": "S2 APPROVED by owner 2026-09-18 (chat)",
+      "origin": "scan",
+      "incumbent_actor_id": null,
+      "first_paid_run_date": null,
+      "ppe_events": {
+        "screenshot-taken": {
+          "proposed_price_usd": 0.002,
+          "title": "Screenshot taken",
+          "description": "One screenshot captured and stored. Invalid URLs and pages that fail to load are never charged."
+        }
+      },
+      "pricing_rationale": "apify/screenshot-url leads (84% share, rated 3.9); $2/1k.",
+      "launched_at": null,
+      "last_fix_date": null,
+      "kpis": {},
+      "listing": {
+        "title": "Website Screenshot API — Bulk Full-Page Screenshots",
+        "description": "Capture full-page or viewport screenshots of any list of URLs in bulk. Desktop or mobile, PNG or JPEG, cookie banners hidden. No browser to manage. $2 per 1,000 screenshots.",
+        "seoTitle": "Website Screenshot API: Bulk Full-Page Screenshots of URLs",
+        "seoDescription": "Take full-page or viewport screenshots of any list of URLs in PNG or JPEG, desktop or mobile, with cookie banners hidden. Pay per screenshot.",
+        "categories": [
+          "DEVELOPER_TOOLS",
+          "SEO_TOOLS"
+        ]
+      },
+      "staging_validated": false,
+      "monetization_configured": false
     }
   },
   "apify_account": "factpipe",

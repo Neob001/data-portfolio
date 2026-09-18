@@ -1,0 +1,69 @@
+{
+  "title": "News Monitor API — Company & Keyword News, Adverse Media (GDELT)",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "queries": {
+      "title": "Queries",
+      "type": "array",
+      "description": "One or more GDELT search queries. Quote exact phrases (\"OpenAI\"), combine with GDELT boolean syntax, e.g. (apple OR microsoft). Each query is run and charged separately.",
+      "editor": "stringList",
+      "prefill": ["\"OpenAI\"", "\"supply chain\" recall"]
+    },
+    "mode": {
+      "title": "Mode",
+      "type": "string",
+      "description": "\"news\" returns all matching coverage. \"adverse_media\" ANDs every query with a curated risk-term group: (fraud OR bribery OR corruption OR \"money laundering\" OR sanctions OR lawsuit OR indictment OR investigation OR scandal OR bankruptcy OR \"data breach\" OR recall), for KYC/AML-style screening.",
+      "editor": "select",
+      "enum": ["news", "adverse_media"],
+      "enumTitles": ["News", "Adverse media"],
+      "default": "news"
+    },
+    "languages": {
+      "title": "Languages",
+      "type": "array",
+      "description": "Optional GDELT sourcelang codes to restrict to (e.g. eng, fre, spa). OR'd together, ANDed with the query.",
+      "editor": "stringList",
+      "nullable": true
+    },
+    "countries": {
+      "title": "Source countries",
+      "type": "array",
+      "description": "Optional GDELT sourcecountry FIPS codes to restrict to (e.g. US, UK, FR). OR'd together, ANDed with the query.",
+      "editor": "stringList",
+      "nullable": true
+    },
+    "domains": {
+      "title": "Domains",
+      "type": "array",
+      "description": "Optional publisher domains to restrict to (e.g. reuters.com). OR'd together, ANDed with the query.",
+      "editor": "stringList",
+      "nullable": true
+    },
+    "lookbackHours": {
+      "title": "Lookback hours",
+      "type": "integer",
+      "description": "How far back to search from now. GDELT DOC covers roughly the last 3 months.",
+      "default": 24,
+      "minimum": 1,
+      "maximum": 2160,
+      "prefill": 24
+    },
+    "sinceLastRun": {
+      "title": "Only new articles since last run",
+      "type": "boolean",
+      "description": "Incremental monitoring mode for schedules: only articles newer than the last successful run are delivered and charged.",
+      "default": false
+    },
+    "maxResultsPerQuery": {
+      "title": "Max results per query",
+      "type": "integer",
+      "description": "Cap on charged article records per query.",
+      "default": 100,
+      "minimum": 1,
+      "maximum": 5000,
+      "prefill": 20
+    }
+  },
+  "required": ["queries"]
+}

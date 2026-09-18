@@ -1,0 +1,24 @@
+{
+  "articles": [
+    {
+      "url": "https://www.ft.com/content/acme-corp-fraud-probe-2026",
+      "url_mobile": "",
+      "title": "Acme Corp shares fall after fraud investigation widens",
+      "seendate": "20260916T081200Z",
+      "socialimage": "https://www.ft.com/img/acme-fraud.jpg",
+      "domain": "ft.com",
+      "language": "English",
+      "sourcecountry": "United Kingdom"
+    },
+    {
+      "url": "https://www.reuters.com/business/acme-corp-recall-2026",
+      "url_mobile": "",
+      "title": "Acme Corp issues recall of industrial valves after safety complaints",
+      "seendate": "20260916T063000Z",
+      "socialimage": "",
+      "domain": "reuters.com",
+      "language": "English",
+      "sourcecountry": "United States"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "articles": [
+    {
+      "url": "https://www.reuters.com/technology/openai-announces-new-safety-framework-2026-09-15/",
+      "url_mobile": "",
+      "title": "OpenAI announces new safety framework for frontier models",
+      "seendate": "20260915T140000Z",
+      "socialimage": "https://www.reuters.com/pf/resources/images/openai-safety.jpg",
+      "domain": "reuters.com",
+      "language": "English",
+      "sourcecountry": "United States"
+    },
+    {
+      "url": "https://www.bbc.com/news/technology-openai-investigation-2026",
+      "url_mobile": "",
+      "title": "Regulators open investigation into OpenAI data practices",
+      "seendate": "20260915T091500Z",
+      "socialimage": "",
+      "domain": "bbc.com",
+      "language": "English",
+      "sourcecountry": "United Kingdom"
+    },
+    {
+      "url": "https://www.lemonde.fr/economie/article/openai-partenariat-france.html",
+      "url_mobile": "",
+      "title": "OpenAI annonce un partenariat avec des entreprises francaises",
+      "seendate": "20260914T173000Z",
+      "socialimage": "https://www.lemonde.fr/img/openai-partenariat.jpg",
+      "domain": "lemonde.fr",
+      "language": "French",
+      "sourcecountry": "France"
+    }
+  ]
+}

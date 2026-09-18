@@ -1,0 +1,119 @@
+{
+  "title": "Website Screenshot",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "urls": {
+      "title": "URLs",
+      "type": "array",
+      "editor": "stringList",
+      "prefill": [
+        "https://example.com",
+        "https://www.wikipedia.org"
+      ],
+      "description": "Pages to screenshot. Domains without https:// are accepted. Duplicates are removed automatically."
+    },
+    "fullPage": {
+      "title": "Full page",
+      "type": "boolean",
+      "default": true,
+      "description": "Capture the entire scrollable page instead of just the visible viewport."
+    },
+    "viewportWidth": {
+      "title": "Viewport width (desktop)",
+      "type": "integer",
+      "default": 1280,
+      "minimum": 200,
+      "maximum": 3840,
+      "description": "Browser viewport width in pixels. Ignored when device is mobile."
+    },
+    "viewportHeight": {
+      "title": "Viewport height (desktop)",
+      "type": "integer",
+      "default": 800,
+      "minimum": 200,
+      "maximum": 3840,
+      "description": "Browser viewport height in pixels. Ignored when device is mobile."
+    },
+    "device": {
+      "title": "Device",
+      "type": "string",
+      "editor": "select",
+      "enum": [
+        "desktop",
+        "mobile"
+      ],
+      "enumTitles": [
+        "Desktop (custom viewport)",
+        "Mobile (390x844, 3x pixel density, mobile UA)"
+      ],
+      "default": "desktop",
+      "description": "Mobile emulates a mid-tier phone (390x844, deviceScaleFactor 3, mobile Chrome user agent) and ignores the viewport width/height fields."
+    },
+    "format": {
+      "title": "Image format",
+      "type": "string",
+      "editor": "select",
+      "enum": [
+        "png",
+        "jpeg"
+      ],
+      "enumTitles": [
+        "PNG (lossless)",
+        "JPEG (smaller files)"
+      ],
+      "default": "png",
+      "description": "Output image format stored in the key-value store."
+    },
+    "jpegQuality": {
+      "title": "JPEG quality",
+      "type": "integer",
+      "default": 80,
+      "minimum": 1,
+      "maximum": 100,
+      "description": "Compression quality for JPEG output (1-100). Ignored for PNG."
+    },
+    "waitUntil": {
+      "title": "Wait until",
+      "type": "string",
+      "editor": "select",
+      "enum": [
+        "load",
+        "domcontentloaded",
+        "networkidle2"
+      ],
+      "enumTitles": [
+        "load (window load event)",
+        "domcontentloaded (HTML parsed)",
+        "networkidle2 (recommended: waits for the page to settle)"
+      ],
+      "default": "networkidle2",
+      "description": "Navigation completion signal before the screenshot is taken."
+    },
+    "delayMs": {
+      "title": "Extra delay before capture (ms)",
+      "type": "integer",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 10000,
+      "description": "Extra wait after the page settles, useful for slow-loading animations or lazy content. Capped at 10 seconds."
+    },
+    "hideCookieBanners": {
+      "title": "Hide cookie banners",
+      "type": "boolean",
+      "default": true,
+      "description": "Inject CSS that hides common cookie/consent banner elements (OneTrust, Cookiebot, etc.) before the screenshot. Never clicks \"accept\"."
+    },
+    "timeoutSecs": {
+      "title": "Per-page timeout (seconds)",
+      "type": "integer",
+      "default": 30,
+      "minimum": 5,
+      "maximum": 120,
+      "description": "Max time to wait for a single page to load. One automatic retry on timeout."
+    }
+  },
+  "required": [
+    "urls"
+  ]
+}

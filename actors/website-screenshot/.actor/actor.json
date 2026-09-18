@@ -1,0 +1,136 @@
+{
+  "actorSpecification": 1,
+  "name": "website-screenshot",
+  "title": "Website Screenshot API — Bulk Full-Page Screenshots",
+  "description": "Capture full-page or viewport screenshots of any list of URLs in bulk. Desktop or mobile, PNG or JPEG, cookie banners hidden. No browser to manage. $2 per 1,000 screenshots.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "minMemoryMbytes": 2048,
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "outputSchema": "./output_schema.json",
+  "categories": [
+    "DEVELOPER_TOOLS",
+    "SEO_TOOLS"
+  ],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "screenshots": {
+          "title": "Screenshots",
+          "transformation": {
+            "fields": [
+              "url",
+              "ok",
+              "status_code",
+              "format",
+              "width",
+              "height",
+              "bytes",
+              "screenshot_url",
+              "error"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "final_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status_code": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              null,
+              "invalid_url",
+              "navigation_timeout",
+              "dns_error",
+              "http_error",
+              "blocked"
+            ]
+          },
+          "screenshot_key": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "screenshot_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "width": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "height": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "bytes": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "png",
+              "jpeg"
+            ]
+          },
+          "page_title": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "taken_at": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source_url": {
+            "type": "string"
+          },
+          "fetched_at": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

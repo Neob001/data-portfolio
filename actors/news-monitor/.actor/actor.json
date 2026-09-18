@@ -1,0 +1,119 @@
+{
+  "actorSpecification": 1,
+  "name": "news-monitor",
+  "title": "News Monitor — Company News & Adverse Media (GDELT)",
+  "description": "Monitor company or keyword news and screen for adverse media (fraud, sanctions, lawsuits, recalls) from GDELT's open global news index. Flat JSON, incremental mode, no API key. $2 per 1,000 articles.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "outputSchema": "./output_schema.json",
+  "categories": [
+    "NEWS",
+    "BUSINESS"
+  ],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "articles": {
+          "title": "Articles",
+          "transformation": {
+            "fields": [
+              "published_at",
+              "query",
+              "mode",
+              "title",
+              "domain",
+              "source_country",
+              "language",
+              "url"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "news",
+              "adverse_media"
+            ]
+          },
+          "title": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "domain": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source_country": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "language": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "published_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "image_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri"
+          },
+          "matched_risk_terms": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "article_id": {
+            "type": "string"
+          },
+          "attribution": {
+            "type": "string"
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}
