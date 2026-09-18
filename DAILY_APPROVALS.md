@@ -15,3 +15,6 @@ Replies are NEVER posted without a tick. Standing decision 2026-09-12.
 
 ## 2026-09-17
 (no drafts today — demand_monitor: 0 new hits, 0 open signals; Apify forum still non-JSON; no owner ticks pending)
+
+## 2026-09-18
+(no drafts today — demand_monitor: 0 new hits, 0 open signals; Apify forum still non-JSON; no owner ticks pending)
