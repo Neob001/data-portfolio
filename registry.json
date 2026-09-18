@@ -675,7 +675,7 @@
       "staging_started_at": "2026-09-15T11:21:02Z"
     },
     "broken-link-checker": {
-      "apify_actor_id": null,
+      "apify_actor_id": "FErlINXi1bzBIRoAD",
       "source": "User-supplied public websites (HTTP HEAD/GET, robots.txt respected for crawling)",
       "variant": "crawl",
       "status": "staging",
@@ -705,7 +705,8 @@
         ]
       },
       "staging_validated": false,
-      "monetization_configured": false
+      "monetization_configured": false,
+      "staging_started_at": "2026-09-15T13:02:52Z"
     }
   },
   "apify_account": "factpipe",

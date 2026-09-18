@@ -82,7 +82,7 @@ The dataset holds two kinds of row, told apart by `record_type`:
 | `checkImagesAndAssets` | boolean | Also check `img`, `script` and stylesheet `link` tags (default true) |
 | `includeOkLinks` | boolean | Return working links too, not just broken ones (default false) |
 | `respectRobotsTxt` | boolean | Honor `Disallow` for `user-agent: *` when deciding what to crawl (default true) |
-| `maxRunMinutes` | integer | Hard wall-clock budget for the whole run (default 30, max 1440) |
+| `maxRunMinutes` | integer | Hard wall-clock budget for the whole run (default 3, max 1440). Raise it for large sites; a run that hits it still succeeds and reports `time_limit_reached` |
 
 Crawling is breadth-first over pages on the same hostname as each start URL (`www.` is ignored), up to `maxPagesPerSite` pages. Every link on every scanned page is checked: HEAD first, falling back to GET on 403/405/501 or a network oddity; redirects are followed (up to 5 hops) and recorded as `final_url`/`redirect_count`; timeouts and 5xx get one retry; a 429 is reported as `rate_limited_unverified` rather than marked broken, so a rate limiter never gets flagged as a dead link. External and asset checks run in their own pool (24 at once across the whole run, at most 4 per host) alongside the page crawl, so a page full of external links doesn't stall the crawl behind it. If `maxRunMinutes` is reached, the Actor stops crawling new pages, gives whatever's already in flight up to 15 more seconds, writes each site's `site_summary` row (`status: "time_limit_reached"` where it was cut short) and finishes successfully — a page whose links weren't all checked in time is never charged.
 

@@ -1,7 +1,24 @@
 import test from 'node:test';
+import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 import http from 'node:http';
 import { crawlSite, runCrawl, createHostPool } from '../src/crawler.js';
+
+// Apify rejects dataset pushes that violate .actor/actor.json field schemas (staging run 2026-09-15 failed on
+// an enum), so every row produced in these tests is checked against the declared types and enums.
+const DATASET_FIELDS = JSON.parse(readFileSync(new URL('../.actor/actor.json', import.meta.url), 'utf8')).storages.dataset.fields.properties;
+function assertMatchesSchema(row) {
+  for (const [key, value] of Object.entries(row)) {
+    const spec = DATASET_FIELDS[key];
+    if (!spec) continue;
+    const types = [].concat(spec.type);
+    const actual = value === null ? 'null' : Array.isArray(value) ? 'array' : Number.isInteger(value) ? 'integer' : typeof value;
+    const ok = types.includes(actual) || (actual === 'integer' && types.includes('number'));
+    assert.ok(ok, `field ${key}=${JSON.stringify(value)} is ${actual}, schema allows ${types}`);
+    if (spec.enum && value !== null) assert.ok(spec.enum.includes(value), `field ${key}=${value} not in enum ${spec.enum}`);
+  }
+}
+
 
 /** A port nothing listens on, for a deterministic connection_refused link/start-URL. */
 async function unusedPort() {
@@ -78,7 +95,7 @@ test('end-to-end crawl: 404, 500-after-retry, redirect chain, robots-respected, 
     { maxPagesPerSite: 10, checkExternalLinks: true, checkImagesAndAssets: true, includeOkLinks: true, respectRobotsTxt: true },
     {
       fetchImpl: fetch,
-      pushData: async (row) => rows.push(row),
+      pushData: async (row) => { assertMatchesSchema(row); rows.push(row); },
       charge: async () => { chargeCalls += 1; return { eventChargeLimitReached: false }; },
       timeoutMs: 3000,
       concurrency: 3,
@@ -183,7 +200,7 @@ test('a healthy site with includeOkLinks=false still produces a non-empty datase
 
   const rows = [];
   const summary = await crawlSite(siteUrl, { includeOkLinks: false }, {
-    fetchImpl: fetch, pushData: async (r) => rows.push(r), charge: async () => ({ eventChargeLimitReached: false }), timeoutMs: 2000,
+    fetchImpl: fetch, pushData: async (r) => { assertMatchesSchema(r); rows.push(r); }, charge: async () => ({ eventChargeLimitReached: false }), timeoutMs: 2000,
   });
 
   await new Promise((r) => server.close(r));
@@ -207,7 +224,7 @@ test('checkExternalLinks:false and checkImagesAndAssets:false filter those links
   const rows = [];
   await crawlSite(siteUrl, {
     maxPagesPerSite: 10, checkExternalLinks: false, checkImagesAndAssets: false, includeOkLinks: true, respectRobotsTxt: false,
-  }, { fetchImpl: fetch, pushData: async (r) => rows.push(r), charge: async () => ({ eventChargeLimitReached: false }), timeoutMs: 2000 });
+  }, { fetchImpl: fetch, pushData: async (r) => { assertMatchesSchema(r); rows.push(r); }, charge: async () => ({ eventChargeLimitReached: false }), timeoutMs: 2000 });
 
   await new Promise((r) => server.close(r));
 
@@ -223,7 +240,7 @@ test('start URL unreachable (connection refused) produces a broken_link row plus
   let chargeCalls = 0;
   const summary = await crawlSite(`http://127.0.0.1:${deadPort}/`, {}, {
     fetchImpl: fetch,
-    pushData: async (r) => rows.push(r),
+    pushData: async (r) => { assertMatchesSchema(r); rows.push(r); },
     charge: async () => { chargeCalls += 1; return { eventChargeLimitReached: false }; },
     timeoutMs: 2000,
   });
@@ -265,7 +282,7 @@ test('eventChargeLimitReached stops the crawl promptly and is reflected in the s
   let chargeCalls = 0;
   const summary = await crawlSite(siteUrl, { maxPagesPerSite: 50, includeOkLinks: true }, {
     fetchImpl: fetch,
-    pushData: async (r) => rows.push(r),
+    pushData: async (r) => { assertMatchesSchema(r); rows.push(r); },
     charge: async () => { chargeCalls += 1; return { eventChargeLimitReached: true }; }, // limit hits on the very first charge
     timeoutMs: 2000,
   });
@@ -290,7 +307,7 @@ test('runCrawl: a global charge-limit hit on the first site short-circuits later
     { startUrls: [siteUrl, siteUrl], maxPagesPerSite: 5 },
     {
       fetchImpl: fetch,
-      pushData: async (r) => rows.push(r),
+      pushData: async (r) => { assertMatchesSchema(r); rows.push(r); },
       charge: async () => ({ eventChargeLimitReached: true }),
       timeoutMs: 2000,
     },
@@ -408,7 +425,7 @@ test('maxRunMinutes: once the deadline has passed, a page still crawls fine but 
     { startUrls: [siteUrl], maxPagesPerSite: 50, maxRunMinutes: DEADLINE_MS / 60000 },
     {
       fetchImpl: fetch,
-      pushData: async (r) => rows.push(r),
+      pushData: async (r) => { assertMatchesSchema(r); rows.push(r); },
       charge: async () => { chargeCalls += 1; return { eventChargeLimitReached: false }; },
       timeoutMs: 2000,
       graceMs: 300,
@@ -447,7 +464,7 @@ test('maxRunMinutes: a check already in flight when the deadline passes is abort
     { startUrls: [siteUrl], maxPagesPerSite: 50, maxRunMinutes: 30 / 60000 }, // deadline ~30ms out
     {
       fetchImpl: fetch,
-      pushData: async (r) => rows.push(r),
+      pushData: async (r) => { assertMatchesSchema(r); rows.push(r); },
       charge: async () => { chargeCalls += 1; return { eventChargeLimitReached: false }; },
       timeoutMs: 10000, // longer than the grace period -- only the wind-down abort can cut this off
       graceMs: 300,

@@ -62,6 +62,7 @@
             "type": "string",
             "enum": [
               "broken_link",
+              "unverified_link",
               "ok_link",
               "site_summary"
             ]

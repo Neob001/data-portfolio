@@ -12,7 +12,7 @@ const {
   checkImagesAndAssets = true,
   includeOkLinks = false,
   respectRobotsTxt = true,
-  maxRunMinutes = 30,
+  maxRunMinutes = 3,
 } = input;
 
 if (!Array.isArray(startUrls) || startUrls.length === 0) {
@@ -43,7 +43,7 @@ try {
       checkImagesAndAssets,
       includeOkLinks,
       respectRobotsTxt,
-      maxRunMinutes: Math.max(1, Math.min(1440, Number(maxRunMinutes) || 30)),
+      maxRunMinutes: Math.max(1, Math.min(1440, Number(maxRunMinutes) || 3)),
     },
     { pushData, charge },
   );

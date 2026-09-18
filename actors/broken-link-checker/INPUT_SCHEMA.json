@@ -48,11 +48,11 @@
     "maxRunMinutes": {
       "title": "Max run time (minutes)",
       "type": "integer",
-      "default": 30,
+      "default": 3,
       "prefill": 3,
       "minimum": 1,
       "maximum": 1440,
-      "description": "Hard wall-clock budget for the whole run. As it nears, the Actor stops crawling new pages, gives in-flight checks up to 15s to finish, writes each site's summary (status \"time_limit_reached\" if it was cut short) and exits successfully. Pages whose links were not fully checked are never charged."
+      "description": "Hard wall-clock budget for the whole run. As it nears, the Actor stops crawling new pages, gives in-flight checks up to 15s to finish, writes each site's summary (status \"time_limit_reached\" if it was cut short) and exits successfully. Pages whose links were not fully checked are never charged. Default 3 minutes keeps a first run quick; raise it (up to 1440) for large sites."
     }
   },
   "required": [
