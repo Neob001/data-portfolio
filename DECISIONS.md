@@ -33,3 +33,9 @@ Item ids come from WEEKLY_REPORT.md. Nothing ships to a new data source, changes
 2026-09-15 | APPROVE | A1-S listing copy | Owner, in chat: eu-vat-validation title "EU VAT Validation API — VIES VAT Number Checker (Bulk)" + long-tail FAQ entries (SEC, SAM.gov, Companies House, EU tenders, sitemap).
 2026-09-15 | APPROVE | A1-P pricing guard | Owner, in chat: rules-based weekly pricing guard in the scorecard; proposals only, no price changes until an Actor has >=5 organic users/30d.
 2026-09-18 | APPROVE | PPE broken-link-checker | Owner, in chat: switch from pay-per-usage to PPE page-scanned $0.0015 (effective 2026-10-02 after Apify's 14-day notice); users emailed with reason: 'Moving to simple pay-per-page pricing: $1.50 per 1,000 pages scanned, with every link on each page checked at no extra cost.'
+2026-09-18 | APPROVE | J1 jobs feed | Owner, in chat ("approve all"): aggregate public ATS job-board APIs (Greenhouse, Lever, Ashby + new sources Workable, SmartRecruiters, Recruitee) into a searchable deduplicated feed, $3/1k jobs. Drop any source whose terms forbid this use. No personal data (recruiter/hiring-manager names and emails stripped).
+2026-09-18 | APPROVE | S2 website screenshot | Owner, in chat: bulk screenshots of user-supplied URLs.
+2026-09-18 | APPROVE | N9 news monitor (GDELT) | Owner, in chat: keyword/company news + adverse-media screening from GDELT open data.
+2026-09-18 | APPROVE | A2 App Store reviews | Owner, in chat: Apple's official public customer-reviews RSS feed; reviewer names dropped.
+2026-09-18 | APPROVE | F1 freeze official-data niches | Owner, in chat: no new small official-data Actors; existing 19 are maintenance-only; spike monitor shelved.
+2026-09-18 | APPROVE | D2 distribution pages | Owner, in chat: one-time static tutorial pages (GitHub Pages) per Actor with API examples.
