@@ -13,7 +13,7 @@ import { clean } from './text.js';
 
 // Where the prebuilt jobs index is hosted (manifest.json + directory.json.gz + shards/).
 // Placeholder until hosting is configured; overridable with the JOBS_INDEX_URL env var.
-export const INDEX_BASE_URL = 'https://jobs-index.factpipe.invalid/v1';
+export const INDEX_BASE_URL = 'https://github.com/Neob001/data-portfolio/releases/download/jobs-index';
 
 // Large, long-lived boards used when the index is unreachable, so the run still returns rows.
 export const FALLBACK_BOARDS = [
