@@ -823,9 +823,9 @@
           "LEAD_GENERATION"
         ]
       },
-      "notes": "Index hosting pending owner decision (public GitHub release vs private Apify storage). Workable returned 429 with 23h back-off after ~3,650 requests at 1-2 rps; builder now paces 3s.",
+      "notes": "Index hosting A (GitHub release jobs-index, daily Actions build). Fallback + live modes staged OK 2026-09-19; search mode pending first index publish. Workable 429 ban risk; builder paces 3s.",
       "staging_validated": false,
-      "monetization_configured": false,
+      "monetization_configured": true,
       "staging_started_at": "2026-09-19T13:46:36Z"
     }
   },
