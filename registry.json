@@ -794,10 +794,10 @@
       "staging_started_at": "2026-09-18T15:11:46Z"
     },
     "ats-jobs-feed": {
-      "apify_actor_id": null,
+      "apify_actor_id": "5tGfM8n7TcEZwmwaP",
       "source": "Public ATS job-board APIs: Greenhouse, Lever, Ashby, Workable, Recruitee (SmartRecruiters excluded: robots.txt). Board directory from Common Crawl index.",
       "variant": "search index + live",
-      "status": "building",
+      "status": "staging",
       "approval": "J1 APPROVED by owner 2026-09-18 (chat)",
       "origin": "scan",
       "incumbent_actor_id": null,
@@ -825,7 +825,8 @@
       },
       "notes": "Index hosting pending owner decision (public GitHub release vs private Apify storage). Workable returned 429 with 23h back-off after ~3,650 requests at 1-2 rps; builder now paces 3s.",
       "staging_validated": false,
-      "monetization_configured": false
+      "monetization_configured": false,
+      "staging_started_at": "2026-09-19T13:46:36Z"
     }
   },
   "apify_account": "factpipe",

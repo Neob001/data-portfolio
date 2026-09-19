@@ -25,7 +25,8 @@ export function assertMatchesSchema(row) {
     const actual = value === null ? 'null' : Array.isArray(value) ? 'array' : Number.isInteger(value) ? 'integer' : typeof value;
     const ok = types.includes(actual) || (actual === 'integer' && types.includes('number'));
     assert.ok(ok, `field ${key}=${JSON.stringify(value)} is ${actual}, schema allows ${types}`);
-    if (spec.enum && value !== null) assert.ok(spec.enum.includes(value), `field ${key}=${value} not in enum ${spec.enum}`);
+    // Apify validates enums like JSON Schema: null must itself be listed in the enum.
+    if (spec.enum) assert.ok(spec.enum.includes(value), `field ${key}=${value} not in enum ${spec.enum}`);
     if (actual === 'array' && spec.items?.type) for (const v of value) assert.equal(typeof v, spec.items.type, `${key}[] item ${v}`);
   }
   for (const key of Object.keys(DATASET_FIELDS)) assert.ok(key in row, `row misses declared field ${key}`);

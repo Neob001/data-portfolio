@@ -133,7 +133,8 @@
               "contract",
               "temporary",
               "internship",
-              "other"
+              "other",
+              null
             ]
           },
           "workplace_type": {
@@ -191,7 +192,8 @@
               "month",
               "week",
               "day",
-              "hour"
+              "hour",
+              null
             ]
           },
           "posted_at": {
