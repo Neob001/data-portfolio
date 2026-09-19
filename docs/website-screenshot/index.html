@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Website Screenshot API: Bulk Full-Page Screenshots of URLs</title>
+<meta name="description" content="Take full-page or viewport screenshots of any list of URLs in PNG or JPEG, desktop or mobile, with cookie banners hidden. Pay per screenshot.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/website-screenshot/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Website Screenshot API: Bulk Full-Page Screenshots of URLs">
+<meta property="og:description" content="Take full-page or viewport screenshots of any list of URLs in PNG or JPEG, desktop or mobile, with cookie banners hidden. Pay per screenshot.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/website-screenshot/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Website Screenshot API \u2014 Bulk Full-Page Screenshots",
+  "description": "Capture full-page or viewport screenshots of any list of URLs in bulk. Desktop or mobile, PNG or JPEG, cookie banners hidden. No browser to manage. $2 per 1,000 screenshots.",
+  "url": "https://neob001.github.io/data-portfolio/website-screenshot/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "2",
+    "description": "Pay-per-result pricing: $2 per 1,000 screenshot takens",
+    "url": "https://apify.com/factpipe/website-screenshot"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>Website Screenshot API — Bulk Full-Page Screenshots of Any URL</h1>
+<p>Capture <strong>full-page or viewport screenshots of any list of URLs in bulk</strong> — desktop or mobile, PNG or JPEG — and get one clean JSON record per page with the stored image URL, dimensions, file size and status. Cookie/consent banners are hidden automatically before capture.</p>
+<p>This Actor runs headless Chrome itself: <strong>no screenshot API key, no rate limits, no browser to host</strong> — feed it a URL list and get back deterministic, storable images plus a flat dataset.</p>
+<div class="quick-facts"><span class="badge">$2 / 1,000</span><a class="button" href="https://apify.com/factpipe/website-screenshot" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the two prefilled URLs (<code>https://example.com</code>, <code>https://www.wikipedia.org</code>). It usually finishes in well under two minutes.</li><li>You get two full-page desktop PNG screenshots, each stored in the run&#x27;s key-value store with a direct download URL, plus a dataset row per page.</li><li>That first run costs $0.004, well within Apify&#x27;s free monthly credit. Then swap in your own URL list or schedule it.</li></ol>
+<h2 id="what-you-get">What you get</h2>
+<pre><code class="language-json">{
+  &quot;url&quot;: &quot;https://example.com/&quot;,
+  &quot;final_url&quot;: &quot;https://example.com/&quot;,
+  &quot;status_code&quot;: 200,
+  &quot;ok&quot;: true,
+  &quot;error&quot;: null,
+  &quot;screenshot_key&quot;: &quot;0f2c9a1b8e7d4c3f6a5b2e1d0c9b8a7f6e5d4c3b.png&quot;,
+  &quot;screenshot_url&quot;: &quot;https://api.apify.com/v2/key-value-stores/abcXYZ123/records/0f2c9a1b8e7d4c3f6a5b2e1d0c9b8a7f6e5d4c3b.png&quot;,
+  &quot;width&quot;: 1280,
+  &quot;height&quot;: 936,
+  &quot;bytes&quot;: 41823,
+  &quot;format&quot;: &quot;png&quot;,
+  &quot;page_title&quot;: &quot;Example Domain&quot;,
+  &quot;taken_at&quot;: &quot;2026-09-18T12:00:00.000Z&quot;,
+  &quot;source_url&quot;: &quot;https://example.com/&quot;,
+  &quot;fetched_at&quot;: &quot;2026-09-18T12:00:00.100Z&quot;
+}</code></pre>
+<h2 id="use-cases">Use cases</h2>
+<ul><li><strong>Visual QA</strong>: screenshot every page in a release checklist before and after a deploy and diff them.</li><li><strong>Uptime &amp; change monitoring</strong>: schedule daily captures of key pages and alert when the layout changes unexpectedly.</li><li><strong>Archiving &amp; compliance</strong>: keep a dated visual record of pages you need to prove existed in a given state.</li><li><strong>SEO &amp; marketing reports</strong>: drop full-page screenshots straight into client reports next to Lighthouse and link-check results.</li><li><strong>Thumbnails &amp; previews</strong>: generate link-preview or directory-listing thumbnails for a list of sites at once.</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/website-screenshot" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~website-screenshot/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;urls&quot;: [&quot;https://example.com&quot;, &quot;https://www.wikipedia.org&quot;]}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;urls&quot;: [
+    &quot;https://example.com&quot;,
+    &quot;https://www.wikipedia.org&quot;
+  ]
+}
+
+run = client.actor(&quot;factpipe/website-screenshot&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;urls&quot;: [
+    &quot;https://example.com&quot;,
+    &quot;https://www.wikipedia.org&quot;
+  ]
+};
+
+const run = await client.actor(&#x27;factpipe/website-screenshot&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>urls</code></td><td>string[], required</td><td>Pages to screenshot; <code>example.com</code> works too. Duplicates removed automatically.</td></tr><tr><td><code>fullPage</code></td><td>boolean</td><td>Capture the whole scrollable page, not just the viewport (default <code>true</code>)</td></tr><tr><td><code>viewportWidth</code> / <code>viewportHeight</code></td><td>integer</td><td>Desktop viewport size (default 1280x800); ignored on mobile</td></tr><tr><td><code>device</code></td><td><code>desktop</code> \</td><td><code>mobile</code></td><td>Mobile emulates 390x844 at 3x pixel density with a mobile user agent</td></tr><tr><td><code>format</code></td><td><code>png</code> \</td><td><code>jpeg</code></td><td>Output image format (default <code>png</code>)</td></tr><tr><td><code>jpegQuality</code></td><td>integer</td><td>JPEG compression quality 1-100 (default 80); ignored for PNG</td></tr><tr><td><code>waitUntil</code></td><td><code>load</code> \</td><td><code>domcontentloaded</code> \</td><td><code>networkidle2</code></td><td>Navigation completion signal (default <code>networkidle2</code>)</td></tr><tr><td><code>delayMs</code></td><td>integer</td><td>Extra wait before capture, up to 10,000ms, for slow content</td></tr><tr><td><code>hideCookieBanners</code></td><td>boolean</td><td>Hide common cookie/consent banners with CSS before capture (default <code>true</code>)</td></tr><tr><td><code>timeoutSecs</code></td><td>integer</td><td>Per-page load timeout in seconds (default 30); one automatic retry on timeout</td></tr></tbody></table></div>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>screenshot-taken</code></td><td><strong>$2 per 1,000</strong> ($0.002 each)</td><td>One screenshot successfully captured and stored. Invalid URLs, timeouts and failed navigations are never charged.</td></tr></tbody></table></div>
+<p>Example: screenshotting 1,000 URLs costs <strong>$2.00</strong>. No start fee. You only pay for delivered images.</p>
+<h2 id="factpipe-website-audit-toolkit">factpipe Website Audit Toolkit</h2>
+<p>Bulk technical checks for agencies, SEO teams and deliverability owners, all pay-per-result. Feed a list of sites in, get one flat row per page or domain out.</p>
+<div class="table-wrap"><table><thead><tr><th>Workflow</th><th>Actor</th><th>What it does</th><th>Price</th></tr></thead><tbody><tr><td>Website audit</td><td><a href="../lighthouse-auditor/">Lighthouse Auditor</a></td><td>Lighthouse scores and Core Web Vitals for many pages, mobile or desktop</td><td>$10/1k</td></tr><tr><td>Website audit</td><td><a href="../broken-link-checker/">Broken Link Checker</a></td><td>Crawl a site and flag every broken internal/external link, image and asset</td><td>$1.50/1k</td></tr><tr><td>Website audit</td><td><a href="../sitemap-url-extractor/">Sitemap URL Extractor &amp; 404 Checker</a></td><td>Extract every URL from XML sitemaps and flag 404s and broken entries</td><td>$0.30/1k</td></tr><tr><td>Website audit</td><td><strong>Website Screenshot</strong> (this Actor)</td><td>Bulk full-page or viewport screenshots, desktop or mobile</td><td>$2/1k</td></tr><tr><td>Domain audit</td><td><a href="../email-security-checker/">Email Security Checker</a></td><td>SPF, DKIM, DMARC and MX audit for any list of domains</td><td>$3/1k</td></tr><tr><td>Domain audit</td><td><a href="../dns-records-lookup/">DNS Records Lookup</a></td><td>Full DNS record set (A, AAAA, MX, TXT, NS, CNAME) for any list of domains</td><td>$1.50/1k</td></tr></tbody></table></div>
+<p><strong>Use it together:</strong></p>
+<ul><li><strong>Client health report:</strong> pair full-page screenshots here with <a href="../lighthouse-auditor/">Lighthouse Auditor</a> scores and <a href="../broken-link-checker/">Broken Link Checker</a> results for a single visual + technical audit deliverable.</li><li><strong>Before/after evidence:</strong> run this Actor before and after a fix flagged by <a href="../broken-link-checker/">Broken Link Checker</a> to document the change.</li></ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>Does this click &quot;Accept&quot; on cookie banners?</strong><br>
+No. <code>hideCookieBanners</code> only injects CSS to hide common consent-banner elements (OneTrust, Cookiebot, Quantcast, Didomi and similar) so they don&#x27;t clutter the screenshot. It never interacts with the page, so no consent is ever recorded on your behalf.</p>
+<p><strong>Can it screenshot pages behind a login?</strong><br>
+No. This Actor loads each URL anonymously, the same way a logged-out visitor would. Pages that require authentication will be captured as their login or paywall screen.</p>
+<p><strong>Will it work on JavaScript-heavy sites (React, Vue, infinite scroll)?</strong><br>
+Yes for standard client-side rendering — <code>waitUntil: networkidle2</code> (the default) waits for network activity to settle before capturing. For pages with delayed animations or lazy-loaded content, increase <code>delayMs</code> up to 10 seconds.</p>
+<p><strong>What image formats are supported, and can I control file size?</strong><br>
+PNG (lossless, larger files) or JPEG (<code>jpegQuality</code> 1-100, smaller files). Both are stored in the run&#x27;s key-value store with a stable <code>screenshot_key</code>; the dataset row gives you a direct download URL plus width, height and byte size.</p>
+<p><strong>Am I charged when a page fails to load?</strong><br>
+No. Invalid URLs, DNS errors, navigation timeouts, HTTP errors and blocked requests are returned with an <code>error</code> code and are never charged.</p>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier or an AI agent?</strong><br>
+Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server.</p>
+<h2 id="reliability">Reliability</h2>
+<p>Deterministic headless Chrome capture, one automatic retry on navigation timeout, per-page timeouts, structured failure reporting, daily health checks.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>

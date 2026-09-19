@@ -763,7 +763,7 @@
       "apify_actor_id": "c5dIrkAu5TJY7QEb2",
       "source": "User-supplied public URLs rendered in headless Chrome",
       "variant": "bulk",
-      "status": "staging",
+      "status": "live",
       "approval": "S2 APPROVED by owner 2026-09-18 (chat)",
       "origin": "scan",
       "incumbent_actor_id": null,
@@ -776,7 +776,7 @@
         }
       },
       "pricing_rationale": "apify/screenshot-url leads (84% share, rated 3.9); $2/1k.",
-      "launched_at": null,
+      "launched_at": "2026-09-19T13:46:00Z",
       "last_fix_date": null,
       "kpis": {},
       "listing": {
