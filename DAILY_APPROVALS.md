@@ -21,3 +21,6 @@ Replies are NEVER posted without a tick. Standing decision 2026-09-12.
 
 ## 2026-09-19
 (no drafts today — demand_monitor: 0 new hits, 0 open signals; Apify forum still non-JSON; no owner ticks pending)
+
+## 2026-09-25
+(no drafts today. demand_monitor found 1 raw hit and 0 passed the filters: SO 80005335 is a WhatsApp Business onboarding/support question that matched only on a keyword. Marked 'filtered'. No DC proposals. Stack Exchange and GitHub polls partly timed out (network); the Apify forum still returns non-JSON. No owner ticks pending.)

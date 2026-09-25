@@ -19,8 +19,8 @@
     {
       "platform": "github",
       "url": "https://github.com/mpospisil/gleanvolt/issues/193",
-      "title": "A \u0160koda configured as itself: an API key from the web UI, read through My\u0160koda's public API",
-      "body": "> *\"Create a WI to provide better integration with \u0160koda EVs.\"*\n>\n> *\"I want to be able to configure a \u0160koda car in the configuration \u2014 a different configuration than my ID.4. It will require other changes \u2014 login in the web UI and a new service for getting data instead of the volkswagen.de source.\"*\n\nOn **2026-08-31** (MySkoda app 8.16) \u0160koda released a free, documented REST API for owners: the [",
+      "title": "A Škoda configured as itself: an API key from the web UI, read through MyŠkoda's public API",
+      "body": "> *\"Create a WI to provide better integration with Škoda EVs.\"*\n>\n> *\"I want to be able to configure a Škoda car in the configuration — a different configuration than my ID.4. It will require other changes — login in the web UI and a new service for getting data instead of the volkswagen.de source.\"*\n\nOn **2026-08-31** (MySkoda app 8.16) Škoda released a free, documented REST API for owners: the [",
       "created_at": "2026-09-13T20:20:59Z",
       "engagement": 0,
       "answered": false,
@@ -31,6 +31,22 @@
       "detected_at": "2026-09-15T08:59:42.738220+00:00",
       "filter_reason": "not legal-safe for us: MySkoda API needs owner login/API key and returns personal vehicle data (no-login + no-personal-data rules)",
       "filtered_at": "2026-09-15"
+    },
+    {
+      "platform": "stackoverflow",
+      "url": "https://stackoverflow.com/questions/80005335/whatsapp-cloud-api-waba-stuck-at-status-onboarding-error-141008-while-an-iden",
+      "title": "WhatsApp Cloud API: WABA stuck at status=ONBOARDING (error 141008) while an identical Test WABA is ACTIVE",
+      "body": "company data api",
+      "created_at": "2026-09-23T19:13:25+00:00",
+      "engagement": -2,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": -0.774,
+      "status": "filtered",
+      "detected_at": "2026-09-25T09:12:37.796143+00:00",
+      "filter_reason": "false positive: WhatsApp Business account onboarding/support issue (Meta account state), not a data-access request (keyword match on 'company data api'); negative score -2",
+      "filtered_at": "2026-09-25"
     }
   ]
 }
