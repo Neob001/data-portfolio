@@ -42,3 +42,7 @@ Item ids come from WEEKLY_REPORT.md. Nothing ships to a new data source, changes
 2026-09-18 | REJECT | A2 App Store reviews | Auto-rejected under standing ToS rule (CLAUDE.md rule 3) before any code: Apple Media Services Terms (apple.com/legal/internet-services/itunes/us/terms.html) limit Content to personal, noncommercial use and prohibit automated scraping/analysis; the iTunes Search API terms grant no commercial redistribution. Owner's A2 approval superseded.
 2026-09-19 | APPROVE | J1 index hosting A | Owner, in chat: daily GitHub Actions build; slim index published as public assets of GitHub release `jobs-index` (no secrets); the Actor reads it from the release URL.
 2026-09-19 | APPROVE | PUB website-screenshot | Owner, in chat: "publish S2" at $2/1k screenshots.
+2026-09-25 | APPROVE | PUB ats-jobs-feed | Owner, in chat ("execute all the steps"): publish J1 at $3/1k jobs.
+2026-09-25 | APPROVE | J2 job-index entry points | Owner, in chat: build + publish Remote Jobs Feed, Greenhouse/Lever/Ashby Jobs Scraper, Companies Hiring (lead list) on the existing jobs index.
+2026-09-25 | APPROVE | J1 ranking | Owner, in chat: rank title matches above description-only matches.
+2026-09-25 | APPROVE | SC1 weekly scorecard | Owner, in chat: weekly real-users/paid-runs scorecard; zero-user Actors after 30 days get price/title test proposals; retirements proposed, never automatic.
