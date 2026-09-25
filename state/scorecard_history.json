@@ -1,0 +1,91 @@
+[
+ {
+  "date": "2026-09-25",
+  "actors": {
+   "sec-edgar-filings-search": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "eu-ted-tenders-monitor": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "uk-company-lookup": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "federal-register-monitor": {
+    "real_users_30": 0,
+    "real_runs_30": 1
+   },
+   "fda-recalls-monitor": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "ofac-sanctions-screening": {
+    "real_users_30": 0,
+    "real_runs_30": 1
+   },
+   "us-weather-forecast": {
+    "real_users_30": 1,
+    "real_runs_30": 17
+   },
+   "company-jobs-scraper": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "sitemap-url-extractor": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "wikipedia-scraper": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "open-food-facts-scraper": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "ecb-exchange-rates": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "email-security-checker": {
+    "real_users_30": 0,
+    "real_runs_30": 2
+   },
+   "eu-vat-validation": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "lighthouse-auditor": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "sam-gov-contracts": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "dns-records-lookup": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "france-company-lookup": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "broken-link-checker": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "website-screenshot": {
+    "real_users_30": 1,
+    "real_runs_30": 5
+   },
+   "ats-jobs-feed": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   }
+  }
+ }
+]
