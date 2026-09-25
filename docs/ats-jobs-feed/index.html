@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jobs Feed API: Greenhouse, Lever, Ashby &amp; Workable Jobs</title>
+<meta name="description" content="Search 270k+ open jobs from 11k company career sites (Greenhouse, Lever, Ashby, Workable, Recruitee). Daily new-jobs feed, salary, remote filters. Pay per job.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/ats-jobs-feed/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jobs Feed API: Greenhouse, Lever, Ashby &amp; Workable Jobs">
+<meta property="og:description" content="Search 270k+ open jobs from 11k company career sites (Greenhouse, Lever, Ashby, Workable, Recruitee). Daily new-jobs feed, salary, remote filters. Pay per job.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/ats-jobs-feed/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Jobs Feed API \u2014 Greenhouse, Lever, Ashby & More Job Boards",
+  "description": "Search live openings from thousands of companies' official Greenhouse, Lever, Ashby, Workable and Recruitee job boards. Deduplicated JSON with salary, remote and location filters. $3 per 1,000 jobs.",
+  "url": "https://neob001.github.io/data-portfolio/ats-jobs-feed/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "3",
+    "description": "Pay-per-result pricing: $3 per 1,000 job results",
+    "url": "https://apify.com/factpipe/ats-jobs-feed"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>Jobs Feed API — Greenhouse, Lever, Ashby &amp; More Job Boards</h1>
+<p>Search <strong>live job openings from 9,000+ companies</strong> in one feed. The jobs come from the <strong>official public job-board APIs</strong> of Greenhouse, Lever, Ashby, Workable and Recruitee. Filter by keyword, location, country, remote, company, department, employment type and posting date. You get flat, deduplicated JSON with salary ranges wherever the employer publishes them. <strong>$3 per 1,000 jobs</strong>, and you pay only for jobs delivered.</p>
+<div class="quick-facts"><span class="badge">$3 / 1,000</span><a class="button" href="https://apify.com/factpipe/ats-jobs-feed" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the prefilled input: <code>keywords: [&quot;engineer&quot;]</code>, <code>remote: &quot;remote_only&quot;</code>, <code>postedWithinDays: 7</code>, <code>maxResults: 20</code>. The run takes well under a minute.</li><li>You get the 20 newest remote engineering jobs posted in the last week, each with company, locations, country codes, apply link and (where published) salary.</li><li>That first run costs at most <strong>$0.06</strong> (20 jobs × $0.003), which fits in Apify&#x27;s free monthly credit. Then change the filters or schedule the run with <code>sinceLastRun: true</code> to get a daily feed of new jobs only.</li></ol>
+<h2 id="what-you-get">What you get</h2>
+<p>One flat record per job opening:</p>
+<pre><code class="language-json">{
+  &quot;job_id&quot;: &quot;ashby:ramp:34413f8d-26bf-4bbc-8ade-eb309a0e2245&quot;,
+  &quot;title&quot;: &quot;Security Engineer, Cloud&quot;,
+  &quot;company_name&quot;: &quot;Ramp&quot;,
+  &quot;company_board&quot;: &quot;ramp&quot;,
+  &quot;ats&quot;: &quot;ashby&quot;,
+  &quot;department&quot;: &quot;Engineering&quot;,
+  &quot;team&quot;: &quot;Backend&quot;,
+  &quot;employment_type&quot;: &quot;full_time&quot;,
+  &quot;workplace_type&quot;: &quot;hybrid&quot;,
+  &quot;locations&quot;: [&quot;New York, NY (HQ)&quot;, &quot;Remote (Canada)&quot;, &quot;Remote (US)&quot;, &quot;Miami, FL&quot;],
+  &quot;country_codes&quot;: [&quot;CA&quot;, &quot;US&quot;],
+  &quot;remote&quot;: true,
+  &quot;salary_min&quot;: 211400,
+  &quot;salary_max&quot;: 290600,
+  &quot;salary_currency&quot;: &quot;USD&quot;,
+  &quot;salary_period&quot;: &quot;year&quot;,
+  &quot;posted_at&quot;: &quot;2026-04-07T17:12:35.753Z&quot;,
+  &quot;updated_at&quot;: null,
+  &quot;apply_url&quot;: &quot;https://jobs.ashbyhq.com/ramp/34413f8d-26bf-4bbc-8ade-eb309a0e2245/application&quot;,
+  &quot;job_url&quot;: &quot;https://jobs.ashbyhq.com/ramp/34413f8d-26bf-4bbc-8ade-eb309a0e2245&quot;,
+  &quot;description_text&quot;: &quot;ABOUT RAMP\n\nRamp is building the smart infrastructure for finance teams…&quot;,
+  &quot;description_snippet&quot;: &quot;ABOUT RAMP Ramp is building the smart infrastructure for finance teams, embedded in the transaction flow of every dollar a business spends…&quot;,
+  &quot;description_status&quot;: &quot;included&quot;,
+  &quot;duplicate_sources&quot;: [],
+  &quot;source_url&quot;: &quot;https://api.ashbyhq.com/posting-api/job-board/ramp?includeCompensation=true&quot;,
+  &quot;fetched_at&quot;: &quot;2026-09-19T03:00:00.000Z&quot;
+}</code></pre>
+<ul><li><code>workplace_type</code> is one of <code>remote</code>, <code>hybrid</code>, <code>onsite</code> or <code>unknown</code>. We never guess: when an ATS has no workplace field (Greenhouse), the value comes from the location text (&quot;Remote, Canada&quot;), and otherwise it is <code>unknown</code>.</li><li>Salary fields are filled only when the ATS publishes structured compensation (Ashby, Lever, Recruitee). They are never estimated.</li><li><code>country_codes</code> are ISO 3166 alpha-2 codes. They come from the ATS&#x27;s own country fields where available, and are otherwise inferred from the location text on a best-effort basis.</li><li><code>duplicate_sources</code> lists the other <code>job_id</code>s of the same opening. Example: a company that still has an old board live after switching ATS. Each opening is delivered and charged once.</li><li><code>description_text</code> is fetched <strong>live from the company&#x27;s ATS</strong> for each delivered job (see below). <code>description_status</code> is <code>included</code>, <code>not_requested</code> (when <code>includeDescription: false</code>) or <code>unavailable</code> (the ATS could not be reached, or the posting has no text).</li><li><strong>No personal data.</strong> Recruiter and hiring-manager fields are never copied. In descriptions, e-mail addresses, phone numbers and names in contact lines (&quot;Questions? Call Jane on …&quot;) are replaced with <code>[… redacted]</code>.</li></ul>
+<h2 id="use-cases">Use cases</h2>
+<ul><li><strong>Job boards and aggregators</strong>: a clean, deduplicated feed of direct-from-employer jobs with apply links, refreshed daily.</li><li><strong>Sales and lead generation</strong>: see who is hiring for which team and where. A hiring burst signals budget. Filter by department (&quot;sales&quot;, &quot;security&quot;) or by company list.</li><li><strong>Recruiting and talent intelligence</strong>: track competitors&#x27; openings, salary ranges and remote policy.</li><li><strong>Job alerts and newsletters</strong>: schedule with <code>sinceLastRun</code> to get only the jobs posted since the previous run.</li><li><strong>AI agents and RAG</strong>: small input, flat deterministic JSON, and full plain-text descriptions (up to 20,000 characters).</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/ats-jobs-feed" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~ats-jobs-feed/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;keywords&quot;: [&quot;engineer&quot;], &quot;remote&quot;: &quot;remote_only&quot;, &quot;postedWithinDays&quot;: 7, &quot;maxResults&quot;: 20}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;keywords&quot;: [
+    &quot;engineer&quot;
+  ],
+  &quot;remote&quot;: &quot;remote_only&quot;,
+  &quot;postedWithinDays&quot;: 7,
+  &quot;maxResults&quot;: 20
+}
+
+run = client.actor(&quot;factpipe/ats-jobs-feed&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;keywords&quot;: [
+    &quot;engineer&quot;
+  ],
+  &quot;remote&quot;: &quot;remote_only&quot;,
+  &quot;postedWithinDays&quot;: 7,
+  &quot;maxResults&quot;: 20
+};
+
+const run = await client.actor(&#x27;factpipe/ats-jobs-feed&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>keywords</code></td><td>string[]</td><td>Case-insensitive. A title matches at a word start (&quot;engineer&quot; matches &quot;Engineering Manager&quot;). In the description, every word of the keyword must appear</td></tr><tr><td><code>keywordMatch</code></td><td><code>any</code> \</td><td><code>all</code></td><td>Default <code>any</code></td></tr><tr><td><code>keywordScope</code></td><td><code>title</code> \</td><td><code>title_and_description</code></td><td>Default <code>title_and_description</code>: title, department, team and the <strong>first ~1,500 characters</strong> of the description</td></tr><tr><td><code>excludeKeywords</code></td><td>string[]</td><td>Drops jobs whose <strong>title</strong> contains any of them</td></tr><tr><td><code>locations</code></td><td>string[]</td><td>City/state/country/region text as written in the posting, or an ISO country code (<code>US</code>, <code>DE</code>, <code>UK</code>)</td></tr><tr><td><code>remote</code></td><td><code>any</code> \</td><td><code>remote_only</code> \</td><td><code>onsite_only</code></td><td><code>onsite_only</code> excludes jobs marked remote</td></tr><tr><td><code>postedWithinDays</code></td><td>integer</td><td>First published within the last N days</td></tr><tr><td><code>companies</code></td><td>string[]</td><td>Company names (<code>Datadog</code>) or board tokens (<code>datadog</code>, <code>greenhouse:datadog</code>)</td></tr><tr><td><code>ats</code></td><td>string[]</td><td>Any of <code>greenhouse</code>, <code>lever</code>, <code>ashby</code>, <code>workable</code>, <code>recruitee</code></td></tr><tr><td><code>departments</code></td><td>string[]</td><td>Substring match on department or team</td></tr><tr><td><code>employmentTypes</code></td><td>string[]</td><td><code>full_time</code>, <code>part_time</code>, <code>contract</code>, <code>temporary</code>, <code>internship</code>, <code>other</code></td></tr><tr><td><code>maxResults</code></td><td>integer</td><td>Default 100. Results come newest first</td></tr><tr><td><code>includeDescription</code></td><td>boolean</td><td>Default <code>true</code>. Fetches the full plain-text description (max 20,000 chars) live from the ATS for every delivered job. A 300-char snippet is always included. Set <code>false</code> for the fastest runs</td></tr><tr><td><code>sinceLastRun</code></td><td>boolean</td><td>Incremental feed: returns only jobs not delivered by an earlier run with the same filters</td></tr><tr><td><code>companyUrls</code></td><td>string[]</td><td><strong>Live mode</strong>: board URLs (<code>https://job-boards.greenhouse.io/gitlab</code>, <code>https://jobs.lever.co/acme</code>, <code>https://jobs.ashbyhq.com/acme</code>, <code>https://apply.workable.com/acme</code>, <code>https://acme.recruitee.com</code>) or <code>ats:token</code> strings. These boards are fetched live, so you can use companies that are not in the index yet</td></tr></tbody></table></div>
+<p><strong>How it works.</strong> By default the Actor searches a compact, prebuilt search index of every board in our directory, rebuilt daily from the ATS APIs. The whole index is about 43 MB compressed. It holds every searchable field, plus the distinct words of each posting&#x27;s first ~1,500 description characters. The Actor downloads only the parts that can match your <code>ats</code>, <code>companies</code> and date filters.</p>
+<p><strong>Descriptions.</strong> For every job it is about to deliver, the Actor fetches the description from the ATS. A single API call per company returns all of that company&#x27;s jobs, so 100 jobs from 20 companies cost 20 calls. Lever and Workable calls are spaced out to respect their limits. A side benefit: a job the employer closed after the nightly build is detected and skipped, not delivered or charged. If a company&#x27;s ATS can&#x27;t be reached, the job is still delivered with <code>description_status: &quot;unavailable&quot;</code>.</p>
+<p><strong>Live mode.</strong> With <code>companyUrls</code> it fetches those boards live instead of using the index.</p>
+<p><strong>Fallback.</strong> If the index is ever unreachable, the run falls back to live-fetching a small set of large boards, so a scheduled run never fails empty.</p>
+<p><strong>Incremental mode.</strong> With <code>sinceLastRun: true</code>, the Actor keeps a small cursor per filter combination in a named key-value store in your Apify account (<code>factpipe-ats-jobs-feed-state</code>). Jobs already delivered are skipped and not charged. A second run straight after the first returns 0 jobs and costs $0. Note that the cursor follows each job&#x27;s posting date, so a board added to the index later only contributes jobs posted after your last run.</p>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>job-result</code></td><td><strong>$3 per 1,000</strong> ($0.003 each)</td><td>One job record delivered, with or without its description. <strong>No start fee. Runs with no matches, jobs skipped by <code>sinceLastRun</code>, jobs found closed at delivery time, and failed boards are never charged.</strong></td></tr></tbody></table></div>
+<p>Example: 10,000 jobs cost <strong>$30</strong>. Set a maximum charge per run in Apify, and the Actor stops cleanly when it is reached.</p>
+<h2 id="coverage">Coverage</h2>
+<p>Search-index build of 2026-09-19:</p>
+<div class="table-wrap"><table><thead><tr><th>ATS</th><th>Jobs in index</th></tr></thead><tbody><tr><td>Greenhouse</td><td>149,679</td></tr><tr><td>Ashby</td><td>54,408</td></tr><tr><td>Lever</td><td>52,493</td></tr><tr><td>Recruitee</td><td>12,806</td></tr><tr><td><strong>Total</strong></td><td><strong>269,386</strong> from <strong>9,070</strong> companies (after collapsing 7,890 duplicate listings)</td></tr></tbody></table></div>
+<p><strong>Workable</strong> is fully supported in live mode (<code>companyUrls</code>). Our directory holds 1,979 validated Workable boards with about 84,000 open jobs, but Workable rate-limited our requests on 2026-09-18, so those jobs join the index at the next paced rebuild after the ban expires. About 15% of indexed jobs carry a structured salary range.</p>
+<p>Coverage grows as the directory is refreshed. Every board in the index had at least one open job when it was last checked. If a company you need is missing, pass its board URL in <code>companyUrls</code>.</p>
+<h2 id="sources-and-terms">Sources and terms</h2>
+<p>Only official, public, unauthenticated job-board APIs that the ATS vendors publish for displaying and syndicating open jobs. No career-site HTML scraping, no logins, no LinkedIn or Indeed.</p>
+<div class="table-wrap"><table><thead><tr><th>ATS</th><th>API</th><th>Reuse terms</th></tr></thead><tbody><tr><td>Greenhouse</td><td><a href="https://developers.greenhouse.io/job-board.html">Job Board API</a></td><td>&quot;Job Board data is publicly available&quot;; no authentication for GET</td></tr><tr><td>Lever</td><td><a href="https://github.com/lever/postings-api">Postings API</a></td><td>Published postings &quot;are publicly viewable&quot; and &quot;may be scraped by third parties&quot;; we respect its 1 request/s crawl delay</td></tr><tr><td>Ashby</td><td><a href="https://developers.ashbyhq.com/docs/public-job-posting-api">Public Job Posting API</a></td><td>Public, unauthenticated posting API</td></tr><tr><td>Workable</td><td><a href="https://help.workable.com/hc/en-us/articles/115012771647">Public jobs endpoint</a></td><td>Documented public endpoint for published jobs; robots.txt allows crawling</td></tr><tr><td>Recruitee</td><td><a href="https://docs.recruitee.com/reference/offers">Careers Site API</a></td><td>Public API returning published offers</td></tr></tbody></table></div>
+<p>SmartRecruiters is deliberately <strong>not</strong> included, because its API host&#x27;s robots.txt disallows automated access.</p>
+<h2 id="faq">FAQ</h2>
+<p><strong>How is this different from LinkedIn or Indeed scrapers?</strong><br>
+We don&#x27;t scrape any job site. Every job comes from the employer&#x27;s own applicant tracking system, through the official public API that also powers the company&#x27;s careers page. That makes the data first-party and current: a job is gone from the feed once the employer closes it. It also carries the direct apply link, and there are no reposts, recruiter spam or login walls. There is no ban risk and no proxy cost, which is why it costs $3 per 1,000 jobs.</p>
+<p><strong>How fresh is the data?</strong><br>
+The search index is rebuilt daily. With <code>includeDescription</code> on (the default), every delivered job is re-checked live against the employer&#x27;s ATS during your run, and closed jobs are dropped. <code>fetched_at</code> is when the index read that board, and <code>posted_at</code> is the employer&#x27;s own publish date.</p>
+<p><strong>Does keyword search cover the whole description?</strong><br>
+It covers the title, department, team and the first ~1,500 characters of each description, which is usually the role summary and the first requirements. Words that appear in most of one company&#x27;s postings (its &quot;About us&quot; boilerplate) are matched per company. Use <code>keywordScope: &quot;title&quot;</code> for strict title searches.</p>
+<p><strong>Which companies are covered?</strong><br>
+About 9,000 companies with open jobs on Greenhouse, Lever, Ashby and Recruitee in the index, plus 1,979 Workable boards in the directory (see Coverage). They were discovered from Common Crawl&#x27;s public URL index and each was validated against its ATS API. Use <code>companies</code> to restrict the search, or <code>companyUrls</code> for any board that isn&#x27;t indexed.</p>
+<p><strong>Why do some jobs have no salary?</strong><br>
+Only some employers publish structured pay ranges, mostly on Ashby, Lever and Recruitee. We never extract or estimate salaries from free text.</p>
+<p><strong>Can I get only new jobs every day?</strong><br>
+Yes. Schedule the Actor with <code>sinceLastRun: true</code>. Each run returns and charges only jobs that no earlier run with the same filters delivered.</p>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier or an AI agent?</strong><br>
+Yes. Run it through the Apify API or the official Python/JavaScript clients. You can connect it to Make, Zapier, n8n, Slack or Google Sheets through Apify integrations, or expose it to AI agents through the Apify MCP server.</p>
+<h2 id="related-factpipe-actors">Related factpipe Actors</h2>
+<ul><li><a href="../company-jobs-scraper/">Career Page Jobs Scraper</a>: give it a company <em>homepage</em> and it finds the careers page and ATS for you.</li></ul>
+<h2 id="reliability">Reliability</h2>
+<p>Official ATS APIs only. The Actor uses retries with backoff, per-host rate limits and structured failure reporting, and writes a <code>RUN_SUMMARY</code> record on every run. Its daily auto-test input has a built-in live fallback.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>

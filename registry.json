@@ -797,7 +797,7 @@
       "apify_actor_id": "5tGfM8n7TcEZwmwaP",
       "source": "Public ATS job-board APIs: Greenhouse, Lever, Ashby, Workable, Recruitee (SmartRecruiters excluded: robots.txt). Board directory from Common Crawl index.",
       "variant": "search index + live",
-      "status": "staging",
+      "status": "live",
       "approval": "J1 APPROVED by owner 2026-09-18 (chat)",
       "origin": "scan",
       "incumbent_actor_id": null,
@@ -810,7 +810,7 @@
         }
       },
       "pricing_rationale": "Leader fantastic-jobs/career-site-job-listing-api $12/1k with 1,441 real users; we launch at $3/1k.",
-      "launched_at": null,
+      "launched_at": "2026-09-25T09:27:05Z",
       "last_fix_date": null,
       "kpis": {},
       "listing": {
