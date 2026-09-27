@@ -2,7 +2,7 @@
 
 ## Money
 - **Revenue: $0.68 in September ($0.64 profit)**, all from `us-weather-forecast` (2 paying users). This is today's Console Insights reading, logged in LEARNINGS.md. This run didn't open the Console, so check the exact figure at https://console.apify.com/actors/insights (Monetization tab). The final number comes on the payout invoice.
-- **24 live Actors · 4 with real users · 4 real users · 21 real runs (30d).** Change vs the first snapshot (2026-09-25, only 2 days ago): users with real Actors 2 → 4, real users 2 → 4, runs 26 → 21.
+- **24 live Actors · 4 with real users · 4 real users · 21 real runs (30d).** Change vs the first snapshot (2026-09-25, only 2 days ago): Actors with real users 2 → 4, real users 2 → 4, runs 26 → 21.
 - Actors with real users: `us-weather-forecast` (1 real user, 16 runs; API shows 2 users/30d incl. auto-test), and in their first days `ats-jobs-scraper`, `companies-hiring` ($5/1k) and `remote-jobs-feed` (1 user each, 0 real runs yet).
 
 ## Health
