@@ -70,6 +70,12 @@ def main():
         failed30 = r30.get("FAILED", 0) + r30.get("TIMED-OUT", 0)
         real_users = max(s.get("totalUsers30Days", 0) - (1 if tester_days else 0), 0)
         real_runs = max(runs30 - tester_days, 0)
+        listing = meta.get("listing", {})
+        drift = [k for k in ("title", "description", "seoTitle", "seoDescription")
+                 if listing.get(k) and (act.get(k) or "").strip() != listing[k].strip()]
+        pic = act.get("pictureUrl") or ""
+        if not (f"-actor-{aid}-" in pic and pic.endswith(f"-{slug}.png")):
+            drift.append("icon")
         before = prev.get(slug, {})
         if real_users == 0 and age >= NO_TRACTION_DAYS:
             verdict = "no_traction"
@@ -85,7 +91,7 @@ def main():
             "real_users_30": real_users, "real_users_7": max(s.get("totalUsers7Days", 0) - (1 if tester_days else 0), 0),
             "real_runs_30": real_runs, "fail_rate_30": round(failed30 / runs30, 3) if runs30 else 0.0,
             "wow_users": real_users - before.get("real_users_30", 0) if before else None,
-            "verdict": verdict,
+            "verdict": verdict, "listing_drift": drift,
         }
 
     proposals = [
@@ -95,6 +101,8 @@ def main():
     ]
     health = [f"{slug}: {r['fail_rate_30']:.0%} of runs failed (30d)" for slug, r in rows.items() if r.get("fail_rate_30", 0) > 0.05]
     health += [f"{slug}: notice {r['notice']}" for slug, r in rows.items() if r.get("notice") not in (None, "NONE")]
+    health += [f"{slug}: live listing differs from registry.json ({', '.join(r['listing_drift'])}); fix with sync_listings.py or re-upload the icon"
+               for slug, r in rows.items() if r.get("listing_drift")]
 
     out = {"date": today, "actors": rows, "proposals": proposals, "health_flags": health,
            "totals": {"live": len(rows), "with_real_users": sum(1 for r in rows.values() if r.get("real_users_30")),
