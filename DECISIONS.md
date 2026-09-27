@@ -46,3 +46,5 @@ Item ids come from WEEKLY_REPORT.md. Nothing ships to a new data source, changes
 2026-09-25 | APPROVE | J2 job-index entry points | Owner, in chat: build + publish Remote Jobs Feed, Greenhouse/Lever/Ashby Jobs Scraper, Companies Hiring (lead list) on the existing jobs index.
 2026-09-25 | APPROVE | J1 ranking | Owner, in chat: rank title matches above description-only matches.
 2026-09-25 | APPROVE | SC1 weekly scorecard | Owner, in chat: weekly real-users/paid-runs scorecard; zero-user Actors after 30 days get price/title test proposals; retirements proposed, never automatic.
+2026-09-27 | APPROVE | SD1 Store discounts | Owner, in chat ("both"): enable Apify Store tier discounts (about 10% / 20% / 30% off on higher paid plans) on all monetized Actors; broken-link-checker excluded until its 2026-10-02 pricing change settles.
+2026-09-27 | APPROVE | RH1 README first screen | Owner, in chat ("both"): README opens with a one-line value statement, a small real sample-result table and links to the published example tasks; the existing intro text moves below it.
