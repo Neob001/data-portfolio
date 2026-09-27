@@ -24,3 +24,6 @@ Replies are NEVER posted without a tick. Standing decision 2026-09-12.
 
 ## 2026-09-25
 (no drafts today. demand_monitor found 1 raw hit and 0 passed the filters: SO 80005335 is a WhatsApp Business onboarding/support question that matched only on a keyword. Marked 'filtered'. No DC proposals. Stack Exchange and GitHub polls partly timed out (network); the Apify forum still returns non-JSON. No owner ticks pending.)
+
+## 2026-09-27
+(no drafts today. demand_monitor found 2 raw hits and 0 passed the filters: Dans-Plugins Medieval-Roleplay-Engine#348 and FoodSpoilage#282 are "Post to SpigotMC" release chores that matched only on keywords. Both marked 'filtered'. No DC proposals. The Apify forum still returns non-JSON. No owner ticks pending.)

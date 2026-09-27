@@ -19,8 +19,8 @@
     {
       "platform": "github",
       "url": "https://github.com/mpospisil/gleanvolt/issues/193",
-      "title": "A Škoda configured as itself: an API key from the web UI, read through MyŠkoda's public API",
-      "body": "> *\"Create a WI to provide better integration with Škoda EVs.\"*\n>\n> *\"I want to be able to configure a Škoda car in the configuration — a different configuration than my ID.4. It will require other changes — login in the web UI and a new service for getting data instead of the volkswagen.de source.\"*\n\nOn **2026-08-31** (MySkoda app 8.16) Škoda released a free, documented REST API for owners: the [",
+      "title": "A \u0160koda configured as itself: an API key from the web UI, read through My\u0160koda's public API",
+      "body": "> *\"Create a WI to provide better integration with \u0160koda EVs.\"*\n>\n> *\"I want to be able to configure a \u0160koda car in the configuration \u2014 a different configuration than my ID.4. It will require other changes \u2014 login in the web UI and a new service for getting data instead of the volkswagen.de source.\"*\n\nOn **2026-08-31** (MySkoda app 8.16) \u0160koda released a free, documented REST API for owners: the [",
       "created_at": "2026-09-13T20:20:59Z",
       "engagement": 0,
       "answered": false,
@@ -47,6 +47,36 @@
       "detected_at": "2026-09-25T09:12:37.796143+00:00",
       "filter_reason": "false positive: WhatsApp Business account onboarding/support issue (Meta account state), not a data-access request (keyword match on 'company data api'); negative score -2",
       "filtered_at": "2026-09-25"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/Dans-Plugins/Medieval-Roleplay-Engine/issues/348",
+      "title": "Post 1.15.1 to SpigotMC",
+      "body": "`v1.15.1` is the stable release on GitHub, but the listing at https://www.spigotmc.org/resources/79993/ still shows the previous version until an update is posted there by hand (SpigotMC has no API for it).\n\n## Post update\n\n1. Open https://www.spigotmc.org/resources/79993/, choose **Post update**.\n2. Version string: `1.15.1`\n3. Download: **External download** \u2192 `https://github.com/Dans-Plugins/Med",
+      "created_at": "2026-09-27T01:42:16Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 0.764,
+      "status": "filtered",
+      "detected_at": "2026-09-27T09:06:29.324916+00:00",
+      "filter_reason": "GitHub release-chore issue (\"Post x.y.z to SpigotMC\"); keyword-only match, no data demand"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/Dans-Plugins/FoodSpoilage/issues/282",
+      "title": "Post 3.0.4 to SpigotMC",
+      "body": "`v3.0.4` is the stable release on GitHub, but the listing at https://www.spigotmc.org/resources/81507/ still shows the previous version until an update is posted there by hand (SpigotMC has no API for it).\n\n## Post update\n\n1. Open https://www.spigotmc.org/resources/81507/, choose **Post update**.\n2. Version string: `3.0.4`\n3. Download: **External download** \u2192 `https://github.com/Dans-Plugins/FoodS",
+      "created_at": "2026-09-27T01:33:46Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 0.761,
+      "status": "filtered",
+      "detected_at": "2026-09-27T09:06:29.325364+00:00",
+      "filter_reason": "GitHub release-chore issue (\"Post x.y.z to SpigotMC\"); keyword-only match, no data demand"
     }
   ]
 }
