@@ -30,7 +30,7 @@ def main() -> None:
             continue
         k = a.get("kpis", {})
         launched = a.get("launched_at")
-        age_days = (now - datetime.fromisoformat(launched)).days if launched else 0
+        age_days = (now - datetime.fromisoformat(launched.replace("Z", "+00:00"))).days if launched else 0
         if age_days < 60:
             continue  # launch-pricing window
         if k.get("paid_runs_30d", 0) < 3 and age_days > 30:
