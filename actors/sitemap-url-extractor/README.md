@@ -1,5 +1,21 @@
 # Sitemap URL Extractor & 404 Checker — XML Sitemap Scraper
 
+<!-- factpipe:hero:start -->
+
+**Extract every URL from any website's XML sitemaps: robots.txt discovery, nested sitemap indexes, lastmod and priority. Optional HTTP status check finds 404s and redirects. $0.30 per 1,000 URLs.**
+
+| Site | Url | Lastmod | Http status | Ok |
+|---|---|---|---|---|
+| https://www.sitemaps.org | https://www.sitemaps.org/ | 2016-11-21 | 200 | yes |
+| https://www.sitemaps.org | https://www.sitemaps.org/protocol.html | 2022-12-15 | 200 | yes |
+| https://www.sitemaps.org | https://www.sitemaps.org/faq.html | 2016-11-21 | 200 | yes |
+
+*Real output from the “Find 404 URLs in a sitemap” example, run on September 27, 2026.*
+
+**Try a ready-made example:** [Find 404 URLs in a sitemap](https://apify.com/factpipe/sitemap-url-extractor/examples/find-404s-in-sitemap)
+
+<!-- factpipe:hero:end -->
+
 Extract **every URL from a website's sitemaps** with one input: the site root. Discovers sitemaps via robots.txt and common paths, walks sitemap indexes, and returns flat records with `lastmod`, `changefreq`, and `priority` — optionally HEAD-checking each URL's HTTP status to find broken pages. Sitemaps are built for machines; this is the clean, reliable way to read them.
 
 ## Quick start

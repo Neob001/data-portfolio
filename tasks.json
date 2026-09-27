@@ -1,112 +1,509 @@
 {
-  "_comment": "Published example tasks (Apify Store landing pages at apify.com/factpipe/<actor>/examples/<name>). Managed by scripts/publish_tasks.py. Each is run once and published only if it succeeds with results.",
-  "tasks": [
-    {"actor": "ats-jobs-feed", "name": "remote-software-engineer-jobs", "title": "Remote software engineer jobs (last 7 days)",
-     "description": "Newest remote software engineering jobs from 10,000+ company career sites, max 3 per company.",
-     "input": {"keywords": ["software engineer"], "remote": "remote_only", "postedWithinDays": 7, "maxResults": 50, "maxPerCompany": 3}},
-    {"actor": "ats-jobs-feed", "name": "ai-machine-learning-engineer-jobs", "title": "AI & machine learning engineer jobs",
-     "description": "Open AI, machine learning and LLM engineering roles posted in the last 14 days, ranked by title relevance.",
-     "input": {"keywords": ["machine learning engineer", "AI engineer", "LLM"], "postedWithinDays": 14, "maxResults": 50, "maxPerCompany": 3, "includeDescription": false}},
-    {"actor": "ats-jobs-feed", "name": "product-manager-jobs-united-states", "title": "Product manager jobs in the United States",
-     "description": "Product manager openings at US companies from Greenhouse, Lever, Ashby, Workable and Recruitee career sites.",
-     "input": {"keywords": ["product manager"], "keywordScope": "title", "locations": ["United States"], "postedWithinDays": 14, "maxResults": 50, "maxPerCompany": 3, "includeDescription": false}},
-    {"actor": "ats-jobs-feed", "name": "data-analyst-jobs-europe", "title": "Data analyst jobs in Europe",
-     "description": "Data analyst and analytics roles in Germany, the UK, France, the Netherlands and Spain from company career pages.",
-     "input": {"keywords": ["data analyst", "analytics"], "keywordScope": "title", "locations": ["Germany", "United Kingdom", "France", "Netherlands", "Spain"], "postedWithinDays": 30, "maxResults": 50, "maxPerCompany": 3, "includeDescription": false}},
-
-    {"actor": "remote-jobs-feed", "name": "remote-customer-support-jobs", "title": "Remote customer support jobs",
-     "description": "Remote customer support, success and service roles from 10,000+ company career sites, newest first.",
-     "input": {"keywords": ["customer support", "customer success", "customer service"], "keywordScope": "title", "postedWithinDays": 14, "maxResults": 50, "maxPerCompany": 3, "includeDescription": false}},
-    {"actor": "remote-jobs-feed", "name": "remote-designer-jobs-europe", "title": "Remote designer jobs open to Europe",
-     "description": "Remote product, UX and UI designer jobs that accept candidates in Europe.",
-     "input": {"keywords": ["designer"], "keywordScope": "title", "timezonesOrRegions": ["Europe"], "postedWithinDays": 30, "maxResults": 50, "maxPerCompany": 3, "includeDescription": false}},
-    {"actor": "remote-jobs-feed", "name": "remote-marketing-jobs-us", "title": "Remote marketing jobs in the US",
-     "description": "Remote marketing, growth and content jobs for US-based candidates from company career pages.",
-     "input": {"keywords": ["marketing", "growth", "content"], "keywordScope": "title", "timezonesOrRegions": ["US"], "postedWithinDays": 14, "maxResults": 50, "maxPerCompany": 3, "includeDescription": false}},
-
-    {"actor": "ats-jobs-scraper", "name": "greenhouse-engineering-jobs", "title": "Greenhouse engineering jobs",
-     "description": "Engineering jobs from companies hiring on Greenhouse job boards, with salary where published.",
-     "input": {"ats": ["greenhouse"], "keywords": ["engineer"], "keywordScope": "title", "postedWithinDays": 7, "maxResults": 50, "maxPerCompany": 3, "includeDescription": false}},
-    {"actor": "ats-jobs-scraper", "name": "lever-sales-jobs", "title": "Lever sales jobs",
-     "description": "Sales and account executive roles from companies hiring on Lever job boards.",
-     "input": {"ats": ["lever"], "keywords": ["sales", "account executive"], "keywordScope": "title", "postedWithinDays": 14, "maxResults": 50, "maxPerCompany": 3, "includeDescription": false}},
-    {"actor": "ats-jobs-scraper", "name": "ashby-startup-jobs", "title": "Ashby startup jobs (newest)",
-     "description": "The newest jobs from startups hiring on Ashby job boards, across all roles.",
-     "input": {"ats": ["ashby"], "postedWithinDays": 3, "maxResults": 50, "maxPerCompany": 3, "includeDescription": false}},
-
-    {"actor": "companies-hiring", "name": "companies-hiring-ai-engineers", "title": "Companies hiring AI engineers",
-     "description": "Companies with open AI, machine learning and LLM engineering roles, with job counts and hiring velocity.",
-     "input": {"keywords": ["machine learning engineer", "AI engineer", "LLM"], "minMatchingJobs": 2, "maxResults": 50}},
-    {"actor": "companies-hiring", "name": "companies-hiring-sales-reps", "title": "Companies hiring sales reps",
-     "description": "B2B sales leads: companies hiring account executives and SDRs right now, sorted by number of open roles.",
-     "input": {"keywords": ["account executive", "sales development", "SDR"], "minMatchingJobs": 2, "maxResults": 50}},
-    {"actor": "companies-hiring", "name": "fastest-hiring-companies", "title": "Fastest-hiring companies this month",
-     "description": "Companies posting the most new jobs relative to their open roles over the last 30 days.",
-     "input": {"minMatchingJobs": 10, "sortBy": "hiring_velocity", "maxResults": 50}},
-    {"actor": "companies-hiring", "name": "companies-hiring-in-germany", "title": "Companies hiring in Germany",
-     "description": "Companies with open engineering roles in Germany, one row per company with departments and locations.",
-     "input": {"keywords": ["engineer"], "locations": ["Germany"], "minMatchingJobs": 2, "maxResults": 50}},
-
-    {"actor": "company-jobs-scraper", "name": "scrape-career-pages", "title": "Scrape jobs from company career pages",
-     "description": "Paste company career-page URLs and get every open job as JSON: example with GitLab and Ramp.",
-     "input": {"companyUrls": ["https://boards.greenhouse.io/gitlab", "https://jobs.ashbyhq.com/ramp"], "maxJobsPerCompany": 25}},
-
-    {"actor": "sec-edgar-filings-search", "name": "8k-cybersecurity-incident-filings", "title": "8-K cybersecurity incident filings",
-     "description": "SEC 8-K filings mentioning a cybersecurity incident, for breach monitoring and risk research.",
-     "input": {"query": "cybersecurity incident", "forms": ["8-K"], "maxResults": 25}},
-    {"actor": "eu-ted-tenders-monitor", "name": "eu-it-services-tenders", "title": "EU IT services tenders",
-     "description": "Public procurement notices for IT services (CPV 72000000) from TED, newest first.",
-     "input": {"cpvCodes": ["72000000"], "maxResults": 25}},
-    {"actor": "uk-company-lookup", "name": "check-uk-company-status", "title": "Check UK company status by number",
-     "description": "Look up UK companies on Companies House by company number: status, SIC codes and registered office.",
-     "input": {"companyNumbers": ["00445790", "03977902"]}},
-    {"actor": "federal-register-monitor", "name": "ai-regulation-tracker", "title": "US AI regulation tracker",
-     "description": "Federal Register rules, proposed rules and notices about artificial intelligence.",
-     "input": {"searchTerm": "artificial intelligence", "maxResults": 25}},
-    {"actor": "fda-recalls-monitor", "name": "listeria-food-recalls", "title": "Listeria food recalls",
-     "description": "FDA food recall enforcement reports mentioning Listeria, with firm, product and classification.",
-     "input": {"category": "food", "searchTerm": "listeria", "maxResults": 25}},
-    {"actor": "ofac-sanctions-screening", "name": "screen-company-names-sanctions", "title": "Screen company names against sanctions lists",
-     "description": "Check company names against OFAC, EU, UK and UN sanctions lists with fuzzy matching.",
-     "input": {"names": ["Banco Nacional de Cuba", "PJSC Sberbank", "Acme Trading GmbH"]}},
-    {"actor": "us-weather-forecast", "name": "7-day-forecast-us-cities", "title": "7-day forecast for major US cities",
-     "description": "Official NWS 7-day forecasts for New York, Los Angeles, Chicago and Houston.",
-     "input": {"coordinates": ["40.7128,-74.0060", "34.0522,-118.2437", "41.8781,-87.6298", "29.7604,-95.3698"]}},
-    {"actor": "sitemap-url-extractor", "name": "find-404s-in-sitemap", "title": "Find 404 URLs in a sitemap",
-     "description": "Extract every URL from a site's sitemaps and check each one for 404s and redirects.",
-     "input": {"websiteUrls": ["https://www.sitemaps.org"], "checkStatus": true, "maxUrlsPerSite": 200}},
-    {"actor": "ecb-exchange-rates", "name": "daily-euro-exchange-rates", "title": "Daily euro exchange rates (USD, GBP, JPY, CHF)",
-     "description": "Latest official ECB euro reference rates for major currencies.",
-     "input": {"currencies": ["USD", "GBP", "JPY", "CHF", "CNY", "CAD"]}},
-    {"actor": "email-security-checker", "name": "dmarc-spf-audit", "title": "DMARC & SPF audit for your domains",
-     "description": "Grade SPF, DKIM and DMARC for a list of domains with a fix list per domain.",
-     "input": {"domains": ["github.com", "example.com", "stripe.com"]}},
-    {"actor": "eu-vat-validation", "name": "validate-eu-vat-numbers", "title": "Validate EU VAT numbers in bulk",
-     "description": "Check EU VAT numbers against VIES and get the registered trader name and address.",
-     "input": {"vatNumbers": ["IE6388047V", "CZ04788290"]}},
-    {"actor": "lighthouse-auditor", "name": "core-web-vitals-mobile-audit", "title": "Core Web Vitals mobile audit",
-     "description": "Run mobile Lighthouse audits and get performance, SEO and Core Web Vitals scores per page.",
-     "input": {"urls": ["https://example.com", "https://www.wikipedia.org"], "strategy": "mobile"}},
-    {"actor": "sam-gov-contracts", "name": "federal-software-contract-opportunities", "title": "Federal software contract opportunities",
-     "description": "Open US federal contract opportunities for software from SAM.gov, with deadlines and set-asides.",
-     "input": {"keywords": ["software"], "maxResults": 25}},
-    {"actor": "wikipedia-scraper", "name": "wikipedia-article-summaries", "title": "Wikipedia article summaries",
-     "description": "Get clean summaries, categories and links for Wikipedia articles by title or search.",
-     "input": {"articles": ["Web scraping", "Large language model"], "searchQueries": ["renewable energy storage"], "maxArticlesPerSearch": 3}},
-    {"actor": "open-food-facts-scraper", "name": "nutrition-facts-by-barcode", "title": "Nutrition facts by barcode",
-     "description": "Look up nutrition facts, ingredients, Nutri-Score and allergens for products by EAN/UPC barcode.",
-     "input": {"barcodes": ["3017624010701", "0851087000250", "5449000000996"]}},
-    {"actor": "dns-records-lookup", "name": "find-email-provider-by-domain", "title": "Find a company's email provider from its domain",
-     "description": "Detect mail provider (Google Workspace, Microsoft 365...) and DNS host for a list of domains.",
-     "input": {"domains": ["github.com", "stripe.com", "notion.so", "shopify.com"]}},
-    {"actor": "france-company-lookup", "name": "french-company-lookup-siren", "title": "French company lookup by SIREN or name",
-     "description": "Get legal form, NAF code, head office and VAT number for French companies from Sirene open data.",
-     "input": {"queries": ["552081317", "Airbus"]}},
-    {"actor": "broken-link-checker", "name": "find-broken-links-on-website", "title": "Find broken links on a website",
-     "description": "Crawl a site and list every broken link, where it appears and its anchor text.",
-     "input": {"startUrls": ["https://crawlee.dev"], "maxPagesPerSite": 20, "maxRunMinutes": 3}},
-    {"actor": "website-screenshot", "name": "mobile-full-page-screenshots", "title": "Mobile full-page screenshots",
-     "description": "Full-page mobile screenshots of a list of websites, cookie banners hidden.",
-     "input": {"urls": ["https://example.com", "https://www.wikipedia.org"], "device": "mobile", "fullPage": true}}
-  ]
+ "_comment": "Published example tasks (Apify Store landing pages at apify.com/factpipe/<actor>/examples/<name>). Managed by scripts/publish_tasks.py. Each is run once and published only if it succeeds with results.",
+ "tasks": [
+  {
+   "actor": "ats-jobs-feed",
+   "name": "remote-software-engineer-jobs",
+   "title": "Remote software engineer jobs (last 7 days)",
+   "description": "Newest remote software engineering jobs from 10,000+ company career sites, max 3 per company.",
+   "input": {
+    "keywords": [
+     "software engineer"
+    ],
+    "remote": "remote_only",
+    "postedWithinDays": 7,
+    "maxResults": 50,
+    "maxPerCompany": 3
+   }
+  },
+  {
+   "actor": "ats-jobs-feed",
+   "name": "ai-machine-learning-engineer-jobs",
+   "title": "AI & machine learning engineer jobs",
+   "description": "Open AI, machine learning and LLM engineering roles posted in the last 14 days, ranked by title relevance.",
+   "input": {
+    "keywords": [
+     "machine learning engineer",
+     "AI engineer",
+     "LLM"
+    ],
+    "postedWithinDays": 14,
+    "maxResults": 50,
+    "maxPerCompany": 3,
+    "includeDescription": false
+   }
+  },
+  {
+   "actor": "ats-jobs-feed",
+   "name": "product-manager-jobs-united-states",
+   "title": "Product manager jobs in the United States",
+   "description": "Product manager openings at US companies from Greenhouse, Lever, Ashby, Workable and Recruitee career sites.",
+   "input": {
+    "keywords": [
+     "product manager"
+    ],
+    "keywordScope": "title",
+    "locations": [
+     "United States"
+    ],
+    "postedWithinDays": 14,
+    "maxResults": 50,
+    "maxPerCompany": 3,
+    "includeDescription": false
+   }
+  },
+  {
+   "actor": "ats-jobs-feed",
+   "name": "data-analyst-jobs-europe",
+   "title": "Data analyst jobs in Europe",
+   "description": "Data analyst and analytics roles in Germany, the UK, France, the Netherlands and Spain from company career pages.",
+   "input": {
+    "keywords": [
+     "data analyst",
+     "analytics"
+    ],
+    "keywordScope": "title",
+    "locations": [
+     "Germany",
+     "United Kingdom",
+     "France",
+     "Netherlands",
+     "Spain"
+    ],
+    "postedWithinDays": 30,
+    "maxResults": 50,
+    "maxPerCompany": 3,
+    "includeDescription": false
+   }
+  },
+  {
+   "actor": "remote-jobs-feed",
+   "name": "remote-customer-support-jobs",
+   "title": "Remote customer support jobs",
+   "description": "Remote customer support, success and service roles from 10,000+ company career sites, newest first.",
+   "input": {
+    "keywords": [
+     "customer support",
+     "customer success",
+     "customer service"
+    ],
+    "keywordScope": "title",
+    "postedWithinDays": 14,
+    "maxResults": 50,
+    "maxPerCompany": 3,
+    "includeDescription": false
+   }
+  },
+  {
+   "actor": "remote-jobs-feed",
+   "name": "remote-designer-jobs-europe",
+   "title": "Remote designer jobs open to Europe",
+   "description": "Remote product, UX and UI designer jobs that accept candidates in Europe.",
+   "input": {
+    "keywords": [
+     "designer"
+    ],
+    "keywordScope": "title",
+    "timezonesOrRegions": [
+     "Europe"
+    ],
+    "postedWithinDays": 30,
+    "maxResults": 50,
+    "maxPerCompany": 3,
+    "includeDescription": false
+   }
+  },
+  {
+   "actor": "remote-jobs-feed",
+   "name": "remote-marketing-jobs-us",
+   "title": "Remote marketing jobs in the US",
+   "description": "Remote marketing, growth and content jobs for US-based candidates from company career pages.",
+   "input": {
+    "keywords": [
+     "marketing",
+     "growth",
+     "content"
+    ],
+    "keywordScope": "title",
+    "timezonesOrRegions": [
+     "US"
+    ],
+    "postedWithinDays": 14,
+    "maxResults": 50,
+    "maxPerCompany": 3,
+    "includeDescription": false
+   }
+  },
+  {
+   "actor": "ats-jobs-scraper",
+   "name": "greenhouse-engineering-jobs",
+   "title": "Greenhouse engineering jobs",
+   "description": "Engineering jobs from companies hiring on Greenhouse job boards, with salary where published.",
+   "input": {
+    "ats": [
+     "greenhouse"
+    ],
+    "keywords": [
+     "engineer"
+    ],
+    "keywordScope": "title",
+    "postedWithinDays": 7,
+    "maxResults": 50,
+    "maxPerCompany": 3,
+    "includeDescription": false
+   }
+  },
+  {
+   "actor": "ats-jobs-scraper",
+   "name": "lever-sales-jobs",
+   "title": "Lever sales jobs",
+   "description": "Sales and account executive roles from companies hiring on Lever job boards.",
+   "input": {
+    "ats": [
+     "lever"
+    ],
+    "keywords": [
+     "sales",
+     "account executive"
+    ],
+    "keywordScope": "title",
+    "postedWithinDays": 14,
+    "maxResults": 50,
+    "maxPerCompany": 3,
+    "includeDescription": false
+   }
+  },
+  {
+   "actor": "ats-jobs-scraper",
+   "name": "ashby-startup-jobs",
+   "title": "Ashby startup jobs (newest)",
+   "description": "The newest jobs from startups hiring on Ashby job boards, across all roles.",
+   "input": {
+    "ats": [
+     "ashby"
+    ],
+    "postedWithinDays": 3,
+    "maxResults": 50,
+    "maxPerCompany": 3,
+    "includeDescription": false
+   }
+  },
+  {
+   "actor": "companies-hiring",
+   "name": "companies-hiring-ai-engineers",
+   "title": "Companies hiring AI engineers",
+   "description": "Companies with open AI, machine learning and LLM engineering roles, with job counts and hiring velocity.",
+   "input": {
+    "keywords": [
+     "machine learning engineer",
+     "AI engineer",
+     "LLM"
+    ],
+    "minMatchingJobs": 2,
+    "maxResults": 50
+   }
+  },
+  {
+   "actor": "companies-hiring",
+   "name": "companies-hiring-sales-reps",
+   "title": "Companies hiring sales reps",
+   "description": "B2B sales leads: companies hiring account executives and SDRs right now, sorted by number of open roles.",
+   "input": {
+    "keywords": [
+     "account executive",
+     "sales development",
+     "SDR"
+    ],
+    "minMatchingJobs": 2,
+    "maxResults": 50
+   }
+  },
+  {
+   "actor": "companies-hiring",
+   "name": "fastest-hiring-companies",
+   "title": "Fastest-hiring companies this month",
+   "description": "Companies posting the most new jobs relative to their open roles over the last 30 days.",
+   "input": {
+    "minMatchingJobs": 10,
+    "sortBy": "hiring_velocity",
+    "maxResults": 50
+   }
+  },
+  {
+   "actor": "companies-hiring",
+   "name": "companies-hiring-in-germany",
+   "title": "Companies hiring in Germany",
+   "description": "Companies with open engineering roles in Germany, one row per company with departments and locations.",
+   "input": {
+    "keywords": [
+     "engineer"
+    ],
+    "locations": [
+     "Germany"
+    ],
+    "minMatchingJobs": 2,
+    "maxResults": 50
+   }
+  },
+  {
+   "actor": "company-jobs-scraper",
+   "name": "scrape-career-pages",
+   "title": "Scrape jobs from company career pages",
+   "description": "Paste company career-page URLs and get every open job as JSON: example with GitLab and Ramp.",
+   "input": {
+    "companyUrls": [
+     "https://boards.greenhouse.io/gitlab",
+     "https://jobs.ashbyhq.com/ramp"
+    ],
+    "maxJobsPerCompany": 25
+   }
+  },
+  {
+   "actor": "sec-edgar-filings-search",
+   "name": "8k-cybersecurity-incident-filings",
+   "title": "8-K cybersecurity incident filings",
+   "description": "Recent SEC 8-K filings mentioning a cybersecurity incident, for breach monitoring and risk research.",
+   "input": {
+    "query": "cybersecurity incident",
+    "forms": [
+     "8-K"
+    ],
+    "maxResults": 25,
+    "startDate": "2025-09-01"
+   }
+  },
+  {
+   "actor": "eu-ted-tenders-monitor",
+   "name": "eu-it-services-tenders",
+   "title": "EU IT services tenders",
+   "description": "Public procurement notices for IT services (CPV 72000000) from TED, newest first.",
+   "input": {
+    "cpvCodes": [
+     "72000000"
+    ],
+    "maxResults": 25
+   }
+  },
+  {
+   "actor": "uk-company-lookup",
+   "name": "check-uk-company-status",
+   "title": "Check UK company status by number",
+   "description": "Look up UK companies on Companies House by company number: status, SIC codes and registered office.",
+   "input": {
+    "companyNumbers": [
+     "00445790",
+     "03977902"
+    ]
+   }
+  },
+  {
+   "actor": "federal-register-monitor",
+   "name": "ai-regulation-tracker",
+   "title": "US AI regulation tracker",
+   "description": "Federal Register rules, proposed rules and notices about artificial intelligence.",
+   "input": {
+    "searchTerm": "artificial intelligence",
+    "maxResults": 25
+   }
+  },
+  {
+   "actor": "fda-recalls-monitor",
+   "name": "listeria-food-recalls",
+   "title": "Listeria food recalls",
+   "description": "FDA food recall enforcement reports mentioning Listeria, with firm, product and classification.",
+   "input": {
+    "category": "food",
+    "searchTerm": "listeria",
+    "maxResults": 25
+   }
+  },
+  {
+   "actor": "ofac-sanctions-screening",
+   "name": "screen-company-names-sanctions",
+   "title": "Screen company names against sanctions lists",
+   "description": "Check company names against OFAC, EU, UK and UN sanctions lists with fuzzy matching.",
+   "input": {
+    "names": [
+     "Banco Nacional de Cuba",
+     "PJSC Sberbank",
+     "Acme Trading GmbH"
+    ]
+   }
+  },
+  {
+   "actor": "us-weather-forecast",
+   "name": "7-day-forecast-us-cities",
+   "title": "7-day forecast for major US cities",
+   "description": "Official NWS 7-day forecasts for New York, Los Angeles, Chicago and Houston.",
+   "input": {
+    "coordinates": [
+     "40.7128,-74.0060",
+     "34.0522,-118.2437",
+     "41.8781,-87.6298",
+     "29.7604,-95.3698"
+    ]
+   }
+  },
+  {
+   "actor": "sitemap-url-extractor",
+   "name": "find-404s-in-sitemap",
+   "title": "Find 404 URLs in a sitemap",
+   "description": "Extract every URL from a site's sitemaps and check each one for 404s and redirects.",
+   "input": {
+    "websiteUrls": [
+     "https://www.sitemaps.org"
+    ],
+    "checkStatus": true,
+    "maxUrlsPerSite": 200
+   }
+  },
+  {
+   "actor": "ecb-exchange-rates",
+   "name": "daily-euro-exchange-rates",
+   "title": "Daily euro exchange rates (USD, GBP, JPY, CHF)",
+   "description": "Latest official ECB euro reference rates for major currencies.",
+   "input": {
+    "currencies": [
+     "USD",
+     "GBP",
+     "JPY",
+     "CHF",
+     "CNY",
+     "CAD"
+    ]
+   }
+  },
+  {
+   "actor": "email-security-checker",
+   "name": "dmarc-spf-audit",
+   "title": "DMARC & SPF audit for your domains",
+   "description": "Grade SPF, DKIM and DMARC for a list of domains with a fix list per domain.",
+   "input": {
+    "domains": [
+     "github.com",
+     "example.com",
+     "stripe.com"
+    ]
+   }
+  },
+  {
+   "actor": "eu-vat-validation",
+   "name": "validate-eu-vat-numbers",
+   "title": "Validate EU VAT numbers in bulk",
+   "description": "Check EU VAT numbers against VIES and get the registered trader name and address.",
+   "input": {
+    "vatNumbers": [
+     "IE6388047V",
+     "CZ04788290"
+    ]
+   }
+  },
+  {
+   "actor": "lighthouse-auditor",
+   "name": "core-web-vitals-mobile-audit",
+   "title": "Core Web Vitals mobile audit",
+   "description": "Run mobile Lighthouse audits and get performance, SEO and Core Web Vitals scores per page.",
+   "input": {
+    "urls": [
+     "https://example.com",
+     "https://www.wikipedia.org"
+    ],
+    "strategy": "mobile"
+   }
+  },
+  {
+   "actor": "sam-gov-contracts",
+   "name": "federal-software-contract-opportunities",
+   "title": "Federal software contract opportunities",
+   "description": "Open US federal contract opportunities for software from SAM.gov, with deadlines and set-asides.",
+   "input": {
+    "keywords": [
+     "software"
+    ],
+    "maxResults": 25
+   }
+  },
+  {
+   "actor": "wikipedia-scraper",
+   "name": "wikipedia-article-summaries",
+   "title": "Wikipedia article summaries",
+   "description": "Get clean summaries, categories and links for Wikipedia articles by title or search.",
+   "input": {
+    "articles": [
+     "Web scraping",
+     "Large language model"
+    ],
+    "searchQueries": [
+     "renewable energy storage"
+    ],
+    "maxArticlesPerSearch": 3
+   }
+  },
+  {
+   "actor": "open-food-facts-scraper",
+   "name": "nutrition-facts-by-barcode",
+   "title": "Nutrition facts by barcode",
+   "description": "Look up nutrition facts, ingredients, Nutri-Score and allergens for products by EAN/UPC barcode.",
+   "input": {
+    "barcodes": [
+     "3017624010701",
+     "0851087000250",
+     "5449000000996"
+    ]
+   }
+  },
+  {
+   "actor": "dns-records-lookup",
+   "name": "find-email-provider-by-domain",
+   "title": "Find a company's email provider from its domain",
+   "description": "Detect mail provider (Google Workspace, Microsoft 365...) and DNS host for a list of domains.",
+   "input": {
+    "domains": [
+     "github.com",
+     "stripe.com",
+     "notion.so",
+     "shopify.com"
+    ]
+   }
+  },
+  {
+   "actor": "france-company-lookup",
+   "name": "french-company-lookup-siren",
+   "title": "French company lookup by SIREN or name",
+   "description": "Get legal form, NAF code, head office and VAT number for French companies from Sirene open data.",
+   "input": {
+    "queries": [
+     "552081317",
+     "Airbus"
+    ]
+   }
+  },
+  {
+   "actor": "broken-link-checker",
+   "name": "find-broken-links-on-website",
+   "title": "Find broken links on a website",
+   "description": "Crawl a site and list every broken link, where it appears and its anchor text.",
+   "input": {
+    "startUrls": [
+     "https://crawlee.dev"
+    ],
+    "maxPagesPerSite": 20,
+    "maxRunMinutes": 3
+   }
+  },
+  {
+   "actor": "website-screenshot",
+   "name": "mobile-full-page-screenshots",
+   "title": "Mobile full-page screenshots",
+   "description": "Full-page mobile screenshots of a list of websites, cookie banners hidden.",
+   "input": {
+    "urls": [
+     "https://example.com",
+     "https://www.wikipedia.org"
+    ],
+    "device": "mobile",
+    "fullPage": true
+   }
+  }
+ ]
 }

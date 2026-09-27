@@ -1,5 +1,19 @@
 # Lighthouse & Core Web Vitals Checker API — Bulk PageSpeed
 
+<!-- factpipe:hero:start -->
+
+**Run real Google Lighthouse audits in bulk: performance, SEO, accessibility and best-practices scores, LCP/CLS/TBT with pass/fail, and top fixes. Mobile and desktop. No API key or quota. $10 per 1,000 audits.**
+
+| Final url | Strategy | Performance score | Seo score | Lcp ms |
+|---|---|---|---|---|
+| https://example.com/ | mobile | 100 | 80 | 753 |
+
+*Real output from the “Core Web Vitals mobile audit” example, run on September 27, 2026.*
+
+**Try a ready-made example:** [Core Web Vitals mobile audit](https://apify.com/factpipe/lighthouse-auditor/examples/core-web-vitals-mobile-audit)
+
+<!-- factpipe:hero:end -->
+
 Run **real Google Lighthouse audits in bulk** and get one clean JSON record per page: **Performance, SEO, Accessibility and Best-Practices scores**, lab **Core Web Vitals (LCP, CLS, TBT)** with good / needs-improvement / poor ratings and an overall pass/fail, plus the **top optimization opportunities** ranked by estimated time saved. Mobile, desktop or both.
 
 This Actor runs the open-source Lighthouse engine itself in headless Chrome — **no PageSpeed Insights API key, no daily quota, no 429 errors** — so large URL lists finish reliably.

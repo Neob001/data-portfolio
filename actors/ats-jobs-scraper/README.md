@@ -1,5 +1,21 @@
 # Greenhouse, Lever & Ashby Jobs Scraper — Job Board API
 
+<!-- factpipe:hero:start -->
+
+**Scrape open jobs from Greenhouse, Lever, Ashby, Workable and Recruitee job boards: pick platforms and companies, filter by keyword, location and remote. Salary where published. $3 per 1,000 jobs.**
+
+| Title | Company | Locations | Workplace | Salary min |
+|---|---|---|---|---|
+| (Senior) Backend Software Engineer (Java) - Met… | Celonis | Munich, Germany | unknown | — |
+| Senior Mechanical Engineer - Lethality | Anduril Industries | Costa Mesa, California, United States | unknown | — |
+| Software Engineer, Manufacturing Infrastructure | SpaceX | Starbase, TX | unknown | — |
+
+*Real output from the “Greenhouse engineering jobs” example, run on September 27, 2026.*
+
+**Try a ready-made example:** [Greenhouse engineering jobs](https://apify.com/factpipe/ats-jobs-scraper/examples/greenhouse-engineering-jobs) · [Lever sales jobs](https://apify.com/factpipe/ats-jobs-scraper/examples/lever-sales-jobs) · [Ashby startup jobs (newest)](https://apify.com/factpipe/ats-jobs-scraper/examples/ashby-startup-jobs)
+
+<!-- factpipe:hero:end -->
+
 A **Greenhouse jobs scraper**, **Lever jobs API**, **Ashby job board API**, plus **Workable jobs** and **Recruitee jobs**, in one Actor. Pick the applicant tracking systems (ATS) you want, optionally name companies, add keywords, and get every open job as flat, deduplicated JSON: title, department, locations, country codes, remote flag, salary range (where the employer publishes one), apply link and full description. It already knows 10,900+ company job boards. You can also paste any board URL ("https://job-boards.greenhouse.io/gitlab", "https://jobs.lever.co/acme") to fetch it live. **$3 per 1,000 jobs**, and you pay only for the jobs you get.
 
 ## Quick start

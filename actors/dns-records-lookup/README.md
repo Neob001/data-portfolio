@@ -1,5 +1,19 @@
 # DNS Records Lookup API — Bulk A, MX, TXT, NS, CNAME, SOA, CAA
 
+<!-- factpipe:hero:start -->
+
+**Bulk DNS lookups for any list of domains: A, AAAA, MX, TXT, NS, CNAME, SOA and CAA records, plus mail/DNS provider detection, SPF/DMARC presence and TXT verification tokens. No API key. $1.50 per 1,000 domains.**
+
+| Domain | Found | A | Mx | Ns |
+|---|---|---|---|---|
+| notion.so | yes | 208.103.161.16, 208.103.161.2, 208.103.161.1 … | — | dana.ns.cloudflare.com, woz.ns.cloudflare.com |
+
+*Real output from the “Find a company's email provider from its domain” example, run on September 27, 2026.*
+
+**Try a ready-made example:** [Find a company's email provider from its domain](https://apify.com/factpipe/dns-records-lookup/examples/find-email-provider-by-domain)
+
+<!-- factpipe:hero:end -->
+
 **Bulk DNS lookups for any list of domains.** Resolve A, AAAA, MX, TXT, NS, CNAME, SOA and CAA records at scale, plus derived hints you'd otherwise have to build yourself: mail provider (Google Workspace, Microsoft 365, Zoho, Proton, Fastmail, Mimecast, Proofpoint, Amazon SES), authoritative DNS provider (Cloudflare, AWS Route 53, Google Cloud DNS, Azure DNS, GoDaddy, Namecheap, DigitalOcean, Vercel, NS1), SPF/DMARC presence and TXT-based verification tokens (Google, Microsoft, Facebook, Atlassian, Apple, Stripe, DocuSign, Zoom). Public DNS only: no API key, no login, no personal data.
 
 ## Quick start

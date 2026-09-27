@@ -1,5 +1,21 @@
 # Broken Link Checker — Find 404s & Dead Links on Any Website
 
+<!-- factpipe:hero:start -->
+
+**Crawl any website and find every broken link: 404s, dead images, dead scripts and stylesheets, DNS failures, redirect loops. BFS same-host crawl, robots.txt aware. $1.50 per 1,000 pages scanned.**
+
+| Record type | Link url | Status code | Error | Found on url |
+|---|---|---|---|---|
+| broken_link | https://github.com//github.com/apify/crawlee/bl… | 404 | — | https://crawlee.dev/js/api/core/changelog |
+| broken_link | https://github.com//github.com/apify/apify-sdk-… | 404 | — | https://crawlee.dev/js/api/core/changelog |
+| broken_link | https://github.com//github.com/apify/crawlee/pu… | 404 | — | https://crawlee.dev/js/api/core/changelog |
+
+*Real output from the “Find broken links on a website” example, run on September 27, 2026.*
+
+**Try a ready-made example:** [Find broken links on a website](https://apify.com/factpipe/broken-link-checker/examples/find-broken-links-on-website)
+
+<!-- factpipe:hero:end -->
+
 Crawl **any website and find every broken link**: 404s, dead images, dead scripts and stylesheets, DNS failures, timeouts and redirect loops. Give it a start URL, it walks the site breadth-first (same hostname, robots.txt aware) and returns one flat row per broken link — where it was found, how many pages link to it, and the anchor text — so you know exactly what to fix and where.
 
 ## Quick start

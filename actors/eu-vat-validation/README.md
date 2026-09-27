@@ -1,5 +1,19 @@
 # EU VAT Validation API — VIES VAT Number Checker (Bulk)
 
+<!-- factpipe:hero:start -->
+
+**Validate EU VAT numbers in bulk against the official EU VIES service: valid/invalid, registered company name and address, check timestamp. Handles VIES throttling. $2 per 1,000 checks.**
+
+| Full vat number | Valid | Name | Address | Checked at |
+|---|---|---|---|---|
+| IE6388047V | yes | GOOGLE IRELAND LIMITED | 3RD FLOOR, GORDON HOUSE, BARROW STREET, DUBLIN 4 | 2026-09-27 |
+
+*Real output from the “Validate EU VAT numbers in bulk” example, run on September 27, 2026.*
+
+**Try a ready-made example:** [Validate EU VAT numbers in bulk](https://apify.com/factpipe/eu-vat-validation/examples/validate-eu-vat-numbers)
+
+<!-- factpipe:hero:end -->
+
 Validate **EU VAT numbers in bulk** against the **official European Commission VIES service** and get a clean record per number: valid or invalid, the registered trader name and address (where the member state provides them), and the check timestamp. VIES throttles heavily and member-state services go offline often — this Actor retries automatically and **only charges for definitive answers**.
 
 ## Quick start

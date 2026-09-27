@@ -1,5 +1,20 @@
 # FDA Recalls Scraper API — Food, Drug & Device Recalls
 
+<!-- factpipe:hero:start -->
+
+**Search and monitor FDA recalls and enforcement reports for food, drugs and medical devices via official openFDA. Filter by keyword, Class I/II/III, date. No key, flat JSON, alerts. $3 per 1,000.**
+
+| Recall initiation date | Classification | Product type | Recalling firm | Reason for recall |
+|---|---|---|---|---|
+| 2026-08-11 | Class II | Food | CUISINE, KETTLE | Product had a presumptive positive test result … |
+| 2026-06-04 | Class I | Food | La Colonia Foods Llc | Products may be contaminated with Listeria mono… |
+
+*Real output from the “Listeria food recalls” example, run on September 27, 2026.*
+
+**Try a ready-made example:** [Listeria food recalls](https://apify.com/factpipe/fda-recalls-monitor/examples/listeria-food-recalls)
+
+<!-- factpipe:hero:end -->
+
 Search and monitor **FDA recalls and enforcement reports** across food, drugs, and medical devices via the **official openFDA API**. Filter by keyword, classification (Class I/II/III), and report date; run on a schedule in incremental mode to catch every new recall the day FDA publishes it. Clean, flat JSON records for supply-chain risk, QA, retail compliance, and news monitoring.
 
 ## Quick start

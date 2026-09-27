@@ -1,5 +1,21 @@
 # Federal Register Scraper — US Rules & Regulations Monitor
 
+<!-- factpipe:hero:start -->
+
+**Search and monitor the US Federal Register: final rules, proposed rules, notices and presidential documents by keyword and agency. Official API, no key, flat JSON, new-document alerts. $2.50 per 1,000.**
+
+| Published at | Title | Document type | Agencies | Html url |
+|---|---|---|---|---|
+| 2026-09-24 | Request for Information; Medicare Part D Reason… | Proposed Rule | Health and Human Services Department, Centers f… | https://www.federalregister.gov/documents/2026/… |
+| 2026-09-24 | HUD Evaluation Policy | Notice | Housing and Urban Development Department | https://www.federalregister.gov/documents/2026/… |
+| 2026-09-22 | Order Granting Temporary Conditional Exemptive … | Notice | Securities and Exchange Commission | https://www.federalregister.gov/documents/2026/… |
+
+*Real output from the “US AI regulation tracker” example, run on September 27, 2026.*
+
+**Try a ready-made example:** [US AI regulation tracker](https://apify.com/factpipe/federal-register-monitor/examples/ai-regulation-tracker)
+
+<!-- factpipe:hero:end -->
+
 Search and monitor **US Federal Register documents** — final rules, proposed rules, notices, and presidential documents — by keyword, agency, and type. Get clean, flat JSON records from the **official federalregister.gov API**, or schedule with incremental mode to receive only documents published since the last run: an automated regulatory-monitoring pipeline for compliance, policy, and government-affairs teams.
 
 ## Quick start

@@ -1,5 +1,21 @@
 # Companies Hiring — Hiring Signals & Sales Leads by Role
 
+<!-- factpipe:hero:start -->
+
+**Find companies hiring for any role across 10,000+ company job boards (Greenhouse, Lever, Ashby, Workable, Recruitee): one row per company with open roles, hiring velocity and locations. $5 per 1,000 companies.**
+
+| Company | Matching jobs | Open jobs | Posted 30d | Velocity |
+|---|---|---|---|---|
+| OpenAI | 106 | 827 | 283 | 0.34 |
+| Bjak | 83 | 2300 | 1654 | 0.72 |
+| Waymo | 38 | 356 | 103 | 0.29 |
+
+*Real output from the “Companies hiring AI engineers” example, run on September 27, 2026.*
+
+**Try a ready-made example:** [Companies hiring AI engineers](https://apify.com/factpipe/companies-hiring/examples/companies-hiring-ai-engineers) · [Companies hiring sales reps](https://apify.com/factpipe/companies-hiring/examples/companies-hiring-sales-reps) · [Fastest-hiring companies this month](https://apify.com/factpipe/companies-hiring/examples/fastest-hiring-companies) · [Companies hiring in Germany](https://apify.com/factpipe/companies-hiring/examples/companies-hiring-in-germany)
+
+<!-- factpipe:hero:end -->
+
 Find **companies that are hiring for a role right now**, as one row per company: how many matching jobs they have open, which titles, departments and locations, how fast they are posting, and a link to their careers page. The data comes from 10,900+ company job boards on Greenhouse, Lever, Ashby, Workable and Recruitee, read through their official public APIs and refreshed daily. Use it for **sales prospecting** (a company hiring 12 account executives is buying sales tools), **recruiting agencies** (who needs people like your candidates) and **market research** ("who is hiring AI engineers?"). **$5 per 1,000 companies**, and you pay only for the company rows you get.
 
 ## Quick start

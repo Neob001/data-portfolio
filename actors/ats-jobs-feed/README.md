@@ -1,5 +1,21 @@
 # Jobs Feed API — Greenhouse, Lever, Ashby & More Job Boards
 
+<!-- factpipe:hero:start -->
+
+**Search live openings from thousands of companies' official Greenhouse, Lever, Ashby, Workable and Recruitee job boards. Deduplicated JSON with salary, remote and location filters. $3 per 1,000 jobs.**
+
+| Title | Company | Locations | Workplace | Salary min |
+|---|---|---|---|---|
+| Software Engineer | Whitespace | Alexandria, Virginia, United States | remote | — |
+| Staff Software Engineer, GI | Hinge Health | San Francisco-HQ | hybrid | 197000 |
+| Senior Software Engineer (Fundraising) — Remote | GiveDirectly | Remote | remote | — |
+
+*Real output from the “Remote software engineer jobs (last 7 days)” example, run on September 27, 2026.*
+
+**Try a ready-made example:** [Remote software engineer jobs (last 7 days)](https://apify.com/factpipe/ats-jobs-feed/examples/remote-software-engineer-jobs) · [AI & machine learning engineer jobs](https://apify.com/factpipe/ats-jobs-feed/examples/ai-machine-learning-engineer-jobs) · [Product manager jobs in the United States](https://apify.com/factpipe/ats-jobs-feed/examples/product-manager-jobs-united-states) · [Data analyst jobs in Europe](https://apify.com/factpipe/ats-jobs-feed/examples/data-analyst-jobs-europe)
+
+<!-- factpipe:hero:end -->
+
 Search **live job openings from 10,000+ companies** in one feed. The jobs come from the **official public job-board APIs** of Greenhouse, Lever, Ashby, Workable and Recruitee. Filter by keyword, location, country, remote, company, department, employment type and posting date. Keyword searches are **ranked by relevance** (title matches first), and you get flat, deduplicated JSON with salary ranges wherever the employer publishes them. **$3 per 1,000 jobs**, and you pay only for jobs delivered.
 
 ## Quick start

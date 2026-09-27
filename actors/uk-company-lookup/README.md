@@ -1,5 +1,20 @@
 # UK Companies House Lookup API — Company Data, No API Key
 
+<!-- factpipe:hero:start -->
+
+**Look up UK companies by number or name on Companies House: status, incorporation date, SIC codes, registered office, overdue accounts, insolvency. Bulk lists, no API key. $2.50 per 1,000 found.**
+
+| Query | Found | Company number | Company name | Status |
+|---|---|---|---|---|
+| 00445790 | yes | 00445790 | TESCO PLC | active |
+| 03977902 | yes | 03977902 | GOOGLE UK LIMITED | active |
+
+*Real output from the “Check UK company status by number” example, run on September 27, 2026.*
+
+**Try a ready-made example:** [Check UK company status by number](https://apify.com/factpipe/uk-company-lookup/examples/check-uk-company-status)
+
+<!-- factpipe:hero:end -->
+
 Look up **UK companies** by company number or name and get a clean, flat JSON record from the **official Companies House API**: legal status, incorporation date, SIC codes, registered office, accounts and confirmation-statement deadlines, insolvency and charges flags. Built for KYB checks, lead enrichment, and AI-agent pipelines. **You are only charged for successful lookups** — misses are free.
 
 ## Quick start

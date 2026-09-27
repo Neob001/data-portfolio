@@ -1,5 +1,21 @@
 # US Weather Forecast API — NWS/NOAA Hourly & 7-Day, No Key
 
+<!-- factpipe:hero:start -->
+
+**Official National Weather Service (NOAA) forecasts for any US latitude/longitude: hourly or 7-day periods with temperature, rain chance and wind. Bulk locations, no API key. $2 per 1,000 locations.**
+
+| Location | Period name | Start time | Temperature | Short forecast |
+|---|---|---|---|---|
+| New York, NY | Overnight | 2026-09-27 | 57 | Rain Showers |
+| New York, NY | Sunday | 2026-09-27 | 68 | Rain Showers |
+| New York, NY | Sunday Night | 2026-09-27 | 62 | Showers And Thunderstorms |
+
+*Real output from the “7-day forecast for major US cities” example, run on September 27, 2026.*
+
+**Try a ready-made example:** [7-day forecast for major US cities](https://apify.com/factpipe/us-weather-forecast/examples/7-day-forecast-us-cities)
+
+<!-- factpipe:hero:end -->
+
 Official **US National Weather Service** forecasts for any US coordinates — daily or hourly periods as clean, flat JSON records. Public-domain government data, no API key, no rate-limit anxiety. Feed logistics planning, event ops, energy forecasting, or AI agents with the same forecast data NOAA publishes.
 
 ## Quick start

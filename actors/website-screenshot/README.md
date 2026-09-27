@@ -1,5 +1,19 @@
 # Website Screenshot API — Bulk Full-Page Screenshots of Any URL
 
+<!-- factpipe:hero:start -->
+
+**Capture full-page or viewport screenshots of any list of URLs in bulk. Desktop or mobile, PNG or JPEG, cookie banners hidden. No browser to manage. $2 per 1,000 screenshots.**
+
+| Url | Ok | Status code | Format | Width |
+|---|---|---|---|---|
+| https://example.com/ | yes | 200 | png | 390 |
+
+*Real output from the “Mobile full-page screenshots” example, run on September 27, 2026.*
+
+**Try a ready-made example:** [Mobile full-page screenshots](https://apify.com/factpipe/website-screenshot/examples/mobile-full-page-screenshots)
+
+<!-- factpipe:hero:end -->
+
 Capture **full-page or viewport screenshots of any list of URLs in bulk** — desktop or mobile, PNG or JPEG — and get one clean JSON record per page with the stored image URL, dimensions, file size and status. Cookie/consent banners are hidden automatically before capture.
 
 This Actor runs headless Chrome itself: **no screenshot API key, no rate limits, no browser to host** — feed it a URL list and get back deterministic, storable images plus a flat dataset.

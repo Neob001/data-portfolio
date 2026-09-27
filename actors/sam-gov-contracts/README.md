@@ -1,5 +1,21 @@
 # SAM.gov Contract Opportunities Scraper — Federal Bids API
 
+<!-- factpipe:hero:start -->
+
+**US federal contract opportunities from the official SAM.gov data extract: solicitations, sources sought, awards. Filter by keyword, NAICS, set-aside, agency, state; daily new-bid alerts. No key. $2 per 1,000.**
+
+| Posted date | Title | Department | Notice type | Naics code |
+|---|---|---|---|---|
+| 2026-09-26 11:20:54 | 70--PANEL PC, IN REPAIR/MODIFICATION OF | DEPT OF DEFENSE | Presolicitation | — |
+| 2026-09-25 11:51:07 | Hamilton Laboratory Equipment - 75D301-26-Q-792… | HEALTH AND HUMAN SERVICES, DEPARTMENT OF | Combined Synopsis/Solicitation | 334516 |
+| 2026-09-25 20:47:21 | 7E--SIGOSUITE (FILE TRACKING) SOFTWARE | INTERIOR, DEPARTMENT OF THE | Award Notice | 541512 |
+
+*Real output from the “Federal software contract opportunities” example, run on September 27, 2026.*
+
+**Try a ready-made example:** [Federal software contract opportunities](https://apify.com/factpipe/sam-gov-contracts/examples/federal-software-contract-opportunities)
+
+<!-- factpipe:hero:end -->
+
 Search and monitor **US federal government contract opportunities** — solicitations, RFPs, combined synopses, sources-sought notices, presolicitations and award notices — straight from the **official SAM.gov Contract Opportunities data extract** published daily by GSA. Filter by keyword, NAICS code, set-aside, notice type, agency and place of performance, then schedule it with incremental mode to get **only new bids every morning**. No SAM.gov account, no API key, no rate limits.
 
 ## Quick start

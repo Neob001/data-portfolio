@@ -1,5 +1,21 @@
 # Career Page Jobs Scraper — Greenhouse, Lever & Ashby API
 
+<!-- factpipe:hero:start -->
+
+**Paste company websites: finds each careers page, detects Greenhouse, Lever or Ashby and returns every open job (title, location, remote, department, apply link) as flat JSON. $2 per 1,000 jobs.**
+
+| Company | Title | Location | Department | Published at |
+|---|---|---|---|---|
+| GitLab | AI Engineer | Remote, Bangalore | — | 2026-05-22 |
+| GitLab | AI Transformation Owner, CRO | Remote, United States | — | 2026-07-22 |
+| GitLab | AI Transformation Owner, Product & Design | Remote, Canada; Remote, United Kingdom; Remote,… | — | 2026-08-19 |
+
+*Real output from the “Scrape jobs from company career pages” example, run on September 27, 2026.*
+
+**Try a ready-made example:** [Scrape jobs from company career pages](https://apify.com/factpipe/company-jobs-scraper/examples/scrape-career-pages)
+
+<!-- factpipe:hero:end -->
+
 Give it **any company website** — it finds the careers page, detects the ATS, and pulls every live job posting through the **official public job-board APIs** of Greenhouse, Lever, and Ashby. No brittle HTML scraping of career pages, no anti-bot fights: the same JSON feeds the career pages themselves use. Direct board URLs (e.g. `boards.greenhouse.io/gitlab`) work too.
 
 ## Quick start

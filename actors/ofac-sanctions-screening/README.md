@@ -1,5 +1,20 @@
 # Sanctions Screening API — OFAC, EU, UK & UN Lists for AML/KYC
 
+<!-- factpipe:hero:start -->
+
+**Screen people, companies and vessels against the official OFAC SDN, EU, UK and UN Security Council sanctions lists, incl. aliases, with fuzzy match scores. Bulk AML/KYC checks. No API key. $3 per 1,000 names.**
+
+| Query | Matched | Match count | Best score | Top match name |
+|---|---|---|---|---|
+| Banco Nacional de Cuba | yes | 1 | 1 | BANCO NACIONAL DE CUBA |
+| Acme Trading GmbH | no | 0 | — | — |
+
+*Real output from the “Screen company names against sanctions lists” example, run on September 27, 2026.*
+
+**Try a ready-made example:** [Screen company names against sanctions lists](https://apify.com/factpipe/ofac-sanctions-screening/examples/screen-company-names-sanctions)
+
+<!-- factpipe:hero:end -->
+
 Screen customer, vendor, counterparty and vessel names against **four official government sanctions lists in one run** — the **US Treasury OFAC SDN list**, the **EU consolidated financial sanctions list**, the **UK Sanctions List** (FCDO) and the **UN Security Council consolidated list** — including official aliases (AKAs), and get one deterministic, auditable match result per name. Every selected list is downloaded **fresh from the official publisher on every run**, so results reflect the current lists. Built for KYC/AML onboarding, sanctions and watchlist screening, vendor due diligence and payment screening.
 
 **One price per name, however many lists you screen: $3 per 1,000 names.**

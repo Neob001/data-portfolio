@@ -1,5 +1,21 @@
 # France Company Lookup API — SIREN, SIRET & Sirene Company Data
 
+<!-- factpipe:hero:start -->
+
+**Look up French companies by SIREN, SIRET or name in the official Sirene registry: legal form, NAF code, head office, headcount, status, computed VAT number. Bulk, no API key, no personal data. $3 per 1,000 found.**
+
+| Query | Found | Company name | Siren | Naf code |
+|---|---|---|---|---|
+| 552081317 | yes | ELECTRICITE DE FRANCE | 552081317 | 35.11Z |
+| Airbus | yes | AIRBUS | 383474814 | 30.30Z |
+| Airbus | yes | AIRBUS ATLANTIC | 778127613 | 30.30Z |
+
+*Real output from the “French company lookup by SIREN or name” example, run on September 27, 2026.*
+
+**Try a ready-made example:** [French company lookup by SIREN or name](https://apify.com/factpipe/france-company-lookup/examples/french-company-lookup-siren)
+
+<!-- factpipe:hero:end -->
+
 Look up **French companies** by **SIREN**, **SIRET** or company name and get a clean, flat JSON record from the official French government **API Recherche d'entreprises** (INSEE Sirene + RNE open data): legal form, NAF/APE activity code, head office address, headcount band, SME/ETI/GE category, creation and closure dates, active status, latest revenue, labels (ESS, RGE, Qualiopi...) and a computed intra-EU **VAT number**. Built for KYB checks, lead enrichment, CRM cleanup and AI-agent pipelines. **You are only charged for companies found** — misses are free.
 
 *Mots-clés : recherche entreprise par SIREN, SIRET, nom ; base Sirene INSEE ; fiche entreprise ; code NAF / APE ; forme juridique ; numéro de TVA intracommunautaire ; annuaire des entreprises.*

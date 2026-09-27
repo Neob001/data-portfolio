@@ -1,5 +1,19 @@
 # Wikipedia Scraper API — Articles, Summaries & Full Text
 
+<!-- factpipe:hero:start -->
+
+**Get Wikipedia articles by title, URL or keyword search in any language: summary, full plain text, categories, Wikidata ID, coordinates, thumbnail, last edit. Official API, no key. $1 per 1,000 articles.**
+
+| Title | Language | Description | Summary | Article url |
+|---|---|---|---|---|
+| Web scraping | en | Method of extracting data from websites | Web scraping, web harvesting, or web data extra… | https://en.wikipedia.org/wiki/Web_scraping |
+
+*Real output from the “Wikipedia article summaries” example, run on September 27, 2026.*
+
+**Try a ready-made example:** [Wikipedia article summaries](https://apify.com/factpipe/wikipedia-scraper/examples/wikipedia-article-summaries)
+
+<!-- factpipe:hero:end -->
+
 Get **Wikipedia articles** as clean, flat JSON — by title, by URL, or by **keyword search** — in **any Wikipedia language**. Every record has the lead summary, optional full plain text, categories, Wikidata ID, coordinates, thumbnail and last-edit timestamp. Uses only the **official MediaWiki API**: no HTML parsing, no proxies, no broken selectors. Built for RAG pipelines, knowledge graphs, content enrichment and AI agents.
 
 ## Quick start

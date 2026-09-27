@@ -1,5 +1,21 @@
 # SEC EDGAR Filings Scraper API — 10-K, 10-Q, 8-K Full-Text
 
+<!-- factpipe:hero:start -->
+
+**Full-text search and monitor SEC EDGAR filings (10-K, 10-Q, 8-K, S-1, Form 4, 13F) by keyword via the official SEC API. No API key, flat JSON, new-filing alerts. $2 per 1,000 filings.**
+
+| Filed at | Company name | Form type | Accession number | Document url |
+|---|---|---|---|---|
+| 2025-09-25 | Inotiv, Inc.  (NOTV) | 8-K | 0001628280-25-042837 | https://www.sec.gov/Archives/edgar/data/720154/… |
+| 2026-03-12 | STRYKER CORP  (SYK) | 8-K | 0001193125-26-104431 | https://www.sec.gov/Archives/edgar/data/310764/… |
+| 2026-06-09 | POPULAR, INC.  (BPOP, BPOPM, BPOPO) | 8-K | 0001193125-26-263044 | https://www.sec.gov/Archives/edgar/data/763901/… |
+
+*Real output from the “8-K cybersecurity incident filings” example, run on September 27, 2026.*
+
+**Try a ready-made example:** [8-K cybersecurity incident filings](https://apify.com/factpipe/sec-edgar-filings-search/examples/8k-cybersecurity-incident-filings)
+
+<!-- factpipe:hero:end -->
+
 Search the **full text of SEC filings** (10-K, 10-Q, 8-K, S-1, Form 4, 13F and every other form) and get clean, flat JSON records — or run it on a schedule in **incremental mode** to monitor only *new* filings mentioning your keyword. Uses only **official SEC APIs** (efts.sec.gov): no anti-bot fights, no proxies, no missed runs.
 
 ## Quick start

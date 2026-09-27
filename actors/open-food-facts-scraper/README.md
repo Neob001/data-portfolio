@@ -1,5 +1,21 @@
 # Open Food Facts Scraper — Nutrition & Barcode Lookup API
 
+<!-- factpipe:hero:start -->
+
+**Look up food products by barcode (EAN/UPC) or keyword on Open Food Facts: nutrition per 100g, ingredients, allergens, Nutri-Score, NOVA, Eco-Score, brands. No API key. $1 per 1,000 products.**
+
+| Barcode | Product name | Brands | Nutriscore grade | Energy kcal 100g |
+|---|---|---|---|---|
+| 3017624010701 | Nutella | Ferrero | e | 539 |
+| 0851087000250 | Peanut Butter (The Bees Knees) | Peanut Butter & Co | c | 562.5 |
+| 5449000000996 | Coca-Cola | COCA-COLA SERVICES SA/NV | e | 42 |
+
+*Real output from the “Nutrition facts by barcode” example, run on September 27, 2026.*
+
+**Try a ready-made example:** [Nutrition facts by barcode](https://apify.com/factpipe/open-food-facts-scraper/examples/nutrition-facts-by-barcode)
+
+<!-- factpipe:hero:end -->
+
 Look up **food products by barcode (EAN/UPC)** or **keyword** and get clean, flat JSON from **Open Food Facts**, the largest open food database (millions of products worldwide): **nutrition facts per 100 g**, ingredients, allergens, traces, **Nutri-Score**, **NOVA group**, **Eco-Score**, brands, categories, labels and product image. Uses only the official Open Food Facts APIs — no HTML scraping, no proxies. Unknown barcodes are free.
 
 ## Quick start

@@ -1,5 +1,21 @@
 # Remote Jobs API — Remote & Work-From-Home Jobs Feed
 
+<!-- factpipe:hero:start -->
+
+**Remote and work-from-home jobs from 10,000+ companies' official Greenhouse, Lever, Ashby, Workable and Recruitee job boards. Filter by region or time zone, ranked by relevance. $3 per 1,000 jobs.**
+
+| Title | Company | Locations | Workplace | Salary min |
+|---|---|---|---|---|
+| Spanish Speaking Automotive Customer Service Ag… | Mercier Consultancy Group | Spain | remote | — |
+| Customer Success Manager | Menlo Security | US - Distributed | remote | — |
+| Director of Customer Success | Feathr | USA | remote | — |
+
+*Real output from the “Remote customer support jobs” example, run on September 27, 2026.*
+
+**Try a ready-made example:** [Remote customer support jobs](https://apify.com/factpipe/remote-jobs-feed/examples/remote-customer-support-jobs) · [Remote designer jobs open to Europe](https://apify.com/factpipe/remote-jobs-feed/examples/remote-designer-jobs-europe) · [Remote marketing jobs in the US](https://apify.com/factpipe/remote-jobs-feed/examples/remote-marketing-jobs-us)
+
+<!-- factpipe:hero:end -->
+
 Get **remote and work-from-home jobs from 6,000+ companies** in one feed, straight from the employers' own job boards on Greenhouse, Lever, Ashby, Workable and Recruitee. Filter by region or time zone ("US", "Europe", "EMEA", "Worldwide", "CET", "UTC-5"), keyword, company, department and posting date. Keyword searches are **ranked by relevance**, so jobs with your keyword in the title come first. You get flat, deduplicated JSON with apply links and salary ranges wherever the employer publishes them. **$3 per 1,000 jobs**, and you pay only for the jobs you get.
 
 ## Quick start

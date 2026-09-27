@@ -1,5 +1,20 @@
 # Email Security Checker — SPF, DKIM, DMARC & MX Audit
 
+<!-- factpipe:hero:start -->
+
+**Audit any domain's email authentication: SPF (lookups, -all), DMARC policy, DKIM keys, MX, MTA-STS and TLS-RPT, with a 0-100 score and fix list. Bulk domains, no key. $3 per 1,000 domains.**
+
+| Domain | Grade | Score | Spf all | Dmarc policy |
+|---|---|---|---|---|
+| example.com | A | 90 | -all | reject |
+| github.com | B | 77 | ~all | quarantine |
+
+*Real output from the “DMARC & SPF audit for your domains” example, run on September 27, 2026.*
+
+**Try a ready-made example:** [DMARC & SPF audit for your domains](https://apify.com/factpipe/email-security-checker/examples/dmarc-spf-audit)
+
+<!-- factpipe:hero:end -->
+
 Audit the **email authentication setup of any domain** — SPF, DKIM, DMARC, MX, MTA-STS and TLS-RPT — and get a **0–100 score, a letter grade and a plain-English fix list** per domain. Check one domain or thousands in bulk. Uses public DNS only: no API key, no mailbox access, no personal data.
 
 ## Quick start

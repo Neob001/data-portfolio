@@ -1,5 +1,21 @@
 # EU Tenders Scraper — TED Public Procurement Notices API
 
+<!-- factpipe:hero:start -->
+
+**Search and monitor EU public tenders and procurement notices from TED by CPV code, country and keyword. Official TED API, no key, flat JSON with deadlines, new-tender alerts. $3 per 1,000.**
+
+| Published at | Title | Buyer name | Submission deadline | Notice url |
+|---|---|---|---|---|
+| 2016-09-27 | United Kingdom-London: Construction work | London Borough of Newham | — | https://ted.europa.eu/bg/notice/-/detail/333473… |
+| 2016-09-27 | Germany-Munich: Software package and informatio… | Landeshauptstadt München, IT@M, Geschäftsbereic… | — | https://ted.europa.eu/bg/notice/-/detail/333717… |
+| 2016-09-27 | France-Rennes: Information systems and servers | Département d'Ille-et-Vilaine | — | https://ted.europa.eu/bg/notice/-/detail/333733… |
+
+*Real output from the “EU IT services tenders” example, run on September 27, 2026.*
+
+**Try a ready-made example:** [EU IT services tenders](https://apify.com/factpipe/eu-ted-tenders-monitor/examples/eu-it-services-tenders)
+
+<!-- factpipe:hero:end -->
+
 Search and monitor **EU public procurement notices** from TED (Tenders Electronic Daily) by CPV category, buyer country, and keyword — and get clean, flat JSON records. Run it on a schedule in **incremental mode** to receive only tenders published since the last run: a ready-made pipeline of B2G sales leads. Uses the **official TED Search API v3**: no anti-bot fights, no failed runs from blocking.
 
 ## Quick start

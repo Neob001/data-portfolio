@@ -1,5 +1,19 @@
 # ECB Exchange Rates API — Official Euro FX Rates, History
 
+<!-- factpipe:hero:start -->
+
+**Official European Central Bank euro reference exchange rates: latest or full daily history since 1999 for 30+ currencies, any base currency via cross rates. No API key. $1 per 1,000 rates.**
+
+| Date | Base currency | Quote currency | Rate | Inverse rate |
+|---|---|---|---|---|
+| 2026-09-25 | EUR | USD | 1.1403 | 0.876962 |
+
+*Real output from the “Daily euro exchange rates (USD, GBP, JPY, CHF)” example, run on September 27, 2026.*
+
+**Try a ready-made example:** [Daily euro exchange rates (USD, GBP, JPY, CHF)](https://apify.com/factpipe/ecb-exchange-rates/examples/daily-euro-exchange-rates)
+
+<!-- factpipe:hero:end -->
+
 Get the **official European Central Bank euro reference exchange rates** — the benchmark used for invoicing, accounting and VAT conversions across Europe — as clean, flat JSON. Latest rates or full **daily history back to 1999**, for every currency the ECB publishes, with **any base currency** through exact cross rates. Straight from the ECB data API: no key, no scraping, no stale mirrors.
 
 ## Quick start
