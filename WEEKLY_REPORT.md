@@ -8,11 +8,10 @@
 ## Health
 - `health.py`: **0 flags** across 24 Actors. Scorecard flag: **`broken-link-checker` 20% of 30d runs failed** (older failures from the 09-18 maintenance incident; its PPE switch takes effect 2026-10-02).
 - Staging: all 11 cloud runs of the jobs Actors passed 2026-09-27. `news-monitor` is still shelved and unpublished because GDELT rate-limits requests.
-- `pricing.py` crashes on system Python 3.9 (it can't parse the `Z` timestamp suffix). It ran clean on python3.12 with 0 price proposals.
+- `pricing.py`: 0 price proposals (a Python 3.9 date-parsing crash was fixed the same day).
 
 ## Decisions needed
-_None open._ The scorecard has 0 proposals, and SD1 (Store discounts) and RH1 (README first screen) were approved today.
-(The Python 3.9 crash in `pricing.py` is fixed; it no longer needs a decision.)
+_None open._ The scorecard has 0 proposals, and SD1 (Store discounts) and RH1 (README first screen) were approved and applied today.
 
 ## What we learned
 - **The first revenue came from the one Actor with organic repeat use** (weather, $0.68). Official-data niches still have 0 real users, so jobs is the right place to keep betting.
