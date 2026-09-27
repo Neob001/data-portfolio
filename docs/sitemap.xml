@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://neob001.github.io/data-portfolio/</loc></url>
   <url><loc>https://neob001.github.io/data-portfolio/ats-jobs-feed/</loc></url>
+  <url><loc>https://neob001.github.io/data-portfolio/ats-jobs-scraper/</loc></url>
   <url><loc>https://neob001.github.io/data-portfolio/broken-link-checker/</loc></url>
   <url><loc>https://neob001.github.io/data-portfolio/company-jobs-scraper/</loc></url>
   <url><loc>https://neob001.github.io/data-portfolio/dns-records-lookup/</loc></url>
@@ -15,6 +16,7 @@
   <url><loc>https://neob001.github.io/data-portfolio/lighthouse-auditor/</loc></url>
   <url><loc>https://neob001.github.io/data-portfolio/ofac-sanctions-screening/</loc></url>
   <url><loc>https://neob001.github.io/data-portfolio/open-food-facts-scraper/</loc></url>
+  <url><loc>https://neob001.github.io/data-portfolio/remote-jobs-feed/</loc></url>
   <url><loc>https://neob001.github.io/data-portfolio/sam-gov-contracts/</loc></url>
   <url><loc>https://neob001.github.io/data-portfolio/sec-edgar-filings-search/</loc></url>
   <url><loc>https://neob001.github.io/data-portfolio/sitemap-url-extractor/</loc></url>

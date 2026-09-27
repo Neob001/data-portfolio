@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Remote Jobs API: Remote &amp; Work-From-Home Jobs Feed</title>
+<meta name="description" content="Remote and work-from-home jobs from 10,000+ company career sites (Greenhouse, Lever, Ashby, Workable, Recruitee). Region filters, daily feed. Pay per job.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/remote-jobs-feed/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Remote Jobs API: Remote &amp; Work-From-Home Jobs Feed">
+<meta property="og:description" content="Remote and work-from-home jobs from 10,000+ company career sites (Greenhouse, Lever, Ashby, Workable, Recruitee). Region filters, daily feed. Pay per job.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/remote-jobs-feed/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Remote Jobs API \u2014 Remote & Work-From-Home Jobs Feed",
+  "description": "Remote and work-from-home jobs from 10,000+ companies' official Greenhouse, Lever, Ashby, Workable and Recruitee job boards. Filter by region or time zone, ranked by relevance. $3 per 1,000 jobs.",
+  "url": "https://neob001.github.io/data-portfolio/remote-jobs-feed/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "3",
+    "description": "Pay-per-result pricing: $3 per 1,000 job results",
+    "url": "https://apify.com/factpipe/remote-jobs-feed"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>Remote Jobs API — Remote &amp; Work-From-Home Jobs Feed</h1>
+<p>Get <strong>remote and work-from-home jobs from 6,000+ companies</strong> in one feed, straight from the employers&#x27; own job boards on Greenhouse, Lever, Ashby, Workable and Recruitee. Filter by region or time zone (&quot;US&quot;, &quot;Europe&quot;, &quot;EMEA&quot;, &quot;Worldwide&quot;, &quot;CET&quot;, &quot;UTC-5&quot;), keyword, company, department and posting date. Keyword searches are <strong>ranked by relevance</strong>, so jobs with your keyword in the title come first. You get flat, deduplicated JSON with apply links and salary ranges wherever the employer publishes them. <strong>$3 per 1,000 jobs</strong>, and you pay only for the jobs you get.</p>
+<div class="quick-facts"><span class="badge">$3 / 1,000</span><a class="button" href="https://apify.com/factpipe/remote-jobs-feed" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the prefilled input: <code>keywords: [&quot;developer&quot;]</code>, <code>maxResults: 20</code>. Remote-only and &quot;posted in the last 7 days&quot; are built in. The run takes well under a minute.</li><li>You get the 20 most relevant remote developer jobs posted in the last week, each with company, locations, country codes, apply link and (where published) salary.</li><li>That first run costs at most <strong>$0.06</strong> (20 jobs × $0.003), which fits in Apify&#x27;s free monthly credit. Add <code>timezonesOrRegions: [&quot;Europe&quot;]</code> (or &quot;US&quot;, &quot;Worldwide&quot;, &quot;EST&quot;...), or schedule the run daily with <code>sinceLastRun: true</code> to get only new remote jobs.</li></ol>
+<h2 id="what-you-get">What you get</h2>
+<p>One flat record per remote job opening:</p>
+<pre><code class="language-json">{
+  &quot;job_id&quot;: &quot;ashby:ramp:d84bbf19-572a-499c-9c87-0c154ce85caf&quot;,
+  &quot;title&quot;: &quot;Account Manager | Mid-Market&quot;,
+  &quot;company_name&quot;: &quot;Ramp&quot;,
+  &quot;company_board&quot;: &quot;ramp&quot;,
+  &quot;ats&quot;: &quot;ashby&quot;,
+  &quot;department&quot;: &quot;Sales&quot;,
+  &quot;team&quot;: &quot;Account Manager&quot;,
+  &quot;employment_type&quot;: &quot;full_time&quot;,
+  &quot;workplace_type&quot;: &quot;remote&quot;,
+  &quot;locations&quot;: [&quot;New York, NY (HQ)&quot;, &quot;San Francisco, CA&quot;, &quot;Remote (US)&quot;],
+  &quot;country_codes&quot;: [&quot;US&quot;],
+  &quot;remote&quot;: true,
+  &quot;salary_min&quot;: 190000,
+  &quot;salary_max&quot;: 260000,
+  &quot;salary_currency&quot;: &quot;USD&quot;,
+  &quot;salary_period&quot;: &quot;year&quot;,
+  &quot;posted_at&quot;: &quot;2025-06-05T17:33:32.680Z&quot;,
+  &quot;updated_at&quot;: null,
+  &quot;apply_url&quot;: &quot;https://jobs.ashbyhq.com/ramp/d84bbf19-572a-499c-9c87-0c154ce85caf/application&quot;,
+  &quot;job_url&quot;: &quot;https://jobs.ashbyhq.com/ramp/d84bbf19-572a-499c-9c87-0c154ce85caf&quot;,
+  &quot;description_text&quot;: &quot;ABOUT RAMP\n\nRamp is building the smart infrastructure for finance teams…&quot;,
+  &quot;description_snippet&quot;: &quot;ABOUT RAMP Ramp is building the smart infrastructure for finance teams, embedded in the transaction flow of every dollar a business spends…&quot;,
+  &quot;description_status&quot;: &quot;included&quot;,
+  &quot;duplicate_sources&quot;: [],
+  &quot;match_score&quot;: 100,
+  &quot;matched_in&quot;: &quot;title&quot;,
+  &quot;source_url&quot;: &quot;https://api.ashbyhq.com/posting-api/job-board/ramp?includeCompensation=true&quot;,
+  &quot;fetched_at&quot;: &quot;2026-09-25T03:40:12.000Z&quot;
+}</code></pre>
+<ul><li>Every job is marked remote by the employer: the ATS&#x27;s own remote/workplace field, or the word &quot;remote&quot; (or &quot;anywhere&quot;, &quot;work from home&quot;) in its location. Hybrid jobs are included only when the ATS also flags them as open to remote candidates.</li><li><code>match_score</code> (0–100) and <code>matched_in</code> (<code>title</code>, <code>department</code> or <code>description</code>) show why a job matched your keywords. Both are <code>null</code> without keywords.</li><li>Salary fields are filled only when the ATS publishes a structured pay range. They are never estimated.</li><li><strong>No personal data.</strong> Recruiter and hiring-manager fields are never copied, and contact details in descriptions are replaced with <code>[… redacted]</code>.</li></ul>
+<h2 id="use-cases">Use cases</h2>
+<ul><li><strong>Remote job boards and newsletters</strong>: a daily feed of new remote jobs with direct apply links, filtered by region.</li><li><strong>Job seekers and career coaches</strong>: remote roles open to your time zone, with salary where published.</li><li><strong>Remote-work research</strong>: which companies hire remotely, for which roles, from which regions.</li><li><strong>AI agents and RAG</strong>: small input, flat deterministic JSON, full plain-text descriptions.</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/remote-jobs-feed" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~remote-jobs-feed/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;keywords&quot;: [&quot;developer&quot;], &quot;maxResults&quot;: 20, &quot;maxPerCompany&quot;: 3}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;keywords&quot;: [
+    &quot;developer&quot;
+  ],
+  &quot;maxResults&quot;: 20,
+  &quot;maxPerCompany&quot;: 3
+}
+
+run = client.actor(&quot;factpipe/remote-jobs-feed&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;keywords&quot;: [
+    &quot;developer&quot;
+  ],
+  &quot;maxResults&quot;: 20,
+  &quot;maxPerCompany&quot;: 3
+};
+
+const run = await client.actor(&#x27;factpipe/remote-jobs-feed&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>keywords</code></td><td>string[]</td><td>Case-insensitive. Title matches rank first, then department/team, then description (first ~1,500 characters)</td></tr><tr><td><code>timezonesOrRegions</code></td><td>string[]</td><td><code>Worldwide</code> / <code>Anywhere</code>, <code>US</code>, <code>Canada</code>, <code>North America</code>, <code>LATAM</code>, <code>Americas</code>, <code>Europe</code>, <code>UK</code>, <code>EMEA</code>, <code>Middle East</code>, <code>Africa</code>, <code>APAC</code>, <code>Asia</code>, <code>ANZ</code>, time zones (<code>EST</code>, <code>PST</code>, <code>CET</code>, <code>GMT</code>, <code>IST</code>, <code>UTC-5</code>, <code>UTC+1</code>…) or any country name or ISO code. A job matches when its locations fall in one of them, <strong>or when it says it is open anywhere / worldwide</strong></td></tr><tr><td><code>keywordMatch</code></td><td><code>any</code> \</td><td><code>all</code></td><td>Default <code>any</code></td></tr><tr><td><code>keywordScope</code></td><td><code>title</code> \</td><td><code>title_and_description</code></td><td>Default <code>title_and_description</code></td></tr><tr><td><code>excludeKeywords</code></td><td>string[]</td><td>Drops jobs whose title contains any of them</td></tr><tr><td><code>locations</code></td><td>string[]</td><td>Extra location text as written in the posting (&quot;Remote (EU)&quot;) or ISO codes, OR-ed with the regions</td></tr><tr><td><code>postedWithinDays</code></td><td>integer</td><td>Default <strong>7</strong></td></tr><tr><td><code>companies</code></td><td>string[]</td><td>Company names or board tokens</td></tr><tr><td><code>ats</code></td><td>string[]</td><td><code>greenhouse</code>, <code>lever</code>, <code>ashby</code>, <code>workable</code>, <code>recruitee</code></td></tr><tr><td><code>departments</code></td><td>string[]</td><td>Substring match on department or team</td></tr><tr><td><code>employmentTypes</code></td><td>string[]</td><td><code>full_time</code>, <code>part_time</code>, <code>contract</code>, <code>temporary</code>, <code>internship</code>, <code>other</code></td></tr><tr><td><code>maxResults</code></td><td>integer</td><td>Default 100</td></tr><tr><td><code>maxPerCompany</code></td><td>integer</td><td>Optional cap on jobs from any one company (prefill 3), so a single employer posting many near-identical roles can&#x27;t fill your results</td></tr><tr><td><code>includeDescription</code></td><td>boolean</td><td>Default <code>true</code>: full description fetched live from the ATS for each delivered job</td></tr><tr><td><code>sinceLastRun</code></td><td>boolean</td><td>Only jobs not delivered by an earlier run with the same filters</td></tr><tr><td><code>companyUrls</code></td><td>string[]</td><td>Live mode: fetch these job boards directly (remote jobs only)</td></tr></tbody></table></div>
+<p><strong>How regions work.</strong> A region is a list of country codes plus the words postings use for it. &quot;Europe&quot; matches jobs located in any European country, and jobs whose location says &quot;Europe&quot;, &quot;EU&quot;, &quot;EMEA&quot; or &quot;CET&quot;. Country codes come from the ATS or from the location text (&quot;Remote (US)&quot; → US). Every region also includes jobs open worldwide (&quot;Remote - Anywhere&quot;, &quot;Worldwide&quot;, &quot;Global&quot;). For strict country matching, use <code>locations: [&quot;US&quot;]</code> instead.</p>
+<p><strong>How it works.</strong> The Actor searches a compact search index of every job board in our directory, rebuilt daily from the ATS APIs, and downloads only the parts that can match your filters. With keywords, it ranks every matching job before delivering the top <code>maxResults</code>. It then fetches the full description live from each company&#x27;s ATS, which also drops jobs closed since the nightly build (not delivered, not charged).</p>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>job-result</code></td><td><strong>$3 per 1,000</strong> ($0.003 each)</td><td>One remote job delivered. <strong>No start fee.</strong> Runs with no matches, jobs skipped by <code>sinceLastRun</code> and jobs found closed are never charged.</td></tr></tbody></table></div>
+<p>Set a maximum charge per run in Apify, and the Actor stops cleanly when it is reached.</p>
+<h2 id="coverage">Coverage</h2>
+<p>Search-index build of 2026-09-25: <strong>85,567 remote jobs</strong> from <strong>6,047 companies</strong>, of 345,976 open jobs on 10,918 company job boards. 8,666 of those remote jobs were posted in the 7 days before the build.</p>
+<div class="table-wrap"><table><thead><tr><th>ATS</th><th>Remote jobs in index</th></tr></thead><tbody><tr><td>Ashby</td><td>30,462</td></tr><tr><td>Workable</td><td>25,131</td></tr><tr><td>Greenhouse</td><td>16,394</td></tr><tr><td>Lever</td><td>11,968</td></tr><tr><td>Recruitee</td><td>1,612</td></tr></tbody></table></div>
+<p>Only 584 remote jobs say explicitly that they are open worldwide (&quot;Anywhere&quot;, &quot;Worldwide&quot;, &quot;Global&quot;). Most remote jobs are limited to a country or region, which is why <code>timezonesOrRegions</code> matters.</p>
+<h2 id="sources-and-terms">Sources and terms</h2>
+<p>Only official, public, unauthenticated job-board APIs that the ATS vendors publish for displaying and syndicating open jobs. No career-site HTML scraping, no logins, no LinkedIn or Indeed.</p>
+<div class="table-wrap"><table><thead><tr><th>ATS</th><th>API</th><th>Reuse terms</th></tr></thead><tbody><tr><td>Greenhouse</td><td><a href="https://developers.greenhouse.io/job-board.html">Job Board API</a></td><td>&quot;Job Board data is publicly available&quot;; no authentication for GET</td></tr><tr><td>Lever</td><td><a href="https://github.com/lever/postings-api">Postings API</a></td><td>Published postings &quot;are publicly viewable&quot; and &quot;may be scraped by third parties&quot;; we respect its 1 request/s crawl delay</td></tr><tr><td>Ashby</td><td><a href="https://developers.ashbyhq.com/docs/public-job-posting-api">Public Job Posting API</a></td><td>Public, unauthenticated posting API</td></tr><tr><td>Workable</td><td><a href="https://help.workable.com/hc/en-us/articles/115012771647">Public jobs endpoint</a></td><td>Documented public endpoint for published jobs</td></tr><tr><td>Recruitee</td><td><a href="https://docs.recruitee.com/reference/offers">Careers Site API</a></td><td>Public API returning published offers</td></tr></tbody></table></div>
+<h2 id="factpipe-jobs-hiring-data">factpipe Jobs &amp; Hiring Data</h2>
+<p>All four Actors search the same daily index of 345,976 open jobs from 10,918 company job boards:</p>
+<ul><li><a href="../ats-jobs-feed/">Jobs Feed API</a>: every job, every filter, ranked by relevance.</li><li><a href="../remote-jobs-feed/">Remote Jobs API</a> (this Actor): remote and work-from-home jobs only, filtered by region or time zone.</li><li><a href="../ats-jobs-scraper/">Greenhouse, Lever &amp; Ashby Jobs Scraper</a>: pick the applicant tracking systems and companies you want.</li><li><a href="https://apify.com/factpipe/companies-hiring">Companies Hiring</a>: one row per company that is hiring for a role, as sales leads or market research.</li></ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>How is this different from remote job boards?</strong><br>
+Every job comes from the employer&#x27;s own applicant tracking system through its official public API, so there are no reposts, expired listings or paywalled apply links. A job disappears from the feed once the employer closes it.</p>
+<p><strong>Can I get only jobs open to my country?</strong><br>
+Yes. Put your country or region in <code>timezonesOrRegions</code> (&quot;Germany&quot;, &quot;Europe&quot;, &quot;US&quot;). Jobs limited to other regions are left out. Jobs open worldwide are included.</p>
+<p><strong>How fresh is the data?</strong><br>
+The index is rebuilt daily, and each delivered job is re-checked live against the ATS when descriptions are on (the default).</p>
+<p><strong>Can I get only new remote jobs every day?</strong><br>
+Yes. Schedule the Actor with <code>sinceLastRun: true</code>. Each run returns and charges only jobs no earlier run with the same filters delivered.</p>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier or an AI agent?</strong><br>
+Yes, through the Apify API, the official clients, Apify integrations (Make, Zapier, n8n, Google Sheets, Slack) or the Apify MCP server.</p>
+<h2 id="reliability">Reliability</h2>
+<p>Official ATS APIs only. Retries with backoff, per-host rate limits, a <code>RUN_SUMMARY</code> record on every run, and a built-in live fallback if the search index is ever unreachable.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>
