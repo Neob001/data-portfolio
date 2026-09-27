@@ -10,57 +10,61 @@ Find **companies that are hiring for a role right now**, as one row per company:
 
 ## What you get
 
-One flat record per company job board:
+One flat record per company. A company with job boards on several ATSs (for example an old Greenhouse board and a new Ashby board) is **one row**, and an opening listed on both boards is counted once:
 
 ```json
 {
-  "company_name": "Datadog",
-  "company_board": "datadog",
+  "company_name": "Wayve",
+  "company_board": "wayve",
   "ats": "greenhouse",
-  "careers_url": "https://job-boards.greenhouse.io/datadog",
-  "website_domain": "datadoghq.com",
-  "open_jobs_total": 425,
-  "matching_jobs": 171,
+  "careers_url": "https://job-boards.greenhouse.io/wayve",
+  "boards": [
+    { "ats": "greenhouse", "token": "wayve", "careers_url": "https://job-boards.greenhouse.io/wayve", "open_jobs": 195 },
+    { "ats": "ashby", "token": "wayve", "careers_url": "https://jobs.ashbyhq.com/wayve", "open_jobs": 183 }
+  ],
+  "ats_list": ["greenhouse", "ashby"],
+  "careers_site_domain": null,
+  "open_jobs_total": 207,
+  "matching_jobs": 26,
   "matching_job_titles": [
-    "Senior Sales Engineer - New England",
-    "Senior Manager, Sponsorship Sales — Global Conferences",
-    "Regional Director - Enterprise Sales",
-    "Commercial Sales Engineer (Sao Paulo)",
-    "Sales Engineer (Customer Success)"
+    "Principal Machine Learning Engineer GAIA",
+    "Machine Learning Engineer, Compiler",
+    "Machine Learning Engineer",
+    "Senior Machine Learning Engineer - AV Core",
+    "Machine Learning Engineer, Driving Product"
   ],
   "departments_hiring": [
-    { "department": "Enterprise Sales", "jobs": 65 },
-    { "department": "Enterprise Sales Engineering", "jobs": 31 },
-    { "department": "Commercial Sales", "jobs": 19 },
-    { "department": "Commercial & Mid-Market Sales Engineering", "jobs": 13 },
-    { "department": "Mid-Market Sales", "jobs": 12 }
+    { "department": "AV Engineering", "jobs": 9 },
+    { "department": "Simulation, Evaluation, Validation", "jobs": 7 },
+    { "department": "AI Platform", "jobs": 6 },
+    { "department": "Product & Delivery", "jobs": 4 }
   ],
   "locations_hiring": [
-    { "location": "New York, New York, USA", "jobs": 18 },
-    { "location": "Boston, Massachusetts, USA", "jobs": 16 },
-    { "location": "Denver, Colorado, USA", "jobs": 13 },
-    { "location": "Tokyo, Japan", "jobs": 13 },
-    { "location": "Amsterdam, The Netherlands", "jobs": 12 }
+    { "location": "London, United Kingdom", "jobs": 9 },
+    { "location": "Sunnyvale, California USA", "jobs": 8 },
+    { "location": "London", "jobs": 4 },
+    { "location": "Sunnyvale", "jobs": 3 },
+    { "location": "Herzliya, Israel", "jobs": 2 }
   ],
-  "remote_share": 0.23,
-  "newest_posting_at": "2026-09-24T15:10:08.000Z",
-  "jobs_posted_last_30d": 94,
-  "hiring_velocity": 0.22,
+  "remote_share": 0,
+  "newest_posting_at": "2026-09-24T15:22:21.313Z",
+  "jobs_posted_last_30d": 78,
+  "hiring_velocity": 0.38,
   "sample_job_urls": [
-    "https://careers.datadoghq.com/detail/8230456/?gh_jid=8230456",
-    "https://careers.datadoghq.com/detail/8214090/?gh_jid=8214090",
-    "https://careers.datadoghq.com/detail/8210323/?gh_jid=8210323"
+    "https://jobs.ashbyhq.com/wayve/e781b706-4494-472d-8831-74140ad1a10e",
+    "https://jobs.ashbyhq.com/wayve/02628ce9-b78d-48f7-ad0a-689e317e14d4",
+    "https://wayve.firststage.co/jobs?gh_jid=8752478002"
   ],
-  "source_url": "https://boards-api.greenhouse.io/v1/boards/datadog/jobs?content=true",
-  "fetched_at": "2026-09-25T03:17:31.522Z"
+  "source_url": "https://boards-api.greenhouse.io/v1/boards/wayve/jobs?content=true",
+  "fetched_at": "2026-09-25T03:19:24.360Z"
 }
 ```
 
-(A real row from the prefilled "sales" search on the 2026-09-25 index. `matching_job_titles` is shortened here: the Actor returns up to 10.)
+(A real row from a `["machine learning engineer"]` search on the 2026-09-25 index. Wayve lists most of its jobs on both Greenhouse and Ashby: 195 + 183 board listings, 207 distinct open jobs. `matching_job_titles` is shortened here: the Actor returns up to 10.)
 
 | Field | Meaning |
 |---|---|
-| `open_jobs_total` | All open jobs on the company's board, whatever your filters |
+| `open_jobs_total` | All open jobs of the company across its boards, whatever your filters (an opening on two boards counts once) |
 | `matching_jobs` | Open jobs matching your keywords and filters |
 | `matching_job_titles` | Up to 10 distinct matching titles, most relevant first |
 | `departments_hiring`, `locations_hiring` | Top 5 departments/teams and locations of the matching jobs, with counts |
@@ -68,8 +72,10 @@ One flat record per company job board:
 | `newest_posting_at` | Newest matching posting |
 | `jobs_posted_last_30d` | Jobs on the board first posted in the last 30 days (matching or not) |
 | `hiring_velocity` | `jobs_posted_last_30d / open_jobs_total`, rounded to 2 decimals. 1.0 means every open job is less than a month old |
-| `website_domain` | The employer's own domain, **only** when its job links point to its own site (for example `careers.datadoghq.com` gives `datadoghq.com`). Otherwise `null`: we never guess a domain from the company name |
-| `careers_url`, `source_url` | The public job board, and the ATS API it was read from |
+| `careers_site_domain` | The domain the company's job posts link to, when that is not the ATS itself. This is **often a dedicated careers site** (`withwaymo.com`, `coupang.jobs`, `weareroku.com`), **not necessarily the company's main website**, so check it before using it as the company domain. `null` when all job links point to the ATS. We never guess a domain from the company name |
+| `company_board`, `ats`, `careers_url`, `source_url` | The company's board with the most matching jobs: its token, ATS, public job-board page and the ATS API it was read from |
+| `boards` | Every job board of the company: `{ats, token, careers_url, open_jobs}` (`open_jobs` per board, before cross-board de-duplication) |
+| `ats_list` | The ATSs those boards use |
 | `sample_job_urls` | Up to 3 matching job postings |
 
 **Company data only.** Rows describe employers and their open roles. No recruiter, hiring-manager or employee names, e-mails or profiles are collected.
@@ -97,7 +103,7 @@ One flat record per company job board:
 | `sortBy` | `matching_jobs` \| `hiring_velocity` \| `newest` | Default `matching_jobs` (ties: more title matches first) |
 | `maxResults` | integer | Default 100 company rows |
 
-**How it works.** The Actor reads a compact search index of every job board in our directory, rebuilt daily from the ATS APIs, and aggregates it company by company. Keywords are matched the same way as in our jobs feeds: in the title first, then in the department or team. It never stores a list of jobs, only running totals per company, so even "all companies hiring anything" finishes quickly.
+**How it works.** The Actor reads a compact search index of every job board in our directory, rebuilt daily from the ATS APIs, and aggregates it company by company. Keywords are matched the same way as in our jobs feeds: in the title first, then in the department or team. Boards are merged only when they are provably the same company (see Coverage), and the same opening listed on two boards (same normalized title and location, where location means the country when it is known) is counted once. It never stores a list of jobs, only running totals per company, so even "all companies hiring anything" finishes quickly.
 
 ## Pricing (pay per event)
 
@@ -119,7 +125,9 @@ Search-index build of 2026-09-25: **10,918 company job boards** with **345,976 o
 | Lever | 1,604 | 50,718 |
 | Recruitee | 756 | 12,783 |
 
-`website_domain` is known for about 5% of companies: those whose job links point to their own careers site, mostly on Greenhouse and Recruitee. For the rest it is `null`, and `careers_url` is the company's job board. A company with boards on two ATSs appears once per board. Boards were discovered from Common Crawl's public URL index and validated against each ATS API.
+`careers_site_domain` is known for about 5% of companies: those whose job links point to their own careers site, mostly on Greenhouse and Recruitee. For the rest it is `null`, and `careers_url` is the company's job board. The 10,918 boards make 10,865 company rows: 53 companies have two boards each (106 boards).
+
+**When are two boards one company?** They must have the same company name, ignoring case, punctuation and legal suffixes such as Inc, Ltd or GmbH. They must also have either the same board token (`wayve` on Greenhouse and on Ashby; `lago-1` and `lago`) or provably the same openings: at least 3 shared jobs, or at least 30% of the smaller board's jobs. A shared name alone is not enough. We would rather list a company twice than merge two different companies: "Zip" (procurement software) and "Zip Co" (payments), or "Parallel" and "Parallel Learning", stay separate rows. Similar-looking names can therefore appear more than once, and `boards` shows which job board each row covers. Boards were discovered from Common Crawl's public URL index and validated against each ATS API.
 
 ## Sources and terms
 

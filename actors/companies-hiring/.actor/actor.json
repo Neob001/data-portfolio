@@ -22,15 +22,15 @@
           "transformation": {
             "fields": [
               "company_name",
-              "website_domain",
               "matching_jobs",
               "open_jobs_total",
               "jobs_posted_last_30d",
               "hiring_velocity",
               "remote_share",
               "newest_posting_at",
-              "ats",
-              "careers_url"
+              "ats_list",
+              "careers_url",
+              "careers_site_domain"
             ]
           },
           "display": {
@@ -38,10 +38,6 @@
             "properties": {
               "company_name": {
                 "label": "Company",
-                "format": "text"
-              },
-              "website_domain": {
-                "label": "Website",
                 "format": "text"
               },
               "matching_jobs": {
@@ -68,13 +64,17 @@
                 "label": "Newest posting",
                 "format": "date"
               },
-              "ats": {
+              "ats_list": {
                 "label": "ATS",
-                "format": "text"
+                "format": "array"
               },
               "careers_url": {
                 "label": "Careers page",
                 "format": "link"
+              },
+              "careers_site_domain": {
+                "label": "Careers-site domain",
+                "format": "text"
               }
             }
           }
@@ -89,7 +89,7 @@
           },
           "company_board": {
             "type": "string",
-            "description": "Board token on the ATS"
+            "description": "Board token of the company's board with the most matching jobs (see boards for all)"
           },
           "ats": {
             "type": "string",
@@ -99,27 +99,42 @@
               "ashby",
               "workable",
               "recruitee"
-            ]
+            ],
+            "description": "ATS of that board"
           },
           "careers_url": {
             "type": "string",
             "format": "uri",
-            "description": "The company's public job board"
+            "description": "Public job board with the most matching jobs"
           },
-          "website_domain": {
+          "boards": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Every job board of the company: {ats, token, careers_url, open_jobs}. Boards of the same company (same name without legal suffix) are merged into one row"
+          },
+          "ats_list": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Applicant tracking systems the company's boards use"
+          },
+          "careers_site_domain": {
             "type": [
               "string",
               "null"
             ],
-            "description": "Employer domain taken from its own job/apply links; null when all links point to the ATS (never guessed)"
+            "description": "Domain the company's job posts link to when that is not the ATS (often a dedicated careers site such as careers.acme.com -> acme.com, or a separate careers brand). Not necessarily the company's main website; null when all links point to the ATS. Never guessed"
           },
           "open_jobs_total": {
             "type": "integer",
-            "description": "All open jobs on the board in the index"
+            "description": "All open jobs of the company across its boards (the same opening on two boards counted once)"
           },
           "matching_jobs": {
             "type": "integer",
-            "description": "Open jobs matching the filters"
+            "description": "Open jobs matching the filters, across the company's boards (duplicates counted once)"
           },
           "matching_job_titles": {
             "type": "array",
@@ -156,7 +171,7 @@
           },
           "jobs_posted_last_30d": {
             "type": "integer",
-            "description": "Open jobs on the board first posted in the last 30 days (matching or not)"
+            "description": "Open jobs first posted in the last 30 days (matching or not), across the company's boards"
           },
           "hiring_velocity": {
             "type": "number",

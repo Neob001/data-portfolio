@@ -54,3 +54,12 @@ test('README: quick start with the prefilled run cost, suite section before FAQ,
   assert.match(md, new RegExp(`apify\\.com/factpipe/${SLUG}\\)[^\\n]*\\(this Actor\\)`));
   for (const s of ['Greenhouse', 'Lever', 'Ashby', 'Workable', 'Recruitee']) assert.ok(md.includes(s), s);
 });
+
+test('careers_site_domain (not website_domain) is documented as the job-link domain, not the company website', () => {
+  const fields = actor.storages.dataset.fields.properties;
+  assert.ok(!('website_domain' in fields));
+  assert.match(fields.careers_site_domain.description, /not necessarily the company's main website/i);
+  assert.match(read('README.md'), /not necessarily the company's main website/);
+  assert.deepEqual(fields.boards.items, { type: 'object' });
+  assert.deepEqual(fields.ats_list.items, { type: 'string' });
+});
