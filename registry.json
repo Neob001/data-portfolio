@@ -829,7 +829,7 @@
       "staging_started_at": "2026-09-19T13:46:36Z"
     },
     "remote-jobs-feed": {
-      "apify_actor_id": null,
+      "apify_actor_id": "vsQjoYbCDY2wUzmIT",
       "source": "factpipe jobs index (GitHub release jobs-index; public ATS job-board APIs)",
       "variant": "search index",
       "status": "staging",
@@ -858,11 +858,12 @@
           "LEAD_GENERATION"
         ]
       },
-      "staging_validated": false,
-      "monetization_configured": false
+      "staging_validated": true,
+      "monetization_configured": true,
+      "staging_started_at": "2026-09-27T07:45:07Z"
     },
     "ats-jobs-scraper": {
-      "apify_actor_id": null,
+      "apify_actor_id": "b7dTq03CEpU3rcic4",
       "source": "factpipe jobs index (GitHub release jobs-index; public ATS job-board APIs)",
       "variant": "search index",
       "status": "staging",
@@ -891,11 +892,12 @@
           "LEAD_GENERATION"
         ]
       },
-      "staging_validated": false,
-      "monetization_configured": false
+      "staging_validated": true,
+      "monetization_configured": true,
+      "staging_started_at": "2026-09-27T07:45:11Z"
     },
     "companies-hiring": {
-      "apify_actor_id": null,
+      "apify_actor_id": "RPfIRrwrZrShLcK0p",
       "source": "factpipe jobs index (GitHub release jobs-index; public ATS job-board APIs)",
       "variant": "search index",
       "status": "staging",
@@ -925,7 +927,8 @@
         ]
       },
       "staging_validated": false,
-      "monetization_configured": false
+      "monetization_configured": true,
+      "staging_started_at": "2026-09-27T07:45:14Z"
     }
   },
   "apify_account": "factpipe",
