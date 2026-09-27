@@ -6,7 +6,7 @@
     "keywords": {
       "title": "Keywords",
       "type": "array",
-      "description": "Words or phrases to find (case-insensitive). A title matches at a word start (\"engineer\" matches \"Engineering Manager\"); description matching needs every word of the keyword, and covers the first ~1,500 characters. Leave empty for all jobs.",
+      "description": "Words or phrases to find (case-insensitive). A title matches at a word start (\"engineer\" matches \"Engineering Manager\"); description matching needs every word of the keyword, and covers the first ~1,500 characters. Results are ranked: title matches first. Leave empty for all jobs, newest first.",
       "editor": "stringList",
       "prefill": [
         "engineer"
@@ -143,11 +143,20 @@
     "maxResults": {
       "title": "Max results",
       "type": "integer",
-      "description": "Maximum number of jobs to return (and charge for). Newest first.",
+      "description": "Maximum number of jobs to return (and charge for). With keywords the most relevant jobs come first (title matches before department and description matches); without keywords the newest.",
       "default": 100,
       "minimum": 1,
       "maximum": 1000000,
       "prefill": 20
+    },
+    "maxPerCompany": {
+      "title": "Max jobs per company",
+      "type": "integer",
+      "editor": "number",
+      "minimum": 1,
+      "nullable": true,
+      "description": "Cap on jobs returned from any single company, so one employer posting many near-identical roles can't fill your results. Empty = no cap.",
+      "prefill": 3
     },
     "includeDescription": {
       "title": "Include full description",

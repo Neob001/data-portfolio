@@ -5,13 +5,13 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { gunzipSync, brotliDecompressSync } from 'node:zlib';
 import { pathToFileURL } from 'node:url';
-import { runFeed, fetchBoard, streamShardLines, FALLBACK_BOARDS, INDEX_BASE_URL, companyNameFromTitle } from '../src/feed.js';
-import { normalizeInput } from '../src/filters.js';
-import { parseBoardRef } from '../src/transform.js';
-import { IndexWriter, SHARD_MAX_BYTES } from '../src/index_writer.js';
-import { selectShards, AGE_BANDS } from '../src/index_format.js';
+import { runFeed, fetchBoard, streamShardLines, FALLBACK_BOARDS, INDEX_BASE_URL, companyNameFromTitle } from '../src/core/feed.js';
+import { normalizeInput } from '../src/core/filters.js';
+import { parseBoardRef } from '../src/core/transform.js';
+import { SHARD_MAX_BYTES } from '../src/core/index_writer.js';
+import { selectShards, AGE_BANDS } from '../src/core/index_format.js';
 import { createTracker } from '../src/lib/incremental.js';
-import { fakeNetwork, sink, FIXTURE_BOARDS, NOW, assertMatchesSchema } from './helpers.mjs';
+import { fakeNetwork, sink, FIXTURE_BOARDS, NOW, assertMatchesSchema, buildIndex } from './helpers.mjs';
 
 const TOTAL_FIXTURE_JOBS = 11;
 
@@ -21,18 +21,6 @@ async function live(input, { chargeLimit, extra, tracker } = {}) {
   const opts = normalizeInput({ companyUrls: FIXTURE_BOARDS.map((b) => `${b.ats}:${b.token}`), ...input });
   const summary = await runFeed(opts, { ...out, fetchJson: net.fetchJson, fetchText: net.fetchText, now: () => NOW, tracker, hostGaps: {} });
   return { summary, rows: out.rows, charges: out.charges, calls: net.calls };
-}
-
-/** Build a real index (same writer the builder uses) from the fixture boards into a temp dir. */
-async function buildIndex(dir, { extraJobs = [], builtAt = new Date(NOW - 86400000) } = {}) {
-  const net = fakeNetwork();
-  const writer = await new IndexWriter(dir, { builtAt }).open();
-  for (const b of FIXTURE_BOARDS) {
-    const r = await fetchBoard(b, { fetchJson: net.fetchJson, fetchText: net.fetchText, now: () => builtAt });
-    await writer.addBoard(b, r.company_name, r.jobs);
-  }
-  if (extraJobs.length) await writer.addBoard({ ats: extraJobs[0].ats, token: extraJobs[0].company_board }, extraJobs[0].company_name, extraJobs);
-  return writer.finish();
 }
 
 async function search(dir, input, { tracker, chargeLimit, spy, extra } = {}) {
@@ -349,11 +337,51 @@ test('on-demand descriptions: a job closed since the index build is skipped and 
 });
 
 test('on-demand descriptions respect per-host pacing (Lever >= 1 s, Workable >= 3 s between calls)', async () => {
-  const { hostPacer, HOST_GAP_MS } = await import('../src/feed.js');
+  const { hostPacer, HOST_GAP_MS } = await import('../src/core/feed.js');
   assert.equal(HOST_GAP_MS.workable, 3000);
   assert.equal(HOST_GAP_MS.lever, 1000);
   const pace = hostPacer({ workable: 60 });
   const t0 = Date.now();
   await pace('workable'); await pace('workable'); await pace('workable'); await pace('greenhouse');
   assert.ok(Date.now() - t0 >= 110, 'third workable call waits two gaps');
+});
+
+test('EU Lever boards: index header "lever:eu:<token>" -> EU API source_url, fetched_at and descriptions from the EU host', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'jobs-index-'));
+  try {
+    const builtAt = new Date(NOW - 86400000);
+    const lever = JSON.parse(await readFile(new URL('../golden/lever_postings.json', import.meta.url), 'utf8'));
+    const euUrl = 'https://api.eu.lever.co/v0/postings/shieldai?mode=json';
+    const net = fakeNetwork({ [euUrl]: () => lever });
+    const { IndexWriter } = await import('../src/core/index_writer.js');
+    const writer = await new IndexWriter(dir, { builtAt }).open();
+    const board = { ats: 'lever', token: 'shieldai', region: 'eu' };
+    const r = await fetchBoard(board, { fetchJson: net.fetchJson, fetchText: net.fetchText, now: () => builtAt });
+    await writer.addBoard(board, 'Shield AI', r.jobs);
+    await writer.finish();
+    const out = await search(dir, { ats: ['lever'] }, { extra: { [euUrl]: () => lever } });
+    assert.equal(out.rows.length, 2);
+    for (const row of out.rows) {
+      assert.equal(row.source_url, euUrl);
+      assert.equal(row.fetched_at, builtAt.toISOString());
+      assert.equal(row.description_status, 'included');
+      assertMatchesSchema(row);
+    }
+    assert.deepEqual(out.calls, [euUrl]);
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test('maxPerCompany: no company exceeds the cap; without it every fixture job is delivered', async () => {
+  const all = await live({});
+  const capped = await live({ maxPerCompany: 1 });
+  const perBoard = (rows) => rows.reduce((m, r) => m.set(r.company_board, (m.get(r.company_board) || 0) + 1), new Map());
+  assert.equal(all.rows.length, TOTAL_FIXTURE_JOBS);
+  assert.ok([...perBoard(all.rows).values()].some((n) => n > 1), 'fixture must have a company with several jobs');
+  assert.ok([...perBoard(capped.rows).values()].every((n) => n === 1));
+  assert.equal(capped.rows.length, perBoard(all.rows).size);
+  assert.equal(capped.charges, capped.rows.length);
+  capped.rows.forEach(assertMatchesSchema);
+  assert.throws(() => normalizeInput({ maxPerCompany: 0 }), /maxPerCompany/);
 });

@@ -827,6 +827,105 @@
       "staging_validated": true,
       "monetization_configured": true,
       "staging_started_at": "2026-09-19T13:46:36Z"
+    },
+    "remote-jobs-feed": {
+      "apify_actor_id": null,
+      "source": "factpipe jobs index (GitHub release jobs-index; public ATS job-board APIs)",
+      "variant": "search index",
+      "status": "staging",
+      "approval": "J2 APPROVED by owner 2026-09-25 (chat)",
+      "origin": "scan",
+      "incumbent_actor_id": null,
+      "first_paid_run_date": null,
+      "ppe_events": {
+        "job-result": {
+          "proposed_price_usd": 0.003,
+          "title": "Job result",
+          "description": "One remote job posting delivered. Nothing else is charged."
+        }
+      },
+      "pricing_rationale": "Same index as ats-jobs-feed; jobs at $3/1k vs leader $12/1k; company rows aggregate many jobs.",
+      "launched_at": null,
+      "last_fix_date": null,
+      "kpis": {},
+      "listing": {
+        "title": "Remote Jobs API — Remote & Work-From-Home Jobs Feed",
+        "description": "Remote and work-from-home jobs from 10,000+ companies' official Greenhouse, Lever, Ashby, Workable and Recruitee job boards. Filter by region or time zone, ranked by relevance. $3 per 1,000 jobs.",
+        "seoTitle": "Remote Jobs API: Remote & Work-From-Home Jobs Feed",
+        "seoDescription": "Remote and work-from-home jobs from 10,000+ company career sites (Greenhouse, Lever, Ashby, Workable, Recruitee). Region filters, daily feed. Pay per job.",
+        "categories": [
+          "JOBS",
+          "LEAD_GENERATION"
+        ]
+      },
+      "staging_validated": false,
+      "monetization_configured": false
+    },
+    "ats-jobs-scraper": {
+      "apify_actor_id": null,
+      "source": "factpipe jobs index (GitHub release jobs-index; public ATS job-board APIs)",
+      "variant": "search index",
+      "status": "staging",
+      "approval": "J2 APPROVED by owner 2026-09-25 (chat)",
+      "origin": "scan",
+      "incumbent_actor_id": null,
+      "first_paid_run_date": null,
+      "ppe_events": {
+        "job-result": {
+          "proposed_price_usd": 0.003,
+          "title": "Job result",
+          "description": "One job posting delivered. Nothing else is charged."
+        }
+      },
+      "pricing_rationale": "Same index as ats-jobs-feed; jobs at $3/1k vs leader $12/1k; company rows aggregate many jobs.",
+      "launched_at": null,
+      "last_fix_date": null,
+      "kpis": {},
+      "listing": {
+        "title": "Greenhouse, Lever & Ashby Jobs Scraper — Job Board API",
+        "description": "Scrape open jobs from Greenhouse, Lever, Ashby, Workable and Recruitee job boards: pick platforms and companies, filter by keyword, location and remote. Salary where published. $3 per 1,000 jobs.",
+        "seoTitle": "Greenhouse, Lever & Ashby Jobs Scraper API",
+        "seoDescription": "Scrape jobs from Greenhouse, Lever, Ashby, Workable and Recruitee boards: pick platforms, companies, keywords, locations. Salary where published.",
+        "categories": [
+          "JOBS",
+          "LEAD_GENERATION"
+        ]
+      },
+      "staging_validated": false,
+      "monetization_configured": false
+    },
+    "companies-hiring": {
+      "apify_actor_id": null,
+      "source": "factpipe jobs index (GitHub release jobs-index; public ATS job-board APIs)",
+      "variant": "search index",
+      "status": "staging",
+      "approval": "J2 APPROVED by owner 2026-09-25 (chat)",
+      "origin": "scan",
+      "incumbent_actor_id": null,
+      "first_paid_run_date": null,
+      "ppe_events": {
+        "company-result": {
+          "proposed_price_usd": 0.005,
+          "title": "Company result",
+          "description": "One hiring company delivered with its open roles and hiring signals."
+        }
+      },
+      "pricing_rationale": "Same index as ats-jobs-feed; jobs at $3/1k vs leader $12/1k; company rows aggregate many jobs.",
+      "launched_at": null,
+      "last_fix_date": null,
+      "kpis": {},
+      "listing": {
+        "title": "Companies Hiring — Hiring Signals & Sales Leads by Role",
+        "description": "Find companies hiring for any role across 10,000+ company job boards (Greenhouse, Lever, Ashby, Workable, Recruitee): one row per company with open roles, hiring velocity and locations. $5 per 1,000 companies.",
+        "seoTitle": "Companies Hiring API: Hiring Signals & Sales Leads by Role",
+        "seoDescription": "Find companies hiring for any role across 10,000+ career sites: open roles, hiring velocity, locations and departments per company. Pay per company.",
+        "categories": [
+          "JOBS",
+          "LEAD_GENERATION"
+        ]
+      },
+      "staging_validated": false,
+      "monetization_configured": false
     }
   },
   "apify_account": "factpipe",

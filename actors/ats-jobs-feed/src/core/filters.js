@@ -2,7 +2,7 @@
 import { ATS_LIST, EMPLOYMENT_TYPES, parseBoardRef, boardKey } from './transform.js';
 import { normKey, companyKey } from './text.js';
 import { isCountryCode } from './geo.js';
-import { compileKeyword, keywordHit, normText, jobKeywordTokens } from './keywords.js';
+import { compileRanker, KEYWORD_SCOPES } from './rank.js';
 
 const strList = (v) => (Array.isArray(v) ? v : typeof v === 'string' && v.trim() ? v.split(',') : [])
   .map((x) => String(x ?? '').trim())
@@ -13,7 +13,7 @@ export function normalizeInput(input = {}) {
   const remote = input.remote ?? 'any';
   if (!['any', 'remote_only', 'onsite_only'].includes(remote)) throw new Error(`"remote" must be any, remote_only or onsite_only (got ${remote})`);
   const keywordScope = input.keywordScope ?? 'title_and_description';
-  if (!['title', 'title_and_description'].includes(keywordScope)) throw new Error(`"keywordScope" must be title or title_and_description (got ${keywordScope})`);
+  if (!KEYWORD_SCOPES.includes(keywordScope)) throw new Error(`"keywordScope" must be one of ${KEYWORD_SCOPES.join(', ')} (got ${keywordScope})`);
   const keywordMatch = input.keywordMatch ?? 'any';
   if (!['any', 'all'].includes(keywordMatch)) throw new Error(`"keywordMatch" must be any or all (got ${keywordMatch})`);
   const ats = strList(input.ats).map((a) => a.toLowerCase());
@@ -22,6 +22,8 @@ export function normalizeInput(input = {}) {
   for (const e of employmentTypes) if (!EMPLOYMENT_TYPES.includes(e)) throw new Error(`Unknown employment type "${e}". Use: ${EMPLOYMENT_TYPES.join(', ')}`);
   const maxResults = input.maxResults === undefined || input.maxResults === null ? 100 : Number(input.maxResults);
   if (!Number.isInteger(maxResults) || maxResults < 1) throw new Error('"maxResults" must be a positive integer');
+  const maxPerCompany = input.maxPerCompany === undefined || input.maxPerCompany === null || input.maxPerCompany === '' ? null : Number(input.maxPerCompany);
+  if (maxPerCompany !== null && (!Number.isInteger(maxPerCompany) || maxPerCompany < 1)) throw new Error('"maxPerCompany" must be a positive integer');
   const postedWithinDays = input.postedWithinDays === undefined || input.postedWithinDays === null || input.postedWithinDays === ''
     ? null : Number(input.postedWithinDays);
   if (postedWithinDays !== null && (!Number.isFinite(postedWithinDays) || postedWithinDays <= 0)) throw new Error('"postedWithinDays" must be a positive number');
@@ -46,6 +48,8 @@ export function normalizeInput(input = {}) {
     keywordScope,
     excludeKeywords: strList(input.excludeKeywords),
     locations: strList(input.locations),
+    // ISO codes matched against country_codes only (OR-ed with locations); set by wrapper Actors.
+    countryCodes: strList(input.countryCodes).map((c) => c.toUpperCase().replace(/^UK$/, 'GB')),
     remote,
     companies: strList(input.companies),
     ats,
@@ -55,6 +59,7 @@ export function normalizeInput(input = {}) {
     sinceLastRun: Boolean(input.sinceLastRun),
     includeDescription: input.includeDescription === undefined ? true : Boolean(input.includeDescription),
     maxResults,
+    maxPerCompany,
   };
 }
 
@@ -75,6 +80,8 @@ export function filterIdentity(opts) {
     departments: sorted(opts.departments),
     employmentTypes: sorted(opts.employmentTypes),
     postedWithinDays: opts.postedWithinDays,
+    // Only when used, so cursors of existing inputs keep their key.
+    ...(opts.countryCodes?.length ? { countryCodes: sorted(opts.countryCodes) } : {}),
   };
 }
 
@@ -93,52 +100,50 @@ export function companyMatches(term, job) {
 }
 
 /**
- * opts -> predicate(job, now). All filters are AND-ed; values inside one filter are OR-ed
- * (except keywords with keywordMatch "all").
+ * opts -> search(job, now) returning { score, matched_in } for a matching job and null otherwise.
+ * All filters are AND-ed; values inside one filter are OR-ed (except keywords with keywordMatch
+ * "all"). Keyword relevance: see rank.js (score and matched_in are null without keywords).
  */
-export function compileFilter(opts) {
-  const kws = opts.keywords.map(compileKeyword).filter((k) => k.phrase);
-  const scope = opts.keywordScope || 'title_and_description';
+export function compileSearch(opts) {
+  const rank = compileRanker(opts.keywords, opts.keywordMatch, opts.keywordScope || 'title_and_description');
   const excl = opts.excludeKeywords.map(lc);
   const locTerms = opts.locations.map((l) => ({ raw: l, text: normKey(l), code: isCountryCode(l) ? l.toUpperCase().replace(/^UK$/, 'GB') : null }));
+  const codes = new Set(opts.countryCodes || []);
   const depts = opts.departments.map(lc);
   const ats = new Set(opts.ats);
   const emp = new Set(opts.employmentTypes);
   const maxAgeMs = opts.postedWithinDays ? opts.postedWithinDays * 86400000 : null;
 
   return (job, now = Date.now()) => {
-    if (ats.size && !ats.has(job.ats)) return false;
-    if (opts.remote === 'remote_only' && !(job.workplace_type === 'remote' || job.remote === true)) return false;
-    if (opts.remote === 'onsite_only' && (job.workplace_type === 'remote' || job.remote === true)) return false;
-    if (emp.size && !emp.has(job.employment_type)) return false;
+    if (ats.size && !ats.has(job.ats)) return null;
+    if (opts.remote === 'remote_only' && !(job.workplace_type === 'remote' || job.remote === true)) return null;
+    if (opts.remote === 'onsite_only' && (job.workplace_type === 'remote' || job.remote === true)) return null;
+    if (emp.size && !emp.has(job.employment_type)) return null;
     if (maxAgeMs !== null) {
       const t = job.posted_at ? Date.parse(job.posted_at) : NaN;
-      if (!Number.isFinite(t) || now - t > maxAgeMs) return false;
+      if (!Number.isFinite(t) || now - t > maxAgeMs) return null;
     }
-    if (opts.companies.length && !opts.companies.some((c) => companyMatches(c, job))) return false;
+    if (opts.companies.length && !opts.companies.some((c) => companyMatches(c, job))) return null;
     if (depts.length) {
       const d = `${lc(job.department)} | ${lc(job.team)}`;
-      if (!depts.some((x) => d.includes(x))) return false;
+      if (!depts.some((x) => d.includes(x))) return null;
     }
-    if (locTerms.length) {
+    if (locTerms.length || codes.size) {
       const text = ` ${normKey(job.locations.join(' | '))} `;
-      const ok = locTerms.some((l) => (l.code && job.country_codes.includes(l.code)) || (l.text && text.includes(` ${l.text} `)));
-      if (!ok) return false;
+      const ok = job.country_codes.some((c) => codes.has(c))
+        || locTerms.some((l) => (l.code && job.country_codes.includes(l.code)) || (l.text && text.includes(` ${l.text} `)));
+      if (!ok) return null;
     }
-    const title = lc(job.title);
-    if (excl.length && excl.some((x) => title.includes(x))) return false;
-    if (kws.length) {
-      const titleNorm = normText(job.title);
-      let vocab = null;
-      // Index rows carry `kw` (job words + the board's shared words); live rows are tokenized here.
-      const getVocab = () => vocab || (vocab = new Set([
-        ...titleNorm.split(' '),
-        ...(typeof job.kw === 'string' ? job.kw.split(' ') : jobKeywordTokens(job)),
-      ]));
-      const hit = (k) => keywordHit(k, titleNorm, getVocab, scope);
-      const ok = opts.keywordMatch === 'all' ? kws.every(hit) : kws.some(hit);
-      if (!ok) return false;
+    if (excl.length) {
+      const title = lc(job.title);
+      if (excl.some((x) => title.includes(x))) return null;
     }
-    return true;
+    return rank(job);
   };
+}
+
+/** opts -> predicate(job, now): true when compileSearch() matches. */
+export function compileFilter(opts) {
+  const search = compileSearch(opts);
+  return (job, now = Date.now()) => search(job, now) !== null;
 }

@@ -1,11 +1,11 @@
 # Jobs Feed API — Greenhouse, Lever, Ashby & More Job Boards
 
-Search **live job openings from 9,000+ companies** in one feed. The jobs come from the **official public job-board APIs** of Greenhouse, Lever, Ashby, Workable and Recruitee. Filter by keyword, location, country, remote, company, department, employment type and posting date. You get flat, deduplicated JSON with salary ranges wherever the employer publishes them. **$3 per 1,000 jobs**, and you pay only for jobs delivered.
+Search **live job openings from 10,000+ companies** in one feed. The jobs come from the **official public job-board APIs** of Greenhouse, Lever, Ashby, Workable and Recruitee. Filter by keyword, location, country, remote, company, department, employment type and posting date. Keyword searches are **ranked by relevance** (title matches first), and you get flat, deduplicated JSON with salary ranges wherever the employer publishes them. **$3 per 1,000 jobs**, and you pay only for jobs delivered.
 
 ## Quick start
 
 1. Click **Start** with the prefilled input: `keywords: ["engineer"]`, `remote: "remote_only"`, `postedWithinDays: 7`, `maxResults: 20`. The run takes well under a minute.
-2. You get the 20 newest remote engineering jobs posted in the last week, each with company, locations, country codes, apply link and (where published) salary.
+2. You get the 20 most relevant remote engineering jobs posted in the last week (jobs with "engineer" in the title first, newest first among equals), each with company, locations, country codes, apply link and (where published) salary.
 3. That first run costs at most **$0.06** (20 jobs × $0.003), which fits in Apify's free monthly credit. Then change the filters or schedule the run with `sinceLastRun: true` to get a daily feed of new jobs only.
 
 ## What you get
@@ -38,6 +38,8 @@ One flat record per job opening:
   "description_snippet": "ABOUT RAMP Ramp is building the smart infrastructure for finance teams, embedded in the transaction flow of every dollar a business spends…",
   "description_status": "included",
   "duplicate_sources": [],
+  "match_score": 100,
+  "matched_in": "title",
   "source_url": "https://api.ashbyhq.com/posting-api/job-board/ramp?includeCompensation=true",
   "fetched_at": "2026-09-19T03:00:00.000Z"
 }
@@ -48,6 +50,7 @@ One flat record per job opening:
 - `country_codes` are ISO 3166 alpha-2 codes. They come from the ATS's own country fields where available, and are otherwise inferred from the location text on a best-effort basis.
 - `duplicate_sources` lists the other `job_id`s of the same opening. Example: a company that still has an old board live after switching ATS. Each opening is delivered and charged once.
 - `description_text` is fetched **live from the company's ATS** for each delivered job (see below). `description_status` is `included`, `not_requested` (when `includeDescription: false`) or `unavailable` (the ATS could not be reached, or the posting has no text).
+- `match_score` (0–100) and `matched_in` (`title`, `department` or `description`) show why a job matched your keywords. Both are `null` when you search without keywords.
 - **No personal data.** Recruiter and hiring-manager fields are never copied. In descriptions, e-mail addresses, phone numbers and names in contact lines ("Questions? Call Jane on …") are replaced with `[… redacted]`.
 
 ## Use cases
@@ -73,12 +76,24 @@ One flat record per job opening:
 | `ats` | string[] | Any of `greenhouse`, `lever`, `ashby`, `workable`, `recruitee` |
 | `departments` | string[] | Substring match on department or team |
 | `employmentTypes` | string[] | `full_time`, `part_time`, `contract`, `temporary`, `internship`, `other` |
-| `maxResults` | integer | Default 100. Results come newest first |
+| `maxResults` | integer | Default 100. With keywords, the most relevant jobs come first; without keywords, the newest |
+| `maxPerCompany` | integer | Optional cap on jobs from any one company (prefill 3), so a single employer posting many near-identical roles can't fill your results |
 | `includeDescription` | boolean | Default `true`. Fetches the full plain-text description (max 20,000 chars) live from the ATS for every delivered job. A 300-char snippet is always included. Set `false` for the fastest runs |
 | `sinceLastRun` | boolean | Incremental feed: returns only jobs not delivered by an earlier run with the same filters |
 | `companyUrls` | string[] | **Live mode**: board URLs (`https://job-boards.greenhouse.io/gitlab`, `https://jobs.lever.co/acme`, `https://jobs.ashbyhq.com/acme`, `https://apply.workable.com/acme`, `https://acme.recruitee.com`) or `ats:token` strings. These boards are fetched live, so you can use companies that are not in the index yet |
 
-**How it works.** By default the Actor searches a compact, prebuilt search index of every board in our directory, rebuilt daily from the ATS APIs. The whole index is about 43 MB compressed. It holds every searchable field, plus the distinct words of each posting's first ~1,500 description characters. The Actor downloads only the parts that can match your `ats`, `companies` and date filters.
+**Ranking.** With keywords, every matching job gets a `match_score`:
+
+| Where the keywords matched | `match_score` |
+|---|---|
+| Every keyword in the title | 100 |
+| Some keywords in the title | 60–70 |
+| Department or team | 40–50 |
+| Description only | 20–30 |
+
+More keywords matched means a higher score inside each band. Among equal scores, the newest posting comes first. So a search for `["security engineer"]` returns jobs titled "Security Engineer" before jobs that only mention security engineering in their description, however new those are. The Actor ranks across the whole index, not just the newest postings, before it delivers the top `maxResults`. Without keywords, results come newest first.
+
+**How it works.** By default the Actor searches a compact, prebuilt search index of every board in our directory, rebuilt daily from the ATS APIs. The whole index is about 53 MB compressed. It holds every searchable field, plus the distinct words of each posting's first ~1,500 description characters. The Actor downloads only the parts that can match your `ats`, `companies` and date filters.
 
 **Descriptions.** For every job it is about to deliver, the Actor fetches the description from the ATS. A single API call per company returns all of that company's jobs, so 100 jobs from 20 companies cost 20 calls. Lever and Workable calls are spaced out to respect their limits. A side benefit: a job the employer closed after the nightly build is detected and skipped, not delivered or charged. If a company's ATS can't be reached, the job is still delivered with `description_status: "unavailable"`.
 
@@ -98,17 +113,18 @@ Example: 10,000 jobs cost **$30**. Set a maximum charge per run in Apify, and th
 
 ## Coverage
 
-Search-index build of 2026-09-19:
+Search-index build of 2026-09-25:
 
 | ATS | Jobs in index |
 |---|---|
-| Greenhouse | 149,679 |
-| Ashby | 54,408 |
-| Lever | 52,493 |
-| Recruitee | 12,806 |
-| **Total** | **269,386** from **9,070** companies (after collapsing 7,890 duplicate listings) |
+| Greenhouse | 149,646 |
+| Workable | 78,318 |
+| Ashby | 54,511 |
+| Lever | 50,718 |
+| Recruitee | 12,783 |
+| **Total** | **345,976** from **10,918** company job boards (after collapsing 11,288 duplicate listings) |
 
-**Workable** is fully supported in live mode (`companyUrls`). Our directory holds 1,979 validated Workable boards with about 84,000 open jobs, but Workable rate-limited our requests on 2026-09-18, so those jobs join the index at the next paced rebuild after the ban expires. About 15% of indexed jobs carry a structured salary range.
+About 15% of indexed jobs carry a structured salary range.
 
 Coverage grows as the directory is refreshed. Every board in the index had at least one open job when it was last checked. If a company you need is missing, pass its board URL in `companyUrls`.
 
@@ -126,6 +142,15 @@ Only official, public, unauthenticated job-board APIs that the ATS vendors publi
 
 SmartRecruiters is deliberately **not** included, because its API host's robots.txt disallows automated access.
 
+## factpipe Jobs & Hiring Data
+
+All four Actors search the same daily index of 345,976 open jobs from 10,918 company job boards:
+
+- [Jobs Feed API](https://apify.com/factpipe/ats-jobs-feed) (this Actor): every job, every filter, ranked by relevance.
+- [Remote Jobs API](https://apify.com/factpipe/remote-jobs-feed): remote and work-from-home jobs only, filtered by region or time zone.
+- [Greenhouse, Lever & Ashby Jobs Scraper](https://apify.com/factpipe/ats-jobs-scraper): pick the applicant tracking systems and companies you want.
+- [Companies Hiring](https://apify.com/factpipe/companies-hiring): one row per company that is hiring for a role, as sales leads or market research.
+
 ## FAQ
 
 **How is this different from LinkedIn or Indeed scrapers?**
@@ -138,7 +163,7 @@ The search index is rebuilt daily. With `includeDescription` on (the default), e
 It covers the title, department, team and the first ~1,500 characters of each description, which is usually the role summary and the first requirements. Words that appear in most of one company's postings (its "About us" boilerplate) are matched per company. Use `keywordScope: "title"` for strict title searches.
 
 **Which companies are covered?**
-About 9,000 companies with open jobs on Greenhouse, Lever, Ashby and Recruitee in the index, plus 1,979 Workable boards in the directory (see Coverage). They were discovered from Common Crawl's public URL index and each was validated against its ATS API. Use `companies` to restrict the search, or `companyUrls` for any board that isn't indexed.
+About 10,900 company job boards with open jobs on Greenhouse, Lever, Ashby, Workable and Recruitee (see Coverage). They were discovered from Common Crawl's public URL index and each was validated against its ATS API. Use `companies` to restrict the search, or `companyUrls` for any board that isn't indexed.
 
 **Why do some jobs have no salary?**
 Only some employers publish structured pay ranges, mostly on Ashby, Lever and Recruitee. We never extract or estimate salaries from free text.

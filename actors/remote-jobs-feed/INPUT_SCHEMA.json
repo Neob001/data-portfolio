@@ -1,0 +1,169 @@
+{
+  "title": "Remote Jobs API",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "keywords": {
+      "title": "Keywords",
+      "type": "array",
+      "description": "Words or phrases to find (case-insensitive). A title matches at a word start (\"engineer\" matches \"Engineering Manager\"); description matching needs every word of the keyword, and covers the first ~1,500 characters. Results are ranked: title matches first. Leave empty for all jobs, newest first.",
+      "editor": "stringList",
+      "prefill": [
+        "developer"
+      ]
+    },
+    "timezonesOrRegions": {
+      "title": "Time zones or regions",
+      "type": "array",
+      "description": "Where you can work from. Regions: \"Worldwide\" (or \"Anywhere\"), \"US\", \"Canada\", \"North America\", \"LATAM\", \"Americas\", \"Europe\", \"UK\", \"EMEA\", \"Middle East\", \"Africa\", \"APAC\", \"Asia\", \"ANZ\". Time zones: \"EST\", \"PST\", \"CET\", \"GMT\", \"IST\", \"UTC-5\", \"UTC+1\"… Any country name or ISO code works too (\"Germany\", \"DE\"). A job matches when its locations fall in one of them, or when it says it is open anywhere / worldwide. Empty = all remote jobs.",
+      "editor": "stringList"
+    },
+    "keywordMatch": {
+      "title": "Keyword match",
+      "type": "string",
+      "description": "\"any\": a job needs at least one keyword. \"all\": a job needs every keyword.",
+      "editor": "select",
+      "enum": [
+        "any",
+        "all"
+      ],
+      "enumTitles": [
+        "Any keyword",
+        "All keywords"
+      ],
+      "default": "any"
+    },
+    "keywordScope": {
+      "title": "Keyword scope",
+      "type": "string",
+      "editor": "select",
+      "description": "title: keywords must appear in the job title. title_and_description: in the title, or (every word of the keyword) in the department, team or the first ~1,500 characters of the description.",
+      "enum": [
+        "title",
+        "title_and_description"
+      ],
+      "enumTitles": [
+        "Title only",
+        "Title and description (first ~1,500 chars)"
+      ],
+      "default": "title_and_description"
+    },
+    "excludeKeywords": {
+      "title": "Exclude keywords (title)",
+      "type": "array",
+      "description": "Drop jobs whose title contains any of these, e.g. \"senior\", \"intern\".",
+      "editor": "stringList"
+    },
+    "locations": {
+      "title": "Locations",
+      "type": "array",
+      "description": "Optional extra location text as written in the posting (e.g. \"Berlin\", \"Remote (EU)\") or a 2-letter ISO country code. OR-ed with the time zones / regions above.",
+      "editor": "stringList"
+    },
+    "postedWithinDays": {
+      "title": "Posted within (days)",
+      "type": "integer",
+      "description": "Only jobs first published in the last N days. Default 7.",
+      "minimum": 1,
+      "maximum": 3650,
+      "default": 7
+    },
+    "companies": {
+      "title": "Companies",
+      "type": "array",
+      "description": "Only these companies: company names (\"Datadog\") or board tokens (\"datadog\", \"greenhouse:datadog\").",
+      "editor": "stringList"
+    },
+    "ats": {
+      "title": "Job-board platforms",
+      "type": "array",
+      "description": "Only jobs from these applicant tracking systems. Empty = all.",
+      "editor": "select",
+      "items": {
+        "type": "string",
+        "enum": [
+          "greenhouse",
+          "lever",
+          "ashby",
+          "workable",
+          "recruitee"
+        ],
+        "enumTitles": [
+          "Greenhouse",
+          "Lever",
+          "Ashby",
+          "Workable",
+          "Recruitee"
+        ]
+      }
+    },
+    "departments": {
+      "title": "Departments",
+      "type": "array",
+      "description": "Substring match on department or team, e.g. \"engineering\", \"sales\".",
+      "editor": "stringList"
+    },
+    "employmentTypes": {
+      "title": "Employment types",
+      "type": "array",
+      "description": "Normalized employment type. Jobs whose ATS does not state one (most Greenhouse boards) are excluded when this is set.",
+      "editor": "select",
+      "items": {
+        "type": "string",
+        "enum": [
+          "full_time",
+          "part_time",
+          "contract",
+          "temporary",
+          "internship",
+          "other"
+        ],
+        "enumTitles": [
+          "Full-time",
+          "Part-time",
+          "Contract",
+          "Temporary",
+          "Internship",
+          "Other"
+        ]
+      }
+    },
+    "maxResults": {
+      "title": "Max results",
+      "type": "integer",
+      "description": "Maximum number of jobs to return (and charge for). With keywords the most relevant jobs come first (title matches before department and description matches); without keywords the newest.",
+      "default": 100,
+      "minimum": 1,
+      "maximum": 1000000,
+      "prefill": 20
+    },
+    "maxPerCompany": {
+      "title": "Max jobs per company",
+      "type": "integer",
+      "editor": "number",
+      "minimum": 1,
+      "nullable": true,
+      "description": "Cap on jobs returned from any single company, so one employer posting many near-identical roles can't fill your results. Empty = no cap.",
+      "prefill": 3
+    },
+    "includeDescription": {
+      "title": "Include full description",
+      "type": "boolean",
+      "description": "Fetch the full plain-text description (HTML stripped, contact details redacted, max 20,000 characters) live from the company's ATS for every delivered job. Adds a few seconds per company. A 300-character snippet is always included.",
+      "default": true
+    },
+    "sinceLastRun": {
+      "title": "Only new jobs since last run",
+      "type": "boolean",
+      "description": "Incremental feed: remembers delivered jobs per filter combination (in a named key-value store in your account) and returns only jobs posted since, so a scheduled run never re-delivers or re-charges a job.",
+      "default": false
+    },
+    "companyUrls": {
+      "title": "Live mode: job-board URLs",
+      "type": "array",
+      "description": "Optional. Fetch these boards live instead of searching the index, e.g. https://job-boards.greenhouse.io/gitlab, https://jobs.lever.co/acme, https://jobs.ashbyhq.com/acme, https://apply.workable.com/acme, https://acme.recruitee.com or \"greenhouse:gitlab\". All filters above still apply (remote jobs only).",
+      "editor": "stringList",
+      "sectionCaption": "Live mode (companies not yet in the index)"
+    }
+  }
+}

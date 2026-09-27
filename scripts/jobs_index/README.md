@@ -35,7 +35,7 @@ Then publish with `publish_index.sh` (see Publishing and hosting).
 | Recruitee | `{company}.recruitee.com/api/offers/` | [docs.recruitee.com/reference/offers](https://docs.recruitee.com/reference/offers) ("Careers Site API") | **Included.** Public Careers Site API that "returns a collection of published company jobs" and needs no auth. |
 | SmartRecruiters | `api.smartrecruiters.com/v1/companies/{id}/postings` | [developers.smartrecruiters.com/docs/posting-api](https://developers.smartrecruiters.com/docs/posting-api) | **Excluded.** `api.smartrecruiters.com/robots.txt` is `User-agent: * / Disallow: /` (only LinkedInBot is allowed on `/v1/companies/`). The docs also present the Posting API as a customer tool for building their own career site, with API-key/OAuth authentication. |
 
-**Personal data:** no ATS field that names a person (Greenhouse `metadata`, Recruitee `mailbox_email`, etc.) is copied into records. In descriptions, `actors/ats-jobs-feed/src/text.js:redactContacts` replaces the following with `[… redacted]`:
+**Personal data:** no ATS field that names a person (Greenhouse `metadata`, Recruitee `mailbox_email`, etc.) is copied into records. In descriptions, `actors/ats-jobs-feed/src/core/text.js:redactContacts` replaces the following with `[… redacted]`:
 - e-mail addresses, including obfuscated ones like `name(at)domain`
 - phone numbers
 - labelled contact names ("Recruiter: Jane Doe", "Ansprechpartner: …")
@@ -76,7 +76,7 @@ index/
 - `apply_url` and `duplicate_sources` are included only when they are not the ATS default or empty. `source_url` (the ATS API URL) and `fetched_at` come from the board header.
 - **No full descriptions.** The Actor fetches them live for the jobs it delivers (one API call per board).
 
-**`kw` field** (`actors/ats-jobs-feed/src/keywords.js`):
+**`kw` field** (`actors/ats-jobs-feed/src/core/keywords.js`):
 - It holds the distinct lowercase words (stopwords removed) of the department, team and the first 1,500 description characters, minus the title's words. It is capped at 500 characters per job.
 - Words found in ≥60% of a board's postings (company boilerplate, EEO text) are stored once per board in the header, and the Actor merges them back at read time.
 - Title matching is phrase-at-word-start. Description matching needs every word of the keyword (or its plural). Adjacency inside descriptions is not preserved.

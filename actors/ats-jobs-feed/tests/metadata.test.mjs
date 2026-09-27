@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
-import { OUTPUT_FIELDS } from '../src/feed.js';
+import { OUTPUT_FIELDS } from '../src/core/feed.js';
 
 const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8');
 const actor = JSON.parse(read('.actor/actor.json'));

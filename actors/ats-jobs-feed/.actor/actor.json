@@ -30,7 +30,8 @@
               "salary_currency",
               "posted_at",
               "ats",
-              "job_url"
+              "job_url",
+              "match_score"
             ]
           },
           "display": {
@@ -75,6 +76,10 @@
               "job_url": {
                 "label": "Job",
                 "format": "link"
+              },
+              "match_score": {
+                "label": "Relevance",
+                "format": "number"
               }
             }
           }
@@ -244,6 +249,26 @@
             "items": {
               "type": "string"
             }
+          },
+          "match_score": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "Keyword relevance 0-100: every keyword in the title 100, some in the title 60-70, department/team 40-50, description only 20-30; null without keywords"
+          },
+          "matched_in": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "title",
+              "department",
+              "description",
+              null
+            ],
+            "description": "Best place a keyword matched; null without keywords"
           },
           "source_url": {
             "type": "string",

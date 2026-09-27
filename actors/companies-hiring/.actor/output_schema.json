@@ -1,0 +1,17 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Output of companies-hiring",
+  "type": "object",
+  "properties": {
+    "resultsDatasetUrl": {
+      "type": "string",
+      "title": "Companies",
+      "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=companies"
+    },
+    "runSummary": {
+      "type": "string",
+      "title": "Run summary",
+      "template": "{{actorRun.defaultKeyValueStoreUrl}}/records/RUN_SUMMARY"
+    }
+  }
+}

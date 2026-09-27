@@ -1,0 +1,184 @@
+{
+  "actorSpecification": 1,
+  "name": "companies-hiring",
+  "title": "Companies Hiring — Hiring Signals & Sales Leads by Role",
+  "description": "Find companies hiring for any role across 10,000+ company job boards (Greenhouse, Lever, Ashby, Workable, Recruitee): one row per company with open roles, hiring velocity and locations. $5 per 1,000 companies.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "outputSchema": "./output_schema.json",
+  "categories": [
+    "JOBS",
+    "LEAD_GENERATION"
+  ],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "companies": {
+          "title": "Companies",
+          "transformation": {
+            "fields": [
+              "company_name",
+              "website_domain",
+              "matching_jobs",
+              "open_jobs_total",
+              "jobs_posted_last_30d",
+              "hiring_velocity",
+              "remote_share",
+              "newest_posting_at",
+              "ats",
+              "careers_url"
+            ]
+          },
+          "display": {
+            "component": "table",
+            "properties": {
+              "company_name": {
+                "label": "Company",
+                "format": "text"
+              },
+              "website_domain": {
+                "label": "Website",
+                "format": "text"
+              },
+              "matching_jobs": {
+                "label": "Matching jobs",
+                "format": "number"
+              },
+              "open_jobs_total": {
+                "label": "Open jobs",
+                "format": "number"
+              },
+              "jobs_posted_last_30d": {
+                "label": "Posted 30d",
+                "format": "number"
+              },
+              "hiring_velocity": {
+                "label": "Velocity",
+                "format": "number"
+              },
+              "remote_share": {
+                "label": "Remote share",
+                "format": "number"
+              },
+              "newest_posting_at": {
+                "label": "Newest posting",
+                "format": "date"
+              },
+              "ats": {
+                "label": "ATS",
+                "format": "text"
+              },
+              "careers_url": {
+                "label": "Careers page",
+                "format": "link"
+              }
+            }
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "company_name": {
+            "type": "string"
+          },
+          "company_board": {
+            "type": "string",
+            "description": "Board token on the ATS"
+          },
+          "ats": {
+            "type": "string",
+            "enum": [
+              "greenhouse",
+              "lever",
+              "ashby",
+              "workable",
+              "recruitee"
+            ]
+          },
+          "careers_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The company's public job board"
+          },
+          "website_domain": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Employer domain taken from its own job/apply links; null when all links point to the ATS (never guessed)"
+          },
+          "open_jobs_total": {
+            "type": "integer",
+            "description": "All open jobs on the board in the index"
+          },
+          "matching_jobs": {
+            "type": "integer",
+            "description": "Open jobs matching the filters"
+          },
+          "matching_job_titles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Up to 10 distinct matching titles, most relevant first"
+          },
+          "departments_hiring": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Top 5 departments/teams of the matching jobs: {department, jobs}"
+          },
+          "locations_hiring": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Top 5 locations of the matching jobs: {location, jobs}"
+          },
+          "remote_share": {
+            "type": "number",
+            "description": "Share (0-1) of the matching jobs that are remote"
+          },
+          "newest_posting_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "description": "Newest posted_at among the matching jobs"
+          },
+          "jobs_posted_last_30d": {
+            "type": "integer",
+            "description": "Open jobs on the board first posted in the last 30 days (matching or not)"
+          },
+          "hiring_velocity": {
+            "type": "number",
+            "description": "jobs_posted_last_30d / open_jobs_total, rounded to 2 decimals"
+          },
+          "sample_job_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Up to 3 matching job URLs"
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

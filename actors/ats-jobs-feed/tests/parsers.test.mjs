@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { parseBoard, parseBoardRef, apiUrlFor, boardKey, employmentType, salaryPeriod, isoDateTime, dedupeJobs } from '../src/transform.js';
-import { toOutput } from '../src/feed.js';
+import { parseBoard, parseBoardRef, apiUrlFor, boardKey, employmentType, salaryPeriod, isoDateTime, dedupeJobs } from '../src/core/transform.js';
+import { toOutput } from '../src/core/feed.js';
 import { load, FIXTURES, assertMatchesSchema } from './helpers.mjs';
 
 const parse = (ats) => parseBoard({ ats, token: FIXTURES[ats].token }, load(FIXTURES[ats].file));

@@ -1,0 +1,63 @@
+#!/usr/bin/env python3
+"""Copy actors/ats-jobs-feed/src/core/*.js into the other jobs Actors' src/core/.
+
+The jobs Actors (remote-jobs-feed, ats-jobs-scraper, companies-hiring) are thin
+wrappers around the same index reader, filters, keyword ranking, parsers and
+live-description code. Apify builds each Actor from its own directory, so that
+code is vendored in. actors/ats-jobs-feed/src/core/ is the single source of
+truth: edit it there, run this script and commit the copies. Stale files in a
+target core/ (removed from the source) are deleted.
+
+    python3 scripts/sync_jobs_core.py            # sync
+    python3 scripts/sync_jobs_core.py --check    # exit 1 on drift (CI)
+"""
+import filecmp
+import shutil
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+SOURCE = ROOT / "actors" / "ats-jobs-feed" / "src" / "core"
+TARGETS = ["remote-jobs-feed", "ats-jobs-scraper", "companies-hiring"]
+
+
+def main(check_only: bool = False) -> int:
+    sources = sorted(SOURCE.glob("*.js"))
+    if not sources:
+        print(f"no core files in {SOURCE.relative_to(ROOT)}")
+        return 1
+    names = {p.name for p in sources}
+    drift = []
+    for slug in TARGETS:
+        actor = ROOT / "actors" / slug
+        if not actor.is_dir():
+            drift.append(f"actors/{slug} (missing actor)")
+            continue
+        core = actor / "src" / "core"
+        if not check_only:
+            core.mkdir(parents=True, exist_ok=True)
+        for src in sources:
+            dst = core / src.name
+            if dst.exists() and filecmp.cmp(src, dst, shallow=False):
+                continue
+            if check_only:
+                drift.append(str(dst.relative_to(ROOT)))
+            else:
+                shutil.copy2(src, dst)
+                print(f"synced {dst.relative_to(ROOT)}")
+        for stale in sorted(core.glob("*.js")) if core.is_dir() else []:
+            if stale.name in names:
+                continue
+            if check_only:
+                drift.append(f"{stale.relative_to(ROOT)} (not in source)")
+            else:
+                stale.unlink()
+                print(f"removed {stale.relative_to(ROOT)}")
+    if check_only and drift:
+        print("DRIFT (run scripts/sync_jobs_core.py):\n  " + "\n  ".join(drift))
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(check_only="--check" in sys.argv))

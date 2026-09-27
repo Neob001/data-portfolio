@@ -1,0 +1,125 @@
+{
+  "title": "Companies Hiring",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "keywords": {
+      "title": "Role keywords",
+      "type": "array",
+      "description": "Roles to look for, e.g. \"sales\", \"account executive\", \"machine learning engineer\" (case-insensitive). A company counts a job when a keyword is in its title (ranked first) or, with the default scope, its department or team. Leave empty to count all open jobs.",
+      "editor": "stringList",
+      "prefill": [
+        "sales"
+      ]
+    },
+    "keywordScope": {
+      "title": "Keyword scope",
+      "type": "string",
+      "editor": "select",
+      "description": "title: the keyword must be in the job title. title_and_department (default): title, department or team. title_and_description: also the first ~1,500 characters of the description (broadest, noisiest).",
+      "enum": [
+        "title",
+        "title_and_department",
+        "title_and_description"
+      ],
+      "enumTitles": [
+        "Title only",
+        "Title, department or team",
+        "Title, department, team or description"
+      ],
+      "default": "title_and_department"
+    },
+    "keywordMatch": {
+      "title": "Keyword match",
+      "type": "string",
+      "description": "\"any\": a job needs at least one keyword. \"all\": a job needs every keyword.",
+      "editor": "select",
+      "enum": [
+        "any",
+        "all"
+      ],
+      "enumTitles": [
+        "Any keyword",
+        "All keywords"
+      ],
+      "default": "any"
+    },
+    "locations": {
+      "title": "Locations",
+      "type": "array",
+      "description": "Only count jobs in these places: city, state, country or region as written in the posting (\"Berlin\", \"California\"), or a 2-letter ISO country code (\"US\", \"DE\").",
+      "editor": "stringList"
+    },
+    "remote": {
+      "title": "Remote",
+      "type": "string",
+      "description": "remote_only: remote jobs only. onsite_only: excludes jobs marked remote (on-site, hybrid and unspecified remain).",
+      "editor": "select",
+      "enum": [
+        "any",
+        "remote_only",
+        "onsite_only"
+      ],
+      "enumTitles": [
+        "Any",
+        "Remote only",
+        "Exclude remote"
+      ],
+      "default": "any"
+    },
+    "departments": {
+      "title": "Departments",
+      "type": "array",
+      "description": "Substring match on department or team, e.g. \"engineering\", \"sales\".",
+      "editor": "stringList"
+    },
+    "minMatchingJobs": {
+      "title": "Minimum matching jobs",
+      "type": "integer",
+      "description": "Only companies with at least this many matching open jobs. Default 1.",
+      "minimum": 1,
+      "maximum": 100000,
+      "default": 1,
+      "prefill": 3
+    },
+    "postedWithinDays": {
+      "title": "Posted within (days)",
+      "type": "integer",
+      "description": "Only count jobs first published in the last N days. Empty = all open jobs.",
+      "minimum": 1,
+      "maximum": 3650
+    },
+    "excludeCompanies": {
+      "title": "Exclude companies",
+      "type": "array",
+      "editor": "stringList",
+      "description": "Leave out these companies (e.g. your existing customers or your own company): names (\"Datadog\") or board tokens (\"datadog\", \"greenhouse:datadog\")."
+    },
+    "sortBy": {
+      "title": "Sort by",
+      "type": "string",
+      "editor": "select",
+      "description": "matching_jobs: most matching open jobs first. hiring_velocity: highest share of jobs posted in the last 30 days. newest: most recent matching posting first.",
+      "enum": [
+        "matching_jobs",
+        "hiring_velocity",
+        "newest"
+      ],
+      "enumTitles": [
+        "Most matching jobs",
+        "Hiring velocity",
+        "Newest posting"
+      ],
+      "default": "matching_jobs"
+    },
+    "maxResults": {
+      "title": "Max companies",
+      "type": "integer",
+      "description": "Maximum number of company rows to return (and charge for).",
+      "default": 100,
+      "minimum": 1,
+      "maximum": 100000,
+      "prefill": 20
+    }
+  }
+}

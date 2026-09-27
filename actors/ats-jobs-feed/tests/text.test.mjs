@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { htmlToText, redactContacts, cleanDescription, DESCRIPTION_MAX, snippetOf, normKey, companyKey } from '../src/text.js';
-import { codesFromLocation, countryCodes, countryCode } from '../src/geo.js';
+import { htmlToText, redactContacts, cleanDescription, DESCRIPTION_MAX, snippetOf, normKey, companyKey } from '../src/core/text.js';
+import { codesFromLocation, countryCodes, countryCode } from '../src/core/geo.js';
 
 test('htmlToText: tags, lists, entities, Greenhouse double-escaped HTML', () => {
   assert.equal(htmlToText('<p>Hello&nbsp;<b>world</b></p><ul><li>One</li><li>Two &amp; three</li></ul>'), 'Hello world\n\n• One\n• Two & three');

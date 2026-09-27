@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { normalizeInput, compileFilter, filterIdentity, companyMatches } from '../src/filters.js';
-import { parseBoard } from '../src/transform.js';
+import { normalizeInput, compileFilter, filterIdentity, companyMatches } from '../src/core/filters.js';
+import { parseBoard } from '../src/core/transform.js';
 import { load, FIXTURES, NOW } from './helpers.mjs';
 
 const ALL = Object.entries(FIXTURES).flatMap(([ats, { token, file }]) => parseBoard({ ats, token }, load(file)).jobs
@@ -100,4 +100,19 @@ test('prefilled input schema values are accepted by normalizeInput', () => {
   const o = normalizeInput(prefill);
   assert.equal(o.mode, 'search');
   assert.deepEqual([o.keywords, o.remote, o.postedWithinDays, o.maxResults], [['engineer'], 'remote_only', 7, 20]);
+});
+
+test('countryCodes (wrapper Actors): codes-only match, OR-ed with locations; absent from the cursor key unless used', () => {
+  assert.deepEqual(run({ countryCodes: ['GR'] }), ['workable:blueground:186545F8C1']);
+  assert.deepEqual(run({ countryCodes: ['GR'], locations: ['Vienna'] }).sort(), ['workable:blueground:186545F8C1', 'workable:blueground:6C6B4B42F5']);
+  assert.deepEqual(run({ countryCodes: ['DE'] }), [], 'a code never matches location text');
+  assert.ok(!('countryCodes' in filterIdentity(normalizeInput({ keywords: ['a'] }))), 'existing incremental cursors keep their key');
+  assert.deepEqual(filterIdentity(normalizeInput({ countryCodes: ['us', 'DE'] })).countryCodes, ['de', 'us']);
+});
+
+test('keywordScope title_and_department (used by companies-hiring) is accepted', () => {
+  assert.equal(normalizeInput({ keywordScope: 'title_and_department' }).keywordScope, 'title_and_department');
+  const ids = run({ keywords: ['engineering'], keywordScope: 'title_and_department' });
+  assert.ok(ids.includes('ashby:ramp:34413f8d-26bf-4bbc-8ade-eb309a0e2245'), 'department "Engineering"');
+  assert.ok(!ids.includes('greenhouse:gitlab:8556658002'), 'description-only match is out of scope');
 });
