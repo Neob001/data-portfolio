@@ -43,7 +43,12 @@ def primary_price_per_1k(act):
     infos = act.get("pricingInfos") or []
     events = ((infos[-1].get("pricingPerEvent") or {}).get("actorChargeEvents") or {}) if infos else {}
     prim = [v for v in events.values() if v.get("isPrimaryEvent")] or list(events.values())
-    return round(prim[0]["eventPriceUsd"] * 1000, 2) if prim and prim[0].get("eventPriceUsd") is not None else None
+    if not prim:
+        return None
+    price = prim[0].get("eventPriceUsd")
+    if price is None:  # Store discounts: report the list (FREE-tier) price
+        price = ((prim[0].get("eventTieredPricingUsd") or {}).get("FREE") or {}).get("tieredEventPriceUsd")
+    return round(price * 1000, 2) if price is not None else None
 
 
 def main():
@@ -77,7 +82,9 @@ def main():
         if not (f"-actor-{aid}-" in pic and pic.endswith(f"-{slug}.png")):
             drift.append("icon")
         before = prev.get(slug, {})
-        if real_users == 0 and age >= NO_TRACTION_DAYS:
+        if age < 3:  # our own staging runs are the only "user" until Apify's daily tester arrives
+            real_users, verdict = 0, "too_early"
+        elif real_users == 0 and age >= NO_TRACTION_DAYS:
             verdict = "no_traction"
         elif real_users == 0:
             verdict = "too_early"

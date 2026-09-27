@@ -9,7 +9,13 @@
       "approval": "AUTO-APPROVED-PENDING-REVIEW (US federal public data)",
       "ppe_events": {
         "filing-result": {
-          "proposed_price_usd": 0.002
+          "proposed_price_usd": 0.002,
+          "store_discount_tiers_usd": {
+            "FREE": 0.002,
+            "BRONZE": 0.0018,
+            "SILVER": 0.0016,
+            "GOLD": 0.0014
+          }
         }
       },
       "pricing_rationale": "Leading incumbent charges ~$0.01/filing-fetched; launch ~20% below.",
@@ -42,6 +48,12 @@
           "event": "filing-result",
           "from": 0.008,
           "to": 0.002
+        },
+        {
+          "date": "2026-09-27",
+          "event": "filing-result",
+          "change": "Store discounts: Starter -10%, Scale -20%, Business -30%; Free plan unchanged",
+          "approval": "SD1"
         }
       ]
     },
@@ -53,7 +65,13 @@
       "approval": "AUTO-APPROVED-PENDING-REVIEW (EU official public data)",
       "ppe_events": {
         "tender-result": {
-          "proposed_price_usd": 0.003
+          "proposed_price_usd": 0.003,
+          "store_discount_tiers_usd": {
+            "FREE": 0.003,
+            "BRONZE": 0.0027,
+            "SILVER": 0.0024,
+            "GOLD": 0.0021
+          }
         }
       },
       "pricing_rationale": "Incumbents rental/PPR at higher effective cost and 13.7% failure rate; undercut + reliability.",
@@ -86,6 +104,12 @@
           "event": "tender-result",
           "from": 0.01,
           "to": 0.003
+        },
+        {
+          "date": "2026-09-27",
+          "event": "tender-result",
+          "change": "Store discounts: Starter -10%, Scale -20%, Business -30%; Free plan unchanged",
+          "approval": "SD1"
         }
       ]
     },
@@ -97,7 +121,13 @@
       "approval": "AUTO-APPROVED-PENDING-REVIEW (UK statutory register, company facts only)",
       "ppe_events": {
         "company-found": {
-          "proposed_price_usd": 0.0025
+          "proposed_price_usd": 0.0025,
+          "store_discount_tiers_usd": {
+            "FREE": 0.0025,
+            "BRONZE": 0.00225,
+            "SILVER": 0.002,
+            "GOLD": 0.00175
+          }
         }
       },
       "pricing_rationale": "Highest-demand safe niche (21.7k runs/30d across incumbents); per-lookup pricing beats per-run incumbents on small batches.",
@@ -128,6 +158,12 @@
           "event": "company-found",
           "from": 0.004,
           "to": 0.0025
+        },
+        {
+          "date": "2026-09-27",
+          "event": "company-found",
+          "change": "Store discounts: Starter -10%, Scale -20%, Business -30%; Free plan unchanged",
+          "approval": "SD1"
         }
       ]
     },
@@ -139,7 +175,13 @@
       "approval": "Q1 APPROVED by owner 2026-09-11 (chat)",
       "ppe_events": {
         "document-result": {
-          "proposed_price_usd": 0.0025
+          "proposed_price_usd": 0.0025,
+          "store_discount_tiers_usd": {
+            "FREE": 0.0025,
+            "BRONZE": 0.00225,
+            "SILVER": 0.002,
+            "GOLD": 0.00175
+          }
         }
       },
       "pricing_rationale": "Cheap build, 5.0-rated incumbents but tiny catalog; regulatory-monitoring buyers",
@@ -171,6 +213,12 @@
           "event": "document-result",
           "from": 0.005,
           "to": 0.0025
+        },
+        {
+          "date": "2026-09-27",
+          "event": "document-result",
+          "change": "Store discounts: Starter -10%, Scale -20%, Business -30%; Free plan unchanged",
+          "approval": "SD1"
         }
       ]
     },
@@ -182,7 +230,13 @@
       "approval": "Q1 APPROVED by owner 2026-09-11 (chat)",
       "ppe_events": {
         "recall-result": {
-          "proposed_price_usd": 0.003
+          "proposed_price_usd": 0.003,
+          "store_discount_tiers_usd": {
+            "FREE": 0.003,
+            "BRONZE": 0.0027,
+            "SILVER": 0.0024,
+            "GOLD": 0.0021
+          }
         }
       },
       "pricing_rationale": "Official source, supply-chain risk buyers",
@@ -215,6 +269,12 @@
           "event": "recall-result",
           "from": 0.005,
           "to": 0.003
+        },
+        {
+          "date": "2026-09-27",
+          "event": "recall-result",
+          "change": "Store discounts: Starter -10%, Scale -20%, Business -30%; Free plan unchanged",
+          "approval": "SD1"
         }
       ]
     },
@@ -226,7 +286,13 @@
       "approval": "Q1 APPROVED by owner 2026-09-11 (chat)",
       "ppe_events": {
         "name-screened": {
-          "proposed_price_usd": 0.003
+          "proposed_price_usd": 0.003,
+          "store_discount_tiers_usd": {
+            "FREE": 0.003,
+            "BRONZE": 0.0027,
+            "SILVER": 0.0024,
+            "GOLD": 0.0021
+          }
         }
       },
       "pricing_rationale": "Compliance buyers pay premium; incumbents unrated",
@@ -255,6 +321,12 @@
           "event": "name-screened",
           "from": 0.01,
           "to": 0.003
+        },
+        {
+          "date": "2026-09-27",
+          "event": "name-screened",
+          "change": "Store discounts: Starter -10%, Scale -20%, Business -30%; Free plan unchanged",
+          "approval": "SD1"
         }
       ],
       "fix_log": [
@@ -272,7 +344,13 @@
       "approval": "Q1 APPROVED by owner 2026-09-11 (chat)",
       "ppe_events": {
         "location-forecast": {
-          "proposed_price_usd": 0.002
+          "proposed_price_usd": 0.002,
+          "store_discount_tiers_usd": {
+            "FREE": 0.002,
+            "BRONZE": 0.0018,
+            "SILVER": 0.0016,
+            "GOLD": 0.0014
+          }
         }
       },
       "pricing_rationale": "Cheapest build; volume + agent-friendly",
@@ -294,7 +372,15 @@
           "TRAVEL",
           "DEVELOPER_TOOLS"
         ]
-      }
+      },
+      "price_history": [
+        {
+          "date": "2026-09-27",
+          "event": "location-forecast",
+          "change": "Store discounts: Starter -10%, Scale -20%, Business -30%; Free plan unchanged",
+          "approval": "SD1"
+        }
+      ]
     },
     "company-jobs-scraper": {
       "apify_actor_id": "7DuuakEPLtkToqkxI",
@@ -308,7 +394,13 @@
       "first_paid_run_date": null,
       "ppe_events": {
         "job-result": {
-          "proposed_price_usd": 0.002
+          "proposed_price_usd": 0.002,
+          "store_discount_tiers_usd": {
+            "FREE": 0.002,
+            "BRONZE": 0.0018,
+            "SILVER": 0.0016,
+            "GOLD": 0.0014
+          }
         }
       },
       "pricing_rationale": "Incumbent failing 39% of 1.7k runs/30d; official-API replacement, priced per job row.",
@@ -330,7 +422,15 @@
           "JOBS",
           "LEAD_GENERATION"
         ]
-      }
+      },
+      "price_history": [
+        {
+          "date": "2026-09-27",
+          "event": "job-result",
+          "change": "Store discounts: Starter -10%, Scale -20%, Business -30%; Free plan unchanged",
+          "approval": "SD1"
+        }
+      ]
     },
     "sitemap-url-extractor": {
       "apify_actor_id": "s1dbHjTJTSoeYEefz",
@@ -344,7 +444,13 @@
       "first_paid_run_date": null,
       "ppe_events": {
         "url-result": {
-          "proposed_price_usd": 0.0003
+          "proposed_price_usd": 0.0003,
+          "store_discount_tiers_usd": {
+            "FREE": 0.0003,
+            "BRONZE": 0.00027,
+            "SILVER": 0.00024,
+            "GOLD": 0.00021
+          }
         }
       },
       "pricing_rationale": "Incumbent free but failing 17%; we add index traversal + status checks; $0.30/1000 URLs.",
@@ -366,7 +472,15 @@
           "SEO_TOOLS",
           "DEVELOPER_TOOLS"
         ]
-      }
+      },
+      "price_history": [
+        {
+          "date": "2026-09-27",
+          "event": "url-result",
+          "change": "Store discounts: Starter -10%, Scale -20%, Business -30%; Free plan unchanged",
+          "approval": "SD1"
+        }
+      ]
     },
     "wikipedia-scraper": {
       "apify_actor_id": "FFe1if47hnnV8Rejh",
@@ -381,7 +495,13 @@
         "article-result": {
           "proposed_price_usd": 0.001,
           "title": "Article result",
-          "description": "One Wikipedia article delivered. Not-found titles, person biographies (excluded by policy), duplicates and empty runs are never charged."
+          "description": "One Wikipedia article delivered. Not-found titles, person biographies (excluded by policy), duplicates and empty runs are never charged.",
+          "store_discount_tiers_usd": {
+            "FREE": 0.001,
+            "BRONZE": 0.0009,
+            "SILVER": 0.0008,
+            "GOLD": 0.0007
+          }
         }
       },
       "pricing_rationale": "Incumbents $0.001-0.005/article plus start fees; $0.001/article, no start fee.",
@@ -405,7 +525,15 @@
         ]
       },
       "staging_started_at": "2026-09-13T12:25:39Z",
-      "notes": "Staging 2026-09-13: default-input + adversarial runs SUCCEEDED; uncharged paths verified (not found, invalid, duplicates, person articles / unknown barcodes, no search results). PPE pricing via API is 403 -> Console only."
+      "notes": "Staging 2026-09-13: default-input + adversarial runs SUCCEEDED; uncharged paths verified (not found, invalid, duplicates, person articles / unknown barcodes, no search results). PPE pricing via API is 403 -> Console only.",
+      "price_history": [
+        {
+          "date": "2026-09-27",
+          "event": "article-result",
+          "change": "Store discounts: Starter -10%, Scale -20%, Business -30%; Free plan unchanged",
+          "approval": "SD1"
+        }
+      ]
     },
     "open-food-facts-scraper": {
       "apify_actor_id": "TKY03UDcrJK4pkhYn",
@@ -420,7 +548,13 @@
         "product-result": {
           "proposed_price_usd": 0.001,
           "title": "Product result",
-          "description": "One food product with name or nutrition data delivered. Unknown barcodes, empty products, duplicates and empty runs are never charged."
+          "description": "One food product with name or nutrition data delivered. Unknown barcodes, empty products, duplicates and empty runs are never charged.",
+          "store_discount_tiers_usd": {
+            "FREE": 0.001,
+            "BRONZE": 0.0009,
+            "SILVER": 0.0008,
+            "GOLD": 0.0007
+          }
         }
       },
       "pricing_rationale": "Incumbents from free to $0.009/item, most with start fees; $0.001/product, no start fee, misses free.",
@@ -444,7 +578,15 @@
         ]
       },
       "staging_started_at": "2026-09-13T12:25:46Z",
-      "notes": "Staging 2026-09-13: default-input + adversarial runs SUCCEEDED; uncharged paths verified (not found, invalid, duplicates, person articles / unknown barcodes, no search results). PPE pricing via API is 403 -> Console only."
+      "notes": "Staging 2026-09-13: default-input + adversarial runs SUCCEEDED; uncharged paths verified (not found, invalid, duplicates, person articles / unknown barcodes, no search results). PPE pricing via API is 403 -> Console only.",
+      "price_history": [
+        {
+          "date": "2026-09-27",
+          "event": "product-result",
+          "change": "Store discounts: Starter -10%, Scale -20%, Business -30%; Free plan unchanged",
+          "approval": "SD1"
+        }
+      ]
     },
     "ecb-exchange-rates": {
       "apify_actor_id": "wL3rvAFzZkdp3GJgh",
@@ -459,7 +601,13 @@
         "rate-result": {
           "proposed_price_usd": 0.001,
           "title": "Rate result",
-          "description": "One exchange rate row (date + currency pair) delivered. Unknown or discontinued currencies and empty runs are never charged."
+          "description": "One exchange rate row (date + currency pair) delivered. Unknown or discontinued currencies and empty runs are never charged.",
+          "store_discount_tiers_usd": {
+            "FREE": 0.001,
+            "BRONZE": 0.0009,
+            "SILVER": 0.0008,
+            "GOLD": 0.0007
+          }
         }
       },
       "pricing_rationale": "At/below competitor median from niche scan 2026-09-15.",
@@ -481,7 +629,15 @@
         ]
       },
       "staging_validated": true,
-      "monetization_configured": true
+      "monetization_configured": true,
+      "price_history": [
+        {
+          "date": "2026-09-27",
+          "event": "rate-result",
+          "change": "Store discounts: Starter -10%, Scale -20%, Business -30%; Free plan unchanged",
+          "approval": "SD1"
+        }
+      ]
     },
     "email-security-checker": {
       "apify_actor_id": "LNGrubmo3gKNWsdgh",
@@ -496,7 +652,13 @@
         "domain-audited": {
           "proposed_price_usd": 0.003,
           "title": "Domain audited",
-          "description": "One domain fully audited (SPF, DMARC, DKIM, MX, MTA-STS, TLS-RPT). Invalid, nonexistent or unreachable domains are never charged."
+          "description": "One domain fully audited (SPF, DMARC, DKIM, MX, MTA-STS, TLS-RPT). Invalid, nonexistent or unreachable domains are never charged.",
+          "store_discount_tiers_usd": {
+            "FREE": 0.003,
+            "BRONZE": 0.0027,
+            "SILVER": 0.0024,
+            "GOLD": 0.0021
+          }
         }
       },
       "pricing_rationale": "At/below competitor median from niche scan 2026-09-15.",
@@ -518,7 +680,15 @@
         ]
       },
       "staging_validated": true,
-      "monetization_configured": true
+      "monetization_configured": true,
+      "price_history": [
+        {
+          "date": "2026-09-27",
+          "event": "domain-audited",
+          "change": "Store discounts: Starter -10%, Scale -20%, Business -30%; Free plan unchanged",
+          "approval": "SD1"
+        }
+      ]
     },
     "eu-vat-validation": {
       "apify_actor_id": "U215BxIiP2pibZ7NJ",
@@ -533,7 +703,13 @@
         "vat-checked": {
           "proposed_price_usd": 0.002,
           "title": "VAT number checked",
-          "description": "One definitive VIES answer (valid or invalid) delivered. Unrecognized formats and checks VIES could not answer are never charged."
+          "description": "One definitive VIES answer (valid or invalid) delivered. Unrecognized formats and checks VIES could not answer are never charged.",
+          "store_discount_tiers_usd": {
+            "FREE": 0.002,
+            "BRONZE": 0.0018,
+            "SILVER": 0.0016,
+            "GOLD": 0.0014
+          }
         }
       },
       "pricing_rationale": "At/below competitor median from niche scan 2026-09-15.",
@@ -555,7 +731,15 @@
         ]
       },
       "staging_validated": true,
-      "monetization_configured": true
+      "monetization_configured": true,
+      "price_history": [
+        {
+          "date": "2026-09-27",
+          "event": "vat-checked",
+          "change": "Store discounts: Starter -10%, Scale -20%, Business -30%; Free plan unchanged",
+          "approval": "SD1"
+        }
+      ]
     },
     "lighthouse-auditor": {
       "apify_actor_id": "Quxlir4keE4Up8hGE",
@@ -570,7 +754,13 @@
         "page-audited": {
           "proposed_price_usd": 0.01,
           "title": "Page audited",
-          "description": "One completed Lighthouse audit (URL x device). Unreachable pages, invalid URLs and failed audits are never charged."
+          "description": "One completed Lighthouse audit (URL x device). Unreachable pages, invalid URLs and failed audits are never charged.",
+          "store_discount_tiers_usd": {
+            "FREE": 0.01,
+            "BRONZE": 0.009,
+            "SILVER": 0.008,
+            "GOLD": 0.007
+          }
         }
       },
       "pricing_rationale": "Competitors $2-100/1k, active cluster $10-20; compute-heavy (headless Chrome), verify margin in staging.",
@@ -593,7 +783,15 @@
       },
       "staging_validated": true,
       "notes": "Staging 2026-09-15: default + adversarial SUCCEEDED; invalid URL, NXDOMAIN (both devices) and duplicate URL uncharged. Compute ~$0.003 per successful audit at 2 GB (24.8s run incl. Chrome start) vs $0.01 price.",
-      "monetization_configured": true
+      "monetization_configured": true,
+      "price_history": [
+        {
+          "date": "2026-09-27",
+          "event": "page-audited",
+          "change": "Store discounts: Starter -10%, Scale -20%, Business -30%; Free plan unchanged",
+          "approval": "SD1"
+        }
+      ]
     },
     "sam-gov-contracts": {
       "apify_actor_id": "Fs9vFlYGCXT0NyKZt",
@@ -608,7 +806,13 @@
         "opportunity-result": {
           "proposed_price_usd": 0.002,
           "title": "Opportunity result",
-          "description": "One matching federal contract opportunity delivered. Scanned non-matching notices and empty runs are never charged."
+          "description": "One matching federal contract opportunity delivered. Scanned non-matching notices and empty runs are never charged.",
+          "store_discount_tiers_usd": {
+            "FREE": 0.002,
+            "BRONZE": 0.0018,
+            "SILVER": 0.0016,
+            "GOLD": 0.0014
+          }
         }
       },
       "pricing_rationale": "Competitor cluster $2.5-3/1k (leader rated 1.0); $2/1k.",
@@ -631,7 +835,15 @@
       },
       "notes": "Contracting officer names/emails/phones dropped by policy (personal data); notice_url links to them on SAM.gov. Staging 2026-09-15: default 68 results in 13s ($0.001 compute); two-pass incremental verified; free-text emails/phones masked (0 raw emails in 68 records).",
       "staging_validated": true,
-      "monetization_configured": true
+      "monetization_configured": true,
+      "price_history": [
+        {
+          "date": "2026-09-27",
+          "event": "opportunity-result",
+          "change": "Store discounts: Starter -10%, Scale -20%, Business -30%; Free plan unchanged",
+          "approval": "SD1"
+        }
+      ]
     },
     "dns-records-lookup": {
       "apify_actor_id": "NkEh2R51jHatGtCA3",
@@ -646,7 +858,13 @@
         "domain-resolved": {
           "proposed_price_usd": 0.0015,
           "title": "Domain resolved",
-          "description": "One existing domain resolved with at least one DNS record returned. Invalid, nonexistent, unreachable or empty domains are never charged."
+          "description": "One existing domain resolved with at least one DNS record returned. Invalid, nonexistent, unreachable or empty domains are never charged.",
+          "store_discount_tiers_usd": {
+            "FREE": 0.0015,
+            "BRONZE": 0.00135,
+            "SILVER": 0.0012,
+            "GOLD": 0.00105
+          }
         }
       },
       "pricing_rationale": "Below niche median $5/1k and leaders $2-3/1k (gap_validation 2026-09-15).",
@@ -669,7 +887,15 @@
       },
       "staging_validated": true,
       "monetization_configured": true,
-      "staging_started_at": "2026-09-15T11:06:08Z"
+      "staging_started_at": "2026-09-15T11:06:08Z",
+      "price_history": [
+        {
+          "date": "2026-09-27",
+          "event": "domain-resolved",
+          "change": "Store discounts: Starter -10%, Scale -20%, Business -30%; Free plan unchanged",
+          "approval": "SD1"
+        }
+      ]
     },
     "france-company-lookup": {
       "apify_actor_id": "2k7EuEL3MiftrabLt",
@@ -684,7 +910,13 @@
         "company-found": {
           "proposed_price_usd": 0.003,
           "title": "Company found",
-          "description": "One French company record delivered. Not found, invalid identifiers, excluded sole proprietors and API failures are never charged."
+          "description": "One French company record delivered. Not found, invalid identifiers, excluded sole proprietors and API failures are never charged.",
+          "store_discount_tiers_usd": {
+            "FREE": 0.003,
+            "BRONZE": 0.0027,
+            "SILVER": 0.0024,
+            "GOLD": 0.0021
+          }
         }
       },
       "pricing_rationale": "Below niche median $5.99/1k (dltik $8, epicscrapers $4, logiover $3.50); gap_validation 2026-09-15.",
@@ -708,7 +940,15 @@
       "notes": "No officers (minimal=true), sole proprietors and natural-person groupings excluded; API rate limit 7 req/s per IP and 30 req/s per ASN (watch 429s on Apify cloud).",
       "staging_validated": true,
       "monetization_configured": true,
-      "staging_started_at": "2026-09-15T11:21:02Z"
+      "staging_started_at": "2026-09-15T11:21:02Z",
+      "price_history": [
+        {
+          "date": "2026-09-27",
+          "event": "company-found",
+          "change": "Store discounts: Starter -10%, Scale -20%, Business -30%; Free plan unchanged",
+          "approval": "SD1"
+        }
+      ]
     },
     "broken-link-checker": {
       "apify_actor_id": "FErlINXi1bzBIRoAD",
@@ -816,7 +1056,13 @@
         "screenshot-taken": {
           "proposed_price_usd": 0.002,
           "title": "Screenshot taken",
-          "description": "One screenshot captured and stored. Invalid URLs and pages that fail to load are never charged."
+          "description": "One screenshot captured and stored. Invalid URLs and pages that fail to load are never charged.",
+          "store_discount_tiers_usd": {
+            "FREE": 0.002,
+            "BRONZE": 0.0018,
+            "SILVER": 0.0016,
+            "GOLD": 0.0014
+          }
         }
       },
       "pricing_rationale": "apify/screenshot-url leads (84% share, rated 3.9); $2/1k.",
@@ -839,7 +1085,15 @@
       },
       "staging_validated": true,
       "monetization_configured": true,
-      "staging_started_at": "2026-09-18T15:11:46Z"
+      "staging_started_at": "2026-09-18T15:11:46Z",
+      "price_history": [
+        {
+          "date": "2026-09-27",
+          "event": "screenshot-taken",
+          "change": "Store discounts: Starter -10%, Scale -20%, Business -30%; Free plan unchanged",
+          "approval": "SD1"
+        }
+      ]
     },
     "ats-jobs-feed": {
       "apify_actor_id": "5tGfM8n7TcEZwmwaP",
@@ -854,7 +1108,13 @@
         "job-result": {
           "proposed_price_usd": 0.003,
           "title": "Job result",
-          "description": "One job posting delivered. Nothing else is charged."
+          "description": "One job posting delivered. Nothing else is charged.",
+          "store_discount_tiers_usd": {
+            "FREE": 0.003,
+            "BRONZE": 0.0027,
+            "SILVER": 0.0024,
+            "GOLD": 0.0021
+          }
         }
       },
       "pricing_rationale": "Leader fantastic-jobs/career-site-job-listing-api $12/1k with 1,441 real users; we launch at $3/1k.",
@@ -878,7 +1138,15 @@
       "notes": "Index: GitHub release jobs-index, daily Actions build (first run 2026-09-19: 349,840 jobs, 11,035 boards incl. Workable, 52.8 MB, 3.5 h). Staging 2026-09-20: prefilled 20 rows/4.8s; worst case 67 rows/99s over 47 shards; empty input 100 rows/15s; incremental second pass delivered 0 repeats.",
       "staging_validated": true,
       "monetization_configured": true,
-      "staging_started_at": "2026-09-19T13:46:36Z"
+      "staging_started_at": "2026-09-19T13:46:36Z",
+      "price_history": [
+        {
+          "date": "2026-09-27",
+          "event": "job-result",
+          "change": "Store discounts: Starter -10%, Scale -20%, Business -30%; Free plan unchanged",
+          "approval": "SD1"
+        }
+      ]
     },
     "remote-jobs-feed": {
       "apify_actor_id": "vsQjoYbCDY2wUzmIT",
@@ -893,7 +1161,13 @@
         "job-result": {
           "proposed_price_usd": 0.003,
           "title": "Job result",
-          "description": "One remote job posting delivered. Nothing else is charged."
+          "description": "One remote job posting delivered. Nothing else is charged.",
+          "store_discount_tiers_usd": {
+            "FREE": 0.003,
+            "BRONZE": 0.0027,
+            "SILVER": 0.0024,
+            "GOLD": 0.0021
+          }
         }
       },
       "pricing_rationale": "Same index as ats-jobs-feed; jobs at $3/1k vs leader $12/1k; company rows aggregate many jobs.",
@@ -916,7 +1190,15 @@
       },
       "staging_validated": true,
       "monetization_configured": true,
-      "staging_started_at": "2026-09-27T07:45:07Z"
+      "staging_started_at": "2026-09-27T07:45:07Z",
+      "price_history": [
+        {
+          "date": "2026-09-27",
+          "event": "job-result",
+          "change": "Store discounts: Starter -10%, Scale -20%, Business -30%; Free plan unchanged",
+          "approval": "SD1"
+        }
+      ]
     },
     "ats-jobs-scraper": {
       "apify_actor_id": "b7dTq03CEpU3rcic4",
@@ -931,7 +1213,13 @@
         "job-result": {
           "proposed_price_usd": 0.003,
           "title": "Job result",
-          "description": "One job posting delivered. Nothing else is charged."
+          "description": "One job posting delivered. Nothing else is charged.",
+          "store_discount_tiers_usd": {
+            "FREE": 0.003,
+            "BRONZE": 0.0027,
+            "SILVER": 0.0024,
+            "GOLD": 0.0021
+          }
         }
       },
       "pricing_rationale": "Same index as ats-jobs-feed; jobs at $3/1k vs leader $12/1k; company rows aggregate many jobs.",
@@ -954,7 +1242,15 @@
       },
       "staging_validated": true,
       "monetization_configured": true,
-      "staging_started_at": "2026-09-27T07:45:11Z"
+      "staging_started_at": "2026-09-27T07:45:11Z",
+      "price_history": [
+        {
+          "date": "2026-09-27",
+          "event": "job-result",
+          "change": "Store discounts: Starter -10%, Scale -20%, Business -30%; Free plan unchanged",
+          "approval": "SD1"
+        }
+      ]
     },
     "companies-hiring": {
       "apify_actor_id": "RPfIRrwrZrShLcK0p",
@@ -969,7 +1265,13 @@
         "company-result": {
           "proposed_price_usd": 0.005,
           "title": "Company result",
-          "description": "One hiring company delivered with its open roles and hiring signals."
+          "description": "One hiring company delivered with its open roles and hiring signals.",
+          "store_discount_tiers_usd": {
+            "FREE": 0.005,
+            "BRONZE": 0.0045,
+            "SILVER": 0.004,
+            "GOLD": 0.0035
+          }
         }
       },
       "pricing_rationale": "Same index as ats-jobs-feed; jobs at $3/1k vs leader $12/1k; company rows aggregate many jobs.",
@@ -992,7 +1294,15 @@
       },
       "staging_validated": true,
       "monetization_configured": true,
-      "staging_started_at": "2026-09-27T07:45:14Z"
+      "staging_started_at": "2026-09-27T07:45:14Z",
+      "price_history": [
+        {
+          "date": "2026-09-27",
+          "event": "company-result",
+          "change": "Store discounts: Starter -10%, Scale -20%, Business -30%; Free plan unchanged",
+          "approval": "SD1"
+        }
+      ]
     }
   },
   "apify_account": "factpipe",

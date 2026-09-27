@@ -35,7 +35,10 @@ def live_price(actor_id, event):
     if not infos:
         return None
     ev = (infos[-1].get("pricingPerEvent") or {}).get("actorChargeEvents", {}).get(event) or {}
-    return ev.get("eventPriceUsd")
+    if ev.get("eventPriceUsd") is not None:
+        return ev["eventPriceUsd"]
+    # Store discounts: the list price is the FREE tier; lower tiers are percentage discounts of it.
+    return ((ev.get("eventTieredPricingUsd") or {}).get("FREE") or {}).get("tieredEventPriceUsd")
 
 
 def fmt_per_1k(price):
