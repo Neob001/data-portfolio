@@ -316,6 +316,18 @@ def build_example_input(schema: dict) -> dict:
     return obj
 
 
+def examples_html(slug: str) -> str:
+    """Links to the published example tasks (Store landing pages) listed in tasks.json."""
+    path = ROOT / "tasks.json"
+    tasks = [t for t in json.loads(path.read_text())["tasks"] if t["actor"] == slug] if path.exists() else []
+    if not tasks:
+        return ""
+    items = "\n".join(
+        f'<li><a href="https://apify.com/factpipe/{esc(slug)}/examples/{esc(t["name"])}" target="_blank" rel="noopener">'
+        f'{esc(t["title"])}</a>: {esc(t["description"])}</li>' for t in tasks)
+    return f'<h3 id="ready-made-examples">Ready-made examples</h3>\n<ul>\n{items}\n</ul>\n'
+
+
 def code_examples_html(slug: str, example_input: dict) -> str:
     input_json = json.dumps(example_input, indent=2)
     input_json_compact = json.dumps(example_input)
@@ -357,7 +369,7 @@ def code_examples_html(slug: str, example_input: dict) -> str:
 <a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
 and edit the input to fit your own data.</p>
 <p><a class="button" href="{esc(console_url)}" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
-
+{examples_html(slug)}
 <h3>cURL</h3>
 <pre><code class="language-bash">{esc(curl_cmd)}</code></pre>
 
