@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Companies Hiring API: Hiring Signals &amp; Sales Leads by Role</title>
+<meta name="description" content="Find companies hiring for any role across 10,000+ career sites: open roles, hiring velocity, locations and departments per company. Pay per company.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/companies-hiring/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Companies Hiring API: Hiring Signals &amp; Sales Leads by Role">
+<meta property="og:description" content="Find companies hiring for any role across 10,000+ career sites: open roles, hiring velocity, locations and departments per company. Pay per company.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/companies-hiring/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Companies Hiring \u2014 Hiring Signals & Sales Leads by Role",
+  "description": "Find companies hiring for any role across 10,000+ company job boards (Greenhouse, Lever, Ashby, Workable, Recruitee): one row per company with open roles, hiring velocity and locations. $5 per 1,000 companies.",
+  "url": "https://neob001.github.io/data-portfolio/companies-hiring/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "5",
+    "description": "Pay-per-result pricing: $5 per 1,000 company results",
+    "url": "https://apify.com/factpipe/companies-hiring"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>Companies Hiring — Hiring Signals &amp; Sales Leads by Role</h1>
+<p>Find <strong>companies that are hiring for a role right now</strong>, as one row per company: how many matching jobs they have open, which titles, departments and locations, how fast they are posting, and a link to their careers page. The data comes from 10,900+ company job boards on Greenhouse, Lever, Ashby, Workable and Recruitee, read through their official public APIs and refreshed daily. Use it for <strong>sales prospecting</strong> (a company hiring 12 account executives is buying sales tools), <strong>recruiting agencies</strong> (who needs people like your candidates) and <strong>market research</strong> (&quot;who is hiring AI engineers?&quot;). <strong>$5 per 1,000 companies</strong>, and you pay only for the company rows you get.</p>
+<div class="quick-facts"><span class="badge">$5 / 1,000</span><a class="button" href="https://apify.com/factpipe/companies-hiring" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the prefilled input: <code>keywords: [&quot;sales&quot;]</code>, <code>minMatchingJobs: 3</code>, <code>maxResults: 20</code>. The run takes well under a minute.</li><li>You get the 20 companies with the most open sales jobs (sales in the title, department or team), each with its matching job titles, top departments and locations, remote share, hiring velocity and careers page.</li><li>That first run costs at most <strong>$0.10</strong> (20 companies × $0.005), which fits in Apify&#x27;s free monthly credit. Then change the role (<code>[&quot;machine learning engineer&quot;]</code>), add <code>locations: [&quot;US&quot;]</code>, or sort by <code>hiring_velocity</code> to find companies that are scaling fastest.</li></ol>
+<h2 id="what-you-get">What you get</h2>
+<p>One flat record per company. A company with job boards on several ATSs (for example an old Greenhouse board and a new Ashby board) is <strong>one row</strong>, and an opening listed on both boards is counted once:</p>
+<pre><code class="language-json">{
+  &quot;company_name&quot;: &quot;Wayve&quot;,
+  &quot;company_board&quot;: &quot;wayve&quot;,
+  &quot;ats&quot;: &quot;greenhouse&quot;,
+  &quot;careers_url&quot;: &quot;https://job-boards.greenhouse.io/wayve&quot;,
+  &quot;boards&quot;: [
+    { &quot;ats&quot;: &quot;greenhouse&quot;, &quot;token&quot;: &quot;wayve&quot;, &quot;careers_url&quot;: &quot;https://job-boards.greenhouse.io/wayve&quot;, &quot;open_jobs&quot;: 195 },
+    { &quot;ats&quot;: &quot;ashby&quot;, &quot;token&quot;: &quot;wayve&quot;, &quot;careers_url&quot;: &quot;https://jobs.ashbyhq.com/wayve&quot;, &quot;open_jobs&quot;: 183 }
+  ],
+  &quot;ats_list&quot;: [&quot;greenhouse&quot;, &quot;ashby&quot;],
+  &quot;careers_site_domain&quot;: null,
+  &quot;open_jobs_total&quot;: 207,
+  &quot;matching_jobs&quot;: 26,
+  &quot;matching_job_titles&quot;: [
+    &quot;Principal Machine Learning Engineer GAIA&quot;,
+    &quot;Machine Learning Engineer, Compiler&quot;,
+    &quot;Machine Learning Engineer&quot;,
+    &quot;Senior Machine Learning Engineer - AV Core&quot;,
+    &quot;Machine Learning Engineer, Driving Product&quot;
+  ],
+  &quot;departments_hiring&quot;: [
+    { &quot;department&quot;: &quot;AV Engineering&quot;, &quot;jobs&quot;: 9 },
+    { &quot;department&quot;: &quot;Simulation, Evaluation, Validation&quot;, &quot;jobs&quot;: 7 },
+    { &quot;department&quot;: &quot;AI Platform&quot;, &quot;jobs&quot;: 6 },
+    { &quot;department&quot;: &quot;Product &amp; Delivery&quot;, &quot;jobs&quot;: 4 }
+  ],
+  &quot;locations_hiring&quot;: [
+    { &quot;location&quot;: &quot;London, United Kingdom&quot;, &quot;jobs&quot;: 9 },
+    { &quot;location&quot;: &quot;Sunnyvale, California USA&quot;, &quot;jobs&quot;: 8 },
+    { &quot;location&quot;: &quot;London&quot;, &quot;jobs&quot;: 4 },
+    { &quot;location&quot;: &quot;Sunnyvale&quot;, &quot;jobs&quot;: 3 },
+    { &quot;location&quot;: &quot;Herzliya, Israel&quot;, &quot;jobs&quot;: 2 }
+  ],
+  &quot;remote_share&quot;: 0,
+  &quot;newest_posting_at&quot;: &quot;2026-09-24T15:22:21.313Z&quot;,
+  &quot;jobs_posted_last_30d&quot;: 78,
+  &quot;hiring_velocity&quot;: 0.38,
+  &quot;sample_job_urls&quot;: [
+    &quot;https://jobs.ashbyhq.com/wayve/e781b706-4494-472d-8831-74140ad1a10e&quot;,
+    &quot;https://jobs.ashbyhq.com/wayve/02628ce9-b78d-48f7-ad0a-689e317e14d4&quot;,
+    &quot;https://wayve.firststage.co/jobs?gh_jid=8752478002&quot;
+  ],
+  &quot;source_url&quot;: &quot;https://boards-api.greenhouse.io/v1/boards/wayve/jobs?content=true&quot;,
+  &quot;fetched_at&quot;: &quot;2026-09-25T03:19:24.360Z&quot;
+}</code></pre>
+<p>(A real row from a <code>[&quot;machine learning engineer&quot;]</code> search on the 2026-09-25 index. Wayve lists most of its jobs on both Greenhouse and Ashby: 195 + 183 board listings, 207 distinct open jobs. <code>matching_job_titles</code> is shortened here: the Actor returns up to 10.)</p>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Meaning</th></tr></thead><tbody><tr><td><code>open_jobs_total</code></td><td>All open jobs of the company across its boards, whatever your filters (an opening on two boards counts once)</td></tr><tr><td><code>matching_jobs</code></td><td>Open jobs matching your keywords and filters</td></tr><tr><td><code>matching_job_titles</code></td><td>Up to 10 distinct matching titles, most relevant first</td></tr><tr><td><code>departments_hiring</code>, <code>locations_hiring</code></td><td>Top 5 departments/teams and locations of the matching jobs, with counts</td></tr><tr><td><code>remote_share</code></td><td>Share (0–1) of the matching jobs that are remote</td></tr><tr><td><code>newest_posting_at</code></td><td>Newest matching posting</td></tr><tr><td><code>jobs_posted_last_30d</code></td><td>Jobs on the board first posted in the last 30 days (matching or not)</td></tr><tr><td><code>hiring_velocity</code></td><td><code>jobs_posted_last_30d / open_jobs_total</code>, rounded to 2 decimals. 1.0 means every open job is less than a month old</td></tr><tr><td><code>careers_site_domain</code></td><td>The domain the company&#x27;s job posts link to, when that is not the ATS itself. This is <strong>often a dedicated careers site</strong> (<code>withwaymo.com</code>, <code>coupang.jobs</code>, <code>weareroku.com</code>), <strong>not necessarily the company&#x27;s main website</strong>, so check it before using it as the company domain. <code>null</code> when all job links point to the ATS. We never guess a domain from the company name</td></tr><tr><td><code>company_board</code>, <code>ats</code>, <code>careers_url</code>, <code>source_url</code></td><td>The company&#x27;s board with the most matching jobs: its token, ATS, public job-board page and the ATS API it was read from</td></tr><tr><td><code>boards</code></td><td>Every job board of the company: <code>{ats, token, careers_url, open_jobs}</code> (<code>open_jobs</code> per board, before cross-board de-duplication)</td></tr><tr><td><code>ats_list</code></td><td>The ATSs those boards use</td></tr><tr><td><code>sample_job_urls</code></td><td>Up to 3 matching job postings</td></tr></tbody></table></div>
+<p><strong>Company data only.</strong> Rows describe employers and their open roles. No recruiter, hiring-manager or employee names, e-mails or profiles are collected.</p>
+<h2 id="use-cases">Use cases</h2>
+<ul><li><strong>Sales prospecting</strong>: companies hiring SDRs and account executives are growing their sales team, and will buy CRM, sales engagement and enablement tools. Companies hiring security engineers need security tooling. Export the list to your CRM and reach out while the budget is fresh.</li><li><strong>Recruiting agencies</strong>: find the companies with the most open roles in your niche (&quot;data engineer&quot;, &quot;nurse&quot;, &quot;controller&quot;) and in your region, with the careers page to check first.</li><li><strong>Investor and market research</strong>: &quot;who is hiring AI engineers?&quot;, which companies are scaling (high <code>hiring_velocity</code>), where teams are being built (<code>locations_hiring</code>), how remote-friendly a segment is (<code>remote_share</code>).</li><li><strong>Competitive intelligence</strong>: track which teams your competitors are growing, week by week.</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/companies-hiring" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~companies-hiring/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;keywords&quot;: [&quot;sales&quot;], &quot;minMatchingJobs&quot;: 3, &quot;maxResults&quot;: 20}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;keywords&quot;: [
+    &quot;sales&quot;
+  ],
+  &quot;minMatchingJobs&quot;: 3,
+  &quot;maxResults&quot;: 20
+}
+
+run = client.actor(&quot;factpipe/companies-hiring&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;keywords&quot;: [
+    &quot;sales&quot;
+  ],
+  &quot;minMatchingJobs&quot;: 3,
+  &quot;maxResults&quot;: 20
+};
+
+const run = await client.actor(&#x27;factpipe/companies-hiring&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>keywords</code></td><td>string[]</td><td>Roles, case-insensitive (&quot;sales&quot;, &quot;account executive&quot;, &quot;ML engineer&quot;). A title match counts first. Empty = count all open jobs</td></tr><tr><td><code>keywordScope</code></td><td><code>title</code> \</td><td><code>title_and_department</code> \</td><td><code>title_and_description</code></td><td>Default <code>title_and_department</code>: a job counts when a keyword is in its title, department or team</td></tr><tr><td><code>keywordMatch</code></td><td><code>any</code> \</td><td><code>all</code></td><td>Default <code>any</code></td></tr><tr><td><code>locations</code></td><td>string[]</td><td>Only count jobs in these places: text as written in the posting, or an ISO country code (<code>US</code>, <code>DE</code>)</td></tr><tr><td><code>remote</code></td><td><code>any</code> \</td><td><code>remote_only</code> \</td><td><code>onsite_only</code></td><td>Only count remote (or non-remote) jobs</td></tr><tr><td><code>departments</code></td><td>string[]</td><td>Substring match on department or team</td></tr><tr><td><code>postedWithinDays</code></td><td>integer</td><td>Only count jobs posted in the last N days</td></tr><tr><td><code>minMatchingJobs</code></td><td>integer</td><td>Default 1. Only companies with at least this many matching jobs</td></tr><tr><td><code>excludeCompanies</code></td><td>string[]</td><td>Leave out these companies (your customers, your own company): names or board tokens</td></tr><tr><td><code>sortBy</code></td><td><code>matching_jobs</code> \</td><td><code>hiring_velocity</code> \</td><td><code>newest</code></td><td>Default <code>matching_jobs</code> (ties: more title matches first)</td></tr><tr><td><code>maxResults</code></td><td>integer</td><td>Default 100 company rows</td></tr></tbody></table></div>
+<p><strong>How it works.</strong> The Actor reads a compact search index of every job board in our directory, rebuilt daily from the ATS APIs, and aggregates it company by company. Keywords are matched the same way as in our jobs feeds: in the title first, then in the department or team. Boards are merged only when they are provably the same company (see Coverage), and the same opening listed on two boards (same normalized title and location, where location means the country when it is known) is counted once. It never stores a list of jobs, only running totals per company, so even &quot;all companies hiring anything&quot; finishes quickly.</p>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>company-result</code></td><td><strong>$5 per 1,000</strong> ($0.005 each)</td><td>One company row delivered. <strong>No start fee.</strong> Runs with no matching company are never charged.</td></tr></tbody></table></div>
+<p>Set a maximum charge per run in Apify, and the Actor stops cleanly when it is reached.</p>
+<h2 id="coverage">Coverage</h2>
+<p>Search-index build of 2026-09-25: <strong>10,918 company job boards</strong> with <strong>345,976 open jobs</strong>.</p>
+<div class="table-wrap"><table><thead><tr><th>ATS</th><th>Company boards</th><th>Open jobs</th></tr></thead><tbody><tr><td>Greenhouse</td><td>3,782</td><td>149,646</td></tr><tr><td>Workable</td><td>1,940</td><td>78,318</td></tr><tr><td>Ashby</td><td>2,836</td><td>54,511</td></tr><tr><td>Lever</td><td>1,604</td><td>50,718</td></tr><tr><td>Recruitee</td><td>756</td><td>12,783</td></tr></tbody></table></div>
+<p><code>careers_site_domain</code> is known for about 5% of companies: those whose job links point to their own careers site, mostly on Greenhouse and Recruitee. For the rest it is <code>null</code>, and <code>careers_url</code> is the company&#x27;s job board. The 10,918 boards make 10,865 company rows: 53 companies have two boards each (106 boards).</p>
+<p><strong>When are two boards one company?</strong> They must have the same company name, ignoring case, punctuation and legal suffixes such as Inc, Ltd or GmbH. They must also have either the same board token (<code>wayve</code> on Greenhouse and on Ashby; <code>lago-1</code> and <code>lago</code>) or provably the same openings: at least 3 shared jobs, or at least 30% of the smaller board&#x27;s jobs. A shared name alone is not enough. We would rather list a company twice than merge two different companies: &quot;Zip&quot; (procurement software) and &quot;Zip Co&quot; (payments), or &quot;Parallel&quot; and &quot;Parallel Learning&quot;, stay separate rows. Similar-looking names can therefore appear more than once, and <code>boards</code> shows which job board each row covers. Boards were discovered from Common Crawl&#x27;s public URL index and validated against each ATS API.</p>
+<h2 id="sources-and-terms">Sources and terms</h2>
+<p>Only official, public, unauthenticated job-board APIs that the ATS vendors publish for displaying and syndicating open jobs. No career-site HTML scraping, no logins, no LinkedIn.</p>
+<div class="table-wrap"><table><thead><tr><th>ATS</th><th>API</th><th>Reuse terms</th></tr></thead><tbody><tr><td>Greenhouse</td><td><a href="https://developers.greenhouse.io/job-board.html">Job Board API</a></td><td>&quot;Job Board data is publicly available&quot;; no authentication for GET</td></tr><tr><td>Lever</td><td><a href="https://github.com/lever/postings-api">Postings API</a></td><td>Published postings &quot;are publicly viewable&quot; and &quot;may be scraped by third parties&quot;</td></tr><tr><td>Ashby</td><td><a href="https://developers.ashbyhq.com/docs/public-job-posting-api">Public Job Posting API</a></td><td>Public, unauthenticated posting API</td></tr><tr><td>Workable</td><td><a href="https://help.workable.com/hc/en-us/articles/115012771647">Public jobs endpoint</a></td><td>Documented public endpoint for published jobs</td></tr><tr><td>Recruitee</td><td><a href="https://docs.recruitee.com/reference/offers">Careers Site API</a></td><td>Public API returning published offers</td></tr></tbody></table></div>
+<h2 id="factpipe-jobs-hiring-data">factpipe Jobs &amp; Hiring Data</h2>
+<p>All four Actors search the same daily index of 345,976 open jobs from 10,918 company job boards:</p>
+<ul><li><a href="../ats-jobs-feed/">Jobs Feed API</a>: every job, every filter, ranked by relevance.</li><li><a href="../remote-jobs-feed/">Remote Jobs API</a>: remote and work-from-home jobs only, filtered by region or time zone.</li><li><a href="../ats-jobs-scraper/">Greenhouse, Lever &amp; Ashby Jobs Scraper</a>: pick the applicant tracking systems and companies you want.</li><li><a href="../companies-hiring/">Companies Hiring</a> (this Actor): one row per company that is hiring for a role, as sales leads or market research.</li></ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>Does it give me contact people?</strong><br>
+No, by design. It gives company-level hiring signals: open roles, teams, locations and the careers page. Pair it with your own CRM or enrichment tool for contacts.</p>
+<p><strong>How is &quot;hiring velocity&quot; calculated?</strong><br>
+Jobs first posted in the last 30 days divided by all open jobs on the board. A company with 40 open jobs, 30 of them posted this month, has velocity 0.75: it is actively adding roles, not just leaving old ones open.</p>
+<p><strong>How fresh is the data?</strong><br>
+The index is rebuilt daily from the ATS APIs. <code>fetched_at</code> is when the company&#x27;s board was read.</p>
+<p><strong>Can I get the individual jobs too?</strong><br>
+Yes: run <a href="../ats-jobs-feed/">Jobs Feed API</a> with the same keywords and <code>companies</code> set to the companies you picked.</p>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier or an AI agent?</strong><br>
+Yes, through the Apify API, the official clients, Apify integrations (Make, Zapier, n8n, Google Sheets, Slack) or the Apify MCP server.</p>
+<h2 id="reliability">Reliability</h2>
+<p>Official ATS APIs only. Retries with backoff, a <code>RUN_SUMMARY</code> record on every run, and a built-in live fallback if the search index is ever unreachable.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>

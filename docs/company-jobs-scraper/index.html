@@ -124,8 +124,9 @@ console.log(items);
 <h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
 <div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>job-result</code></td><td><strong>$2 per 1,000</strong> ($0.002 each)</td><td>One live job posting delivered. <strong>Detection misses, empty boards, and empty runs are never charged.</strong></td></tr></tbody></table></div>
 <p>Example: 1,000 jobs cost <strong>$2.00</strong>. You only pay for delivered results.</p>
-<h2 id="related-factpipe-actors">Related factpipe Actors</h2>
-<ul><li><a href="../uk-company-lookup/">UK Companies House Lookup API — Company Data, No API Key</a> — UK company registry records</li><li><a href="../email-security-checker/">Email Security Checker — SPF, DKIM, DMARC &amp; MX Audit</a> — SPF, DKIM and DMARC domain audits</li><li><a href="../sitemap-url-extractor/">Sitemap URL Extractor &amp; 404 Checker — XML Sitemap Scraper</a> — every URL from a site&#x27;s sitemaps</li></ul>
+<h2 id="factpipe-jobs-hiring-data">factpipe Jobs &amp; Hiring Data</h2>
+<p>This Actor fetches jobs live from the career pages you give it. For search across many companies at once, the Actors below query a daily index of about 346,000 open jobs from 10,900 company job boards:</p>
+<ul><li><a href="../ats-jobs-feed/">Jobs Feed API</a>: every job, every filter, ranked by relevance.</li><li><a href="../remote-jobs-feed/">Remote Jobs API</a>: remote and work-from-home jobs only, filtered by region or time zone.</li><li><a href="../ats-jobs-scraper/">Greenhouse, Lever &amp; Ashby Jobs Scraper</a>: pick the applicant tracking systems and companies you want.</li><li><a href="../companies-hiring/">Companies Hiring</a>: one row per company that is hiring for a role, as sales leads or market research.</li></ul>
 <h2 id="faq">FAQ</h2>
 <p><strong>Which applicant tracking systems are supported?</strong><br>
 Greenhouse, Lever and Ashby, via their official public job-board APIs. Give a company homepage and the Actor detects the ATS, or pass a board URL directly.</p>

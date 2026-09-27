@@ -59,11 +59,14 @@ Same idea, same inputs: a list of company URLs in, flat job records out. Field m
 
 Example: 1,000 jobs cost **$2.00**. You only pay for delivered results.
 
-## Related factpipe Actors
+## factpipe Jobs & Hiring Data
 
-- [UK Companies House Lookup API — Company Data, No API Key](https://apify.com/factpipe/uk-company-lookup) — UK company registry records
-- [Email Security Checker — SPF, DKIM, DMARC & MX Audit](https://apify.com/factpipe/email-security-checker) — SPF, DKIM and DMARC domain audits
-- [Sitemap URL Extractor & 404 Checker — XML Sitemap Scraper](https://apify.com/factpipe/sitemap-url-extractor) — every URL from a site's sitemaps
+This Actor fetches jobs live from the career pages you give it. For search across many companies at once, the Actors below query a daily index of about 346,000 open jobs from 10,900 company job boards:
+
+- [Jobs Feed API](https://apify.com/factpipe/ats-jobs-feed): every job, every filter, ranked by relevance.
+- [Remote Jobs API](https://apify.com/factpipe/remote-jobs-feed): remote and work-from-home jobs only, filtered by region or time zone.
+- [Greenhouse, Lever & Ashby Jobs Scraper](https://apify.com/factpipe/ats-jobs-scraper): pick the applicant tracking systems and companies you want.
+- [Companies Hiring](https://apify.com/factpipe/companies-hiring): one row per company that is hiring for a role, as sales leads or market research.
 
 ## FAQ
 

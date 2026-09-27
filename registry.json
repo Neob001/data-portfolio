@@ -900,7 +900,7 @@
       "apify_actor_id": "RPfIRrwrZrShLcK0p",
       "source": "factpipe jobs index (GitHub release jobs-index; public ATS job-board APIs)",
       "variant": "search index",
-      "status": "staging",
+      "status": "live",
       "approval": "J2 APPROVED by owner 2026-09-25 (chat)",
       "origin": "scan",
       "incumbent_actor_id": null,
@@ -913,7 +913,7 @@
         }
       },
       "pricing_rationale": "Same index as ats-jobs-feed; jobs at $3/1k vs leader $12/1k; company rows aggregate many jobs.",
-      "launched_at": null,
+      "launched_at": "2026-09-27T08:26:39Z",
       "last_fix_date": null,
       "kpis": {},
       "listing": {
@@ -926,7 +926,7 @@
           "LEAD_GENERATION"
         ]
       },
-      "staging_validated": false,
+      "staging_validated": true,
       "monetization_configured": true,
       "staging_started_at": "2026-09-27T07:45:14Z"
     }
