@@ -1305,7 +1305,7 @@
       ]
     },
     "tech-stack-detector": {
-      "apify_actor_id": null,
+      "apify_actor_id": "0bskRlyiLOlNtOBsa",
       "source": "User-supplied public websites (HTTP + public DNS); fingerprints: wappalyzer@6.10.54 (MIT)",
       "variant": "bulk lookup",
       "status": "staging",
@@ -1335,7 +1335,8 @@
         ]
       },
       "staging_validated": false,
-      "monetization_configured": false
+      "monetization_configured": false,
+      "staging_started_at": "2026-09-30T12:34:02Z"
     }
   },
   "apify_account": "factpipe",

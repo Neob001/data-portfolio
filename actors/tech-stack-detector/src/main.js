@@ -26,9 +26,10 @@ const concurrency = Math.max(1, Math.min(50, Number.parseInt(maxConcurrency, 10)
 const resolver = includeDns ? createResolver() : null;
 const dnsLookup = resolver ? (q) => lookupDns(resolver, q) : null;
 
-// Start a URL only if a worst-case attempt (fetch + one retry + DNS) can finish before the timeout.
+// Start a URL only if one attempt can finish: fetch timeouts are capped to time left - 15 s and
+// retries/http fallback only run with >30 s left (pipeline.js), DNS runs in parallel.
 const deadline = createDeadline();
-const ITEM_BUDGET_MS = 45000;
+const ITEM_BUDGET_MS = 25000;
 
 let pushed = 0;
 let failed = 0;
