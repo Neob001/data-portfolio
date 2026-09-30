@@ -9,7 +9,7 @@ rate, and a traction verdict. Actors public for 30+ days with zero real users ge
 Revenue itself is only visible in the Apify Console (Insights > Monetization), not the API.
 
 Writes state/scorecard.json, state/scorecard.md and appends to state/scorecard_history.json.
-Usage: APIFY_TOKEN=... scorecard.py [--no-history]
+Usage: APIFY_TOKEN=... scorecard.py [--no-history]   (--no-history = preview: print only, write nothing)
 """
 import json
 import sys
@@ -116,7 +116,9 @@ def main():
                       "real_users_30": sum(r.get("real_users_30", 0) for r in rows.values()),
                       "real_runs_30": sum(r.get("real_runs_30", 0) for r in rows.values())}}
     STATE.mkdir(exist_ok=True)
-    (STATE / "scorecard.json").write_text(json.dumps(out, indent=2) + "\n")
+    preview = "--no-history" in sys.argv
+    if not preview:
+        (STATE / "scorecard.json").write_text(json.dumps(out, indent=2) + "\n")
 
     order = sorted(rows.items(), key=lambda kv: (-kv[1].get("real_users_30", 0), -kv[1].get("real_runs_30", 0), kv[0]))
     md = [f"# Scorecard {today}", "",
@@ -135,9 +137,10 @@ def main():
         md += ["", "## Proposals (owner decides)"] + [f"- {p}" for p in proposals]
     if health:
         md += ["", "## Health flags"] + [f"- {h}" for h in health]
-    (STATE / "scorecard.md").write_text("\n".join(md) + "\n")
+    if not preview:
+        (STATE / "scorecard.md").write_text("\n".join(md) + "\n")
 
-    if "--no-history" not in sys.argv:
+    if not preview:
         history = [h for h in history if h["date"] != today] + [{"date": today, "actors": {
             k: {"real_users_30": v.get("real_users_30", 0), "real_runs_30": v.get("real_runs_30", 0)} for k, v in rows.items()}}]
         hist_path.write_text(json.dumps(history, indent=1) + "\n")
