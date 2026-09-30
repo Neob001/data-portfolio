@@ -15,5 +15,8 @@
     "start": "node src/main.js",
     "test": "node --test 'tests/*.test.mjs'",
     "build:fingerprints": "node scripts_local/build_fingerprints.mjs"
+  },
+  "config": {
+    "ciInstall": true
   }
 }

@@ -1309,18 +1309,24 @@
       "source": "User-supplied public websites (HTTP + public DNS); fingerprints: wappalyzer@6.10.54 (MIT)",
       "variant": "bulk lookup",
       "status": "staging",
-      "approval": "Built 2026-09-30 on owner's 'double down' instruction; publish pending owner approval",
+      "approval": "2026-09-30 TS1 (owner: 'TS1 A')",
       "origin": "scan",
       "incumbent_actor_id": "nexgendata/wappalyzer-replacement",
       "first_paid_run_date": null,
       "ppe_events": {
         "domain-analyzed": {
-          "proposed_price_usd": 0.005,
           "title": "Domain analyzed",
-          "description": "One website analyzed with at least one technology detected. Failures and pages with no detections are never charged."
+          "description": "One website analyzed with at least one technology detected. Failures and pages with no detections are never charged.",
+          "price_usd": 0.01,
+          "store_discount_tiers_usd": {
+            "FREE": 0.01,
+            "BRONZE": 0.009,
+            "SILVER": 0.008,
+            "GOLD": 0.007
+          }
         }
       },
-      "pricing_rationale": "Leader nexgendata/wappalyzer-replacement $100/1k (1,231 users); cheap rivals $0.24-3/1k with 3-35 users; $5/1k.",
+      "pricing_rationale": "Leader nexgendata/wappalyzer-replacement $100/1k (1,231 users) vs cheap rivals $0.24-3/1k with 3-35 users: buyers choose on trust, not price. $10/1k = 10x cheaper than the leader. Compute ~$0.03/1k.",
       "launched_at": null,
       "last_fix_date": null,
       "kpis": {},
@@ -1336,7 +1342,15 @@
       },
       "staging_validated": false,
       "monetization_configured": false,
-      "staging_started_at": "2026-09-30T12:34:02Z"
+      "staging_started_at": "2026-09-30T12:34:02Z",
+      "price_history": [
+        {
+          "date": "2026-09-30",
+          "event": "domain-analyzed",
+          "price_usd": 0.01,
+          "note": "launch, TS1"
+        }
+      ]
     }
   },
   "apify_account": "factpipe",

@@ -19,6 +19,11 @@ jobs:
           set -e
           for a in actors/*/; do
             echo "=== $a"
+            # Most tests import only dependency-free modules; actors whose tests need their npm
+            # dependencies opt in with "config": {"ciInstall": true} in package.json.
+            if grep -q '"ciInstall": true' "$a/package.json"; then
+              (cd "$a" && npm install --ignore-scripts --no-audit --no-fund --silent)
+            fi
             (cd "$a" && node --test tests/*.test.mjs)
           done
       - name: Registry is valid JSON and covers every actor dir
