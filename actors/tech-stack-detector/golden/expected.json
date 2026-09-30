@@ -1,0 +1,242 @@
+{
+  "shopify_store.json": {
+    "technologies": [
+      {
+        "name": "Shopify",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "Apple Pay",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "PayPal",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "Cloudflare",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "Google Tag Manager",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "HSTS",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "HTTP/3",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "Open Graph",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "Microsoft 365",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "DocuSign",
+        "version": null,
+        "confidence": 100
+      }
+    ],
+    "cms": null,
+    "ecommerce_platform": "Shopify",
+    "analytics": [],
+    "tag_managers": [
+      "Google Tag Manager"
+    ],
+    "cdn": "Cloudflare",
+    "hosting_or_paas": null,
+    "javascript_frameworks": [],
+    "web_server": null,
+    "programming_languages": [],
+    "marketing_automation": [],
+    "payment_processors": [
+      "Apple Pay",
+      "PayPal"
+    ],
+    "mail_provider": "Microsoft 365",
+    "dns_provider": null,
+    "has_spf": true,
+    "has_dmarc": true,
+    "verification_tokens": [
+      "microsoft",
+      "apple",
+      "docusign",
+      "google"
+    ],
+    "technology_count": 10
+  },
+  "wordpress_site.json": {
+    "technologies": [
+      {
+        "name": "WordPress",
+        "version": "7.2",
+        "confidence": 100
+      },
+      {
+        "name": "MySQL",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "PHP",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "Nginx",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "Google Font API",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "Google Tag Manager",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "HSTS",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "Open Graph",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "Priority Hints",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "RSS",
+        "version": null,
+        "confidence": 100
+      }
+    ],
+    "cms": "WordPress",
+    "ecommerce_platform": null,
+    "analytics": [],
+    "tag_managers": [
+      "Google Tag Manager"
+    ],
+    "cdn": null,
+    "hosting_or_paas": null,
+    "javascript_frameworks": [],
+    "web_server": "Nginx",
+    "programming_languages": [
+      "PHP"
+    ],
+    "marketing_automation": [],
+    "payment_processors": [],
+    "mail_provider": null,
+    "dns_provider": null,
+    "has_spf": true,
+    "has_dmarc": true,
+    "verification_tokens": [
+      "google"
+    ],
+    "technology_count": 10
+  },
+  "nextjs_vercel.json": {
+    "technologies": [
+      {
+        "name": "Node.js",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "Next.js",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "Vercel",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "React",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "HSTS",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "HTTP/3",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "Open Graph",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "Priority Hints",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "Webpack",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "Google Workspace",
+        "version": null,
+        "confidence": 100
+      },
+      {
+        "name": "Sendgrid",
+        "version": null,
+        "confidence": 100
+      }
+    ],
+    "cms": null,
+    "ecommerce_platform": null,
+    "analytics": [],
+    "tag_managers": [],
+    "cdn": null,
+    "hosting_or_paas": "Vercel",
+    "javascript_frameworks": [
+      "React"
+    ],
+    "web_server": "Next.js",
+    "programming_languages": [
+      "Node.js"
+    ],
+    "marketing_automation": [],
+    "payment_processors": [],
+    "mail_provider": "Google Workspace",
+    "dns_provider": "Vercel",
+    "has_spf": true,
+    "has_dmarc": true,
+    "verification_tokens": [
+      "google"
+    ],
+    "technology_count": 11
+  }
+}

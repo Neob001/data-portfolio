@@ -1,0 +1,19 @@
+{
+  "name": "tech-stack-detector",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Detect the technology stack of any website (CMS, ecommerce platform, analytics, CDN, hosting, frameworks, mail provider) with plain HTTP + DNS and MIT-licensed community fingerprints.",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "apify": "^3.2.6",
+    "cheerio": "1.0.0-rc.12",
+    "tldts": "^7.0.0"
+  },
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node --test 'tests/*.test.mjs'",
+    "build:fingerprints": "node scripts_local/build_fingerprints.mjs"
+  }
+}

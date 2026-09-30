@@ -1,0 +1,30 @@
+{
+  "source": {
+    "package": "wappalyzer@6.10.54",
+    "tarball": "https://registry.npmjs.org/wappalyzer/-/wappalyzer-6.10.54.tgz",
+    "sha1": "de8e0f0386f66bc6ce858408de9faa477f304c5e",
+    "license": "MIT",
+    "copyright": "Copyright 2008 Wappalyzer",
+    "modified": "Stripped to static-detection fields; local overrides and pattern drops listed in manifest.json."
+  },
+  "technologies": 3588,
+  "categories": 108,
+  "overrides": [
+    "Amazon Web Services",
+    "Apple iCloud Mail",
+    "Amazon S3",
+    "Cart Functionality",
+    "Nginx",
+    "Angie",
+    "H2O"
+  ],
+  "dropped_invalid_regex": [],
+  "dropped_slow_regex": [
+    "Glider.js scriptSrc: (?:/|@)?([\\d\\.]{2,})?/glider\\.min\\.js\\;version:\\1"
+  ],
+  "dropped_selectors": [
+    "Airtable: iframe[scr*='//airtable.com/'], a[href*='//airtable.com/][target='_blank']"
+  ],
+  "bytes_json": 388892,
+  "bytes_gz": 100932
+}

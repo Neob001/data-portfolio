@@ -1,0 +1,233 @@
+{
+  "actorSpecification": 1,
+  "name": "tech-stack-detector",
+  "title": "Tech Stack Detector — Wappalyzer Alternative for Any Website",
+  "description": "Detect the tech stack of any website in bulk: CMS, ecommerce platform, analytics, CDN, hosting, JS frameworks, email provider. 3,000+ technologies via plain HTTP + DNS, no browser. $5 per 1,000 domains.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "outputSchema": "./output_schema.json",
+  "categories": [
+    "LEAD_GENERATION",
+    "DEVELOPER_TOOLS"
+  ],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "technologies": {
+          "title": "Tech stack",
+          "transformation": {
+            "fields": [
+              "domain",
+              "ok",
+              "cms",
+              "ecommerce_platform",
+              "analytics",
+              "cdn",
+              "hosting_or_paas",
+              "technology_count",
+              "technology_names",
+              "error"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "final_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "domain": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status_code": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              null,
+              "invalid_url",
+              "dns_not_found",
+              "timeout",
+              "http_error",
+              "blocked",
+              "tls_error",
+              "connection_error"
+            ]
+          },
+          "technologies": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "categories": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "version": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "confidence": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "technology_names": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cms": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ecommerce_platform": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "analytics": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tag_managers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cdn": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "hosting_or_paas": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "javascript_frameworks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "web_server": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "programming_languages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "marketing_automation": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "payment_processors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "mail_provider": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "dns_provider": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "has_spf": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "has_dmarc": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "verification_tokens": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "technology_count": {
+            "type": "integer"
+          },
+          "source_url": {
+            "type": "string"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

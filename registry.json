@@ -1303,6 +1303,39 @@
           "approval": "SD1"
         }
       ]
+    },
+    "tech-stack-detector": {
+      "apify_actor_id": null,
+      "source": "User-supplied public websites (HTTP + public DNS); fingerprints: wappalyzer@6.10.54 (MIT)",
+      "variant": "bulk lookup",
+      "status": "staging",
+      "approval": "Built 2026-09-30 on owner's 'double down' instruction; publish pending owner approval",
+      "origin": "scan",
+      "incumbent_actor_id": "nexgendata/wappalyzer-replacement",
+      "first_paid_run_date": null,
+      "ppe_events": {
+        "domain-analyzed": {
+          "proposed_price_usd": 0.005,
+          "title": "Domain analyzed",
+          "description": "One website analyzed with at least one technology detected. Failures and pages with no detections are never charged."
+        }
+      },
+      "pricing_rationale": "Leader nexgendata/wappalyzer-replacement $100/1k (1,231 users); cheap rivals $0.24-3/1k with 3-35 users; $5/1k.",
+      "launched_at": null,
+      "last_fix_date": null,
+      "kpis": {},
+      "listing": {
+        "title": "Tech Stack Detector — Wappalyzer Alternative for Any Website",
+        "description": "Detect the tech stack of any website in bulk: CMS, ecommerce platform, analytics, CDN, hosting, JS frameworks, email provider. 3,000+ technologies via plain HTTP + DNS, no browser. $5 per 1,000 domains.",
+        "seoTitle": "Tech Stack Detector API: Wappalyzer Alternative for Any Site",
+        "seoDescription": "Detect the CMS, e-commerce platform, analytics, CDN, frameworks and email provider of any website in bulk. 3,500+ technologies. Pay per domain.",
+        "categories": [
+          "LEAD_GENERATION",
+          "DEVELOPER_TOOLS"
+        ]
+      },
+      "staging_validated": false,
+      "monetization_configured": false
     }
   },
   "apify_account": "factpipe",
