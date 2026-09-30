@@ -110,18 +110,20 @@ Technology fingerprints are derived from the `wappalyzer` npm package **v6.10.54
 
 ## factpipe Website Audit Toolkit
 
-Bulk technical checks for agencies, SEO, sales and security teams, all pay-per-result. Feed a list of sites in, get one flat row per page or domain out.
+Bulk technical checks for agencies, SEO teams and deliverability owners, all pay-per-result. Feed a list of sites in, get one flat row per page or domain out.
 
 | Workflow | Actor | What it does | Price |
 |---|---|---|---|
-| Website audit | **Tech Stack Detector** (this Actor) | CMS, ecommerce platform, analytics, CDN, hosting and 3,000+ technologies per site | $5/1k |
+| Website audit | [Sitemap URL Extractor & 404 Checker](https://apify.com/factpipe/sitemap-url-extractor) | Extract every URL from XML sitemaps and flag 404s and broken entries | $0.30/1k |
 | Website audit | [Lighthouse Auditor](https://apify.com/factpipe/lighthouse-auditor) | Lighthouse scores and Core Web Vitals for many pages, mobile or desktop | $10/1k |
-| Website audit | [Broken Link Checker](https://apify.com/factpipe/broken-link-checker) | Crawl a site and flag every broken internal/external link, image and asset | $1.50/1k |
-| Website audit | [Website Screenshot](https://apify.com/factpipe/website-screenshot) | Bulk full-page or viewport screenshots, desktop or mobile | $2/1k |
-| Domain audit | [Email Security Checker](https://apify.com/factpipe/email-security-checker) | SPF, DKIM, DMARC and MX audit for any list of domains | $3/1k |
-| Domain audit | [DNS Records Lookup](https://apify.com/factpipe/dns-records-lookup) | Full DNS record set (A, AAAA, MX, TXT, NS, CNAME) for any list of domains | $1.50/1k |
+| Website audit | [Email Security Checker](https://apify.com/factpipe/email-security-checker) | SPF, DKIM, DMARC and MX audit for any list of domains | $3/1k |
+| Domain intelligence | **Tech Stack Detector** (this Actor) | CMS, e-commerce platform, analytics, CDN and frameworks of any website | $10/1k |
+| Domain intelligence | [DNS Records Lookup](https://apify.com/factpipe/dns-records-lookup) | Bulk A, MX, TXT, NS records plus mail and DNS provider for any domain list | $1.50/1k |
 
-For sales prospecting, combine it with [Companies Hiring](https://apify.com/factpipe/companies-hiring): find companies that are hiring, then enrich their domains with the tech stack they run.
+**Use it together:**
+
+- **Lead enrichment:** add each company's email and DNS provider from [DNS Records Lookup](https://apify.com/factpipe/dns-records-lookup) to its detected stack.
+- **Prospect audits:** pair the stack with [Lighthouse Auditor](https://apify.com/factpipe/lighthouse-auditor) scores to show a prospect what to fix, and with [Email Security Checker](https://apify.com/factpipe/email-security-checker) for their mail setup.
 
 ## FAQ
 

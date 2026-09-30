@@ -95,6 +95,8 @@ Bulk technical checks for agencies, SEO teams and deliverability owners, all pay
 | Website audit | [Sitemap URL Extractor & 404 Checker](https://apify.com/factpipe/sitemap-url-extractor) | Extract every URL from XML sitemaps and flag 404s and broken entries | $0.30/1k |
 | Website audit | **Lighthouse Auditor** (this Actor) | Lighthouse scores and Core Web Vitals for many pages, mobile or desktop | $10/1k |
 | Website audit | [Email Security Checker](https://apify.com/factpipe/email-security-checker) | SPF, DKIM, DMARC and MX audit for any list of domains | $3/1k |
+| Domain intelligence | [Tech Stack Detector](https://apify.com/factpipe/tech-stack-detector) | CMS, e-commerce platform, analytics, CDN and frameworks of any website | $10/1k |
+| Domain intelligence | [DNS Records Lookup](https://apify.com/factpipe/dns-records-lookup) | Bulk A, MX, TXT, NS records plus mail and DNS provider for any domain list | $1.50/1k |
 
 **Use it together:**
 

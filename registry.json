@@ -1315,9 +1315,9 @@
       "first_paid_run_date": null,
       "ppe_events": {
         "domain-analyzed": {
+          "proposed_price_usd": 0.01,
           "title": "Domain analyzed",
           "description": "One website analyzed with at least one technology detected. Failures and pages with no detections are never charged.",
-          "price_usd": 0.01,
           "store_discount_tiers_usd": {
             "FREE": 0.01,
             "BRONZE": 0.009,

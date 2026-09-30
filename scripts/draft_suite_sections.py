@@ -73,11 +73,14 @@ SUITES = {
                   "Feed a list of sites in, get one flat row per page or domain out."),
         "groups": [
             ("Website audit", ["sitemap-url-extractor", "lighthouse-auditor", "email-security-checker"]),
+            ("Domain intelligence", ["tech-stack-detector", "dns-records-lookup"]),
         ],
         "blurbs": {
             "sitemap-url-extractor": "Extract every URL from XML sitemaps and flag 404s and broken entries",
             "lighthouse-auditor": "Lighthouse scores and Core Web Vitals for many pages, mobile or desktop",
             "email-security-checker": "SPF, DKIM, DMARC and MX audit for any list of domains",
+            "tech-stack-detector": "CMS, e-commerce platform, analytics, CDN and frameworks of any website",
+            "dns-records-lookup": "Bulk A, MX, TXT, NS records plus mail and DNS provider for any domain list",
         },
         "recipes": {
             "sitemap-url-extractor": [
@@ -89,6 +92,14 @@ SUITES = {
             ],
             "email-security-checker": [
                 "**Agency site-and-domain health report:** combine these results with [Lighthouse Auditor]({lighthouse-auditor}) performance scores and [Sitemap URL Extractor & 404 Checker]({sitemap-url-extractor}) broken-URL counts.",
+            ],
+            "tech-stack-detector": [
+                "**Lead enrichment:** add each company's email and DNS provider from [DNS Records Lookup]({dns-records-lookup}) to its detected stack.",
+                "**Prospect audits:** pair the stack with [Lighthouse Auditor]({lighthouse-auditor}) scores to show a prospect what to fix, and with [Email Security Checker]({email-security-checker}) for their mail setup.",
+            ],
+            "dns-records-lookup": [
+                "**Full company tech profile:** combine mail and DNS providers from here with the CMS, e-commerce, analytics and hosting stack from [Tech Stack Detector]({tech-stack-detector}).",
+                "**Deep mail audit:** for SPF/DKIM/DMARC scoring and a fix list, send the same domains to [Email Security Checker]({email-security-checker}).",
             ],
         },
     },
@@ -106,6 +117,8 @@ SHORT = {
     "sitemap-url-extractor": "Sitemap URL Extractor & 404 Checker",
     "lighthouse-auditor": "Lighthouse Auditor",
     "email-security-checker": "Email Security Checker",
+    "tech-stack-detector": "Tech Stack Detector",
+    "dns-records-lookup": "DNS Records Lookup",
 }
 
 
@@ -140,7 +153,8 @@ def members():
                 yield m, suite
 
 
-SECTION_RE = re.compile(r"## Related factpipe Actors\n.*?(?=\n## )", re.S)
+# Matches the old hand-written section or a previously applied suite section, so --apply is idempotent.
+SECTION_RE = re.compile(r"## (?:Related factpipe Actors|factpipe [^\n]*(?:Suite|Toolkit))\n.*?(?=\n## )", re.S)
 
 
 def main():
