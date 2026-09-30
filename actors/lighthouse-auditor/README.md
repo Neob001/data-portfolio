@@ -10,7 +10,7 @@
 
 *Real output from the “Core Web Vitals mobile audit” example, run on September 27, 2026.*
 
-**Try a ready-made example:** [Core Web Vitals mobile audit](https://apify.com/factpipe/lighthouse-auditor/examples/core-web-vitals-mobile-audit)
+**Try a ready-made example:** [Core Web Vitals mobile audit](https://apify.com/factpipe/lighthouse-auditor/examples/core-web-vitals-mobile-audit) · [Desktop PageSpeed audit for a list of pages](https://apify.com/factpipe/lighthouse-auditor/examples/desktop-pagespeed-audit) · [Mobile vs desktop Core Web Vitals](https://apify.com/factpipe/lighthouse-auditor/examples/mobile-vs-desktop-core-web-vitals) · [Lighthouse SEO score audit](https://apify.com/factpipe/lighthouse-auditor/examples/seo-score-audit)
 
 <!-- factpipe:hero:end -->
 

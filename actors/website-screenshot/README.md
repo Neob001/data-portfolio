@@ -10,7 +10,7 @@
 
 *Real output from the “Mobile full-page screenshots” example, run on September 27, 2026.*
 
-**Try a ready-made example:** [Mobile full-page screenshots](https://apify.com/factpipe/website-screenshot/examples/mobile-full-page-screenshots)
+**Try a ready-made example:** [Mobile full-page screenshots](https://apify.com/factpipe/website-screenshot/examples/mobile-full-page-screenshots) · [Desktop full-page screenshots](https://apify.com/factpipe/website-screenshot/examples/desktop-full-page-screenshots)
 
 <!-- factpipe:hero:end -->
 

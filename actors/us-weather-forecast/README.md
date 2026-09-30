@@ -12,7 +12,7 @@
 
 *Real output from the “7-day forecast for major US cities” example, run on September 27, 2026.*
 
-**Try a ready-made example:** [7-day forecast for major US cities](https://apify.com/factpipe/us-weather-forecast/examples/7-day-forecast-us-cities)
+**Try a ready-made example:** [7-day forecast for major US cities](https://apify.com/factpipe/us-weather-forecast/examples/7-day-forecast-us-cities) · [Hourly weather forecast for New York](https://apify.com/factpipe/us-weather-forecast/examples/hourly-forecast-new-york) · [Weather forecast for major US airports](https://apify.com/factpipe/us-weather-forecast/examples/forecast-major-us-airports)
 
 <!-- factpipe:hero:end -->
 
