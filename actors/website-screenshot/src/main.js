@@ -48,8 +48,11 @@ async function launch() {
 }
 
 const deadline = createDeadline();
-// Worst case for one URL: navigation timeout, one retry, screenshot and upload.
-const itemBudgetMs = timeoutMs * 2 + 30000;
+// Start a URL only if one attempt can finish (navigation + screenshot + upload); each navigation
+// timeout is capped to the time left so no attempt can outlive the run.
+const RESERVE_MS = 15000;
+const itemBudgetMs = Math.min(timeoutMs, 20000) + RESERVE_MS;
+const navTimeout = () => Math.max(5000, Math.min(timeoutMs, deadline.timeLeftMs() - RESERVE_MS));
 
 let browser = await launch();
 let pushed = 0;
@@ -72,7 +75,7 @@ async function captureOnce(url) {
 
     let response = null;
     try {
-      response = await page.goto(url, { waitUntil, timeout: timeoutMs });
+      response = await page.goto(url, { waitUntil, timeout: navTimeout() });
     } catch (e) {
       // Sites with long-lived connections (analytics, chat widgets) never reach networkidle/load;
       // if the document itself has rendered, the screenshot is still what the user wants.
@@ -131,7 +134,7 @@ async function processUrl(url) {
     attempt = await captureOnce(url);
   } catch (e) {
     const errorCode = classifyNavigationError(e, e.statusCode);
-    if (errorCode === 'navigation_timeout') {
+    if (errorCode === 'navigation_timeout' && deadline.hasTimeFor(itemBudgetMs)) {
       // Retry once on navigation timeout, with a fresh page.
       try {
         attempt = await captureOnce(url);

@@ -30,8 +30,11 @@ async function launch() {
 }
 
 const deadline = createDeadline();
-// Worst case for one audit: the audit timeout plus browser restart and dataset write.
-const AUDIT_BUDGET_MS = AUDIT_TIMEOUT_MS + 30000;
+// Start an audit only if a typical one fits; its timeout is capped to the time left so a slow page
+// ends as a free AUDIT_TIMEOUT row instead of the platform killing the run.
+const RESERVE_MS = 20000;
+const MIN_AUDIT_MS = 45000;
+const auditTimeout = () => Math.max(10000, Math.min(AUDIT_TIMEOUT_MS, deadline.timeLeftMs() - RESERVE_MS));
 
 let browser = await launch();
 let pushed = 0;
@@ -45,7 +48,7 @@ async function auditOnce(url, strat) {
   try {
     const flags = { output: 'json', logLevel: 'error', onlyCategories: CATEGORIES, maxWaitForLoad: 45000 };
     const run = lighthouse(url, flags, strat === 'desktop' ? desktopConfig : undefined, page);
-    const timeout = new Promise((_, reject) => setTimeout(() => reject(Object.assign(new Error('audit timeout'), { code: 'AUDIT_TIMEOUT' })), AUDIT_TIMEOUT_MS));
+    const timeout = new Promise((_, reject) => setTimeout(() => reject(Object.assign(new Error('audit timeout'), { code: 'AUDIT_TIMEOUT' })), auditTimeout()));
     const result = await Promise.race([run, timeout]);
     return lhrToRecord(result.lhr, strat);
   } finally {
@@ -57,7 +60,7 @@ try {
   const list = urls.slice(0, maxUrls);
   for (const [index, raw] of list.entries()) {
     if (stop) break;
-    if (!deadline.hasTimeFor(AUDIT_BUDGET_MS * strategies.length)) {
+    if (!deadline.hasTimeFor(MIN_AUDIT_MS + RESERVE_MS)) {
       deadline.skipped = list.length - index;
       break;
     }
@@ -70,6 +73,7 @@ try {
     for (const strat of strategies) {
       const key = `${url}|${strat}`;
       if (seen.has(key) || stop) continue;
+      if (!deadline.hasTimeFor(MIN_AUDIT_MS + RESERVE_MS)) { deadline.skipped += 1; continue; }
       seen.add(key);
       let rec;
       try {
