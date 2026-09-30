@@ -2,7 +2,7 @@
   "actorSpecification": 1,
   "name": "tech-stack-detector",
   "title": "Tech Stack Detector — Wappalyzer Alternative for Any Website",
-  "description": "Detect the tech stack of any website in bulk: CMS, ecommerce platform, analytics, CDN, hosting, JS frameworks, email provider. 3,000+ technologies via plain HTTP + DNS, no browser. $5 per 1,000 domains.",
+  "description": "Detect the tech stack of any website in bulk: CMS, ecommerce platform, analytics, CDN, hosting, JS frameworks, email provider. 3,000+ technologies via plain HTTP + DNS, no browser. $10 per 1,000 domains.",
   "version": "0.1",
   "buildTag": "latest",
   "input": "../INPUT_SCHEMA.json",

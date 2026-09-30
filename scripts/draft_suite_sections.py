@@ -72,13 +72,15 @@ SUITES = {
         "intro": ("Bulk technical checks for agencies, SEO teams and deliverability owners, all pay-per-result. "
                   "Feed a list of sites in, get one flat row per page or domain out."),
         "groups": [
-            ("Website audit", ["sitemap-url-extractor", "lighthouse-auditor", "email-security-checker"]),
+            ("Website audit", ["sitemap-url-extractor", "lighthouse-auditor", "broken-link-checker", "website-screenshot", "email-security-checker"]),
             ("Domain intelligence", ["tech-stack-detector", "dns-records-lookup"]),
         ],
         "blurbs": {
             "sitemap-url-extractor": "Extract every URL from XML sitemaps and flag 404s and broken entries",
             "lighthouse-auditor": "Lighthouse scores and Core Web Vitals for many pages, mobile or desktop",
             "email-security-checker": "SPF, DKIM, DMARC and MX audit for any list of domains",
+            "broken-link-checker": "Crawl a site and flag every broken internal/external link, image and asset",
+            "website-screenshot": "Bulk full-page or viewport screenshots, desktop or mobile",
             "tech-stack-detector": "CMS, e-commerce platform, analytics, CDN and frameworks of any website",
             "dns-records-lookup": "Bulk A, MX, TXT, NS records plus mail and DNS provider for any domain list",
         },
@@ -96,6 +98,7 @@ SUITES = {
             "tech-stack-detector": [
                 "**Lead enrichment:** add each company's email and DNS provider from [DNS Records Lookup]({dns-records-lookup}) to its detected stack.",
                 "**Prospect audits:** pair the stack with [Lighthouse Auditor]({lighthouse-auditor}) scores to show a prospect what to fix, and with [Email Security Checker]({email-security-checker}) for their mail setup.",
+                "**Sales prospecting:** find companies that are hiring with [Companies Hiring](https://apify.com/factpipe/companies-hiring), then enrich their domains with the tech stack they run.",
             ],
             "dns-records-lookup": [
                 "**Full company tech profile:** combine mail and DNS providers from here with the CMS, e-commerce, analytics and hosting stack from [Tech Stack Detector]({tech-stack-detector}).",
@@ -117,6 +120,8 @@ SHORT = {
     "sitemap-url-extractor": "Sitemap URL Extractor & 404 Checker",
     "lighthouse-auditor": "Lighthouse Auditor",
     "email-security-checker": "Email Security Checker",
+    "broken-link-checker": "Broken Link Checker",
+    "website-screenshot": "Website Screenshot",
     "tech-stack-detector": "Tech Stack Detector",
     "dns-records-lookup": "DNS Records Lookup",
 }
@@ -141,7 +146,7 @@ def render(slug, suite, registry):
             lines.append(f"| {group} | {name} | {suite['blurbs'][m]} | {price_note(registry[m])} |")
     lines += ["", "**Use it together:**", ""]
     links = {m: url(m) for g in suite["groups"] for m in g[1]}
-    for r in suite["recipes"][slug]:
+    for r in suite["recipes"].get(slug, []):
         lines.append("- " + r.format(**links))
     return "\n".join(lines) + "\n"
 

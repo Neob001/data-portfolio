@@ -12,7 +12,7 @@ const input = JSON.parse(read('INPUT_SCHEMA.json'));
 test('actor.json: Store limits, categories, pricing mention', () => {
   assert.ok(actor.title.length <= 60, `title ${actor.title.length} chars`);
   assert.ok(actor.description.length <= 220, `description ${actor.description.length} chars`);
-  assert.match(actor.description, /\$5 per 1,000 domains/);
+  assert.match(actor.description, /\$10 per 1,000 domains/);
   const known = new Set();
   for (const dir of readdirSync(new URL('../../', import.meta.url))) {
     if (dir === 'tech-stack-detector') continue;
@@ -75,7 +75,8 @@ test('README: required sections, prefilled run cost, toolkit links, license attr
   const md = read('README.md');
   for (const h of ['## Quick start', '## Pricing', '## Input', '## Coverage', '## Fingerprint license', '## factpipe Website Audit Toolkit', '## FAQ']) assert.ok(md.includes(h), h);
   assert.ok(md.indexOf('## factpipe Website Audit Toolkit') < md.indexOf('## FAQ'));
-  assert.match(md, /\$0\.015/);
+  assert.match(md, /\$0\.03\b/);
+  assert.match(md, /\$10 per 1,000/);
   for (const slug of ['lighthouse-auditor', 'dns-records-lookup', 'email-security-checker', 'website-screenshot', 'broken-link-checker', 'companies-hiring']) {
     assert.ok(md.includes(`https://apify.com/factpipe/${slug}`), slug);
   }

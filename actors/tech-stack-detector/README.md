@@ -1,6 +1,6 @@
 # Tech Stack Detector — Wappalyzer Alternative: Find the CMS, Ecommerce Platform, Analytics, CDN & Hosting of Any Website
 
-**Detect the technology stack of any list of websites in bulk: CMS, ecommerce platform, analytics and tag managers, CDN, hosting/PaaS, JavaScript frameworks, web server, payment processors, marketing automation and email provider. 3,000+ technologies, plain HTTP + DNS (no browser), one flat row per site. $5 per 1,000 domains.**
+**Detect the technology stack of any list of websites in bulk: CMS, ecommerce platform, analytics and tag managers, CDN, hosting/PaaS, JavaScript frameworks, web server, payment processors, marketing automation and email provider. 3,000+ technologies, plain HTTP + DNS (no browser), one flat row per site. $10 per 1,000 domains.**
 
 Paste domains or URLs, get back what each site is built with, a confidence score and version where the site exposes one, plus ready-to-filter columns like `cms`, `ecommerce_platform` and `cdn`. It uses MIT-licensed community fingerprints (Wappalyzer format) matched against response headers, cookies, meta tags, script URLs, page markup and public DNS records. No API key, no login, no personal data.
 
@@ -8,7 +8,7 @@ Paste domains or URLs, get back what each site is built with, a confidence score
 
 1. Click **Start** with the three prefilled sites (`https://www.shopify.com`, `https://github.com`, `https://www.nytimes.com`). It finishes in well under a minute.
 2. You get one row per site with its technologies, categories and the flat columns (`cms`, `ecommerce_platform`, `analytics`, `cdn`, `hosting_or_paas`, `mail_provider`, ...).
-3. That first run costs at most **$0.015** (3 sites × $0.005), well within Apify's free monthly credit. Then paste your own list: thousands of domains per run are fine.
+3. That first run costs at most **$0.03** (3 sites × $0.01), well within Apify's free monthly credit. Then paste your own list: thousands of domains per run are fine.
 
 ## What you get
 
@@ -88,11 +88,11 @@ A WordPress site returns e.g. `"cms": "WordPress"` (with its version when the si
 
 | Event | Price | Meaning |
 |---|---|---|
-| `domain-analyzed` | **$5 per 1,000** ($0.005 each) | One website that loaded (`ok: true`) and returned at least one technology. |
+| `domain-analyzed` | **$10 per 1,000** ($0.01 each) | One website that loaded (`ok: true`) and returned at least one technology. |
 
 Failures (invalid input, nonexistent domain, timeout, HTTP error, bot-protection block) and pages with zero detections are **free**. You can cap spend with the run's maximum charge; the Actor stops cleanly when it is reached.
 
-Example: analyzing 1,000 domains costs at most **$5.00**. No start fee.
+Example: analyzing 1,000 domains costs at most **$10.00**. No start fee.
 
 ## Coverage
 
@@ -116,6 +116,8 @@ Bulk technical checks for agencies, SEO teams and deliverability owners, all pay
 |---|---|---|---|
 | Website audit | [Sitemap URL Extractor & 404 Checker](https://apify.com/factpipe/sitemap-url-extractor) | Extract every URL from XML sitemaps and flag 404s and broken entries | $0.30/1k |
 | Website audit | [Lighthouse Auditor](https://apify.com/factpipe/lighthouse-auditor) | Lighthouse scores and Core Web Vitals for many pages, mobile or desktop | $10/1k |
+| Website audit | [Broken Link Checker](https://apify.com/factpipe/broken-link-checker) | Crawl a site and flag every broken internal/external link, image and asset | $1.50/1k |
+| Website audit | [Website Screenshot](https://apify.com/factpipe/website-screenshot) | Bulk full-page or viewport screenshots, desktop or mobile | $2/1k |
 | Website audit | [Email Security Checker](https://apify.com/factpipe/email-security-checker) | SPF, DKIM, DMARC and MX audit for any list of domains | $3/1k |
 | Domain intelligence | **Tech Stack Detector** (this Actor) | CMS, e-commerce platform, analytics, CDN and frameworks of any website | $10/1k |
 | Domain intelligence | [DNS Records Lookup](https://apify.com/factpipe/dns-records-lookup) | Bulk A, MX, TXT, NS records plus mail and DNS provider for any domain list | $1.50/1k |
@@ -124,6 +126,7 @@ Bulk technical checks for agencies, SEO teams and deliverability owners, all pay
 
 - **Lead enrichment:** add each company's email and DNS provider from [DNS Records Lookup](https://apify.com/factpipe/dns-records-lookup) to its detected stack.
 - **Prospect audits:** pair the stack with [Lighthouse Auditor](https://apify.com/factpipe/lighthouse-auditor) scores to show a prospect what to fix, and with [Email Security Checker](https://apify.com/factpipe/email-security-checker) for their mail setup.
+- **Sales prospecting:** find companies that are hiring with [Companies Hiring](https://apify.com/factpipe/companies-hiring), then enrich their domains with the tech stack they run.
 
 ## FAQ
 
