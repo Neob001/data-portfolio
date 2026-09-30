@@ -4,6 +4,7 @@ import lighthouse from 'lighthouse';
 import desktopConfig from 'lighthouse/core/config/desktop-config.js';
 import { stamp } from './lib/records.js';
 import { writeRunSummary } from './lib/run_summary.js';
+import { createDeadline } from './lib/deadline.js';
 import { lhrToRecord, normalizeUrl } from './transform.js';
 
 const AUDIT_TIMEOUT_MS = 120000;
@@ -28,6 +29,10 @@ async function launch() {
   });
 }
 
+const deadline = createDeadline();
+// Worst case for one audit: the audit timeout plus browser restart and dataset write.
+const AUDIT_BUDGET_MS = AUDIT_TIMEOUT_MS + 30000;
+
 let browser = await launch();
 let pushed = 0;
 let charged = 0;
@@ -49,8 +54,13 @@ async function auditOnce(url, strat) {
 }
 
 try {
-  for (const raw of urls.slice(0, maxUrls)) {
+  const list = urls.slice(0, maxUrls);
+  for (const [index, raw] of list.entries()) {
     if (stop) break;
+    if (!deadline.hasTimeFor(AUDIT_BUDGET_MS * strategies.length)) {
+      deadline.skipped = list.length - index;
+      break;
+    }
     const url = normalizeUrl(raw);
     if (!url) {
       await Actor.pushData(stamp({ query: String(raw), ok: false, error_code: 'INVALID_URL' }, 'input'));
@@ -93,5 +103,11 @@ try {
 }
 
 await browser.close().catch(() => {});
-await writeRunSummary(Actor, { rows: pushed + misses, charged_events: charged, duration_ms: Date.now() - started });
+await writeRunSummary(Actor, {
+  rows: pushed + misses, charged_events: charged, duration_ms: Date.now() - started,
+  stopped_before_timeout: deadline.stoppedEarly, urls_not_processed: deadline.skipped,
+});
+if (deadline.stoppedEarly) {
+  await Actor.exit(`Stopped before the run timeout: ${pushed} audits done, ${deadline.skipped} URLs not audited (not charged). Raise the run timeout or split the list.`);
+}
 await Actor.exit();

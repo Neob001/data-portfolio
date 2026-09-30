@@ -2,6 +2,7 @@ import { Actor } from 'apify';
 import puppeteer from 'puppeteer';
 import { stamp } from './lib/records.js';
 import { writeRunSummary } from './lib/run_summary.js';
+import { createDeadline } from './lib/deadline.js';
 import {
   dedupeUrls, screenshotKey, contentTypeFor, screenshotUrlFor,
   classifyNavigationError, cookieBannerCss, deviceViewport, buildRow,
@@ -45,6 +46,10 @@ async function launch() {
     args: ['--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
   });
 }
+
+const deadline = createDeadline();
+// Worst case for one URL: navigation timeout, one retry, screenshot and upload.
+const itemBudgetMs = timeoutMs * 2 + 30000;
 
 let browser = await launch();
 let pushed = 0;
@@ -167,6 +172,10 @@ async function runPool(items, limit, worker) {
   let next = 0;
   const runners = Array.from({ length: Math.min(limit, items.length) }, async () => {
     while (next < items.length && !stop) {
+      if (!deadline.hasTimeFor(itemBudgetMs)) {
+        deadline.skipped = items.length - next;
+        break;
+      }
       const i = next;
       next += 1;
       try {
@@ -197,5 +206,10 @@ await writeRunSummary(Actor, {
   charged_events: charged,
   errors: failed,
   duration_ms: Date.now() - started,
+  stopped_before_timeout: deadline.stoppedEarly,
+  urls_not_processed: deadline.skipped,
 });
+if (deadline.stoppedEarly) {
+  await Actor.exit(`Stopped before the run timeout: ${pushed} screenshots taken, ${deadline.skipped} URLs not processed (not charged). Raise the run timeout or split the list.`);
+}
 await Actor.exit();
