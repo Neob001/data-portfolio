@@ -34,6 +34,7 @@ ICONS = {
     "lighthouse-auditor": ("website", "CWV"),
     "email-security-checker": ("website", "SPF"),
     "dns-records-lookup": ("website", "DNS"),
+    "tech-stack-detector": ("website", "STACK"),
     "website-screenshot": ("website", "SNAP"),
     "ats-jobs-feed": ("jobs", "JOBS"),
     "remote-jobs-feed": ("jobs", "WFH"),

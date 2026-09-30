@@ -68,3 +68,9 @@
 - All 24 factpipe Actors are whitelisted for x402 agentic payments (Store field isWhiteListedForAgenticPayments). Criteria: PPE without "+usage", limited permissions, no Standby, KYC'd developer.
 - TIMED-OUT runs count as failures in the quality score even when results were delivered (website-screenshot: a free user's 165-URL batches hit the 10-min default). Fix: shared/js/deadline.js — start an item only if a typical one fits, cap per-item timeouts to the time left, exit SUCCEEDED with a status message listing unprocessed (uncharged) items. Default run timeout raised to 3600 s for screenshot and lighthouse. Verified on Apify with 120 s/150 s run limits.
 - Demand scan 2026-09-30 (website cluster): tech-stack detection is the biggest reachable pool (nexgendata/wappalyzer-replacement 1,231 real users at $100/1k; cheaper rivals 3-35 users). Cookie/GDPR scanners: leaders have 0-2 users — skip. Accessibility, SSL, headers, redirects, robots: near-zero demand.
+
+## 2026-09-30 | tech-stack-detector staging
+- Built on wappalyzer@6.10.54 fingerprints (MIT, last MIT release; 3,588 technologies), plain HTTP + DNS, no browser. Cloud: 148 big-brand domains in 68 s, $0.0042 compute (~$0.03/1k) — PPE margin >99% at any sane price. ~17% of big brands answer 403 (bot walls); header/DNS detections are still returned, free.
+- Deadline guard sizing: an item budget of 45 s processed 0 URLs at a 45 s run timeout. Size the budget to ONE capped attempt (fetch timeout = min(20 s, left − 15 s), retries only with >30 s left) → 25 s. At 60 s timeout: 95/148 analyzed, SUCCEEDED at 40 s.
+- Empty input `{}` is rejected by the platform (400) when `urls` is required — the auto-tester uses the prefill, so this is fine.
+- Scripts need `export APIFY_TOKEN=$(cat ~/.apify_token)` locally (401 otherwise).
