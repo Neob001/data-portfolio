@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tech Stack Detector API: Wappalyzer Alternative for Any Site</title>
+<meta name="description" content="Detect the CMS, e-commerce platform, analytics, CDN, frameworks and email provider of any website in bulk. 3,500+ technologies. Pay per domain.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/tech-stack-detector/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tech Stack Detector API: Wappalyzer Alternative for Any Site">
+<meta property="og:description" content="Detect the CMS, e-commerce platform, analytics, CDN, frameworks and email provider of any website in bulk. 3,500+ technologies. Pay per domain.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/tech-stack-detector/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Tech Stack Detector \u2014 Wappalyzer Alternative for Any Website",
+  "description": "Detect the tech stack of any website in bulk: CMS, ecommerce platform, analytics, CDN, hosting, JS frameworks, email provider. 3,000+ technologies via plain HTTP + DNS, no browser. $10 per 1,000 domains.",
+  "url": "https://neob001.github.io/data-portfolio/tech-stack-detector/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "10",
+    "description": "Pay-per-result pricing: $10 per 1,000 domain analyzeds",
+    "url": "https://apify.com/factpipe/tech-stack-detector"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>Tech Stack Detector — Wappalyzer Alternative: Find the CMS, Ecommerce Platform, Analytics, CDN &amp; Hosting of Any Website</h1>
+<p>&lt;!-- factpipe:hero:start --&gt;</p>
+<p><strong>Detect the tech stack of any website in bulk: CMS, ecommerce platform, analytics, CDN, hosting, JS frameworks, email provider. 3,000+ technologies via plain HTTP + DNS, no browser. $10 per 1,000 domains.</strong></p>
+<div class="table-wrap"><table><thead><tr><th>Domain</th><th>Ecommerce platform</th><th>Payment processors</th><th>CDN</th><th>Mail provider</th></tr></thead><tbody><tr><td>gymshark.com</td><td>Shopify</td><td>Apple Pay, PayPal</td><td>Cloudflare</td><td>Proofpoint</td></tr><tr><td>allbirds.com</td><td>Shopify</td><td>Apple Pay, PayPal</td><td>Cloudflare</td><td>Microsoft 365</td></tr><tr><td>casper.com</td><td>Shopify</td><td>Apple Pay, PayPal, Venmo</td><td>Cloudflare</td><td>Google Workspace</td></tr></tbody></table></div>
+<p><em>Real output from the “Check which websites run on Shopify” example, run on September 30, 2026.</em></p>
+<p><strong>Try a ready-made example:</strong> <a href="https://apify.com/factpipe/tech-stack-detector/examples/detect-shopify-stores">Check which websites run on Shopify</a> · <a href="https://apify.com/factpipe/tech-stack-detector/examples/find-website-cms">Find which CMS a website uses</a> · <a href="https://apify.com/factpipe/tech-stack-detector/examples/builtwith-style-lead-enrichment">BuiltWith-style tech stack lookup for a lead list</a></p>
+<p>&lt;!-- factpipe:hero:end --&gt;</p>
+<p><strong>Detect the technology stack of any list of websites in bulk: CMS, ecommerce platform, analytics and tag managers, CDN, hosting/PaaS, JavaScript frameworks, web server, payment processors, marketing automation and email provider. 3,000+ technologies, plain HTTP + DNS (no browser), one flat row per site. $10 per 1,000 domains.</strong></p>
+<p>Paste domains or URLs, get back what each site is built with, a confidence score and version where the site exposes one, plus ready-to-filter columns like <code>cms</code>, <code>ecommerce_platform</code> and <code>cdn</code>. It uses MIT-licensed community fingerprints (Wappalyzer format) matched against response headers, cookies, meta tags, script URLs, page markup and public DNS records. No API key, no login, no personal data.</p>
+<div class="quick-facts"><span class="badge">$10 / 1,000</span><a class="button" href="https://apify.com/factpipe/tech-stack-detector" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the three prefilled sites (<code>https://www.shopify.com</code>, <code>https://github.com</code>, <code>https://www.nytimes.com</code>). It finishes in well under a minute.</li><li>You get one row per site with its technologies, categories and the flat columns (<code>cms</code>, <code>ecommerce_platform</code>, <code>analytics</code>, <code>cdn</code>, <code>hosting_or_paas</code>, <code>mail_provider</code>, ...).</li><li>That first run costs at most <strong>$0.03</strong> (3 sites × $0.01), well within Apify&#x27;s free monthly credit. Then paste your own list: thousands of domains per run are fine.</li></ol>
+<h2 id="what-you-get">What you get</h2>
+<p>One row per website (real output for <code>https://www.shopify.com</code>, trimmed):</p>
+<pre><code class="language-json">{
+  &quot;url&quot;: &quot;https://www.shopify.com/&quot;,
+  &quot;final_url&quot;: &quot;https://www.shopify.com/&quot;,
+  &quot;domain&quot;: &quot;shopify.com&quot;,
+  &quot;status_code&quot;: 200,
+  &quot;ok&quot;: true,
+  &quot;error&quot;: null,
+  &quot;technologies&quot;: [
+    { &quot;name&quot;: &quot;Shopify&quot;, &quot;categories&quot;: [&quot;Ecommerce&quot;], &quot;version&quot;: null, &quot;confidence&quot;: 100 },
+    { &quot;name&quot;: &quot;Cloudflare&quot;, &quot;categories&quot;: [&quot;CDN&quot;], &quot;version&quot;: null, &quot;confidence&quot;: 100 },
+    { &quot;name&quot;: &quot;HSTS&quot;, &quot;categories&quot;: [&quot;Security&quot;], &quot;version&quot;: null, &quot;confidence&quot;: 100 },
+    { &quot;name&quot;: &quot;Google Workspace&quot;, &quot;categories&quot;: [&quot;Webmail&quot;, &quot;Email&quot;], &quot;version&quot;: null, &quot;confidence&quot;: 100 },
+    { &quot;name&quot;: &quot;Zendesk&quot;, &quot;categories&quot;: [&quot;Documentation&quot;, &quot;Issue trackers&quot;, &quot;Live chat&quot;], &quot;version&quot;: null, &quot;confidence&quot;: 100 },
+    { &quot;name&quot;: &quot;Stripe&quot;, &quot;categories&quot;: [&quot;Payment processors&quot;], &quot;version&quot;: null, &quot;confidence&quot;: 100 }
+  ],
+  &quot;technology_names&quot;: [&quot;Shopify&quot;, &quot;Cloudflare&quot;, &quot;HSTS&quot;, &quot;Google Workspace&quot;, &quot;Zendesk&quot;, &quot;Stripe&quot;],
+  &quot;categories&quot;: [&quot;Ecommerce&quot;, &quot;CDN&quot;, &quot;Security&quot;, &quot;Webmail&quot;, &quot;Email&quot;, &quot;Documentation&quot;, &quot;Issue trackers&quot;, &quot;Live chat&quot;, &quot;Payment processors&quot;],
+  &quot;cms&quot;: null,
+  &quot;ecommerce_platform&quot;: &quot;Shopify&quot;,
+  &quot;analytics&quot;: [],
+  &quot;tag_managers&quot;: [],
+  &quot;cdn&quot;: &quot;Cloudflare&quot;,
+  &quot;hosting_or_paas&quot;: null,
+  &quot;javascript_frameworks&quot;: [],
+  &quot;web_server&quot;: null,
+  &quot;programming_languages&quot;: [],
+  &quot;marketing_automation&quot;: [],
+  &quot;payment_processors&quot;: [&quot;Stripe&quot;],
+  &quot;mail_provider&quot;: &quot;Google Workspace&quot;,
+  &quot;dns_provider&quot;: null,
+  &quot;has_spf&quot;: true,
+  &quot;has_dmarc&quot;: true,
+  &quot;verification_tokens&quot;: [&quot;microsoft&quot;, &quot;apple&quot;, &quot;atlassian&quot;, &quot;docusign&quot;, &quot;facebook&quot;, &quot;google&quot;, &quot;stripe&quot;],
+  &quot;technology_count&quot;: 6,
+  &quot;source_url&quot;: &quot;https://www.shopify.com/&quot;,
+  &quot;fetched_at&quot;: &quot;2026-09-30T12:28:20.258Z&quot;
+}</code></pre>
+<p>A WordPress site returns e.g. <code>&quot;cms&quot;: &quot;WordPress&quot;</code> (with its version when the site exposes it), <code>&quot;web_server&quot;: &quot;Nginx&quot;</code>, <code>&quot;programming_languages&quot;: [&quot;PHP&quot;]</code>; a Next.js site on Vercel returns <code>&quot;hosting_or_paas&quot;: &quot;Vercel&quot;</code>, <code>&quot;javascript_frameworks&quot;: [&quot;React&quot;]</code>.</p>
+<h2 id="use-cases">Use cases</h2>
+<ul><li><strong>Sales prospecting &amp; lead enrichment by technology</strong>: find every Shopify, WooCommerce, Magento or BigCommerce store in a lead list, or every company on HubSpot, Salesforce or Zendesk, and route leads by the tools they already use.</li><li><strong>Competitor research</strong>: see which CMS, analytics, A/B testing, CDN and hosting your competitors run, and which versions.</li><li><strong>Agency audits &amp; pitches</strong>: audit a client portfolio in one run: outdated CMS versions, missing tag manager, no CDN, no SPF/DMARC.</li><li><strong>Market-share research</strong>: count technology adoption across thousands of domains (e.g. &quot;share of top ecommerce sites on Shopify vs. Salesforce Commerce Cloud&quot;).</li><li><strong>Security &amp; IT inventory</strong>: inventory the web servers, frameworks, CDNs and exposed versions across all your company&#x27;s domains and subsidiaries.</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/tech-stack-detector" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+<h3 id="ready-made-examples">Ready-made examples</h3>
+<ul>
+<li><a href="https://apify.com/factpipe/tech-stack-detector/examples/detect-shopify-stores" target="_blank" rel="noopener">Check which websites run on Shopify</a>: Detect the e-commerce platform (Shopify, WooCommerce, Magento, BigCommerce...) behind a list of online stores.</li>
+<li><a href="https://apify.com/factpipe/tech-stack-detector/examples/find-website-cms" target="_blank" rel="noopener">Find which CMS a website uses</a>: Detect WordPress, Webflow, Contentful, Drupal, Wix, Squarespace and more for any list of sites.</li>
+<li><a href="https://apify.com/factpipe/tech-stack-detector/examples/builtwith-style-lead-enrichment" target="_blank" rel="noopener">BuiltWith-style tech stack lookup for a lead list</a>: Enrich company domains with their analytics, marketing, CRM, live chat, CDN and hosting stack.</li>
+</ul>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~tech-stack-detector/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;urls&quot;: [&quot;https://www.shopify.com&quot;, &quot;https://github.com&quot;, &quot;https://www.nytimes.com&quot;]}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;urls&quot;: [
+    &quot;https://www.shopify.com&quot;,
+    &quot;https://github.com&quot;,
+    &quot;https://www.nytimes.com&quot;
+  ]
+}
+
+run = client.actor(&quot;factpipe/tech-stack-detector&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;urls&quot;: [
+    &quot;https://www.shopify.com&quot;,
+    &quot;https://github.com&quot;,
+    &quot;https://www.nytimes.com&quot;
+  ]
+};
+
+const run = await client.actor(&#x27;factpipe/tech-stack-detector&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>urls</code></td><td>string[], required</td><td>Website URLs or bare domains (<code>shopify.com</code>). One row per site; <code>www.</code> and non-<code>www.</code> of the same host count as one site (first URL wins). Bare domains are tried over https first, then http.</td></tr><tr><td><code>includeDns</code></td><td>boolean</td><td>Default <code>true</code>. Also looks up MX, TXT, NS and SOA records (via 1.1.1.1 / 8.8.8.8) for <code>mail_provider</code>, <code>dns_provider</code>, <code>has_spf</code>, <code>has_dmarc</code>, <code>verification_tokens</code> and DNS-based detections (Google Workspace, Microsoft 365, HubSpot, Zendesk, ...).</td></tr><tr><td><code>categoriesFilter</code></td><td>string[]</td><td>Optional. Return only technologies in these categories (e.g. <code>CMS</code>, <code>Ecommerce</code>, <code>Analytics</code>). Flat columns are always filled. A site with no technology in the chosen categories is delivered but <strong>not charged</strong>.</td></tr><tr><td><code>maxConcurrency</code></td><td>integer</td><td>Default <code>10</code> (1–50). Sites fetched in parallel.</td></tr></tbody></table></div>
+<h2 id="output-fields">Output fields</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Meaning</th></tr></thead><tbody><tr><td><code>technologies</code></td><td><code>[{ name, categories[], version, confidence }]</code>, strongest first. <code>confidence</code> is 0–100 (Wappalyzer-style: pattern confidences add up, capped at 100).</td></tr><tr><td><code>technology_names</code>, <code>categories</code>, <code>technology_count</code></td><td>Flattened names, unique category names, count (after <code>categoriesFilter</code>).</td></tr><tr><td><code>cms</code>, <code>ecommerce_platform</code>, <code>cdn</code>, <code>hosting_or_paas</code>, <code>web_server</code></td><td>Best single match per column (<code>null</code> if none). CDN / hosting / web server prefer evidence from the site&#x27;s own response headers.</td></tr><tr><td><code>analytics</code>, <code>tag_managers</code>, <code>javascript_frameworks</code>, <code>programming_languages</code>, <code>marketing_automation</code>, <code>payment_processors</code></td><td>All matches per column.</td></tr><tr><td><code>mail_provider</code>, <code>dns_provider</code>, <code>has_spf</code>, <code>has_dmarc</code>, <code>verification_tokens</code></td><td>From public DNS (<code>null</code> when <code>includeDns</code> is off or DNS could not be read).</td></tr><tr><td><code>ok</code>, <code>error</code>, <code>status_code</code>, <code>final_url</code></td><td><code>error</code> is one of <code>invalid_url</code>, <code>dns_not_found</code>, <code>timeout</code>, <code>http_error</code>, <code>blocked</code>, <code>tls_error</code>, <code>connection_error</code> (or <code>null</code>).</td></tr></tbody></table></div>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>domain-analyzed</code></td><td><strong>$10 per 1,000</strong> ($0.01 each)</td><td>One website that loaded (<code>ok: true</code>) and returned at least one technology.</td></tr></tbody></table></div>
+<p>Failures (invalid input, nonexistent domain, timeout, HTTP error, bot-protection block) and pages with zero detections are <strong>free</strong>. You can cap spend with the run&#x27;s maximum charge; the Actor stops cleanly when it is reached.</p>
+<p>Example: analyzing 1,000 domains costs at most <strong>$10.00</strong>. No start fee.</p>
+<h2 id="coverage">Coverage</h2>
+<ul><li><strong>Fingerprints</strong>: 3,588 technologies in 108 categories from the last MIT-licensed Wappalyzer fingerprint snapshot (January 2023), of which about 3,150 can be detected from HTTP + DNS; the rest are reachable through <code>implies</code> (e.g. WordPress → PHP, MySQL).</li><li><strong>No JavaScript execution.</strong> This Actor fetches the page over plain HTTP (fast and cheap) and matches headers, cookies set by the server, <code>&lt;meta&gt;</code> tags, <code>&lt;script src&gt;</code> URLs, inline scripts, markup, CSS selectors, the URL and DNS records. Technologies that only reveal themselves after JavaScript runs in a browser (global JS variables, tags injected later by a tag manager, client-side-only single-page apps, cookies set by JavaScript) <strong>may be missed</strong>. Wappalyzer&#x27;s <code>js</code>, <code>css</code>, <code>xhr</code> and <code>robots</code> patterns are skipped.</li><li><strong>One page per site</strong>: the URL you give (after redirects), not a crawl. The home page usually carries the most signals.</li><li><strong>Bot protection</strong>: sites behind aggressive bot protection may return a challenge page; the row gets <code>error: &quot;blocked&quot;</code> (free), still listing what the headers revealed (e.g. Cloudflare, DataDome).</li><li><strong>DNS-based detections</strong> (TXT verification records, SPF includes, MX) describe the organization&#x27;s SaaS and email stack, e.g. Zendesk or Salesforce. They appear in <code>technologies</code> but never fill website columns like <code>cms</code> or <code>cdn</code>.</li><li><strong>Snapshot age</strong>: technologies launched after early 2023, or that changed their markers since, may be missing. A few noisy rules were tightened (e.g. Route 53 name servers no longer imply &quot;hosted on AWS&quot;); see <code>FINGERPRINTS_LICENSE.md</code>.</li><li><strong>Regex safety</strong>: third-party patterns are pre-compiled once with bounded quantifiers, inputs are size-capped (5 MB body, 1 MB of HTML scanned), and slow patterns are dropped at build time and disabled at run time.</li></ul>
+<h2 id="fingerprint-license-and-attribution">Fingerprint license and attribution</h2>
+<p>Technology fingerprints are derived from the <code>wappalyzer</code> npm package <strong>v6.10.54</strong>, the last release published under the <strong>MIT license</strong> (Copyright 2008 Wappalyzer). The MIT copyright and permission notice is retained in <code>FINGERPRINTS_LICENSE.md</code>, together with the exact package URL, checksum and license verification. No GPL-licensed fork and none of Wappalyzer&#x27;s current proprietary data is used. The detection engine is an independent implementation.</p>
+<h2 id="factpipe-website-audit-toolkit">factpipe Website Audit Toolkit</h2>
+<p>Bulk technical checks for agencies, SEO teams and deliverability owners, all pay-per-result. Feed a list of sites in, get one flat row per page or domain out.</p>
+<div class="table-wrap"><table><thead><tr><th>Workflow</th><th>Actor</th><th>What it does</th><th>Price</th></tr></thead><tbody><tr><td>Website audit</td><td><a href="../sitemap-url-extractor/">Sitemap URL Extractor &amp; 404 Checker</a></td><td>Extract every URL from XML sitemaps and flag 404s and broken entries</td><td>$0.30/1k</td></tr><tr><td>Website audit</td><td><a href="../lighthouse-auditor/">Lighthouse Auditor</a></td><td>Lighthouse scores and Core Web Vitals for many pages, mobile or desktop</td><td>$10/1k</td></tr><tr><td>Website audit</td><td><a href="../broken-link-checker/">Broken Link Checker</a></td><td>Crawl a site and flag every broken internal/external link, image and asset</td><td>$1.50/1k</td></tr><tr><td>Website audit</td><td><a href="../website-screenshot/">Website Screenshot</a></td><td>Bulk full-page or viewport screenshots, desktop or mobile</td><td>$2/1k</td></tr><tr><td>Website audit</td><td><a href="../email-security-checker/">Email Security Checker</a></td><td>SPF, DKIM, DMARC and MX audit for any list of domains</td><td>$3/1k</td></tr><tr><td>Domain intelligence</td><td><strong>Tech Stack Detector</strong> (this Actor)</td><td>CMS, e-commerce platform, analytics, CDN and frameworks of any website</td><td>$10/1k</td></tr><tr><td>Domain intelligence</td><td><a href="../dns-records-lookup/">DNS Records Lookup</a></td><td>Bulk A, MX, TXT, NS records plus mail and DNS provider for any domain list</td><td>$1.50/1k</td></tr></tbody></table></div>
+<p><strong>Use it together:</strong></p>
+<ul><li><strong>Lead enrichment:</strong> add each company&#x27;s email and DNS provider from <a href="../dns-records-lookup/">DNS Records Lookup</a> to its detected stack.</li><li><strong>Prospect audits:</strong> pair the stack with <a href="../lighthouse-auditor/">Lighthouse Auditor</a> scores to show a prospect what to fix, and with <a href="../email-security-checker/">Email Security Checker</a> for their mail setup.</li><li><strong>Sales prospecting:</strong> find companies that are hiring with <a href="../companies-hiring/">Companies Hiring</a>, then enrich their domains with the tech stack they run.</li></ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>Is this Wappalyzer?</strong><br>
+No. It is an independent Actor, not affiliated with or endorsed by Wappalyzer. It uses the MIT-licensed community fingerprints that Wappalyzer published until early 2023, with its own detection engine that runs over plain HTTP and DNS.</p>
+<p><strong>Why is a technology I know the site uses missing?</strong><br>
+Most likely it only shows up after JavaScript runs in a browser (see Coverage), it is loaded on a different page than the one analyzed, or it is newer than the fingerprint snapshot. Try the specific page URL where it is used.</p>
+<p><strong>Am I charged for sites that fail or show nothing?</strong><br>
+No. Only rows with <code>ok: true</code> and at least one technology (after your <code>categoriesFilter</code>) are charged. Invalid inputs, nonexistent domains, timeouts, HTTP errors, blocked pages and empty results are free.</p>
+<p><strong>What does <code>confidence</code> mean?</strong><br>
+Each matching pattern adds its confidence (usually 100, sometimes 25 or 50 for weak signals); the total is capped at 100. Implied technologies take the lower of the parent&#x27;s confidence and the implication&#x27;s. Filter on <code>confidence &gt;= 50</code> if you want only strong matches.</p>
+<p><strong>How fast is it?</strong><br>
+A typical site takes 1–3 seconds (one HTTP request plus DNS). The default concurrency of 10 analyzes roughly 100–300 sites per minute. Each fetch has a 20-second timeout and one retry on timeouts and 5xx errors; runs stop cleanly before the run timeout and report any unprocessed URLs in the status message.</p>
+<p><strong>Do you collect personal data?</strong><br>
+No. Only technical metadata of public websites and public DNS records is returned; nothing behind a login is accessed.</p>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier, n8n or an AI agent?</strong><br>
+Yes. Run it through the Apify API or the official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server. Input is small and the output is deterministic flat JSON.</p>
+<h2 id="reliability">Reliability</h2>
+<p>Deterministic code: pre-compiled fingerprints, one HTTP fetch per site with a realistic browser User-Agent, redirect following, a 5 MB body cap, one retry on transient failures, structured error codes, a run summary record every run, golden-fixture tests, daily health checks and issue triage.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>

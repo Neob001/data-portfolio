@@ -1,5 +1,21 @@
 # Tech Stack Detector — Wappalyzer Alternative: Find the CMS, Ecommerce Platform, Analytics, CDN & Hosting of Any Website
 
+<!-- factpipe:hero:start -->
+
+**Detect the tech stack of any website in bulk: CMS, ecommerce platform, analytics, CDN, hosting, JS frameworks, email provider. 3,000+ technologies via plain HTTP + DNS, no browser. $10 per 1,000 domains.**
+
+| Domain | Ecommerce platform | Payment processors | CDN | Mail provider |
+|---|---|---|---|---|
+| gymshark.com | Shopify | Apple Pay, PayPal | Cloudflare | Proofpoint |
+| allbirds.com | Shopify | Apple Pay, PayPal | Cloudflare | Microsoft 365 |
+| casper.com | Shopify | Apple Pay, PayPal, Venmo | Cloudflare | Google Workspace |
+
+*Real output from the “Check which websites run on Shopify” example, run on September 30, 2026.*
+
+**Try a ready-made example:** [Check which websites run on Shopify](https://apify.com/factpipe/tech-stack-detector/examples/detect-shopify-stores) · [Find which CMS a website uses](https://apify.com/factpipe/tech-stack-detector/examples/find-website-cms) · [BuiltWith-style tech stack lookup for a lead list](https://apify.com/factpipe/tech-stack-detector/examples/builtwith-style-lead-enrichment)
+
+<!-- factpipe:hero:end -->
+
 **Detect the technology stack of any list of websites in bulk: CMS, ecommerce platform, analytics and tag managers, CDN, hosting/PaaS, JavaScript frameworks, web server, payment processors, marketing automation and email provider. 3,000+ technologies, plain HTTP + DNS (no browser), one flat row per site. $10 per 1,000 domains.**
 
 Paste domains or URLs, get back what each site is built with, a confidence score and version where the site exposes one, plus ready-to-filter columns like `cms`, `ecommerce_platform` and `cdn`. It uses MIT-licensed community fingerprints (Wappalyzer format) matched against response headers, cookies, meta tags, script URLs, page markup and public DNS records. No API key, no login, no personal data.

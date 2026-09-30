@@ -1308,7 +1308,7 @@
       "apify_actor_id": "0bskRlyiLOlNtOBsa",
       "source": "User-supplied public websites (HTTP + public DNS); fingerprints: wappalyzer@6.10.54 (MIT)",
       "variant": "bulk lookup",
-      "status": "staging",
+      "status": "live",
       "approval": "2026-09-30 TS1 (owner: 'TS1 A')",
       "origin": "scan",
       "incumbent_actor_id": "nexgendata/wappalyzer-replacement",
@@ -1327,7 +1327,7 @@
         }
       },
       "pricing_rationale": "Leader nexgendata/wappalyzer-replacement $100/1k (1,231 users) vs cheap rivals $0.24-3/1k with 3-35 users: buyers choose on trust, not price. $10/1k = 10x cheaper than the leader. Compute ~$0.03/1k.",
-      "launched_at": null,
+      "launched_at": "2026-09-30T13:25:00Z",
       "last_fix_date": null,
       "kpis": {},
       "listing": {
@@ -1340,8 +1340,8 @@
           "DEVELOPER_TOOLS"
         ]
       },
-      "staging_validated": false,
-      "monetization_configured": false,
+      "staging_validated": true,
+      "monetization_configured": true,
       "staging_started_at": "2026-09-30T12:34:02Z",
       "price_history": [
         {

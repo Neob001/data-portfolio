@@ -36,6 +36,13 @@ def cell(value):
     return text if len(text) <= MAX_CELL else text[: MAX_CELL - 1] + "…"
 
 
+# Actors whose dataset view starts with columns that make a poor sample (flags, sparse columns).
+HERO_FIELDS = {
+    "tech-stack-detector": ["domain", "ecommerce_platform", "payment_processors", "cdn", "mail_provider"],
+}
+
+ACRONYMS = {"cdn": "CDN", "cms": "CMS", "url": "URL", "mx": "MX", "ns": "NS"}
+
 PERSONAL_URL = re.compile(r"linkedin\.com/in/|facebook\.com/|twitter\.com/|x\.com/|instagram\.com/", re.I)
 
 
@@ -45,7 +52,9 @@ def pick_rows(slug, items, fields):
             and not PERSONAL_URL.search(json.dumps(r))]
     if slug == "broken-link-checker":
         rows = [r for r in rows if r.get("record_type") == "broken_link"] or rows
-    key_field = "company_name" if "company_name" in fields else fields[1] if len(fields) > 1 else fields[0]
+    rows = [r for r in rows if r.get("ok") is not False] or rows  # show successes, not failures
+    key_field = ("company_name" if "company_name" in fields else "domain" if "domain" in fields
+                 else fields[1] if len(fields) > 1 else fields[0])
     chosen, seen = [], set()
     for r in rows:
         k = str(r.get(key_field))
@@ -76,12 +85,12 @@ def render(slug, meta, tasks):
     actor = json.loads((ROOT / "actors" / slug / ".actor" / "actor.json").read_text())
     view = next(iter(actor["storages"]["dataset"]["views"].values()))
     labels = (view.get("display") or {}).get("properties") or {}
-    fields = view["transformation"]["fields"][:MAX_COLS]
+    fields = HERO_FIELDS.get(slug) or view["transformation"]["fields"][:MAX_COLS]
     items, when = sample_rows(tasks[0]["name"]) if tasks else (None, None)
     lines = [START, "", f"**{meta['listing']['description']}**", ""]
     if items:
         rows = pick_rows(slug, items, fields)
-        lines.append("| " + " | ".join((labels.get(f) or {}).get("label") or f.replace("_", " ").capitalize() for f in fields) + " |")
+        lines.append("| " + " | ".join((labels.get(f) or {}).get("label") or ACRONYMS.get(f) or f.replace("_", " ").capitalize() for f in fields) + " |")
         lines.append("|" + "---|" * len(fields))
         for r in rows:
             lines.append("| " + " | ".join(cell(r.get(f)) for f in fields) + " |")
