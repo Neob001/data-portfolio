@@ -33,3 +33,6 @@ Replies are NEVER posted without a tick. Standing decision 2026-09-12.
 
 ## 2026-09-30
 (no drafts today. demand_monitor: 0 new hits, 0 open signals; the Apify forum still returns non-JSON. No owner ticks pending.)
+
+## 2026-10-05
+(no drafts today. demand_monitor: 2 raw hits, 0 passed the filters: SO 80007661 is a CARLA/Vulkan GPU hang question matched on a stray keyword, and well-prado/new-blok#289 is an internal run-retention issue, not a data demand. Both marked 'filtered'. No DC proposals. The Apify forum still returns non-JSON. No owner ticks pending.)

@@ -77,6 +77,36 @@
       "status": "filtered",
       "detected_at": "2026-09-27T09:06:29.325364+00:00",
       "filter_reason": "GitHub release-chore issue (\"Post x.y.z to SpigotMC\"); keyword-only match, no data demand"
+    },
+    {
+      "platform": "stackoverflow",
+      "url": "https://stackoverflow.com/questions/80007661/carla-0-9-15-hangs-in-vulkan-waituntilidle-on-h800-with-nvidia-535-54-03",
+      "title": "CARLA 0.9.15 hangs in Vulkan WaitUntilIdle on H800 with NVIDIA 535.54.03",
+      "body": "sec filings api",
+      "created_at": "2026-10-03T09:47:47+00:00",
+      "engagement": -7,
+      "answered": false,
+      "match_type": "have",
+      "matched_actor": "sec-edgar-filings-search",
+      "capture_score": -1.874,
+      "status": "filtered",
+      "detected_at": "2026-10-05T14:37:38.491034+00:00",
+      "filter_reason": "keyword-only match: GPU driver hang question, no SEC data demand"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/well-prado/new-blok/issues/289",
+      "title": "retention: failed/canceled runs and child results inside a parent are never erased",
+      "body": "## What\nAfter PR #288 (#281), compaction erases the content of completed and reconciled runs. Some content is still kept forever:\n- **Failed and canceled runs** are never compacted, so their input, output and step data stay indefinitely. ADR 0021 says they are kept \"until the application deletes it\", but there is no API for an application to delete them.\n- **A child run's result** stays in an unco",
+      "created_at": "2026-10-05T12:20:27Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 0.913,
+      "status": "filtered",
+      "detected_at": "2026-10-05T14:37:38.491867+00:00",
+      "filter_reason": "internal retention/erasure issue in another project; no data demand, not a buildable data Actor"
     }
   ]
 }
