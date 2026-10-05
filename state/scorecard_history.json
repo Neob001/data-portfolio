@@ -188,5 +188,110 @@
     "real_runs_30": 0
    }
   }
+ },
+ {
+  "date": "2026-10-05",
+  "actors": {
+   "sec-edgar-filings-search": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "eu-ted-tenders-monitor": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "uk-company-lookup": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "federal-register-monitor": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "fda-recalls-monitor": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "ofac-sanctions-screening": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "us-weather-forecast": {
+    "real_users_30": 1,
+    "real_runs_30": 15
+   },
+   "company-jobs-scraper": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "sitemap-url-extractor": {
+    "real_users_30": 1,
+    "real_runs_30": 0
+   },
+   "wikipedia-scraper": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "open-food-facts-scraper": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "ecb-exchange-rates": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "email-security-checker": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "eu-vat-validation": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "lighthouse-auditor": {
+    "real_users_30": 0,
+    "real_runs_30": 5
+   },
+   "sam-gov-contracts": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "dns-records-lookup": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "france-company-lookup": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "broken-link-checker": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "website-screenshot": {
+    "real_users_30": 0,
+    "real_runs_30": 4
+   },
+   "ats-jobs-feed": {
+    "real_users_30": 0,
+    "real_runs_30": 25
+   },
+   "remote-jobs-feed": {
+    "real_users_30": 1,
+    "real_runs_30": 9
+   },
+   "ats-jobs-scraper": {
+    "real_users_30": 1,
+    "real_runs_30": 3
+   },
+   "companies-hiring": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "tech-stack-detector": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   }
+  }
  }
 ]

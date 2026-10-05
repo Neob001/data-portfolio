@@ -1,26 +1,29 @@
-# Weekly report — 2026-09-27
+# factpipe weekly report — 2026-10-05
 
 ## Money
-- **Revenue: $0.68 in September ($0.64 profit)**, all from `us-weather-forecast` (2 paying users). This is today's Console Insights reading, logged in LEARNINGS.md. This run didn't open the Console, so check the exact figure at https://console.apify.com/actors/insights (Monetization tab). The final number comes on the payout invoice.
-- **24 live Actors · 1 with a real user (us-weather-forecast: 1 real user, 16 runs in 30 days).** Correction: an earlier version of this report counted the three jobs Actors published 2026-09-27 as having real users; those were our own test runs, so the scorecard now holds Actors under 3 days old at "too early".
-- Store-side changes made 2026-09-27 (owner-approved): custom icons on all 24 Actors, 34 published example tasks (Store landing pages), Store plan discounts on 23 Actors (Starter −10%, Scale −20%, Business −30%, Free unchanged), and a new README first screen (value line, real sample table, example links).
+- **Live Actors: 25** (26 in registry) · **with real users: 4** · **real users 30d: 4** · **real runs 30d: 61**
+- Week over week: sitemap-url-extractor +1 user (growing), companies-hiring -1; others flat.
+- Actors with real users: us-weather-forecast (1 user, 15 runs), remote-jobs-feed (1, 9), ats-jobs-scraper (1, 3), sitemap-url-extractor (1, 0 runs).
+- Revenue: not read this run (Console Insights is not in the public API). Last known: Sept = $0.97 ($0.80 profit). Current figure: https://console.apify.com/actors/insights (Monetization tab).
 
 ## Health
-- `health.py`: **0 flags** across 24 Actors. Scorecard flag: **`broken-link-checker` 20% of 30d runs failed** (older failures from the 09-18 maintenance incident; its PPE switch takes effect 2026-10-02).
-- Staging: all 11 cloud runs of the jobs Actors passed 2026-09-27. `news-monitor` is still shelved and unpublished because GDELT rate-limits requests.
-- `pricing.py`: 0 price proposals (a Python 3.9 date-parsing crash was fixed the same day).
+- health.py: no flags (25 checked). Pricing guard: no proposals.
+- Failure rates (30d): broken-link-checker 12%, website-screenshot 10%, lighthouse-auditor 8%, ats-jobs-feed 6%. All others 0%.
+- tech-stack-detector: listing icon differs from registry (icon never uploaded; Console was blank last attempt).
+- ats-jobs-feed has the most runs (25) but 0 real users, so most are probably auto-tests.
 
-## Decisions needed
-_None open._ The scorecard has 0 proposals, and SD1 (Store discounts) and RH1 (README first screen) were approved and applied today.
+## Decisions needed (answer in DECISIONS.md)
+1. Retry the tech-stack-detector icon upload via Console next session? (yes/no)
+2. Investigate the failures on broken-link-checker, website-screenshot and lighthouse-auditor (6-12%)? (yes/no)
+3. Pricing/title proposals from the scorecard: none this week.
 
 ## What we learned
-- **The first revenue came from the one Actor with organic repeat use** (weather, $0.68). Official-data niches still have 0 real users, so jobs is the right place to keep betting.
-- **Store funnel leaks at the input page:** 1,487 views → 120 input views → 25 starts. Half the views look like crawlers. Every Actor lacked the same basics (icon, published task, discounts), and those are now being fixed.
-- **Tasks published through the API act as indexable Store landing pages** (`/examples/<task>`). Icons have to be uploaded in the Console, one full page load per Actor, because moving between Actors inside the Console app once overwrote a listing.
+- Only paying-plan users produce revenue: Sept $0.97 came from weather (2 paying) and lighthouse (1 paying, thin margin from heavy compute).
+- Store ranking is quality-score driven, so new Actors in crowded categories (jobs) stay invisible; the earners sit in small niches where we rank top-15.
+- Timed-out runs count as failures in the quality score even when results were delivered; fix is deadline guards, and CI needs an opt-in (`ciInstall`) for Actors with npm deps.
 
-## Top build proposals (state/opportunities.json)
-1. `companies-house`: score 1.54, 49 users / 21.7k runs per 30d, ~8h. Needs a free API key.
-2. `open-food-facts`: 1.48, 9 users. We already have `open-food-facts-scraper`.
-3. `wikipedia-data`: 1.32, 21 users. We already have `wikipedia-scraper`.
-
-The official-data freeze (F1) applies to all three, so no new builds are proposed. Jobs remains the growth cluster.
+## Top build proposals
+1. companies-house (score 1.54, 8h, 49 users/30d demand)
+2. open-food-facts (score 1.48, 5h, 9 users)
+3. wikipedia-data (score 1.32, 4h, 21 users)
+(Note: owner froze new small official-data Actors on 2026-09-18, so these need a fresh yes before any build.)
