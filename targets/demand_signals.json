@@ -217,7 +217,7 @@
       "match_type": "buildable",
       "matched_actor": null,
       "capture_score": 0.774,
-      "status": "new",
+      "status": "filtered",
       "detected_at": "2026-10-07T10:18:50.655520+00:00"
     },
     {
@@ -231,7 +231,7 @@
       "match_type": "buildable",
       "matched_actor": null,
       "capture_score": 0.762,
-      "status": "new",
+      "status": "filtered",
       "detected_at": "2026-10-07T10:18:50.656019+00:00"
     },
     {
@@ -245,7 +245,7 @@
       "match_type": "buildable",
       "matched_actor": null,
       "capture_score": 0.757,
-      "status": "new",
+      "status": "filtered",
       "detected_at": "2026-10-07T10:18:50.656489+00:00"
     },
     {
@@ -259,7 +259,7 @@
       "match_type": "buildable",
       "matched_actor": null,
       "capture_score": 0.753,
-      "status": "new",
+      "status": "filtered",
       "detected_at": "2026-10-07T10:18:50.656962+00:00"
     },
     {
@@ -273,7 +273,7 @@
       "match_type": "buildable",
       "matched_actor": null,
       "capture_score": 0.746,
-      "status": "new",
+      "status": "filtered",
       "detected_at": "2026-10-07T10:18:50.657435+00:00"
     },
     {
@@ -287,7 +287,7 @@
       "match_type": "buildable",
       "matched_actor": null,
       "capture_score": 0.74,
-      "status": "new",
+      "status": "filtered",
       "detected_at": "2026-10-07T10:18:50.658206+00:00"
     }
   ]
