@@ -289,6 +289,34 @@
       "capture_score": 0.74,
       "status": "filtered",
       "detected_at": "2026-10-07T10:18:50.658206+00:00"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/JuliDikova/SemMan4Cat/issues/1",
+      "title": "how to get the prefix maps for all data sets?",
+      "body": "Is there an API endpoint where I can get just the prefix map extracted out of a given data set?",
+      "created_at": "2026-10-08T10:09:42Z",
+      "engagement": 3,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 3.272,
+      "status": "filtered",
+      "detected_at": "2026-10-08T15:30:08.569544+00:00"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/Dans-Plugins/SimpleSkills/issues/199",
+      "title": "Post 2.7.0 to SpigotMC",
+      "body": "`v2.7.0` is the stable release on GitHub, but the listing at https://www.spigotmc.org/resources/98039/ still shows the previous version until an update is posted there by hand (SpigotMC has no API for it).\n\n## Post update\n\n1. Open https://www.spigotmc.org/resources/98039/, choose **Post update**.\n2. Version string: `2.7.0`\n3. Download: **External download** \u2192 `https://github.com/Dans-Plugins/Simpl",
+      "created_at": "2026-10-08T01:28:22Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 0.631,
+      "status": "filtered",
+      "detected_at": "2026-10-08T15:30:08.571787+00:00"
     }
   ]
 }
