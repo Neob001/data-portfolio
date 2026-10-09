@@ -85,7 +85,8 @@ export const trackDate = (job) => (job.posted_at || job.updated_at || '1970-01-0
 const isLocal = (base) => base.startsWith('file://') || base.startsWith('/') || /^[A-Za-z]:\\/.test(base);
 const localPath = (base, rel) => (base.startsWith('file://') ? fileURLToPath(`${base.replace(/\/$/, '')}/${rel}`) : `${base.replace(/\/$/, '')}/${rel}`);
 
-export async function readIndexFile(base, rel, { timeoutMs = 30000, attempts = 3 } = {}) {
+/** retry404: keep retrying a 404 (manifest.json is briefly missing while the nightly publish swaps it). */
+export async function readIndexFile(base, rel, { timeoutMs = 30000, attempts = 3, retry404 = false } = {}) {
   if (isLocal(base)) return readFile(localPath(base, rel));
   let last;
   for (let a = 0; a < attempts; a += 1) {
@@ -97,7 +98,7 @@ export async function readIndexFile(base, rel, { timeoutMs = 30000, attempts = 3
       return Buffer.from(await res.arrayBuffer());
     } catch (e) {
       last = e;
-      if (e.status === 404) break;
+      if (e.status === 404 && !retry404) break;
     }
   }
   throw last;
@@ -221,7 +222,7 @@ export async function openIndex(deps = {}) {
   const base = deps.indexBaseUrl || INDEX_BASE_URL;
   const readFileImpl = deps.readIndexFile || readIndexFile;
   const stream = deps.streamShardLines || streamShardLines;
-  const manifest = JSON.parse((await readFileImpl(base, 'manifest.json', { timeoutMs: 20000 })).toString('utf8'));
+  const manifest = JSON.parse((await readFileImpl(base, 'manifest.json', { timeoutMs: 20000, attempts: 5, retry404: true })).toString('utf8'));
   if (manifest.format !== INDEX_FORMAT || !Array.isArray(manifest.shards)) throw new Error(`unsupported index format ${manifest.format}`);
   return { base, manifest, readFile: readFileImpl, stream };
 }

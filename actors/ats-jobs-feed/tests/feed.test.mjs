@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { gunzipSync, brotliDecompressSync } from 'node:zlib';
 import { pathToFileURL } from 'node:url';
-import { runFeed, fetchBoard, streamShardLines, FALLBACK_BOARDS, INDEX_BASE_URL, companyNameFromTitle } from '../src/core/feed.js';
+import { runFeed, fetchBoard, streamShardLines, readIndexFile, openIndex, FALLBACK_BOARDS, INDEX_BASE_URL, companyNameFromTitle } from '../src/core/feed.js';
 import { normalizeInput } from '../src/core/filters.js';
 import { parseBoardRef } from '../src/core/transform.js';
 import { SHARD_MAX_BYTES } from '../src/core/index_writer.js';
@@ -384,4 +384,23 @@ test('maxPerCompany: no company exceeds the cap; without it every fixture job is
   assert.equal(capped.charges, capped.rows.length);
   capped.rows.forEach(assertMatchesSchema);
   assert.throws(() => normalizeInput({ maxPerCompany: 0 }), /maxPerCompany/);
+});
+
+test('openIndex waits out a brief manifest.json 404 (nightly publish swaps it), other files fail fast', async (t) => {
+  const realFetch = globalThis.fetch;
+  t.after(() => { globalThis.fetch = realFetch; });
+  let calls = 0;
+  globalThis.fetch = async (url) => {
+    calls += 1;
+    if (String(url).endsWith('/manifest.json') && calls < 3) return new Response('Not Found', { status: 404 });
+    if (String(url).endsWith('/manifest.json')) return new Response(JSON.stringify({ format: 2, shards: [] }), { status: 200 });
+    return new Response('Not Found', { status: 404 });
+  };
+  const index = await openIndex({ indexBaseUrl: 'https://index.example' });
+  assert.equal(index.manifest.format, 2);
+  assert.equal(calls, 3);
+
+  calls = 0;
+  await assert.rejects(readIndexFile('https://index.example', 'shard-0.jsonl.br', { attempts: 3 }), /HTTP 404/);
+  assert.equal(calls, 1); // a missing shard is not retried
 });

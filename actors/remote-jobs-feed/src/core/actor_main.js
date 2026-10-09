@@ -24,6 +24,12 @@ export async function runJobsActor({ slug, toOptions = normalizeInput }) {
     return;
   }
   if (opts.badRefs.length) log.warning(`Ignored ${opts.badRefs.length} unsupported board reference(s): ${opts.badRefs.slice(0, 5).join(', ')}`);
+  // Only unsupported URLs (e.g. a company's own careers page): explain instead of failing the run.
+  if (opts.mode === 'live' && opts.boards.length === 0) {
+    await writeRunSummary(Actor, { rows: 0, errors: opts.badRefs.length, failure_class: 'input_error', duration_ms: Date.now() - started });
+    await Actor.exit({ statusMessage: noSupportedBoardsMessage(opts.badRefs) });
+    return;
+  }
 
   // Incremental mode: per-filter-set cursor in a NAMED store (shared/js/incremental.js), dedupe by job_id.
   const inc = opts.sinceLastRun ? await loadTracker(Actor, slug, filterIdentity(opts)) : null;
@@ -73,9 +79,20 @@ export async function runJobsActor({ slug, toOptions = normalizeInput }) {
   });
   if (summary.stop_reason === 'charge_limit') {
     await Actor.exit({ statusMessage: `Charge limit reached after ${summary.rows} jobs` });
+  } else if (allLiveFailed && summary.rows === 0 && summary.failed_boards.every((b) => b.status === 404)) {
+    // Boards that do not exist are an input problem, not an outage: explain instead of failing.
+    await Actor.exit({ statusMessage: `None of the ${summary.boards_requested} job boards exist (HTTP 404: ${summary.failed_boards.map((b) => b.board).slice(0, 5).join(', ')}). Check the company's board URL on its careers page.` });
   } else if (allLiveFailed && summary.rows === 0) {
     await Actor.fail(`All ${summary.boards_requested} job boards failed to load (${summary.failed_boards.map((b) => b.board).slice(0, 5).join(', ')})`);
   } else {
     await Actor.exit({ statusMessage: `${summary.rows} jobs delivered (${summary.mode}${summary.used_fallback ? ', index unreachable - live fallback' : ''})` });
   }
+}
+
+/** Status message for runs whose board references are all unsupported (exported for tests). */
+export function noSupportedBoardsMessage(badRefs) {
+  return `No supported job-board URL in input (${badRefs.slice(0, 3).join(', ')}${badRefs.length > 3 ? ', ...' : ''}). `
+    + 'Use Greenhouse, Lever, Ashby, Workable or Recruitee board URLs, e.g. https://job-boards.greenhouse.io/<company>, '
+    + 'https://jobs.lever.co/<company>, https://jobs.ashbyhq.com/<company>. For a company\'s own careers page use '
+    + 'https://apify.com/factpipe/company-jobs-scraper';
 }

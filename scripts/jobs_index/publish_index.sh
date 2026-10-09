@@ -7,8 +7,9 @@
 #   publish_apify_kvs       STORE_NAME_OR_ID    # needs $APIFY_TOKEN
 #
 # Files published (flat names, because release assets and KV records cannot contain "/"):
-#   manifest.json, directory.json.gz, shard-<n>.jsonl.br (n = index in manifest.shards)
-# The published manifest.json is rewritten so every shard "file" is its flat name.
+#   GitHub release: manifest.json, <build>-directory.json.gz, <build>-shard-<n>.jsonl.br
+#   Apify KVS:      manifest.json, directory.json.gz, shard-<n>.jsonl.br
+# The published manifest.json is rewritten so "directory" and every shard "file" use those names.
 #
 # INDEX_BASE_URL to configure afterwards:
 #   (a) https://github.com/OWNER/REPO/releases/download/jobs-index
@@ -49,30 +50,9 @@ PY
 #     Manifest is uploaded LAST so readers never see a manifest pointing at missing shards
 #     (there is still a short window with no manifest: the Actor then uses its live fallback).
 publish_github_release() {
-  local repo="$1" api="https://api.github.com" auth=(-H "Authorization: Bearer ${GITHUB_TOKEN:?set GITHUB_TOKEN}" -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28")
-  local rel id
-  rel="$(curl -fsS "${auth[@]}" "$api/repos/$repo/releases/tags/jobs-index" || true)"
-  if [ -z "$rel" ]; then
-    rel="$(curl -fsS "${auth[@]}" -X POST "$api/repos/$repo/releases" \
-      -d '{"tag_name":"jobs-index","name":"jobs-index (rebuilt daily)","body":"Slim jobs search index for actors/ats-jobs-feed. Replaced daily.","prerelease":true}')"
-  fi
-  id="$(printf '%s' "$rel" | python3 -c 'import json,sys; print(json.load(sys.stdin)["id"])')"
-  # delete old assets (paginate 100 at a time)
-  while :; do
-    local ids
-    ids="$(curl -fsS "${auth[@]}" "$api/repos/$repo/releases/$id/assets?per_page=100" | python3 -c 'import json,sys; print(" ".join(str(a["id"]) for a in json.load(sys.stdin)))')"
-    [ -z "$ids" ] && break
-    for a in $ids; do curl -fsS "${auth[@]}" -X DELETE "$api/repos/$repo/releases/assets/$a" >/dev/null; done
-  done
-  local up="https://uploads.github.com/repos/$repo/releases/$id/assets"
-  while IFS=$'\t' read -r name path ctype; do
-    curl -fsS "${auth[@]}" -H "Content-Type: $ctype" --data-binary @"$path" "$up?name=$name" >/dev/null
-    echo "uploaded $name"
-  done < <(_each_file)
-  _flat_manifest > "$JOBS_INDEX_DIR/.manifest.flat.json"
-  curl -fsS "${auth[@]}" -H "Content-Type: application/json" --data-binary @"$JOBS_INDEX_DIR/.manifest.flat.json" "$up?name=manifest.json" >/dev/null
-  rm -f "$JOBS_INDEX_DIR/.manifest.flat.json"
-  echo "INDEX_BASE_URL=https://github.com/$repo/releases/download/jobs-index"
+  # Gap-free publish (build-stamped asset names, manifest swapped last, previous build kept one
+  # cycle for in-flight runs): see publish_release.py.
+  python3 "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/publish_release.py" "$1" "$JOBS_INDEX_DIR"
 }
 
 # (b) Apify key-value store: PUT one record per file. Records with the same key are overwritten,
