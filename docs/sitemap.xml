@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://neob001.github.io/data-portfolio/</loc></url>
+  <url><loc>https://neob001.github.io/data-portfolio/ashby-jobs-api/</loc></url>
   <url><loc>https://neob001.github.io/data-portfolio/ats-jobs-feed/</loc></url>
   <url><loc>https://neob001.github.io/data-portfolio/ats-jobs-scraper/</loc></url>
   <url><loc>https://neob001.github.io/data-portfolio/broken-link-checker/</loc></url>
@@ -14,6 +15,8 @@
   <url><loc>https://neob001.github.io/data-portfolio/fda-recalls-monitor/</loc></url>
   <url><loc>https://neob001.github.io/data-portfolio/federal-register-monitor/</loc></url>
   <url><loc>https://neob001.github.io/data-portfolio/france-company-lookup/</loc></url>
+  <url><loc>https://neob001.github.io/data-portfolio/greenhouse-jobs-api/</loc></url>
+  <url><loc>https://neob001.github.io/data-portfolio/lever-jobs-api/</loc></url>
   <url><loc>https://neob001.github.io/data-portfolio/lighthouse-auditor/</loc></url>
   <url><loc>https://neob001.github.io/data-portfolio/ofac-sanctions-screening/</loc></url>
   <url><loc>https://neob001.github.io/data-portfolio/open-food-facts-scraper/</loc></url>

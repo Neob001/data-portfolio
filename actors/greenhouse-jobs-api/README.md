@@ -1,5 +1,21 @@
 # Greenhouse Jobs API — Search All Greenhouse Job Boards
 
+<!-- factpipe:hero:start -->
+
+**Search open jobs on 3,600+ Greenhouse job boards (Stripe, Databricks, Anthropic…) by keyword, location, remote and department, or fetch any Greenhouse board live. Full descriptions. $2 per 1,000 jobs.**
+
+| Title | Company | Department | Locations | Workplace |
+|---|---|---|---|---|
+| Staff Software Engineer | Robinhood | ENG Data and AI Platform Division | New York, NY | unknown |
+| Sr. Staff Software Engineer, Browser (New Produ… | Mozilla | New Products | Remote Canada | remote |
+| Senior Software Engineer | Xometry | Software Engineering | North Bethesda, Maryland | unknown |
+
+*Real output from the “Software Engineer jobs on Greenhouse job boards” example, run on October 9, 2026.*
+
+**Try a ready-made example:** [Software Engineer jobs on Greenhouse job boards](https://apify.com/factpipe/greenhouse-jobs-api/examples/greenhouse-software-engineer-jobs) · [Remote jobs on Greenhouse job boards (last 7 days)](https://apify.com/factpipe/greenhouse-jobs-api/examples/greenhouse-remote-jobs)
+
+<!-- factpipe:hero:end -->
+
 A **Greenhouse jobs API** and **Greenhouse job board scraper** in one: search every open job on **3,698 Greenhouse company job boards** (Stripe, Databricks, Anthropic, Datadog, Cloudflare, GitLab…) by keyword, location, remote, department and posting date, and get flat, deduplicated JSON: title, department, locations, country codes, remote flag, apply link and full description. Paste any Greenhouse board URL ("https://job-boards.greenhouse.io/gitlab") to fetch it live. **$2 per 1,000 jobs**, and you pay only for the jobs you get.
 
 ## Quick start

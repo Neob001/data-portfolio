@@ -644,6 +644,84 @@
           "intercom.com"
         ]
       }
+    },
+    {
+      "actor": "greenhouse-jobs-api",
+      "name": "greenhouse-software-engineer-jobs",
+      "title": "Software Engineer jobs on Greenhouse job boards",
+      "description": "Newest software engineer openings across every Greenhouse job board in the index, max 3 per company, with salary where published.",
+      "input": {
+        "keywords": [
+          "software engineer"
+        ],
+        "postedWithinDays": 7,
+        "maxResults": 50,
+        "maxPerCompany": 3
+      }
+    },
+    {
+      "actor": "greenhouse-jobs-api",
+      "name": "greenhouse-remote-jobs",
+      "title": "Remote jobs on Greenhouse job boards (last 7 days)",
+      "description": "Remote-only roles posted in the last week on Greenhouse job boards, one flat row per job.",
+      "input": {
+        "remote": "remote_only",
+        "postedWithinDays": 7,
+        "maxResults": 50,
+        "maxPerCompany": 2
+      }
+    },
+    {
+      "actor": "lever-jobs-api",
+      "name": "lever-remote-jobs",
+      "title": "Remote jobs on Lever job boards (last 7 days)",
+      "description": "Remote-only roles posted in the last week on Lever job boards, one flat row per job.",
+      "input": {
+        "remote": "remote_only",
+        "postedWithinDays": 7,
+        "maxResults": 50,
+        "maxPerCompany": 2
+      }
+    },
+    {
+      "actor": "ashby-jobs-api",
+      "name": "ashby-engineer-jobs",
+      "title": "Engineer jobs on Ashby job boards",
+      "description": "Newest engineer openings across every Ashby job board in the index, max 3 per company, with salary where published.",
+      "input": {
+        "keywords": [
+          "engineer"
+        ],
+        "postedWithinDays": 7,
+        "maxResults": 50,
+        "maxPerCompany": 3
+      }
+    },
+    {
+      "actor": "ashby-jobs-api",
+      "name": "ashby-remote-jobs",
+      "title": "Remote jobs on Ashby job boards (last 7 days)",
+      "description": "Remote-only roles posted in the last week on Ashby job boards, one flat row per job.",
+      "input": {
+        "remote": "remote_only",
+        "postedWithinDays": 7,
+        "maxResults": 50,
+        "maxPerCompany": 2
+      }
+    },
+    {
+      "actor": "lever-jobs-api",
+      "name": "lever-sales-roles",
+      "title": "Sales jobs on Lever job boards",
+      "description": "Newest sales openings across every Lever job board in the index, max 3 per company, with salary where published.",
+      "input": {
+        "keywords": [
+          "sales"
+        ],
+        "postedWithinDays": 7,
+        "maxResults": 50,
+        "maxPerCompany": 3
+      }
     }
   ]
 }

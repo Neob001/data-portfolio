@@ -1,5 +1,21 @@
 # Lever Jobs API — Search All Lever Job Postings
 
+<!-- factpipe:hero:start -->
+
+**Search open jobs on 1,500+ Lever job boards (Palantir, Spotify, Zoox…) by keyword, location, remote and department, or fetch any jobs.lever.co board live. Salary where published. $2 per 1,000 jobs.**
+
+| Title | Company | Locations | Workplace | Employment |
+|---|---|---|---|---|
+| Vice President, Capital Markets | Pivot Energy | Denver, Colorado, Baltimore, Maryland, Chicago,… | remote | full_time |
+| Finance Manager, Marketplace ⭐ | Achievers | Canada | remote | full_time |
+| UX/UI Designer I | Clearer.io | Ho Chi Minh, Ha Noi | remote | full_time |
+
+*Real output from the “Remote jobs on Lever job boards (last 7 days)” example, run on October 9, 2026.*
+
+**Try a ready-made example:** [Remote jobs on Lever job boards (last 7 days)](https://apify.com/factpipe/lever-jobs-api/examples/lever-remote-jobs) · [Sales jobs on Lever job boards](https://apify.com/factpipe/lever-jobs-api/examples/lever-sales-roles)
+
+<!-- factpipe:hero:end -->
+
 A **Lever jobs API** and **Lever job board scraper** in one: search every open job on **1,574 Lever company job boards** (Palantir, Spotify, Zoox, Shield AI, Veeva, Gopuff…) by keyword, location, remote, department and posting date, and get flat, deduplicated JSON: title, department, locations, country codes, remote flag, salary range (where the employer publishes one), employment type, apply link and full description. Paste any Lever board URL ("https://jobs.lever.co/palantir") to fetch it live. **$2 per 1,000 jobs**, and you pay only for the jobs you get.
 
 ## Quick start

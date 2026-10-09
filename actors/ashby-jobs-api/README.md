@@ -1,5 +1,21 @@
 # Ashby Jobs API — Search All Ashby Job Boards
 
+<!-- factpipe:hero:start -->
+
+**Search open jobs on 2,700+ Ashby job boards (OpenAI, Ramp, Notion, Snowflake…) by keyword, location, remote and department, or fetch any jobs.ashbyhq.com board live. Salary where published. $2 per 1,000 jobs.**
+
+| Title | Company | Locations | Workplace | Employment |
+|---|---|---|---|---|
+| Senior DevOps Engineer | Shift | Sydney | hybrid | full_time |
+| Data Privacy Security Engineer | Bjak | Global | remote | full_time |
+| Analytics Engineer | Addi | Colombia | remote | full_time |
+
+*Real output from the “Engineer jobs on Ashby job boards” example, run on October 9, 2026.*
+
+**Try a ready-made example:** [Engineer jobs on Ashby job boards](https://apify.com/factpipe/ashby-jobs-api/examples/ashby-engineer-jobs) · [Remote jobs on Ashby job boards (last 7 days)](https://apify.com/factpipe/ashby-jobs-api/examples/ashby-remote-jobs)
+
+<!-- factpipe:hero:end -->
+
 A **Ashby jobs API** and **Ashby job board scraper** in one: search every open job on **2,790 Ashby company job boards** (OpenAI, Ramp, Notion, Snowflake, Harvey, Perplexity…) by keyword, location, remote, department and posting date, and get flat, deduplicated JSON: title, department, locations, country codes, remote flag, salary range (where the employer publishes one), employment type, apply link and full description. Paste any Ashby board URL ("https://jobs.ashbyhq.com/ramp") to fetch it live. **$2 per 1,000 jobs**, and you pay only for the jobs you get.
 
 ## Quick start

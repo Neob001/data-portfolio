@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ashby Jobs API: Ashby Job Board Scraper</title>
+<meta name="description" content="Search every Ashby job board via Ashby&#x27;s public posting API: keywords, locations, remote, salary where published, full descriptions. $2 per 1,000 jobs.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/ashby-jobs-api/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ashby Jobs API: Ashby Job Board Scraper">
+<meta property="og:description" content="Search every Ashby job board via Ashby&#x27;s public posting API: keywords, locations, remote, salary where published, full descriptions. $2 per 1,000 jobs.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/ashby-jobs-api/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Ashby Jobs API \u2014 Search All Ashby Job Boards",
+  "description": "Search open jobs on 2,700+ Ashby job boards (OpenAI, Ramp, Notion, Snowflake\u2026) by keyword, location, remote and department, or fetch any jobs.ashbyhq.com board live. Salary where published. $2 per 1,000 jobs.",
+  "url": "https://neob001.github.io/data-portfolio/ashby-jobs-api/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "2",
+    "description": "Pay-per-result pricing: $2 per 1,000 job results",
+    "url": "https://apify.com/factpipe/ashby-jobs-api"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>Ashby Jobs API — Search All Ashby Job Boards</h1>
+<p>&lt;!-- factpipe:hero:start --&gt;</p>
+<p><strong>Search open jobs on 2,700+ Ashby job boards (OpenAI, Ramp, Notion, Snowflake…) by keyword, location, remote and department, or fetch any jobs.ashbyhq.com board live. Salary where published. $2 per 1,000 jobs.</strong></p>
+<div class="table-wrap"><table><thead><tr><th>Title</th><th>Company</th><th>Locations</th><th>Workplace</th><th>Employment</th></tr></thead><tbody><tr><td>Senior DevOps Engineer</td><td>Shift</td><td>Sydney</td><td>hybrid</td><td>full_time</td></tr><tr><td>Data Privacy Security Engineer</td><td>Bjak</td><td>Global</td><td>remote</td><td>full_time</td></tr><tr><td>Analytics Engineer</td><td>Addi</td><td>Colombia</td><td>remote</td><td>full_time</td></tr></tbody></table></div>
+<p><em>Real output from the “Engineer jobs on Ashby job boards” example, run on October 9, 2026.</em></p>
+<p><strong>Try a ready-made example:</strong> <a href="https://apify.com/factpipe/ashby-jobs-api/examples/ashby-engineer-jobs">Engineer jobs on Ashby job boards</a> · <a href="https://apify.com/factpipe/ashby-jobs-api/examples/ashby-remote-jobs">Remote jobs on Ashby job boards (last 7 days)</a></p>
+<p>&lt;!-- factpipe:hero:end --&gt;</p>
+<p>A <strong>Ashby jobs API</strong> and <strong>Ashby job board scraper</strong> in one: search every open job on <strong>2,790 Ashby company job boards</strong> (OpenAI, Ramp, Notion, Snowflake, Harvey, Perplexity…) by keyword, location, remote, department and posting date, and get flat, deduplicated JSON: title, department, locations, country codes, remote flag, salary range (where the employer publishes one), employment type, apply link and full description. Paste any Ashby board URL (&quot;https://jobs.ashbyhq.com/ramp&quot;) to fetch it live. <strong>$2 per 1,000 jobs</strong>, and you pay only for the jobs you get.</p>
+<div class="quick-facts"><span class="badge">$2 / 1,000</span><a class="button" href="https://apify.com/factpipe/ashby-jobs-api" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the prefilled input: <code>keywords: [&quot;engineer&quot;]</code>, <code>maxResults: 20</code>, <code>maxPerCompany: 3</code>. The run usually takes under a minute.</li><li>You get the 20 most relevant Ashby jobs for &quot;engineer&quot;, mostly at venture-backed startups, at most 3 per company: jobs with the keyword in the title come first, newest first among equals.</li><li>That first run costs at most <strong>$0.04 (20 jobs × $0.002)</strong>, which fits in Apify&#x27;s free monthly credit. Then name the companies you track (<code>companies: [&quot;OpenAI&quot;, &quot;Ramp&quot;]</code>), add <code>locations</code> or <code>remote</code>, or paste board URLs in <code>companyUrls</code>.</li></ol>
+<h2 id="what-you-get">What you get</h2>
+<p>One flat record per job opening, from a real run:</p>
+<pre><code class="language-json">{
+  &quot;job_id&quot;: &quot;ashby:fal-ai:70031914-e873-451d-8d17-712bada15563&quot;,
+  &quot;title&quot;: &quot;Senior Software Engineer, Machine Learning Infrastructure &amp; Automation&quot;,
+  &quot;company_name&quot;: &quot;fal&quot;,
+  &quot;company_board&quot;: &quot;fal-ai&quot;,
+  &quot;ats&quot;: &quot;ashby&quot;,
+  &quot;department&quot;: &quot;Engineering&quot;,
+  &quot;team&quot;: &quot;ML&quot;,
+  &quot;employment_type&quot;: &quot;full_time&quot;,
+  &quot;workplace_type&quot;: &quot;remote&quot;,
+  &quot;locations&quot;: [
+    &quot;Remote - USA&quot;
+  ],
+  &quot;country_codes&quot;: [
+    &quot;US&quot;
+  ],
+  &quot;remote&quot;: true,
+  &quot;salary_min&quot;: 170000,
+  &quot;salary_max&quot;: 230000,
+  &quot;salary_currency&quot;: &quot;USD&quot;,
+  &quot;salary_period&quot;: &quot;year&quot;,
+  &quot;posted_at&quot;: &quot;2026-10-09T00:48:32.515Z&quot;,
+  &quot;updated_at&quot;: null,
+  &quot;apply_url&quot;: &quot;https://jobs.ashbyhq.com/fal-ai/70031914-e873-451d-8d17-712bada15563/application&quot;,
+  &quot;job_url&quot;: &quot;https://jobs.ashbyhq.com/fal-ai/70031914-e873-451d-8d17-712bada15563&quot;,
+  &quot;description_text&quot;: &quot;fal is the generative media ecosystem powering the next generation of…&quot;,
+  &quot;description_snippet&quot;: &quot;fal is the generative media ecosystem powering the next generation of AI products. We build the infrastructure, tools, and model access…&quot;,
+  &quot;description_status&quot;: &quot;included&quot;,
+  &quot;duplicate_sources&quot;: [],
+  &quot;match_score&quot;: 100,
+  &quot;matched_in&quot;: &quot;title&quot;,
+  &quot;source_url&quot;: &quot;https://api.ashbyhq.com/posting-api/job-board/fal-ai?includeCompensation=true&quot;,
+  &quot;fetched_at&quot;: &quot;2026-10-09T03:18:48.297Z&quot;
+}</code></pre>
+<ul><li><code>employment_type</code>, <code>workplace_type</code> and <code>remote</code> come from Ashby&#x27;s own fields, and the <code>salary_*</code> fields from the compensation the employer publishes on Ashby (otherwise <code>null</code>, never guessed). <code>posted_at</code> is the publication date; Ashby has no update date, so <code>updated_at</code> is <code>null</code>.</li><li><code>match_score</code> (0–100) and <code>matched_in</code> (<code>title</code>, <code>department</code>, <code>description</code>) explain keyword matches. Both are <code>null</code> without keywords.</li><li><code>duplicate_sources</code> lists other <code>job_id</code>s of the same opening (for example a company with two boards). Each opening is delivered and charged once.</li><li><strong>No personal data.</strong> Recruiter and hiring-manager fields are never copied, and contact details in descriptions are replaced with <code>[… redacted]</code>.</li></ul>
+<h2 id="use-cases">Use cases</h2>
+<ul><li><strong>Ashby jobs API across every company</strong>: one call searches thousands of Ashby boards instead of calling the Ashby posting API company by company.</li><li><strong>Ashby job board scraper for startup job boards</strong>: Ashby is popular with venture-backed startups, so it is a strong source for startup and AI jobs, with salary ranges where published.</li><li><strong>Tracking specific companies</strong>: <code>companies: [&quot;OpenAI&quot;, &quot;Ramp&quot;]</code>, scheduled daily with <code>sinceLastRun: true</code>.</li><li><strong>Investor and sales intelligence</strong>: which startups are hiring which teams, and where. For one row per company, see <a href="../companies-hiring/">Companies Hiring</a>.</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/ashby-jobs-api" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+<h3 id="ready-made-examples">Ready-made examples</h3>
+<ul>
+<li><a href="https://apify.com/factpipe/ashby-jobs-api/examples/ashby-engineer-jobs" target="_blank" rel="noopener">Engineer jobs on Ashby job boards</a>: Newest engineer openings across every Ashby job board in the index, max 3 per company, with salary where published.</li>
+<li><a href="https://apify.com/factpipe/ashby-jobs-api/examples/ashby-remote-jobs" target="_blank" rel="noopener">Remote jobs on Ashby job boards (last 7 days)</a>: Remote-only roles posted in the last week on Ashby job boards, one flat row per job.</li>
+</ul>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~ashby-jobs-api/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;keywords&quot;: [&quot;engineer&quot;], &quot;maxResults&quot;: 20, &quot;maxPerCompany&quot;: 3}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;keywords&quot;: [
+    &quot;engineer&quot;
+  ],
+  &quot;maxResults&quot;: 20,
+  &quot;maxPerCompany&quot;: 3
+}
+
+run = client.actor(&quot;factpipe/ashby-jobs-api&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;keywords&quot;: [
+    &quot;engineer&quot;
+  ],
+  &quot;maxResults&quot;: 20,
+  &quot;maxPerCompany&quot;: 3
+};
+
+const run = await client.actor(&#x27;factpipe/ashby-jobs-api&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>keywords</code></td><td>string[]</td><td>Case-insensitive. Title matches rank first, then department/team, then description (first ~1,500 characters)</td></tr><tr><td><code>keywordMatch</code></td><td><code>any</code> \</td><td><code>all</code></td><td>Default <code>any</code></td></tr><tr><td><code>keywordScope</code></td><td><code>title</code> \</td><td><code>title_and_description</code></td><td>Default <code>title_and_description</code></td></tr><tr><td><code>companies</code></td><td>string[]</td><td>Company names (<code>Ramp</code>) or Ashby board tokens (<code>ramp</code>). Empty = every Ashby company in the index</td></tr><tr><td><code>excludeKeywords</code></td><td>string[]</td><td>Drops jobs whose title contains any of them</td></tr><tr><td><code>locations</code></td><td>string[]</td><td>Location text as written in the posting, or an ISO country code (<code>US</code>, <code>DE</code>)</td></tr><tr><td><code>remote</code></td><td><code>any</code> \</td><td><code>remote_only</code> \</td><td><code>onsite_only</code></td><td>Default <code>any</code></td></tr><tr><td><code>postedWithinDays</code></td><td>integer</td><td>First published within the last N days</td></tr><tr><td><code>departments</code></td><td>string[]</td><td>Substring match on department or team</td></tr><tr><td><code>employmentTypes</code></td><td>string[]</td><td><code>full_time</code>, <code>part_time</code>, <code>contract</code>, <code>temporary</code>, <code>internship</code>, <code>other</code>. Normalized from Ashby&#x27;s employment type (FullTime, PartTime, Contract, Intern, Temporary). Jobs without one are excluded when this is set.</td></tr><tr><td><code>maxResults</code></td><td>integer</td><td>Default 100</td></tr><tr><td><code>maxPerCompany</code></td><td>integer</td><td>Optional cap on jobs from any one company (prefill 3), so a single employer posting many near-identical roles can&#x27;t fill your results</td></tr><tr><td><code>includeDescription</code></td><td>boolean</td><td>Default <code>true</code>: full description fetched live from Ashby for each delivered job</td></tr><tr><td><code>sinceLastRun</code></td><td>boolean</td><td>Only jobs not delivered by an earlier run with the same filters</td></tr><tr><td><code>companyUrls</code></td><td>string[]</td><td><strong>Live mode</strong>: Ashby board URLs or tokens, fetched directly from Ashby. URLs of other platforms are ignored with a warning</td></tr></tbody></table></div>
+<p><strong>Ashby board references accepted in live mode:</strong></p>
+<div class="table-wrap"><table><thead><tr><th>Form</th><th>Example</th></tr></thead><tbody><tr><td>Board page</td><td><code>https://jobs.ashbyhq.com/ramp</code> (any page of the board)</td></tr><tr><td>API URL</td><td><code>https://api.ashbyhq.com/posting-api/job-board/ramp</code></td></tr><tr><td>Token</td><td><code>ramp</code> or <code>ashby:ramp</code></td></tr></tbody></table></div>
+<p><strong>How it works.</strong> Without <code>companyUrls</code>, the Actor searches a compact search index of every Ashby board in our directory, rebuilt daily from Ashby&#x27;s public API, and downloads only the Ashby parts of it for your date range. With keywords, it ranks every matching job before delivering the top <code>maxResults</code>. For each delivered job it then fetches the full description live from Ashby (one API call per company), which also drops jobs closed since the nightly build (not delivered, not charged).</p>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>job-result</code></td><td><strong>$2 per 1,000</strong> ($0.002 each)</td><td>One job delivered. <strong>No start fee.</strong> Runs with no matches, jobs skipped by <code>sinceLastRun</code>, jobs found closed and failed boards are never charged.</td></tr></tbody></table></div>
+<p>Set a maximum charge per run in Apify, and the Actor stops cleanly when it is reached.</p>
+<h2 id="coverage">Coverage</h2>
+<p>Search-index build of 2026-10-09: <strong>54,302 open jobs</strong> on <strong>2,790 Ashby company job boards</strong>, including OpenAI, Ramp, Notion, Snowflake, Harvey, Perplexity.</p>
+<p>Boards were discovered from Common Crawl&#x27;s public URL index and validated against Ashby&#x27;s API. Every indexed board had at least one open job when last checked. A company that isn&#x27;t indexed yet works in live mode through <code>companyUrls</code>.</p>
+<h2 id="sources-and-terms">Sources and terms</h2>
+<p>Only Ashby&#x27;s official, public, unauthenticated <a href="https://developers.ashbyhq.com/docs/public-job-posting-api">Public Job Posting API</a>, which Ashby publishes for displaying and syndicating open jobs: Public, unauthenticated posting API. No career-site HTML scraping, no logins, no LinkedIn or Indeed.</p>
+<h2 id="factpipe-jobs-data">factpipe Jobs Data</h2>
+<p>All of these Actors search the same daily index of open jobs from 10,000+ company job boards:</p>
+<ul><li><a href="../ats-jobs-feed/">Jobs Feed API</a>: every job from every platform, every filter, ranked by relevance.</li><li><a href="../ats-jobs-scraper/">Greenhouse, Lever &amp; Ashby Jobs Scraper</a>: pick several applicant tracking systems (also Workable and Recruitee) in one run.</li><li><a href="../remote-jobs-feed/">Remote Jobs API</a>: remote and work-from-home jobs only, filtered by region or time zone.</li><li><a href="../companies-hiring/">Companies Hiring</a>: one row per company that is hiring for a role, as sales leads or market research.</li><li><a href="../greenhouse-jobs-api/">Greenhouse Jobs API</a>: every Greenhouse job board in one search.</li><li><a href="../lever-jobs-api/">Lever Jobs API</a>: every Lever job board, with salary where published.</li><li><a href="../ashby-jobs-api/">Ashby Jobs API</a> (this Actor): every Ashby job board: startup and AI jobs, with salary where published.</li></ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>Do I need an Ashby account or API key?</strong><br>
+No. This is the public job-board API that powers each company&#x27;s Ashby careers page. No key, no login.</p>
+<p><strong>How do I find a company&#x27;s board token?</strong><br>
+It is the last part of the careers-page URL: <code>jobs.ashbyhq.com/</code><strong><code>ramp</code></strong>. Or just type the company name in <code>companies</code>.</p>
+<p><strong>How fresh is the data?</strong><br>
+The index is rebuilt daily. With <code>includeDescription</code> on (the default), every delivered job is re-checked live against Ashby during your run. Live mode (<code>companyUrls</code>) always reads Ashby directly.</p>
+<p><strong>Does it include Ashby salary ranges?</strong><br>
+Yes, where the employer publishes compensation on Ashby. The run requests Ashby&#x27;s compensation data and maps the salary (or hourly) range to <code>salary_min</code>, <code>salary_max</code>, <code>salary_currency</code> and <code>salary_period</code>.</p>
+<p><strong>What happens to Greenhouse, Lever, Workable or Recruitee URLs?</strong><br>
+They are ignored with a warning in the log, and the rest of the run goes ahead. If no Ashby board is left, the run ends successfully with a message and nothing is charged. For several platforms in one run, use <a href="../ats-jobs-scraper/">Greenhouse, Lever &amp; Ashby Jobs Scraper</a>.</p>
+<p><strong>Switching from ats-jobs-scraper or other Ashby scrapers?</strong><br>
+Inputs from <a href="../ats-jobs-scraper/">ats-jobs-scraper</a> work as they are: the same fields minus <code>ats</code> (ignored if present, the platform is always Ashby), and the same output records. Only <code>companyUrls</code> of other platforms are skipped. From other tools, this field map covers the usual settings:</p>
+<div class="table-wrap"><table><thead><tr><th>You want</th><th>Use here</th></tr></thead><tbody><tr><td>Company name, board token or board URL</td><td><code>companies</code> (index) or <code>companyUrls</code> (live)</td></tr><tr><td>Job title / search query</td><td><code>keywords</code> (+ <code>keywordScope: &quot;title&quot;</code> for titles only)</td></tr><tr><td>Location or country</td><td><code>locations</code> (text or ISO code)</td></tr><tr><td>Remote only</td><td><code>remote: &quot;remote_only&quot;</code></td></tr><tr><td>Date posted</td><td><code>postedWithinDays</code></td></tr><tr><td>Result limit</td><td><code>maxResults</code></td></tr><tr><td>Job description</td><td><code>includeDescription</code> → <code>description_text</code></td></tr><tr><td>Job id / URL / apply link</td><td><code>job_id</code> / <code>job_url</code> / <code>apply_url</code></td></tr><tr><td>Company / location / date</td><td><code>company_name</code> / <code>locations</code> / <code>posted_at</code></td></tr></tbody></table></div>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier or an AI agent?</strong><br>
+Yes, through the Apify API, the official clients, Apify integrations (Make, Zapier, n8n, Google Sheets, Slack) or the Apify MCP server.</p>
+<h2 id="reliability">Reliability</h2>
+<p>Official Ashby API only. Retries with backoff, per-host rate limits, a <code>RUN_SUMMARY</code> record on every run, and a built-in live fallback if the search index is ever unreachable.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>

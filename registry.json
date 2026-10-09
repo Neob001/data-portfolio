@@ -1359,8 +1359,8 @@
       "apify_actor_id": "LBYabmq0lPOUi2DAf",
       "source": "factpipe jobs index (GitHub release jobs-index; public ATS job-board APIs)",
       "variant": "search index (Greenhouse only)",
-      "status": "staging",
-      "approval": "built 2026-10-09; publish pending owner approval (J4)",
+      "status": "live",
+      "approval": "2026-10-09 J4 (owner: 'both J3 and J4 approve')",
       "origin": "scan",
       "incumbent_actor_id": null,
       "first_paid_run_date": null,
@@ -1378,7 +1378,7 @@
         }
       },
       "pricing_rationale": "Per-ATS Store searches (state/ats_demand_2026-10-09.txt): dedicated per-ATS leaders $2-2.5/1k with 72-130 users30; multi-ATS leader $1.5/1k. Same index as ats-jobs-scraper; $2/1k (owner J4 brief).",
-      "launched_at": null,
+      "launched_at": "2026-10-09T06:30:00Z",
       "last_fix_date": null,
       "kpis": {},
       "listing": {
@@ -1392,15 +1392,23 @@
         ]
       },
       "staging_validated": true,
-      "monetization_configured": false,
-      "staging_started_at": "2026-10-09T05:46:41Z"
+      "monetization_configured": true,
+      "staging_started_at": "2026-10-09T05:46:41Z",
+      "price_history": [
+        {
+          "date": "2026-10-09",
+          "event": "job-result",
+          "price_usd": 0.002,
+          "note": "launch, J4"
+        }
+      ]
     },
     "lever-jobs-api": {
       "apify_actor_id": "Q07qMol0f2Qn0g1K4",
       "source": "factpipe jobs index (GitHub release jobs-index; public ATS job-board APIs)",
       "variant": "search index (Lever only)",
-      "status": "staging",
-      "approval": "built 2026-10-09; publish pending owner approval (J4)",
+      "status": "live",
+      "approval": "2026-10-09 J4 (owner: 'both J3 and J4 approve')",
       "origin": "scan",
       "incumbent_actor_id": null,
       "first_paid_run_date": null,
@@ -1418,7 +1426,7 @@
         }
       },
       "pricing_rationale": "Per-ATS Store searches (state/ats_demand_2026-10-09.txt): dedicated per-ATS leaders $2-2.5/1k with 72-130 users30; multi-ATS leader $1.5/1k. Same index as ats-jobs-scraper; $2/1k (owner J4 brief).",
-      "launched_at": null,
+      "launched_at": "2026-10-09T06:30:00Z",
       "last_fix_date": null,
       "kpis": {},
       "listing": {
@@ -1432,15 +1440,23 @@
         ]
       },
       "staging_validated": true,
-      "monetization_configured": false,
-      "staging_started_at": "2026-10-09T05:46:44Z"
+      "monetization_configured": true,
+      "staging_started_at": "2026-10-09T05:46:44Z",
+      "price_history": [
+        {
+          "date": "2026-10-09",
+          "event": "job-result",
+          "price_usd": 0.002,
+          "note": "launch, J4"
+        }
+      ]
     },
     "ashby-jobs-api": {
       "apify_actor_id": "cqUW0nVKTjRpsirTY",
       "source": "factpipe jobs index (GitHub release jobs-index; public ATS job-board APIs)",
       "variant": "search index (Ashby only)",
-      "status": "staging",
-      "approval": "built 2026-10-09; publish pending owner approval (J4)",
+      "status": "live",
+      "approval": "2026-10-09 J4 (owner: 'both J3 and J4 approve')",
       "origin": "scan",
       "incumbent_actor_id": null,
       "first_paid_run_date": null,
@@ -1458,7 +1474,7 @@
         }
       },
       "pricing_rationale": "Per-ATS Store searches (state/ats_demand_2026-10-09.txt): dedicated per-ATS leaders $2-2.5/1k with 72-130 users30; multi-ATS leader $1.5/1k. Same index as ats-jobs-scraper; $2/1k (owner J4 brief).",
-      "launched_at": null,
+      "launched_at": "2026-10-09T06:30:00Z",
       "last_fix_date": null,
       "kpis": {},
       "listing": {
@@ -1472,8 +1488,16 @@
         ]
       },
       "staging_validated": true,
-      "monetization_configured": false,
-      "staging_started_at": "2026-10-09T05:46:48Z"
+      "monetization_configured": true,
+      "staging_started_at": "2026-10-09T05:46:48Z",
+      "price_history": [
+        {
+          "date": "2026-10-09",
+          "event": "job-result",
+          "price_usd": 0.002,
+          "note": "launch, J4"
+        }
+      ]
     }
   },
   "apify_account": "factpipe",
