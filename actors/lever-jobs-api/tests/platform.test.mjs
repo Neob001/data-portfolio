@@ -25,7 +25,7 @@ async function run(input, { dir } = {}) {
 }
 
 test('options: platform is forced, whatever `ats` says', () => {
-  for (const ats of [undefined, [], ['ashby'], ['greenhouse', 'lever', 'ashby', 'workable', 'recruitee'], 'workable']) {
+  for (const ats of [undefined, [], ['ashby'], ['greenhouse', 'lever', 'ashby', 'workable', 'recruitee', 'workday'], 'workable']) {
     const o = toScraperOptions({ ats, keywords: ['engineer'] });
     assert.deepEqual([o.mode, o.ats, o.keywords], ['search', [PLATFORM], ['engineer']], JSON.stringify(ats));
   }
@@ -51,7 +51,7 @@ test('options: other-platform board URLs are dropped (with a warning), own URLs 
   const o = toScraperOptions({ companyUrls: [own, ...foreign, 'palantir', 'https://www.example.com/careers'] });
   assert.equal(o.mode, 'live');
   assert.ok(o.boards.every((b) => b.ats === PLATFORM), JSON.stringify(o.boards));
-  assert.deepEqual(o.boards.map((b) => b.token.toLowerCase()), ['palantir', 'palantir'].filter((t, i, a) => a.indexOf(t) === i));
+  assert.deepEqual(o.boards.map((b) => b.token.toLowerCase()), ['palantir', 'palantir'.toLowerCase()].filter((t, i, a) => a.indexOf(t) === i));
   assert.deepEqual(o.otherPlatformRefs, foreign);
   assert.deepEqual(o.badRefs, ['https://www.example.com/careers', ...foreign]);
   assert.match(otherPlatformWarning(o.otherPlatformRefs), /^Ignored 3 board URL\(s\) of other platforms[\s\S]*Lever boards only[\s\S]*ats-jobs-scraper/);
@@ -101,7 +101,7 @@ test('live mode: own board fetched, other-platform board ignored (never requeste
   const r = await run({ companyUrls: [`${PLATFORM}:${OWN.token}`, `${OTHER}:${FIXTURES[OTHER].token}`] });
   assert.equal(r.summary.mode, 'live');
   assert.ok(r.rows.length > 0);
-  assert.ok(r.rows.every((x) => x.ats === PLATFORM && x.company_board.toLowerCase() === OWN.token));
+  assert.ok(r.rows.every((x) => x.ats === PLATFORM && x.company_board.toLowerCase() === OWN.token.toLowerCase()));
   assert.ok(r.rows.every((x) => x.description_status === 'included'));
   for (const x of r.rows) assertMatchesSchema(x);
   assert.equal(r.charges, r.rows.length);

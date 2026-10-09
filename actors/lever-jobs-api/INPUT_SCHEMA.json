@@ -148,7 +148,7 @@
     "companyUrls": {
       "title": "Live mode: Lever board URLs or tokens",
       "type": "array",
-      "description": "Optional. Fetch these Lever boards live instead of searching the index, e.g. https://jobs.lever.co/palantir, https://jobs.lever.co/spotify or just the board token \"palantir\". URLs of other platforms (Greenhouse, Ashby, Workable or Recruitee) are ignored with a warning: use ats-jobs-scraper for those. All filters above still apply.",
+      "description": "Optional. Fetch these Lever boards live instead of searching the index, e.g. https://jobs.lever.co/palantir, https://jobs.lever.co/spotify or just the board token \"palantir\". URLs of other platforms (Greenhouse, Ashby, Workable, Recruitee or Workday) are ignored with a warning: use ats-jobs-scraper for those. All filters above still apply.",
       "editor": "stringList",
       "sectionCaption": "Live mode (Lever boards not yet in the index)"
     }

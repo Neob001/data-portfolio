@@ -16,7 +16,7 @@ import {
 } from './core/feed.js';
 import { fetchJson as libFetchJson } from './lib/http.js';
 import { selectShards } from './core/index_format.js';
-import { apiUrlFor, boardUrlFor, boardKey, dedupeJobs } from './core/transform.js';
+import { apiUrlFor, boardUrlFor, boardKey, dedupeJobs, atsOfUrl } from './core/transform.js';
 import { companyKey, normKey } from './core/text.js';
 import { compileKeyword } from './core/keywords.js';
 
@@ -485,8 +485,7 @@ export async function runCompanies(input, deps) {
     summary.boards_requested = boards.length;
     const pace = hostPacer(deps.hostGaps);
     const fetchJson = async (url, o) => {
-      const ats = /greenhouse/.test(url) ? 'greenhouse' : /lever\.co/.test(url) ? 'lever' : /ashbyhq/.test(url) ? 'ashby' : /workable/.test(url) ? 'workable' : 'recruitee';
-      await pace(ats);
+      await pace(atsOfUrl(url));
       return (deps.fetchJson || libFetchJson)(url, o);
     };
     const results = await mapLimit(boards, 6, async (b) => {

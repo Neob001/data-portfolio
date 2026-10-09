@@ -135,7 +135,7 @@ The index is rebuilt daily. With `includeDescription` on (the default), every de
 **Does it include Ashby salary ranges?**
 Yes, where the employer publishes compensation on Ashby. The run requests Ashby's compensation data and maps the salary (or hourly) range to `salary_min`, `salary_max`, `salary_currency` and `salary_period`.
 
-**What happens to Greenhouse, Lever, Workable or Recruitee URLs?**
+**What happens to Greenhouse, Lever, Workable, Recruitee or Workday URLs?**
 They are ignored with a warning in the log, and the rest of the run goes ahead. If no Ashby board is left, the run ends successfully with a message and nothing is charged. For several platforms in one run, use [Greenhouse, Lever & Ashby Jobs Scraper](https://apify.com/factpipe/ats-jobs-scraper).
 
 **Switching from ats-jobs-scraper or other Ashby scrapers?**

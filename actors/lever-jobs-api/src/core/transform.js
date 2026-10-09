@@ -3,7 +3,7 @@
 import { clean, cleanDescription, snippetOf, normKey, companyKey } from './text.js';
 import { countryCodes } from './geo.js';
 
-export const ATS_LIST = ['greenhouse', 'lever', 'ashby', 'workable', 'recruitee'];
+export const ATS_LIST = ['greenhouse', 'lever', 'ashby', 'workable', 'recruitee', 'workday'];
 export const WORKPLACE_TYPES = ['remote', 'hybrid', 'onsite', 'unknown'];
 export const EMPLOYMENT_TYPES = ['full_time', 'part_time', 'contract', 'temporary', 'internship', 'other'];
 export const SALARY_PERIODS = ['year', 'month', 'week', 'day', 'hour'];
@@ -38,6 +38,7 @@ export function parseBoardRef(ref) {
     const ats = explicit[1].toLowerCase();
     return withRegion({ ats, token: fixCase(ats, decodeURIComponent(explicit[3])) }, explicit[2] && ats === 'lever' ? 'eu' : null);
   }
+  if (/myworkday(?:jobs|site)\.com|^workday:|^[a-z0-9][a-z0-9-]*\.wd\d{1,3}\//i.test(s)) return parseWorkdayRef(s);
   for (const p of BOARD_PATTERNS) {
     const m = s.match(p.rx);
     if (!m) continue;
@@ -55,7 +56,133 @@ export function boardKey({ ats, token, region }) {
   return `${ats}${region ? `:${region}` : ''}:${String(token).toLowerCase()}`;
 }
 
+// ------------------------------------------------------------------ Workday career sites
+// A Workday "board" is one public career site: https://<tenant>.<wdN>.myworkdayjobs.com/<site>.
+// Its token is "<tenant>.<wdN>/<site>" (tenant and data-center lowercase, site as published; Workday
+// treats site names case-insensitively). The site's own page loads its jobs from the CXS JSON endpoint
+// POST /wday/cxs/<tenant>/<site>/jobs and one job from GET /wday/cxs/<tenant>/<site>/job/<path>.
+const WD_LOCALE = /^[a-z]{2}(?:-[a-z]{2,4})?$/i;
+const WD_SITE = /^[A-Za-z0-9][A-Za-z0-9_.-]{0,99}$/;
+const WD_TENANT = /^[a-z0-9][a-z0-9-]{0,62}$/i;
+const WD_RESERVED = new Set(['wday', 'robots.txt', 'favicon.ico', 'refreshfacet', 'sitemap.xml', 'llms.txt', 'assets', 'static',
+  'api', 'talentcommunity', 'recruiting', 'job', 'jobs.xml', 'login', 'apply', 'cxs']);
+
+function workdayBoard(tenant, wd, site) {
+  let s;
+  try { s = decodeURIComponent(site); } catch { return null; }
+  if (!WD_TENANT.test(tenant) || !WD_SITE.test(s) || WD_LOCALE.test(s) || WD_RESERVED.has(s.toLowerCase())
+    || /\.(txt|xml|json|html?|ico|png|jpe?g|svg|js|css)$/i.test(s)) return null;
+  return { ats: 'workday', token: `${tenant.toLowerCase()}.${wd.toLowerCase()}/${s}` };
+}
+
+const pathSegments = (p) => String(p || '').split(/[?#]/)[0].split('/').filter(Boolean);
+
+/**
+ * Workday reference -> { ats: 'workday', token } or null. Accepts career-site URLs (any page of the
+ * site, with or without a locale prefix such as /en-US/), job URLs, CXS API URLs, the
+ * <wdN>.myworkdaysite.com/recruiting/<tenant>/<site> host form, "workday:<tenant>.<wdN>/<site>"
+ * and the bare token "<tenant>.<wdN>/<site>".
+ */
+export function parseWorkdayRef(ref) {
+  const s = String(ref ?? '').trim();
+  let m = s.match(/^(?:workday:)?([a-z0-9][a-z0-9-]*)\.(wd\d{1,3})\/([^\s/?#]+)\/?$/i);
+  if (m) return workdayBoard(m[1], m[2], m[3]);
+  m = s.match(/^(?:https?:\/\/)?([a-z0-9][a-z0-9-]*)\.(wd\d{1,3})\.myworkdayjobs\.com(\/[^\s]*)?$/i);
+  if (m) {
+    let segs = pathSegments(m[3]);
+    if (segs[0]?.toLowerCase() === 'wday') return segs[1]?.toLowerCase() === 'cxs' && segs[3] ? workdayBoard(m[1], m[2], segs[3]) : null;
+    if (segs.length > 1 && WD_LOCALE.test(segs[0])) segs = segs.slice(1);
+    return segs[0] ? workdayBoard(m[1], m[2], segs[0]) : null;
+  }
+  m = s.match(/^(?:https?:\/\/)?(wd\d{1,3})\.myworkdaysite\.com(\/[^\s]*)?$/i);
+  if (m) {
+    let segs = pathSegments(m[2]);
+    if (segs[0]?.toLowerCase() === 'wday') return segs[1]?.toLowerCase() === 'cxs' && segs[3] ? workdayBoard(segs[2], m[1], segs[3]) : null;
+    if (segs.length > 1 && WD_LOCALE.test(segs[0])) segs = segs.slice(1);
+    return segs[0]?.toLowerCase() === 'recruiting' && segs[2] ? workdayBoard(segs[1], m[1], segs[2]) : null;
+  }
+  return null;
+}
+
+/** "<tenant>.<wdN>/<site>" -> { tenant, wd, site, host } */
+export function workdayParts(token) {
+  const [tw, ...rest] = String(token).split('/');
+  const [tenant, wd] = tw.split('.');
+  return { tenant: tenant.toLowerCase(), wd: (wd || '').toLowerCase(), site: rest.join('/'), host: `${tenant.toLowerCase()}.${(wd || '').toLowerCase()}.myworkdayjobs.com` };
+}
+
+/** CXS detail URL of one Workday job, from its public job_url (…/<site>/job/<location>/<slug>). */
+export function workdayDetailUrl(board, jobUrl) {
+  const { host, tenant, site } = workdayParts(board.token);
+  let path;
+  try { path = new URL(jobUrl).pathname; } catch { return null; }
+  const i = path.indexOf('/job/');
+  return i < 0 ? null : `https://${host}/wday/cxs/${tenant}/${encodeURIComponent(site)}${path.slice(i)}`;
+}
+
+/** Paths a robots.txt must allow before we read a Workday site (list, detail, the site's own pages). */
+export function workdayRobotsPaths(board) {
+  const { tenant, site } = workdayParts(board.token);
+  return [`/wday/cxs/${tenant}/${site}/jobs`, `/wday/cxs/${tenant}/${site}/job/`, `/${site}/`];
+}
+
+/**
+ * Workday's relative "postedOn" label -> ISO date (UTC midnight) relative to the fetch time, or null.
+ * "Posted Today" = fetch day, "Posted Yesterday" = -1 day, "Posted 5 Days Ago" = -5 days and
+ * "Posted 30+ Days Ago" = -30 days (meaning: 30 or more days ago; Workday gives no exact date in lists).
+ */
+export function workdayPostedAt(postedOn, fetchedAt) {
+  const s = String(postedOn || '').toLowerCase();
+  let days = null;
+  if (/\btoday\b|\bjust posted\b/.test(s)) days = 0;
+  else if (/\byesterday\b/.test(s)) days = 1;
+  else {
+    const m = s.match(/(\d{1,4})\s*\+?\s*days?\s+ago/);
+    if (m) days = Number(m[1]);
+  }
+  const base = new Date(fetchedAt ?? Date.now());
+  if (days === null || Number.isNaN(base.getTime())) return null;
+  base.setUTCHours(0, 0, 0, 0);
+  return new Date(base.getTime() - days * 86400000).toISOString();
+}
+
+/** Workday remoteType ("Remote", "Hybrid", "On-site", "Primarily On-Site / Occasionally from Home"...). */
+export function workdayWorkplace(v) {
+  const s = normKey(v);
+  if (!s) return null;
+  if (/hybrid|\bflex|occasional|partially remote|partly remote/.test(s)) return 'hybrid';
+  if (/remote|home based|work from home|virtual|telecommut/.test(s)) return 'remote';
+  if (/on ?site|in office|office based/.test(s)) return 'onsite';
+  return null;
+}
+
+/** Stable per-site job id: the requisition id after the last "_" of the posting path, else the slug. */
+export function workdayJobId(externalPath) {
+  const slug = decodeURIComponent(pathSegments(externalPath).pop() || '');
+  const tail = slug.includes('_') ? slug.slice(slug.lastIndexOf('_') + 1) : '';
+  return /^[A-Za-z0-9][A-Za-z0-9-]*$/.test(tail) && /\d/.test(tail) ? tail : slug;
+}
+
+function workdayPathLocation(externalPath) {
+  const segs = pathSegments(externalPath);
+  if (segs[0] !== 'job' || segs.length < 3) return null;
+  let loc;
+  try { loc = decodeURIComponent(segs[1]); } catch { return null; }
+  return clean(loc.replace(/-+/g, ' '));
+}
+
+/** Prettified tenant ("ibm" -> "IBM", "capitalone" -> "Capitalone"): last-resort company name. */
+export function workdayTenantName(token) {
+  const t = workdayParts(token).tenant;
+  if (!t) return String(token);
+  return t.length <= 3 ? t.toUpperCase() : t.charAt(0).toUpperCase() + t.slice(1);
+}
+
 export function apiUrlFor({ ats, token, region }) {
+  if (ats === 'workday') {
+    const { host, tenant, site } = workdayParts(token);
+    return `https://${host}/wday/cxs/${tenant}/${encodeURIComponent(site)}/jobs`;
+  }
   const t = encodeURIComponent(token);
   if (ats === 'greenhouse') return `https://boards-api.greenhouse.io/v1/boards/${t}/jobs?content=true`;
   if (ats === 'lever') return `https://api${region === 'eu' ? '.eu' : ''}.lever.co/v0/postings/${t}?mode=json`;
@@ -71,7 +198,22 @@ export function boardUrlFor({ ats, token, region }) {
   if (ats === 'ashby') return `https://jobs.ashbyhq.com/${encodeURIComponent(token)}`;
   if (ats === 'workable') return `https://apply.workable.com/${token}/`;
   if (ats === 'recruitee') return `https://${token}.recruitee.com/`;
+  if (ats === 'workday') {
+    const { host, site } = workdayParts(token);
+    return `https://${host}/${site}`;
+  }
   return null;
+}
+
+/** ATS of an API URL (for per-host pacing). Workday first: a tenant may be called "greenhouse…". */
+export function atsOfUrl(url) {
+  const u = String(url);
+  if (/\.myworkday(?:jobs|site)\.com\//.test(u)) return 'workday';
+  if (/greenhouse/.test(u)) return 'greenhouse';
+  if (/lever\.co/.test(u)) return 'lever';
+  if (/ashbyhq/.test(u)) return 'ashby';
+  if (/workable/.test(u)) return 'workable';
+  return 'recruitee';
 }
 
 // ------------------------------------------------------------------ field helpers
@@ -311,6 +453,50 @@ function recruitee(board, o) {
   });
 }
 
+// Workday list entries carry title, path, a location label, a relative posted label and (on some
+// tenants) remoteType / timeType. No description, department or salary: descriptions come from the
+// detail endpoint, only for delivered jobs (parseWorkdayDetail).
+function workday(board, j, companyName, ctx) {
+  if (!j || !j.title || !j.externalPath || !/^\/job\//.test(j.externalPath)) return null;
+  const { host, site } = workdayParts(board.token);
+  const locText = clean(j.locationsText);
+  // "3 Locations": the list only names the primary one, in the posting path (/job/<location>/<slug>).
+  const multi = !locText || /^\d+\s+(locations?|standorte|emplacements|ubicaciones|sedi|locais)$/i.test(locText);
+  const jobUrl = `https://${host}/${site}${j.externalPath}`;
+  return finish(board, {
+    id: ctx.id,
+    title: j.title,
+    company_name: companyName || workdayTenantName(board.token),
+    department: null,
+    team: null,
+    employment_type: j.timeType || null,
+    workplace_type: workdayWorkplace(j.remoteType),
+    locations: multi ? [workdayPathLocation(j.externalPath)] : [locText],
+    posted_at: workdayPostedAt(j.postedOn, ctx.fetchedAt),
+    updated_at: null,
+    job_url: jobUrl,
+    apply_url: `${jobUrl}/apply`,
+    description_text: null,
+  });
+}
+
+/**
+ * Workday job detail response -> fields filled in at delivery: description (contacts redacted) and the
+ * full location list (the list endpoint names only the primary location of multi-location jobs).
+ */
+export function parseWorkdayDetail(board, response) {
+  const info = response?.jobPostingInfo;
+  if (!info || typeof info !== 'object' || !info.title) throw schemaError('workday', board.token);
+  const extra = Array.isArray(info.additionalLocations) ? info.additionalLocations : [];
+  const locations = uniq([info.location, ...extra].filter((x) => typeof x === 'string'));
+  const hints = [info.jobRequisitionLocation?.country?.alpha2Code, info.country?.descriptor].filter(Boolean);
+  return {
+    description_text: cleanDescription(info.jobDescription),
+    locations,
+    country_codes: countryCodes(locations, hints),
+  };
+}
+
 function schemaError(ats, token) {
   const e = new Error(`Unexpected ${ats} response shape for board ${token}`);
   e.failureClass = 'schema_change';
@@ -320,11 +506,32 @@ function schemaError(ats, token) {
 /**
  * Raw ATS API response -> { company_name, jobs[] } (jobs lack source_url/fetched_at).
  * Throws a schema_change error when the response is not the documented shape.
+ * Workday: `response` is a jobs page ({ total, jobPostings }) or several pages' postings merged into
+ * one; `fetchedAt` anchors its relative "Posted N Days Ago" labels.
  */
-export function parseBoard(board, response) {
+export function parseBoard(board, response, { fetchedAt = new Date() } = {}) {
   const { ats, token } = board;
   let list;
   let companyName = null;
+  if (ats === 'workday') {
+    list = response?.jobPostings;
+    if (!Array.isArray(list)) throw schemaError(ats, token);
+    const jobs = [];
+    const ids = new Set();
+    for (const raw of list) {
+      let job = null;
+      try {
+        // Requisition id; a second posting of the same requisition falls back to its full slug.
+        let id = workdayJobId(raw.externalPath);
+        if (ids.has(id)) id = decodeURIComponent(pathSegments(raw.externalPath).pop());
+        if (ids.has(id)) continue;
+        job = workday(board, raw, null, { id, fetchedAt });
+        if (job) ids.add(id);
+      } catch { job = null; }
+      if (job && job.title && job.job_url) jobs.push(job);
+    }
+    return { company_name: null, jobs };
+  }
   if (ats === 'greenhouse') {
     list = response?.jobs;
     companyName = list?.find?.((j) => j?.company_name)?.company_name ?? null;

@@ -1474,6 +1474,45 @@
       "staging_validated": true,
       "monetization_configured": false,
       "staging_started_at": "2026-10-09T05:46:48Z"
+    },
+    "workday-jobs-api": {
+      "apify_actor_id": null,
+      "source": "Workday public career sites (*.myworkdayjobs.com job lists + job pages via the CXS JSON they load; robots.txt checked per host) through the factpipe jobs index, plus live reads",
+      "variant": "search index (Workday only)",
+      "status": "staging",
+      "approval": "J3 2026-10-09; publish + price pending owner approval",
+      "origin": "scan",
+      "incumbent_actor_id": null,
+      "first_paid_run_date": null,
+      "ppe_events": {
+        "job-result": {
+          "proposed_price_usd": 0.002,
+          "title": "Job result",
+          "description": "One job posting delivered. Nothing else is charged.",
+          "store_discount_tiers_usd": {
+            "FREE": 0.002,
+            "BRONZE": 0.0018,
+            "SILVER": 0.0016,
+            "GOLD": 0.0014
+          }
+        }
+      },
+      "pricing_rationale": "Per-ATS demand (LEARNINGS 2026-10-09): Workday 341 real users/30d, the largest per-ATS pool; the leader fantastic-jobs covers Workday among 58 ATSs at $12/1k + $0.01/run. Same $2/1k as the J4 family (owner J3 brief); publish and price pending owner approval.",
+      "launched_at": null,
+      "last_fix_date": null,
+      "kpis": {},
+      "listing": {
+        "title": "Workday Jobs API — Search Workday Career Sites",
+        "description": "Search open jobs on 4,000+ Workday career sites (NVIDIA, Salesforce, Adobe, Intel…) by keyword, location and remote, or read any myworkdayjobs.com site live. Full descriptions. $2 per 1,000 jobs.",
+        "seoTitle": "Workday Jobs API: Workday Job Scraper (myworkdayjobs)",
+        "seoDescription": "Search Workday career sites (myworkdayjobs.com) by keyword, location and remote, with full descriptions, or read any Workday site live. $2 per 1,000 jobs.",
+        "categories": [
+          "JOBS",
+          "LEAD_GENERATION"
+        ]
+      },
+      "staging_validated": false,
+      "monetization_configured": false
     }
   },
   "apify_account": "factpipe",

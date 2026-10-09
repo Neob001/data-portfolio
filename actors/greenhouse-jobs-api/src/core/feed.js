@@ -9,9 +9,14 @@ import { fetchJson as libFetchJson, FetchError } from '../lib/http.js';
 import { compileSearch } from './filters.js';
 import { compileKeyword } from './keywords.js';
 import { TopK, rankCmp, newestCmp } from './rank.js';
-import { parseBoard, apiUrlFor, boardUrlFor, boardKey, dedupeJobs } from './transform.js';
+import { createDeadline } from '../lib/deadline.js';
+import {
+  parseBoard, apiUrlFor, boardUrlFor, boardKey, dedupeJobs, atsOfUrl, parseWorkdayDetail, workdayDetailUrl, workdayParts,
+  workdayRobotsPaths,
+} from './transform.js';
 import { selectShards, shardsForCompanies, INDEX_FORMAT, defaultApplyUrl } from './index_format.js';
-import { clean } from './text.js';
+import { clean, snippetOf, normKey } from './text.js';
+import { robotsVerdict } from './robots.js';
 
 // Where the prebuilt jobs index is hosted (manifest.json + directory.json.gz + shards/).
 // Placeholder until hosting is configured; overridable with the JOBS_INDEX_URL env var.
@@ -30,6 +35,30 @@ export const FALLBACK_BOARDS = [
   { ats: 'lever', token: 'acceldata' },
   { ats: 'workable', token: 'blueground' },
 ];
+
+// Per-ATS fallback boards for a platform that FALLBACK_BOARDS does not cover (used when the index is
+// unreachable or has no shard of the requested platform yet). Mid-size Workday sites (150-400 jobs, so
+// 8-20 list pages each) keep the fallback run short.
+export const EXTRA_FALLBACK_BOARDS = {
+  workday: [
+    { ats: 'workday', token: 'workday.wd5/Workday' },
+    { ats: 'workday', token: 'crowdstrike.wd5/crowdstrikecareers' },
+    { ats: 'workday', token: 'redhat.wd5/jobs' },
+    { ats: 'workday', token: 'adobe.wd5/external_experienced' },
+    { ats: 'workday', token: 'paypal.wd1/jobs' },
+  ],
+};
+
+// Workday CXS limits. The jobs endpoint rejects limit > 20 (HTTP 400) and reports at most total=2000.
+export const WORKDAY = {
+  pageSize: 20,
+  maxJobsPerBoard: 2000, // live mode default cap per site (the index build sets its own, smaller cap)
+  liveBoardBudgetMs: 150000, // stop paging one site after this long (newest jobs come first)
+  pageReserveMs: 45000, // do not start another page with less than this left before the run deadline
+  detailConcurrency: 2, // parallel job-detail calls for descriptions (all paced per ATS, see HOST_GAP_MS)
+};
+// robots.txt product token we answer to (our User-Agent below starts with it).
+export const ROBOTS_AGENT = 'factpipe-jobs-feed';
 
 const UA = 'Mozilla/5.0 (compatible; factpipe-jobs-feed/1.0; +https://apify.com/factpipe)';
 
@@ -148,7 +177,7 @@ export async function* streamShardLines(base, rel, { timeoutMs = 120000, stallMs
   }
 }
 
-async function defaultFetchText(url) {
+export async function defaultFetchText(url) {
   const res = await fetch(url, { headers: { 'User-Agent': UA }, redirect: 'follow', signal: AbortSignal.timeout(15000) });
   if (!res.ok) throw new FetchError(`HTTP ${res.status} at ${url}`, 'http_error', res.status);
   return res.text();
@@ -165,9 +194,96 @@ export function companyNameFromTitle(ats, html) {
   return t;
 }
 
+/**
+ * Company name from a Workday career-site page: its og:title when it reads "Careers at X", "X Careers"
+ * or "X Jobs" (the <title> is empty; the page is a JS app). null otherwise (callers fall back to the tenant).
+ */
+export function workdayNameFromPage(html) {
+  const m = String(html || '').match(/<meta[^>]*property="og:title"[^>]*content="([^"]{1,200})"/i)
+    || String(html || '').match(/<meta[^>]*content="([^"]{1,200})"[^>]*property="og:title"/i);
+  if (!m) return null;
+  const t = clean(m[1].replace(/&amp;/g, '&').replace(/&#39;|&apos;/g, "'").replace(/&quot;/g, '"'));
+  if (!t) return null;
+  const n = t.match(/^(?:careers?|jobs?|work|opportunities)\s+(?:at|with|@)\s+(.{2,80})$/i)?.[1]
+    || t.match(/^(.{2,80}?)\s+(?:careers?|jobs?|career site|job opportunities)$/i)?.[1];
+  const name = clean(n?.replace(/[!.]+$/, '').replace(/^(?:welcome to|join)\s+/i, ''));
+  return name && !/^(our|the|external|internal|search|find|all|global)$/i.test(name) ? name : null;
+}
+
+// ------------------------------------------------------------------ robots.txt (Workday)
+const ROBOTS_CACHE = new Map(); // host -> Promise<{ status, text } | { error }>
+
+async function fetchRobots(url, fetchText) {
+  try {
+    return { status: 200, text: await fetchText(url) };
+  } catch (e) {
+    return e?.status ? { status: e.status, text: '' } : { error: e?.message || 'unreachable' };
+  }
+}
+
+/**
+ * Robots verdict for a Workday site's CXS list/detail paths and its own pages ({ allowed, reason }).
+ * One robots.txt fetch per host per process (cache). Unreachable robots.txt = not allowed (RFC 9309).
+ */
+export async function workdayRobots(board, { fetchText = defaultFetchText, cache = ROBOTS_CACHE, agent = ROBOTS_AGENT } = {}) {
+  const { host } = workdayParts(board.token);
+  if (!cache.has(host)) cache.set(host, fetchRobots(`https://${host}/robots.txt`, fetchText));
+  return robotsVerdict(await cache.get(host), agent, workdayRobotsPaths(board));
+}
+
+function robotsError(board, reason) {
+  return Object.assign(new FetchError(`${boardKey(board)} skipped: ${reason}`, 'blocked', null), { robots: true });
+}
+
+/**
+ * One Workday site, list pages only (no descriptions): POST .../jobs pages of 20, newest first, until
+ * the site's total, `maxJobs`, the per-site `budgetMs` or the run deadline is reached. A site cut short
+ * returns the jobs it has with `truncated: true`.
+ */
+async function fetchWorkdayBoard(board, { fetchJson, fetchText, now, skipName, maxJobs = WORKDAY.maxJobsPerBoard,
+  budgetMs = WORKDAY.liveBoardBudgetMs, deadline = null, robotsCache, robotsAgent }) {
+  const verdict = await workdayRobots(board, { fetchText, cache: robotsCache, agent: robotsAgent });
+  if (!verdict.allowed) throw robotsError(board, verdict.reason);
+  const url = apiUrlFor(board);
+  const started = Date.now();
+  const postings = [];
+  const seen = new Set();
+  let total = null;
+  let truncated = false;
+  let pages = 0;
+  for (let offset = 0; ; offset += WORKDAY.pageSize) {
+    if (pages > 0 && (Date.now() - started >= budgetMs || (deadline && !deadline.hasTimeFor(WORKDAY.pageReserveMs)))) { truncated = true; break; }
+    const page = await fetchJson(url, {
+      method: 'POST',
+      body: { appliedFacets: {}, limit: WORKDAY.pageSize, offset, searchText: '' },
+      headers: { 'User-Agent': UA, 'content-type': 'application/json', 'accept-language': 'en-US' },
+      retries: 2, timeoutMs: 30000, minDelayMs: 1000,
+    });
+    pages += 1;
+    if (!Array.isArray(page?.jobPostings)) parseBoard(board, page); // throws schema_change
+    if (total === null) total = Number(page.total) || 0; // later pages report total 0
+    for (const p of page.jobPostings) {
+      if (p?.externalPath && !seen.has(p.externalPath)) { seen.add(p.externalPath); postings.push(p); }
+    }
+    if (page.jobPostings.length < WORKDAY.pageSize || offset + WORKDAY.pageSize >= total) break;
+    if (postings.length >= maxJobs) { truncated = true; break; }
+  }
+  if (postings.length > maxJobs) { postings.length = maxJobs; truncated = true; }
+  const fetchedAt = now();
+  const parsed = parseBoard(board, { total, jobPostings: postings }, { fetchedAt });
+  let name = null;
+  if (!skipName && parsed.jobs.length) {
+    try { name = workdayNameFromPage(await fetchText(boardUrlFor(board))); } catch { name = null; }
+  }
+  const iso = fetchedAt.toISOString();
+  const jobs = parsed.jobs.map((j) => ({ ...j, company_name: name || j.company_name, source_url: url, fetched_at: iso }));
+  return { board, company_name: name, jobs, source_url: url, truncated, total, pages };
+}
+
 // ------------------------------------------------------------------ live boards
 /** Fetch one board live -> { board, company_name, jobs, source_url } ; throws FetchError on failure. */
-export async function fetchBoard(board, { fetchJson = libFetchJson, fetchText = defaultFetchText, now = () => new Date(), skipName = false } = {}) {
+export async function fetchBoard(board, { fetchJson = libFetchJson, fetchText = defaultFetchText, now = () => new Date(), skipName = false, ...wd } = {}) {
+  if (board.ats === 'workday') return fetchWorkdayBoard(board, { fetchJson, fetchText, now, skipName, ...wd });
   const url = apiUrlFor(board);
   const response = await fetchJson(url, { headers: { 'User-Agent': UA }, retries: 2, timeoutMs: board.ats === 'lever' ? 90000 : 45000, minDelayMs: 1000 });
   const parsed = parseBoard(board, response);
@@ -182,7 +298,9 @@ export async function fetchBoard(board, { fetchJson = libFetchJson, fetchText = 
 
 // Minimum spacing between request starts per ATS host (Lever robots.txt Crawl-delay: 1; Workable
 // rate-limits hard). Shared by live mode and on-demand descriptions within a run.
-export const HOST_GAP_MS = { greenhouse: 0, ashby: 0, recruitee: 0, lever: 1000, workable: 3000 };
+// Workday: at most one request start per 250 ms across all Workday hosts in a run, and one request in
+// flight per site (its pages are read one after another): career-site JSON is not a documented API.
+export const HOST_GAP_MS = { greenhouse: 0, ashby: 0, recruitee: 0, lever: 1000, workable: 3000, workday: 250 };
 
 export function hostPacer(gaps = HOST_GAP_MS) {
   const next = {};
@@ -263,7 +381,7 @@ export async function scanShard(index, shard, begin, { attempts = 3, log = () =>
 /**
  * @param opts normalizeInput() result
  * @param deps { pushData, charge, tracker?, log?, indexBaseUrl?, fetchJson?, fetchText?, readIndexFile?,
- *               streamShardLines?, fallbackBoards?, now?, topK? }
+ *               streamShardLines?, fallbackBoards?, now?, topK?, deadline?, robotsCache? }
  */
 export async function runFeed(opts, deps) {
   const log = deps.log || (() => {});
@@ -272,22 +390,25 @@ export async function runFeed(opts, deps) {
   const ranked = opts.keywords.some((k) => compileKeyword(k).phrase);
   const tracker = deps.tracker || null;
   const pace = deps.pacer || hostPacer(deps.hostGaps);
+  const deadline = deps.deadline || createDeadline();
+  const fetchText = deps.fetchText || defaultFetchText;
+  const robotsCache = deps.robotsCache || undefined;
   const summary = {
     mode: opts.mode, rows: 0, charged_events: 0, matched: 0, skipped_seen: 0, skipped_closed: 0, stop_reason: 'exhausted',
     ranking: ranked ? 'relevance' : 'newest',
-    boards_requested: 0, boards_ok: 0, boards_failed: 0, failed_boards: [], shards_total: 0, shards_read: 0, shards_failed: 0,
+    boards_requested: 0, boards_ok: 0, boards_failed: 0, boards_truncated: 0, failed_boards: [], shards_total: 0, shards_read: 0, shards_failed: 0,
     ranking_passes: 0, index_scan_ms: 0, delivery_ms: 0, description_boards_fetched: 0, description_boards_failed: 0, descriptions_unavailable: 0,
-    index_built_at: null, index_jobs: null, used_fallback: false, bad_refs: opts.badRefs || [],
+    description_jobs_fetched: 0, description_jobs_failed: 0,
+    index_built_at: null, index_jobs: null, used_fallback: false, fallback_reason: null, bad_refs: opts.badRefs || [],
   };
   const delivered = new Set();
   const perCompany = new Map();
-  const companyFull = (job) => opts.maxPerCompany != null && (perCompany.get(job.company_board) || 0) >= opts.maxPerCompany;
   let stopped = false;
   const pacedFetchJson = (fj) => async (url, o) => {
-    const ats = /greenhouse/.test(url) ? 'greenhouse' : /lever\.co/.test(url) ? 'lever' : /ashbyhq/.test(url) ? 'ashby' : /workable/.test(url) ? 'workable' : 'recruitee';
-    await pace(ats);
+    await pace(atsOfUrl(url));
     return (fj || libFetchJson)(url, o);
   };
+  const paced = pacedFetchJson(deps.fetchJson);
 
   /** Incremental check for a job that passed the filters; stamps its relevance. Counts into `c`. */
   function accept(job, r, c = summary) {
@@ -325,18 +446,48 @@ export async function runFeed(opts, deps) {
   function liveBoard(board) {
     const k = boardKey(board);
     if (!boardCache.has(k)) {
-      boardCache.set(k, fetchBoard(board, { fetchJson: pacedFetchJson(deps.fetchJson), skipName: true, now: () => new Date(nowMs) })
+      boardCache.set(k, fetchBoard(board, { fetchJson: paced, skipName: true, now: () => new Date(nowMs) })
         .then((r) => { summary.description_boards_fetched += 1; return new Map(r.jobs.map((j) => [j.job_id, j.description_text])); })
         .catch((e) => { summary.description_boards_failed += 1; log(`Description fetch for ${k} failed: ${e.message}`); return null; }));
     }
     return boardCache.get(k);
   }
 
+  // ---- Workday: its list endpoint has no descriptions, so each delivered job gets one detail call.
+  // -> { description_text, locations, country_codes } | 'closed' (HTTP 404: closed since listed) | null
+  const detailCache = new Map();
+  function liveWorkdayJob(job) {
+    if (!detailCache.has(job.job_id)) {
+      detailCache.set(job.job_id, (async () => {
+        const board = job._board || { ats: 'workday', token: job.company_board };
+        const verdict = await workdayRobots(board, { fetchText, cache: robotsCache });
+        if (!verdict.allowed) { summary.description_jobs_failed += 1; log(`Workday description for ${job.job_id} skipped: ${verdict.reason}`); return null; }
+        const url = workdayDetailUrl(board, job.job_url);
+        if (!url || !deadline.hasTimeFor(20000)) { summary.description_jobs_failed += 1; return null; }
+        try {
+          const r = await paced(url, { headers: { 'User-Agent': UA, 'accept-language': 'en-US' }, retries: 1, timeoutMs: 20000, minDelayMs: 1000 });
+          summary.description_jobs_fetched += 1;
+          return parseWorkdayDetail(board, r);
+        } catch (e) {
+          if (e.status === 404 || e.status === 410) return 'closed';
+          summary.description_jobs_failed += 1;
+          log(`Workday description for ${job.job_id} failed: ${e.message}`);
+          return null;
+        }
+      })());
+    }
+    return detailCache.get(job.job_id);
+  }
+  const needsWorkdayDetail = (job) => job.ats === 'workday' && opts.includeDescription;
+  // Index records need their board re-read for descriptions; live-mode records already carry them.
+  const needsBoard = (job) => opts.includeDescription && job._board && job.ats !== 'workday';
+
   /**
-   * Deliver index matches in the given order, fetching descriptions only for jobs about to be
-   * delivered. `prechecked`: filters and the incremental check already ran (ranked path).
+   * Deliver matches in the given order, fetching descriptions only for jobs about to be delivered
+   * (index records: one board call per board; Workday: one detail call per job). Jobs found closed are
+   * skipped (not delivered, not charged). `prechecked`: filters and the incremental check already ran.
    */
-  async function deliverIndexed(matches, { prechecked = false } = {}) {
+  async function deliver(matches, { prechecked = false } = {}) {
     let i = 0;
     while (i < matches.length && !stopped) {
       const batch = [];
@@ -348,16 +499,30 @@ export async function runFeed(opts, deps) {
         if (prechecked ? !delivered.has(job.job_id) : eligible(job)) batch.push(job);
       }
       if (!batch.length) break;
-      if (opts.includeDescription) {
-        const boards = [...new Map(batch.map((j) => [boardKey(j._board), j._board])).values()];
-        await mapLimit(boards, 8, (b) => liveBoard(b));
-      }
+      const boards = [...new Map(batch.filter(needsBoard).map((j) => [boardKey(j._board), j._board])).values()];
+      await Promise.all([
+        mapLimit(boards, 8, (b) => liveBoard(b)),
+        mapLimit(batch.filter(needsWorkdayDetail), WORKDAY.detailConcurrency, (j) => liveWorkdayJob(j)),
+      ]);
       for (const job of batch) {
         if (stopped) break;
-        if (opts.includeDescription) {
+        if (needsBoard(job)) {
           const live = await liveBoard(job._board);
           if (live && !live.has(job.job_id)) { summary.skipped_closed += 1; continue; } // closed since the index build
           job.description_text = live ? live.get(job.job_id) || null : null;
+        } else if (needsWorkdayDetail(job)) {
+          const d = await liveWorkdayJob(job);
+          if (d === 'closed') { summary.skipped_closed += 1; continue; }
+          if (d) {
+            job.description_text = d.description_text;
+            job.description_snippet = job.description_snippet || snippetOf(d.description_text);
+            // The detail names every location; the list only the primary one. The detail list replaces it
+            // when it contains it (so location filters still hold), else both are kept.
+            const keys = new Set(d.locations.map(normKey));
+            job.locations = d.locations.length && job.locations.every((l) => keys.has(normKey(l)))
+              ? d.locations : [...new Set([...job.locations, ...d.locations])];
+            job.country_codes = [...new Set([...job.country_codes, ...d.country_codes])].sort();
+          }
         }
         const { kw, _board, ...out } = job;
         await emit(out);
@@ -367,17 +532,16 @@ export async function runFeed(opts, deps) {
 
   async function runLive(boards) {
     summary.boards_requested = boards.length;
-    const results = await mapLimit(boards, 6, async (b) => {
-      try {
-        const r = await fetchBoard(b, { fetchJson: pacedFetchJson(deps.fetchJson), fetchText: deps.fetchText, now: () => new Date(nowMs) });
-        summary.boards_ok += 1;
-        return r.jobs;
-      } catch (e) {
-        summary.boards_failed += 1;
-        summary.failed_boards.push({ board: boardKey(b), status: e.status ?? null, failure_class: e.failureClass || 'unknown' });
-        log(`Board ${boardKey(b)} failed: ${e.message}`);
-        return [];
-      }
+    // Several sites of one Workday tenant share a host: read them one after another.
+    const groups = new Map();
+    for (const b of boards) {
+      const k = b.ats === 'workday' ? workdayParts(b.token).host : boardKey(b);
+      (groups.get(k) || groups.set(k, []).get(k)).push(b);
+    }
+    const results = await mapLimit([...groups.values()], 6, async (group) => {
+      const out = [];
+      for (const b of group) out.push(...await liveOne(b));
+      return out;
     });
     const jobs = [];
     for (const job of dedupeJobs(results.flat())) {
@@ -385,10 +549,43 @@ export async function runFeed(opts, deps) {
       if (r && accept(job, r)) jobs.push(job);
     }
     jobs.sort(ranked ? rankCmp : newestCmp);
-    for (const job of jobs) {
-      if (stopped) break;
-      if (!delivered.has(job.job_id) && !companyFull(job)) await emit(job);
+    await deliver(jobs, { prechecked: true });
+  }
+
+  /** One live board -> its jobs ([] when it failed; the failure is recorded in the summary). */
+  async function liveOne(b) {
+    try {
+      const r = await fetchBoard(b, { fetchJson: paced, fetchText, now: () => new Date(nowMs), deadline, robotsCache });
+      summary.boards_ok += 1;
+      if (r.truncated) {
+        summary.boards_truncated += 1;
+        log(`Board ${boardKey(b)}: read the newest ${r.jobs.length} of ${r.total} jobs (per-site cap / time budget).`);
+      }
+      return r.jobs;
+    } catch (e) {
+      summary.boards_failed += 1;
+      summary.failed_boards.push({ board: boardKey(b), status: e.status ?? null, failure_class: e.failureClass || 'unknown', ...(e.robots ? { robots: true } : {}) });
+      log(`Board ${boardKey(b)} failed: ${e.message}`);
+      return [];
     }
+  }
+
+  /** Built-in boards for a live fallback; a platform FALLBACK_BOARDS lacks (Workday) gets its own. */
+  function fallbackBoards() {
+    const base = deps.fallbackBoards || FALLBACK_BOARDS;
+    if (!opts.ats.length || base.some((b) => opts.ats.includes(b.ats))) return base;
+    const extra = opts.ats.flatMap((a) => EXTRA_FALLBACK_BOARDS[a] || []);
+    return extra.length ? extra : base;
+  }
+
+  async function runFallback(reason, code) {
+    const boards = fallbackBoards();
+    log(`${reason}; falling back to live fetch of ${boards.length} built-in boards.`);
+    summary.used_fallback = true;
+    summary.fallback_reason = code;
+    summary.mode = 'fallback_live';
+    await runLive(boards);
+    return summary;
   }
 
   if (opts.mode === 'live') {
@@ -402,11 +599,15 @@ export async function runFeed(opts, deps) {
   try {
     index = await openIndex(deps);
   } catch (e) {
-    log(`Jobs index unreachable (${e.message}); falling back to live fetch of ${(deps.fallbackBoards || FALLBACK_BOARDS).length} built-in boards.`);
-    summary.used_fallback = true;
-    summary.mode = 'fallback_live';
-    await runLive(deps.fallbackBoards || FALLBACK_BOARDS);
-    return summary;
+    return runFallback(`Jobs index unreachable (${e.message})`, 'index_unreachable');
+  }
+  // A platform the index does not hold yet (a newly added source before its first nightly build).
+  if (opts.ats.length && !index.manifest.shards.some((s) => opts.ats.includes(s.ats))) {
+    const own = fallbackBoards().filter((b) => opts.ats.includes(b.ats));
+    if (own.length) {
+      summary.index_built_at = index.manifest.built_at;
+      return runFallback(`The jobs index (built ${index.manifest.built_at}) has no ${opts.ats.join('/')} jobs yet`, 'platform_not_indexed');
+    }
   }
   const { manifest } = index;
   summary.index_built_at = manifest.built_at;
@@ -470,7 +671,7 @@ export async function runFeed(opts, deps) {
       const t1 = Date.now();
       summary.index_scan_ms += t1 - t0;
       if (!list.length) return;
-      await deliverIndexed(list, { prechecked: true });
+      await deliver(list, { prechecked: true });
       summary.delivery_ms += Date.now() - t1;
       if (!top.dropped) return;
       boundary = list[list.length - 1];

@@ -86,14 +86,16 @@
           "lever",
           "ashby",
           "workable",
-          "recruitee"
+          "recruitee",
+          "workday"
         ],
         "enumTitles": [
           "Greenhouse",
           "Lever",
           "Ashby",
           "Workable",
-          "Recruitee"
+          "Recruitee",
+          "Workday"
         ]
       }
     },

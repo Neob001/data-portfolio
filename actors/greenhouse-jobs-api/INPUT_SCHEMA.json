@@ -148,7 +148,7 @@
     "companyUrls": {
       "title": "Live mode: Greenhouse board URLs or tokens",
       "type": "array",
-      "description": "Optional. Fetch these Greenhouse boards live instead of searching the index, e.g. https://job-boards.greenhouse.io/gitlab, https://boards.greenhouse.io/stripe or just the board token \"stripe\". URLs of other platforms (Lever, Ashby, Workable or Recruitee) are ignored with a warning: use ats-jobs-scraper for those. All filters above still apply.",
+      "description": "Optional. Fetch these Greenhouse boards live instead of searching the index, e.g. https://job-boards.greenhouse.io/gitlab, https://boards.greenhouse.io/stripe or just the board token \"stripe\". URLs of other platforms (Lever, Ashby, Workable, Recruitee or Workday) are ignored with a warning: use ats-jobs-scraper for those. All filters above still apply.",
       "editor": "stringList",
       "sectionCaption": "Live mode (Greenhouse boards not yet in the index)"
     }

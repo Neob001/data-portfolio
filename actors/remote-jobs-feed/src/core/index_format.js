@@ -26,7 +26,7 @@ export const SLIM_FIELDS = [
 /** apply_url each ATS uses by default for a job_url (stored in the index only when different). */
 export function defaultApplyUrl(ats, jobUrl) {
   if (!jobUrl) return null;
-  if (ats === 'lever' || ats === 'workable') return `${jobUrl}/apply`;
+  if (ats === 'lever' || ats === 'workable' || ats === 'workday') return `${jobUrl}/apply`;
   if (ats === 'ashby') return `${jobUrl}/application`;
   if (ats === 'recruitee') return `${jobUrl}/c/new`;
   return jobUrl;

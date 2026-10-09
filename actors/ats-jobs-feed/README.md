@@ -89,14 +89,14 @@ One flat record per job opening:
 | `remote` | `any` \| `remote_only` \| `onsite_only` | `onsite_only` excludes jobs marked remote |
 | `postedWithinDays` | integer | First published within the last N days |
 | `companies` | string[] | Company names (`Datadog`) or board tokens (`datadog`, `greenhouse:datadog`) |
-| `ats` | string[] | Any of `greenhouse`, `lever`, `ashby`, `workable`, `recruitee` |
+| `ats` | string[] | Any of `greenhouse`, `lever`, `ashby`, `workable`, `recruitee`, `workday` |
 | `departments` | string[] | Substring match on department or team |
 | `employmentTypes` | string[] | `full_time`, `part_time`, `contract`, `temporary`, `internship`, `other` |
 | `maxResults` | integer | Default 100. With keywords, the most relevant jobs come first; without keywords, the newest |
 | `maxPerCompany` | integer | Optional cap on jobs from any one company (prefill 3), so a single employer posting many near-identical roles can't fill your results |
 | `includeDescription` | boolean | Default `true`. Fetches the full plain-text description (max 20,000 chars) live from the ATS for every delivered job. A 300-char snippet is always included. Set `false` for the fastest runs |
 | `sinceLastRun` | boolean | Incremental feed: returns only jobs not delivered by an earlier run with the same filters |
-| `companyUrls` | string[] | **Live mode**: board URLs (`https://job-boards.greenhouse.io/gitlab`, `https://jobs.lever.co/acme`, `https://jobs.ashbyhq.com/acme`, `https://apply.workable.com/acme`, `https://acme.recruitee.com`) or `ats:token` strings. These boards are fetched live, so you can use companies that are not in the index yet |
+| `companyUrls` | string[] | **Live mode**: board URLs (`https://job-boards.greenhouse.io/gitlab`, `https://jobs.lever.co/acme`, `https://jobs.ashbyhq.com/acme`, `https://apply.workable.com/acme`, `https://acme.recruitee.com`, `https://acme.wd5.myworkdayjobs.com/External`) or `ats:token` strings. These boards are fetched live, so you can use companies that are not in the index yet |
 
 **Ranking.** With keywords, every matching job gets a `match_score`:
 
@@ -155,6 +155,7 @@ Only official, public, unauthenticated job-board APIs that the ATS vendors publi
 | Ashby | [Public Job Posting API](https://developers.ashbyhq.com/docs/public-job-posting-api) | Public, unauthenticated posting API |
 | Workable | [Public jobs endpoint](https://help.workable.com/hc/en-us/articles/115012771647) | Documented public endpoint for published jobs; robots.txt allows crawling |
 | Recruitee | [Careers Site API](https://docs.recruitee.com/reference/offers) | Public API returning published offers |
+| Workday | Public career sites (`<company>.<wdN>.myworkdayjobs.com/<site>`) | Not a vendor-documented API: the job list and job pages each site loads for its visitors. Each host's robots.txt is checked first (career sites allow `/<site>/`); about 4 requests/s across all Workday hosts |
 
 SmartRecruiters is deliberately **not** included, because its API host's robots.txt disallows automated access.
 

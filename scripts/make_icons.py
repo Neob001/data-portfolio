@@ -43,6 +43,7 @@ ICONS = {
     "greenhouse-jobs-api": ("jobs", "GH"),
     "lever-jobs-api": ("jobs", "LEVER"),
     "ashby-jobs-api": ("jobs", "ASHBY"),
+    "workday-jobs-api": ("jobs", "WD"),
     "company-jobs-scraper": ("jobs", "CAREER"),
     "ecb-exchange-rates": ("data", "FX"),
     "us-weather-forecast": ("data", "WX"),

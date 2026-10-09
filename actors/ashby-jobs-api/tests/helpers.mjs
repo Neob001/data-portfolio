@@ -2,7 +2,7 @@
 // Shared test helpers: fixtures, a fake ATS network, and the dataset-schema guard.
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { apiUrlFor } from '../src/core/transform.js';
+import { apiUrlFor, boardUrlFor, workdayDetailUrl } from '../src/core/transform.js';
 import { fetchBoard } from '../src/core/feed.js';
 import { IndexWriter } from '../src/core/index_writer.js';
 
@@ -14,6 +14,15 @@ export const FIXTURES = {
   greenhouse: { token: 'gitlab', file: 'greenhouse_jobs.json' },
 };
 export const FIXTURE_BOARDS = Object.entries(FIXTURES).map(([ats, { token }]) => ({ ats, token }));
+
+/** [url, () => response] routes of one fixture. A Workday fixture holds a list page plus job details. */
+function routesFor(ats, token, file) {
+  if (ats !== 'workday') return [[apiUrlFor({ ats, token }), () => load(file)]];
+  const fx = load(file);
+  const board = { ats, token };
+  return [[apiUrlFor(board), () => fx.jobs],
+    ...Object.entries(fx.details).map(([path, d]) => [workdayDetailUrl(board, `${boardUrlFor(board)}${path}`), () => d])];
+}
 
 // Apify validates every pushed row against .actor/actor.json dataset fields (types AND enums); a
 // violating row is rejected and the run crashes. Every row produced in tests goes through this.
@@ -36,7 +45,7 @@ export function assertMatchesSchema(row) {
 /** fetchJson stand-in serving golden fixtures by ATS API URL; records calls. */
 export function fakeNetwork(extra = {}) {
   const routes = new Map();
-  for (const [ats, { token, file }] of Object.entries(FIXTURES)) routes.set(apiUrlFor({ ats, token }), () => load(file));
+  for (const [ats, { token, file }] of Object.entries(FIXTURES)) for (const [url, fn] of routesFor(ats, token, file)) routes.set(url, fn);
   for (const [url, fn] of Object.entries(extra)) routes.set(url, fn);
   const calls = [];
   const fetchJson = async (url) => {
@@ -45,8 +54,11 @@ export function fakeNetwork(extra = {}) {
     if (!route) throw Object.assign(new Error(`HTTP 404 at ${url}`), { status: 404, failureClass: 'http_error' });
     return structuredClone(route());
   };
+  const wd = FIXTURES.workday;
   const fetchText = async (url) => {
     calls.push(url);
+    if (wd && /\.myworkdayjobs\.com\/robots\.txt$/.test(url)) return load(wd.file).robots_txt;
+    if (wd && url === boardUrlFor({ ats: 'workday', token: wd.token })) return `<html><head>${load(wd.file).site_page_head}</head></html>`;
     if (url.includes('lever.co/shieldai')) return '<html><head><title>Shield AI</title></head></html>';
     if (url.includes('ashbyhq.com/ramp')) return '<html><head><title>Ramp Jobs</title></head></html>';
     throw new Error('no page');

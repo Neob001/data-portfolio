@@ -61,3 +61,12 @@ test('live mode: board URLs and ats:token strings are fetched even when the ats 
   const allBoards = await run({ companyUrls: FIXTURE_BOARDS.map((b) => `${b.ats}:${b.token}`), includeDescription: false });
   assert.equal(allBoards.rows.length, 11);
 });
+
+test('Workday: career-site URLs work in live mode and `ats: ["workday"]` is accepted; rows fit the dataset schema', async () => {
+  const r = await run({ companyUrls: ['https://workday.wd5.myworkdayjobs.com/en-US/Workday'], ats: ['greenhouse'] });
+  assert.equal(r.summary.mode, 'live');
+  assert.ok(r.rows.length > 0 && r.rows.every((x) => x.ats === 'workday'), 'live boards are fetched as given');
+  for (const x of r.rows) assertMatchesSchema(x);
+  assert.ok(r.rows.every((x) => x.description_status === 'included'));
+  assert.deepEqual(toScraperOptions({ ats: ['workday'] }).ats, ['workday']);
+});

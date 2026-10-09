@@ -39,6 +39,46 @@ PREFILL_MAX_RESULTS = 20
 PREFILL_MAX_PER_COMPANY = 3
 INDEX_DATE = "2026-10-09"  # coverage numbers below are from this index build
 
+# Workday directory (scripts/jobs_index/validate_boards.py over workday_candidates.json). Workday is not in a
+# published index build yet, so its README reports the validated directory instead.
+WORKDAY_DIRECTORY_DATE = "2026-10-09"
+WORKDAY_BOARDS = 4796  # sites with >= 1 open job and robots.txt allowing the job pages + endpoint
+WORKDAY_JOBS = 850315  # sum of the sites' reported totals (Workday caps a site's total at 2,000)
+WORKDAY_EXAMPLES = ["NVIDIA", "Salesforce", "Adobe", "Intel", "Target", "Boeing"]  # verified in boards.json 2026-10-09
+WORKDAY_INDEX_CAP = 300  # newest jobs kept per Workday site by build_index.mjs (--workday-max-jobs default)
+# Real row from a local prefill run, 2026-10-09 (index without Workday yet -> built-in sites read live; descriptions shortened).
+WORKDAY_SAMPLE = {
+    'job_id': 'workday:adobe.wd5/external_experienced:R171485',
+    'title': 'Senior Site Reliability Engineer - Observability',
+    'company_name': 'Adobe',
+    'company_board': 'adobe.wd5/external_experienced',
+    'ats': 'workday',
+    'department': None,
+    'team': None,
+    'employment_type': None,
+    'workplace_type': 'unknown',
+    'locations': ['Bucharest'],
+    'country_codes': ['RO'],
+    'remote': None,
+    'salary_min': None,
+    'salary_max': None,
+    'salary_currency': None,
+    'salary_period': None,
+    'posted_at': '2026-10-08T00:00:00.000Z',
+    'updated_at': None,
+    'apply_url': 'https://adobe.wd5.myworkdayjobs.com/external_experienced/job/Bucharest/Senior-Site-Reliability-Engineer---Observability_R171485/apply',
+    'job_url': 'https://adobe.wd5.myworkdayjobs.com/external_experienced/job/Bucharest/Senior-Site-Reliability-Engineer---Observability_R171485',
+    'description_text': 'The Team\n\nWe are a globally distributed team inside Adobe Developer…',
+    'description_snippet': 'The Team We are a globally distributed team inside Adobe Developer Platforms. We own the '
+                           "observability platform Adobe's engineering ecosystem runs on…",
+    'description_status': 'included',
+    'duplicate_sources': ['workday:adobe.wd5/external_experienced:R169504'],
+    'match_score': 100,
+    'matched_in': 'title',
+    'source_url': 'https://adobe.wd5.myworkdayjobs.com/wday/cxs/adobe/external_experienced/jobs',
+    'fetched_at': '2026-10-09T11:29:47.802Z',
+}
+
 # ------------------------------------------------------------------ per-ATS config
 FAMILY = {
     "greenhouse": {
@@ -266,6 +306,118 @@ FAMILY = {
          'source_url': 'https://api.ashbyhq.com/posting-api/job-board/fal-ai?includeCompensation=true',
          'fetched_at': '2026-10-09T03:18:48.297Z'},
     },
+    "workday": {
+        "slug": "workday-jobs-api",
+        "name": "Workday",
+        "title": "Workday Jobs API — Search Workday Career Sites",
+        "description": f"Search open jobs on {WORKDAY_BOARDS // 1000:,},000+ Workday career sites (NVIDIA, Salesforce, Adobe, Intel…) by keyword, "
+                       "location and remote, or read any myworkdayjobs.com site live. Full descriptions. $2 per 1,000 jobs.",
+        "seoTitle": "Workday Jobs API: Workday Job Scraper (myworkdayjobs)",
+        "seoDescription": "Search Workday career sites (myworkdayjobs.com) by keyword, location and remote, with full "
+                          "descriptions, or read any Workday site live. $2 per 1,000 jobs.",
+        "boards": WORKDAY_BOARDS, "jobs": WORKDAY_JOBS,
+        "examples": WORKDAY_EXAMPLES,
+        "company_example": ["NVIDIA", "Salesforce"],
+        "token_example": ("NVIDIA", "nvidia.wd5/NVIDIAExternalCareerSite"),
+        "url_examples": ["https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite",
+                         "https://salesforce.wd12.myworkdayjobs.com/External_Career_Site"],
+        "url_token": "nvidia.wd5/nvidiaexternalcareersite",
+        "message_example": "a career-site URL like https://acme.wd5.myworkdayjobs.com/External",
+        "url_forms": [
+            ("Career site", "`https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite`, also with a locale: `…/en-US/NVIDIAExternalCareerSite`"),
+            ("Job page", "`https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite/job/…` (reads that job's whole site)"),
+            ("myworkdaysite.com", "`https://wd1.myworkdaysite.com/recruiting/paypal/jobs`"),
+            ("Token", "`nvidia.wd5/NVIDIAExternalCareerSite` or `workday:nvidia.wd5/NVIDIAExternalCareerSite`"),
+        ],
+        "token_hint": "",
+        "token_answer": "It is `<company>.<wdN>/<site>` from the career-site URL: `https://`**`nvidia.wd5`**`.myworkdayjobs.com/`"
+                        "**`NVIDIAExternalCareerSite`** is `nvidia.wd5/NVIDIAExternalCareerSite`. Or paste the URL itself, "
+                        "or type the company name in `companies`.",
+        "keywords": ["engineer"],
+        "prefill_story": "Workday jobs for \"engineer\" at large employers (software, hardware, field and sales engineers…)",
+        "api": ("career-site job list", "https://www.workday.com/", "public career sites"),  # unused: `sources` below
+        "api_host": "<company>.<wdN>.myworkdayjobs.com",
+        "employment_note": "Normalized from the time type a Workday site shows in its job list (Full time, Part time). Many sites don't show one; their jobs are excluded when this is set.",
+        "fields_note": "`posted_at` is a **date derived from Workday's \"Posted N Days Ago\" label** when the site was read (UTC midnight; "
+                       "\"Posted 30+ Days Ago\" becomes 30 days before, meaning *30 days or more*, see the FAQ). Workday job lists "
+                       "publish no pay range or department, so the `salary_*`, `department` and `team` fields are `null` (never "
+                       "guessed). `workplace_type` comes from the site's remote type where shown (Remote, Hybrid, Flex, On-site), "
+                       "otherwise from the location text, and `employment_type` from its time type. Lists name only the primary "
+                       "location of a multi-location job; with `includeDescription` the delivered row lists every location.",
+        "faq": [
+            ("How is `posted_at` derived for Workday jobs?",
+             "Workday career sites show a relative label instead of a date: \"Posted Today\", \"Posted Yesterday\", \"Posted 5 "
+             "Days Ago\" or \"Posted 30+ Days Ago\". We turn it into a date relative to when the site was read (nightly for the "
+             "index, during your run in live mode): today, yesterday, 5 days earlier, and for \"30+\" exactly 30 days earlier, "
+             "which means *30 days or more*. The date is set to UTC midnight, so it can be a day off around midnight in the "
+             "employer's time zone. `postedWithinDays` and `sinceLastRun` use this date."),
+            ("Which Workday URLs work in `companyUrls`?",
+             "Any page of a public Workday career site on `myworkdayjobs.com` (with or without a locale such as `/en-US/`), a "
+             "job URL (its whole site is read), or the `myworkdaysite.com/recruiting/<company>/<site>` form. Internal Workday "
+             "tenants on `myworkday.com` need a login and are not supported."),
+            ("Do keywords search Workday job descriptions?",
+             "In the daily index, keywords match job titles: Workday job lists carry no description. With `includeDescription` "
+             "(the default) every delivered job's full description is read live from its site. In live mode (`companyUrls`), "
+             "too, keywords match titles."),
+            ("Do you respect robots.txt and rate limits?",
+             "Yes. Before reading a Workday site we read its host's robots.txt and skip any site whose rules disallow its job "
+             "pages or the JSON endpoint they load. Requests are spaced (one at a time per site; at most 4 per second across all "
+             "Workday hosts in this Actor, under 7 per second in the nightly index build) and back off on HTTP 429 and "
+             "`Retry-After`."),
+            ("Do I get every job of employers with thousands of openings?",
+             "Workday itself lists at most 2,000 jobs per site. Live mode reads up to 2,000 per site, newest first, within a "
+             f"2.5-minute budget per site; the nightly index keeps the newest {WORKDAY_INDEX_CAP:,} per site. `RUN_SUMMARY` counts the sites "
+             "that were cut short (`boards_truncated`)."),
+        ],
+        "use_cases": [
+            "**Workday jobs API across employers**: one call searches thousands of Workday career sites (`*.myworkdayjobs.com`) instead of scripting each employer's job search page.",
+            "**Workday job scraper for job boards and aggregators**: enterprise jobs (healthcare, finance, retail, manufacturing, tech) filtered by keyword, location and remote, refreshed daily with `sinceLastRun: true`.",
+            "**Tracking specific employers**: `companies: [\"NVIDIA\", \"Salesforce\"]`, or their career-site URLs in `companyUrls`, scheduled daily.",
+            "**Recruiting and sales intelligence**: which large employers are hiring which roles, and where. For one row per company, see [Companies Hiring](https://apify.com/factpipe/companies-hiring).",
+        ],
+        "view": ["title", "company_name", "locations", "workplace_type", "employment_type", "posted_at", "job_url", "match_score"],
+        "other_fixture": "greenhouse",
+        # Real row from a local prefill run (descriptions shortened).
+        "sample": WORKDAY_SAMPLE,
+        # Not linked from the published family's READMEs until its own publish is approved.
+        "in_family_links": False,
+        "approval": "J3 2026-10-09; publish + price pending owner approval",
+        "registry_source": "Workday public career sites (*.myworkdayjobs.com job lists + job pages via the CXS JSON they load; "
+                           "robots.txt checked per host) through the factpipe jobs index, plus live reads",
+        "pricing_rationale": "Per-ATS demand (LEARNINGS 2026-10-09): Workday 341 real users/30d, the largest per-ATS pool; the "
+                             "leader fantastic-jobs covers Workday among 58 ATSs at $12/1k + $0.01/run. Same $2/1k as the J4 "
+                             "family (owner J3 brief); publish and price pending owner approval.",
+        "intro": f"A **Workday jobs API** and **Workday job scraper** in one: search open jobs on **{WORKDAY_BOARDS:,} Workday career "
+                 "sites** (NVIDIA, Salesforce, Adobe, Intel…) by keyword, location, remote and posting date, and get flat, "
+                 "deduplicated JSON: title, company, locations, country codes, remote flag, posting date, apply link and full "
+                 "description. Paste any Workday career-site URL (\"https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite\") "
+                 "to read it live. **$2 per 1,000 jobs**, and you pay only for the jobs you get.",
+        "how_it_works": "**How it works.** Without `companyUrls`, the Actor searches a compact search index of the Workday career "
+                        "sites in our directory, rebuilt daily from each site's public job list, and downloads only the Workday "
+                        "parts of it for your date range. With keywords, it ranks every matching job before delivering the top "
+                        "`maxResults`. For each delivered job it then reads the full description live from the site (one request "
+                        "per job), which also drops jobs closed since the nightly build (not delivered, not charged). Until the "
+                        "index holds Workday jobs, a search reads a few built-in Workday sites live instead.",
+        "coverage": f"Directory of {WORKDAY_DIRECTORY_DATE}: **{WORKDAY_BOARDS:,} Workday career sites** listing **{WORKDAY_JOBS:,} open jobs**, "
+                    f"including {', '.join(WORKDAY_EXAMPLES)}. The search index keeps the newest {WORKDAY_INDEX_CAP:,} jobs of each site "
+                    "(about half of all listed jobs); live mode reads up to 2,000 per site.\n\nSites were discovered from Common Crawl's public URL index and validated "
+                    "against each site's own job list (at least one open job, and robots.txt allows reading it). They join the "
+                    "daily search index with its nightly build. Any other Workday career site works in live mode through "
+                    "`companyUrls`.",
+        "sources": "Only the public career sites employers publish on Workday (`<company>.<wdN>.myworkdayjobs.com/<site>`): the "
+                   "same job list and job pages any visitor sees, read through the JSON endpoint those pages load. Before reading "
+                   "a site we check its host's robots.txt (career sites allow `/<site>/`; a site whose rules disallow its job pages "
+                   "or that endpoint is skipped), send a descriptive User-Agent, read one page at a time per site, keep to a "
+                   "few requests per second across all Workday hosts (4/s in this Actor, under 7/s in the nightly index build) "
+                   "and back off on HTTP 429. Job data only: no candidate or recruiter profiles, no logins "
+                   "(`myworkday.com` tenant apps are never touched), no LinkedIn or Indeed.",
+        "key_answer": "No. Workday career sites are public: these are the job lists and job pages any visitor of the employer's "
+                      "careers site sees. No key, no login.",
+        "reliability": "Public Workday career sites only, robots.txt checked per host. Retries with backoff (honouring "
+                       "`Retry-After`), a polite global request rate, a time budget per site so a 2,000-job site never stalls a "
+                       "run, a `RUN_SUMMARY` record on every run, and a built-in live fallback if the search index is unreachable "
+                       "or has no Workday jobs yet.",
+    },
 }
 
 # Golden fixtures of the model actor, by platform: (board token, file).
@@ -273,8 +425,10 @@ FIXTURES = {
     "greenhouse": ("gitlab", "greenhouse_jobs.json"),
     "lever": ("shieldai", "lever_postings.json"),
     "ashby": ("ramp", "ashby_jobs.json"),
+    "workday": ("workday.wd5/Workday", "workday_site.json"),
 }
-ATS_NAMES = {"greenhouse": "Greenhouse", "lever": "Lever", "ashby": "Ashby", "workable": "Workable", "recruitee": "Recruitee"}
+ATS_NAMES = {"greenhouse": "Greenhouse", "lever": "Lever", "ashby": "Ashby", "workable": "Workable", "recruitee": "Recruitee",
+             "workday": "Workday"}
 VIEW_LABELS = {"department": ("Department", "text"), "employment_type": ("Employment", "text")}
 
 
@@ -462,7 +616,7 @@ export function otherPlatformWarning(refs) {
 /** Status message when live mode has no usable [[NAME]] board (passed to runJobsActor). */
 export function noBoardsMessage(badRefs) {
   return `No [[NAME]] job-board URL in input (${badRefs.slice(0, 3).join(', ')}${badRefs.length > 3 ? ', ...' : ''}). `
-    + 'This Actor reads [[NAME]] boards only, e.g. [[URL_EXAMPLE]] or the board token "[[TOKEN]]". '
+    + 'This Actor reads [[NAME]] boards only, e.g. [[MSG_EXAMPLE]]. '
     + `For ${OTHER_NAMES} boards use https://apify.com/factpipe/ats-jobs-scraper; for a company's own careers page use `
     + 'https://apify.com/factpipe/company-jobs-scraper';
 }
@@ -471,7 +625,7 @@ export function noBoardsMessage(badRefs) {
 HELPERS_MJS = GENERATED_JS + """// Shared test helpers: fixtures, a fake ATS network, and the dataset-schema guard.
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { apiUrlFor } from '../src/core/transform.js';
+import { apiUrlFor, boardUrlFor, workdayDetailUrl } from '../src/core/transform.js';
 import { fetchBoard } from '../src/core/feed.js';
 import { IndexWriter } from '../src/core/index_writer.js';
 
@@ -480,6 +634,15 @@ export const load = (f) => JSON.parse(readFileSync(new URL(`../golden/${f}`, imp
 // This Actor's platform plus one other platform (whose jobs must never come out of this Actor).
 export const FIXTURES = [[FIXTURES]];
 export const FIXTURE_BOARDS = Object.entries(FIXTURES).map(([ats, { token }]) => ({ ats, token }));
+
+/** [url, () => response] routes of one fixture. A Workday fixture holds a list page plus job details. */
+function routesFor(ats, token, file) {
+  if (ats !== 'workday') return [[apiUrlFor({ ats, token }), () => load(file)]];
+  const fx = load(file);
+  const board = { ats, token };
+  return [[apiUrlFor(board), () => fx.jobs],
+    ...Object.entries(fx.details).map(([path, d]) => [workdayDetailUrl(board, `${boardUrlFor(board)}${path}`), () => d])];
+}
 
 // Apify validates every pushed row against .actor/actor.json dataset fields (types AND enums); a
 // violating row is rejected and the run crashes. Every row produced in tests goes through this.
@@ -502,7 +665,7 @@ export function assertMatchesSchema(row) {
 /** fetchJson stand-in serving golden fixtures by ATS API URL; records calls. */
 export function fakeNetwork(extra = {}) {
   const routes = new Map();
-  for (const [ats, { token, file }] of Object.entries(FIXTURES)) routes.set(apiUrlFor({ ats, token }), () => load(file));
+  for (const [ats, { token, file }] of Object.entries(FIXTURES)) for (const [url, fn] of routesFor(ats, token, file)) routes.set(url, fn);
   for (const [url, fn] of Object.entries(extra)) routes.set(url, fn);
   const calls = [];
   const fetchJson = async (url) => {
@@ -511,8 +674,11 @@ export function fakeNetwork(extra = {}) {
     if (!route) throw Object.assign(new Error(`HTTP 404 at ${url}`), { status: 404, failureClass: 'http_error' });
     return structuredClone(route());
   };
+  const wd = FIXTURES.workday;
   const fetchText = async (url) => {
     calls.push(url);
+    if (wd && /\\.myworkdayjobs\\.com\\/robots\\.txt$/.test(url)) return load(wd.file).robots_txt;
+    if (wd && url === boardUrlFor({ ats: 'workday', token: wd.token })) return `<html><head>${load(wd.file).site_page_head}</head></html>`;
     if (url.includes('lever.co/shieldai')) return '<html><head><title>Shield AI</title></head></html>';
     if (url.includes('ashbyhq.com/ramp')) return '<html><head><title>Ramp Jobs</title></head></html>';
     throw new Error('no page');
@@ -577,7 +743,7 @@ async function run(input, { dir } = {}) {
 }
 
 test('options: platform is forced, whatever `ats` says', () => {
-  for (const ats of [undefined, [], ['[[OTHER]]'], ['greenhouse', 'lever', 'ashby', 'workable', 'recruitee'], 'workable']) {
+  for (const ats of [undefined, [], ['[[OTHER]]'], ['greenhouse', 'lever', 'ashby', 'workable', 'recruitee', 'workday'], 'workable']) {
     const o = toScraperOptions({ ats, keywords: ['engineer'] });
     assert.deepEqual([o.mode, o.ats, o.keywords], ['search', [PLATFORM], ['engineer']], JSON.stringify(ats));
   }
@@ -603,7 +769,7 @@ test('options: other-platform board URLs are dropped (with a warning), own URLs 
   const o = toScraperOptions({ companyUrls: [own, ...foreign, '[[TOKEN]]', 'https://www.example.com/careers'] });
   assert.equal(o.mode, 'live');
   assert.ok(o.boards.every((b) => b.ats === PLATFORM), JSON.stringify(o.boards));
-  assert.deepEqual(o.boards.map((b) => b.token.toLowerCase()), ['[[URL_TOKEN]]', '[[TOKEN]]'].filter((t, i, a) => a.indexOf(t) === i));
+  assert.deepEqual(o.boards.map((b) => b.token.toLowerCase()), ['[[URL_TOKEN]]', '[[TOKEN]]'.toLowerCase()].filter((t, i, a) => a.indexOf(t) === i));
   assert.deepEqual(o.otherPlatformRefs, foreign);
   assert.deepEqual(o.badRefs, ['https://www.example.com/careers', ...foreign]);
   assert.match(otherPlatformWarning(o.otherPlatformRefs), /^Ignored 3 board URL\\(s\\) of other platforms[\\s\\S]*[[NAME]] boards only[\\s\\S]*ats-jobs-scraper/);
@@ -653,7 +819,7 @@ test('live mode: own board fetched, other-platform board ignored (never requeste
   const r = await run({ companyUrls: [`${PLATFORM}:${OWN.token}`, `${OTHER}:${FIXTURES[OTHER].token}`] });
   assert.equal(r.summary.mode, 'live');
   assert.ok(r.rows.length > 0);
-  assert.ok(r.rows.every((x) => x.ats === PLATFORM && x.company_board.toLowerCase() === OWN.token));
+  assert.ok(r.rows.every((x) => x.ats === PLATFORM && x.company_board.toLowerCase() === OWN.token.toLowerCase()));
   assert.ok(r.rows.every((x) => x.description_status === 'included'));
   for (const x of r.rows) assertMatchesSchema(x);
   assert.equal(r.charges, r.rows.length);
@@ -676,7 +842,7 @@ import { OUTPUT_FIELDS } from '../src/core/feed.js';
 import { toScraperOptions, PLATFORM, PLATFORM_NAME } from '../src/scraper.js';
 
 const SLUG = '[[SLUG]]';
-const FAMILY = ['greenhouse-jobs-api', 'lever-jobs-api', 'ashby-jobs-api'];
+const FAMILY = [[FAMILY_SLUGS]];
 const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8');
 const readRepo = (p) => readFileSync(new URL(`../../../${p}`, import.meta.url), 'utf8');
 const actor = JSON.parse(read('.actor/actor.json'));
@@ -768,7 +934,7 @@ test('README: sections in order, related Actors before FAQ incl. the other per-A
 
 README_MD = """# [[TITLE]]
 
-A **[[NAME]] jobs API** and **[[NAME]] job board scraper** in one: search every open job on **[[BOARDS]] [[NAME]] company job boards** ([[EXAMPLES]]…) by keyword, location, remote, department and posting date, and get flat, deduplicated JSON: title, department, locations, country codes, remote flag, [[SALARY_PHRASE]]apply link and full description. Paste any [[NAME]] board URL ("[[URL_EXAMPLE]]") to fetch it live. **$2 per 1,000 jobs**, and you pay only for the jobs you get.
+[[INTRO]]
 
 ## Quick start
 
@@ -819,7 +985,7 @@ One flat record per job opening, from a real run:
 |---|---|
 [[URL_FORMS]]
 
-**How it works.** Without `companyUrls`, the Actor searches a compact search index of every [[NAME]] board in our directory, rebuilt daily from [[NAME]]'s public API, and downloads only the [[NAME]] parts of it for your date range. With keywords, it ranks every matching job before delivering the top `maxResults`. For each delivered job it then fetches the full description live from [[NAME]] (one API call per company), which also drops jobs closed since the nightly build (not delivered, not charged).
+[[HOW_IT_WORKS]]
 
 ## Pricing (pay per event)
 
@@ -831,13 +997,11 @@ Set a maximum charge per run in Apify, and the Actor stops cleanly when it is re
 
 ## Coverage
 
-Search-index build of [[INDEX_DATE]]: **[[JOBS]] open jobs** on **[[BOARDS]] [[NAME]] company job boards**, including [[EXAMPLES]].
-
-Boards were discovered from Common Crawl's public URL index and validated against [[NAME]]'s API. Every indexed board had at least one open job when last checked. A company that isn't indexed yet works in live mode through `companyUrls`.
+[[COVERAGE]]
 
 ## Sources and terms
 
-Only [[NAME]]'s official, public, unauthenticated [[[API_NAME]]]([[API_URL]]), which [[NAME]] publishes for displaying and syndicating open jobs: [[API_TERMS]]. No career-site HTML scraping, no logins, no LinkedIn or Indeed.
+[[SOURCES]]
 
 ## factpipe Jobs Data
 
@@ -852,10 +1016,10 @@ All of these Actors search the same daily index of open jobs from 10,000+ compan
 ## FAQ
 
 **Do I need [[A_NAME]] account or API key?**
-No. This is the public job-board API that powers each company's [[NAME]] careers page. No key, no login.
+[[KEY_ANSWER]]
 
 **How do I find a company's board token?**
-It is the last part of the careers-page URL: [[TOKEN_HINT]]. Or just type the company name in `companies`.
+[[TOKEN_ANSWER]]
 
 **How fresh is the data?**
 The index is rebuilt daily. With `includeDescription` on (the default), every delivered job is re-checked live against [[NAME]] during your run. Live mode (`companyUrls`) always reads [[NAME]] directly.
@@ -885,24 +1049,61 @@ Yes, through the Apify API, the official clients, Apify integrations (Make, Zapi
 
 ## Reliability
 
-Official [[NAME]] API only. Retries with backoff, per-host rate limits[[RATE_NOTE]], a `RUN_SUMMARY` record on every run, and a built-in live fallback if the search index is ever unreachable.
+[[RELIABILITY]]
 """
 
 FAMILY_LINK_TEXT = {
     "greenhouse": "every Greenhouse job board in one search.",
     "lever": "every Lever job board, with salary where published.",
     "ashby": "every Ashby job board: startup and AI jobs, with salary where published.",
+    "workday": "every Workday career site in our directory (large employers), or any Workday site live.",
 }
+
+
+def family_for(platform):
+    """Per-ATS Actors a README links to: the published-or-approved family plus the Actor itself (an Actor
+    whose publish is still pending, `in_family_links: False`, is linked only from its own README)."""
+    return [(p, c) for p, c in FAMILY.items() if c.get("in_family_links", True) or p == platform]
 
 
 def readme(platform, cfg):
     name = cfg["name"]
     fam = []
-    for p, c in FAMILY.items():
+    for p, c in family_for(platform):
         label = c["title"].split(" — ")[0]
         this = " (this Actor)" if p == platform else ""
         fam.append(f"- [{label}](https://apify.com/factpipe/{c['slug']}){this}: {FAMILY_LINK_TEXT[p]}")
     faq = "\n\n".join(f"**{q}**\n{a}" for q, a in cfg["faq"])
+    rate_note = " (Lever 1 request/s)" if platform == "lever" else ""
+    salary_phrase = "" if platform == "greenhouse" else "salary range (where the employer publishes one), employment type, "
+    defaults = {
+        "INTRO": (
+            f"A **{name} jobs API** and **{name} job board scraper** in one: search every open job on **{cfg['boards']:,} {name} "
+            f"company job boards** ({', '.join(cfg['examples'])}…) by keyword, location, remote, department and posting date, and "
+            f"get flat, deduplicated JSON: title, department, locations, country codes, remote flag, {salary_phrase}apply link and "
+            f"full description. Paste any {name} board URL (\"{cfg['url_examples'][0]}\") to fetch it live. **$2 per 1,000 jobs**, "
+            "and you pay only for the jobs you get."),
+        "HOW_IT_WORKS": (
+            f"**How it works.** Without `companyUrls`, the Actor searches a compact search index of every {name} board in our "
+            f"directory, rebuilt daily from {name}'s public API, and downloads only the {name} parts of it for your date range. "
+            "With keywords, it ranks every matching job before delivering the top `maxResults`. For each delivered job it then "
+            f"fetches the full description live from {name} (one API call per company), which also drops jobs closed since the "
+            "nightly build (not delivered, not charged)."),
+        "COVERAGE": (
+            f"Search-index build of {INDEX_DATE}: **{cfg['jobs']:,} open jobs** on **{cfg['boards']:,} {name} company job boards**, "
+            f"including {', '.join(cfg['examples'])}.\n\nBoards were discovered from Common Crawl's public URL index and validated "
+            f"against {name}'s API. Every indexed board had at least one open job when last checked. A company that isn't indexed "
+            "yet works in live mode through `companyUrls`."),
+        "SOURCES": (
+            f"Only {name}'s official, public, unauthenticated [{cfg['api'][0]}]({cfg['api'][1]}), which {name} publishes for "
+            f"displaying and syndicating open jobs: {cfg['api'][2]}. No career-site HTML scraping, no logins, no LinkedIn or Indeed."),
+        "KEY_ANSWER": f"No. This is the public job-board API that powers each company's {name} careers page. No key, no login.",
+        "TOKEN_ANSWER": f"It is the last part of the careers-page URL: {cfg['token_hint']}. Or just type the company name in `companies`.",
+        "RELIABILITY": (
+            f"Official {name} API only. Retries with backoff, per-host rate limits{rate_note}, a `RUN_SUMMARY` record on every "
+            "run, and a built-in live fallback if the search index is ever unreachable."),
+    }
+    blocks = {k: cfg.get(k.lower(), v) for k, v in defaults.items()}
     return render(
         README_MD,
         TITLE=cfg["title"], NAME=name, A_NAME=("an " if name[0] in "AEIOU" else "a ") + name, BOARDS=f"{cfg['boards']:,}", JOBS=f"{cfg['jobs']:,}",
@@ -914,10 +1115,8 @@ def readme(platform, cfg):
         USE_CASES="\n".join(f"- {u}" for u in cfg["use_cases"]),
         TOKEN_NAME=cfg["token_example"][0], TOKEN=cfg["token_example"][1], EMPLOYMENT_NOTE=cfg["employment_note"],
         URL_FORMS="\n".join(f"| {a} | {b} |" for a, b in cfg["url_forms"]),
-        INDEX_DATE=INDEX_DATE, API_NAME=cfg["api"][0], API_URL=cfg["api"][1], API_TERMS=cfg["api"][2],
-        FAMILY_LINKS="\n".join(fam), TOKEN_HINT=cfg["token_hint"], FAQ=faq,
-        OTHER_NAMES=join_names(others(platform)),
-        RATE_NOTE=" (Lever 1 request/s)" if platform == "lever" else "",
+        FAMILY_LINKS="\n".join(fam), FAQ=faq,
+        OTHER_NAMES=join_names(others(platform)), **blocks,
     )
 
 
@@ -936,18 +1135,21 @@ def files_for(platform, cfg):
     fixtures = {p: FIXTURES[p] for p in (platform, other)}
     fixtures_js = "{\n" + "".join(f"  {p}: {{ token: '{t}', file: '{f}' }},\n" for p, (t, f) in fixtures.items()) + "}"
     foreign_url = {"greenhouse": "https://job-boards.greenhouse.io/gitlab", "lever": "https://jobs.lever.co/shieldai",
-                   "ashby": "https://jobs.ashbyhq.com/ramp"}[other]
-    url_token = cfg["url_examples"][0].rstrip("/").rsplit("/", 1)[1].lower()
+                   "ashby": "https://jobs.ashbyhq.com/ramp", "workday": "https://workday.wd5.myworkdayjobs.com/Workday"}[other]
+    url_token = cfg.get("url_token") or cfg["url_examples"][0].rstrip("/").rsplit("/", 1)[1].lower()
     readme_keywords = {
         "greenhouse": ["Greenhouse API", "Greenhouse job board scraper", "Greenhouse jobs API"],
         "lever": ["Lever postings API", "Lever jobs scraper", "Lever jobs API"],
         "ashby": ["Ashby jobs API", "Ashby job board scraper", "Ashby posting API"],
+        "workday": ["Workday jobs API", "Workday job scraper", "myworkdayjobs.com"],
     }[platform]
     tokens = dict(
         SLUG=cfg["slug"], NAME=cfg["name"], PLATFORM=platform, OTHER=other, TOKEN=cfg["token_example"][1],
-        URL_EXAMPLE=cfg["url_examples"][0], URL_TOKEN=url_token, FOREIGN_URL=foreign_url, FIXTURES=fixtures_js,
+        URL_EXAMPLE=cfg["url_examples"][0], URL_TOKEN=url_token,
+        MSG_EXAMPLE=cfg.get("message_example", f"{cfg['url_examples'][0]} or the board token \"{cfg['token_example'][1]}\""), FOREIGN_URL=foreign_url, FIXTURES=fixtures_js,
         OTHER_NAMES=join_names(others(platform)), KEYWORDS="[" + ", ".join(json.dumps(k) for k in cfg["keywords"]).replace('"', "'") + "]",
         README_KEYWORDS="[" + ", ".join(json.dumps(k) for k in readme_keywords).replace('"', "'") + "]",
+        FAMILY_SLUGS="[" + ", ".join(f"'{c['slug']}'" for _, c in family_for(platform)) + "]",
     )
     out = {
         "package.json": jdump(package_json(cfg)),
@@ -971,10 +1173,10 @@ def files_for(platform, cfg):
 def registry_entry(cfg):
     return {
         "apify_actor_id": None,
-        "source": "factpipe jobs index (GitHub release jobs-index; public ATS job-board APIs)",
+        "source": cfg.get("registry_source", "factpipe jobs index (GitHub release jobs-index; public ATS job-board APIs)"),
         "variant": f"search index ({cfg['name']} only)",
         "status": "staging",
-        "approval": APPROVAL,
+        "approval": cfg.get("approval", APPROVAL),
         "origin": "scan",
         "incumbent_actor_id": None,
         "first_paid_run_date": None,
@@ -986,9 +1188,10 @@ def registry_entry(cfg):
                 "store_discount_tiers_usd": DISCOUNT_TIERS,
             }
         },
-        "pricing_rationale": "Per-ATS Store searches (state/ats_demand_2026-10-09.txt): dedicated per-ATS leaders "
-                             "$2-2.5/1k with 72-130 users30; multi-ATS leader $1.5/1k. Same index as ats-jobs-scraper; "
-                             "$2/1k (owner J4 brief).",
+        "pricing_rationale": cfg.get("pricing_rationale",
+                                     "Per-ATS Store searches (state/ats_demand_2026-10-09.txt): dedicated per-ATS leaders "
+                                     "$2-2.5/1k with 72-130 users30; multi-ATS leader $1.5/1k. Same index as ats-jobs-scraper; "
+                                     "$2/1k (owner J4 brief)."),
         "launched_at": None,
         "last_fix_date": None,
         "kpis": {},
@@ -1067,7 +1270,7 @@ def main(check_only=False):
         if check_only:
             stale += [f"registry.json (missing {s})" for s in added]
         else:
-            reg_path.write_text(json.dumps(registry, indent=2, ensure_ascii=True))  # file has no trailing newline
+            reg_path.write_text(json.dumps(registry, indent=2, ensure_ascii=False) + ("\n" if reg_path.read_text().endswith("\n") else ""))
             print(f"registry.json: added {', '.join(added)} (staging)")
 
     if check_only:

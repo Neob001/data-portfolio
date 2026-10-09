@@ -136,7 +136,7 @@ The index is rebuilt daily. With `includeDescription` on (the default), every de
 **Why is there no salary or employment type on Greenhouse jobs?**
 Greenhouse's public job-board API does not include pay ranges or employment types. We never extract or estimate them from free text. For pay data, [Lever Jobs API](https://apify.com/factpipe/lever-jobs-api) and [Ashby Jobs API](https://apify.com/factpipe/ashby-jobs-api) return the ranges employers publish.
 
-**What happens to Lever, Ashby, Workable or Recruitee URLs?**
+**What happens to Lever, Ashby, Workable, Recruitee or Workday URLs?**
 They are ignored with a warning in the log, and the rest of the run goes ahead. If no Greenhouse board is left, the run ends successfully with a message and nothing is charged. For several platforms in one run, use [Greenhouse, Lever & Ashby Jobs Scraper](https://apify.com/factpipe/ats-jobs-scraper).
 
 **Switching from ats-jobs-scraper or other Greenhouse scrapers?**
