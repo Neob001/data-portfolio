@@ -1,0 +1,285 @@
+{
+  "actorSpecification": 1,
+  "name": "ashby-jobs-api",
+  "title": "Ashby Jobs API — Search All Ashby Job Boards",
+  "description": "Search open jobs on 2,700+ Ashby job boards (OpenAI, Ramp, Notion, Snowflake…) by keyword, location, remote and department, or fetch any jobs.ashbyhq.com board live. Salary where published. $2 per 1,000 jobs.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "outputSchema": "./output_schema.json",
+  "categories": [
+    "JOBS",
+    "LEAD_GENERATION"
+  ],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "jobs": {
+          "title": "Ashby jobs",
+          "transformation": {
+            "fields": [
+              "title",
+              "company_name",
+              "locations",
+              "workplace_type",
+              "employment_type",
+              "salary_min",
+              "salary_max",
+              "salary_currency",
+              "posted_at",
+              "job_url",
+              "match_score"
+            ]
+          },
+          "display": {
+            "component": "table",
+            "properties": {
+              "title": {
+                "label": "Title",
+                "format": "text"
+              },
+              "company_name": {
+                "label": "Company",
+                "format": "text"
+              },
+              "locations": {
+                "label": "Locations",
+                "format": "array"
+              },
+              "workplace_type": {
+                "label": "Workplace",
+                "format": "text"
+              },
+              "employment_type": {
+                "label": "Employment",
+                "format": "text"
+              },
+              "salary_min": {
+                "label": "Salary min",
+                "format": "number"
+              },
+              "salary_max": {
+                "label": "Salary max",
+                "format": "number"
+              },
+              "salary_currency": {
+                "label": "Currency",
+                "format": "text"
+              },
+              "posted_at": {
+                "label": "Posted",
+                "format": "date"
+              },
+              "job_url": {
+                "label": "Job",
+                "format": "link"
+              },
+              "match_score": {
+                "label": "Relevance",
+                "format": "number"
+              }
+            }
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "job_id": {
+            "type": "string",
+            "description": "Stable id: ats:board:posting_id"
+          },
+          "title": {
+            "type": "string"
+          },
+          "company_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "company_board": {
+            "type": "string"
+          },
+          "ats": {
+            "type": "string",
+            "enum": [
+              "greenhouse",
+              "lever",
+              "ashby",
+              "workable",
+              "recruitee"
+            ]
+          },
+          "department": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "team": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "employment_type": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "full_time",
+              "part_time",
+              "contract",
+              "temporary",
+              "internship",
+              "other",
+              null
+            ]
+          },
+          "workplace_type": {
+            "type": "string",
+            "enum": [
+              "remote",
+              "hybrid",
+              "onsite",
+              "unknown"
+            ]
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "country_codes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "remote": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "salary_min": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "salary_max": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "salary_currency": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "salary_period": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "year",
+              "month",
+              "week",
+              "day",
+              "hour",
+              null
+            ]
+          },
+          "posted_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "apply_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "job_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "description_text": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "description_snippet": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "description_status": {
+            "type": "string",
+            "enum": [
+              "included",
+              "not_requested",
+              "unavailable"
+            ],
+            "description": "included: full text fetched live from the ATS; not_requested: includeDescription=false; unavailable: live fetch failed or the ATS has no text"
+          },
+          "duplicate_sources": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "match_score": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "Keyword relevance 0-100: every keyword in the title 100, some in the title 60-70, department/team 40-50, description only 20-30; null without keywords"
+          },
+          "matched_in": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "title",
+              "department",
+              "description",
+              null
+            ],
+            "description": "Best place a keyword matched; null without keywords"
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

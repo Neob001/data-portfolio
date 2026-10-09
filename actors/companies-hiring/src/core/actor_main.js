@@ -1,5 +1,6 @@
-// Apify entry shared by the job-feed Actors (ats-jobs-feed, remote-jobs-feed, ats-jobs-scraper).
-// Each Actor's main.js only maps its own input onto normalizeInput() options.
+// Apify entry shared by the job-feed Actors (ats-jobs-feed, remote-jobs-feed, ats-jobs-scraper, the
+// per-ATS greenhouse/lever/ashby-jobs-api). Each Actor's main.js only maps its own input onto
+// normalizeInput() options.
 import { Actor, log } from 'apify';
 import { writeRunSummary } from '../lib/run_summary.js';
 import { loadTracker } from '../lib/incremental.js';
@@ -9,8 +10,9 @@ import { runFeed, INDEX_BASE_URL } from './feed.js';
 /**
  * @param slug Actor slug (names the incremental-state store)
  * @param toOptions raw input -> normalizeInput() options (throws a readable Error on bad input)
+ * @param noBoardsMessage badRefs -> status message when live mode has no usable board left
  */
-export async function runJobsActor({ slug, toOptions = normalizeInput }) {
+export async function runJobsActor({ slug, toOptions = normalizeInput, noBoardsMessage = noSupportedBoardsMessage }) {
   await Actor.init();
   const started = Date.now();
   const input = (await Actor.getInput()) ?? {};
@@ -27,7 +29,7 @@ export async function runJobsActor({ slug, toOptions = normalizeInput }) {
   // Only unsupported URLs (e.g. a company's own careers page): explain instead of failing the run.
   if (opts.mode === 'live' && opts.boards.length === 0) {
     await writeRunSummary(Actor, { rows: 0, errors: opts.badRefs.length, failure_class: 'input_error', duration_ms: Date.now() - started });
-    await Actor.exit({ statusMessage: noSupportedBoardsMessage(opts.badRefs) });
+    await Actor.exit({ statusMessage: noBoardsMessage(opts.badRefs) });
     return;
   }
 
