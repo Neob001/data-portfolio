@@ -1356,7 +1356,7 @@
       ]
     },
     "greenhouse-jobs-api": {
-      "apify_actor_id": null,
+      "apify_actor_id": "LBYabmq0lPOUi2DAf",
       "source": "factpipe jobs index (GitHub release jobs-index; public ATS job-board APIs)",
       "variant": "search index (Greenhouse only)",
       "status": "staging",
@@ -1391,11 +1391,12 @@
           "LEAD_GENERATION"
         ]
       },
-      "staging_validated": false,
-      "monetization_configured": false
+      "staging_validated": true,
+      "monetization_configured": false,
+      "staging_started_at": "2026-10-09T05:46:41Z"
     },
     "lever-jobs-api": {
-      "apify_actor_id": null,
+      "apify_actor_id": "Q07qMol0f2Qn0g1K4",
       "source": "factpipe jobs index (GitHub release jobs-index; public ATS job-board APIs)",
       "variant": "search index (Lever only)",
       "status": "staging",
@@ -1430,11 +1431,12 @@
           "LEAD_GENERATION"
         ]
       },
-      "staging_validated": false,
-      "monetization_configured": false
+      "staging_validated": true,
+      "monetization_configured": false,
+      "staging_started_at": "2026-10-09T05:46:44Z"
     },
     "ashby-jobs-api": {
-      "apify_actor_id": null,
+      "apify_actor_id": "cqUW0nVKTjRpsirTY",
       "source": "factpipe jobs index (GitHub release jobs-index; public ATS job-board APIs)",
       "variant": "search index (Ashby only)",
       "status": "staging",
@@ -1469,8 +1471,9 @@
           "LEAD_GENERATION"
         ]
       },
-      "staging_validated": false,
-      "monetization_configured": false
+      "staging_validated": true,
+      "monetization_configured": false,
+      "staging_started_at": "2026-10-09T05:46:48Z"
     }
   },
   "apify_account": "factpipe",
