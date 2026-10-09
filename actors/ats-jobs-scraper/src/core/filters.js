@@ -93,6 +93,8 @@ export function companyMatches(term, job) {
   const ref = parseBoardRef(term);
   if (ref && /[:/.]/.test(term)) return ref.ats === job.ats && lc(ref.token) === lc(job.company_board);
   if (t === lc(job.company_board)) return true;
+  // Workday: "nvidia" / "Capital One" also name the tenant of "<tenant>.<wdN>/<site>".
+  if (job.ats === 'workday' && normKey(term).replace(/ /g, '') === lc(job.company_board).split('.')[0]) return true;
   const ck = companyKey(term);
   const jk = companyKey(job.company_name);
   if (!ck || !jk) return false;

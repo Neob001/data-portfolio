@@ -155,7 +155,7 @@ Yes. EU boards are in the index like any other, and in live mode `https://jobs.e
 **Why is a Lever run with full descriptions slower?**
 Lever's API asks crawlers for one request per second, and we respect that. Full descriptions need one request per company, so 20 jobs from 7 companies add about 7 seconds. Set `includeDescription: false` if the 300-character snippet is enough.
 
-**What happens to Greenhouse, Ashby, Workable or Recruitee URLs?**
+**What happens to Greenhouse, Ashby, Workable, Recruitee or Workday URLs?**
 They are ignored with a warning in the log, and the rest of the run goes ahead. If no Lever board is left, the run ends successfully with a message and nothing is charged. For several platforms in one run, use [Greenhouse, Lever & Ashby Jobs Scraper](https://apify.com/factpipe/ats-jobs-scraper).
 
 **Switching from ats-jobs-scraper or other Lever scrapers?**

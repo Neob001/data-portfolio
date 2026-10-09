@@ -7,7 +7,7 @@ import { pathToFileURL } from 'node:url';
 import { normalizeCompaniesInput, runCompanies, careersSiteDomain, mergeKey, jobKey, clusterBoards, normToken, CrossBoardCounter, OUTPUT_FIELDS, MAX_TITLES } from '../src/companies.js';
 import { IndexWriter } from '../src/core/index_writer.js';
 import { fetchBoard } from '../src/core/feed.js';
-import { fakeNetwork, sink, NOW, buildIndex, assertMatchesSchema, FIXTURE_BOARDS, load } from './helpers.mjs';
+import { fakeNetwork, sink, NOW, buildIndex, assertMatchesSchema, FIXTURE_BOARDS, WORKDAY_BOARD, load } from './helpers.mjs';
 
 const DAY = 86400000;
 // Acme (greenhouse:acme): 14 open jobs, 12 in sales, links on its own careers site.
@@ -331,4 +331,20 @@ test('EU Lever board + same-name Ashby board: one row, one entry per board, EU c
   } finally {
     await rm(dir, { recursive: true, force: true });
   }
+});
+
+test('Workday: a Workday site in the live fallback becomes a schema-valid company row with its career-site URL', async () => {
+  const net = fakeNetwork();
+  const out = sink({ event: 'company-result' });
+  const summary = await runCompanies(normalizeCompaniesInput({}), {
+    ...out, indexBaseUrl: pathToFileURL(join(tmpdir(), 'no-such-index')).href, fallbackBoards: [WORKDAY_BOARD],
+    fetchJson: net.fetchJson, fetchText: net.fetchText, now: () => NOW, hostGaps: {},
+  });
+  assert.equal(summary.used_fallback, true);
+  assert.equal(out.rows.length, 1);
+  const row = out.rows[0];
+  assertMatchesSchema(row);
+  assert.equal(row.ats, 'workday');
+  assert.equal(row.company_name, 'Workday');
+  assert.equal(row.careers_url, 'https://workday.wd5.myworkdayjobs.com/Workday');
 });

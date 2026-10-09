@@ -10,7 +10,7 @@ import { parseBoardRef } from './core/transform.js';
 
 export const PLATFORM = 'greenhouse';
 export const PLATFORM_NAME = 'Greenhouse';
-const OTHER_NAMES = 'Lever, Ashby, Workable or Recruitee';
+const OTHER_NAMES = 'Lever, Ashby, Workable, Recruitee or Workday';
 const BARE_TOKEN = /^[A-Za-z0-9][A-Za-z0-9_.%-]*$/;
 
 const strList = (v) => (Array.isArray(v) ? v : typeof v === 'string' && v.trim() ? v.split(',') : [])

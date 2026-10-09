@@ -100,3 +100,15 @@ test('search over a local index: remote jobs only, ranked, schema-valid, one job
     await rm(dir, { recursive: true, force: true });
   }
 });
+
+test('Workday: remote jobs of a live Workday site come through the remote filter and fit the dataset schema', async () => {
+  const out = sink();
+  const net = fakeNetwork();
+  const summary = await runFeed(toFeedOptions({ companyUrls: ['workday:workday.wd5/Workday'], postedWithinDays: 60 }), {
+    ...out, now: () => NOW, hostGaps: {}, fetchJson: net.fetchJson, fetchText: net.fetchText, robotsCache: new Map(),
+  });
+  assert.equal(summary.mode, 'live');
+  assert.ok(out.rows.length >= 2, `${out.rows.length} rows`);
+  assert.ok(out.rows.every((r) => r.ats === 'workday' && (r.remote === true || r.workplace_type === 'remote')));
+  for (const r of out.rows) assertMatchesSchema(r);
+});

@@ -39,7 +39,7 @@ test('src/lib is the synced shared copy; src/core is the synced ats-jobs-feed co
 
 test('input schema: ats first, prefill and defaults are accepted', () => {
   assert.equal(Object.keys(schema.properties)[0], 'ats');
-  assert.deepEqual(schema.properties.ats.items.enum, ['greenhouse', 'lever', 'ashby', 'workable', 'recruitee']);
+  assert.deepEqual(schema.properties.ats.items.enum, ['greenhouse', 'lever', 'ashby', 'workable', 'recruitee', 'workday']);
   const prefill = Object.fromEntries(Object.entries(schema.properties).filter(([, p]) => 'prefill' in p).map(([k, p]) => [k, p.prefill]));
   assert.deepEqual(prefill, { ats: ['greenhouse'], keywords: ['product'], maxResults: 20, maxPerCompany: 3 });
   const o = toScraperOptions(prefill);

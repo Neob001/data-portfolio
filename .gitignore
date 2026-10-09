@@ -8,3 +8,4 @@ state/issues_for_model.json
 state/pricing_proposals.json
 __pycache__/
 *.pyc
+.claude/

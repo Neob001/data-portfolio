@@ -156,6 +156,7 @@ Only official, public, unauthenticated job-board APIs that the ATS vendors publi
 | Ashby | [Public Job Posting API](https://developers.ashbyhq.com/docs/public-job-posting-api) | Public, unauthenticated posting API |
 | Workable | [Public jobs endpoint](https://help.workable.com/hc/en-us/articles/115012771647) | Documented public endpoint for published jobs |
 | Recruitee | [Careers Site API](https://docs.recruitee.com/reference/offers) | Public API returning published offers |
+| Workday | Public career sites (`<company>.<wdN>.myworkdayjobs.com/<site>`) | Not a vendor-documented API: the job list and job pages each site loads for its visitors. Each host's robots.txt is checked first (career sites allow `/<site>/`); about 4 requests/s across all Workday hosts |
 
 ## factpipe Jobs & Hiring Data
 
