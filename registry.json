@@ -1500,7 +1500,7 @@
       ]
     },
     "workday-jobs-api": {
-      "apify_actor_id": null,
+      "apify_actor_id": "vCQuwilQtm4f1D9NL",
       "source": "Workday public career sites (*.myworkdayjobs.com job lists + job pages via the CXS JSON they load; robots.txt checked per host) through the factpipe jobs index, plus live reads",
       "variant": "search index (Workday only)",
       "status": "staging",
@@ -1535,8 +1535,9 @@
           "LEAD_GENERATION"
         ]
       },
-      "staging_validated": false,
-      "monetization_configured": false
+      "staging_validated": true,
+      "monetization_configured": false,
+      "staging_started_at": "2026-10-09T13:37:21Z"
     }
   },
   "apify_account": "factpipe",
