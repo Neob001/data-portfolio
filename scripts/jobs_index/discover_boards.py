@@ -49,6 +49,10 @@ HOSTS = [
     ('ashby', 'jobs.ashbyhq.com/*', 'com,ashbyhq,jobs)/', 'path', None),
     ('workable', 'apply.workable.com/*', 'com,workable,apply)/', 'path', None),
     ('recruitee', '*.recruitee.com', 'com,recruitee,', 'subdomain', None),
+    # Workday career sites: <tenant>.<wdN>.myworkdayjobs.com/[<locale>/]<site>/... and the alternative
+    # host form <wdN>.myworkdaysite.com/[<locale>/]recruiting/<tenant>/<site>/... Token: "<tenant>.<wdN>/<site>".
+    ('workday', '*.myworkdayjobs.com', 'com,myworkdayjobs,', 'workday', None),
+    ('workday', '*.myworkdaysite.com', 'com,myworkdaysite,', 'workday_site', None),
 ]
 
 RESERVED = {
@@ -60,7 +64,38 @@ RESERVED = {
                  'oauth', 'login', 'signup', 'workable', 'backend', 'recaptcha'},
     'recruitee': {'www', 'app', 'api', 'blog', 'support', 'help', 'careers', 'cdn', 's', 'status', 'docs',
                   'partners', 'marketplace', 'static', 'assets', 'mail', 'go', 'demo', 'staging', 'test'},
+    # First path segments of a Workday host that are not career sites (lowercased).
+    'workday': {'wday', 'robots.txt', 'favicon.ico', 'refreshfacet', 'sitemap.xml', 'assets', 'static', 'api',
+                'talentcommunity', 'recruiting', 'job', 'jobs.xml', 'login', 'apply', 'cxs'},
 }
+WORKDAY_HOST_RX = re.compile(r'^([a-z0-9][a-z0-9-]*)\.(wd\d{1,3})\.myworkdayjobs\.com$')
+WORKDAY_SITE_HOST_RX = re.compile(r'^(wd\d{1,3})\.myworkdaysite\.com$')
+LOCALE_RX = re.compile(r'^[a-z]{2}(?:-[a-z]{2,4})?$', re.I)
+SITE_RX = re.compile(r'^[A-Za-z0-9][A-Za-z0-9_.-]{0,99}$')
+
+
+def workday_token(host, segs):
+    """(lowercase host, path segments) -> "<tenant>.<wdN>/<site>" or None (job pages map to their site)."""
+    if segs and LOCALE_RX.match(segs[0]) and len(segs) > 1:
+        segs = segs[1:]
+    m = WORKDAY_HOST_RX.match(host)
+    if m:
+        tenant, wd = m.groups()
+    else:
+        m = WORKDAY_SITE_HOST_RX.match(host)
+        if not m or len(segs) < 3 or segs[0].lower() != 'recruiting':
+            return None
+        wd, tenant, segs = m.group(1), segs[1].lower(), segs[2:]
+        if not re.fullmatch(r'[a-z0-9][a-z0-9-]*', tenant):
+            return None
+    if not segs:
+        return None
+    site = urllib.parse.unquote(segs[0])
+    if (site.lower() in RESERVED['workday'] or not SITE_RX.match(site) or LOCALE_RX.match(site)
+            or re.search(r'\.(txt|xml|json|html?|ico|png|jpe?g|svg|js|css)$', site, re.I)):  # llms.txt, siteMap.xml
+        return None
+    return f'{tenant}.{wd}/{site}'
+
 TOKEN_RX = re.compile(r'^[A-Za-z0-9][A-Za-z0-9_.\- ]{0,99}$')
 
 
@@ -97,6 +132,8 @@ def extract_token(ats, kind, url):
         p = urllib.parse.urlsplit(url if '://' in url else 'https://' + url)
     except ValueError:
         return None
+    if kind in ('workday', 'workday_site'):
+        return workday_token((p.hostname or '').lower(), [s for s in p.path.split('/') if s])
     if kind == 'subdomain':
         host = (p.hostname or '').lower()
         parts = host.split('.')
@@ -123,6 +160,15 @@ def extract_token(ats, kind, url):
 def surt_token(surt_key, prefix, kind):
     """Token portion of a SURT key (lowercased) - used only to decide which blocks to fetch."""
     rest = surt_key[len(prefix):]
+    if kind in ('workday', 'workday_site'):
+        # "wd5,nvidia)/en-us/nvidiaexternalcareersite/job/..." -> "wd5,nvidia)/nvidiaexternalcareersite"
+        host, _, path = rest.partition(')')
+        segs = [x for x in path.split('?', 1)[0].split('/') if x]
+        if segs and LOCALE_RX.match(segs[0]) and len(segs) > 1:
+            segs = segs[1:]
+        if kind == 'workday_site':
+            segs = segs[:3]  # recruiting/<tenant>/<site>
+        return host + ')/' + '/'.join(segs[:1] if kind == 'workday' else segs)
     if kind == 'subdomain':
         return rest.split(')', 1)[0].split(',', 1)[0]
     return rest.split('/', 1)[0].split('?', 1)[0]
@@ -205,8 +251,19 @@ class RemoteLines:
             yield buf
 
 
-def zipnum(crawl, prefix, ats, kind):
-    idx = RemoteLines(f'{DATA}/cc-index/collections/{crawl}/indexes/cluster.idx')
+def token_surt(kind, tok):
+    """Board token -> its surt_token() form, to tell which tokens a block scan has already seen."""
+    if kind in ('workday', 'workday_site'):
+        tenant_wd, _, site = tok.partition('/')
+        tenant, _, wd = tenant_wd.partition('.')
+        return (f'{wd},{tenant})/{site}' if kind == 'workday' else f'{wd})/recruiting/{tenant}/{site}').lower()
+    return tok.lower()
+
+
+def zipnum(crawl, prefix, ats, kind, max_blocks=None, progress_path=None):
+    """-> (tokens, complete). With max_blocks, reads at most that many CDX blocks per call and keeps its
+    place in progress_path, so a large host (Workday) is discovered over several runs."""
+    idx =RemoteLines(f'{DATA}/cc-index/collections/{crawl}/indexes/cluster.idx')
     start = idx.lower_bound(prefix)
     blocks = []  # (first_key, file, offset, length)
     for line in idx.iter_from(start):
@@ -227,8 +284,14 @@ def zipnum(crawl, prefix, ats, kind):
             skipped.append((surt_token(key, prefix, kind), (fn, off, ln)))  # one token only
             continue
         want.append((fn, off, ln))
-    log(f'  zipnum: {len(blocks)} blocks in range, fetching {len(want)}')
-    tokens = set()
+    prog = {'done_blocks': 0, 'tokens': []}
+    if progress_path and os.path.exists(progress_path):
+        with open(progress_path) as f:
+            prog.update(json.load(f))
+    first = min(prog['done_blocks'], len(want))
+    last = len(want) if not max_blocks else min(len(want), first + max_blocks)
+    log(f'  zipnum: {len(blocks)} blocks in range, {len(want)} with token boundaries; reading {first}..{last}')
+    tokens = set(prog['tokens'])
 
     def read_block(fn, off, ln):
         raw = http_get(f'{DATA}/cc-index/collections/{crawl}/indexes/{fn}', (off, off + ln - 1))
@@ -245,18 +308,26 @@ def zipnum(crawl, prefix, ats, kind):
                 tokens.add(tok)
         time.sleep(0.3)
 
-    for n, blk in enumerate(want):
-        read_block(*blk)
+    t_start = time.time()
+    for n in range(first, last):
+        read_block(*want[n])
         if n % 25 == 24:
-            log(f'    {n + 1}/{len(want)} blocks, {len(tokens)} tokens')
+            log(f'    {n + 1}/{len(want)} blocks, {len(tokens)} tokens, {time.time() - t_start:.0f}s')
+    if last < len(want):
+        with open(progress_path, 'w') as f:
+            json.dump({'done_blocks': last, 'want_blocks': len(want), 'tokens': sorted(tokens),
+                       'seconds': round(time.time() - t_start + prog.get('seconds', 0), 1)}, f)
+        return tokens, False
     # A token that fills whole blocks and starts exactly on a block boundary is not in any fetched
     # block; read one of its blocks to recover the original-case spelling.
-    seen_lower, done = {t.lower() for t in tokens}, set()
+    seen, done = {token_surt(kind, t) for t in tokens}, set()
     for tok, blk in skipped:
-        if tok not in seen_lower and tok not in done:
+        if tok not in seen and tok not in done:
             done.add(tok)
             read_block(*blk)
-    return tokens
+    if progress_path and os.path.exists(progress_path):
+        os.remove(progress_path)
+    return tokens, True
 
 
 def latest_crawls(n):
@@ -270,6 +341,9 @@ def main():
     ap.add_argument('--crawl-ids', default='', help='comma list, overrides --crawls')
     ap.add_argument('--mode', choices=['auto', 'api', 'zipnum'], default='auto')
     ap.add_argument('--ats', default='', help='comma list to restrict')
+    ap.add_argument('--max-blocks', type=int, default=0,
+                    help='zipnum: read at most N CDX blocks per (crawl, host) this run and resume there next run '
+                         '(0 = all). Bounds nightly discovery of the large Workday hosts.')
     ap.add_argument('--walk-back', type=int, default=12,
                     help='for a host with 0 tokens in the chosen crawls, try up to N older crawls until one has pages '
                          '(recent crawls only fetched robots.txt on jobs.lever.co)')
@@ -280,7 +354,7 @@ def main():
     t0 = time.time()
     units = [(crawl, h) for crawl in crawls for h in HOSTS if not only or h[0] in only]
     for crawl, host in units:
-        run_unit(crawl, host, args.mode)
+        run_unit(crawl, host, args.mode, args.max_blocks or None)
     if args.walk_back:
         older = [c for c in latest_crawls(len(crawls) + args.walk_back) if c not in crawls]
         for host in HOSTS:
@@ -290,7 +364,7 @@ def main():
                 continue
             for crawl in older:
                 log(f'{host[1]}: no board pages in {",".join(crawls)} - walking back to {crawl}')
-                if run_unit(crawl, host, args.mode):
+                if run_unit(crawl, host, args.mode, args.max_blocks or None):
                     break
     merge(t0)
 
@@ -302,18 +376,23 @@ def unit_path(crawl, pattern):
 def unit_tokens(crawl, host):
     ck = unit_path(crawl, host[1])
     if not os.path.exists(ck):
-        return 0
+        ck = ck[:-len('.json')] + '.progress'  # partial bounded scan
+        if not os.path.exists(ck):
+            return 0
     with open(ck) as f:
         return len(json.load(f)['tokens'])
 
 
-def run_unit(crawl, host, mode):
-    """Discover one (crawl, host) unit unless checkpointed; returns its token count."""
+def run_unit(crawl, host, mode, max_blocks=None):
+    """Discover one (crawl, host) unit unless checkpointed; returns its token count (so far)."""
     ats, pattern, prefix, kind, region = host
     ck = unit_path(crawl, pattern)
     if not os.path.exists(ck):
         log(f'{crawl} {pattern}')
         tokens, how = None, None
+        progress = ck[:-len('.json')] + '.progress'
+        if max_blocks or os.path.exists(progress):
+            mode = 'zipnum'  # bounded / resumed scans need the block list
         if mode in ('auto', 'api'):
             try:
                 tokens, how = cdx_api(crawl, pattern, ats, kind), 'cdx_api'
@@ -322,7 +401,10 @@ def run_unit(crawl, host, mode):
                 if mode == 'api':
                     return 0
         if tokens is None:
-            tokens, how = zipnum(crawl, prefix, ats, kind), 'zipnum'
+            (tokens, complete), how = zipnum(crawl, prefix, ats, kind, max_blocks, progress), 'zipnum'
+            if not complete:
+                log(f'  -> {len(tokens)} tokens so far (partial; the next run resumes this unit)')
+                return len(tokens)
         with open(ck, 'w') as f:
             json.dump({'crawl': crawl, 'pattern': pattern, 'ats': ats, 'region': region, 'via': how,
                        'tokens': sorted(tokens)}, f)
@@ -333,12 +415,18 @@ def run_unit(crawl, host, mode):
 def merge(t0):
     # Merge every checkpoint into candidates.json (case-insensitive dedupe, first spelling wins).
     merged = {}
+    by_pattern = {re.sub(r'[^a-z0-9]+', '_', h[1]): h for h in HOSTS}
     for fn in sorted(os.listdir(STATE)):
-        if not fn.endswith('.json'):
+        if not fn.endswith(('.json', '.progress')):
             continue
         with open(os.path.join(STATE, fn)) as f:
             d = json.load(f)
-        key = d['ats'] + (':' + d['region'] if d.get('region') else '')
+        if fn.endswith('.progress'):  # partial (bounded) scan: its tokens so far are candidates too
+            host = by_pattern.get(fn[:-len('.progress')].split('__', 1)[-1])
+            if not host:
+                continue
+            d = {'ats': host[0], 'region': host[4], 'tokens': d['tokens']}
+        key =d['ats'] + (':' + d['region'] if d.get('region') else '')
         bucket = merged.setdefault(key, {})
         for t in d['tokens']:
             bucket.setdefault(t.lower(), t)
