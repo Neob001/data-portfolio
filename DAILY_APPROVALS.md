@@ -46,3 +46,6 @@ Replies are NEVER posted without a tick. Standing decision 2026-09-12.
 ## 2026-10-09
 (no drafts today. demand_monitor: 2 raw hits, 0 passed the filters: JuliDikova/SemMan4Cat#1 asks about a prefix-map endpoint of one academic semantic-web project (not a public data demand our Actors or a <=6h build can serve), and Dans-Plugins/SimpleSkills#199 is a "Post to SpigotMC" release chore. Both marked filtered. No DC proposals. The Apify forum still returns non-JSON. No owner ticks pending.)
 (re-run 18:06: demand_monitor: 0 new hits, 0 open signals; Apify forum still returns non-JSON. No owner ticks pending.)
+
+## 2026-10-10
+(no drafts today. demand_monitor: 3 raw hits, 0 passed the filters: all 3 are Dans-Plugins "Post X to SpigotMC" release chores matched on keywords only. All marked filtered. No DC proposals. The Apify forum still returns non-JSON. No owner ticks pending.)
