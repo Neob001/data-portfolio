@@ -108,7 +108,7 @@ Set a maximum charge per run in Apify, and the Actor stops cleanly when it is re
 
 ## Coverage
 
-Search-index build of 2026-09-25: **85,567 remote jobs** from **6,047 companies**, of 345,976 open jobs on 10,918 company job boards. 8,666 of those remote jobs were posted in the 7 days before the build.
+Search-index build of 2026-09-25: **85,567 remote jobs** from **6,047 companies**, of 730,000+ open jobs on 15,000+ company job boards. 8,666 of those remote jobs were posted in the 7 days before the build.
 
 | ATS | Remote jobs in index |
 |---|---|
@@ -135,7 +135,7 @@ Only official, public, unauthenticated job-board APIs that the ATS vendors publi
 
 ## factpipe Jobs & Hiring Data
 
-These Actors search the same daily index of 345,976 open jobs from 10,918 company job boards:
+These Actors search the same daily index of 730,000+ open jobs from 15,000+ company job boards:
 
 - [Jobs Feed API](https://apify.com/factpipe/ats-jobs-feed): every job, every filter, ranked by relevance.
 - [Remote Jobs API](https://apify.com/factpipe/remote-jobs-feed) (this Actor): remote and work-from-home jobs only, filtered by region or time zone.
@@ -144,6 +144,7 @@ These Actors search the same daily index of 345,976 open jobs from 10,918 compan
 - [Greenhouse Jobs API](https://apify.com/factpipe/greenhouse-jobs-api): every Greenhouse job board in one search.
 - [Lever Jobs API](https://apify.com/factpipe/lever-jobs-api): every Lever job board, with salary where published.
 - [Ashby Jobs API](https://apify.com/factpipe/ashby-jobs-api): every Ashby job board: startup and AI jobs, with salary where published.
+- [Workday Jobs API](https://apify.com/factpipe/workday-jobs-api): thousands of Workday career sites of large employers (NVIDIA, Salesforce, Adobe…), with full descriptions.
 
 ## FAQ
 

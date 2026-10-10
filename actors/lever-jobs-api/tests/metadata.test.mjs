@@ -6,7 +6,7 @@ import { OUTPUT_FIELDS } from '../src/core/feed.js';
 import { toScraperOptions, PLATFORM, PLATFORM_NAME } from '../src/scraper.js';
 
 const SLUG = 'lever-jobs-api';
-const FAMILY = ['greenhouse-jobs-api', 'lever-jobs-api', 'ashby-jobs-api'];
+const FAMILY = ['greenhouse-jobs-api', 'lever-jobs-api', 'ashby-jobs-api', 'workday-jobs-api'];
 const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8');
 const readRepo = (p) => readFileSync(new URL(`../../../${p}`, import.meta.url), 'utf8');
 const actor = JSON.parse(read('.actor/actor.json'));

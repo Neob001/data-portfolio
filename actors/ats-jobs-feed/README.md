@@ -129,16 +129,19 @@ Example: 10,000 jobs cost **$30**. Set a maximum charge per run in Apify, and th
 
 ## Coverage
 
-Search-index build of 2026-09-25:
+Search-index build of 2026-10-10:
 
 | ATS | Jobs in index |
 |---|---|
-| Greenhouse | 149,646 |
-| Workable | 78,318 |
-| Ashby | 54,511 |
-| Lever | 50,718 |
-| Recruitee | 12,783 |
-| **Total** | **345,976** from **10,918** company job boards (after collapsing 11,288 duplicate listings) |
+| Workday | 385,425 |
+| Greenhouse | 148,443 |
+| Workable | 79,741 |
+| Ashby | 54,458 |
+| Lever | 51,038 |
+| Recruitee | 12,819 |
+| **Total** | **731,924** from **15,339** company job boards (after collapsing 53,189 duplicate listings) |
+
+Workday sites contribute their newest 300 jobs each to the index; read a Workday site live (`companyUrls`) for all of its jobs.
 
 About 15% of indexed jobs carry a structured salary range.
 
@@ -161,7 +164,7 @@ SmartRecruiters is deliberately **not** included, because its API host's robots.
 
 ## factpipe Jobs & Hiring Data
 
-These Actors search the same daily index of 345,976 open jobs from 10,918 company job boards:
+These Actors search the same daily index of 730,000+ open jobs from 15,000+ company job boards:
 
 - [Jobs Feed API](https://apify.com/factpipe/ats-jobs-feed) (this Actor): every job, every filter, ranked by relevance.
 - [Remote Jobs API](https://apify.com/factpipe/remote-jobs-feed): remote and work-from-home jobs only, filtered by region or time zone.
@@ -170,6 +173,7 @@ These Actors search the same daily index of 345,976 open jobs from 10,918 compan
 - [Greenhouse Jobs API](https://apify.com/factpipe/greenhouse-jobs-api): every Greenhouse job board in one search.
 - [Lever Jobs API](https://apify.com/factpipe/lever-jobs-api): every Lever job board, with salary where published.
 - [Ashby Jobs API](https://apify.com/factpipe/ashby-jobs-api): every Ashby job board: startup and AI jobs, with salary where published.
+- [Workday Jobs API](https://apify.com/factpipe/workday-jobs-api): thousands of Workday career sites of large employers (NVIDIA, Salesforce, Adobe…), with full descriptions.
 
 ## FAQ
 
@@ -183,7 +187,7 @@ The search index is rebuilt daily. With `includeDescription` on (the default), e
 It covers the title, department, team and the first ~1,500 characters of each description, which is usually the role summary and the first requirements. Words that appear in most of one company's postings (its "About us" boilerplate) are matched per company. Use `keywordScope: "title"` for strict title searches.
 
 **Which companies are covered?**
-About 10,900 company job boards with open jobs on Greenhouse, Lever, Ashby, Workable and Recruitee (see Coverage). They were discovered from Common Crawl's public URL index and each was validated against its ATS API. Use `companies` to restrict the search, or `companyUrls` for any board that isn't indexed.
+About 15,000 company job boards with open jobs on Greenhouse, Lever, Ashby, Workable and Recruitee (see Coverage). They were discovered from Common Crawl's public URL index and each was validated against its ATS API. Use `companies` to restrict the search, or `companyUrls` for any board that isn't indexed.
 
 **Why do some jobs have no salary?**
 Only some employers publish structured pay ranges, mostly on Ashby, Lever and Recruitee. We never extract or estimate salaries from free text.

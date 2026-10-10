@@ -2,7 +2,7 @@
 
 <!-- factpipe:hero:start -->
 
-**Find companies hiring for any role across 10,000+ company job boards (Greenhouse, Lever, Ashby, Workable, Recruitee): one row per company with open roles, hiring velocity and locations. $5 per 1,000 companies.**
+**Find companies hiring for any role across 15,000+ company job boards (Greenhouse, Lever, Ashby, Workable, Recruitee): one row per company with open roles, hiring velocity and locations. $5 per 1,000 companies.**
 
 | Company | Matching jobs | Open jobs | Posted 30d | Velocity |
 |---|---|---|---|---|
@@ -16,7 +16,7 @@
 
 <!-- factpipe:hero:end -->
 
-Find **companies that are hiring for a role right now**, as one row per company: how many matching jobs they have open, which titles, departments and locations, how fast they are posting, and a link to their careers page. The data comes from 10,900+ company job boards on Greenhouse, Lever, Ashby, Workable and Recruitee, read through their official public APIs and refreshed daily. Use it for **sales prospecting** (a company hiring 12 account executives is buying sales tools), **recruiting agencies** (who needs people like your candidates) and **market research** ("who is hiring AI engineers?"). **$5 per 1,000 companies**, and you pay only for the company rows you get.
+Find **companies that are hiring for a role right now**, as one row per company: how many matching jobs they have open, which titles, departments and locations, how fast they are posting, and a link to their careers page. The data comes from 15,000+ company job boards on Greenhouse, Lever, Ashby, Workable and Recruitee, read through their official public APIs and refreshed daily. Use it for **sales prospecting** (a company hiring 12 account executives is buying sales tools), **recruiting agencies** (who needs people like your candidates) and **market research** ("who is hiring AI engineers?"). **$5 per 1,000 companies**, and you pay only for the company rows you get.
 
 ## Quick start
 
@@ -131,7 +131,7 @@ Set a maximum charge per run in Apify, and the Actor stops cleanly when it is re
 
 ## Coverage
 
-Search-index build of 2026-09-25: **10,918 company job boards** with **345,976 open jobs**.
+Search-index build of 2026-09-25: **15,000+ company job boards** with **730,000+ open jobs**.
 
 | ATS | Company boards | Open jobs |
 |---|---|---|
@@ -141,7 +141,7 @@ Search-index build of 2026-09-25: **10,918 company job boards** with **345,976 o
 | Lever | 1,604 | 50,718 |
 | Recruitee | 756 | 12,783 |
 
-`careers_site_domain` is known for about 5% of companies: those whose job links point to their own careers site, mostly on Greenhouse and Recruitee. For the rest it is `null`, and `careers_url` is the company's job board. The 10,918 boards make 10,865 company rows: 53 companies have two boards each (106 boards).
+`careers_site_domain` is known for about 5% of companies: those whose job links point to their own careers site, mostly on Greenhouse and Recruitee. For the rest it is `null`, and `careers_url` is the company's job board. Most companies have one board; the few with two boards (e.g. a main and a regional board) are merged into one row.
 
 **When are two boards one company?** They must have the same company name, ignoring case, punctuation and legal suffixes such as Inc, Ltd or GmbH. They must also have either the same board token (`wayve` on Greenhouse and on Ashby; `lago-1` and `lago`) or provably the same openings: at least 3 shared jobs, or at least 30% of the smaller board's jobs. A shared name alone is not enough. We would rather list a company twice than merge two different companies: "Zip" (procurement software) and "Zip Co" (payments), or "Parallel" and "Parallel Learning", stay separate rows. Similar-looking names can therefore appear more than once, and `boards` shows which job board each row covers. Boards were discovered from Common Crawl's public URL index and validated against each ATS API.
 
@@ -160,7 +160,7 @@ Only official, public, unauthenticated job-board APIs that the ATS vendors publi
 
 ## factpipe Jobs & Hiring Data
 
-These Actors search the same daily index of 345,976 open jobs from 10,918 company job boards:
+These Actors search the same daily index of 730,000+ open jobs from 15,000+ company job boards:
 
 - [Jobs Feed API](https://apify.com/factpipe/ats-jobs-feed): every job, every filter, ranked by relevance.
 - [Remote Jobs API](https://apify.com/factpipe/remote-jobs-feed): remote and work-from-home jobs only, filtered by region or time zone.
@@ -169,6 +169,7 @@ These Actors search the same daily index of 345,976 open jobs from 10,918 compan
 - [Greenhouse Jobs API](https://apify.com/factpipe/greenhouse-jobs-api): every Greenhouse job board in one search.
 - [Lever Jobs API](https://apify.com/factpipe/lever-jobs-api): every Lever job board, with salary where published.
 - [Ashby Jobs API](https://apify.com/factpipe/ashby-jobs-api): every Ashby job board: startup and AI jobs, with salary where published.
+- [Workday Jobs API](https://apify.com/factpipe/workday-jobs-api): thousands of Workday career sites of large employers (NVIDIA, Salesforce, Adobe…), with full descriptions.
 
 ## FAQ
 

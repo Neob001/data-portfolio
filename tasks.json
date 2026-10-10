@@ -722,6 +722,32 @@
         "maxResults": 50,
         "maxPerCompany": 3
       }
+    },
+    {
+      "actor": "workday-jobs-api",
+      "name": "workday-software-engineer-jobs",
+      "title": "Software engineer jobs on Workday career sites",
+      "description": "Newest software engineer openings across thousands of Workday career sites (NVIDIA, Salesforce, Adobe…), max 3 per company, with full descriptions.",
+      "input": {
+        "keywords": [
+          "software engineer"
+        ],
+        "postedWithinDays": 7,
+        "maxResults": 50,
+        "maxPerCompany": 3
+      }
+    },
+    {
+      "actor": "workday-jobs-api",
+      "name": "workday-remote-jobs",
+      "title": "Remote jobs on Workday career sites (last 7 days)",
+      "description": "Remote-only roles posted in the last week on Workday career sites of large employers, one flat row per job.",
+      "input": {
+        "remote": "remote_only",
+        "postedWithinDays": 7,
+        "maxResults": 50,
+        "maxPerCompany": 2
+      }
     }
   ]
 }

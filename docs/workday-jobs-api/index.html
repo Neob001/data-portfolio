@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Workday Jobs API: Workday Job Scraper (myworkdayjobs)</title>
+<meta name="description" content="Search Workday career sites (myworkdayjobs.com) by keyword, location and remote, with full descriptions, or read any Workday site live. $2 per 1,000 jobs.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/workday-jobs-api/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Workday Jobs API: Workday Job Scraper (myworkdayjobs)">
+<meta property="og:description" content="Search Workday career sites (myworkdayjobs.com) by keyword, location and remote, with full descriptions, or read any Workday site live. $2 per 1,000 jobs.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/workday-jobs-api/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Workday Jobs API \u2014 Search Workday Career Sites",
+  "description": "Search open jobs on 4,000+ Workday career sites (NVIDIA, Salesforce, Adobe, Intel\u2026) by keyword, location and remote, or read any myworkdayjobs.com site live. Full descriptions. $2 per 1,000 jobs.",
+  "url": "https://neob001.github.io/data-portfolio/workday-jobs-api/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "2",
+    "description": "Pay-per-result pricing: $2 per 1,000 job results",
+    "url": "https://apify.com/factpipe/workday-jobs-api"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>Workday Jobs API — Search Workday Career Sites</h1>
+<p>&lt;!-- factpipe:hero:start --&gt;</p>
+<p><strong>Search open jobs on 4,000+ Workday career sites (NVIDIA, Salesforce, Adobe, Intel…) by keyword, location and remote, or read any myworkdayjobs.com site live. Full descriptions. $2 per 1,000 jobs.</strong></p>
+<div class="table-wrap"><table><thead><tr><th>Title</th><th>Company</th><th>Locations</th><th>Workplace</th><th>Employment</th></tr></thead><tbody><tr><td>Senior Software Engineer</td><td>Abbott</td><td>United States - California - Sylmar</td><td>unknown</td><td>—</td></tr><tr><td>Internship: Software Engineer Avanade Agentic E…</td><td>Avanade</td><td>Brussels</td><td>unknown</td><td>full_time</td></tr><tr><td>Sr. Software Engineer - CloudOps</td><td>ACE</td><td>Coppell, TX</td><td>unknown</td><td>—</td></tr></tbody></table></div>
+<p><em>Real output from the “Software engineer jobs on Workday career sites” example, run on October 10, 2026.</em></p>
+<p><strong>Try a ready-made example:</strong> <a href="https://apify.com/factpipe/workday-jobs-api/examples/workday-software-engineer-jobs">Software engineer jobs on Workday career sites</a> · <a href="https://apify.com/factpipe/workday-jobs-api/examples/workday-remote-jobs">Remote jobs on Workday career sites (last 7 days)</a></p>
+<p>&lt;!-- factpipe:hero:end --&gt;</p>
+<p>A <strong>Workday jobs API</strong> and <strong>Workday job scraper</strong> in one: search open jobs on <strong>4,796 Workday career sites</strong> (NVIDIA, Salesforce, Adobe, Intel…) by keyword, location, remote and posting date, and get flat, deduplicated JSON: title, company, locations, country codes, remote flag, posting date, apply link and full description. Paste any Workday career-site URL (&quot;https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite&quot;) to read it live. <strong>$2 per 1,000 jobs</strong>, and you pay only for the jobs you get.</p>
+<div class="quick-facts"><span class="badge">$2 / 1,000</span><a class="button" href="https://apify.com/factpipe/workday-jobs-api" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the prefilled input: <code>keywords: [&quot;engineer&quot;]</code>, <code>maxResults: 20</code>, <code>maxPerCompany: 3</code>. The run usually takes under a minute.</li><li>You get the 20 most relevant Workday jobs for &quot;engineer&quot; at large employers (software, hardware, field and sales engineers…), at most 3 per company: jobs with the keyword in the title come first, newest first among equals.</li><li>That first run costs at most <strong>$0.04 (20 jobs × $0.002)</strong>, which fits in Apify&#x27;s free monthly credit. Then name the companies you track (<code>companies: [&quot;NVIDIA&quot;, &quot;Salesforce&quot;]</code>), add <code>locations</code> or <code>remote</code>, or paste board URLs in <code>companyUrls</code>.</li></ol>
+<h2 id="what-you-get">What you get</h2>
+<p>One flat record per job opening, from a real run:</p>
+<pre><code class="language-json">{
+  &quot;job_id&quot;: &quot;workday:adobe.wd5/external_experienced:R171485&quot;,
+  &quot;title&quot;: &quot;Senior Site Reliability Engineer - Observability&quot;,
+  &quot;company_name&quot;: &quot;Adobe&quot;,
+  &quot;company_board&quot;: &quot;adobe.wd5/external_experienced&quot;,
+  &quot;ats&quot;: &quot;workday&quot;,
+  &quot;department&quot;: null,
+  &quot;team&quot;: null,
+  &quot;employment_type&quot;: null,
+  &quot;workplace_type&quot;: &quot;unknown&quot;,
+  &quot;locations&quot;: [
+    &quot;Bucharest&quot;
+  ],
+  &quot;country_codes&quot;: [
+    &quot;RO&quot;
+  ],
+  &quot;remote&quot;: null,
+  &quot;salary_min&quot;: null,
+  &quot;salary_max&quot;: null,
+  &quot;salary_currency&quot;: null,
+  &quot;salary_period&quot;: null,
+  &quot;posted_at&quot;: &quot;2026-10-08T00:00:00.000Z&quot;,
+  &quot;updated_at&quot;: null,
+  &quot;apply_url&quot;: &quot;https://adobe.wd5.myworkdayjobs.com/external_experienced/job/Bucharest/Senior-Site-Reliability-Engineer---Observability_R171485/apply&quot;,
+  &quot;job_url&quot;: &quot;https://adobe.wd5.myworkdayjobs.com/external_experienced/job/Bucharest/Senior-Site-Reliability-Engineer---Observability_R171485&quot;,
+  &quot;description_text&quot;: &quot;The Team\n\nWe are a globally distributed team inside Adobe Developer…&quot;,
+  &quot;description_snippet&quot;: &quot;The Team We are a globally distributed team inside Adobe Developer Platforms. We own the observability platform Adobe&#x27;s engineering ecosystem runs on…&quot;,
+  &quot;description_status&quot;: &quot;included&quot;,
+  &quot;duplicate_sources&quot;: [
+    &quot;workday:adobe.wd5/external_experienced:R169504&quot;
+  ],
+  &quot;match_score&quot;: 100,
+  &quot;matched_in&quot;: &quot;title&quot;,
+  &quot;source_url&quot;: &quot;https://adobe.wd5.myworkdayjobs.com/wday/cxs/adobe/external_experienced/jobs&quot;,
+  &quot;fetched_at&quot;: &quot;2026-10-09T11:29:47.802Z&quot;
+}</code></pre>
+<ul><li><code>posted_at</code> is a <strong>date derived from Workday&#x27;s &quot;Posted N Days Ago&quot; label</strong> when the site was read (UTC midnight; &quot;Posted 30+ Days Ago&quot; becomes 30 days before, meaning <em>30 days or more</em>, see the FAQ). Workday job lists publish no pay range or department, so the <code>salary_*</code>, <code>department</code> and <code>team</code> fields are <code>null</code> (never guessed). <code>workplace_type</code> comes from the site&#x27;s remote type where shown (Remote, Hybrid, Flex, On-site), otherwise from the location text, and <code>employment_type</code> from its time type. Lists name only the primary location of a multi-location job; with <code>includeDescription</code> the delivered row lists every location.</li><li><code>match_score</code> (0–100) and <code>matched_in</code> (<code>title</code>, <code>department</code>, <code>description</code>) explain keyword matches. Both are <code>null</code> without keywords.</li><li><code>duplicate_sources</code> lists other <code>job_id</code>s of the same opening (for example a company with two boards). Each opening is delivered and charged once.</li><li><strong>No personal data.</strong> Recruiter and hiring-manager fields are never copied, and contact details in descriptions are replaced with <code>[… redacted]</code>.</li></ul>
+<h2 id="use-cases">Use cases</h2>
+<ul><li><strong>Workday jobs API across employers</strong>: one call searches thousands of Workday career sites (<code>*.myworkdayjobs.com</code>) instead of scripting each employer&#x27;s job search page.</li><li><strong>Workday job scraper for job boards and aggregators</strong>: enterprise jobs (healthcare, finance, retail, manufacturing, tech) filtered by keyword, location and remote, refreshed daily with <code>sinceLastRun: true</code>.</li><li><strong>Tracking specific employers</strong>: <code>companies: [&quot;NVIDIA&quot;, &quot;Salesforce&quot;]</code>, or their career-site URLs in <code>companyUrls</code>, scheduled daily.</li><li><strong>Recruiting and sales intelligence</strong>: which large employers are hiring which roles, and where. For one row per company, see <a href="../companies-hiring/">Companies Hiring</a>.</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/workday-jobs-api" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+<h3 id="ready-made-examples">Ready-made examples</h3>
+<ul>
+<li><a href="https://apify.com/factpipe/workday-jobs-api/examples/workday-software-engineer-jobs" target="_blank" rel="noopener">Software engineer jobs on Workday career sites</a>: Newest software engineer openings across thousands of Workday career sites (NVIDIA, Salesforce, Adobe…), max 3 per company, with full descriptions.</li>
+<li><a href="https://apify.com/factpipe/workday-jobs-api/examples/workday-remote-jobs" target="_blank" rel="noopener">Remote jobs on Workday career sites (last 7 days)</a>: Remote-only roles posted in the last week on Workday career sites of large employers, one flat row per job.</li>
+</ul>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~workday-jobs-api/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;keywords&quot;: [&quot;engineer&quot;], &quot;maxResults&quot;: 20, &quot;maxPerCompany&quot;: 3}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;keywords&quot;: [
+    &quot;engineer&quot;
+  ],
+  &quot;maxResults&quot;: 20,
+  &quot;maxPerCompany&quot;: 3
+}
+
+run = client.actor(&quot;factpipe/workday-jobs-api&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;keywords&quot;: [
+    &quot;engineer&quot;
+  ],
+  &quot;maxResults&quot;: 20,
+  &quot;maxPerCompany&quot;: 3
+};
+
+const run = await client.actor(&#x27;factpipe/workday-jobs-api&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>keywords</code></td><td>string[]</td><td>Case-insensitive. Title matches rank first, then department/team, then description (first ~1,500 characters)</td></tr><tr><td><code>keywordMatch</code></td><td><code>any</code> \</td><td><code>all</code></td><td>Default <code>any</code></td></tr><tr><td><code>keywordScope</code></td><td><code>title</code> \</td><td><code>title_and_description</code></td><td>Default <code>title_and_description</code></td></tr><tr><td><code>companies</code></td><td>string[]</td><td>Company names (<code>NVIDIA</code>) or Workday board tokens (<code>nvidia.wd5/NVIDIAExternalCareerSite</code>). Empty = every Workday company in the index</td></tr><tr><td><code>excludeKeywords</code></td><td>string[]</td><td>Drops jobs whose title contains any of them</td></tr><tr><td><code>locations</code></td><td>string[]</td><td>Location text as written in the posting, or an ISO country code (<code>US</code>, <code>DE</code>)</td></tr><tr><td><code>remote</code></td><td><code>any</code> \</td><td><code>remote_only</code> \</td><td><code>onsite_only</code></td><td>Default <code>any</code></td></tr><tr><td><code>postedWithinDays</code></td><td>integer</td><td>First published within the last N days</td></tr><tr><td><code>departments</code></td><td>string[]</td><td>Substring match on department or team</td></tr><tr><td><code>employmentTypes</code></td><td>string[]</td><td><code>full_time</code>, <code>part_time</code>, <code>contract</code>, <code>temporary</code>, <code>internship</code>, <code>other</code>. Normalized from the time type a Workday site shows in its job list (Full time, Part time). Many sites don&#x27;t show one; their jobs are excluded when this is set.</td></tr><tr><td><code>maxResults</code></td><td>integer</td><td>Default 100</td></tr><tr><td><code>maxPerCompany</code></td><td>integer</td><td>Optional cap on jobs from any one company (prefill 3), so a single employer posting many near-identical roles can&#x27;t fill your results</td></tr><tr><td><code>includeDescription</code></td><td>boolean</td><td>Default <code>true</code>: full description fetched live from Workday for each delivered job</td></tr><tr><td><code>sinceLastRun</code></td><td>boolean</td><td>Only jobs not delivered by an earlier run with the same filters</td></tr><tr><td><code>companyUrls</code></td><td>string[]</td><td><strong>Live mode</strong>: Workday board URLs or tokens, fetched directly from Workday. URLs of other platforms are ignored with a warning</td></tr></tbody></table></div>
+<p><strong>Workday board references accepted in live mode:</strong></p>
+<div class="table-wrap"><table><thead><tr><th>Form</th><th>Example</th></tr></thead><tbody><tr><td>Career site</td><td><code>https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite</code>, also with a locale: <code>…/en-US/NVIDIAExternalCareerSite</code></td></tr><tr><td>Job page</td><td><code>https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite/job/…</code> (reads that job&#x27;s whole site)</td></tr><tr><td>myworkdaysite.com</td><td><code>https://wd1.myworkdaysite.com/recruiting/paypal/jobs</code></td></tr><tr><td>Token</td><td><code>nvidia.wd5/NVIDIAExternalCareerSite</code> or <code>workday:nvidia.wd5/NVIDIAExternalCareerSite</code></td></tr></tbody></table></div>
+<p><strong>How it works.</strong> Without <code>companyUrls</code>, the Actor searches a compact search index of the Workday career sites in our directory, rebuilt daily from each site&#x27;s public job list, and downloads only the Workday parts of it for your date range. With keywords, it ranks every matching job before delivering the top <code>maxResults</code>. For each delivered job it then reads the full description live from the site (one request per job), which also drops jobs closed since the nightly build (not delivered, not charged). Until the index holds Workday jobs, a search reads a few built-in Workday sites live instead.</p>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>job-result</code></td><td><strong>$2 per 1,000</strong> ($0.002 each)</td><td>One job delivered. <strong>No start fee.</strong> Runs with no matches, jobs skipped by <code>sinceLastRun</code>, jobs found closed and failed boards are never charged.</td></tr></tbody></table></div>
+<p>Set a maximum charge per run in Apify, and the Actor stops cleanly when it is reached.</p>
+<h2 id="coverage">Coverage</h2>
+<p>Directory of 2026-10-09: <strong>4,796 Workday career sites</strong> listing <strong>850,315 open jobs</strong>, including NVIDIA, Salesforce, Adobe, Intel, Target, Boeing. The search index keeps the newest 300 jobs of each site (about half of all listed jobs); live mode reads up to 2,000 per site.</p>
+<p>Sites were discovered from Common Crawl&#x27;s public URL index and validated against each site&#x27;s own job list (at least one open job, and robots.txt allows reading it). They join the daily search index with its nightly build. Any other Workday career site works in live mode through <code>companyUrls</code>.</p>
+<h2 id="sources-and-terms">Sources and terms</h2>
+<p>Only the public career sites employers publish on Workday (<code>&lt;company&gt;.&lt;wdN&gt;.myworkdayjobs.com/&lt;site&gt;</code>): the same job list and job pages any visitor sees, read through the JSON endpoint those pages load. Before reading a site we check its host&#x27;s robots.txt (career sites allow <code>/&lt;site&gt;/</code>; a site whose rules disallow its job pages or that endpoint is skipped), send a descriptive User-Agent, read one page at a time per site, keep to a few requests per second across all Workday hosts (4/s in this Actor, under 7/s in the nightly index build) and back off on HTTP 429. Job data only: no candidate or recruiter profiles, no logins (<code>myworkday.com</code> tenant apps are never touched), no LinkedIn or Indeed.</p>
+<h2 id="factpipe-jobs-data">factpipe Jobs Data</h2>
+<p>All of these Actors search the same daily index of open jobs from 10,000+ company job boards:</p>
+<ul><li><a href="../ats-jobs-feed/">Jobs Feed API</a>: every job from every platform, every filter, ranked by relevance.</li><li><a href="../ats-jobs-scraper/">Greenhouse, Lever &amp; Ashby Jobs Scraper</a>: pick several applicant tracking systems (also Workable and Recruitee) in one run.</li><li><a href="../remote-jobs-feed/">Remote Jobs API</a>: remote and work-from-home jobs only, filtered by region or time zone.</li><li><a href="../companies-hiring/">Companies Hiring</a>: one row per company that is hiring for a role, as sales leads or market research.</li><li><a href="../greenhouse-jobs-api/">Greenhouse Jobs API</a>: every Greenhouse job board in one search.</li><li><a href="../lever-jobs-api/">Lever Jobs API</a>: every Lever job board, with salary where published.</li><li><a href="../ashby-jobs-api/">Ashby Jobs API</a>: every Ashby job board: startup and AI jobs, with salary where published.</li><li><a href="../workday-jobs-api/">Workday Jobs API</a> (this Actor): every Workday career site in our directory (large employers), or any Workday site live.</li></ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>Do I need a Workday account or API key?</strong><br>
+No. Workday career sites are public: these are the job lists and job pages any visitor of the employer&#x27;s careers site sees. No key, no login.</p>
+<p><strong>How do I find a company&#x27;s board token?</strong><br>
+It is <code>&lt;company&gt;.&lt;wdN&gt;/&lt;site&gt;</code> from the career-site URL: <code>https://</code><strong><code>nvidia.wd5</code></strong><code>.myworkdayjobs.com/</code><strong><code>NVIDIAExternalCareerSite</code></strong> is <code>nvidia.wd5/NVIDIAExternalCareerSite</code>. Or paste the URL itself, or type the company name in <code>companies</code>.</p>
+<p><strong>How fresh is the data?</strong><br>
+The index is rebuilt daily. With <code>includeDescription</code> on (the default), every delivered job is re-checked live against Workday during your run. Live mode (<code>companyUrls</code>) always reads Workday directly.</p>
+<p><strong>How is <code>posted_at</code> derived for Workday jobs?</strong><br>
+Workday career sites show a relative label instead of a date: &quot;Posted Today&quot;, &quot;Posted Yesterday&quot;, &quot;Posted 5 Days Ago&quot; or &quot;Posted 30+ Days Ago&quot;. We turn it into a date relative to when the site was read (nightly for the index, during your run in live mode): today, yesterday, 5 days earlier, and for &quot;30+&quot; exactly 30 days earlier, which means <em>30 days or more</em>. The date is set to UTC midnight, so it can be a day off around midnight in the employer&#x27;s time zone. <code>postedWithinDays</code> and <code>sinceLastRun</code> use this date.</p>
+<p><strong>Which Workday URLs work in <code>companyUrls</code>?</strong><br>
+Any page of a public Workday career site on <code>myworkdayjobs.com</code> (with or without a locale such as <code>/en-US/</code>), a job URL (its whole site is read), or the <code>myworkdaysite.com/recruiting/&lt;company&gt;/&lt;site&gt;</code> form. Internal Workday tenants on <code>myworkday.com</code> need a login and are not supported.</p>
+<p><strong>Do keywords search Workday job descriptions?</strong><br>
+In the daily index, keywords match job titles: Workday job lists carry no description. With <code>includeDescription</code> (the default) every delivered job&#x27;s full description is read live from its site. In live mode (<code>companyUrls</code>), too, keywords match titles.</p>
+<p><strong>Do you respect robots.txt and rate limits?</strong><br>
+Yes. Before reading a Workday site we read its host&#x27;s robots.txt and skip any site whose rules disallow its job pages or the JSON endpoint they load. Requests are spaced (one at a time per site; at most 4 per second across all Workday hosts in this Actor, under 7 per second in the nightly index build) and back off on HTTP 429 and <code>Retry-After</code>.</p>
+<p><strong>Do I get every job of employers with thousands of openings?</strong><br>
+Workday itself lists at most 2,000 jobs per site. Live mode reads up to 2,000 per site, newest first, within a 2.5-minute budget per site; the nightly index keeps the newest 300 per site. <code>RUN_SUMMARY</code> counts the sites that were cut short (<code>boards_truncated</code>).</p>
+<p><strong>What happens to Greenhouse, Lever, Ashby, Workable or Recruitee URLs?</strong><br>
+They are ignored with a warning in the log, and the rest of the run goes ahead. If no Workday board is left, the run ends successfully with a message and nothing is charged. For several platforms in one run, use <a href="../ats-jobs-scraper/">Greenhouse, Lever &amp; Ashby Jobs Scraper</a>.</p>
+<p><strong>Switching from ats-jobs-scraper or other Workday scrapers?</strong><br>
+Inputs from <a href="../ats-jobs-scraper/">ats-jobs-scraper</a> work as they are: the same fields minus <code>ats</code> (ignored if present, the platform is always Workday), and the same output records. Only <code>companyUrls</code> of other platforms are skipped. From other tools, this field map covers the usual settings:</p>
+<div class="table-wrap"><table><thead><tr><th>You want</th><th>Use here</th></tr></thead><tbody><tr><td>Company name, board token or board URL</td><td><code>companies</code> (index) or <code>companyUrls</code> (live)</td></tr><tr><td>Job title / search query</td><td><code>keywords</code> (+ <code>keywordScope: &quot;title&quot;</code> for titles only)</td></tr><tr><td>Location or country</td><td><code>locations</code> (text or ISO code)</td></tr><tr><td>Remote only</td><td><code>remote: &quot;remote_only&quot;</code></td></tr><tr><td>Date posted</td><td><code>postedWithinDays</code></td></tr><tr><td>Result limit</td><td><code>maxResults</code></td></tr><tr><td>Job description</td><td><code>includeDescription</code> → <code>description_text</code></td></tr><tr><td>Job id / URL / apply link</td><td><code>job_id</code> / <code>job_url</code> / <code>apply_url</code></td></tr><tr><td>Company / location / date</td><td><code>company_name</code> / <code>locations</code> / <code>posted_at</code></td></tr></tbody></table></div>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier or an AI agent?</strong><br>
+Yes, through the Apify API, the official clients, Apify integrations (Make, Zapier, n8n, Google Sheets, Slack) or the Apify MCP server.</p>
+<h2 id="reliability">Reliability</h2>
+<p>Public Workday career sites only, robots.txt checked per host. Retries with backoff (honouring <code>Retry-After</code>), a polite global request rate, a time budget per site so a 2,000-job site never stalls a run, a <code>RUN_SUMMARY</code> record on every run, and a built-in live fallback if the search index is unreachable or has no Workday jobs yet.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>

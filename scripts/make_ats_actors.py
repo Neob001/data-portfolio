@@ -379,9 +379,8 @@ FAMILY = {
         "other_fixture": "greenhouse",
         # Real row from a local prefill run (descriptions shortened).
         "sample": WORKDAY_SAMPLE,
-        # Not linked from the published family's READMEs until its own publish is approved.
-        "in_family_links": False,
-        "approval": "J3 2026-10-09; publish + price pending owner approval",
+        "in_family_links": True,
+        "approval": "J3 2026-10-09; published 2026-10-10 (owner: 'publish Workday')",
         "registry_source": "Workday public career sites (*.myworkdayjobs.com job lists + job pages via the CXS JSON they load; "
                            "robots.txt checked per host) through the factpipe jobs index, plus live reads",
         "pricing_rationale": "Per-ATS demand (LEARNINGS 2026-10-09): Workday 341 real users/30d, the largest per-ATS pool; the "

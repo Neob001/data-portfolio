@@ -137,6 +137,7 @@ All of these Actors search the same daily index of open jobs from 10,000+ compan
 - [Greenhouse Jobs API](https://apify.com/factpipe/greenhouse-jobs-api): every Greenhouse job board in one search.
 - [Lever Jobs API](https://apify.com/factpipe/lever-jobs-api) (this Actor): every Lever job board, with salary where published.
 - [Ashby Jobs API](https://apify.com/factpipe/ashby-jobs-api): every Ashby job board: startup and AI jobs, with salary where published.
+- [Workday Jobs API](https://apify.com/factpipe/workday-jobs-api): every Workday career site in our directory (large employers), or any Workday site live.
 
 ## FAQ
 

@@ -1503,8 +1503,8 @@
       "apify_actor_id": "vCQuwilQtm4f1D9NL",
       "source": "Workday public career sites (*.myworkdayjobs.com job lists + job pages via the CXS JSON they load; robots.txt checked per host) through the factpipe jobs index, plus live reads",
       "variant": "search index (Workday only)",
-      "status": "staging",
-      "approval": "J3 2026-10-09; publish + price pending owner approval",
+      "status": "live",
+      "approval": "J3 2026-10-09; published 2026-10-10 (owner: 'publish Workday')",
       "origin": "scan",
       "incumbent_actor_id": null,
       "first_paid_run_date": null,
@@ -1522,7 +1522,7 @@
         }
       },
       "pricing_rationale": "Per-ATS demand (LEARNINGS 2026-10-09): Workday 341 real users/30d, the largest per-ATS pool; the leader fantastic-jobs covers Workday among 58 ATSs at $12/1k + $0.01/run. Same $2/1k as the J4 family (owner J3 brief); publish and price pending owner approval.",
-      "launched_at": null,
+      "launched_at": "2026-10-10T05:45:00Z",
       "last_fix_date": null,
       "kpis": {},
       "listing": {
@@ -1536,8 +1536,16 @@
         ]
       },
       "staging_validated": true,
-      "monetization_configured": false,
-      "staging_started_at": "2026-10-09T13:37:21Z"
+      "monetization_configured": true,
+      "staging_started_at": "2026-10-09T13:37:21Z",
+      "price_history": [
+        {
+          "date": "2026-10-10",
+          "event": "job-result",
+          "price_usd": 0.002,
+          "note": "launch"
+        }
+      ]
     }
   },
   "apify_account": "factpipe",

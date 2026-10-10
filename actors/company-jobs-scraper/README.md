@@ -77,7 +77,7 @@ Example: 1,000 jobs cost **$2.00**. You only pay for delivered results.
 
 ## factpipe Jobs & Hiring Data
 
-This Actor fetches jobs live from the career pages you give it. For search across many companies at once, the Actors below query a daily index of about 346,000 open jobs from 10,900 company job boards:
+This Actor fetches jobs live from the career pages you give it. For search across many companies at once, the Actors below query a daily index of about 730,000 open jobs from 15,000 company job boards:
 
 - [Jobs Feed API](https://apify.com/factpipe/ats-jobs-feed): every job, every filter, ranked by relevance.
 - [Remote Jobs API](https://apify.com/factpipe/remote-jobs-feed): remote and work-from-home jobs only, filtered by region or time zone.
@@ -86,6 +86,7 @@ This Actor fetches jobs live from the career pages you give it. For search acros
 - [Greenhouse Jobs API](https://apify.com/factpipe/greenhouse-jobs-api): every Greenhouse job board in one search.
 - [Lever Jobs API](https://apify.com/factpipe/lever-jobs-api): every Lever job board, with salary where published.
 - [Ashby Jobs API](https://apify.com/factpipe/ashby-jobs-api): every Ashby job board: startup and AI jobs, with salary where published.
+- [Workday Jobs API](https://apify.com/factpipe/workday-jobs-api): thousands of Workday career sites of large employers (NVIDIA, Salesforce, Adobe…), with full descriptions.
 
 ## FAQ
 

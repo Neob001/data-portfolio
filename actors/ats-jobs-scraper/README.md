@@ -16,7 +16,7 @@
 
 <!-- factpipe:hero:end -->
 
-A **Greenhouse jobs scraper**, **Lever jobs API**, **Ashby job board API**, plus **Workable jobs** and **Recruitee jobs**, in one Actor. Pick the applicant tracking systems (ATS) you want, optionally name companies, add keywords, and get every open job as flat, deduplicated JSON: title, department, locations, country codes, remote flag, salary range (where the employer publishes one), apply link and full description. It already knows 10,900+ company job boards. You can also paste any board URL ("https://job-boards.greenhouse.io/gitlab", "https://jobs.lever.co/acme") to fetch it live. **$3 per 1,000 jobs**, and you pay only for the jobs you get.
+A **Greenhouse jobs scraper**, **Lever jobs API**, **Ashby job board API**, plus **Workable jobs** and **Recruitee jobs**, in one Actor. Pick the applicant tracking systems (ATS) you want, optionally name companies, add keywords, and get every open job as flat, deduplicated JSON: title, department, locations, country codes, remote flag, salary range (where the employer publishes one), apply link and full description. It already knows 15,000+ company job boards. You can also paste any board URL ("https://job-boards.greenhouse.io/gitlab", "https://jobs.lever.co/acme") to fetch it live. **$3 per 1,000 jobs**, and you pay only for the jobs you get.
 
 ## Quick start
 
@@ -117,7 +117,7 @@ Set a maximum charge per run in Apify, and the Actor stops cleanly when it is re
 
 ## Coverage
 
-Search-index build of 2026-09-25: **345,976 open jobs** on **10,918 company job boards**.
+Search-index build of 2026-09-25: **730,000+ open jobs** on **15,000+ company job boards**.
 
 | ATS | Company boards | Open jobs |
 |---|---|---|
@@ -146,7 +146,7 @@ SmartRecruiters is deliberately **not** included, because its API host's robots.
 
 ## factpipe Jobs & Hiring Data
 
-These Actors search the same daily index of 345,976 open jobs from 10,918 company job boards:
+These Actors search the same daily index of 730,000+ open jobs from 15,000+ company job boards:
 
 - [Jobs Feed API](https://apify.com/factpipe/ats-jobs-feed): every job, every filter, ranked by relevance.
 - [Remote Jobs API](https://apify.com/factpipe/remote-jobs-feed): remote and work-from-home jobs only, filtered by region or time zone.
@@ -155,6 +155,7 @@ These Actors search the same daily index of 345,976 open jobs from 10,918 compan
 - [Greenhouse Jobs API](https://apify.com/factpipe/greenhouse-jobs-api): every Greenhouse job board in one search.
 - [Lever Jobs API](https://apify.com/factpipe/lever-jobs-api): every Lever job board, with salary where published.
 - [Ashby Jobs API](https://apify.com/factpipe/ashby-jobs-api): every Ashby job board: startup and AI jobs, with salary where published.
+- [Workday Jobs API](https://apify.com/factpipe/workday-jobs-api): thousands of Workday career sites of large employers (NVIDIA, Salesforce, Adobe…), with full descriptions.
 
 ## FAQ
 

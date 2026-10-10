@@ -1,5 +1,21 @@
 # Workday Jobs API — Search Workday Career Sites
 
+<!-- factpipe:hero:start -->
+
+**Search open jobs on 4,000+ Workday career sites (NVIDIA, Salesforce, Adobe, Intel…) by keyword, location and remote, or read any myworkdayjobs.com site live. Full descriptions. $2 per 1,000 jobs.**
+
+| Title | Company | Locations | Workplace | Employment |
+|---|---|---|---|---|
+| Senior Software Engineer | Abbott | United States - California - Sylmar | unknown | — |
+| Internship: Software Engineer Avanade Agentic E… | Avanade | Brussels | unknown | full_time |
+| Sr. Software Engineer - CloudOps | ACE | Coppell, TX | unknown | — |
+
+*Real output from the “Software engineer jobs on Workday career sites” example, run on October 10, 2026.*
+
+**Try a ready-made example:** [Software engineer jobs on Workday career sites](https://apify.com/factpipe/workday-jobs-api/examples/workday-software-engineer-jobs) · [Remote jobs on Workday career sites (last 7 days)](https://apify.com/factpipe/workday-jobs-api/examples/workday-remote-jobs)
+
+<!-- factpipe:hero:end -->
+
 A **Workday jobs API** and **Workday job scraper** in one: search open jobs on **4,796 Workday career sites** (NVIDIA, Salesforce, Adobe, Intel…) by keyword, location, remote and posting date, and get flat, deduplicated JSON: title, company, locations, country codes, remote flag, posting date, apply link and full description. Paste any Workday career-site URL ("https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite") to read it live. **$2 per 1,000 jobs**, and you pay only for the jobs you get.
 
 ## Quick start
