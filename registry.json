@@ -1284,9 +1284,9 @@
       },
       "listing": {
         "title": "Companies Hiring — Hiring Signals & Sales Leads by Role",
-        "description": "Find companies hiring for any role across 10,000+ company job boards (Greenhouse, Lever, Ashby, Workable, Recruitee): one row per company with open roles, hiring velocity and locations. $5 per 1,000 companies.",
+        "description": "Find companies hiring for any role across 15,000+ company job boards (Workday, Greenhouse, Lever, Ashby, Workable, Recruitee): one row per company with open roles, hiring velocity and locations. $5 per 1,000 companies.",
         "seoTitle": "Companies Hiring API: Hiring Signals & Sales Leads by Role",
-        "seoDescription": "Find companies hiring for any role across 10,000+ career sites: open roles, hiring velocity, locations and departments per company. Pay per company.",
+        "seoDescription": "Find companies hiring for any role across 15,000+ career sites incl. Workday: open roles, hiring velocity, locations, departments per company. Pay per company.",
         "categories": [
           "JOBS",
           "LEAD_GENERATION"
