@@ -22,8 +22,8 @@
       "launched_at": "2026-09-11T08:35:36Z",
       "last_fix_date": "2026-09-15",
       "kpis": {
-        "as_of": "2026-09-27",
-        "totalRuns": 79,
+        "as_of": "2026-10-11",
+        "totalRuns": 96,
         "totalUsers30Days": 1
       },
       "staging_started_at": "2026-09-10T16:46:05Z",
@@ -78,8 +78,8 @@
       "launched_at": "2026-09-11T08:35:36Z",
       "last_fix_date": "2026-09-15",
       "kpis": {
-        "as_of": "2026-09-27",
-        "totalRuns": 78,
+        "as_of": "2026-10-11",
+        "totalRuns": 95,
         "totalUsers30Days": 1
       },
       "staging_started_at": "2026-09-10T16:46:05Z",
@@ -134,8 +134,8 @@
       "launched_at": "2026-09-11T08:35:36Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-09-27",
-        "totalRuns": 27,
+        "as_of": "2026-10-11",
+        "totalRuns": 32,
         "totalUsers30Days": 1
       },
       "notes": "Keyless by default: owner's CH key set as secret env var COMPANIES_HOUSE_API_KEY (shared 600 req/5min quota; revisit if volume grows). Customers may bring their own key. Officers/PSC variant still requires owner legal approval (L1).",
@@ -188,8 +188,8 @@
       "launched_at": "2026-09-11T09:51:12Z",
       "last_fix_date": "2026-09-15",
       "kpis": {
-        "as_of": "2026-09-27",
-        "totalRuns": 30,
+        "as_of": "2026-10-11",
+        "totalRuns": 35,
         "totalUsers30Days": 1
       },
       "staging_validated": true,
@@ -243,8 +243,8 @@
       "launched_at": null,
       "last_fix_date": "2026-09-15",
       "kpis": {
-        "as_of": "2026-09-27",
-        "totalRuns": 29,
+        "as_of": "2026-10-11",
+        "totalRuns": 34,
         "totalUsers30Days": 1
       },
       "staging_validated": true,
@@ -299,8 +299,8 @@
       "launched_at": "2026-09-11T09:51:12Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-09-27",
-        "totalRuns": 29,
+        "as_of": "2026-10-11",
+        "totalRuns": 34,
         "totalUsers30Days": 1
       },
       "staging_validated": true,
@@ -357,8 +357,8 @@
       "launched_at": "2026-09-12T09:33:41Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-09-27",
-        "totalRuns": 42,
+        "as_of": "2026-10-11",
+        "totalRuns": 50,
         "totalUsers30Days": 2
       },
       "staging_validated": true,
@@ -407,8 +407,8 @@
       "launched_at": "2026-09-12T09:33:41Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-09-27",
-        "totalRuns": 23,
+        "as_of": "2026-10-11",
+        "totalRuns": 28,
         "totalUsers30Days": 1
       },
       "staging_validated": true,
@@ -457,8 +457,8 @@
       "launched_at": "2026-09-12T09:33:41Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-09-27",
-        "totalRuns": 24,
+        "as_of": "2026-10-11",
+        "totalRuns": 29,
         "totalUsers30Days": 2
       },
       "staging_validated": true,
@@ -508,8 +508,8 @@
       "launched_at": "2026-09-13T13:24:30Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-09-27",
-        "totalRuns": 23,
+        "as_of": "2026-10-11",
+        "totalRuns": 28,
         "totalUsers30Days": 1
       },
       "staging_validated": true,
@@ -561,8 +561,8 @@
       "launched_at": "2026-09-13T13:24:30Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-09-27",
-        "totalRuns": 23,
+        "as_of": "2026-10-11",
+        "totalRuns": 28,
         "totalUsers30Days": 1
       },
       "staging_validated": true,
@@ -614,8 +614,8 @@
       "launched_at": "2026-09-15T09:30:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-09-27",
-        "totalRuns": 24,
+        "as_of": "2026-10-11",
+        "totalRuns": 29,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -665,8 +665,8 @@
       "launched_at": "2026-09-15T09:30:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-09-27",
-        "totalRuns": 24,
+        "as_of": "2026-10-11",
+        "totalRuns": 30,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -716,8 +716,8 @@
       "launched_at": "2026-09-15T09:30:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-09-27",
-        "totalRuns": 21,
+        "as_of": "2026-10-11",
+        "totalRuns": 26,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -767,8 +767,8 @@
       "launched_at": "2026-09-15T09:30:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-09-27",
-        "totalRuns": 33,
+        "as_of": "2026-10-11",
+        "totalRuns": 40,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -819,8 +819,8 @@
       "launched_at": "2026-09-15T09:30:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-09-27",
-        "totalRuns": 29,
+        "as_of": "2026-10-11",
+        "totalRuns": 34,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -871,8 +871,8 @@
       "launched_at": "2026-09-17T09:36:18Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-09-27",
-        "totalRuns": 19,
+        "as_of": "2026-10-11",
+        "totalRuns": 24,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -923,8 +923,8 @@
       "launched_at": "2026-09-17T09:36:18Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-09-27",
-        "totalRuns": 19,
+        "as_of": "2026-10-11",
+        "totalRuns": 23,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -970,8 +970,8 @@
       "launched_at": null,
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-09-27",
-        "totalRuns": 22,
+        "as_of": "2026-10-11",
+        "totalRuns": 26,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -1024,7 +1024,7 @@
       "launched_at": null,
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-09-27",
+        "as_of": "2026-10-11",
         "totalRuns": 7,
         "totalUsers30Days": 0
       },
@@ -1069,8 +1069,8 @@
       "launched_at": "2026-09-19T13:46:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-09-27",
-        "totalRuns": 26,
+        "as_of": "2026-10-11",
+        "totalRuns": 31,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -1121,9 +1121,9 @@
       "launched_at": "2026-09-25T09:27:05Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-09-27",
-        "totalRuns": 51,
-        "totalUsers30Days": 1
+        "as_of": "2026-10-11",
+        "totalRuns": 198,
+        "totalUsers30Days": 10
       },
       "listing": {
         "title": "Jobs Feed API — Greenhouse, Lever, Ashby & More Job Boards",
@@ -1174,8 +1174,8 @@
       "launched_at": "2026-09-27T08:03:41Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-09-27",
-        "totalRuns": 23,
+        "as_of": "2026-10-11",
+        "totalRuns": 29,
         "totalUsers30Days": 2
       },
       "listing": {
@@ -1226,9 +1226,9 @@
       "launched_at": "2026-09-27T08:03:41Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-09-27",
-        "totalRuns": 17,
-        "totalUsers30Days": 2
+        "as_of": "2026-10-11",
+        "totalRuns": 26,
+        "totalUsers30Days": 1
       },
       "listing": {
         "title": "Greenhouse, Lever & Ashby Jobs Scraper — Job Board API",
@@ -1278,8 +1278,8 @@
       "launched_at": "2026-09-27T08:26:39Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-09-27",
-        "totalRuns": 20,
+        "as_of": "2026-10-11",
+        "totalRuns": 26,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -1330,7 +1330,8 @@
       "launched_at": "2026-09-30T13:25:00Z",
       "last_fix_date": null,
       "kpis": {
-        "totalRuns": 16,
+        "as_of": "2026-10-11",
+        "totalRuns": 21,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -1380,7 +1381,11 @@
       "pricing_rationale": "Per-ATS Store searches (state/ats_demand_2026-10-09.txt): dedicated per-ATS leaders $2-2.5/1k with 72-130 users30; multi-ATS leader $1.5/1k. Same index as ats-jobs-scraper; $2/1k (owner J4 brief).",
       "launched_at": "2026-10-09T06:30:00Z",
       "last_fix_date": null,
-      "kpis": {},
+      "kpis": {
+        "as_of": "2026-10-11",
+        "totalRuns": 6,
+        "totalUsers30Days": 1
+      },
       "listing": {
         "title": "Greenhouse Jobs API — Search All Greenhouse Job Boards",
         "description": "Search open jobs on 3,600+ Greenhouse job boards (Stripe, Databricks, Anthropic…) by keyword, location, remote and department, or fetch any Greenhouse board live. Full descriptions. $2 per 1,000 jobs.",
@@ -1428,7 +1433,11 @@
       "pricing_rationale": "Per-ATS Store searches (state/ats_demand_2026-10-09.txt): dedicated per-ATS leaders $2-2.5/1k with 72-130 users30; multi-ATS leader $1.5/1k. Same index as ats-jobs-scraper; $2/1k (owner J4 brief).",
       "launched_at": "2026-10-09T06:30:00Z",
       "last_fix_date": null,
-      "kpis": {},
+      "kpis": {
+        "as_of": "2026-10-11",
+        "totalRuns": 6,
+        "totalUsers30Days": 1
+      },
       "listing": {
         "title": "Lever Jobs API — Search All Lever Job Postings",
         "description": "Search open jobs on 1,500+ Lever job boards (Palantir, Spotify, Zoox…) by keyword, location, remote and department, or fetch any jobs.lever.co board live. Salary where published. $2 per 1,000 jobs.",
@@ -1476,7 +1485,11 @@
       "pricing_rationale": "Per-ATS Store searches (state/ats_demand_2026-10-09.txt): dedicated per-ATS leaders $2-2.5/1k with 72-130 users30; multi-ATS leader $1.5/1k. Same index as ats-jobs-scraper; $2/1k (owner J4 brief).",
       "launched_at": "2026-10-09T06:30:00Z",
       "last_fix_date": null,
-      "kpis": {},
+      "kpis": {
+        "as_of": "2026-10-11",
+        "totalRuns": 6,
+        "totalUsers30Days": 1
+      },
       "listing": {
         "title": "Ashby Jobs API — Search All Ashby Job Boards",
         "description": "Search open jobs on 2,700+ Ashby job boards (OpenAI, Ramp, Notion, Snowflake…) by keyword, location, remote and department, or fetch any jobs.ashbyhq.com board live. Salary where published. $2 per 1,000 jobs.",
@@ -1524,7 +1537,11 @@
       "pricing_rationale": "Per-ATS demand (LEARNINGS 2026-10-09): Workday 341 real users/30d, the largest per-ATS pool; the leader fantastic-jobs covers Workday among 58 ATSs at $12/1k + $0.01/run. Same $2/1k as the J4 family (owner J3 brief); publish and price pending owner approval.",
       "launched_at": "2026-10-10T05:45:00Z",
       "last_fix_date": null,
-      "kpis": {},
+      "kpis": {
+        "as_of": "2026-10-11",
+        "totalRuns": 6,
+        "totalUsers30Days": 1
+      },
       "listing": {
         "title": "Workday Jobs API — Search Workday Career Sites",
         "description": "Search open jobs on 4,000+ Workday career sites (NVIDIA, Salesforce, Adobe, Intel…) by keyword, location and remote, or read any myworkdayjobs.com site live. Full descriptions. $2 per 1,000 jobs.",
