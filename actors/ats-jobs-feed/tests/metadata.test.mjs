@@ -35,3 +35,15 @@ test('src/lib is the synced shared copy (never edited here)', () => {
     assert.equal(read(`src/lib/${f}`), readFileSync(new URL(`../../company-jobs-scraper/src/lib/${f}`, import.meta.url), 'utf8'), f);
   }
 });
+
+test('every Actor that reads the jobs index refuses to run below 1 GB (smaller runs are OOM-killed)', () => {
+  const root = new URL('../../', import.meta.url);
+  const readers = readdirSync(root).filter((d) => {
+    try { return readdirSync(new URL(`${d}/src/core/`, root)).includes('feed.js'); } catch { return false; }
+  });
+  assert.ok(readers.length >= 8, `found ${readers.length} index readers`);
+  for (const d of readers) {
+    const a = JSON.parse(readFileSync(new URL(`${d}/.actor/actor.json`, root), 'utf8'));
+    assert.ok((a.minMemoryMbytes ?? 0) >= 1024, `${d}: minMemoryMbytes ${a.minMemoryMbytes}`);
+  }
+});
