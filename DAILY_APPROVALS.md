@@ -49,3 +49,5 @@ Replies are NEVER posted without a tick. Standing decision 2026-09-12.
 
 ## 2026-10-10
 (no drafts today. demand_monitor: 3 raw hits, 0 passed the filters: all 3 are Dans-Plugins "Post X to SpigotMC" release chores matched on keywords only. All marked filtered. No DC proposals. The Apify forum still returns non-JSON. No owner ticks pending.)
+
+(2026-10-11 run: demand_monitor: 3 new raw hits, 0 passed the filters: all 3 are Dans-Plugins "Post X to SpigotMC" release chores matched on keywords only. All marked filtered. No DC proposals. Apify forum still returns non-JSON. No owner ticks pending.)

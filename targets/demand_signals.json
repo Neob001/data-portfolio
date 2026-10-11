@@ -359,6 +359,48 @@
       "capture_score": 0.756,
       "status": "filtered",
       "detected_at": "2026-10-10T09:07:55.656382+00:00"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/Dans-Plugins/SimpleSkills/issues/203",
+      "title": "Post 2.7.1 to SpigotMC",
+      "body": "`v2.7.1` is the stable release on GitHub, but the listing at https://www.spigotmc.org/resources/98039/ still shows the previous version until an update is posted there by hand (SpigotMC has no API for it).\n\n## Post update\n\n1. Open https://www.spigotmc.org/resources/98039/, choose **Post update**.\n2. Version string: `2.7.1`\n3. Download: **External download** \u2192 `https://github.com/Dans-Plugins/Simpl",
+      "created_at": "2026-10-11T02:14:00Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 0.777,
+      "status": "filtered",
+      "detected_at": "2026-10-11T09:08:24.874475+00:00"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/Dans-Plugins/Dans-Spawn-System/issues/111",
+      "title": "Post 2.2.0 to SpigotMC",
+      "body": "`v2.2.0` is the stable release on GitHub, but the listing at https://www.spigotmc.org/resources/82697/ still shows the previous version until an update is posted there by hand (SpigotMC has no API for it).\n\n## Post update\n\n1. Open https://www.spigotmc.org/resources/82697/, choose **Post update**.\n2. Version string: `2.2.0`\n3. Download: **External download** \u2192 `https://github.com/Dans-Plugins/Dans-",
+      "created_at": "2026-10-11T01:26:04Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 0.757,
+      "status": "filtered",
+      "detected_at": "2026-10-11T09:08:24.875031+00:00"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/Dans-Plugins/Dans-Essentials/issues/188",
+      "title": "Post 2.6.1 to SpigotMC",
+      "body": "`v2.6.1` is the stable release on GitHub, but the listing at https://www.spigotmc.org/resources/80513/ still shows the previous version until an update is posted there by hand (SpigotMC has no API for it).\n\n## Post update\n\n1. Open https://www.spigotmc.org/resources/80513/, choose **Post update**.\n2. Version string: `2.6.1`\n3. Download: **External download** \u2192 `https://github.com/Dans-Plugins/Dans-",
+      "created_at": "2026-10-11T01:14:49Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 0.753,
+      "status": "filtered",
+      "detected_at": "2026-10-11T09:08:24.875516+00:00"
     }
   ]
 }
