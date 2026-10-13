@@ -23,10 +23,14 @@
           "transformation": {
             "fields": [
               "title",
+              "seniority",
               "company_name",
               "department",
               "locations",
               "workplace_type",
+              "salary_min",
+              "salary_max",
+              "salary_currency",
               "posted_at",
               "job_url",
               "match_score"
@@ -37,6 +41,10 @@
             "properties": {
               "title": {
                 "label": "Title",
+                "format": "text"
+              },
+              "seniority": {
+                "label": "Seniority",
                 "format": "text"
               },
               "company_name": {
@@ -53,6 +61,18 @@
               },
               "workplace_type": {
                 "label": "Workplace",
+                "format": "text"
+              },
+              "salary_min": {
+                "label": "Salary min",
+                "format": "number"
+              },
+              "salary_max": {
+                "label": "Salary max",
+                "format": "number"
+              },
+              "salary_currency": {
+                "label": "Currency",
                 "format": "text"
               },
               "posted_at": {
@@ -129,6 +149,24 @@
               null
             ]
           },
+          "seniority": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "intern",
+              "entry",
+              "mid",
+              "senior",
+              "lead",
+              "manager",
+              "director",
+              "executive",
+              null
+            ],
+            "description": "Level read from the job title by fixed rules (no AI): intern, entry, mid, senior, lead, manager, director, executive; null when the title has no level marker"
+          },
           "workplace_type": {
             "type": "string",
             "enum": [
@@ -187,6 +225,32 @@
               "hour",
               null
             ]
+          },
+          "salary_source": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "structured",
+              "description",
+              null
+            ],
+            "description": "structured: the ATS's own pay fields; description: pay stated in the description text (needs the description); null: no salary"
+          },
+          "years_experience_min": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Minimum years of experience the description asks for (\"3+ years\", \"3-5 years\" -> 3); null when not stated or the description was not read"
+          },
+          "visa_sponsorship": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "true: the description says visa sponsorship is offered; false: it says sponsorship is not available; null: not mentioned, or the description was not read"
           },
           "posted_at": {
             "type": [

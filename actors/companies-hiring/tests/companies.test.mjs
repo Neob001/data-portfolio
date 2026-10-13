@@ -119,6 +119,19 @@ test('filters: minMatchingJobs, excludeCompanies, locations, remote, postedWithi
   assert.equal(recent.rows[0].open_jobs_total, 14, 'open_jobs_total is never narrowed by filters');
 }));
 
+test('seniority filter: counts only jobs whose title-derived level matches (core enrich.js)', () => withIndex(async (dir) => {
+  assert.deepEqual(normalizeCompaniesInput({ seniority: ['Senior', 'lead'] }).opts.seniority, ['senior', 'lead']);
+  assert.throws(() => normalizeCompaniesInput({ seniority: ['guru'] }), /seniority/);
+  const dir1 = await run(dir, { seniority: ['director'] });
+  assert.deepEqual(dir1.rows.map((r) => [r.company_board, r.matching_jobs]), [['gitlab', 1]], 'GitLab "Director, Engineering, ..."');
+  assert.equal(dir1.rows[0].matching_job_titles.length, 1);
+  assert.equal(dir1.rows[0].open_jobs_total, 3, 'open_jobs_total is never narrowed by filters');
+  const mid = await run(dir, { seniority: ['mid'] });
+  assert.deepEqual(mid.rows.map((r) => r.company_board), ['shieldai'], 'Lever "Aerostructures Design Engineer II"');
+  // Acme's "Account Executive N" / "Software Engineer N" titles carry no level marker.
+  assert.ok(!(await run(dir, { seniority: ['senior', 'entry', 'executive'] })).rows.some((r) => r.company_board === 'acme'));
+}));
+
 test('sortBy hiring_velocity / newest; maxResults and the charge limit', () => withIndex(async (dir) => {
   const vel = await run(dir, { sortBy: 'hiring_velocity' });
   const v = vel.rows.map((r) => r.hiring_velocity);

@@ -67,6 +67,15 @@ test('region / time-zone resolution', () => {
   assert.deepEqual(ww.words.sort(), ['anywhere', 'global', 'world wide', 'worldwide']);
 });
 
+test('seniority input passes through to the core filter (title-derived level)', () => {
+  assert.deepEqual(toFeedOptions({ seniority: ['Senior', 'lead'] }).seniority, ['senior', 'lead']);
+  assert.deepEqual(toFeedOptions({}).seniority, []);
+  assert.throws(() => toFeedOptions({ seniority: ['rockstar'] }), /seniority/);
+  const f = compileFilter(toFeedOptions({ seniority: ['senior'], postedWithinDays: 30 }));
+  assert.equal(f(extra(9, 'Senior Backend Developer', ['Remote, United States'], ['US']), NOW), true);
+  assert.equal(f(extra(9, 'Backend Developer', ['Remote, United States'], ['US']), NOW), false);
+});
+
 test('region filter on fixture jobs: US, Europe, Worldwide', () => {
   const jobs = EXTRA.map((j) => ({ ...j }));
   const gitlabUS = { ...extra(9, 'AI Transformation Owner', ['Remote, United States'], ['US']) };

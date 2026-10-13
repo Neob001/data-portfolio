@@ -17,6 +17,7 @@ import {
 import { selectShards, shardsForCompanies, INDEX_FORMAT, defaultApplyUrl } from './index_format.js';
 import { clean, snippetOf, normKey } from './text.js';
 import { robotsVerdict } from './robots.js';
+import { enrichRow } from './enrich.js';
 
 // Where the prebuilt jobs index is hosted (manifest.json + directory.json.gz + shards/).
 // Placeholder until hosting is configured; overridable with the JOBS_INDEX_URL env var.
@@ -63,20 +64,25 @@ export const ROBOTS_AGENT = 'factpipe-jobs-feed';
 const UA = 'Mozilla/5.0 (compatible; factpipe-jobs-feed/1.0; +https://apify.com/factpipe)';
 
 export const OUTPUT_FIELDS = [
-  'job_id', 'title', 'company_name', 'company_board', 'ats', 'department', 'team', 'employment_type',
+  'job_id', 'title', 'company_name', 'company_board', 'ats', 'department', 'team', 'employment_type', 'seniority',
   'workplace_type', 'locations', 'country_codes', 'remote', 'salary_min', 'salary_max', 'salary_currency',
-  'salary_period', 'posted_at', 'updated_at', 'apply_url', 'job_url', 'description_text', 'description_snippet',
-  'description_status', 'duplicate_sources', 'match_score', 'matched_in', 'source_url', 'fetched_at',
+  'salary_period', 'salary_source', 'years_experience_min', 'visa_sponsorship', 'posted_at', 'updated_at', 'apply_url',
+  'job_url', 'description_text', 'description_snippet', 'description_status', 'duplicate_sources', 'match_score',
+  'matched_in', 'source_url', 'fetched_at',
 ];
 
 /**
  * Output row. description_status: included | not_requested | unavailable (live fetch failed / empty).
  * match_score / matched_in: keyword relevance (rank.js), null when the run has no keywords.
+ * Enrichment (enrich.js, deterministic): seniority from the title on every row; salary from the text
+ * (salary_source "description"), years_experience_min and visa_sponsorship only when the full
+ * description was read (includeDescription, or live mode where the board read returns it anyway).
  */
 export function toOutput(job, includeDescription) {
   const row = {};
   for (const k of OUTPUT_FIELDS) row[k] = job[k] === undefined ? null : job[k];
   for (const k of ['locations', 'country_codes', 'duplicate_sources']) if (!Array.isArray(row[k])) row[k] = [];
+  enrichRow(row, row.description_text);
   if (!includeDescription) {
     row.description_text = null;
     row.description_status = 'not_requested';

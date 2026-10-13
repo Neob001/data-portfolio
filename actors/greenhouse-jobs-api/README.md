@@ -38,6 +38,7 @@ One flat record per job opening, from a real run:
   "department": "Engineering",
   "team": null,
   "employment_type": null,
+  "seniority": "senior",
   "workplace_type": "remote",
   "locations": [
     "Remote - USA"
@@ -46,10 +47,13 @@ One flat record per job opening, from a real run:
     "US"
   ],
   "remote": true,
-  "salary_min": null,
-  "salary_max": null,
-  "salary_currency": null,
-  "salary_period": null,
+  "salary_min": 186065,
+  "salary_max": 218900,
+  "salary_currency": "USD",
+  "salary_period": "year",
+  "salary_source": "description",
+  "years_experience_min": 5,
+  "visa_sponsorship": null,
   "posted_at": "2026-10-08T23:50:37.000Z",
   "updated_at": "2026-10-08T23:50:38.000Z",
   "apply_url": "https://www.coinbase.com/careers/positions/8174232?gh_jid=8174232",
@@ -65,10 +69,12 @@ One flat record per job opening, from a real run:
 }
 ```
 
-- Greenhouse's job-board API has no employment type or pay range, so `employment_type` and the `salary_*` fields are always `null` here. They are never guessed. `posted_at` is the job's first publication date.
+- Greenhouse's job-board API has no employment type or pay fields, so `employment_type` is always `null` here, and the `salary_*` fields come only from pay stated in the description text (`salary_source: "description"`, e.g. US pay-transparency ranges), otherwise `null`. They are never estimated. `posted_at` is the job's first publication date.
 - `match_score` (0–100) and `matched_in` (`title`, `department`, `description`) explain keyword matches. Both are `null` without keywords.
 - `duplicate_sources` lists other `job_id`s of the same opening (for example a company with two boards). Each opening is delivered and charged once.
 - **No personal data.** Recruiter and hiring-manager fields are never copied, and contact details in descriptions are replaced with `[… redacted]`.
+
+**Enrichment (deterministic, no AI).** Every job gets `seniority` (`intern`, `entry`, `mid`, `senior`, `lead`, `manager`, `director`, `executive`), read from the title by fixed rules, including common German, French, Spanish, Dutch and Portuguese markers. It is `null` when the title has no level marker ("Software Engineer"): no guessing. When the run reads the job's full description (`includeDescription`, the default), the text also gives `years_experience_min` ("3+ years", "3–5 years" → 3), `visa_sponsorship` (`true` when offered, `false` when ruled out, `null` when not mentioned) and, for jobs without structured pay, the pay stated in the text (`salary_source: "description"`; the ATS's own pay fields are `structured` and never overwritten). Without the description these three stay `null`. Same input, same output: no language model, no estimates.
 
 ## Use cases
 
@@ -91,6 +97,7 @@ One flat record per job opening, from a real run:
 | `postedWithinDays` | integer | First published within the last N days |
 | `departments` | string[] | Substring match on department or team |
 | `employmentTypes` | string[] | `full_time`, `part_time`, `contract`, `temporary`, `internship`, `other`. Greenhouse's job-board API does not state an employment type, so Greenhouse jobs have none and are excluded when this is set. |
+| `seniority` | string[] | `intern`, `entry`, `mid`, `senior`, `lead`, `manager`, `director`, `executive`, read from the job title. Jobs whose title has no level marker are excluded when this is set |
 | `maxResults` | integer | Default 100 |
 | `maxPerCompany` | integer | Optional cap on jobs from any one company (prefill 3), so a single employer posting many near-identical roles can't fill your results |
 | `includeDescription` | boolean | Default `true`: full description fetched live from Greenhouse for each delivered job |
@@ -150,8 +157,8 @@ It is the last part of the careers-page URL: `job-boards.greenhouse.io/`**`gitla
 **How fresh is the data?**
 The index is rebuilt daily. With `includeDescription` on (the default), every delivered job is re-checked live against Greenhouse during your run. Live mode (`companyUrls`) always reads Greenhouse directly.
 
-**Why is there no salary or employment type on Greenhouse jobs?**
-Greenhouse's public job-board API does not include pay ranges or employment types. We never extract or estimate them from free text. For pay data, [Lever Jobs API](https://apify.com/factpipe/lever-jobs-api) and [Ashby Jobs API](https://apify.com/factpipe/ashby-jobs-api) return the ranges employers publish.
+**Do Greenhouse jobs include salary?**
+Greenhouse's public job-board API has no pay fields. When the job description states pay (for example the pay-transparency range many US employers publish: "$186,065—$218,900 USD" under "Annual base salary range"), the run reads it from the text with fixed rules and fills `salary_min`, `salary_max`, `salary_currency` and `salary_period` with `salary_source: "description"`. Otherwise they stay `null`: pay is never estimated. This needs the description (`includeDescription`, the default). Employment type is not in the API and stays `null`. For structured pay fields, [Lever Jobs API](https://apify.com/factpipe/lever-jobs-api) and [Ashby Jobs API](https://apify.com/factpipe/ashby-jobs-api) also return the ranges employers enter in their ATS.
 
 **What happens to Lever, Ashby, Workable, Recruitee or Workday URLs?**
 They are ignored with a warning in the log, and the rest of the run goes ahead. If no Greenhouse board is left, the run ends successfully with a message and nothing is charged. For several platforms in one run, use [Greenhouse, Lever & Ashby Jobs Scraper](https://apify.com/factpipe/ats-jobs-scraper).
@@ -166,6 +173,7 @@ Inputs from [ats-jobs-scraper](https://apify.com/factpipe/ats-jobs-scraper) work
 | Location or country | `locations` (text or ISO code) |
 | Remote only | `remote: "remote_only"` |
 | Date posted | `postedWithinDays` |
+| Experience level / seniority | `seniority` (filter) → `seniority`, `years_experience_min` |
 | Result limit | `maxResults` |
 | Job description | `includeDescription` → `description_text` |
 | Job id / URL / apply link | `job_id` / `job_url` / `apply_url` |

@@ -7,6 +7,7 @@ import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { runFeed, streamShardLines } from '../src/core/feed.js';
 import { toScraperOptions, noBoardsMessage, otherPlatformWarning, PLATFORM } from '../src/scraper.js';
+import { seniorityOf } from '../src/core/enrich.js';
 import { fakeNetwork, sink, NOW, buildIndex, assertMatchesSchema, FIXTURES, load } from './helpers.mjs';
 
 const OWN = FIXTURES[PLATFORM];
@@ -114,4 +115,20 @@ test('golden fixture of this platform parses into schema-valid rows', async () =
   assert.ok(r.rows.length > 0);
   for (const x of r.rows) assertMatchesSchema(x);
   assert.ok(r.rows.every((x) => x.description_status === 'not_requested'));
+});
+
+test('enrichment: seniority from the title on every row; seniority filter; schema-valid', async () => {
+  const all = await run({ companyUrls: [OWN.token] });
+  assert.ok(all.rows.length > 0);
+  for (const x of all.rows) {
+    assertMatchesSchema(x);
+    assert.equal(x.seniority, seniorityOf(x.title), x.title);
+    assert.ok(x.salary_source === null || ['structured', 'description'].includes(x.salary_source));
+  }
+  const levels = [...new Set(all.rows.map((x) => x.seniority).filter(Boolean))];
+  if (levels.length) {
+    const only = await run({ companyUrls: [OWN.token], seniority: [levels[0]] });
+    assert.ok(only.rows.length > 0 && only.rows.every((x) => x.seniority === levels[0]));
+  }
+  assert.throws(() => toScraperOptions({ seniority: ['wizard'] }), /seniority/);
 });

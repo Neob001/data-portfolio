@@ -73,6 +73,35 @@
       "description": "Substring match on department or team, e.g. \"engineering\", \"sales\".",
       "editor": "stringList"
     },
+    "seniority": {
+      "title": "Seniority",
+      "type": "array",
+      "description": "Count only jobs at these levels (read from the job title by fixed rules, no AI): e.g. \"senior\" + \"lead\" for companies hiring experienced engineers, \"intern\" + \"entry\" for early-career hiring. Same levels as the jobs Actors; jobs whose title has no level marker are not counted when this is set. Empty = all.",
+      "editor": "select",
+      "items": {
+        "type": "string",
+        "enum": [
+          "intern",
+          "entry",
+          "mid",
+          "senior",
+          "lead",
+          "manager",
+          "director",
+          "executive"
+        ],
+        "enumTitles": [
+          "Intern / working student",
+          "Entry level / junior",
+          "Mid level",
+          "Senior",
+          "Lead / supervisor",
+          "Manager",
+          "Director / Head of / VP",
+          "Executive (C-level, SVP, founder)"
+        ]
+      }
+    },
     "minMatchingJobs": {
       "title": "Minimum matching jobs",
       "type": "integer",

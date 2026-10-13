@@ -38,6 +38,7 @@ One flat record per job opening, from a real run:
   "department": null,
   "team": null,
   "employment_type": null,
+  "seniority": "senior",
   "workplace_type": "unknown",
   "locations": [
     "Bucharest"
@@ -50,6 +51,9 @@ One flat record per job opening, from a real run:
   "salary_max": null,
   "salary_currency": null,
   "salary_period": null,
+  "salary_source": null,
+  "years_experience_min": 5,
+  "visa_sponsorship": null,
   "posted_at": "2026-10-08T00:00:00.000Z",
   "updated_at": null,
   "apply_url": "https://adobe.wd5.myworkdayjobs.com/external_experienced/job/Bucharest/Senior-Site-Reliability-Engineer---Observability_R171485/apply",
@@ -67,10 +71,12 @@ One flat record per job opening, from a real run:
 }
 ```
 
-- `posted_at` is a **date derived from Workday's "Posted N Days Ago" label** when the site was read (UTC midnight; "Posted 30+ Days Ago" becomes 30 days before, meaning *30 days or more*, see the FAQ). Workday job lists publish no pay range or department, so the `salary_*`, `department` and `team` fields are `null` (never guessed). `workplace_type` comes from the site's remote type where shown (Remote, Hybrid, Flex, On-site), otherwise from the location text, and `employment_type` from its time type. Lists name only the primary location of a multi-location job; with `includeDescription` the delivered row lists every location.
+- `posted_at` is a **date derived from Workday's "Posted N Days Ago" label** when the site was read (UTC midnight; "Posted 30+ Days Ago" becomes 30 days before, meaning *30 days or more*, see the FAQ). Workday publishes no pay fields or department, so `department` and `team` are `null` and the `salary_*` fields come only from pay stated in the description text (`salary_source: "description"`), otherwise `null` (never estimated). `workplace_type` comes from the site's remote type where shown (Remote, Hybrid, Flex, On-site), otherwise from the location text, and `employment_type` from its time type. Lists name only the primary location of a multi-location job; with `includeDescription` the delivered row lists every location.
 - `match_score` (0–100) and `matched_in` (`title`, `department`, `description`) explain keyword matches. Both are `null` without keywords.
 - `duplicate_sources` lists other `job_id`s of the same opening (for example a company with two boards). Each opening is delivered and charged once.
 - **No personal data.** Recruiter and hiring-manager fields are never copied, and contact details in descriptions are replaced with `[… redacted]`.
+
+**Enrichment (deterministic, no AI).** Every job gets `seniority` (`intern`, `entry`, `mid`, `senior`, `lead`, `manager`, `director`, `executive`), read from the title by fixed rules, including common German, French, Spanish, Dutch and Portuguese markers. It is `null` when the title has no level marker ("Software Engineer"): no guessing. When the run reads the job's full description (`includeDescription`, the default), the text also gives `years_experience_min` ("3+ years", "3–5 years" → 3), `visa_sponsorship` (`true` when offered, `false` when ruled out, `null` when not mentioned) and, for jobs without structured pay, the pay stated in the text (`salary_source: "description"`; the ATS's own pay fields are `structured` and never overwritten). Without the description these three stay `null`. Same input, same output: no language model, no estimates.
 
 ## Use cases
 
@@ -93,6 +99,7 @@ One flat record per job opening, from a real run:
 | `postedWithinDays` | integer | First published within the last N days |
 | `departments` | string[] | Substring match on department or team |
 | `employmentTypes` | string[] | `full_time`, `part_time`, `contract`, `temporary`, `internship`, `other`. Normalized from the time type a Workday site shows in its job list (Full time, Part time). Many sites don't show one; their jobs are excluded when this is set. |
+| `seniority` | string[] | `intern`, `entry`, `mid`, `senior`, `lead`, `manager`, `director`, `executive`, read from the job title. Jobs whose title has no level marker are excluded when this is set |
 | `maxResults` | integer | Default 100 |
 | `maxPerCompany` | integer | Optional cap on jobs from any one company (prefill 3), so a single employer posting many near-identical roles can't fill your results |
 | `includeDescription` | boolean | Default `true`: full description fetched live from Workday for each delivered job |
@@ -180,6 +187,7 @@ Inputs from [ats-jobs-scraper](https://apify.com/factpipe/ats-jobs-scraper) work
 | Location or country | `locations` (text or ISO code) |
 | Remote only | `remote: "remote_only"` |
 | Date posted | `postedWithinDays` |
+| Experience level / seniority | `seniority` (filter) → `seniority`, `years_experience_min` |
 | Result limit | `maxResults` |
 | Job description | `includeDescription` → `description_text` |
 | Job id / URL / apply link | `job_id` / `job_url` / `apply_url` |

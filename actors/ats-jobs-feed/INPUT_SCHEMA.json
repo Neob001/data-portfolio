@@ -142,6 +142,35 @@
         ]
       }
     },
+    "seniority": {
+      "title": "Seniority",
+      "type": "array",
+      "description": "Only jobs at these levels, read from the job title by fixed rules (no AI): intern (Intern, Working student, Co-op, Trainee, Apprentice), entry (Junior, Graduate, Associate, Engineer I), mid (Mid-level, Engineer II, Intermediate), senior (Senior, Staff engineer, Principal, Engineer III), lead (Lead, Team lead, Supervisor), manager (people managers; not Product/Project/Account Manager), director (Director, Head of, VP), executive (Chief ... Officer, CEO/CTO, SVP, President, Founder). Common German, French, Spanish, Dutch and Portuguese markers count too. Jobs whose title has no level marker (\"Software Engineer\") are excluded when this is set. Empty = all.",
+      "editor": "select",
+      "items": {
+        "type": "string",
+        "enum": [
+          "intern",
+          "entry",
+          "mid",
+          "senior",
+          "lead",
+          "manager",
+          "director",
+          "executive"
+        ],
+        "enumTitles": [
+          "Intern / working student",
+          "Entry level / junior",
+          "Mid level",
+          "Senior",
+          "Lead / supervisor",
+          "Manager",
+          "Director / Head of / VP",
+          "Executive (C-level, SVP, founder)"
+        ]
+      }
+    },
     "maxResults": {
       "title": "Max results",
       "type": "integer",

@@ -21,6 +21,20 @@ async function run(input, { dir } = {}) {
   return { summary, rows: out.rows, charges: out.charges, calls: net.calls, read };
 }
 
+test('seniority input: validated; search with seniority returns only that title-derived level', async () => {
+  assert.deepEqual(toScraperOptions({ seniority: ['Director'] }).seniority, ['director']);
+  assert.throws(() => toScraperOptions({ seniority: ['boss'] }), /seniority/);
+  const dir = await mkdtemp(join(tmpdir(), 'ats-index-'));
+  try {
+    await buildIndex(dir);
+    const r = await run({ seniority: ['director'], includeDescription: false }, { dir });
+    assert.ok(r.rows.length >= 1);
+    for (const x of r.rows) { assertMatchesSchema(x); assert.equal(x.seniority, 'director'); }
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
 test('ats selection: only the chosen platforms, other ATS shards never downloaded', async () => {
   const dir = await mkdtemp(join(tmpdir(), 'ats-index-'));
   try {
