@@ -219,7 +219,7 @@ const PAY_WORDS = 'salary|salaries|pay|paid|compensation|comp|base|wage|wages|ra
   + 'gehalt|jahresgehalt|bruttojahresgehalt|zieljahresgehalt|vergütung|verguetung|verdienst|lohn|stundenlohn|entgelt|bezahlung|salär|'
   + 'salaire|rémunération|remuneration|rémunéré|brut|salario|sueldo|remuneración|retribución|salário|remuneração|salaris|loon|bruto|'
   + 'retribuzione|stipendio|ral|lpa|ctc|package';
-const NONPAY_WORDS = 'raised|raise|raising|funding|funded|series|valuation|valued|revenue|revenues|arr|turnover|budget|budgets|stipend|stipends|'
+const NONPAY_WORDS = 'differential|differentials|premium|premiums|uplift|uplifts|incentive|incentives|raised|raise|raising|funding|funded|series|valuation|valued|revenue|revenues|arr|turnover|budget|budgets|stipend|stipends|'
   + 'allowance|allowances|bonus|bonuses|equity|stock|rsus?|shares|options|relocation|reimbursement|reimbursed|reimburse|credit|credits|'
   + 'wellness|learning|education|tuition|referral|signing|sign-on|gift|gifts|donation|donations|grant|grants|prize|prizes|award|awards|'
   + 'investment|investments|invested|investors|aum|assets|capital|fund|funds|loan|loans|deposits?|transactions?|processed|gmv|spend|spending|'
@@ -358,6 +358,8 @@ export function salaryFromText(text, countryCodes = []) {
     const postKind = nearestKind(after.slice(0, 40), false);
     const period0 = periodOf(after, before);
     if (preKind === 'nonpay') continue;
+    // "+$2.25/hr": an add-on to a rate (shift differential), not the rate itself.
+    if (/\+\s*$/.test(s.slice(Math.max(0, lo.start - 3), lo.start))) continue;
     if (preKind === null && !(period0 || postKind === 'pay')) continue;
     if (preKind === null && postKind === 'nonpay' && !period0) continue;
     const cur = resolveCurrency(sym, s, countryCodes);

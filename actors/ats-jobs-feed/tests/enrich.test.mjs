@@ -119,6 +119,10 @@ test('seniorityOf: only enum values, fast enough for an index scan (~730k titles
 const sal = (salary_min, salary_max, salary_currency, salary_period) => ({ salary_min, salary_max, salary_currency, salary_period });
 const SALARY = [
   ['The base salary range for this role is $120,000 - $150,000.', [], sal(120000, 150000, 'USD', 'year')],
+  // Shift differentials / premiums are add-ons, not the rate (real Workday posting, 2026-10-13).
+  ['Weekend Differential: +$2.25/hr\nNight Differential: +$3.75/hr', ['US'], null],
+  ['Pay: $18.50 - $24.00 per hour\nWeekend Differential: +$2.25/hr', ['US'], sal(18.5, 24, 'USD', 'hour')],
+  ['Night shift premium of $3.00 per hour applies.', ['US'], null],
   ['Compensation: $120K–$150K USD + equity', [], sal(120000, 150000, 'USD', 'year')],
   ['Gehalt: €55.000 - €65.000 brutto pro Jahr', [], sal(55000, 65000, 'EUR', 'year')],
   ['Salary: £40k-£45k depending on experience', [], sal(40000, 45000, 'GBP', 'year')],
