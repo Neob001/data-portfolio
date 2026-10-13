@@ -5,7 +5,7 @@
   "description": "Run real Google Lighthouse audits in bulk: performance, SEO, accessibility and best-practices scores, LCP/CLS/TBT with pass/fail, and top fixes. Mobile and desktop. No API key or quota. $10 per 1,000 audits.",
   "version": "0.1",
   "buildTag": "latest",
-  "minMemoryMbytes": 2048,
+  "minMemoryMbytes": 1024,
   "input": "../INPUT_SCHEMA.json",
   "readme": "../README.md",
   "dockerfile": "./Dockerfile",

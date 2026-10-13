@@ -5,7 +5,7 @@
   "description": "Capture full-page or viewport screenshots of any list of URLs in bulk. Desktop or mobile, PNG or JPEG, cookie banners hidden. No browser to manage. $2 per 1,000 screenshots.",
   "version": "0.1",
   "buildTag": "latest",
-  "minMemoryMbytes": 2048,
+  "minMemoryMbytes": 1024,
   "input": "../INPUT_SCHEMA.json",
   "readme": "../README.md",
   "dockerfile": "./Dockerfile",
