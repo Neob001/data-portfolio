@@ -36,7 +36,7 @@ test('src/lib is the synced shared copy (never edited here)', () => {
   }
 });
 
-test('every Actor that reads the jobs index refuses to run below 1 GB (smaller runs are OOM-killed)', () => {
+test('every Actor that reads the jobs index refuses to run below 2 GB (2,000+ job requests are OOM-killed at 1 GB)', () => {
   const root = new URL('../../', import.meta.url);
   const readers = readdirSync(root).filter((d) => {
     try { return readdirSync(new URL(`${d}/src/core/`, root)).includes('feed.js'); } catch { return false; }
@@ -44,6 +44,6 @@ test('every Actor that reads the jobs index refuses to run below 1 GB (smaller r
   assert.ok(readers.length >= 8, `found ${readers.length} index readers`);
   for (const d of readers) {
     const a = JSON.parse(readFileSync(new URL(`${d}/.actor/actor.json`, root), 'utf8'));
-    assert.ok((a.minMemoryMbytes ?? 0) >= 1024, `${d}: minMemoryMbytes ${a.minMemoryMbytes}`);
+    assert.ok((a.minMemoryMbytes ?? 0) >= 2048, `${d}: minMemoryMbytes ${a.minMemoryMbytes}`);
   }
 });

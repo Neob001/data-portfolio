@@ -9,7 +9,7 @@
   "readme": "../README.md",
   "dockerfile": "./Dockerfile",
   "outputSchema": "./output_schema.json",
-  "minMemoryMbytes": 1024,
+  "minMemoryMbytes": 2048,
   "categories": [
     "JOBS",
     "LEAD_GENERATION"

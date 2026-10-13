@@ -492,7 +492,7 @@ def input_schema(platform, cfg):
     return {"title": f"{name} Jobs API", "type": "object", "schemaVersion": 1, "properties": out}
 
 
-MIN_MEMORY_MB = 1024
+MIN_MEMORY_MB = 2048
 
 
 def actor_json(platform, cfg):
@@ -516,8 +516,8 @@ def actor_json(platform, cfg):
         "readme": "../README.md",
         "dockerfile": "./Dockerfile",
         "outputSchema": "./output_schema.json",
-        # Index search needs ~0.5-0.7 GB since Workday doubled the index; at 256/512 MB runs are OOM-killed
-        # (FAILED, no log line). Users cannot pick less than this.
+        # Index search needs ~0.5-0.9 GB since Workday doubled the index (2,000+ job requests OOM at 1 GB:
+        # FAILED, no log line). Users cannot pick less than this.
         "minMemoryMbytes": MIN_MEMORY_MB,
         "categories": CATEGORIES,
         "storages": {
