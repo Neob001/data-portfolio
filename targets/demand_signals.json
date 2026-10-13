@@ -401,6 +401,48 @@
       "capture_score": 0.753,
       "status": "filtered",
       "detected_at": "2026-10-11T09:08:24.875516+00:00"
+    },
+    {
+      "platform": "stackoverflow",
+      "url": "https://stackoverflow.com/questions/80009348/how-do-i-solve-an-error-with-a-python-scraping-program",
+      "title": "How do I solve an error with a Python scraping program",
+      "body": "company data api",
+      "created_at": "2026-10-12T00:09:34+00:00",
+      "engagement": -2,
+      "answered": true,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": -0.945,
+      "status": "filtered",
+      "detected_at": "2026-10-13T02:57:09.587503+00:00"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/DivyanshBFL/Test-Rep/issues/278",
+      "title": "Data Restore feature",
+      "body": "---CLIENT_META---\nToken: DEDUP_frontend_559\nOrigRepo: frontend\nOrigNumber: 559\nOrigAuthor: doug17grapes\nOrigCreatedAt: 2026-10-12T16:27:21Z\nOrigLabels: None\nOrigState: OPEN\n---END_CLIENT_META---\n\nThere is currently an API for records that are accidentally deleted. \n",
+      "created_at": "2026-10-12T16:29:24Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 1.393,
+      "status": "filtered",
+      "detected_at": "2026-10-13T02:57:09.591935+00:00"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/Dans-Plugins/Wild-Pets/issues/345",
+      "title": "Post 1.11.0 to SpigotMC",
+      "body": "`v1.11.0` is the stable release on GitHub, but the listing at https://www.spigotmc.org/resources/95800/ still shows the previous version until an update is posted there by hand (SpigotMC has no API for it).\n\n## Post update\n\n1. Open https://www.spigotmc.org/resources/95800/, choose **Post update**.\n2. Version string: `1.11.0`\n3. Download: **External download** \u2192 `https://github.com/Dans-Plugins/Wil",
+      "created_at": "2026-10-12T01:45:45Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 0.488,
+      "status": "filtered",
+      "detected_at": "2026-10-13T02:57:09.593711+00:00"
     }
   ]
 }
