@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate discovered ATS board tokens against the official public job-board APIs.
+"""Validate discovered ATS board tokens against the official public job-board APIs and career-site feeds.
 
 Zero-token, stdlib only. Reads candidates.json (from discover_boards.py) and optionally the
 existing boards.json (re-checks known boards too), calls each ATS API once per board with polite
@@ -33,9 +33,11 @@ from concurrent.futures import ThreadPoolExecutor
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 CANDIDATES = os.path.join(HERE, 'candidates.json')
-# Committed Workday candidates (career sites from discover_boards.py): unlike candidates.json this file
-# is in git, so the nightly workflow validates them incrementally (--max-new per run).
+# Committed candidates of the career-site platforms (from discover_boards.py): unlike candidates.json these
+# files are in git, so the nightly workflow validates them incrementally (--max-new per run).
 WORKDAY_CANDIDATES = os.path.join(HERE, 'workday_candidates.json')
+COMMITTED_CANDIDATES = [WORKDAY_CANDIDATES, os.path.join(HERE, 'personio_candidates.json'),
+                        os.path.join(HERE, 'teamtailor_candidates.json')]
 BOARDS = os.path.join(HERE, 'boards.json')
 CHECKPOINT = os.path.join(HERE, 'state', 'validate.jsonl')
 BANS = os.path.join(HERE, 'state', 'bans.json')  # {ats: unix time until which we must not call it}
@@ -67,7 +69,12 @@ POLICY = {
     # Workday career sites (not a documented API): 4 hosts in parallel, one site at a time per host, one
     # request start per 250 ms across all Workday hosts, robots.txt checked per host before any call.
     'workday': (4, 0.25),
+    # Personio /xml and Teamtailor /jobs.rss career-site feeds: one host per company, robots.txt of that host first,
+    # 4 boards in parallel, one request start per 250 ms across the platform.
+    'personio': (4, 0.25),
+    'teamtailor': (4, 0.25),
 }
+ROBOTS_CHECKED = ('workday', 'personio', 'teamtailor')
 ROBOTS_AGENT = 'factpipe-jobs-index'
 
 
@@ -133,7 +140,36 @@ def workday_parts(token):
     return tenant.lower(), wd.lower(), site, f'{tenant.lower()}.{wd.lower()}.myworkdayjobs.com'
 
 
+TT_REGIONAL = re.compile(r'^[a-z0-9][a-z0-9-]*\.[a-z]{2}$')
+
+
+def board_host(ats, token):
+    """Host of a robots-checked board (same as boardHost() in actors/ats-jobs-feed/src/core/transform.js)."""
+    t = token.lower()
+    if ats == 'workday':
+        return workday_parts(token)[3]
+    if ats == 'personio':
+        return f'{t}.jobs.personio.de'
+    if ats == 'teamtailor':
+        return f'{t}.teamtailor.com' if '.' not in t or TT_REGIONAL.match(t) else t
+    return None
+
+
+def robots_paths(ats, token):
+    """Paths robots.txt must allow before we read a board (robotsPathsFor() in transform.js)."""
+    if ats == 'workday':
+        tenant, _, site, _ = workday_parts(token)
+        return [f'/wday/cxs/{tenant}/{site}/jobs', f'/wday/cxs/{tenant}/{site}/job/', f'/{site}/']
+    if ats == 'personio':
+        return ['/xml', '/job/']
+    if ats == 'teamtailor':
+        return ['/jobs.rss', '/jobs.rss?offset=100', '/jobs/']
+    return []
+
+
 def api_url(ats, token, region=None):
+    if ats in ('personio', 'teamtailor'):
+        return f'https://{board_host(ats, token)}/' + ('xml' if ats == 'personio' else 'jobs.rss')
     if ats == 'workday':
         tenant, _, site, host = workday_parts(token)
         return f'https://{host}/wday/cxs/{tenant}/{urllib.parse.quote(site, safe="")}/jobs'
@@ -148,6 +184,8 @@ def api_url(ats, token, region=None):
 
 
 def page_url(ats, token, region=None):
+    if ats == 'personio':
+        return f'https://{board_host(ats, token)}/'
     if ats == 'workday':
         _, _, site, host = workday_parts(token)
         return f'https://{host}/{urllib.parse.quote(site, safe="")}'
@@ -218,21 +256,29 @@ def robots_allowed(rules, path):
     return True if best is None else best[1]
 
 
-def workday_robots_verdict(status, text, token):
-    """-> (allowed, reason) for a Workday site's CXS list/detail paths and its own pages."""
-    if status == 0 or status >= 500:
+def robots_verdict(status, text, content_type, paths):
+    """-> (allowed, reason) for the paths we read on one host (robotsVerdict() in core/robots.js).
+    Only a 2xx text/plain robots file grants permission: unreachable / 5xx, no robots file (4xx), a non-text/plain
+    answer and an HTML body all mean "disallow everything" (owner rule, stricter than RFC 9309)."""
+    if status == 0 or status < 0 or status >= 500:
         return False, 'robots.txt unreachable'
     if status >= 400:
-        return True, f'robots.txt HTTP {status}'
+        return False, f'robots.txt HTTP {status} (no robots file is not taken as permission)'
+    if content_type is not None and not re.match(r'\s*text/plain\b', content_type, re.I):
+        return False, f'robots.txt answered as {content_type or "no content type"}, not text/plain'
     if re.match(r'\s*<', text or ''):
         return False, 'robots.txt answered with an HTML page'  # not a robots file: assume not allowed
-    tenant, _, site, _ = workday_parts(token)
     rules = robots_rules(parse_robots(text))
     lower = [(a, r.lower()) for a, r in rules]
-    for path in (f'/wday/cxs/{tenant}/{site}/jobs', f'/wday/cxs/{tenant}/{site}/job/', f'/{site}/'):
+    for path in paths:
         if not robots_allowed(rules, path) or not robots_allowed(lower, path.lower()):
             return False, f'robots.txt disallows {path}'
     return True, 'robots.txt allows'
+
+
+def workday_robots_verdict(status, text, token, content_type=None):
+    """-> (allowed, reason) for a Workday site's CXS list/detail paths and its own pages."""
+    return robots_verdict(status, text, content_type, robots_paths('workday', token))
 
 
 def workday_tenant_name(token):
@@ -242,8 +288,32 @@ def workday_tenant_name(token):
     return t.upper() if len(t) <= 3 else t[:1].upper() + t[1:]
 
 
-ROBOTS = {}  # host -> (status, text)
+ROBOTS = {}  # host -> (status, text, content_type)
 ROBOTS_LOCK = threading.Lock()
+
+
+def get_robots(url, pacer, retries=1, timeout=30):
+    """GET robots.txt with Accept: text/plain -> (status, text, content_type); status 0 when unreachable."""
+    delay = 2
+    for attempt in range(retries + 1):
+        pacer.wait()
+        req = urllib.request.Request(url, headers={'User-Agent': UA, 'Accept': 'text/plain'})
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return r.status, r.read(512 * 1024).decode('utf-8', 'replace'), r.headers.get('Content-Type') or ''
+        except urllib.error.HTTPError as e:
+            if e.code in (429, 500, 502, 503, 504) and attempt < retries:
+                time.sleep(delay)
+                delay *= 2
+                continue
+            return e.code, '', (e.headers.get('Content-Type') if e.headers else '') or ''
+        except (urllib.error.URLError, TimeoutError, ConnectionError, OSError, http.client.HTTPException):
+            if attempt < retries:
+                time.sleep(delay)
+                delay *= 2
+                continue
+            return 0, '', None
+    return 0, '', None
 
 
 def host_robots(host, pacer):
@@ -251,10 +321,38 @@ def host_robots(host, pacer):
         if host in ROBOTS:
             return ROBOTS[host]
     # Accept text/plain: asked for text/html, Workday hosts answer /robots.txt with their HTML app page.
-    status, text = get(f'https://{host}/robots.txt', pacer, retries=1, timeout=30, want_json=False, accept='text/plain, */*;q=0.1')
+    res = get_robots(f'https://{host}/robots.txt', pacer)
     with ROBOTS_LOCK:
-        ROBOTS[host] = (status, text or '')
+        ROBOTS[host] = res
     return ROBOTS[host]
+
+
+def personio_name(page):
+    """Company name from a Personio career page <title> (personioNameFromPage() in core/feed.js)."""
+    m = re.search(r'<title[^>]*>([^<]{1,200})</title>', page or '', re.I)
+    if not m:
+        return None
+    t = re.sub(r'\s+', ' ', html.unescape(m.group(1))).strip()
+    n = re.fullmatch(r'(?i)(?:jobs?|stellenangebote|stellen|karriere|careers?|offres d[\'’]emploi|emplois?|vacatures|'
+                     r'ofertas de (?:empleo|trabajo)|empleos?|posizioni aperte|lavora con noi|vagas|lediga jobb|ledige stillinger|'
+                     r'työpaikat)\s+(?:bei|at|chez|bij|en|in|presso|da|na|hos|à|@|von)\s+(.{2,100})', t)
+    name = re.sub(r'\s+', ' ', n.group(1)).strip() if n else None
+    return None if not name or re.fullmatch(r'(?i)personio|uns|us|our company', name) else name
+
+
+def feed_count_and_name(ats, body):
+    """Personio /xml or Teamtailor /jobs.rss body -> (open jobs, company name) ; (None, None) if not that feed."""
+    if not isinstance(body, str):
+        return None, None
+    if ats == 'personio':
+        if not re.search(r'<workzag-jobs[\s>/]', body):
+            return None, None
+        return len(re.findall(r'<position>', body)), None
+    if not re.search(r'<rss[\s>]', body) or not re.search(r'<channel>', body):
+        return None, None
+    m = re.search(r'<channel>\s*<title>([^<]{1,200})</title>', body)
+    name = re.sub(r'\s+', ' ', html.unescape(m.group(1))).strip() if m else None
+    return len(re.findall(r'<item>', body)), name or None
 
 
 def title_name(ats, page):
@@ -291,13 +389,43 @@ def count_and_name(ats, body):
 
 def check(ats, token, region, pacers, prev=None):
     rec = {'ats': ats, 'token': token, 'checked': time.strftime('%Y-%m-%d', time.gmtime()), 'ts': time.time()}
-    if ats == 'workday':
-        # Before any call to a Workday site: its host's robots.txt must allow the CXS paths we read.
-        r_status, r_text = host_robots(workday_parts(token)[3], pacers['workday'])
-        allowed, reason = workday_robots_verdict(r_status, r_text, token)
+    if ats in ROBOTS_CHECKED:
+        # Before any other call to the board's host: its robots.txt must allow the paths we read.
+        r_status, r_text, r_type = host_robots(board_host(ats, token), pacers[ats])
+        allowed, reason = robots_verdict(r_status, r_text, r_type, robots_paths(ats, token))
         if not allowed:
             rec.update({'status': 'robots', 'reason': reason})
             return rec
+    if ats in ('personio', 'teamtailor'):
+        accept = 'application/xml, text/xml;q=0.9, */*;q=0.1' if ats == 'personio' else 'application/rss+xml, application/xml;q=0.9, */*;q=0.1'
+        status, body = get(api_url(ats, token), pacers[ats], retries=2, timeout=90, want_json=False, accept=accept)
+        rec['status'] = status
+        if status != 200:
+            return rec
+        n, name = feed_count_and_name(ats, body)
+        if n is None:
+            rec['status'] = 'not_feed'  # answered, but not a Personio / Teamtailor feed (definitive)
+            return rec
+        if ats == 'teamtailor' and n >= 100:
+            # /jobs.rss lists 100 items per page; ?offset=100, 200... the next ones (counted up to 2,000 jobs).
+            for off in range(100, 2000, 100):
+                st, more = get(f'{api_url(ats, token)}?offset={off}', pacers[ats], retries=2, timeout=90, want_json=False, accept=accept)
+                m, _ = feed_count_and_name(ats, more) if st == 200 else (None, None)
+                if not m:
+                    break
+                n += m
+                if m < 100:
+                    break
+        rec['jobs'] = n
+        if n and ats == 'personio':
+            name = (prev or {}).get('name') if (prev or {}).get('name_src') == 'page' else None
+            if not name:
+                st, page = get(page_url(ats, token), pacers['personio'], retries=1, timeout=60, want_json=False)
+                name = personio_name(page) if st == 200 else None
+            rec['name_src'] = 'page' if name else 'token'
+        rec['name'] = name or token
+        return rec
+    if ats == 'workday':
         status, body = get(api_url(ats, token), pacers[ats], retries=2, timeout=45,
                            body={'appliedFacets': {}, 'limit': 20, 'offset': 0, 'searchText': ''})
     else:
@@ -331,6 +459,7 @@ def main():
     ap.add_argument('--ats', default='')
     ap.add_argument('--limit', type=int, default=0, help='max boards per ATS (0 = all)')
     ap.add_argument('--max-age-hours', type=float, default=20, help='skip boards checked more recently than this')
+    ap.add_argument('--tokens', default='', help='only these board tokens (comma list), e.g. to re-check a few boards')
     ap.add_argument('--max-new', type=int, default=0,
                     help='per ATS, check at most N never-checked candidates this run (0 = all); the rest wait for '
                          'the next run. Lets the nightly workflow work through workday_candidates.json incrementally.')
@@ -344,9 +473,10 @@ def main():
         with open(CANDIDATES) as f:
             cands = json.load(f)
     sources = [cands]
-    if os.path.exists(WORKDAY_CANDIDATES):  # committed, so CI sees it too
-        with open(WORKDAY_CANDIDATES) as f:
-            sources.append(json.load(f))
+    for path in COMMITTED_CANDIDATES:  # committed, so CI sees them too
+        if os.path.exists(path):
+            with open(path) as f:
+                sources.append(json.load(f))
     for src in sources:
         for key, tokens in src.items():
             if key.startswith('_'):
@@ -379,10 +509,12 @@ def main():
     for (ats, low, region), tok in sorted(todo.items(), key=lambda kv: (kv[0][0], kv[0][1], kv[0][2] or "")):
         if (only and ats not in only) or ats in bans:
             continue
+        if args.tokens and low not in {t.lower() for t in args.tokens.split(',')}:
+            continue
         prev = done.get((ats, low, region))
         # Definitive answers (200 / 404 / 410 / robots-disallowed; Workday also 403 "permission denied" = site not
         # public, 422 = wrong data center) are reused while fresh; transient failures are retried.
-        final = (200, 404, 410, 'robots') + ((403, 422) if ats == 'workday' else ())
+        final = (200, 404, 410, 'robots', 'not_feed') + ((403, 422) if ats == 'workday' else ())
         if prev and prev.get('ts', 0) >= fresh and prev.get('status') in final:
             continue
         if prev is None and args.max_new:

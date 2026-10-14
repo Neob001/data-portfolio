@@ -6,17 +6,23 @@
 //   node scripts/jobs_index/build_index.mjs --ats greenhouse,ashby --out /tmp/idx
 //   node scripts/jobs_index/build_index.mjs --skip-ats workable --transport curl --codec br
 //   node scripts/jobs_index/build_index.mjs --ats workday --limit 60 --workday-max-jobs 200 --out /tmp/wd
+//   node scripts/jobs_index/build_index.mjs --ats personio,teamtailor --limit 200 --out /tmp/feeds
 //
 // Polite per-host limits (same as validate_boards.py): Greenhouse 8 parallel, Ashby 6,
 // Recruitee 8, Workable 1 @ >=3s spacing, Lever <=8 in flight @ >=1s between request starts (robots.txt Crawl-delay),
 // Workday 8 sites in parallel (one per host) @ >=150 ms between request starts across all Workday hosts, robots.txt
-// checked per host.
+// checked per host. Personio / Teamtailor (career-site feeds, one host per company): 6 boards in parallel @ >=200 ms
+// between request starts per platform, robots.txt of each host read (Accept: text/plain) before its feed.
 //
 // Workday budget: a site's jobs come 20 per request, so a 2,000-job site costs 100 requests. Each site keeps
 // its newest --workday-max-jobs jobs, stops paging after --workday-site-budget-s, and the whole Workday queue
 // stops starting sites after --workday-budget-min (it runs in parallel with the other ATSs, so it must end
 // before the slowest of them, Workable at ~3 s per board). The site order rotates daily, so a budget cut
 // skips different sites on different nights.
+//
+// Personio / Teamtailor budget: one feed request per board (+ robots.txt; Personio + one English feed when a position
+// has no default-language description). Each platform's queue runs in parallel with the others, rotates daily
+// and stops starting boards after --personio-budget-min / --teamtailor-budget-min, with its own 429 breaker.
 // Zero-token, deterministic. Needs node >= 22; imports only node builtins and the Actor's src/.
 import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
@@ -27,6 +33,7 @@ import { execFile } from 'node:child_process';
 const HERE = dirname(fileURLToPath(import.meta.url));
 const SRC = resolve(HERE, '../../actors/ats-jobs-feed/src');
 const { fetchBoard } = await import(join(SRC, 'feed.js'));
+const { boardHost } = await import(join(SRC, 'core/transform.js'));
 const { IndexWriter } = await import(join(SRC, 'index_writer.js'));
 const { fetchJson, FetchError } = await import(join(SRC, 'lib/http.js'));
 const execFileP = promisify(execFile);
@@ -40,7 +47,12 @@ const POLICY = {
   // Career-site JSON (not a documented API): robots.txt checked per host, one site at a time per host,
   // <= 6.7 request starts/s across all Workday hosts (8 sites in flight, ~1.2 s per request measured).
   workday: { workers: 8, gapMs: 150 },
+  // Career-site feeds (Personio /xml, Teamtailor /jobs.rss): one host per company, robots.txt per host first.
+  personio: { workers: 6, gapMs: 200 },
+  teamtailor: { workers: 6, gapMs: 200 },
 };
+const FEED_ATS = new Set(['personio', 'teamtailor']);
+const ROBOTS_ATS = new Set(['workday', 'personio', 'teamtailor']);
 
 const { values: args } = parseArgs({
   options: {
@@ -56,6 +68,9 @@ const { values: args } = parseArgs({
     'workday-max-jobs': { type: 'string', default: '300' }, // newest N jobs per Workday site (20 per request)
     'workday-site-budget-s': { type: 'string', default: '90' }, // stop paging one site after this long
     'workday-budget-min': { type: 'string', default: '85' }, // stop starting Workday sites after this long
+    'personio-budget-min': { type: 'string', default: '45' }, // stop starting Personio boards after this long
+    'teamtailor-budget-min': { type: 'string', default: '45' }, // stop starting Teamtailor boards after this long
+    'teamtailor-max-jobs': { type: 'string', default: '1000' }, // newest-first pages of 100 per Teamtailor site
   },
 });
 
@@ -87,19 +102,44 @@ async function curlJson(url, { retries = 3, timeoutMs = 180000, minDelayMs = 200
   throw lastErr;
 }
 
-/** robots.txt fetch for Workday hosts (fetchText-compatible: throws with .status on HTTP errors). */
-async function robotsText(url) {
-  if (!url.endsWith('/robots.txt')) throw new Error(`name from boards.json, not ${url}`);
-  if (args.transport === 'curl') {
-    const { stdout } = await execFileP('curl', ['-sS', '-L', '--max-time', '30', '-A', UA, '-w', '\n%{http_code}', url], { maxBuffer: 8 * 1024 * 1024 });
-    const nl = stdout.lastIndexOf('\n');
-    const status = Number(stdout.slice(nl + 1));
-    if (status !== 200) throw new FetchError(`HTTP ${status} at ${url}`, 'http_error', status);
-    return stdout.slice(0, nl);
+/**
+ * fetchText-compatible GET for robots.txt (Workday, Personio, Teamtailor hosts) and the Personio / Teamtailor feeds:
+ * opts { accept, meta, retries, timeoutMs } like defaultFetchText in core/feed.js. 429 / 5xx / network errors are
+ * retried with backoff; other HTTP errors throw a FetchError with .status. Company pages are never fetched here
+ * (names come from boards.json).
+ */
+async function getText(url, { accept = null, meta = false, retries = 2, timeoutMs = 60000 } = {}) {
+  if (!url.endsWith('/robots.txt') && !/\/xml(?:\?language=en)?$|\/jobs\.rss(?:\?offset=\d+)?$/.test(url)) throw new Error(`name from boards.json, not ${url}`);
+  let last;
+  for (let a = 0; a <= retries; a += 1) {
+    if (a) await new Promise((r) => setTimeout(r, 2000 * 2 ** (a - 1)));
+    let status;
+    let text;
+    let contentType;
+    try {
+      if (args.transport === 'curl') {
+        const { stdout } = await execFileP('curl', ['-sS', '-L', '--compressed', '--max-time', String(Math.ceil(timeoutMs / 1000)), '-A', UA,
+          ...(accept ? ['-H', `accept: ${accept}`] : []), '-w', '\n%{http_code} %{content_type}', url], { maxBuffer: 256 * 1024 * 1024 });
+        const nl = stdout.lastIndexOf('\n');
+        const tail = stdout.slice(nl + 1);
+        status = Number(tail.split(' ')[0]);
+        contentType = tail.slice(tail.indexOf(' ') + 1);
+        text = stdout.slice(0, nl);
+      } else {
+        const res = await fetch(url, { headers: { 'User-Agent': UA, ...(accept ? { accept } : {}) }, redirect: 'follow', signal: AbortSignal.timeout(timeoutMs) });
+        status = res.status;
+        contentType = res.headers.get('content-type') || '';
+        text = await res.text();
+      }
+    } catch (e) {
+      last = new FetchError(`GET failed at ${url}: ${String(e.stderr || e.message).trim().slice(0, 200)}`, e.code === 28 || e.name === 'TimeoutError' ? 'timeout' : 'site_down');
+      continue;
+    }
+    if (status === 429 || status >= 500) { last = new FetchError(`HTTP ${status} at ${url}`, status === 429 ? 'blocked' : 'site_down', status); continue; }
+    if (status < 200 || status >= 300) throw new FetchError(`HTTP ${status} at ${url}`, status === 403 ? 'blocked' : 'http_error', status);
+    return meta ? { status, text, contentType } : text;
   }
-  const res = await fetch(url, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(30000) });
-  if (!res.ok) throw new FetchError(`HTTP ${res.status} at ${url}`, 'http_error', res.status);
-  return res.text();
+  throw last;
 }
 
 /** Rotate a list by the day of the year, so a budget cut skips different items on different days. */
@@ -153,11 +193,17 @@ async function main() {
   const failures = [];
   const queues = new Map();
   for (const b of boards) (queues.get(b.ats) || queues.set(b.ats, []).get(b.ats)).push(b);
-  if (queues.has('workday')) queues.set('workday', rotateDaily(queues.get('workday')));
+  for (const a of ['workday', ...FEED_ATS]) if (queues.has(a)) queues.set(a, rotateDaily(queues.get(a)));
+  // Per-queue time budgets: no new board of that platform after this point (each runs in parallel with the others).
+  const queueEndsAt = {
+    workday: t0 + (Number(args['workday-budget-min']) || 85) * 60000,
+    personio: t0 + (Number(args['personio-budget-min']) || 45) * 60000,
+    teamtailor: t0 + (Number(args['teamtailor-budget-min']) || 45) * 60000,
+  };
   const wdCfg = {
     maxJobs: Number(args['workday-max-jobs']) || 300,
     siteBudgetMs: (Number(args['workday-site-budget-s']) || 90) * 1000,
-    endsAt: t0 + (Number(args['workday-budget-min']) || 85) * 60000,
+    endsAt: queueEndsAt.workday,
   };
   const wdDeadline = { hasTimeFor: () => Date.now() < wdCfg.endsAt };
   const robotsCache = new Map();
@@ -173,12 +219,15 @@ async function main() {
     const getJson = args.transport === 'curl' ? curlJson : fetchJson;
     const politeFetchJson = async (url, opts) => { await wait(); return getJson(url, { ...opts, retries: 3, timeoutMs: 180000, minDelayMs: 2000 }); };
     const politeFetchText = async (url) => { throw new Error(`name from boards.json, not ${url}`); };
+    // robots.txt and feeds of the career-site platforms, paced with the platform's other requests.
+    const politeGetText = async (url, opts) => { await wait(); return getText(url, opts); };
     let blocked429 = 0; // circuit breaker: consecutive rate-limit failures on this ATS
     await Promise.all(Array.from({ length: pol.workers }, async () => {
       while (next < list.length) {
-        if (ats === 'workday' && Date.now() >= wdCfg.endsAt) {
+        if (queueEndsAt[ats] && Date.now() >= queueEndsAt[ats]) {
           stats.skipped_budget = (stats.skipped_budget || 0) + (list.length - next);
-          console.error(`  workday: time budget spent - skipping its remaining ${list.length - next} sites this build`);
+          (stats.skipped_budget_by_ats ||= {})[ats] = (stats.skipped_budget_by_ats[ats] || 0) + (list.length - next);
+          console.error(`  ${ats}: time budget spent - skipping its remaining ${list.length - next} boards this build`);
           next = list.length;
           break;
         }
@@ -203,25 +252,38 @@ async function main() {
         const s = stats.by_ats[ats] || (stats.by_ats[ats] = { boards: 0, jobs: 0, failed: 0 });
         const bt0 = Date.now();
         try {
+          // robots.txt is fetched once per host (shared cache across workers): count it for the board that needed it.
+          const newHost = ROBOTS_ATS.has(ats) && !robotsCache.has(boardHost(board));
           const r = await fetchBoard(board, ats === 'workday'
-            ? { fetchJson: politeFetchJson, fetchText: robotsText, skipName: true, maxJobs: wdCfg.maxJobs, budgetMs: wdCfg.siteBudgetMs,
+            ? { fetchJson: politeFetchJson, fetchText: politeGetText, skipName: true, maxJobs: wdCfg.maxJobs, budgetMs: wdCfg.siteBudgetMs,
               deadline: wdDeadline, robotsCache, robotsAgent: ROBOTS_AGENT }
-            : { fetchJson: politeFetchJson, fetchText: politeFetchText });
-          if (ats === 'workday') {
-            s.requests = (s.requests || 0) + r.pages;
+            : FEED_ATS.has(ats)
+              ? { fetchText: politeGetText, skipName: true, robotsCache, robotsAgent: ROBOTS_AGENT, feedTimeoutMs: 90000,
+                maxJobs: Number(args['teamtailor-max-jobs']) || 1000 }
+              : { fetchJson: politeFetchJson, fetchText: politeFetchText });
+          if (ROBOTS_ATS.has(ats)) {
+            // Per-board cost: requests (feed / list pages + robots.txt fetches of new hosts) and wall time.
+            s.requests = (s.requests || 0) + (r.pages ?? r.requests ?? 0) + (newHost ? 1 : 0);
             s.seconds = Math.round(((s.seconds || 0) + (Date.now() - bt0) / 1000) * 10) / 10;
-            s.listed_total = (s.listed_total || 0) + (r.total || 0);
+            if (ats === 'workday') s.listed_total = (s.listed_total || 0) + (r.total || 0);
             if (r.truncated) s.truncated = (s.truncated || 0) + 1;
           }
           const name = r.company_name || b.name || b.token;
-          const jobs = r.jobs.map((j) => ({ ...j, company_name: r.company_name ? j.company_name : name }));
+          // Personio: a position's own <subcompany> stays; otherwise the directory name replaces the token.
+          const own = (j) => ats === 'personio' && j.company_name && j.company_name !== String(b.token);
+          const jobs = r.jobs.map((j) => ({ ...j, company_name: r.company_name || own(j) ? j.company_name : name }));
           addLock = addLock.then(() => writer.addBoard(board, name, jobs));
           await addLock;
           if (jobs.length) { stats.ok += 1; s.boards += 1; s.jobs += jobs.length; } else { stats.empty += 1; }
           blocked429 = 0;
         } catch (e) {
           blocked429 = e.status === 429 ? blocked429 + 1 : 0;
-          if (e.robots) s.skipped_robots = (s.skipped_robots || 0) + 1; // robots.txt disallows: never called
+          if (e.robots) {
+            s.skipped_robots = (s.skipped_robots || 0) + 1; // robots.txt disallows: the feed / site was never called
+            const why = e.message.replace(/^.*skipped: /, '').replace(/disallows \/.*$/, 'disallows a path we read');
+            s.robots_reasons ||= {};
+            s.robots_reasons[why] = (s.robots_reasons[why] || 0) + 1;
+          }
           stats.failed += 1;
           s.failed += 1;
           failures.push({ ats, token: b.token, status: e.status ?? null, failure_class: e.failureClass || 'unknown' });
@@ -247,6 +309,8 @@ async function main() {
     boards_skipped_rate_limited: stats.skipped_rate_limited || 0,
     boards_skipped_budget: stats.skipped_budget || 0,
     workday_limits: { max_jobs_per_site: wdCfg.maxJobs, site_budget_s: wdCfg.siteBudgetMs / 1000, queue_budget_min: (wdCfg.endsAt - t0) / 60000 },
+    queue_budget_min: Object.fromEntries(Object.entries(queueEndsAt).map(([a, at]) => [a, (at - t0) / 60000])),
+    boards_skipped_budget_by_ats: stats.skipped_budget_by_ats || {},
     by_ats: stats.by_ats,
     jobs_before_dedupe: manifest.jobs_before_dedupe,
     jobs: manifest.jobs,

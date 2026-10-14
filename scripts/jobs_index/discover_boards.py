@@ -53,6 +53,13 @@ HOSTS = [
     # host form <wdN>.myworkdaysite.com/[<locale>/]recruiting/<tenant>/<site>/... Token: "<tenant>.<wdN>/<site>".
     ('workday', '*.myworkdayjobs.com', 'com,myworkdayjobs,', 'workday', None),
     ('workday', '*.myworkdaysite.com', 'com,myworkdaysite,', 'workday_site', None),
+    # Personio career pages <company>.jobs.personio.de (and the same accounts on .jobs.personio.com) publish a
+    # public XML job feed at /xml. Token: the company subdomain (lowercase); the .de host serves both.
+    ('personio', '*.jobs.personio.de', 'de,personio,jobs,', 'host', None),
+    ('personio', '*.jobs.personio.com', 'com,personio,jobs,', 'host', None),
+    # Teamtailor career sites <company>.teamtailor.com (also <company>.<region>.teamtailor.com) publish /jobs.rss.
+    # Token: the host label(s) before .teamtailor.com ("acme", "acme.na").
+    ('teamtailor', '*.teamtailor.com', 'com,teamtailor,', 'host', None),
 ]
 
 RESERVED = {
@@ -65,6 +72,11 @@ RESERVED = {
     'recruitee': {'www', 'app', 'api', 'blog', 'support', 'help', 'careers', 'cdn', 's', 'status', 'docs',
                   'partners', 'marketplace', 'static', 'assets', 'mail', 'go', 'demo', 'staging', 'test'},
     # First path segments of a Workday host that are not career sites (lowercased).
+    'personio': {'www', 'api', 'app', 'static', 'assets', 'cdn', 'jobs', 'help', 'support', 'status', 'test', 'demo', 'staging'},
+    'teamtailor': {'www', 'app', 'api', 'cdn', 'assets', 'scripts', 'static', 'support', 'help', 'status', 'docs', 'blog',
+                   'partner', 'partners', 'marketplace', 'jobs', 'mail', 'email', 'go', 'demo', 'staging', 'test', 'sandbox',
+                   'developer', 'developers', 'academy', 'community', 'images', 'media', 'files', 'tt', 'na', 'eu', 'us',
+                   'auth', 'login', 'sso', 'hub', 'feedback', 'events', 'webinars', 'info', 'click', 'links', 'track'},
     'workday': {'wday', 'robots.txt', 'favicon.ico', 'refreshfacet', 'sitemap.xml', 'assets', 'static', 'api',
                 'talentcommunity', 'recruiting', 'job', 'jobs.xml', 'login', 'apply', 'cxs'},
 }
@@ -97,6 +109,19 @@ def workday_token(host, segs):
     return f'{tenant}.{wd}/{site}'
 
 TOKEN_RX = re.compile(r'^[A-Za-z0-9][A-Za-z0-9_.\- ]{0,99}$')
+HOST_RX = {
+    'personio': re.compile(r'^([a-z0-9][a-z0-9-]{0,62})\.jobs\.personio\.(?:de|com)$'),
+    # "acme.teamtailor.com" -> "acme"; regional "acme.na.teamtailor.com" -> "acme.na"
+    'teamtailor': re.compile(r'^([a-z0-9][a-z0-9-]{0,62}(?:\.[a-z]{2})?)\.teamtailor\.com$'),
+}
+
+
+def host_token(ats, host):
+    m = HOST_RX[ats].match(host)
+    if not m:
+        return None
+    tok = m.group(1)
+    return None if tok.split('.')[0] in RESERVED[ats] else tok
 
 
 def log(*a):
@@ -134,6 +159,8 @@ def extract_token(ats, kind, url):
         return None
     if kind in ('workday', 'workday_site'):
         return workday_token((p.hostname or '').lower(), [s for s in p.path.split('/') if s])
+    if kind == 'host':
+        return host_token(ats, (p.hostname or '').lower())
     if kind == 'subdomain':
         host = (p.hostname or '').lower()
         parts = host.split('.')
@@ -171,6 +198,8 @@ def surt_token(surt_key, prefix, kind):
         return host + ')/' + '/'.join(segs[:1] if kind == 'workday' else segs)
     if kind == 'subdomain':
         return rest.split(')', 1)[0].split(',', 1)[0]
+    if kind == 'host':  # the whole host part: "acme)" and "na,acme)" are different boards
+        return rest.split(')', 1)[0]
     return rest.split('/', 1)[0].split('?', 1)[0]
 
 
@@ -257,6 +286,8 @@ def token_surt(kind, tok):
         tenant_wd, _, site = tok.partition('/')
         tenant, _, wd = tenant_wd.partition('.')
         return (f'{wd},{tenant})/{site}' if kind == 'workday' else f'{wd})/recruiting/{tenant}/{site}').lower()
+    if kind == 'host':
+        return ','.join(reversed(tok.lower().split('.')))
     return tok.lower()
 
 

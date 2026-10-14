@@ -46,30 +46,32 @@ jobs:
       - name: Show active rate-limit bans
         run: cat state/bans.json 2>/dev/null || echo "no bans"
 
-      # New Workday career sites from the newest Common Crawl crawl (zipnum reads of data.commoncrawl.org;
-      # each (crawl, host) unit is checkpointed in state/, so this is a ~1 min no-op until a new crawl
-      # appears, and --max-blocks bounds a large one: the rest resumes the next night).
-      - name: Discover new Workday sites
+      # New Workday, Personio and Teamtailor career sites from the newest Common Crawl crawl (zipnum reads of
+      # data.commoncrawl.org; each (crawl, host) unit is checkpointed in state/, so this is a ~1 min no-op until a
+      # new crawl appears, and --max-blocks bounds a large one: the rest resumes the next night).
+      - name: Discover new career sites (Workday, Personio, Teamtailor)
         timeout-minutes: 20
         continue-on-error: true
-        run: python3 discover_boards.py --ats workday --mode zipnum --crawls 1 --walk-back 0 --max-blocks 40
+        run: python3 discover_boards.py --ats workday,personio,teamtailor --mode zipnum --crawls 1 --walk-back 0 --max-blocks 40
 
       # Re-checks boards not checked in the last ~6 days (the daily build itself drops boards that fail). An ATS with an active
       # ban in state/bans.json (e.g. Workable after a 429 with a long Retry-After) is skipped;
       # a new long Retry-After records a ban and stops calling that ATS for this run.
-      # Never-checked candidates (workday_candidates.json + new discoveries) are capped at 1,500 per ATS per
-      # night (~25 min for Workday at 4 requests/s, in parallel with the other ATSs).
+      # Never-checked candidates (workday/personio/teamtailor_candidates.json + new discoveries) are capped at
+      # 1,500 per ATS per night (~25 min for Workday at 4 requests/s; Personio/Teamtailor ~1.2 s per board and pool, so ~30 min),
+      # all in parallel with the other ATSs. robots.txt of each career-site host is read first (Accept: text/plain).
       - name: Refresh board validation
         timeout-minutes: 180
         run: python3 validate_boards.py --max-age-hours 150 --max-new 1500
 
-      # Builder also honours state/bans.json and trips its own breaker after 5 consecutive 429s.
+      # Builder also honours state/bans.json and trips its own breaker after 5 consecutive 429s (per ATS).
       # Workday runs in parallel with the other ATSs inside its own budget (see build_index.mjs): newest
       # 300 jobs per site, 90 s per site, no new site after 85 min, so the fetch phase still ends with
-      # Workable (~100 min at 3 s per board).
+      # Workable (~100 min at 3 s per board). Personio and Teamtailor are two more parallel queues with their own
+      # budgets and breakers (measured 2026-10-14 on every valid board: Personio 2,396 boards in 19 min, Teamtailor 1,956 in 16 min; budget 45 min each).
       - name: Build slim index
         timeout-minutes: 140
-        run: node --max-old-space-size=6144 build_index.mjs --codec br --workday-max-jobs 300 --workday-site-budget-s 90 --workday-budget-min 85
+        run: node --max-old-space-size=6144 build_index.mjs --codec br --workday-max-jobs 300 --workday-site-budget-s 90 --workday-budget-min 85 --personio-budget-min 45 --teamtailor-budget-min 45 --teamtailor-max-jobs 1000
 
       - name: Save validation state
         if: always()
