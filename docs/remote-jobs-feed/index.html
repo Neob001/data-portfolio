@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Remote Jobs API: Remote &amp; Work-From-Home Jobs Feed</title>
-<meta name="description" content="Remote and work-from-home jobs from 10,000+ company career sites (Greenhouse, Lever, Ashby, Workable, Recruitee). Region filters, daily feed. Pay per job.">
+<meta name="description" content="Remote and work-from-home jobs from 15,000+ career sites (Workday, Greenhouse, Lever, Ashby, Workable, Recruitee). Region filters, daily feed. Pay per job.">
 <link rel="canonical" href="https://neob001.github.io/data-portfolio/remote-jobs-feed/">
 <link rel="stylesheet" href="../style.css">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Remote Jobs API: Remote &amp; Work-From-Home Jobs Feed">
-<meta property="og:description" content="Remote and work-from-home jobs from 10,000+ company career sites (Greenhouse, Lever, Ashby, Workable, Recruitee). Region filters, daily feed. Pay per job.">
+<meta property="og:description" content="Remote and work-from-home jobs from 15,000+ career sites (Workday, Greenhouse, Lever, Ashby, Workable, Recruitee). Region filters, daily feed. Pay per job.">
 <meta property="og:url" content="https://neob001.github.io/data-portfolio/remote-jobs-feed/">
 <meta property="og:site_name" content="factpipe Actor Tutorials">
 <meta name="twitter:card" content="summary">
@@ -18,7 +18,7 @@
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "Remote Jobs API \u2014 Remote & Work-From-Home Jobs Feed",
-  "description": "Remote and work-from-home jobs from 10,000+ companies' official Greenhouse, Lever, Ashby, Workable and Recruitee job boards. Filter by region or time zone, ranked by relevance. $3 per 1,000 jobs.",
+  "description": "Remote and work-from-home jobs from 15,000+ companies' official Workday, Greenhouse, Lever, Ashby, Workable and Recruitee job boards. Filter by region or time zone, ranked by relevance. $3 per 1,000 jobs.",
   "url": "https://neob001.github.io/data-portfolio/remote-jobs-feed/",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Any (cloud, runs on Apify)",
@@ -163,7 +163,7 @@ console.log(items);
 <div class="table-wrap"><table><thead><tr><th>ATS</th><th>API</th><th>Reuse terms</th></tr></thead><tbody><tr><td>Greenhouse</td><td><a href="https://developers.greenhouse.io/job-board.html">Job Board API</a></td><td>&quot;Job Board data is publicly available&quot;; no authentication for GET</td></tr><tr><td>Lever</td><td><a href="https://github.com/lever/postings-api">Postings API</a></td><td>Published postings &quot;are publicly viewable&quot; and &quot;may be scraped by third parties&quot;; we respect its 1 request/s crawl delay</td></tr><tr><td>Ashby</td><td><a href="https://developers.ashbyhq.com/docs/public-job-posting-api">Public Job Posting API</a></td><td>Public, unauthenticated posting API</td></tr><tr><td>Workable</td><td><a href="https://help.workable.com/hc/en-us/articles/115012771647">Public jobs endpoint</a></td><td>Documented public endpoint for published jobs</td></tr><tr><td>Recruitee</td><td><a href="https://docs.recruitee.com/reference/offers">Careers Site API</a></td><td>Public API returning published offers</td></tr><tr><td>Workday</td><td>Public career sites (<code>&lt;company&gt;.&lt;wdN&gt;.myworkdayjobs.com/&lt;site&gt;</code>)</td><td>Not a vendor-documented API: the job list and job pages each site loads for its visitors. Each host&#x27;s robots.txt is checked first (career sites allow <code>/&lt;site&gt;/</code>); about 4 requests/s across all Workday hosts</td></tr></tbody></table></div>
 <h2 id="factpipe-jobs-hiring-data">factpipe Jobs &amp; Hiring Data</h2>
 <p>These Actors search the same daily index of 730,000+ open jobs from 15,000+ company job boards:</p>
-<ul><li><a href="../ats-jobs-feed/">Jobs Feed API</a>: every job, every filter, ranked by relevance.</li><li><a href="../remote-jobs-feed/">Remote Jobs API</a> (this Actor): remote and work-from-home jobs only, filtered by region or time zone.</li><li><a href="../ats-jobs-scraper/">Greenhouse, Lever &amp; Ashby Jobs Scraper</a>: pick the applicant tracking systems and companies you want.</li><li><a href="../companies-hiring/">Companies Hiring</a>: one row per company that is hiring for a role, as sales leads or market research.</li><li><a href="../greenhouse-jobs-api/">Greenhouse Jobs API</a>: every Greenhouse job board in one search.</li><li><a href="../lever-jobs-api/">Lever Jobs API</a>: every Lever job board, with salary where published.</li><li><a href="../ashby-jobs-api/">Ashby Jobs API</a>: every Ashby job board: startup and AI jobs, with salary where published.</li><li><a href="../workday-jobs-api/">Workday Jobs API</a>: thousands of Workday career sites of large employers (NVIDIA, Salesforce, Adobe…), with full descriptions.</li></ul>
+<ul><li><a href="../ats-jobs-feed/">Jobs Feed API</a>: every job, every filter, ranked by relevance.</li><li><a href="../remote-jobs-feed/">Remote Jobs API</a> (this Actor): remote and work-from-home jobs only, filtered by region or time zone.</li><li><a href="../ats-jobs-scraper/">Greenhouse, Lever, Ashby &amp; Workday Jobs Scraper</a>: pick the applicant tracking systems and companies you want.</li><li><a href="../companies-hiring/">Companies Hiring</a>: one row per company that is hiring for a role, as sales leads or market research.</li><li><a href="../greenhouse-jobs-api/">Greenhouse Jobs API</a>: every Greenhouse job board in one search.</li><li><a href="../lever-jobs-api/">Lever Jobs API</a>: every Lever job board, with salary where published.</li><li><a href="../ashby-jobs-api/">Ashby Jobs API</a>: every Ashby job board: startup and AI jobs, with salary where published.</li><li><a href="../workday-jobs-api/">Workday Jobs API</a>: thousands of Workday career sites of large employers (NVIDIA, Salesforce, Adobe…), with full descriptions.</li></ul>
 <h2 id="faq">FAQ</h2>
 <p><strong>How is this different from remote job boards?</strong><br>
 Every job comes from the employer&#x27;s own applicant tracking system through its official public API, so there are no reposts, expired listings or paywalled apply links. A job disappears from the feed once the employer closes it.</p>

@@ -138,7 +138,7 @@ Only Greenhouse's official, public, unauthenticated [Job Board API](https://deve
 All of these Actors search the same daily index of open jobs from 10,000+ company job boards:
 
 - [Jobs Feed API](https://apify.com/factpipe/ats-jobs-feed): every job from every platform, every filter, ranked by relevance.
-- [Greenhouse, Lever & Ashby Jobs Scraper](https://apify.com/factpipe/ats-jobs-scraper): pick several applicant tracking systems (also Workable and Recruitee) in one run.
+- [Greenhouse, Lever, Ashby & Workday Jobs Scraper](https://apify.com/factpipe/ats-jobs-scraper): pick several applicant tracking systems (also Workable and Recruitee) in one run.
 - [Remote Jobs API](https://apify.com/factpipe/remote-jobs-feed): remote and work-from-home jobs only, filtered by region or time zone.
 - [Companies Hiring](https://apify.com/factpipe/companies-hiring): one row per company that is hiring for a role, as sales leads or market research.
 - [Greenhouse Jobs API](https://apify.com/factpipe/greenhouse-jobs-api) (this Actor): every Greenhouse job board in one search.
@@ -161,7 +161,7 @@ The index is rebuilt daily. With `includeDescription` on (the default), every de
 Greenhouse's public job-board API has no pay fields. When the job description states pay (for example the pay-transparency range many US employers publish: "$186,065—$218,900 USD" under "Annual base salary range"), the run reads it from the text with fixed rules and fills `salary_min`, `salary_max`, `salary_currency` and `salary_period` with `salary_source: "description"`. Otherwise they stay `null`: pay is never estimated. This needs the description (`includeDescription`, the default). Employment type is not in the API and stays `null`. For structured pay fields, [Lever Jobs API](https://apify.com/factpipe/lever-jobs-api) and [Ashby Jobs API](https://apify.com/factpipe/ashby-jobs-api) also return the ranges employers enter in their ATS.
 
 **What happens to Lever, Ashby, Workable, Recruitee or Workday URLs?**
-They are ignored with a warning in the log, and the rest of the run goes ahead. If no Greenhouse board is left, the run ends successfully with a message and nothing is charged. For several platforms in one run, use [Greenhouse, Lever & Ashby Jobs Scraper](https://apify.com/factpipe/ats-jobs-scraper).
+They are ignored with a warning in the log, and the rest of the run goes ahead. If no Greenhouse board is left, the run ends successfully with a message and nothing is charged. For several platforms in one run, use [Greenhouse, Lever, Ashby & Workday Jobs Scraper](https://apify.com/factpipe/ats-jobs-scraper).
 
 **Switching from ats-jobs-scraper or other Greenhouse scrapers?**
 Inputs from [ats-jobs-scraper](https://apify.com/factpipe/ats-jobs-scraper) work as they are: the same fields minus `ats` (ignored if present, the platform is always Greenhouse), and the same output records. Only `companyUrls` of other platforms are skipped. From other tools, this field map covers the usual settings:

@@ -140,7 +140,7 @@ Only the public career sites employers publish on Workday (`<company>.<wdN>.mywo
 All of these Actors search the same daily index of open jobs from 10,000+ company job boards:
 
 - [Jobs Feed API](https://apify.com/factpipe/ats-jobs-feed): every job from every platform, every filter, ranked by relevance.
-- [Greenhouse, Lever & Ashby Jobs Scraper](https://apify.com/factpipe/ats-jobs-scraper): pick several applicant tracking systems (also Workable and Recruitee) in one run.
+- [Greenhouse, Lever, Ashby & Workday Jobs Scraper](https://apify.com/factpipe/ats-jobs-scraper): pick several applicant tracking systems (also Workable and Recruitee) in one run.
 - [Remote Jobs API](https://apify.com/factpipe/remote-jobs-feed): remote and work-from-home jobs only, filtered by region or time zone.
 - [Companies Hiring](https://apify.com/factpipe/companies-hiring): one row per company that is hiring for a role, as sales leads or market research.
 - [Greenhouse Jobs API](https://apify.com/factpipe/greenhouse-jobs-api): every Greenhouse job board in one search.
@@ -175,7 +175,7 @@ Yes. Before reading a Workday site we read its host's robots.txt and skip any si
 Workday itself lists at most 2,000 jobs per site. Live mode reads up to 2,000 per site, newest first, within a 2.5-minute budget per site; the nightly index keeps the newest 300 per site. `RUN_SUMMARY` counts the sites that were cut short (`boards_truncated`).
 
 **What happens to Greenhouse, Lever, Ashby, Workable or Recruitee URLs?**
-They are ignored with a warning in the log, and the rest of the run goes ahead. If no Workday board is left, the run ends successfully with a message and nothing is charged. For several platforms in one run, use [Greenhouse, Lever & Ashby Jobs Scraper](https://apify.com/factpipe/ats-jobs-scraper).
+They are ignored with a warning in the log, and the rest of the run goes ahead. If no Workday board is left, the run ends successfully with a message and nothing is charged. For several platforms in one run, use [Greenhouse, Lever, Ashby & Workday Jobs Scraper](https://apify.com/factpipe/ats-jobs-scraper).
 
 **Switching from ats-jobs-scraper or other Workday scrapers?**
 Inputs from [ats-jobs-scraper](https://apify.com/factpipe/ats-jobs-scraper) work as they are: the same fields minus `ats` (ignored if present, the platform is always Workday), and the same output records. Only `companyUrls` of other platforms are skipped. From other tools, this field map covers the usual settings:

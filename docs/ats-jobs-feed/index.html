@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jobs Feed API: Greenhouse, Lever, Ashby &amp; Workable Jobs</title>
-<meta name="description" content="Search 270k+ open jobs from 11k company career sites (Greenhouse, Lever, Ashby, Workable, Recruitee). Daily new-jobs feed, salary, remote filters. Pay per job.">
+<title>Jobs Feed API: Workday, Greenhouse, Lever &amp; Ashby Jobs</title>
+<meta name="description" content="Search 730k+ open jobs from 15k company career sites (Workday, Greenhouse, Lever, Ashby, Workable, Recruitee). Daily new-jobs feed, salary, remote filters.">
 <link rel="canonical" href="https://neob001.github.io/data-portfolio/ats-jobs-feed/">
 <link rel="stylesheet" href="../style.css">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Jobs Feed API: Greenhouse, Lever, Ashby &amp; Workable Jobs">
-<meta property="og:description" content="Search 270k+ open jobs from 11k company career sites (Greenhouse, Lever, Ashby, Workable, Recruitee). Daily new-jobs feed, salary, remote filters. Pay per job.">
+<meta property="og:title" content="Jobs Feed API: Workday, Greenhouse, Lever &amp; Ashby Jobs">
+<meta property="og:description" content="Search 730k+ open jobs from 15k company career sites (Workday, Greenhouse, Lever, Ashby, Workable, Recruitee). Daily new-jobs feed, salary, remote filters.">
 <meta property="og:url" content="https://neob001.github.io/data-portfolio/ats-jobs-feed/">
 <meta property="og:site_name" content="factpipe Actor Tutorials">
 <meta name="twitter:card" content="summary">
@@ -17,8 +17,8 @@
 {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "Jobs Feed API \u2014 Greenhouse, Lever, Ashby & More Job Boards",
-  "description": "Search live openings from thousands of companies' official Greenhouse, Lever, Ashby, Workable and Recruitee job boards. Deduplicated JSON with salary, remote and location filters. $3 per 1,000 jobs.",
+  "name": "Jobs Feed API \u2014 Workday, Greenhouse, Lever & Ashby Jobs",
+  "description": "Search 730,000+ live openings from 15,000+ companies' official Workday, Greenhouse, Lever, Ashby, Workable and Recruitee job boards. Deduplicated JSON, salary, remote and location filters. $3 per 1,000 jobs.",
   "url": "https://neob001.github.io/data-portfolio/ats-jobs-feed/",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Any (cloud, runs on Apify)",
@@ -40,7 +40,7 @@
   </div>
 </header>
 <main class="wrap actor-page">
-<h1>Jobs Feed API — Greenhouse, Lever, Ashby &amp; More Job Boards</h1>
+<h1>Jobs Feed API — Workday, Greenhouse, Lever &amp; Ashby Jobs</h1>
 <p>&lt;!-- factpipe:hero:start --&gt;</p>
 <p><strong>Search live openings from thousands of companies&#x27; official Greenhouse, Lever, Ashby, Workable and Recruitee job boards. Deduplicated JSON with salary, remote and location filters. $3 per 1,000 jobs.</strong></p>
 <div class="table-wrap"><table><thead><tr><th>Title</th><th>Company</th><th>Locations</th><th>Workplace</th><th>Salary min</th></tr></thead><tbody><tr><td>Software Engineer</td><td>Whitespace</td><td>Alexandria, Virginia, United States</td><td>remote</td><td>—</td></tr><tr><td>Staff Software Engineer, GI</td><td>Hinge Health</td><td>San Francisco-HQ</td><td>hybrid</td><td>197000</td></tr><tr><td>Senior Software Engineer (Fundraising) — Remote</td><td>GiveDirectly</td><td>Remote</td><td>remote</td><td>—</td></tr></tbody></table></div>
@@ -177,7 +177,7 @@ console.log(items);
 <p>SmartRecruiters is deliberately <strong>not</strong> included, because its API host&#x27;s robots.txt disallows automated access.</p>
 <h2 id="factpipe-jobs-hiring-data">factpipe Jobs &amp; Hiring Data</h2>
 <p>These Actors search the same daily index of 730,000+ open jobs from 15,000+ company job boards:</p>
-<ul><li><a href="../ats-jobs-feed/">Jobs Feed API</a> (this Actor): every job, every filter, ranked by relevance.</li><li><a href="../remote-jobs-feed/">Remote Jobs API</a>: remote and work-from-home jobs only, filtered by region or time zone.</li><li><a href="../ats-jobs-scraper/">Greenhouse, Lever &amp; Ashby Jobs Scraper</a>: pick the applicant tracking systems and companies you want.</li><li><a href="../companies-hiring/">Companies Hiring</a>: one row per company that is hiring for a role, as sales leads or market research.</li><li><a href="../greenhouse-jobs-api/">Greenhouse Jobs API</a>: every Greenhouse job board in one search.</li><li><a href="../lever-jobs-api/">Lever Jobs API</a>: every Lever job board, with salary where published.</li><li><a href="../ashby-jobs-api/">Ashby Jobs API</a>: every Ashby job board: startup and AI jobs, with salary where published.</li><li><a href="../workday-jobs-api/">Workday Jobs API</a>: thousands of Workday career sites of large employers (NVIDIA, Salesforce, Adobe…), with full descriptions.</li></ul>
+<ul><li><a href="../ats-jobs-feed/">Jobs Feed API</a> (this Actor): every job, every filter, ranked by relevance.</li><li><a href="../remote-jobs-feed/">Remote Jobs API</a>: remote and work-from-home jobs only, filtered by region or time zone.</li><li><a href="../ats-jobs-scraper/">Greenhouse, Lever, Ashby &amp; Workday Jobs Scraper</a>: pick the applicant tracking systems and companies you want.</li><li><a href="../companies-hiring/">Companies Hiring</a>: one row per company that is hiring for a role, as sales leads or market research.</li><li><a href="../greenhouse-jobs-api/">Greenhouse Jobs API</a>: every Greenhouse job board in one search.</li><li><a href="../lever-jobs-api/">Lever Jobs API</a>: every Lever job board, with salary where published.</li><li><a href="../ashby-jobs-api/">Ashby Jobs API</a>: every Ashby job board: startup and AI jobs, with salary where published.</li><li><a href="../workday-jobs-api/">Workday Jobs API</a>: thousands of Workday career sites of large employers (NVIDIA, Salesforce, Adobe…), with full descriptions.</li></ul>
 <h2 id="faq">FAQ</h2>
 <p><strong>How is this different from LinkedIn or Indeed scrapers?</strong><br>
 We don&#x27;t scrape any job site. Every job comes from the employer&#x27;s own applicant tracking system, through the official public API that also powers the company&#x27;s careers page. That makes the data first-party and current: a job is gone from the feed once the employer closes it. It also carries the direct apply link, and there are no reposts, recruiter spam or login walls. There is no ban risk and no proxy cost, which is why it costs $3 per 1,000 jobs.</p>

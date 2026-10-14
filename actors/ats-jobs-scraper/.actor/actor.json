@@ -1,8 +1,8 @@
 {
   "actorSpecification": 1,
   "name": "ats-jobs-scraper",
-  "title": "Greenhouse, Lever & Ashby Jobs Scraper — Job Board API",
-  "description": "Scrape open jobs from Greenhouse, Lever, Ashby, Workable and Recruitee job boards: pick platforms and companies, filter by keyword, location and remote. Salary where published. $3 per 1,000 jobs.",
+  "title": "Greenhouse, Lever, Ashby & Workday Jobs Scraper API",
+  "description": "Scrape open jobs from Greenhouse, Lever, Ashby, Workday, Workable and Recruitee job boards: pick platforms and companies, filter by keyword, location and remote. Salary where published. $3 per 1,000 jobs.",
   "version": "0.1",
   "buildTag": "latest",
   "input": "../INPUT_SCHEMA.json",

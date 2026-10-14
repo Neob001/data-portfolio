@@ -1126,10 +1126,10 @@
         "totalUsers30Days": 10
       },
       "listing": {
-        "title": "Jobs Feed API — Greenhouse, Lever, Ashby & More Job Boards",
-        "description": "Search live openings from thousands of companies' official Greenhouse, Lever, Ashby, Workable and Recruitee job boards. Deduplicated JSON with salary, remote and location filters. $3 per 1,000 jobs.",
-        "seoTitle": "Jobs Feed API: Greenhouse, Lever, Ashby & Workable Jobs",
-        "seoDescription": "Search 270k+ open jobs from 11k company career sites (Greenhouse, Lever, Ashby, Workable, Recruitee). Daily new-jobs feed, salary, remote filters. Pay per job.",
+        "title": "Jobs Feed API — Workday, Greenhouse, Lever & Ashby Jobs",
+        "description": "Search 730,000+ live openings from 15,000+ companies' official Workday, Greenhouse, Lever, Ashby, Workable and Recruitee job boards. Deduplicated JSON, salary, remote and location filters. $3 per 1,000 jobs.",
+        "seoTitle": "Jobs Feed API: Workday, Greenhouse, Lever & Ashby Jobs",
+        "seoDescription": "Search 730k+ open jobs from 15k company career sites (Workday, Greenhouse, Lever, Ashby, Workable, Recruitee). Daily new-jobs feed, salary, remote filters.",
         "categories": [
           "JOBS",
           "LEAD_GENERATION"
@@ -1180,9 +1180,9 @@
       },
       "listing": {
         "title": "Remote Jobs API — Remote & Work-From-Home Jobs Feed",
-        "description": "Remote and work-from-home jobs from 10,000+ companies' official Greenhouse, Lever, Ashby, Workable and Recruitee job boards. Filter by region or time zone, ranked by relevance. $3 per 1,000 jobs.",
+        "description": "Remote and work-from-home jobs from 15,000+ companies' official Workday, Greenhouse, Lever, Ashby, Workable and Recruitee job boards. Filter by region or time zone, ranked by relevance. $3 per 1,000 jobs.",
         "seoTitle": "Remote Jobs API: Remote & Work-From-Home Jobs Feed",
-        "seoDescription": "Remote and work-from-home jobs from 10,000+ company career sites (Greenhouse, Lever, Ashby, Workable, Recruitee). Region filters, daily feed. Pay per job.",
+        "seoDescription": "Remote and work-from-home jobs from 15,000+ career sites (Workday, Greenhouse, Lever, Ashby, Workable, Recruitee). Region filters, daily feed. Pay per job.",
         "categories": [
           "JOBS",
           "LEAD_GENERATION"
@@ -1231,10 +1231,10 @@
         "totalUsers30Days": 1
       },
       "listing": {
-        "title": "Greenhouse, Lever & Ashby Jobs Scraper — Job Board API",
-        "description": "Scrape open jobs from Greenhouse, Lever, Ashby, Workable and Recruitee job boards: pick platforms and companies, filter by keyword, location and remote. Salary where published. $3 per 1,000 jobs.",
-        "seoTitle": "Greenhouse, Lever & Ashby Jobs Scraper API",
-        "seoDescription": "Scrape jobs from Greenhouse, Lever, Ashby, Workable and Recruitee boards: pick platforms, companies, keywords, locations. Salary where published.",
+        "title": "Greenhouse, Lever, Ashby & Workday Jobs Scraper API",
+        "description": "Scrape open jobs from Greenhouse, Lever, Ashby, Workday, Workable and Recruitee job boards: pick platforms and companies, filter by keyword, location and remote. Salary where published. $3 per 1,000 jobs.",
+        "seoTitle": "Greenhouse, Lever, Ashby & Workday Jobs Scraper API",
+        "seoDescription": "Scrape jobs from Greenhouse, Lever, Ashby, Workday, Workable and Recruitee boards: pick platforms, companies, keywords, locations. Salary where published.",
         "categories": [
           "JOBS",
           "LEAD_GENERATION"
