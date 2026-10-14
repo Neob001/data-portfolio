@@ -121,3 +121,15 @@ test('Workday: remote jobs of a live Workday site come through the remote filter
   assert.ok(out.rows.every((r) => r.ats === 'workday' && (r.remote === true || r.workplace_type === 'remote')));
   for (const r of out.rows) assertMatchesSchema(r);
 });
+
+test('Personio + Teamtailor: only remote feed jobs come through (hybrid / on-site Teamtailor jobs do not); schema-valid', async () => {
+  const out = sink();
+  const net = fakeNetwork();
+  const summary = await runFeed(toFeedOptions({ companyUrls: ['personio:1komma5grad', 'teamtailor:career'], postedWithinDays: 60 }), {
+    ...out, now: () => NOW, hostGaps: {}, fetchJson: net.fetchJson, fetchText: net.fetchText, robotsCache: new Map(),
+  });
+  assert.equal(summary.boards_ok, 2);
+  assert.ok(out.rows.length >= 3, `${out.rows.length} rows`);
+  assert.ok(out.rows.every((r) => r.ats === 'personio' && r.workplace_type === 'remote'), JSON.stringify(out.rows.map((r) => [r.ats, r.workplace_type])));
+  for (const r of out.rows) assertMatchesSchema(r);
+});

@@ -160,7 +160,7 @@ The index is rebuilt daily. With `includeDescription` on (the default), every de
 **Do Greenhouse jobs include salary?**
 Greenhouse's public job-board API has no pay fields. When the job description states pay (for example the pay-transparency range many US employers publish: "$186,065—$218,900 USD" under "Annual base salary range"), the run reads it from the text with fixed rules and fills `salary_min`, `salary_max`, `salary_currency` and `salary_period` with `salary_source: "description"`. Otherwise they stay `null`: pay is never estimated. This needs the description (`includeDescription`, the default). Employment type is not in the API and stays `null`. For structured pay fields, [Lever Jobs API](https://apify.com/factpipe/lever-jobs-api) and [Ashby Jobs API](https://apify.com/factpipe/ashby-jobs-api) also return the ranges employers enter in their ATS.
 
-**What happens to Lever, Ashby, Workable, Recruitee or Workday URLs?**
+**What happens to Lever, Ashby, Workable, Recruitee, Workday, Personio or Teamtailor URLs?**
 They are ignored with a warning in the log, and the rest of the run goes ahead. If no Greenhouse board is left, the run ends successfully with a message and nothing is charged. For several platforms in one run, use [Greenhouse, Lever, Ashby & Workday Jobs Scraper](https://apify.com/factpipe/ats-jobs-scraper).
 
 **Switching from ats-jobs-scraper or other Greenhouse scrapers?**

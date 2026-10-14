@@ -10,7 +10,7 @@ import { parseBoardRef } from './core/transform.js';
 
 export const PLATFORM = 'lever';
 export const PLATFORM_NAME = 'Lever';
-const OTHER_NAMES = 'Greenhouse, Ashby, Workable, Recruitee or Workday';
+const OTHER_NAMES = 'Greenhouse, Ashby, Workable, Recruitee, Workday, Personio or Teamtailor';
 const BARE_TOKEN = /^[A-Za-z0-9][A-Za-z0-9_.%-]*$/;
 
 const strList = (v) => (Array.isArray(v) ? v : typeof v === 'string' && v.trim() ? v.split(',') : [])
@@ -44,6 +44,6 @@ export function otherPlatformWarning(refs) {
 export function noBoardsMessage(badRefs) {
   return `No Lever job-board URL in input (${badRefs.slice(0, 3).join(', ')}${badRefs.length > 3 ? ', ...' : ''}). `
     + 'This Actor reads Lever boards only, e.g. https://jobs.lever.co/palantir or the board token "palantir". '
-    + `For ${OTHER_NAMES} boards use https://apify.com/factpipe/ats-jobs-scraper; for a company's own careers page use `
+    + `For other platforms use https://apify.com/factpipe/ats-jobs-scraper; for a company's own careers page use `
     + 'https://apify.com/factpipe/company-jobs-scraper';
 }

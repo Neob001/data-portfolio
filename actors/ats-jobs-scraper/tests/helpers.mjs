@@ -1,7 +1,7 @@
 // Shared test helpers: fixtures, a fake ATS network, and the dataset-schema guard.
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { apiUrlFor, boardUrlFor, workdayDetailUrl } from '../src/core/transform.js';
+import { apiUrlFor, boardUrlFor, workdayDetailUrl, personioEnglishUrl } from '../src/core/transform.js';
 import { fetchBoard } from '../src/core/feed.js';
 import { IndexWriter } from '../src/core/index_writer.js';
 
@@ -26,6 +26,28 @@ export function workdayRoutes() {
   const routes = [[apiUrlFor(WORKDAY_BOARD), () => fx.jobs]];
   for (const [path, d] of Object.entries(fx.details)) routes.push([workdayDetailUrl(WORKDAY_BOARD, `${boardUrlFor(WORKDAY_BOARD)}${path}`), () => d]);
   return routes;
+}
+
+// Career-site feed goldens (also outside FIXTURES): real Personio /xml (+ its ?language=en version) and
+// Teamtailor /jobs.rss responses, trimmed, with the hosts' robots.txt (served as text/plain).
+export const PERSONIO_FIXTURE = { token: '1komma5grad', file: 'personio_feed.json' };
+export const TEAMTAILOR_FIXTURE = { token: 'career', file: 'teamtailor_jobs.json' };
+export const PERSONIO_BOARD = { ats: 'personio', token: PERSONIO_FIXTURE.token };
+export const TEAMTAILOR_BOARD = { ats: 'teamtailor', token: TEAMTAILOR_FIXTURE.token };
+export const FEED_BOARDS = [PERSONIO_BOARD, TEAMTAILOR_BOARD];
+const plain = (text) => ({ status: 200, text, contentType: 'text/plain; charset=utf-8' });
+/** [url, () => text | { status, text, contentType }] routes of the feed goldens (fetchText). */
+export function feedRoutes() {
+  const p = load(PERSONIO_FIXTURE.file);
+  const t = load(TEAMTAILOR_FIXTURE.file);
+  return [
+    [`https://${PERSONIO_FIXTURE.token}.jobs.personio.de/robots.txt`, () => plain(p.robots_txt)],
+    [apiUrlFor(PERSONIO_BOARD), () => p.xml],
+    [personioEnglishUrl(PERSONIO_BOARD), () => p.xml_en],
+    [boardUrlFor(PERSONIO_BOARD), () => `<html><head>${p.page_title}</head><body></body></html>`],
+    [`https://${TEAMTAILOR_FIXTURE.token}.teamtailor.com/robots.txt`, () => plain(t.robots_txt)],
+    [apiUrlFor(TEAMTAILOR_BOARD), () => t.rss],
+  ];
 }
 
 // Apify validates every pushed row against .actor/actor.json dataset fields (types AND enums); a
@@ -59,8 +81,16 @@ export function fakeNetwork(extra = {}) {
     if (!route) throw Object.assign(new Error(`HTTP 404 at ${url}`), { status: 404, failureClass: 'http_error' });
     return structuredClone(route(opts));
   };
-  const fetchText = async (url) => {
+  const textRoutes = new Map(feedRoutes());
+  // Extra routes for robots.txt and feed URLs are text (fetchText); the rest are JSON API routes (fetchJson).
+  const isText = (url) => textRoutes.has(url) || /\/robots\.txt$|\.personio\.(?:de|com)\/xml(?:\?|$)|\/jobs\.rss(?:\?|$)/.test(url);
+  for (const [url, fn] of Object.entries(extra)) if (isText(url)) textRoutes.set(url, fn);
+  const fetchText = async (url, opts = {}) => {
     calls.push(url);
+    if (textRoutes.has(url)) {
+      const v = textRoutes.get(url)(opts);
+      return typeof v === 'string' || opts.meta ? v : v.text;
+    }
     if (/\.myworkdayjobs\.com\/robots\.txt$/.test(url)) return load(WORKDAY_FIXTURE.file).robots_txt;
     if (url === boardUrlFor(WORKDAY_BOARD)) return `<html><head>${load(WORKDAY_FIXTURE.file).site_page_head}</head></html>`;
     if (url.includes('lever.co/shieldai')) return '<html><head><title>Shield AI</title></head></html>';

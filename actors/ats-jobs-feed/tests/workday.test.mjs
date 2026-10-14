@@ -148,11 +148,12 @@ function fakeSite(total, { robots = 'User-agent: *\nAllow: /Big/\nDisallow: /ref
       })),
     };
   };
-  const fetchText = async (url) => {
+  const fetchText = async (url, opts = {}) => {
     if (url.endsWith('/robots.txt')) {
+      assert.equal(opts.accept, 'text/plain', 'robots.txt is asked for as text/plain');
       if (robots === null) throw new Error('ECONNRESET');
       if (typeof robots === 'number') throw Object.assign(new Error(`HTTP ${robots}`), { status: robots });
-      return robots;
+      return robots; // a string, or { status, text, contentType } like defaultFetchText(url, { meta: true })
     }
     return '<meta property="og:title" content="Big Co Careers">';
   };
@@ -187,14 +188,18 @@ test('pagination: pages of 20 until total; per-site cap; budget and run deadline
 });
 
 test('robots.txt: a disallowed or unreachable robots.txt means the site is never called', async () => {
-  for (const robots of ['User-agent: *\nDisallow: /wday/', 'User-agent: *\nDisallow: /', 'User-agent: factpipe\nDisallow: /Big/', null, 503]) {
+  // Disallowing rules, unreachable / 5xx, and (stricter than RFC 9309, owner rule) no robots file (4xx), a
+  // non-text/plain answer or an HTML body: none of them is permission.
+  const html = { status: 200, text: '<!DOCTYPE html><html></html>', contentType: 'text/html; charset=utf-8' };
+  const allowAllAsHtml = { status: 200, text: 'User-agent: *\nAllow: /', contentType: 'text/html' };
+  for (const robots of ['User-agent: *\nDisallow: /wday/', 'User-agent: *\nDisallow: /', 'User-agent: factpipe\nDisallow: /Big/', null, 503, 404, 410, html, allowAllAsHtml]) {
     const s = fakeSite(10, { robots });
     await assert.rejects(fetchBoard(s.board, { fetchJson: s.fetchJson, fetchText: s.fetchText, robotsCache: fresh() }),
-      (e) => e.failureClass === 'blocked' && e.robots === true, String(robots));
-    assert.equal(s.bodies.length, 0, `no jobs call (${robots})`);
+      (e) => e.failureClass === 'blocked' && e.robots === true, JSON.stringify(robots));
+    assert.equal(s.bodies.length, 0, `no jobs call (${JSON.stringify(robots)})`);
   }
-  // No robots.txt (4xx) = allowed (RFC 9309); "Allow: /<site>/" + other sites disallowed = allowed.
-  for (const robots of [404, FX.robots_txt.replace(/Workday/g, 'Big')]) {
+  // "Allow: /<site>/" + other sites disallowed = allowed, as a plain body or as a text/plain meta answer.
+  for (const robots of [FX.robots_txt.replace(/Workday/g, 'Big'), { status: 200, text: 'User-agent: *\nAllow: /', contentType: 'text/plain; charset=utf-8' }]) {
     const s = fakeSite(10, { robots });
     const r = await fetchBoard(s.board, { fetchJson: s.fetchJson, fetchText: s.fetchText, robotsCache: fresh() });
     assert.equal(r.jobs.length, 10, String(robots));

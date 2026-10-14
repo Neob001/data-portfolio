@@ -99,7 +99,9 @@
           "ashby",
           "workable",
           "recruitee",
-          "workday"
+          "workday",
+          "personio",
+          "teamtailor"
         ],
         "enumTitles": [
           "Greenhouse",
@@ -107,7 +109,9 @@
           "Ashby",
           "Workable",
           "Recruitee",
-          "Workday"
+          "Workday",
+          "Personio",
+          "Teamtailor"
         ]
       }
     },

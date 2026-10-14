@@ -436,7 +436,10 @@ FIXTURES = {
     "workday": ("workday.wd5/Workday", "workday_site.json"),
 }
 ATS_NAMES = {"greenhouse": "Greenhouse", "lever": "Lever", "ashby": "Ashby", "workable": "Workable", "recruitee": "Recruitee",
-             "workday": "Workday"}
+             "workday": "Workday", "personio": "Personio", "teamtailor": "Teamtailor"}
+# Career-site feed goldens of the model actor (no per-ATS Actor of their own): every generated Actor checks that rows of
+# these platforms also match its dataset schema (identical to the model's).
+FEED_GOLDENS = ["personio_feed.json", "teamtailor_jobs.json"]
 VIEW_LABELS = {"department": ("Department", "text"), "employment_type": ("Employment", "text")}
 
 
@@ -656,7 +659,7 @@ export function otherPlatformWarning(refs) {
 export function noBoardsMessage(badRefs) {
   return `No [[NAME]] job-board URL in input (${badRefs.slice(0, 3).join(', ')}${badRefs.length > 3 ? ', ...' : ''}). `
     + 'This Actor reads [[NAME]] boards only, e.g. [[MSG_EXAMPLE]]. '
-    + `For ${OTHER_NAMES} boards use https://apify.com/factpipe/ats-jobs-scraper; for a company's own careers page use `
+    + `For other platforms use https://apify.com/factpipe/ats-jobs-scraper; for a company's own careers page use `
     + 'https://apify.com/factpipe/company-jobs-scraper';
 }
 """
@@ -762,7 +765,8 @@ import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { runFeed, streamShardLines } from '../src/core/feed.js';
+import { runFeed, streamShardLines, toOutput } from '../src/core/feed.js';
+import { parseBoard, apiUrlFor } from '../src/core/transform.js';
 import { toScraperOptions, noBoardsMessage, otherPlatformWarning, PLATFORM } from '../src/scraper.js';
 import { seniorityOf } from '../src/core/enrich.js';
 import { fakeNetwork, sink, NOW, buildIndex, assertMatchesSchema, FIXTURES, load } from './helpers.mjs';
@@ -783,7 +787,7 @@ async function run(input, { dir } = {}) {
 }
 
 test('options: platform is forced, whatever `ats` says', () => {
-  for (const ats of [undefined, [], ['[[OTHER]]'], ['greenhouse', 'lever', 'ashby', 'workable', 'recruitee', 'workday'], 'workable']) {
+  for (const ats of [undefined, [], ['[[OTHER]]'], ['greenhouse', 'lever', 'ashby', 'workable', 'recruitee', 'workday', 'personio', 'teamtailor'], 'personio']) {
     const o = toScraperOptions({ ats, keywords: ['engineer'] });
     assert.deepEqual([o.mode, o.ats, o.keywords], ['search', [PLATFORM], ['engineer']], JSON.stringify(ats));
   }
@@ -888,6 +892,18 @@ test('enrichment: seniority from the title on every row; seniority filter; schem
     assert.ok(only.rows.length > 0 && only.rows.every((x) => x.seniority === levels[0]));
   }
   assert.throws(() => toScraperOptions({ seniority: ['wizard'] }), /seniority/);
+});
+
+test('dataset schema also accepts rows of the career-site feed platforms (Personio, Teamtailor goldens)', () => {
+  const p = load('personio_feed.json');
+  const t = load('teamtailor_jobs.json');
+  for (const [board, body] of [[{ ats: 'personio', token: p.token }, p.xml], [{ ats: 'teamtailor', token: t.token }, t.rss]]) {
+    const { jobs } = parseBoard(board, body);
+    assert.ok(jobs.length > 0, board.ats);
+    for (const j of jobs) {
+      assertMatchesSchema(toOutput({ ...j, source_url: apiUrlFor(board), fetched_at: new Date(NOW).toISOString() }, true));
+    }
+  }
 });
 """
 
@@ -1226,6 +1242,8 @@ def files_for(platform, cfg):
         "README.md": readme(platform, cfg),
     }
     for p, (_, f) in fixtures.items():
+        out[f"golden/{f}"] = (MODEL / "golden" / f).read_text()
+    for f in FEED_GOLDENS:
         out[f"golden/{f}"] = (MODEL / "golden" / f).read_text()
     return out
 

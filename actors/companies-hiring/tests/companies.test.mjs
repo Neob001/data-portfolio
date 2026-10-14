@@ -7,7 +7,7 @@ import { pathToFileURL } from 'node:url';
 import { normalizeCompaniesInput, runCompanies, careersSiteDomain, mergeKey, jobKey, clusterBoards, normToken, CrossBoardCounter, OUTPUT_FIELDS, MAX_TITLES } from '../src/companies.js';
 import { IndexWriter } from '../src/core/index_writer.js';
 import { fetchBoard } from '../src/core/feed.js';
-import { fakeNetwork, sink, NOW, buildIndex, assertMatchesSchema, FIXTURE_BOARDS, WORKDAY_BOARD, load } from './helpers.mjs';
+import { fakeNetwork, sink, NOW, buildIndex, assertMatchesSchema, FIXTURE_BOARDS, WORKDAY_BOARD, FEED_BOARDS, load } from './helpers.mjs';
 
 const DAY = 86400000;
 // Acme (greenhouse:acme): 14 open jobs, 12 in sales, links on its own careers site.
@@ -360,4 +360,21 @@ test('Workday: a Workday site in the live fallback becomes a schema-valid compan
   assert.equal(row.ats, 'workday');
   assert.equal(row.company_name, 'Workday');
   assert.equal(row.careers_url, 'https://workday.wd5.myworkdayjobs.com/Workday');
+});
+
+test('Personio + Teamtailor: feed boards in the live fallback become schema-valid company rows with their career-site URLs', async () => {
+  const net = fakeNetwork();
+  const out = sink({ event: 'company-result' });
+  const summary = await runCompanies(normalizeCompaniesInput({}), {
+    ...out, indexBaseUrl: pathToFileURL(join(tmpdir(), 'no-such-index')).href, fallbackBoards: FEED_BOARDS,
+    fetchJson: net.fetchJson, fetchText: net.fetchText, now: () => NOW, hostGaps: {}, robotsCache: new Map(),
+  });
+  assert.equal(summary.used_fallback, true);
+  assert.ok(out.rows.length >= 2, JSON.stringify(out.rows.map((r) => r.company_name)));
+  for (const row of out.rows) assertMatchesSchema(row);
+  assert.deepEqual([...new Set(out.rows.map((r) => r.ats))].sort(), ['personio', 'teamtailor']);
+  const tt = out.rows.find((r) => r.ats === 'teamtailor');
+  assert.deepEqual([tt.company_name, tt.careers_url], ['Teamtailor', 'https://career.teamtailor.com/jobs']);
+  assert.ok(out.rows.filter((r) => r.ats === 'personio').every((r) => r.careers_url === 'https://1komma5grad.jobs.personio.de/'));
+  assert.ok(net.calls[0].endsWith('/robots.txt'), 'robots.txt before any feed request');
 });

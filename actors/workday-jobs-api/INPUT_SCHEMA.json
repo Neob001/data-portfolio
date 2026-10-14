@@ -177,7 +177,7 @@
     "companyUrls": {
       "title": "Live mode: Workday board URLs or tokens",
       "type": "array",
-      "description": "Optional. Fetch these Workday boards live instead of searching the index, e.g. https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite, https://salesforce.wd12.myworkdayjobs.com/External_Career_Site or just the board token \"nvidia.wd5/NVIDIAExternalCareerSite\". URLs of other platforms (Greenhouse, Lever, Ashby, Workable or Recruitee) are ignored with a warning: use ats-jobs-scraper for those. All filters above still apply.",
+      "description": "Optional. Fetch these Workday boards live instead of searching the index, e.g. https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite, https://salesforce.wd12.myworkdayjobs.com/External_Career_Site or just the board token \"nvidia.wd5/NVIDIAExternalCareerSite\". URLs of other platforms (Greenhouse, Lever, Ashby, Workable, Recruitee, Personio or Teamtailor) are ignored with a warning: use ats-jobs-scraper for those. All filters above still apply.",
       "editor": "stringList",
       "sectionCaption": "Live mode (Workday boards not yet in the index)"
     }

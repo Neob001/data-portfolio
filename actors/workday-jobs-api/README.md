@@ -174,7 +174,7 @@ Yes. Before reading a Workday site we read its host's robots.txt and skip any si
 **Do I get every job of employers with thousands of openings?**
 Workday itself lists at most 2,000 jobs per site. Live mode reads up to 2,000 per site, newest first, within a 2.5-minute budget per site; the nightly index keeps the newest 300 per site. `RUN_SUMMARY` counts the sites that were cut short (`boards_truncated`).
 
-**What happens to Greenhouse, Lever, Ashby, Workable or Recruitee URLs?**
+**What happens to Greenhouse, Lever, Ashby, Workable, Recruitee, Personio or Teamtailor URLs?**
 They are ignored with a warning in the log, and the rest of the run goes ahead. If no Workday board is left, the run ends successfully with a message and nothing is charged. For several platforms in one run, use [Greenhouse, Lever, Ashby & Workday Jobs Scraper](https://apify.com/factpipe/ats-jobs-scraper).
 
 **Switching from ats-jobs-scraper or other Workday scrapers?**

@@ -84,3 +84,14 @@ test('Workday: career-site URLs work in live mode and `ats: ["workday"]` is acce
   assert.ok(r.rows.every((x) => x.description_status === 'included'));
   assert.deepEqual(toScraperOptions({ ats: ['workday'] }).ats, ['workday']);
 });
+
+test('Personio + Teamtailor: career-site URLs work in live mode, `ats` accepts both; rows fit the dataset schema', async () => {
+  const r = await run({ companyUrls: ['https://1komma5grad.jobs.personio.de/', 'https://career.teamtailor.com/jobs'] });
+  assert.equal(r.summary.mode, 'live');
+  assert.deepEqual([...new Set(r.rows.map((x) => x.ats))].sort(), ['personio', 'teamtailor']);
+  for (const x of r.rows) assertMatchesSchema(x);
+  assert.ok(r.rows.every((x) => x.description_status === 'included'));
+  assert.ok(r.calls.indexOf('https://career.teamtailor.com/robots.txt') < r.calls.indexOf('https://career.teamtailor.com/jobs.rss'));
+  assert.deepEqual(toScraperOptions({ ats: ['personio', 'teamtailor'] }).ats, ['personio', 'teamtailor']);
+  assert.throws(() => toScraperOptions({ ats: ['bamboohr'] }), /Unknown ATS/);
+});

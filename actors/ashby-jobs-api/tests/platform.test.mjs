@@ -5,7 +5,8 @@ import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { runFeed, streamShardLines } from '../src/core/feed.js';
+import { runFeed, streamShardLines, toOutput } from '../src/core/feed.js';
+import { parseBoard, apiUrlFor } from '../src/core/transform.js';
 import { toScraperOptions, noBoardsMessage, otherPlatformWarning, PLATFORM } from '../src/scraper.js';
 import { seniorityOf } from '../src/core/enrich.js';
 import { fakeNetwork, sink, NOW, buildIndex, assertMatchesSchema, FIXTURES, load } from './helpers.mjs';
@@ -26,7 +27,7 @@ async function run(input, { dir } = {}) {
 }
 
 test('options: platform is forced, whatever `ats` says', () => {
-  for (const ats of [undefined, [], ['greenhouse'], ['greenhouse', 'lever', 'ashby', 'workable', 'recruitee', 'workday'], 'workable']) {
+  for (const ats of [undefined, [], ['greenhouse'], ['greenhouse', 'lever', 'ashby', 'workable', 'recruitee', 'workday', 'personio', 'teamtailor'], 'personio']) {
     const o = toScraperOptions({ ats, keywords: ['engineer'] });
     assert.deepEqual([o.mode, o.ats, o.keywords], ['search', [PLATFORM], ['engineer']], JSON.stringify(ats));
   }
@@ -131,4 +132,16 @@ test('enrichment: seniority from the title on every row; seniority filter; schem
     assert.ok(only.rows.length > 0 && only.rows.every((x) => x.seniority === levels[0]));
   }
   assert.throws(() => toScraperOptions({ seniority: ['wizard'] }), /seniority/);
+});
+
+test('dataset schema also accepts rows of the career-site feed platforms (Personio, Teamtailor goldens)', () => {
+  const p = load('personio_feed.json');
+  const t = load('teamtailor_jobs.json');
+  for (const [board, body] of [[{ ats: 'personio', token: p.token }, p.xml], [{ ats: 'teamtailor', token: t.token }, t.rss]]) {
+    const { jobs } = parseBoard(board, body);
+    assert.ok(jobs.length > 0, board.ats);
+    for (const j of jobs) {
+      assertMatchesSchema(toOutput({ ...j, source_url: apiUrlFor(board), fetched_at: new Date(NOW).toISOString() }, true));
+    }
+  }
 });

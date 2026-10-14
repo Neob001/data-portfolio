@@ -460,17 +460,28 @@ export function visaSponsorship(text) {
 
 // ------------------------------------------------------------------ row enrichment
 /**
+ * Level of a job: the title rules (seniorityOf) first, else the level the ATS itself publishes (Personio's
+ * structured seniority, passed as `structuredSeniority`). The `seniority` filter and enrichRow both use this.
+ */
+export function seniorityFor(title, structuredSeniority = null) {
+  return seniorityOf(title) ?? (SENIORITY_LEVELS.includes(structuredSeniority) ? structuredSeniority : null);
+}
+
+/**
  * Adds the enrichment fields to an output row in place: seniority (title, always), salary_source,
  * and - only when `description` (the full text) is available - years_experience_min, visa_sponsorship
  * and the salary_* fields from the text when the ATS gave no structured salary. Structured values are
  * never overwritten.
+ * `ats` carries what the ATS itself publishes (Personio): `seniority` backs up the title rules
+ * (seniorityFor), `yearsMin` wins over the description text and is set even without the description.
  */
-export function enrichRow(row, description) {
-  row.seniority = seniorityOf(row.title);
+export function enrichRow(row, description, ats = {}) {
+  const yearsMin = Number.isInteger(ats.yearsMin) && ats.yearsMin >= 0 ? ats.yearsMin : null;
+  row.seniority = seniorityFor(row.title, ats.seniority);
   const structured = row.salary_min !== null && row.salary_min !== undefined
     || row.salary_max !== null && row.salary_max !== undefined;
   row.salary_source = structured ? 'structured' : null;
-  row.years_experience_min = null;
+  row.years_experience_min = yearsMin;
   row.visa_sponsorship = null;
   if (!description) return row;
   if (!structured) {
@@ -480,7 +491,7 @@ export function enrichRow(row, description) {
       row.salary_source = 'description';
     }
   }
-  row.years_experience_min = yearsExperienceMin(description);
+  row.years_experience_min = yearsMin ?? yearsExperienceMin(description);
   row.visa_sponsorship = visaSponsorship(description);
   return row;
 }

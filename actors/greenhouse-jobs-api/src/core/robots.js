@@ -1,5 +1,5 @@
 // Pure robots.txt evaluation (RFC 9309): user-agent groups, longest-match Allow/Disallow with `*` and `$`.
-// Used before calling an endpoint that is not a documented public API (Workday career-site JSON):
+// Used before calling a career-site endpoint (Workday career-site JSON, Personio /xml, Teamtailor /jobs.rss):
 // a path robots.txt disallows is never requested.
 
 /** robots.txt text -> [{ agents: [lowercase tokens], rules: [{ allow, path }] }] */
@@ -54,12 +54,16 @@ export function isAllowed(rules, path) {
 
 /**
  * Robots verdict for a set of paths on one host: { allowed, reason }.
- * `fetched` is { status, text } of GET /robots.txt, or { error } when it could not be fetched.
- * RFC 9309: 4xx (no robots.txt) = everything allowed; 5xx / unreachable = assume everything disallowed.
+ * `fetched` is { status, text, contentType? } of GET /robots.txt (asked with Accept: text/plain), or { error }
+ * when it could not be fetched. Stricter than RFC 9309 on purpose (owner rule, LEARNINGS 2026-10-09): only a
+ * 2xx text/plain robots file grants permission. 5xx / unreachable, 4xx (no robots file), a non-text/plain
+ * content type and an HTML body all mean "disallow everything" for that host.
  */
 export function robotsVerdict(fetched, userAgent, paths) {
   if (!fetched || fetched.error || (fetched.status >= 500)) return { allowed: false, reason: 'robots.txt unreachable' };
-  if (fetched.status >= 400) return { allowed: true, reason: `robots.txt HTTP ${fetched.status}` };
+  if (fetched.status >= 400) return { allowed: false, reason: `robots.txt HTTP ${fetched.status} (no robots file is not taken as permission)` };
+  const ct = fetched.contentType;
+  if (ct !== undefined && ct !== null && !/^\s*text\/plain\b/i.test(ct)) return { allowed: false, reason: `robots.txt answered as ${ct || 'no content type'}, not text/plain` };
   // Asked with Accept: text/html, Workday hosts answer /robots.txt with their HTML app: not a robots file.
   if (/^\s*</.test(fetched.text || '')) return { allowed: false, reason: 'robots.txt answered with an HTML page' };
   const rules = rulesFor(parseRobots(fetched.text), userAgent);

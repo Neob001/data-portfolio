@@ -6,7 +6,7 @@
     "ats": {
       "title": "Applicant tracking systems",
       "type": "array",
-      "description": "Which job-board platforms to search: Greenhouse, Lever, Ashby, Workable, Recruitee. Empty = all five.",
+      "description": "Which job-board platforms to search: Greenhouse, Lever, Ashby, Workable, Recruitee, Workday, Personio, Teamtailor. Empty = all of them.",
       "editor": "select",
       "items": {
         "type": "string",
@@ -16,7 +16,9 @@
           "ashby",
           "workable",
           "recruitee",
-          "workday"
+          "workday",
+          "personio",
+          "teamtailor"
         ],
         "enumTitles": [
           "Greenhouse",
@@ -24,7 +26,9 @@
           "Ashby",
           "Workable",
           "Recruitee",
-          "Workday"
+          "Workday",
+          "Personio",
+          "Teamtailor"
         ]
       },
       "prefill": [

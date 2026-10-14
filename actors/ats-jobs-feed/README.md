@@ -66,14 +66,14 @@ One flat record per job opening:
 ```
 
 - `workplace_type` is one of `remote`, `hybrid`, `onsite` or `unknown`. We never guess: when an ATS has no workplace field (Greenhouse), the value comes from the location text ("Remote, Canada"), and otherwise it is `unknown`.
-- Salary fields come from the ATS's structured compensation (Ashby, Lever, Recruitee) or, when it has none, from pay stated in the description text (`salary_source` says which). They are never estimated.
+- Salary fields come from the ATS's structured compensation (Ashby, Lever, Recruitee, Personio) or, when it has none, from pay stated in the description text (`salary_source` says which). They are never estimated.
 - `country_codes` are ISO 3166 alpha-2 codes. They come from the ATS's own country fields where available, and are otherwise inferred from the location text on a best-effort basis.
 - `duplicate_sources` lists the other `job_id`s of the same opening. Example: a company that still has an old board live after switching ATS. Each opening is delivered and charged once.
 - `description_text` is fetched **live from the company's ATS** for each delivered job (see below). `description_status` is `included`, `not_requested` (when `includeDescription: false`) or `unavailable` (the ATS could not be reached, or the posting has no text).
 - `match_score` (0–100) and `matched_in` (`title`, `department` or `description`) show why a job matched your keywords. Both are `null` when you search without keywords.
 - **No personal data.** Recruiter and hiring-manager fields are never copied. In descriptions, e-mail addresses, phone numbers and names in contact lines ("Questions? Call Jane on …") are replaced with `[… redacted]`.
 
-**Enrichment (deterministic, no AI).** Every job gets `seniority` (`intern`, `entry`, `mid`, `senior`, `lead`, `manager`, `director`, `executive`), read from the title by fixed rules, including common German, French, Spanish, Dutch and Portuguese markers. It is `null` when the title has no level marker ("Software Engineer"): no guessing. When the run reads the job's full description (`includeDescription`, the default), the text also gives `years_experience_min` ("3+ years", "3–5 years" → 3), `visa_sponsorship` (`true` when offered, `false` when ruled out, `null` when not mentioned) and, for jobs without structured pay, the pay stated in the text (`salary_source: "description"`; the ATS's own pay fields are `structured` and never overwritten). Without the description these three stay `null`. Same input, same output: no language model, no estimates.
+**Enrichment (deterministic, no AI).** Every job gets `seniority` (`intern`, `entry`, `mid`, `senior`, `lead`, `manager`, `director`, `executive`), read from the title by fixed rules, including common German, French, Spanish, Dutch and Portuguese markers. It is `null` when the title has no level marker ("Software Engineer"): no guessing. When the run reads the job's full description (`includeDescription`, the default), the text also gives `years_experience_min` ("3+ years", "3–5 years" → 3), `visa_sponsorship` (`true` when offered, `false` when ruled out, `null` when not mentioned) and, for jobs without structured pay, the pay stated in the text (`salary_source: "description"`; the ATS's own pay fields are `structured` and never overwritten). Without the description these three stay `null`. Personio publishes a level and the years of experience as fields: they fill `seniority` when the title has no level word and `years_experience_min` even without the description. Same input, same output: no language model, no estimates.
 
 ## Use cases
 
@@ -95,7 +95,7 @@ One flat record per job opening:
 | `remote` | `any` \| `remote_only` \| `onsite_only` | `onsite_only` excludes jobs marked remote |
 | `postedWithinDays` | integer | First published within the last N days |
 | `companies` | string[] | Company names (`Datadog`) or board tokens (`datadog`, `greenhouse:datadog`) |
-| `ats` | string[] | Any of `greenhouse`, `lever`, `ashby`, `workable`, `recruitee`, `workday` |
+| `ats` | string[] | Any of `greenhouse`, `lever`, `ashby`, `workable`, `recruitee`, `workday`, `personio`, `teamtailor` |
 | `departments` | string[] | Substring match on department or team |
 | `employmentTypes` | string[] | `full_time`, `part_time`, `contract`, `temporary`, `internship`, `other` |
 | `seniority` | string[] | `intern`, `entry`, `mid`, `senior`, `lead`, `manager`, `director`, `executive`, read from the job title. Jobs whose title has no level marker are excluded when this is set |
@@ -103,7 +103,7 @@ One flat record per job opening:
 | `maxPerCompany` | integer | Optional cap on jobs from any one company (prefill 3), so a single employer posting many near-identical roles can't fill your results |
 | `includeDescription` | boolean | Default `true`. Fetches the full plain-text description (max 20,000 chars) live from the ATS for every delivered job. A 300-char snippet is always included. Set `false` for the fastest runs |
 | `sinceLastRun` | boolean | Incremental feed: returns only jobs not delivered by an earlier run with the same filters |
-| `companyUrls` | string[] | **Live mode**: board URLs (`https://job-boards.greenhouse.io/gitlab`, `https://jobs.lever.co/acme`, `https://jobs.ashbyhq.com/acme`, `https://apply.workable.com/acme`, `https://acme.recruitee.com`, `https://acme.wd5.myworkdayjobs.com/External`) or `ats:token` strings. These boards are fetched live, so you can use companies that are not in the index yet |
+| `companyUrls` | string[] | **Live mode**: board URLs (`https://job-boards.greenhouse.io/gitlab`, `https://jobs.lever.co/acme`, `https://jobs.ashbyhq.com/acme`, `https://apply.workable.com/acme`, `https://acme.recruitee.com`, `https://acme.wd5.myworkdayjobs.com/External`, `https://acme.jobs.personio.de`, `https://acme.teamtailor.com`; a Teamtailor custom domain as `teamtailor:careers.acme.com`) or `ats:token` strings. These boards are fetched live, so you can use companies that are not in the index yet |
 
 **Ranking.** With keywords, every matching job gets a `match_score`:
 
@@ -150,13 +150,15 @@ Search-index build of 2026-10-10:
 
 Workday sites contribute their newest 300 jobs each to the index; read a Workday site live (`companyUrls`) for all of its jobs.
 
+**Personio and Teamtailor** (added 2026-10-14): 2,397 Personio and 1,956 Teamtailor career sites with open jobs (22,853 and 39,070 listed jobs) are in the directory and join the search index with its nightly build. Until a platform's first build, a search limited to it reads a few built-in boards live; any Personio or Teamtailor board also works in live mode (`companyUrls`).
+
 About 15% of indexed jobs carry a structured salary range.
 
 Coverage grows as the directory is refreshed. Every board in the index had at least one open job when it was last checked. If a company you need is missing, pass its board URL in `companyUrls`.
 
 ## Sources and terms
 
-Only official, public, unauthenticated job-board APIs that the ATS vendors publish for displaying and syndicating open jobs. No career-site HTML scraping, no logins, no LinkedIn or Indeed.
+Only official, public, unauthenticated job-board APIs and feeds that the ATS vendors publish for displaying and syndicating open jobs. No career-site HTML scraping, no logins, no LinkedIn or Indeed.
 
 | ATS | API | Reuse terms |
 |---|---|---|
@@ -166,8 +168,10 @@ Only official, public, unauthenticated job-board APIs that the ATS vendors publi
 | Workable | [Public jobs endpoint](https://help.workable.com/hc/en-us/articles/115012771647) | Documented public endpoint for published jobs; robots.txt allows crawling |
 | Recruitee | [Careers Site API](https://docs.recruitee.com/reference/offers) | Public API returning published offers |
 | Workday | Public career sites (`<company>.<wdN>.myworkdayjobs.com/<site>`) | Not a vendor-documented API: the job list and job pages each site loads for its visitors. Each host's robots.txt is checked first (career sites allow `/<site>/`); about 4 requests/s across all Workday hosts |
+| Personio | [XML job feed](https://developer.personio.de/docs/retrieving-open-job-positions) (`<company>.jobs.personio.de/xml`) | Published by Personio for job portals and company sites. Each host's robots.txt is read first and only a text/plain file allowing `/xml` and `/job/` counts; a company that disallows it is never read |
+| Teamtailor | Career-site RSS feed (`<company>.teamtailor.com/jobs.rss`) | The jobs feed each career site links for its visitors (`rel="alternate"`), no Teamtailor API or login. robots.txt checked per host first (career sites disallow only `/app/`, `/messages/` and similar) |
 
-SmartRecruiters is deliberately **not** included, because its API host's robots.txt disallows automated access.
+SmartRecruiters is deliberately **not** included, because its API host's robots.txt disallows automated access. BambooHR is **not** included either: its Terms of Service forbid using any robot or spider to monitor or copy content from the service, which hosts its customers' careers pages.
 
 ## factpipe Jobs & Hiring Data
 
@@ -194,10 +198,10 @@ The search index is rebuilt daily. With `includeDescription` on (the default), e
 It covers the title, department, team and the first ~1,500 characters of each description, which is usually the role summary and the first requirements. Words that appear in most of one company's postings (its "About us" boilerplate) are matched per company. Use `keywordScope: "title"` for strict title searches.
 
 **Which companies are covered?**
-About 15,000 company job boards with open jobs on Greenhouse, Lever, Ashby, Workable and Recruitee (see Coverage). They were discovered from Common Crawl's public URL index and each was validated against its ATS API. Use `companies` to restrict the search, or `companyUrls` for any board that isn't indexed.
+About 15,000 company job boards with open jobs on Greenhouse, Lever, Ashby, Workable, Recruitee and Workday, plus the Personio and Teamtailor career sites added in October 2026 (see Coverage). They were discovered from Common Crawl's public URL index and each was validated against its ATS API or feed. Use `companies` to restrict the search, or `companyUrls` for any board that isn't indexed.
 
 **Why do some jobs have no salary?**
-Only some employers publish pay: as structured ranges (mostly Ashby, Lever and Recruitee) or as a stated range in the description, such as US pay-transparency ranges on Greenhouse. The first is `salary_source: "structured"`, the second `"description"` (read with fixed rules, only when the run reads the description). Pay is never estimated: a job that states none has `null` salary fields.
+Only some employers publish pay: as structured ranges (mostly Ashby, Lever, Recruitee and Personio) or as a stated range in the description, such as US pay-transparency ranges on Greenhouse. The first is `salary_source: "structured"`, the second `"description"` (read with fixed rules, only when the run reads the description). Pay is never estimated: a job that states none has `null` salary fields.
 
 **How are seniority, years of experience and visa sponsorship determined?**
 By fixed, published rules, not by an AI model, so the same posting always gives the same answer. `seniority` comes from title words ("Senior", "Staff Engineer", "Head of", "Werkstudent"…); "Product Manager" or "Account Manager" are not people-manager titles and stay `null` unless the title has another level word. `years_experience_min` takes the first required "N+ years" in the description and ignores company-age phrases ("founded 20 years ago"). `visa_sponsorship` is `false` whenever the posting rules sponsorship out, even if it also mentions it positively. Anything ambiguous stays `null`.

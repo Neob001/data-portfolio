@@ -103,7 +103,8 @@ export async function runJobsActor({ slug, toOptions = normalizeInput, noBoardsM
 /** Status message for runs whose board references are all unsupported (exported for tests). */
 export function noSupportedBoardsMessage(badRefs) {
   return `No supported job-board URL in input (${badRefs.slice(0, 3).join(', ')}${badRefs.length > 3 ? ', ...' : ''}). `
-    + 'Use Greenhouse, Lever, Ashby, Workable, Recruitee or Workday board URLs, e.g. https://job-boards.greenhouse.io/<company>, '
-    + 'https://jobs.lever.co/<company>, https://<company>.wd5.myworkdayjobs.com/<site>. For a company\'s own careers page use '
+    + 'Use Greenhouse, Lever, Ashby, Workable, Recruitee, Workday, Personio or Teamtailor board URLs, e.g. https://job-boards.greenhouse.io/<company>, '
+    + 'https://<company>.wd5.myworkdayjobs.com/<site>, https://<company>.jobs.personio.de, https://<company>.teamtailor.com '
+    + '(a Teamtailor custom domain as teamtailor:<host>). For a company\'s own careers page use '
     + 'https://apify.com/factpipe/company-jobs-scraper';
 }

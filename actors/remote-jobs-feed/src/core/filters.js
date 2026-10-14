@@ -3,7 +3,7 @@ import { ATS_LIST, EMPLOYMENT_TYPES, parseBoardRef, boardKey } from './transform
 import { normKey, companyKey } from './text.js';
 import { isCountryCode } from './geo.js';
 import { compileRanker, KEYWORD_SCOPES } from './rank.js';
-import { SENIORITY_LEVELS, seniorityOf } from './enrich.js';
+import { SENIORITY_LEVELS, seniorityFor } from './enrich.js';
 
 const strList = (v) => (Array.isArray(v) ? v : typeof v === 'string' && v.trim() ? v.split(',') : [])
   .map((x) => String(x ?? '').trim())
@@ -128,7 +128,7 @@ export function compileSearch(opts) {
     if (opts.remote === 'remote_only' && !(job.workplace_type === 'remote' || job.remote === true)) return null;
     if (opts.remote === 'onsite_only' && (job.workplace_type === 'remote' || job.remote === true)) return null;
     if (emp.size && !emp.has(job.employment_type)) return null;
-    if (sen && !sen.has(seniorityOf(job.title))) return null;
+    if (sen && !sen.has(seniorityFor(job.title, job.seniority_hint))) return null;
     if (maxAgeMs !== null) {
       const t = job.posted_at ? Date.parse(job.posted_at) : NaN;
       if (!Number.isFinite(t) || now - t > maxAgeMs) return null;

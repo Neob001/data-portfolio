@@ -2,13 +2,20 @@
 // Shared by the Actor (live mode) and scripts/jobs_index/build_index.mjs (the jobs index).
 import { clean, cleanDescription, snippetOf, normKey, companyKey } from './text.js';
 import { countryCodes } from './geo.js';
+import { parseXml, child, childrenOf, textOf } from './xml.js';
 
-export const ATS_LIST = ['greenhouse', 'lever', 'ashby', 'workable', 'recruitee', 'workday'];
+export const ATS_LIST = ['greenhouse', 'lever', 'ashby', 'workable', 'recruitee', 'workday', 'personio', 'teamtailor'];
+// Platforms whose boards are career-site feeds rather than documented JSON APIs: robots.txt of the board's
+// host is read (Accept: text/plain) and must allow the paths we read BEFORE any other request to that host.
+export const ROBOTS_CHECKED_ATS = ['workday', 'personio', 'teamtailor'];
 export const WORKPLACE_TYPES = ['remote', 'hybrid', 'onsite', 'unknown'];
 export const EMPLOYMENT_TYPES = ['full_time', 'part_time', 'contract', 'temporary', 'internship', 'other'];
 export const SALARY_PERIODS = ['year', 'month', 'week', 'day', 'hour'];
 
 // ------------------------------------------------------------------ board detection
+// Teamtailor hosts that are not company career sites (first label).
+const TT_RESERVED = ['www', 'app', 'api', 'cdn', 'assets', 'scripts', 'static', 'support', 'help', 'status', 'docs', 'blog',
+  'partner', 'partners', 'marketplace', 'jobs', 'mail', 'go', 'demo', 'staging', 'test', 'sandbox', 'developer', 'developers'];
 const TOKEN = '([A-Za-z0-9][A-Za-z0-9_.%-]*)';
 export const BOARD_PATTERNS = [
   { ats: 'greenhouse', rx: new RegExp(`(?:boards|job-boards)\\.greenhouse\\.io/embed/job_board\\?for=${TOKEN}`, 'i') },
@@ -23,6 +30,8 @@ export const BOARD_PATTERNS = [
   { ats: 'workable', rx: new RegExp(`apply\\.workable\\.com/(?:api/v\\d/widget/accounts/)?${TOKEN}`, 'i') },
   { ats: 'workable', rx: /(?:https?:\/\/)?([a-z0-9][a-z0-9-]*)\.workable\.com(?:\/|$)/i, skip: ['www', 'apply', 'help', 'resources'] },
   { ats: 'recruitee', rx: /(?:https?:\/\/)?([a-z0-9][a-z0-9-]*)\.recruitee\.com(?:\/|$)/i, skip: ['www', 'app', 'api', 'blog', 'support'] },
+  { ats: 'personio', rx: /^(?:https?:\/\/)?([a-z0-9][a-z0-9-]*)\.jobs\.personio\.(?:de|com)(?:[/?#]|$)/i, skip: ['www', 'api', 'app'] },
+  { ats: 'teamtailor', rx: /^(?:https?:\/\/)?([a-z0-9][a-z0-9-]*(?:\.[a-z]{2})?)\.teamtailor\.com(?:[/?#]|$)/i, skip: TT_RESERVED },
 ];
 const RESERVED_FIRST_SEGMENT = new Set(['embed', 'v1', 'j', 'api', 'jobs', 'static', 'assets']);
 
@@ -33,7 +42,7 @@ const RESERVED_FIRST_SEGMENT = new Set(['embed', 'v1', 'j', 'api', 'jobs', 'stat
 export function parseBoardRef(ref) {
   const s = String(ref ?? '').trim();
   if (!s) return null;
-  const explicit = s.match(/^(greenhouse|lever|ashby|workable|recruitee):(?:(eu):)?([^\s/?#]+)$/i);
+  const explicit = s.match(/^(greenhouse|lever|ashby|workable|recruitee|personio|teamtailor):(?:(eu):)?([^\s/?#]+)$/i);
   if (explicit) {
     const ats = explicit[1].toLowerCase();
     return withRegion({ ats, token: fixCase(ats, decodeURIComponent(explicit[3])) }, explicit[2] && ats === 'lever' ? 'eu' : null);
@@ -43,14 +52,14 @@ export function parseBoardRef(ref) {
     const m = s.match(p.rx);
     if (!m) continue;
     const token = decodeURIComponent(m[1]);
-    if (p.skip?.includes(token.toLowerCase())) continue;
+    if (p.skip?.includes(token.toLowerCase().split('.')[0])) continue;
     if (RESERVED_FIRST_SEGMENT.has(token.toLowerCase())) continue;
     return withRegion({ ats: p.ats, token: fixCase(p.ats, token) }, p.region);
   }
   return null;
 }
 const withRegion = (b, region) => (region ? { ...b, region } : b);
-const fixCase = (ats, t) => (ats === 'greenhouse' || ats === 'recruitee' ? t.toLowerCase() : t);
+const fixCase = (ats, t) => (['greenhouse', 'recruitee', 'personio', 'teamtailor'].includes(ats) ? t.toLowerCase() : t);
 
 export function boardKey({ ats, token, region }) {
   return `${ats}${region ? `:${region}` : ''}:${String(token).toLowerCase()}`;
@@ -178,7 +187,48 @@ export function workdayTenantName(token) {
   return t.length <= 3 ? t.toUpperCase() : t.charAt(0).toUpperCase() + t.slice(1);
 }
 
+// ------------------------------------------------------------------ Personio / Teamtailor career-site feeds
+// Personio: every career page <company>.jobs.personio.de (the same accounts answer on .jobs.personio.com)
+// publishes its open positions as XML at /xml, documented by Personio for job portals
+// (developer.personio.de "Retrieving open positions"). Without a parameter it answers in the account's
+// default language; ?language=en returns English texts, and an EMPTY description for a position that has no
+// English version (measured: 290 of 322 positions on one German board), so the core reads the default feed
+// and only asks for ?language=en when a position came without description (personioEnglishUrl). Token: the
+// company subdomain.
+// Teamtailor: every career site publishes an RSS 2.0 feed of its open jobs at /jobs.rss (linked from its
+// /jobs page as rel=alternate), with descriptions, structured locations, department and remote status. A page
+// holds at most 100 items; ?offset=100, 200... returns the next ones (measured: 639 distinct jobs in 7 pages).
+// A group site may list jobs whose links point to its sister sites / custom domains: job_url is the item link.
+// Token: the host labels before .teamtailor.com ("acme", regional "acme.na"), or the full host of a
+// Teamtailor-hosted custom domain ("careers.acme.com").
+const TT_REGIONAL = /^[a-z0-9][a-z0-9-]*\.[a-z]{2}$/;
+
+/** Host of a board read through a career-site feed (Personio, Teamtailor) or a Workday site; else null. */
+export function boardHost(board) {
+  const t = String(board.token).toLowerCase();
+  if (board.ats === 'workday') return workdayParts(board.token).host;
+  if (board.ats === 'personio') return `${t}.jobs.personio.de`;
+  if (board.ats === 'teamtailor') return !t.includes('.') || TT_REGIONAL.test(t) ? `${t}.teamtailor.com` : t;
+  return null;
+}
+
+/** Teamtailor feed page: offset 0 is the plain /jobs.rss. */
+export const teamtailorPageUrl = (board, offset) => `${apiUrlFor(board)}${offset ? `?offset=${offset}` : ''}`;
+
+/** Personio feed in English: fills descriptions of positions whose default-language text is empty. */
+export const personioEnglishUrl = (board) => `https://${boardHost(board)}/xml?language=en`;
+
+/** Paths a robots.txt must allow before we read a board of a robots-checked platform. */
+export function robotsPathsFor(board) {
+  if (board.ats === 'workday') return workdayRobotsPaths(board);
+  if (board.ats === 'personio') return ['/xml', '/job/'];
+  if (board.ats === 'teamtailor') return ['/jobs.rss', '/jobs.rss?offset=100', '/jobs/'];
+  return [];
+}
+
 export function apiUrlFor({ ats, token, region }) {
+  if (ats === 'personio') return `https://${boardHost({ ats, token })}/xml`;
+  if (ats === 'teamtailor') return `https://${boardHost({ ats, token })}/jobs.rss`;
   if (ats === 'workday') {
     const { host, tenant, site } = workdayParts(token);
     return `https://${host}/wday/cxs/${tenant}/${encodeURIComponent(site)}/jobs`;
@@ -193,6 +243,8 @@ export function apiUrlFor({ ats, token, region }) {
 }
 
 export function boardUrlFor({ ats, token, region }) {
+  if (ats === 'personio') return `https://${boardHost({ ats, token })}/`;
+  if (ats === 'teamtailor') return `https://${boardHost({ ats, token })}/jobs`;
   if (ats === 'greenhouse') return `https://job-boards.greenhouse.io/${token}`;
   if (ats === 'lever') return `https://jobs${region === 'eu' ? '.eu' : ''}.lever.co/${token}`;
   if (ats === 'ashby') return `https://jobs.ashbyhq.com/${encodeURIComponent(token)}`;
@@ -205,10 +257,13 @@ export function boardUrlFor({ ats, token, region }) {
   return null;
 }
 
-/** ATS of an API URL (for per-host pacing). Workday first: a tenant may be called "greenhouse…". */
+/** ATS of an API URL (for per-host pacing). Hosted career sites first: a tenant may be called "greenhouse…". */
 export function atsOfUrl(url) {
   const u = String(url);
   if (/\.myworkday(?:jobs|site)\.com\//.test(u)) return 'workday';
+  if (/\.jobs\.personio\.(?:de|com)\//.test(u)) return 'personio';
+  // Teamtailor custom domains are recognised by the feed path.
+  if (/\.teamtailor\.com\/|\/jobs\.rss(?:[?#]|$)/.test(u)) return 'teamtailor';
   if (/greenhouse/.test(u)) return 'greenhouse';
   if (/lever\.co/.test(u)) return 'lever';
   if (/ashbyhq/.test(u)) return 'ashby';
@@ -317,6 +372,10 @@ function finish(board, raw) {
     description_text: text,
     description_snippet: snippetOf(text),
     duplicate_sources: [],
+    // Structured level / experience the ATS publishes (Personio), used by enrich.js when the title or the
+    // description gives none. Only set when present, so other platforms' records and the index are unchanged.
+    ...(raw.seniority_hint ? { seniority_hint: raw.seniority_hint } : {}),
+    ...(Number.isInteger(raw.years_experience_hint) ? { years_experience_hint: raw.years_experience_hint } : {}),
   };
 }
 
@@ -497,6 +556,99 @@ export function parseWorkdayDetail(board, response) {
   };
 }
 
+// ------------------------------------------------------------------ Personio / Teamtailor normalizers
+// Personio position fields (developer.personio.de + real feeds): employmentType permanent | intern | trainee |
+// working_student | freelance (some accounts: temporary), schedule full-time | part-time | full-or-part-time,
+// seniority entry-level | experienced | executive | student, yearsOfExperience lt-1 | 1-2 | 2-5 | 5-7 | 7-10 |
+// 10-15 | gt-15, optional salaryInformation { min, max, currencyCode, type: yearly | monthly | hourly }.
+// "experienced" spans mid to senior, so it maps to no level of ours.
+const PERSONIO_SENIORITY = { student: 'intern', 'entry-level': 'entry', executive: 'executive' };
+const PERSONIO_YEARS = { 'lt-1': 0, '1-2': 1, '2-5': 2, '5-7': 5, '7-10': 7, '10-15': 10, 'gt-15': 15 };
+const escHtml = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+/** Personio employmentType + schedule -> one EMPLOYMENT_TYPES value (or null). */
+export function personioEmployment(type, schedule) {
+  const t = String(type || '').toLowerCase();
+  const sch = String(schedule || '').toLowerCase();
+  if (/intern|trainee|working.?student|freelance/.test(t)) return employmentType(t.replace(/_/g, ' '));
+  if (sch === 'part-time') return 'part_time'; // "full-or-part-time" stays with the contract type
+  if (/temp|fixed/.test(t)) return 'temporary';
+  return employmentType(sch === 'full-time' ? sch : t || sch);
+}
+
+const PERSONIO_PERIOD = { yearly: 'year', monthly: 'month', weekly: 'week', daily: 'day', hourly: 'hour' };
+
+function personio(board, p, companyName) {
+  const id = textOf(p, 'id');
+  const title = textOf(p, 'name');
+  if (!/^\d+$/.test(id) || !title) return null;
+  const offices = [textOf(p, 'office'), ...childrenOf(child(p, 'additionalOffices'), 'office').map((o) => o.text.trim())];
+  const html = childrenOf(child(p, 'jobDescriptions'), 'jobDescription').map((d) => {
+    const head = textOf(d, 'name');
+    return `${head ? `<p><strong>${escHtml(head)}</strong></p>` : ''}${child(d, 'value')?.text || ''}`;
+  }).join('\n');
+  const jobUrl = `https://${boardHost(board)}/job/${id}`;
+  const sal = child(p, 'salaryInformation');
+  return finish(board, {
+    id,
+    title,
+    company_name: textOf(p, 'subcompany') || companyName,
+    salary_min: sal ? textOf(sal, 'min') : null,
+    salary_max: sal ? textOf(sal, 'max') : null,
+    salary_currency: sal ? textOf(sal, 'currencyCode') : null,
+    salary_period: sal ? PERSONIO_PERIOD[textOf(sal, 'type').toLowerCase()] || textOf(sal, 'type') : null,
+    department: textOf(p, 'department') || null,
+    team: textOf(p, 'recruitingCategory') || null,
+    employment_type: personioEmployment(textOf(p, 'employmentType'), textOf(p, 'schedule')),
+    locations: offices,
+    posted_at: textOf(p, 'createdAt') || null,
+    updated_at: null,
+    job_url: jobUrl,
+    apply_url: jobUrl,
+    description_text: html.trim() ? cleanDescription(html) : null,
+    seniority_hint: PERSONIO_SENIORITY[textOf(p, 'seniority').toLowerCase()] || null,
+    years_experience_hint: PERSONIO_YEARS[textOf(p, 'yearsOfExperience').toLowerCase()],
+  });
+}
+
+// Teamtailor remoteStatus: none | hybrid | fully | temporary. "temporary" (temporarily remote) names no lasting
+// arrangement, so it falls back to the location text like a missing value.
+const TEAMTAILOR_WORKPLACE = { none: 'onsite', hybrid: 'hybrid', fully: 'remote' };
+
+function teamtailor(board, item, companyName) {
+  const link = textOf(item, 'link');
+  const title = textOf(item, 'title');
+  if (!link || !title || !/^https?:\/\//i.test(link)) return null;
+  const id = link.match(/\/jobs\/(\d+)/)?.[1] || textOf(item, 'guid');
+  if (!id) return null;
+  const locs = childrenOf(child(item, 'locations'), 'location');
+  // City and country only: an office's street address and zip are not needed to place a job.
+  const locations = locs.map((l) => [textOf(l, 'city'), textOf(l, 'country')].filter(Boolean).join(', ') || textOf(l, 'name'));
+  return finish(board, {
+    id,
+    title,
+    company_name: companyName,
+    department: textOf(item, 'department') || null,
+    team: textOf(item, 'role') || null,
+    employment_type: null,
+    workplace_type: TEAMTAILOR_WORKPLACE[textOf(item, 'remoteStatus').toLowerCase()] || null,
+    locations,
+    country_hints: locs.map((l) => textOf(l, 'country')).filter(Boolean),
+    posted_at: textOf(item, 'pubDate') || null,
+    updated_at: null,
+    job_url: link,
+    apply_url: link,
+    description_text: cleanDescription(textOf(item, 'description')),
+  });
+}
+
+/** Feed text (or an already parsed root) -> root element; a body that is not XML is a schema change. */
+function feedRoot(ats, token, response) {
+  if (response && typeof response === 'object' && Array.isArray(response.children)) return response;
+  if (typeof response !== 'string') throw schemaError(ats, token);
+  try { return parseXml(response); } catch { throw schemaError(ats, token); }
+}
+
 function schemaError(ats, token) {
   const e = new Error(`Unexpected ${ats} response shape for board ${token}`);
   e.failureClass = 'schema_change';
@@ -532,6 +684,29 @@ export function parseBoard(board, response, { fetchedAt = new Date() } = {}) {
     }
     return { company_name: null, jobs };
   }
+  if (ats === 'personio' || ats === 'teamtailor') {
+    const root = feedRoot(ats, token, response);
+    if (ats === 'personio') {
+      if (root.name !== 'workzag-jobs') throw schemaError(ats, token);
+      list = childrenOf(root, 'position');
+    } else {
+      const channel = child(root, 'channel');
+      if (root.name !== 'rss' || !channel) throw schemaError(ats, token);
+      list = childrenOf(channel, 'item');
+      companyName = clean(textOf(channel, 'title')) || null;
+    }
+    const norm = ats === 'personio' ? personio : teamtailor;
+    const jobs = [];
+    const ids = new Set();
+    for (const raw of list) {
+      let job = null;
+      try { job = norm(board, raw, companyName); } catch { job = null; } // one malformed job never sinks a board
+      if (!job || !job.title || !job.job_url || ids.has(job.job_id)) continue;
+      ids.add(job.job_id);
+      jobs.push(job);
+    }
+    return { company_name: companyName, jobs, items: list.length };
+  }
   if (ats === 'greenhouse') {
     list = response?.jobs;
     companyName = list?.find?.((j) => j?.company_name)?.company_name ?? null;
@@ -558,7 +733,13 @@ export function parseBoard(board, response, { fetchedAt = new Date() } = {}) {
 }
 
 // ------------------------------------------------------------------ dedupe
+// Teamtailor job ids are global: a group career site lists its sister sites' jobs under the same id and link
+// (e.g. jobs/8466633 on anicuraglobal and on anicuraportugal), with a different company name. The id is the key.
+const TT_JOB_ID = /\/jobs\/(\d+)/;
+
 export function dedupeKey(job) {
+  const tt = job.ats === 'teamtailor' ? String(job.job_url || '').match(TT_JOB_ID) : null;
+  if (tt) return `teamtailor#${tt[1]}`;
   return [companyKey(job.company_name || job.company_board), normKey(job.title), job.locations.map(normKey).sort().join('|')].join('#');
 }
 

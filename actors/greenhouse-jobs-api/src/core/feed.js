@@ -11,8 +11,8 @@ import { compileKeyword } from './keywords.js';
 import { TopK, rankCmp, newestCmp } from './rank.js';
 import { createDeadline } from '../lib/deadline.js';
 import {
-  parseBoard, apiUrlFor, boardUrlFor, boardKey, dedupeJobs, atsOfUrl, parseWorkdayDetail, workdayDetailUrl, workdayParts,
-  workdayRobotsPaths,
+  parseBoard, apiUrlFor, boardUrlFor, boardKey, dedupeJobs, atsOfUrl, parseWorkdayDetail, workdayDetailUrl,
+  boardHost, robotsPathsFor, personioEnglishUrl, teamtailorPageUrl, ROBOTS_CHECKED_ATS,
 } from './transform.js';
 import { selectShards, shardsForCompanies, INDEX_FORMAT, defaultApplyUrl } from './index_format.js';
 import { clean, snippetOf, normKey } from './text.js';
@@ -48,6 +48,18 @@ export const EXTRA_FALLBACK_BOARDS = {
     { ats: 'workday', token: 'adobe.wd5/external_experienced' },
     { ats: 'workday', token: 'paypal.wd1/jobs' },
   ],
+  // Career-site feeds: one request per board (+ robots.txt per host); mid-size boards (60-90 jobs, validated
+  // 2026-10-14) with descriptions.
+  personio: [
+    { ats: 'personio', token: 'ommax' },
+    { ats: 'personio', token: 'zollsoft' },
+    { ats: 'personio', token: 'pmx' },
+  ],
+  teamtailor: [
+    { ats: 'teamtailor', token: 'huaweiresearchcentergermanyaustria' },
+    { ats: 'teamtailor', token: 'luminorbank' },
+    { ats: 'teamtailor', token: 'ingeteam' },
+  ],
 };
 
 // Workday CXS limits. The jobs endpoint rejects limit > 20 (HTTP 400) and reports at most total=2000.
@@ -58,6 +70,10 @@ export const WORKDAY = {
   pageReserveMs: 45000, // do not start another page with less than this left before the run deadline
   detailConcurrency: 2, // parallel job-detail calls for descriptions (all paced per ATS, see HOST_GAP_MS)
 };
+// Teamtailor /jobs.rss pages: 100 items each, next ones at ?offset=N. Live mode reads up to 2,000 jobs per site
+// (the index build sets its own cap); a page that adds no new job ends the paging (offset ignored).
+export const TEAMTAILOR = { pageSize: 100, maxJobsPerBoard: 2000, pageReserveMs: 20000 };
+
 // robots.txt product token we answer to (our User-Agent below starts with it).
 export const ROBOTS_AGENT = 'factpipe-jobs-feed';
 
@@ -82,7 +98,8 @@ export function toOutput(job, includeDescription) {
   const row = {};
   for (const k of OUTPUT_FIELDS) row[k] = job[k] === undefined ? null : job[k];
   for (const k of ['locations', 'country_codes', 'duplicate_sources']) if (!Array.isArray(row[k])) row[k] = [];
-  enrichRow(row, row.description_text);
+  // Structured level / experience from the ATS (Personio) back up the title / description rules.
+  enrichRow(row, row.description_text, { seniority: job.seniority_hint ?? null, yearsMin: job.years_experience_hint ?? null });
   if (!includeDescription) {
     row.description_text = null;
     row.description_status = 'not_requested';
@@ -183,11 +200,38 @@ export async function* streamShardLines(base, rel, { timeoutMs = 120000, stallMs
   }
 }
 
-export async function defaultFetchText(url) {
-  const res = await fetch(url, { headers: { 'User-Agent': UA }, redirect: 'follow', signal: AbortSignal.timeout(15000) });
-  if (!res.ok) throw new FetchError(`HTTP ${res.status} at ${url}`, 'http_error', res.status);
-  return res.text();
+/**
+ * GET a text resource (pages, robots.txt, XML/RSS feeds). opts: { accept, meta, timeoutMs = 15000, retries = 0 }.
+ * 429 / 5xx / network errors are retried with backoff; other HTTP errors throw at once (FetchError with
+ * .status). meta: true -> { status, text, contentType } (robots.txt needs the content type), else the text.
+ */
+export async function defaultFetchText(url, { accept = null, meta = false, timeoutMs = 15000, retries = 0 } = {}) {
+  let last;
+  for (let a = 0; a <= retries; a += 1) {
+    if (a) await new Promise((r) => setTimeout(r, 1000 * 2 ** (a - 1)));
+    let res;
+    try {
+      res = await fetch(url, {
+        headers: { 'User-Agent': UA, ...(accept ? { accept } : {}) }, redirect: 'follow', signal: AbortSignal.timeout(timeoutMs),
+      });
+    } catch (e) {
+      const timeout = e?.name === 'TimeoutError' || e?.name === 'AbortError';
+      last = new FetchError(`${timeout ? `Timeout after ${timeoutMs}ms` : e.message} at ${url}`, timeout ? 'timeout' : 'site_down');
+      continue;
+    }
+    if (res.status === 429 || res.status >= 500) {
+      last = new FetchError(`HTTP ${res.status} at ${url}`, res.status === 429 ? 'blocked' : 'site_down', res.status);
+      continue;
+    }
+    if (!res.ok) throw new FetchError(`HTTP ${res.status} at ${url}`, res.status === 403 ? 'blocked' : 'http_error', res.status);
+    const text = await res.text();
+    return meta ? { status: res.status, text, contentType: res.headers.get('content-type') || '' } : text;
+  }
+  throw last;
 }
+
+/** fetchText() result -> body text (a test double or a meta call may return { text }). */
+const bodyOf = (r) => (typeof r === 'string' ? r : r?.text ?? '');
 
 /** Company display name from a hosted board page title (Lever and Ashby APIs don't return it). */
 export function companyNameFromTitle(ats, html) {
@@ -216,26 +260,44 @@ export function workdayNameFromPage(html) {
   return name && !/^(our|the|external|internal|search|find|all|global)$/i.test(name) ? name : null;
 }
 
-// ------------------------------------------------------------------ robots.txt (Workday)
-const ROBOTS_CACHE = new Map(); // host -> Promise<{ status, text } | { error }>
+/**
+ * Company name from a Personio career page <title> ("Jobs bei X", "Jobs at X", "Karriere bei X", "Offres d'emploi
+ * chez X"...); null when the title has another form (callers fall back to the directory name / token).
+ */
+export function personioNameFromPage(html) {
+  const m = String(html || '').match(/<title[^>]*>([^<]{1,200})<\/title>/i);
+  if (!m) return null;
+  const t = clean(m[1].replace(/&amp;/g, '&').replace(/&#0?39;|&apos;/g, "'").replace(/&quot;/g, '"'));
+  const n = t?.match(/^(?:jobs?|stellenangebote|stellen|karriere|careers?|offres d['’]emploi|emplois?|vacatures|ofertas de (?:empleo|trabajo)|empleos?|posizioni aperte|lavora con noi|vagas|lediga jobb|ledige stillinger|työpaikat)\s+(?:bei|at|chez|bij|en|in|presso|da|na|hos|à|@|von)\s+(.{2,100})$/i)?.[1];
+  const name = clean(n);
+  return name && !/^(personio|uns|us|our company)$/i.test(name) ? name : null;
+}
 
+// ------------------------------------------------------------------ robots.txt (career-site hosts)
+const ROBOTS_CACHE = new Map(); // host -> Promise<{ status, text, contentType? } | { error }>
+
+/** GET /robots.txt with Accept: text/plain (asked for text/html, Workday hosts answer with their HTML app). */
 async function fetchRobots(url, fetchText) {
   try {
-    return { status: 200, text: await fetchText(url) };
+    const r = await fetchText(url, { accept: 'text/plain', meta: true, retries: 1, timeoutMs: 15000 });
+    return typeof r === 'string' ? { status: 200, text: r } : { status: r.status ?? 200, text: r.text ?? '', contentType: r.contentType ?? null };
   } catch (e) {
     return e?.status ? { status: e.status, text: '' } : { error: e?.message || 'unreachable' };
   }
 }
 
 /**
- * Robots verdict for a Workday site's CXS list/detail paths and its own pages ({ allowed, reason }).
- * One robots.txt fetch per host per process (cache). Unreachable robots.txt = not allowed (RFC 9309).
+ * Robots verdict for the paths we read on a board's host ({ allowed, reason }), for the platforms in
+ * ROBOTS_CHECKED_ATS (Workday career-site JSON, Personio and Teamtailor feeds). Called BEFORE any other
+ * request to that host; one robots.txt fetch per host per process (cache). Only a text/plain robots.txt
+ * that allows every path counts as permission (robots.js robotsVerdict).
  */
-export async function workdayRobots(board, { fetchText = defaultFetchText, cache = ROBOTS_CACHE, agent = ROBOTS_AGENT } = {}) {
-  const { host } = workdayParts(board.token);
+export async function boardRobots(board, { fetchText = defaultFetchText, cache = ROBOTS_CACHE, agent = ROBOTS_AGENT } = {}) {
+  const host = boardHost(board);
   if (!cache.has(host)) cache.set(host, fetchRobots(`https://${host}/robots.txt`, fetchText));
-  return robotsVerdict(await cache.get(host), agent, workdayRobotsPaths(board));
+  return robotsVerdict(await cache.get(host), agent, robotsPathsFor(board));
 }
+export const workdayRobots = boardRobots;
 
 function robotsError(board, reason) {
   return Object.assign(new FetchError(`${boardKey(board)} skipped: ${reason}`, 'blocked', null), { robots: true });
@@ -286,10 +348,66 @@ async function fetchWorkdayBoard(board, { fetchJson, fetchText, now, skipName, m
   return { board, company_name: name, jobs, source_url: url, truncated, total, pages };
 }
 
+// Feed requests: what the feed is, then anything (some hosts label XML as text/html).
+const FEED_ACCEPT = {
+  personio: 'application/xml, text/xml;q=0.9, */*;q=0.1',
+  teamtailor: 'application/rss+xml, application/xml;q=0.9, text/xml;q=0.8, */*;q=0.1',
+};
+
+/**
+ * One Personio / Teamtailor board: robots.txt of its host first (never any other request when it does not
+ * allow /xml + /job/ resp. /jobs.rss (+ ?offset=) + /jobs/), then the feed: Personio one request (+ an English
+ * one only when a position came without description); Teamtailor pages of 100 until a short page, `maxJobs`
+ * or the run deadline (then `truncated`). `requests` counts feed requests (robots.txt not included).
+ */
+async function fetchFeedBoard(board, { fetchText, now, skipName, robotsCache, robotsAgent, feedTimeoutMs = 60000,
+  maxJobs = TEAMTAILOR.maxJobsPerBoard, deadline = null }) {
+  const verdict = await boardRobots(board, { fetchText, cache: robotsCache, agent: robotsAgent });
+  if (!verdict.allowed) throw robotsError(board, verdict.reason);
+  const url = apiUrlFor(board);
+  const opts = { accept: FEED_ACCEPT[board.ats], retries: 2, timeoutMs: feedTimeoutMs };
+  const parsed = parseBoard(board, bodyOf(await fetchText(url, opts)));
+  let { jobs } = parsed;
+  let requests = 1;
+  let truncated = false;
+  if (board.ats === 'teamtailor' && parsed.items >= TEAMTAILOR.pageSize) {
+    const ids = new Set(jobs.map((j) => j.job_id));
+    for (let offset = TEAMTAILOR.pageSize; ; offset += TEAMTAILOR.pageSize) {
+      if (jobs.length >= maxJobs || (deadline && !deadline.hasTimeFor(TEAMTAILOR.pageReserveMs))) { truncated = true; break; }
+      const page = parseBoard(board, bodyOf(await fetchText(teamtailorPageUrl(board, offset), opts)));
+      requests += 1;
+      const fresh = page.jobs.filter((j) => !ids.has(j.job_id));
+      for (const j of fresh) { ids.add(j.job_id); jobs.push(j); }
+      if (page.items < TEAMTAILOR.pageSize || !fresh.length) break;
+    }
+    if (jobs.length > maxJobs) { jobs = jobs.slice(0, maxJobs); truncated = true; }
+  }
+  if (board.ats === 'personio' && jobs.some((j) => !j.description_text)) {
+    try {
+      requests += 1;
+      const en = new Map(parseBoard(board, bodyOf(await fetchText(personioEnglishUrl(board), opts))).jobs.map((j) => [j.job_id, j]));
+      jobs = jobs.map((j) => (j.description_text || !en.get(j.job_id)?.description_text ? j
+        : { ...j, description_text: en.get(j.job_id).description_text, description_snippet: en.get(j.job_id).description_snippet }));
+    } catch { /* the default-language feed stands */ }
+  }
+  let name = parsed.company_name;
+  if (!name && board.ats === 'personio' && !skipName && jobs.length) {
+    try { name = personioNameFromPage(bodyOf(await fetchText(boardUrlFor(board), { timeoutMs: 20000 }))); } catch { name = null; }
+  }
+  const iso = now().toISOString();
+  const token = String(board.token);
+  // Personio: a position's own <subcompany> beats the board name; the token is only the last resort.
+  const out = jobs.map((j) => ({
+    ...j, company_name: j.company_name && j.company_name !== token ? j.company_name : name || j.company_name, source_url: url, fetched_at: iso,
+  }));
+  return { board, company_name: name, jobs: out, source_url: url, requests, truncated };
+}
+
 // ------------------------------------------------------------------ live boards
 /** Fetch one board live -> { board, company_name, jobs, source_url } ; throws FetchError on failure. */
 export async function fetchBoard(board, { fetchJson = libFetchJson, fetchText = defaultFetchText, now = () => new Date(), skipName = false, ...wd } = {}) {
   if (board.ats === 'workday') return fetchWorkdayBoard(board, { fetchJson, fetchText, now, skipName, ...wd });
+  if (board.ats === 'personio' || board.ats === 'teamtailor') return fetchFeedBoard(board, { fetchText, now, skipName, ...wd });
   const url = apiUrlFor(board);
   const response = await fetchJson(url, { headers: { 'User-Agent': UA }, retries: 2, timeoutMs: board.ats === 'lever' ? 90000 : 45000, minDelayMs: 1000 });
   const parsed = parseBoard(board, response);
@@ -306,7 +424,8 @@ export async function fetchBoard(board, { fetchJson = libFetchJson, fetchText = 
 // rate-limits hard). Shared by live mode and on-demand descriptions within a run.
 // Workday: at most one request start per 250 ms across all Workday hosts in a run, and one request in
 // flight per site (its pages are read one after another): career-site JSON is not a documented API.
-export const HOST_GAP_MS = { greenhouse: 0, ashby: 0, recruitee: 0, lever: 1000, workable: 3000, workday: 250 };
+// Personio / Teamtailor: one subdomain per company, all on one platform: 250 ms between request starts.
+export const HOST_GAP_MS = { greenhouse: 0, ashby: 0, recruitee: 0, lever: 1000, workable: 3000, workday: 250, personio: 250, teamtailor: 250 };
 
 export function hostPacer(gaps = HOST_GAP_MS) {
   const next = {};
@@ -397,7 +516,9 @@ export async function runFeed(opts, deps) {
   const tracker = deps.tracker || null;
   const pace = deps.pacer || hostPacer(deps.hostGaps);
   const deadline = deps.deadline || createDeadline();
-  const fetchText = deps.fetchText || defaultFetchText;
+  const rawFetchText = deps.fetchText || defaultFetchText;
+  // Pages, robots.txt and feeds are paced per ATS like the JSON calls.
+  const fetchText = async (url, o) => { await pace(atsOfUrl(url)); return rawFetchText(url, o); };
   const robotsCache = deps.robotsCache || undefined;
   const summary = {
     mode: opts.mode, rows: 0, charged_events: 0, matched: 0, skipped_seen: 0, skipped_closed: 0, stop_reason: 'exhausted',
@@ -452,7 +573,7 @@ export async function runFeed(opts, deps) {
   function liveBoard(board) {
     const k = boardKey(board);
     if (!boardCache.has(k)) {
-      boardCache.set(k, fetchBoard(board, { fetchJson: paced, skipName: true, now: () => new Date(nowMs) })
+      boardCache.set(k, fetchBoard(board, { fetchJson: paced, fetchText, robotsCache, skipName: true, now: () => new Date(nowMs) })
         .then((r) => { summary.description_boards_fetched += 1; return new Map(r.jobs.map((j) => [j.job_id, j.description_text])); })
         .catch((e) => { summary.description_boards_failed += 1; log(`Description fetch for ${k} failed: ${e.message}`); return null; }));
     }
@@ -541,7 +662,7 @@ export async function runFeed(opts, deps) {
     // Several sites of one Workday tenant share a host: read them one after another.
     const groups = new Map();
     for (const b of boards) {
-      const k = b.ats === 'workday' ? workdayParts(b.token).host : boardKey(b);
+      const k = ROBOTS_CHECKED_ATS.includes(b.ats) ? boardHost(b) : boardKey(b);
       (groups.get(k) || groups.set(k, []).get(k)).push(b);
     }
     const results = await mapLimit([...groups.values()], 6, async (group) => {
@@ -576,7 +697,7 @@ export async function runFeed(opts, deps) {
     }
   }
 
-  /** Built-in boards for a live fallback; a platform FALLBACK_BOARDS lacks (Workday) gets its own. */
+  /** Built-in boards for a live fallback; a platform FALLBACK_BOARDS lacks (Workday, Personio, Teamtailor) gets its own. */
   function fallbackBoards() {
     const base = deps.fallbackBoards || FALLBACK_BOARDS;
     if (!opts.ats.length || base.some((b) => opts.ats.includes(b.ats))) return base;

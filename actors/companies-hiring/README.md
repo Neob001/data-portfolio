@@ -142,13 +142,15 @@ Search-index build of 2026-09-25: **15,000+ company job boards** with **730,000+
 | Lever | 1,604 | 50,718 |
 | Recruitee | 756 | 12,783 |
 
+**Personio and Teamtailor** (added 2026-10-14): 2,397 Personio and 1,956 Teamtailor career sites with open jobs (22,853 and 39,070 listed jobs) are in the directory and join the search index with its nightly build. Until a platform's first build, a search limited to it reads a few built-in boards live; any Personio or Teamtailor board also works in live mode (`companyUrls`).
+
 `careers_site_domain` is known for about 5% of companies: those whose job links point to their own careers site, mostly on Greenhouse and Recruitee. For the rest it is `null`, and `careers_url` is the company's job board. Most companies have one board; the few with two boards (e.g. a main and a regional board) are merged into one row.
 
 **When are two boards one company?** They must have the same company name, ignoring case, punctuation and legal suffixes such as Inc, Ltd or GmbH. They must also have either the same board token (`wayve` on Greenhouse and on Ashby; `lago-1` and `lago`) or provably the same openings: at least 3 shared jobs, or at least 30% of the smaller board's jobs. A shared name alone is not enough. We would rather list a company twice than merge two different companies: "Zip" (procurement software) and "Zip Co" (payments), or "Parallel" and "Parallel Learning", stay separate rows. Similar-looking names can therefore appear more than once, and `boards` shows which job board each row covers. Boards were discovered from Common Crawl's public URL index and validated against each ATS API.
 
 ## Sources and terms
 
-Only official, public, unauthenticated job-board APIs that the ATS vendors publish for displaying and syndicating open jobs. No career-site HTML scraping, no logins, no LinkedIn.
+Only official, public, unauthenticated job-board APIs and feeds that the ATS vendors publish for displaying and syndicating open jobs. No career-site HTML scraping, no logins, no LinkedIn.
 
 | ATS | API | Reuse terms |
 |---|---|---|
@@ -158,6 +160,8 @@ Only official, public, unauthenticated job-board APIs that the ATS vendors publi
 | Workable | [Public jobs endpoint](https://help.workable.com/hc/en-us/articles/115012771647) | Documented public endpoint for published jobs |
 | Recruitee | [Careers Site API](https://docs.recruitee.com/reference/offers) | Public API returning published offers |
 | Workday | Public career sites (`<company>.<wdN>.myworkdayjobs.com/<site>`) | Not a vendor-documented API: the job list and job pages each site loads for its visitors. Each host's robots.txt is checked first (career sites allow `/<site>/`); about 4 requests/s across all Workday hosts |
+| Personio | [XML job feed](https://developer.personio.de/docs/retrieving-open-job-positions) (`<company>.jobs.personio.de/xml`) | Published by Personio for job portals and company sites. Each host's robots.txt is read first and only a text/plain file allowing `/xml` and `/job/` counts; a company that disallows it is never read |
+| Teamtailor | Career-site RSS feed (`<company>.teamtailor.com/jobs.rss`) | The jobs feed each career site links for its visitors (`rel="alternate"`), no Teamtailor API or login. robots.txt checked per host first (career sites disallow only `/app/`, `/messages/` and similar) |
 
 ## factpipe Jobs & Hiring Data
 

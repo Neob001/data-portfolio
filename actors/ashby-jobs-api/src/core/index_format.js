@@ -21,6 +21,8 @@ export const SLIM_FIELDS = [
   'job_id', 'title', 'company_name', 'company_board', 'ats', 'department', 'team', 'employment_type', 'workplace_type',
   'locations', 'country_codes', 'remote', 'salary_min', 'salary_max', 'salary_currency', 'salary_period', 'posted_at',
   'updated_at', 'apply_url', 'job_url', 'description_snippet', 'duplicate_sources',
+  // Optional, only on records whose ATS publishes them (Personio): structured level / minimum years.
+  'seniority_hint', 'years_experience_hint',
 ];
 
 /** apply_url each ATS uses by default for a job_url (stored in the index only when different). */

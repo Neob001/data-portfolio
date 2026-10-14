@@ -10,7 +10,7 @@ import { parseBoardRef } from './core/transform.js';
 
 export const PLATFORM = 'workday';
 export const PLATFORM_NAME = 'Workday';
-const OTHER_NAMES = 'Greenhouse, Lever, Ashby, Workable or Recruitee';
+const OTHER_NAMES = 'Greenhouse, Lever, Ashby, Workable, Recruitee, Personio or Teamtailor';
 const BARE_TOKEN = /^[A-Za-z0-9][A-Za-z0-9_.%-]*$/;
 
 const strList = (v) => (Array.isArray(v) ? v : typeof v === 'string' && v.trim() ? v.split(',') : [])
@@ -44,6 +44,6 @@ export function otherPlatformWarning(refs) {
 export function noBoardsMessage(badRefs) {
   return `No Workday job-board URL in input (${badRefs.slice(0, 3).join(', ')}${badRefs.length > 3 ? ', ...' : ''}). `
     + 'This Actor reads Workday boards only, e.g. a career-site URL like https://acme.wd5.myworkdayjobs.com/External. '
-    + `For ${OTHER_NAMES} boards use https://apify.com/factpipe/ats-jobs-scraper; for a company's own careers page use `
+    + `For other platforms use https://apify.com/factpipe/ats-jobs-scraper; for a company's own careers page use `
     + 'https://apify.com/factpipe/company-jobs-scraper';
 }

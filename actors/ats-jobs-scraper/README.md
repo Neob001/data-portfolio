@@ -83,7 +83,7 @@ One flat record per job opening:
 
 | Field | Type | Notes |
 |---|---|---|
-| `ats` | string[] | Any of `greenhouse`, `lever`, `ashby`, `workable`, `recruitee`, `workday`. Empty = all six |
+| `ats` | string[] | Any of `greenhouse`, `lever`, `ashby`, `workable`, `recruitee`, `workday`, `personio`, `teamtailor`. Empty = all eight |
 | `companies` | string[] | Company names (`Datadog`) or board tokens (`datadog`, `greenhouse:datadog`). Empty = every company on the chosen platforms |
 | `keywords` | string[] | Case-insensitive. Title matches rank first, then department/team, then description (first ~1,500 characters) |
 | `keywordMatch` | `any` \| `all` | Default `any` |
@@ -111,6 +111,8 @@ One flat record per job opening:
 | Workable | `https://apply.workable.com/acme` | `workable:acme` |
 | Recruitee | `https://acme.recruitee.com` | `recruitee:acme` |
 | Workday | `https://acme.wd5.myworkdayjobs.com/External` (any page, also `/en-US/…`) | `workday:acme.wd5/External` |
+| Personio | `https://acme.jobs.personio.de` (any page, also `.jobs.personio.com`) | `personio:acme` |
+| Teamtailor | `https://acme.teamtailor.com/jobs` (any page) | `teamtailor:acme`; a custom domain hosted by Teamtailor: `teamtailor:careers.acme.com` |
 
 **How it works.** Without `companyUrls`, the Actor searches a compact search index of every job board in our directory, rebuilt daily from the ATS APIs. It downloads only the index parts for your chosen ATSs and date range. With keywords, it ranks every matching job before delivering the top `maxResults`. For each delivered job it then fetches the full description live from the company's ATS (one API call per company), which also drops jobs closed since the nightly build (not delivered, not charged).
 
@@ -134,11 +136,13 @@ Search-index build of 2026-09-25: **730,000+ open jobs** on **15,000+ company jo
 | Lever | 1,604 | 50,718 |
 | Recruitee | 756 | 12,783 |
 
-Boards were discovered from Common Crawl's public URL index and validated against each ATS API. Every indexed board had at least one open job when last checked. A company that isn't indexed yet works in live mode through `companyUrls`.
+**Personio and Teamtailor** (added 2026-10-14): 2,397 Personio and 1,956 Teamtailor career sites with open jobs (22,853 and 39,070 listed jobs) are in the directory and join the search index with its nightly build. Until a platform's first build, a search limited to it reads a few built-in boards live; any Personio or Teamtailor board also works in live mode (`companyUrls`).
+
+Boards were discovered from Common Crawl's public URL index and validated against each ATS API or feed. Every indexed board had at least one open job when last checked. A company that isn't indexed yet works in live mode through `companyUrls`.
 
 ## Sources and terms
 
-Only official, public, unauthenticated job-board APIs that the ATS vendors publish for displaying and syndicating open jobs. No career-site HTML scraping, no logins, no LinkedIn or Indeed.
+Only official, public, unauthenticated job-board APIs and feeds that the ATS vendors publish for displaying and syndicating open jobs. No career-site HTML scraping, no logins, no LinkedIn or Indeed.
 
 | ATS | API | Reuse terms |
 |---|---|---|
@@ -148,8 +152,10 @@ Only official, public, unauthenticated job-board APIs that the ATS vendors publi
 | Workable | [Public jobs endpoint](https://help.workable.com/hc/en-us/articles/115012771647) | Documented public endpoint for published jobs; paced at one request per 3 s |
 | Recruitee | [Careers Site API](https://docs.recruitee.com/reference/offers) | Public API returning published offers |
 | Workday | Public career sites (`<company>.<wdN>.myworkdayjobs.com/<site>`) | Not a vendor-documented API: the job list and job pages each site loads for its visitors. Each host's robots.txt is checked first (career sites allow `/<site>/`); about 4 requests/s across all Workday hosts |
+| Personio | [XML job feed](https://developer.personio.de/docs/retrieving-open-job-positions) (`<company>.jobs.personio.de/xml`) | Published by Personio for job portals and company sites. Each host's robots.txt is read first and only a text/plain file allowing `/xml` and `/job/` counts; a company that disallows it is never read |
+| Teamtailor | Career-site RSS feed (`<company>.teamtailor.com/jobs.rss`) | The jobs feed each career site links for its visitors (`rel="alternate"`), no Teamtailor API or login. robots.txt checked per host first (career sites disallow only `/app/`, `/messages/` and similar) |
 
-SmartRecruiters is deliberately **not** included, because its API host's robots.txt disallows automated access.
+SmartRecruiters is deliberately **not** included, because its API host's robots.txt disallows automated access. BambooHR is **not** included either: its Terms of Service forbid using any robot or spider to monitor or copy content from the service, which hosts its customers' careers pages.
 
 ## factpipe Jobs & Hiring Data
 
