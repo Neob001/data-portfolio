@@ -113,6 +113,7 @@ One flat record per company. A company with job boards on several ATSs (for exam
 | `locations` | string[] | Only count jobs in these places: text as written in the posting, or an ISO country code (`US`, `DE`) |
 | `remote` | `any` \| `remote_only` \| `onsite_only` | Only count remote (or non-remote) jobs |
 | `departments` | string[] | Substring match on department or team |
+| `seniority` | string[] | Only count jobs at these levels, read from the job title by fixed rules (no AI): `intern`, `entry`, `mid`, `senior`, `lead`, `manager`, `director`, `executive`. E.g. `["senior", "lead"]` for companies hiring experienced people. Jobs whose title has no level marker are not counted when this is set |
 | `postedWithinDays` | integer | Only count jobs posted in the last N days |
 | `minMatchingJobs` | integer | Default 1. Only companies with at least this many matching jobs |
 | `excludeCompanies` | string[] | Leave out these companies (your customers, your own company): names or board tokens |

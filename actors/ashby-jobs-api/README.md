@@ -38,6 +38,7 @@ One flat record per job opening, from a real run:
   "department": "Engineering",
   "team": "ML",
   "employment_type": "full_time",
+  "seniority": "senior",
   "workplace_type": "remote",
   "locations": [
     "Remote - USA"
@@ -50,6 +51,9 @@ One flat record per job opening, from a real run:
   "salary_max": 230000,
   "salary_currency": "USD",
   "salary_period": "year",
+  "salary_source": "structured",
+  "years_experience_min": 5,
+  "visa_sponsorship": null,
   "posted_at": "2026-10-09T00:48:32.515Z",
   "updated_at": null,
   "apply_url": "https://jobs.ashbyhq.com/fal-ai/70031914-e873-451d-8d17-712bada15563/application",
@@ -65,10 +69,12 @@ One flat record per job opening, from a real run:
 }
 ```
 
-- `employment_type`, `workplace_type` and `remote` come from Ashby's own fields, and the `salary_*` fields from the compensation the employer publishes on Ashby (otherwise `null`, never guessed). `posted_at` is the publication date; Ashby has no update date, so `updated_at` is `null`.
+- `employment_type`, `workplace_type` and `remote` come from Ashby's own fields, and the `salary_*` fields from the compensation the employer publishes on Ashby, else from pay stated in the description text (`salary_source` says which; otherwise `null`, never estimated). `posted_at` is the publication date; Ashby has no update date, so `updated_at` is `null`.
 - `match_score` (0–100) and `matched_in` (`title`, `department`, `description`) explain keyword matches. Both are `null` without keywords.
 - `duplicate_sources` lists other `job_id`s of the same opening (for example a company with two boards). Each opening is delivered and charged once.
 - **No personal data.** Recruiter and hiring-manager fields are never copied, and contact details in descriptions are replaced with `[… redacted]`.
+
+**Enrichment (deterministic, no AI).** Every job gets `seniority` (`intern`, `entry`, `mid`, `senior`, `lead`, `manager`, `director`, `executive`), read from the title by fixed rules, including common German, French, Spanish, Dutch and Portuguese markers. It is `null` when the title has no level marker ("Software Engineer"): no guessing. When the run reads the job's full description (`includeDescription`, the default), the text also gives `years_experience_min` ("3+ years", "3–5 years" → 3), `visa_sponsorship` (`true` when offered, `false` when ruled out, `null` when not mentioned) and, for jobs without structured pay, the pay stated in the text (`salary_source: "description"`; the ATS's own pay fields are `structured` and never overwritten). Without the description these three stay `null`. Same input, same output: no language model, no estimates.
 
 ## Use cases
 
@@ -91,6 +97,7 @@ One flat record per job opening, from a real run:
 | `postedWithinDays` | integer | First published within the last N days |
 | `departments` | string[] | Substring match on department or team |
 | `employmentTypes` | string[] | `full_time`, `part_time`, `contract`, `temporary`, `internship`, `other`. Normalized from Ashby's employment type (FullTime, PartTime, Contract, Intern, Temporary). Jobs without one are excluded when this is set. |
+| `seniority` | string[] | `intern`, `entry`, `mid`, `senior`, `lead`, `manager`, `director`, `executive`, read from the job title. Jobs whose title has no level marker are excluded when this is set |
 | `maxResults` | integer | Default 100 |
 | `maxPerCompany` | integer | Optional cap on jobs from any one company (prefill 3), so a single employer posting many near-identical roles can't fill your results |
 | `includeDescription` | boolean | Default `true`: full description fetched live from Ashby for each delivered job |
@@ -165,6 +172,7 @@ Inputs from [ats-jobs-scraper](https://apify.com/factpipe/ats-jobs-scraper) work
 | Location or country | `locations` (text or ISO code) |
 | Remote only | `remote: "remote_only"` |
 | Date posted | `postedWithinDays` |
+| Experience level / seniority | `seniority` (filter) → `seniority`, `years_experience_min` |
 | Result limit | `maxResults` |
 | Job description | `includeDescription` → `description_text` |
 | Job id / URL / apply link | `job_id` / `job_url` / `apply_url` |

@@ -3,6 +3,7 @@ import { ATS_LIST, EMPLOYMENT_TYPES, parseBoardRef, boardKey } from './transform
 import { normKey, companyKey } from './text.js';
 import { isCountryCode } from './geo.js';
 import { compileRanker, KEYWORD_SCOPES } from './rank.js';
+import { SENIORITY_LEVELS, seniorityOf } from './enrich.js';
 
 const strList = (v) => (Array.isArray(v) ? v : typeof v === 'string' && v.trim() ? v.split(',') : [])
   .map((x) => String(x ?? '').trim())
@@ -20,6 +21,8 @@ export function normalizeInput(input = {}) {
   for (const a of ats) if (!ATS_LIST.includes(a)) throw new Error(`Unknown ATS "${a}". Supported: ${ATS_LIST.join(', ')}`);
   const employmentTypes = strList(input.employmentTypes).map((e) => e.toLowerCase().replace(/[\s-]+/g, '_'));
   for (const e of employmentTypes) if (!EMPLOYMENT_TYPES.includes(e)) throw new Error(`Unknown employment type "${e}". Use: ${EMPLOYMENT_TYPES.join(', ')}`);
+  const seniority = [...new Set(strList(input.seniority).map((e) => e.toLowerCase()))];
+  for (const e of seniority) if (!SENIORITY_LEVELS.includes(e)) throw new Error(`Unknown seniority "${e}". Use: ${SENIORITY_LEVELS.join(', ')}`);
   const maxResults = input.maxResults === undefined || input.maxResults === null ? 100 : Number(input.maxResults);
   if (!Number.isInteger(maxResults) || maxResults < 1) throw new Error('"maxResults" must be a positive integer');
   const maxPerCompany = input.maxPerCompany === undefined || input.maxPerCompany === null || input.maxPerCompany === '' ? null : Number(input.maxPerCompany);
@@ -55,6 +58,8 @@ export function normalizeInput(input = {}) {
     ats,
     departments: strList(input.departments),
     employmentTypes,
+    // Title-derived level (enrich.js seniorityOf); jobs without a level marker are excluded when set.
+    seniority,
     postedWithinDays,
     sinceLastRun: Boolean(input.sinceLastRun),
     includeDescription: input.includeDescription === undefined ? true : Boolean(input.includeDescription),
@@ -82,6 +87,7 @@ export function filterIdentity(opts) {
     postedWithinDays: opts.postedWithinDays,
     // Only when used, so cursors of existing inputs keep their key.
     ...(opts.countryCodes?.length ? { countryCodes: sorted(opts.countryCodes) } : {}),
+    ...(opts.seniority?.length ? { seniority: sorted(opts.seniority) } : {}),
   };
 }
 
@@ -114,6 +120,7 @@ export function compileSearch(opts) {
   const depts = opts.departments.map(lc);
   const ats = new Set(opts.ats);
   const emp = new Set(opts.employmentTypes);
+  const sen = opts.seniority?.length ? new Set(opts.seniority) : null;
   const maxAgeMs = opts.postedWithinDays ? opts.postedWithinDays * 86400000 : null;
 
   return (job, now = Date.now()) => {
@@ -121,6 +128,7 @@ export function compileSearch(opts) {
     if (opts.remote === 'remote_only' && !(job.workplace_type === 'remote' || job.remote === true)) return null;
     if (opts.remote === 'onsite_only' && (job.workplace_type === 'remote' || job.remote === true)) return null;
     if (emp.size && !emp.has(job.employment_type)) return null;
+    if (sen && !sen.has(seniorityOf(job.title))) return null;
     if (maxAgeMs !== null) {
       const t = job.posted_at ? Date.parse(job.posted_at) : NaN;
       if (!Number.isFinite(t) || now - t > maxAgeMs) return null;

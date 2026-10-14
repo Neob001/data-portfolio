@@ -38,6 +38,7 @@ One flat record per remote job opening:
   "department": "Sales",
   "team": "Account Manager",
   "employment_type": "full_time",
+  "seniority": null,
   "workplace_type": "remote",
   "locations": ["New York, NY (HQ)", "San Francisco, CA", "Remote (US)"],
   "country_codes": ["US"],
@@ -46,6 +47,9 @@ One flat record per remote job opening:
   "salary_max": 260000,
   "salary_currency": "USD",
   "salary_period": "year",
+  "salary_source": "structured",
+  "years_experience_min": 3,
+  "visa_sponsorship": null,
   "posted_at": "2025-06-05T17:33:32.680Z",
   "updated_at": null,
   "apply_url": "https://jobs.ashbyhq.com/ramp/d84bbf19-572a-499c-9c87-0c154ce85caf/application",
@@ -63,8 +67,10 @@ One flat record per remote job opening:
 
 - Every job is marked remote by the employer: the ATS's own remote/workplace field, or the word "remote" (or "anywhere", "work from home") in its location. Hybrid jobs are included only when the ATS also flags them as open to remote candidates.
 - `match_score` (0–100) and `matched_in` (`title`, `department` or `description`) show why a job matched your keywords. Both are `null` without keywords.
-- Salary fields are filled only when the ATS publishes a structured pay range. They are never estimated.
+- Salary fields come from the ATS's structured pay range or, when it has none, from pay stated in the description text (`salary_source` says which). They are never estimated.
 - **No personal data.** Recruiter and hiring-manager fields are never copied, and contact details in descriptions are replaced with `[… redacted]`.
+
+**Enrichment (deterministic, no AI).** Every job gets `seniority` (`intern`, `entry`, `mid`, `senior`, `lead`, `manager`, `director`, `executive`), read from the title by fixed rules, including common German, French, Spanish, Dutch and Portuguese markers. It is `null` when the title has no level marker ("Software Engineer"): no guessing. When the run reads the job's full description (`includeDescription`, the default), the text also gives `years_experience_min` ("3+ years", "3–5 years" → 3), `visa_sponsorship` (`true` when offered, `false` when ruled out, `null` when not mentioned) and, for jobs without structured pay, the pay stated in the text (`salary_source: "description"`; the ATS's own pay fields are `structured` and never overwritten). Without the description these three stay `null`. Same input, same output: no language model, no estimates.
 
 ## Use cases
 
@@ -88,6 +94,7 @@ One flat record per remote job opening:
 | `ats` | string[] | `greenhouse`, `lever`, `ashby`, `workable`, `recruitee`, `workday` |
 | `departments` | string[] | Substring match on department or team |
 | `employmentTypes` | string[] | `full_time`, `part_time`, `contract`, `temporary`, `internship`, `other` |
+| `seniority` | string[] | `intern`, `entry`, `mid`, `senior`, `lead`, `manager`, `director`, `executive`, read from the job title. Jobs whose title has no level marker are excluded when this is set |
 | `maxResults` | integer | Default 100 |
 | `maxPerCompany` | integer | Optional cap on jobs from any one company (prefill 3), so a single employer posting many near-identical roles can't fill your results |
 | `includeDescription` | boolean | Default `true`: full description fetched live from the ATS for each delivered job |

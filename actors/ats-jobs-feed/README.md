@@ -38,6 +38,7 @@ One flat record per job opening:
   "department": "Engineering",
   "team": "Backend",
   "employment_type": "full_time",
+  "seniority": null,
   "workplace_type": "hybrid",
   "locations": ["New York, NY (HQ)", "Remote (Canada)", "Remote (US)", "Miami, FL"],
   "country_codes": ["CA", "US"],
@@ -46,6 +47,9 @@ One flat record per job opening:
   "salary_max": 290600,
   "salary_currency": "USD",
   "salary_period": "year",
+  "salary_source": "structured",
+  "years_experience_min": 5,
+  "visa_sponsorship": null,
   "posted_at": "2026-04-07T17:12:35.753Z",
   "updated_at": null,
   "apply_url": "https://jobs.ashbyhq.com/ramp/34413f8d-26bf-4bbc-8ade-eb309a0e2245/application",
@@ -62,12 +66,14 @@ One flat record per job opening:
 ```
 
 - `workplace_type` is one of `remote`, `hybrid`, `onsite` or `unknown`. We never guess: when an ATS has no workplace field (Greenhouse), the value comes from the location text ("Remote, Canada"), and otherwise it is `unknown`.
-- Salary fields are filled only when the ATS publishes structured compensation (Ashby, Lever, Recruitee). They are never estimated.
+- Salary fields come from the ATS's structured compensation (Ashby, Lever, Recruitee) or, when it has none, from pay stated in the description text (`salary_source` says which). They are never estimated.
 - `country_codes` are ISO 3166 alpha-2 codes. They come from the ATS's own country fields where available, and are otherwise inferred from the location text on a best-effort basis.
 - `duplicate_sources` lists the other `job_id`s of the same opening. Example: a company that still has an old board live after switching ATS. Each opening is delivered and charged once.
 - `description_text` is fetched **live from the company's ATS** for each delivered job (see below). `description_status` is `included`, `not_requested` (when `includeDescription: false`) or `unavailable` (the ATS could not be reached, or the posting has no text).
 - `match_score` (0–100) and `matched_in` (`title`, `department` or `description`) show why a job matched your keywords. Both are `null` when you search without keywords.
 - **No personal data.** Recruiter and hiring-manager fields are never copied. In descriptions, e-mail addresses, phone numbers and names in contact lines ("Questions? Call Jane on …") are replaced with `[… redacted]`.
+
+**Enrichment (deterministic, no AI).** Every job gets `seniority` (`intern`, `entry`, `mid`, `senior`, `lead`, `manager`, `director`, `executive`), read from the title by fixed rules, including common German, French, Spanish, Dutch and Portuguese markers. It is `null` when the title has no level marker ("Software Engineer"): no guessing. When the run reads the job's full description (`includeDescription`, the default), the text also gives `years_experience_min` ("3+ years", "3–5 years" → 3), `visa_sponsorship` (`true` when offered, `false` when ruled out, `null` when not mentioned) and, for jobs without structured pay, the pay stated in the text (`salary_source: "description"`; the ATS's own pay fields are `structured` and never overwritten). Without the description these three stay `null`. Same input, same output: no language model, no estimates.
 
 ## Use cases
 
@@ -92,6 +98,7 @@ One flat record per job opening:
 | `ats` | string[] | Any of `greenhouse`, `lever`, `ashby`, `workable`, `recruitee`, `workday` |
 | `departments` | string[] | Substring match on department or team |
 | `employmentTypes` | string[] | `full_time`, `part_time`, `contract`, `temporary`, `internship`, `other` |
+| `seniority` | string[] | `intern`, `entry`, `mid`, `senior`, `lead`, `manager`, `director`, `executive`, read from the job title. Jobs whose title has no level marker are excluded when this is set |
 | `maxResults` | integer | Default 100. With keywords, the most relevant jobs come first; without keywords, the newest |
 | `maxPerCompany` | integer | Optional cap on jobs from any one company (prefill 3), so a single employer posting many near-identical roles can't fill your results |
 | `includeDescription` | boolean | Default `true`. Fetches the full plain-text description (max 20,000 chars) live from the ATS for every delivered job. A 300-char snippet is always included. Set `false` for the fastest runs |
@@ -190,7 +197,10 @@ It covers the title, department, team and the first ~1,500 characters of each de
 About 15,000 company job boards with open jobs on Greenhouse, Lever, Ashby, Workable and Recruitee (see Coverage). They were discovered from Common Crawl's public URL index and each was validated against its ATS API. Use `companies` to restrict the search, or `companyUrls` for any board that isn't indexed.
 
 **Why do some jobs have no salary?**
-Only some employers publish structured pay ranges, mostly on Ashby, Lever and Recruitee. We never extract or estimate salaries from free text.
+Only some employers publish pay: as structured ranges (mostly Ashby, Lever and Recruitee) or as a stated range in the description, such as US pay-transparency ranges on Greenhouse. The first is `salary_source: "structured"`, the second `"description"` (read with fixed rules, only when the run reads the description). Pay is never estimated: a job that states none has `null` salary fields.
+
+**How are seniority, years of experience and visa sponsorship determined?**
+By fixed, published rules, not by an AI model, so the same posting always gives the same answer. `seniority` comes from title words ("Senior", "Staff Engineer", "Head of", "Werkstudent"…); "Product Manager" or "Account Manager" are not people-manager titles and stay `null` unless the title has another level word. `years_experience_min` takes the first required "N+ years" in the description and ignores company-age phrases ("founded 20 years ago"). `visa_sponsorship` is `false` whenever the posting rules sponsorship out, even if it also mentions it positively. Anything ambiguous stays `null`.
 
 **Can I get only new jobs every day?**
 Yes. Schedule the Actor with `sinceLastRun: true`. Each run returns and charges only jobs that no earlier run with the same filters delivered.

@@ -109,12 +109,19 @@ FAMILY = {
                 "\"Job Board data is publicly available\"; no authentication for GET"),
         "api_host": "boards-api.greenhouse.io",
         "employment_note": "Greenhouse's job-board API does not state an employment type, so Greenhouse jobs have none and are excluded when this is set.",
-        "fields_note": "Greenhouse's job-board API has no employment type or pay range, so `employment_type` and the `salary_*` fields are always `null` here. They are never guessed. `posted_at` is the job's first publication date.",
+        "fields_note": "Greenhouse's job-board API has no employment type or pay fields, so `employment_type` is always `null` here, "
+                       "and the `salary_*` fields come only from pay stated in the description text (`salary_source: \"description\"`, "
+                       "e.g. US pay-transparency ranges), otherwise `null`. They are never estimated. `posted_at` is the job's first "
+                       "publication date.",
         "faq": [
-            ("Why is there no salary or employment type on Greenhouse jobs?",
-             "Greenhouse's public job-board API does not include pay ranges or employment types. We never extract or "
-             "estimate them from free text. For pay data, [Lever Jobs API](https://apify.com/factpipe/lever-jobs-api) "
-             "and [Ashby Jobs API](https://apify.com/factpipe/ashby-jobs-api) return the ranges employers publish."),
+            ("Do Greenhouse jobs include salary?",
+             "Greenhouse's public job-board API has no pay fields. When the job description states pay (for example the "
+             "pay-transparency range many US employers publish: \"$186,065—$218,900 USD\" under \"Annual base salary range\"), "
+             "the run reads it from the text with fixed rules and fills `salary_min`, `salary_max`, `salary_currency` and "
+             "`salary_period` with `salary_source: \"description\"`. Otherwise they stay `null`: pay is never estimated. This needs "
+             "the description (`includeDescription`, the default). Employment type is not in the API and stays `null`. For "
+             "structured pay fields, [Lever Jobs API](https://apify.com/factpipe/lever-jobs-api) and "
+             "[Ashby Jobs API](https://apify.com/factpipe/ashby-jobs-api) also return the ranges employers enter in their ATS."),
         ],
         "use_cases": [
             "**Greenhouse API without integration work**: one call returns jobs from thousands of Greenhouse boards in one flat schema, instead of polling `boards-api.greenhouse.io` board by board.",
@@ -122,7 +129,8 @@ FAMILY = {
             "**Tracking specific companies**: `companies: [\"Stripe\", \"Datadog\"]`, scheduled daily, to see new Greenhouse openings as they appear.",
             "**Recruiting and sales intelligence**: who is hiring which team, and where. For one row per company, see [Companies Hiring](https://apify.com/factpipe/companies-hiring).",
         ],
-        "view": ["title", "company_name", "department", "locations", "workplace_type", "posted_at", "job_url", "match_score"],
+        "view": ["title", "seniority", "company_name", "department", "locations", "workplace_type", "salary_min", "salary_max",
+                 "salary_currency", "posted_at", "job_url", "match_score"],
         "other_fixture": "lever",
         # Real row from a local prefill run, 2026-10-09 (descriptions shortened).
         "sample": {'job_id': 'greenhouse:coinbase:8174232',
@@ -183,7 +191,7 @@ FAMILY = {
                 "Published postings \"are publicly viewable\" and \"may be scraped by third parties\"; we respect its 1 request/s crawl delay"),
         "api_host": "api.lever.co",
         "employment_note": "Normalized from Lever's commitment field (Full-time, Part-time, Contract, Intern…). Jobs without one are excluded when this is set.",
-        "fields_note": "`employment_type` comes from Lever's commitment field, `workplace_type` from its workplace setting, and the `salary_*` fields from the pay range the employer publishes on Lever (otherwise `null`, never guessed). `posted_at` is the posting's creation date; Lever has no update date, so `updated_at` is `null`.",
+        "fields_note": "`employment_type` comes from Lever's commitment field, `workplace_type` from its workplace setting, and the `salary_*` fields from the pay range the employer publishes on Lever, else from pay stated in the description text (`salary_source` says which; otherwise `null`, never estimated). `posted_at` is the posting's creation date; Lever has no update date, so `updated_at` is `null`.",
         "faq": [
             ("Are EU Lever boards (jobs.eu.lever.co) supported?",
              "Yes. EU boards are in the index like any other, and in live mode `https://jobs.eu.lever.co/<company>` or "
@@ -199,7 +207,7 @@ FAMILY = {
             "**Tracking specific companies**: `companies: [\"Palantir\", \"Spotify\"]`, scheduled daily with `sinceLastRun: true`.",
             "**Sales and recruiting intelligence**: which teams companies on Lever are growing, and where. For one row per company, see [Companies Hiring](https://apify.com/factpipe/companies-hiring).",
         ],
-        "view": ["title", "company_name", "locations", "workplace_type", "employment_type", "salary_min", "salary_max",
+        "view": ["title", "seniority", "company_name", "locations", "workplace_type", "employment_type", "salary_min", "salary_max",
                  "salary_currency", "posted_at", "job_url", "match_score"],
         "other_fixture": "ashby",
         # Real row from a local prefill run, 2026-10-09 (descriptions shortened).
@@ -260,7 +268,7 @@ FAMILY = {
                 "Public, unauthenticated posting API"),
         "api_host": "api.ashbyhq.com",
         "employment_note": "Normalized from Ashby's employment type (FullTime, PartTime, Contract, Intern, Temporary). Jobs without one are excluded when this is set.",
-        "fields_note": "`employment_type`, `workplace_type` and `remote` come from Ashby's own fields, and the `salary_*` fields from the compensation the employer publishes on Ashby (otherwise `null`, never guessed). `posted_at` is the publication date; Ashby has no update date, so `updated_at` is `null`.",
+        "fields_note": "`employment_type`, `workplace_type` and `remote` come from Ashby's own fields, and the `salary_*` fields from the compensation the employer publishes on Ashby, else from pay stated in the description text (`salary_source` says which; otherwise `null`, never estimated). `posted_at` is the publication date; Ashby has no update date, so `updated_at` is `null`.",
         "faq": [
             ("Does it include Ashby salary ranges?",
              "Yes, where the employer publishes compensation on Ashby. The run requests Ashby's compensation data and "
@@ -272,7 +280,7 @@ FAMILY = {
             "**Tracking specific companies**: `companies: [\"OpenAI\", \"Ramp\"]`, scheduled daily with `sinceLastRun: true`.",
             "**Investor and sales intelligence**: which startups are hiring which teams, and where. For one row per company, see [Companies Hiring](https://apify.com/factpipe/companies-hiring).",
         ],
-        "view": ["title", "company_name", "locations", "workplace_type", "employment_type", "salary_min", "salary_max",
+        "view": ["title", "seniority", "company_name", "locations", "workplace_type", "employment_type", "salary_min", "salary_max",
                  "salary_currency", "posted_at", "job_url", "match_score"],
         "other_fixture": "greenhouse",
         # Real row from a local prefill run, 2026-10-09 (descriptions shortened).
@@ -339,9 +347,9 @@ FAMILY = {
         "api_host": "<company>.<wdN>.myworkdayjobs.com",
         "employment_note": "Normalized from the time type a Workday site shows in its job list (Full time, Part time). Many sites don't show one; their jobs are excluded when this is set.",
         "fields_note": "`posted_at` is a **date derived from Workday's \"Posted N Days Ago\" label** when the site was read (UTC midnight; "
-                       "\"Posted 30+ Days Ago\" becomes 30 days before, meaning *30 days or more*, see the FAQ). Workday job lists "
-                       "publish no pay range or department, so the `salary_*`, `department` and `team` fields are `null` (never "
-                       "guessed). `workplace_type` comes from the site's remote type where shown (Remote, Hybrid, Flex, On-site), "
+                       "\"Posted 30+ Days Ago\" becomes 30 days before, meaning *30 days or more*, see the FAQ). Workday publishes "
+                       "no pay fields or department, so `department` and `team` are `null` and the `salary_*` fields come only from "
+                       "pay stated in the description text (`salary_source: \"description\"`), otherwise `null` (never estimated). `workplace_type` comes from the site's remote type where shown (Remote, Hybrid, Flex, On-site), "
                        "otherwise from the location text, and `employment_type` from its time type. Lists name only the primary "
                        "location of a multi-location job; with `includeDescription` the delivered row lists every location.",
         "faq": [
@@ -375,7 +383,8 @@ FAMILY = {
             "**Tracking specific employers**: `companies: [\"NVIDIA\", \"Salesforce\"]`, or their career-site URLs in `companyUrls`, scheduled daily.",
             "**Recruiting and sales intelligence**: which large employers are hiring which roles, and where. For one row per company, see [Companies Hiring](https://apify.com/factpipe/companies-hiring).",
         ],
-        "view": ["title", "company_name", "locations", "workplace_type", "employment_type", "posted_at", "job_url", "match_score"],
+        "view": ["title", "seniority", "company_name", "locations", "workplace_type", "employment_type", "salary_min", "salary_max",
+                 "salary_currency", "posted_at", "job_url", "match_score"],
         "other_fixture": "greenhouse",
         # Real row from a local prefill run (descriptions shortened).
         "sample": WORKDAY_SAMPLE,
@@ -458,10 +467,35 @@ def join_names(names):
     return ", ".join(names[:-1]) + " or " + names[-1]
 
 
+# Enrichment fields (core enrich.js) of each README sample row, from re-reading the same live job on 2026-10-13
+# and running the core on it. Keys that already exist in the sample (salary_*) replace the sample's value; the
+# new fields are inserted in OUTPUT_FIELDS order.
+SAMPLE_ENRICHMENT = {
+    "greenhouse": {"seniority": "senior", "salary_min": 186065, "salary_max": 218900, "salary_currency": "USD",
+                   "salary_period": "year", "salary_source": "description", "years_experience_min": 5, "visa_sponsorship": None},
+    "lever": {"seniority": None, "salary_source": "structured", "years_experience_min": None, "visa_sponsorship": None},
+    "ashby": {"seniority": "senior", "salary_source": "structured", "years_experience_min": 5, "visa_sponsorship": None},
+    "workday": {"seniority": "senior", "salary_source": None, "years_experience_min": 5, "visa_sponsorship": None},
+}
+
+
+def with_enrichment(sample, enrichment):
+    out = {}
+    for k, v in sample.items():
+        out[k] = enrichment.get(k, v)
+        if k == "employment_type":
+            out["seniority"] = enrichment["seniority"]
+        if k == "salary_period":
+            for f in ("salary_source", "years_experience_min", "visa_sponsorship"):
+                out[f] = enrichment[f]
+    return out
+
+
 def readme_sample(cfg):
     if cfg["sample"] is None:
         raise ValueError(f"{cfg['slug']}: no README sample row configured (run the prefill locally and paste one)")
-    return json.dumps(cfg["sample"], indent=2, ensure_ascii=False)
+    platform = next(p for p, c in FAMILY.items() if c is cfg)
+    return json.dumps(with_enrichment(cfg["sample"], SAMPLE_ENRICHMENT[platform]), indent=2, ensure_ascii=False)
 
 
 # ------------------------------------------------------------------ file builders
@@ -469,7 +503,7 @@ def input_schema(platform, cfg):
     model = json.loads((MODEL / "INPUT_SCHEMA.json").read_text())
     props = model["properties"]
     expected = ["ats", "companies", "keywords", "keywordMatch", "keywordScope", "excludeKeywords", "locations", "remote",
-                "postedWithinDays", "departments", "employmentTypes", "maxResults", "maxPerCompany", "includeDescription",
+                "postedWithinDays", "departments", "employmentTypes", "seniority", "maxResults", "maxPerCompany", "includeDescription",
                 "sinceLastRun", "companyUrls"]
     if list(props) != expected:
         raise ValueError(f"ats-jobs-scraper INPUT_SCHEMA properties changed: {list(props)} — update make_ats_actors.py")
@@ -730,6 +764,7 @@ import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { runFeed, streamShardLines } from '../src/core/feed.js';
 import { toScraperOptions, noBoardsMessage, otherPlatformWarning, PLATFORM } from '../src/scraper.js';
+import { seniorityOf } from '../src/core/enrich.js';
 import { fakeNetwork, sink, NOW, buildIndex, assertMatchesSchema, FIXTURES, load } from './helpers.mjs';
 
 const OWN = FIXTURES[PLATFORM];
@@ -837,6 +872,22 @@ test('golden fixture of this platform parses into schema-valid rows', async () =
   assert.ok(r.rows.length > 0);
   for (const x of r.rows) assertMatchesSchema(x);
   assert.ok(r.rows.every((x) => x.description_status === 'not_requested'));
+});
+
+test('enrichment: seniority from the title on every row; seniority filter; schema-valid', async () => {
+  const all = await run({ companyUrls: [OWN.token] });
+  assert.ok(all.rows.length > 0);
+  for (const x of all.rows) {
+    assertMatchesSchema(x);
+    assert.equal(x.seniority, seniorityOf(x.title), x.title);
+    assert.ok(x.salary_source === null || ['structured', 'description'].includes(x.salary_source));
+  }
+  const levels = [...new Set(all.rows.map((x) => x.seniority).filter(Boolean))];
+  if (levels.length) {
+    const only = await run({ companyUrls: [OWN.token], seniority: [levels[0]] });
+    assert.ok(only.rows.length > 0 && only.rows.every((x) => x.seniority === levels[0]));
+  }
+  assert.throws(() => toScraperOptions({ seniority: ['wizard'] }), /seniority/);
 });
 """
 
@@ -960,6 +1011,8 @@ One flat record per job opening, from a real run:
 - `duplicate_sources` lists other `job_id`s of the same opening (for example a company with two boards). Each opening is delivered and charged once.
 - **No personal data.** Recruiter and hiring-manager fields are never copied, and contact details in descriptions are replaced with `[… redacted]`.
 
+**Enrichment (deterministic, no AI).** Every job gets `seniority` (`intern`, `entry`, `mid`, `senior`, `lead`, `manager`, `director`, `executive`), read from the title by fixed rules, including common German, French, Spanish, Dutch and Portuguese markers. It is `null` when the title has no level marker ("Software Engineer"): no guessing. When the run reads the job's full description (`includeDescription`, the default), the text also gives `years_experience_min` ("3+ years", "3–5 years" → 3), `visa_sponsorship` (`true` when offered, `false` when ruled out, `null` when not mentioned) and, for jobs without structured pay, the pay stated in the text (`salary_source: "description"`; the ATS's own pay fields are `structured` and never overwritten). Without the description these three stay `null`. Same input, same output: no language model, no estimates.
+
 ## Use cases
 
 [[USE_CASES]]
@@ -978,6 +1031,7 @@ One flat record per job opening, from a real run:
 | `postedWithinDays` | integer | First published within the last N days |
 | `departments` | string[] | Substring match on department or team |
 | `employmentTypes` | string[] | `full_time`, `part_time`, `contract`, `temporary`, `internship`, `other`. [[EMPLOYMENT_NOTE]] |
+| `seniority` | string[] | `intern`, `entry`, `mid`, `senior`, `lead`, `manager`, `director`, `executive`, read from the job title. Jobs whose title has no level marker are excluded when this is set |
 | `maxResults` | integer | Default 100 |
 | `maxPerCompany` | integer | Optional cap on jobs from any one company (prefill 3), so a single employer posting many near-identical roles can't fill your results |
 | `includeDescription` | boolean | Default `true`: full description fetched live from [[NAME]] for each delivered job |
@@ -1044,6 +1098,7 @@ Inputs from [ats-jobs-scraper](https://apify.com/factpipe/ats-jobs-scraper) work
 | Location or country | `locations` (text or ISO code) |
 | Remote only | `remote: "remote_only"` |
 | Date posted | `postedWithinDays` |
+| Experience level / seniority | `seniority` (filter) → `seniority`, `years_experience_min` |
 | Result limit | `maxResults` |
 | Job description | `includeDescription` → `description_text` |
 | Job id / URL / apply link | `job_id` / `job_url` / `apply_url` |

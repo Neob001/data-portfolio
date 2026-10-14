@@ -49,6 +49,8 @@ export function normalizeCompaniesInput(input = {}) {
     locations: input.locations,
     remote: input.remote,
     departments: input.departments,
+    // Title-derived job level (core enrich.js): counts only matching jobs at these levels.
+    seniority: input.seniority,
     postedWithinDays: input.postedWithinDays,
     maxResults: input.maxResults,
     includeDescription: false,
