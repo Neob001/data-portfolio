@@ -57,7 +57,7 @@ def main() -> int:
             print(f"{slug}: PUT failed {e.code} {e.read().decode()[:300]}")
             errors += 1
             continue
-        aj_path.write_text(json.dumps(aj, indent=2) + "\n")
+        aj_path.write_text(json.dumps(aj, indent=2, ensure_ascii=False) + "\n")
         live = retry(get, f"/acts/{meta['apify_actor_id']}")["data"]
         ok = live.get("title") == listing["title"] and live.get("description") == listing["description"]
         print(f"{slug}: {'OK' if ok else 'MISMATCH'} title={live.get('title')!r} categories={live.get('categories')}")
