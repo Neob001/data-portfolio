@@ -443,6 +443,34 @@
       "capture_score": 0.488,
       "status": "filtered",
       "detected_at": "2026-10-13T02:57:09.593711+00:00"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/Dans-Plugins/Easy-Links/issues/62",
+      "title": "Post 0.6.2 to SpigotMC",
+      "body": "`v0.6.2` is the stable release on GitHub, but the listing at https://www.spigotmc.org/resources/98040/ still shows the previous version until an update is posted there by hand (SpigotMC has no API for it).\n\n## Post update\n\n1. Open https://www.spigotmc.org/resources/98040/, choose **Post update**.\n2. Version string: `0.6.2`\n3. Download: **External download** \u2192 `https://github.com/Dans-Plugins/Easy-",
+      "created_at": "2026-10-14T01:25:33Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 0.638,
+      "status": "filtered",
+      "detected_at": "2026-10-14T15:02:23.056627+00:00"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/Dans-Plugins/Activity-Tracker/issues/131",
+      "title": "Post 1.6.1 to SpigotMC",
+      "body": "`v1.6.1` is the stable release on GitHub, but the listing at https://www.spigotmc.org/resources/96724/ still shows the previous version until an update is posted there by hand (SpigotMC has no API for it).\n\n## Post update\n\n1. Open https://www.spigotmc.org/resources/96724/, choose **Post update**.\n2. Version string: `1.6.1`\n3. Download: **External download** \u2192 `https://github.com/Dans-Plugins/Activ",
+      "created_at": "2026-10-14T01:15:03Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 0.635,
+      "status": "filtered",
+      "detected_at": "2026-10-14T15:02:23.057008+00:00"
     }
   ]
 }
