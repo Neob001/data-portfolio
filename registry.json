@@ -22,8 +22,8 @@
       "launched_at": "2026-09-11T08:35:36Z",
       "last_fix_date": "2026-09-15",
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 96,
+        "as_of": "2026-10-20",
+        "totalRuns": 123,
         "totalUsers30Days": 1
       },
       "staging_started_at": "2026-09-10T16:46:05Z",
@@ -78,8 +78,8 @@
       "launched_at": "2026-09-11T08:35:36Z",
       "last_fix_date": "2026-09-15",
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 95,
+        "as_of": "2026-10-20",
+        "totalRuns": 122,
         "totalUsers30Days": 1
       },
       "staging_started_at": "2026-09-10T16:46:05Z",
@@ -134,8 +134,8 @@
       "launched_at": "2026-09-11T08:35:36Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 32,
+        "as_of": "2026-10-20",
+        "totalRuns": 41,
         "totalUsers30Days": 1
       },
       "notes": "Keyless by default: owner's CH key set as secret env var COMPANIES_HOUSE_API_KEY (shared 600 req/5min quota; revisit if volume grows). Customers may bring their own key. Officers/PSC variant still requires owner legal approval (L1).",
@@ -188,8 +188,8 @@
       "launched_at": "2026-09-11T09:51:12Z",
       "last_fix_date": "2026-09-15",
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 35,
+        "as_of": "2026-10-20",
+        "totalRuns": 44,
         "totalUsers30Days": 1
       },
       "staging_validated": true,
@@ -243,8 +243,8 @@
       "launched_at": null,
       "last_fix_date": "2026-09-15",
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 34,
+        "as_of": "2026-10-20",
+        "totalRuns": 43,
         "totalUsers30Days": 1
       },
       "staging_validated": true,
@@ -299,8 +299,8 @@
       "launched_at": "2026-09-11T09:51:12Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 34,
+        "as_of": "2026-10-20",
+        "totalRuns": 43,
         "totalUsers30Days": 1
       },
       "staging_validated": true,
@@ -357,8 +357,8 @@
       "launched_at": "2026-09-12T09:33:41Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 50,
+        "as_of": "2026-10-20",
+        "totalRuns": 59,
         "totalUsers30Days": 2
       },
       "staging_validated": true,
@@ -407,8 +407,8 @@
       "launched_at": "2026-09-12T09:33:41Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 28,
+        "as_of": "2026-10-20",
+        "totalRuns": 37,
         "totalUsers30Days": 1
       },
       "staging_validated": true,
@@ -457,8 +457,8 @@
       "launched_at": "2026-09-12T09:33:41Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 29,
+        "as_of": "2026-10-20",
+        "totalRuns": 38,
         "totalUsers30Days": 2
       },
       "staging_validated": true,
@@ -508,8 +508,8 @@
       "launched_at": "2026-09-13T13:24:30Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 28,
+        "as_of": "2026-10-20",
+        "totalRuns": 37,
         "totalUsers30Days": 1
       },
       "staging_validated": true,
@@ -561,8 +561,8 @@
       "launched_at": "2026-09-13T13:24:30Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 28,
+        "as_of": "2026-10-20",
+        "totalRuns": 37,
         "totalUsers30Days": 1
       },
       "staging_validated": true,
@@ -614,8 +614,8 @@
       "launched_at": "2026-09-15T09:30:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 29,
+        "as_of": "2026-10-20",
+        "totalRuns": 38,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -665,8 +665,8 @@
       "launched_at": "2026-09-15T09:30:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 30,
+        "as_of": "2026-10-20",
+        "totalRuns": 39,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -716,8 +716,8 @@
       "launched_at": "2026-09-15T09:30:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 26,
+        "as_of": "2026-10-20",
+        "totalRuns": 35,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -767,8 +767,8 @@
       "launched_at": "2026-09-15T09:30:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 40,
+        "as_of": "2026-10-20",
+        "totalRuns": 50,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -819,8 +819,8 @@
       "launched_at": "2026-09-15T09:30:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 34,
+        "as_of": "2026-10-20",
+        "totalRuns": 43,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -871,8 +871,8 @@
       "launched_at": "2026-09-17T09:36:18Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 24,
+        "as_of": "2026-10-20",
+        "totalRuns": 33,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -923,8 +923,8 @@
       "launched_at": "2026-09-17T09:36:18Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 23,
+        "as_of": "2026-10-20",
+        "totalRuns": 32,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -970,8 +970,8 @@
       "launched_at": null,
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 26,
+        "as_of": "2026-10-20",
+        "totalRuns": 37,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -1024,7 +1024,7 @@
       "launched_at": null,
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
+        "as_of": "2026-10-20",
         "totalRuns": 7,
         "totalUsers30Days": 0
       },
@@ -1069,8 +1069,8 @@
       "launched_at": "2026-09-19T13:46:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 31,
+        "as_of": "2026-10-20",
+        "totalRuns": 42,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -1121,9 +1121,9 @@
       "launched_at": "2026-09-25T09:27:05Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 198,
-        "totalUsers30Days": 10
+        "as_of": "2026-10-20",
+        "totalRuns": 547,
+        "totalUsers30Days": 34
       },
       "listing": {
         "title": "Jobs Feed API — Workday, Greenhouse, Lever & Ashby Jobs",
@@ -1174,8 +1174,8 @@
       "launched_at": "2026-09-27T08:03:41Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 29,
+        "as_of": "2026-10-20",
+        "totalRuns": 38,
         "totalUsers30Days": 2
       },
       "listing": {
@@ -1226,8 +1226,8 @@
       "launched_at": "2026-09-27T08:03:41Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 26,
+        "as_of": "2026-10-20",
+        "totalRuns": 36,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -1278,8 +1278,8 @@
       "launched_at": "2026-09-27T08:26:39Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 26,
+        "as_of": "2026-10-20",
+        "totalRuns": 36,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -1330,8 +1330,8 @@
       "launched_at": "2026-09-30T13:25:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 21,
+        "as_of": "2026-10-20",
+        "totalRuns": 30,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -1382,8 +1382,8 @@
       "launched_at": "2026-10-09T06:30:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 6,
+        "as_of": "2026-10-20",
+        "totalRuns": 15,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -1434,8 +1434,8 @@
       "launched_at": "2026-10-09T06:30:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 6,
+        "as_of": "2026-10-20",
+        "totalRuns": 15,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -1486,8 +1486,8 @@
       "launched_at": "2026-10-09T06:30:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 6,
+        "as_of": "2026-10-20",
+        "totalRuns": 15,
         "totalUsers30Days": 1
       },
       "listing": {
@@ -1538,8 +1538,8 @@
       "launched_at": "2026-10-10T05:45:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-11",
-        "totalRuns": 6,
+        "as_of": "2026-10-20",
+        "totalRuns": 16,
         "totalUsers30Days": 1
       },
       "listing": {
