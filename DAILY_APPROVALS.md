@@ -64,3 +64,6 @@ Replies are NEVER posted without a tick. Standing decision 2026-09-12.
 
 ## 2026-10-16
 (no drafts today. demand_monitor: 2 new raw hits, 0 passed the filters: Dans-Plugins Easy-Links#66 and Dans-Set-Home#115 are "Post X to SpigotMC" release chores matched on keywords only. Both marked filtered. No DC proposals. Apify forum still returns non-JSON. No owner ticks pending.)
+
+## 2026-10-20
+(no drafts today. demand_monitor: 1 new raw hit, 0 passed the filters: Dans-Plugins/Medieval-Factions#2126 is a "Post 8.0.0 to SpigotMC" release chore matched on keywords only. Marked filtered. No DC proposals. Apify forum still returns non-JSON. No owner ticks pending.)
