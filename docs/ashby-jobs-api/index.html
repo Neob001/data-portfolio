@@ -175,7 +175,7 @@ It is the last part of the careers-page URL: <code>jobs.ashbyhq.com/</code><stro
 The index is rebuilt daily. With <code>includeDescription</code> on (the default), every delivered job is re-checked live against Ashby during your run. Live mode (<code>companyUrls</code>) always reads Ashby directly.</p>
 <p><strong>Does it include Ashby salary ranges?</strong><br>
 Yes, where the employer publishes compensation on Ashby. The run requests Ashby&#x27;s compensation data and maps the salary (or hourly) range to <code>salary_min</code>, <code>salary_max</code>, <code>salary_currency</code> and <code>salary_period</code>.</p>
-<p><strong>What happens to Greenhouse, Lever, Workable, Recruitee or Workday URLs?</strong><br>
+<p><strong>What happens to Greenhouse, Lever, Workable, Recruitee, Workday, Personio or Teamtailor URLs?</strong><br>
 They are ignored with a warning in the log, and the rest of the run goes ahead. If no Ashby board is left, the run ends successfully with a message and nothing is charged. For several platforms in one run, use <a href="../ats-jobs-scraper/">Greenhouse, Lever, Ashby &amp; Workday Jobs Scraper</a>.</p>
 <p><strong>Switching from ats-jobs-scraper or other Ashby scrapers?</strong><br>
 Inputs from <a href="../ats-jobs-scraper/">ats-jobs-scraper</a> work as they are: the same fields minus <code>ats</code> (ignored if present, the platform is always Ashby), and the same output records. Only <code>companyUrls</code> of other platforms are skipped. From other tools, this field map covers the usual settings:</p>

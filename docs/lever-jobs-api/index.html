@@ -177,7 +177,7 @@ The index is rebuilt daily. With <code>includeDescription</code> on (the default
 Yes. EU boards are in the index like any other, and in live mode <code>https://jobs.eu.lever.co/&lt;company&gt;</code> or <code>lever:eu:&lt;company&gt;</code> reads Lever&#x27;s EU API.</p>
 <p><strong>Why is a Lever run with full descriptions slower?</strong><br>
 Lever&#x27;s API asks crawlers for one request per second, and we respect that. Full descriptions need one request per company, so 20 jobs from 7 companies add about 7 seconds. Set <code>includeDescription: false</code> if the 300-character snippet is enough.</p>
-<p><strong>What happens to Greenhouse, Ashby, Workable, Recruitee or Workday URLs?</strong><br>
+<p><strong>What happens to Greenhouse, Ashby, Workable, Recruitee, Workday, Personio or Teamtailor URLs?</strong><br>
 They are ignored with a warning in the log, and the rest of the run goes ahead. If no Lever board is left, the run ends successfully with a message and nothing is charged. For several platforms in one run, use <a href="../ats-jobs-scraper/">Greenhouse, Lever, Ashby &amp; Workday Jobs Scraper</a>.</p>
 <p><strong>Switching from ats-jobs-scraper or other Lever scrapers?</strong><br>
 Inputs from <a href="../ats-jobs-scraper/">ats-jobs-scraper</a> work as they are: the same fields minus <code>ats</code> (ignored if present, the platform is always Lever), and the same output records. Only <code>companyUrls</code> of other platforms are skipped. From other tools, this field map covers the usual settings:</p>
