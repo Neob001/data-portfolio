@@ -58,3 +58,7 @@ Item ids come from WEEKLY_REPORT.md. Nothing ships to a new data source, changes
 2026-10-14 | APPROVE | J5 new job sources | Owner, in chat: add Personio (public XML job feed), Teamtailor and BambooHR public career pages to the jobs index (robots.txt honoured per host; job data only). SmartRecruiters excluded (api.smartrecruiters.com robots.txt disallows all but LinkedInBot).
 2026-10-14 | REJECT | weekly-report items 1-6 | Owner, in chat: no title/SEO tests or -30% price cuts for sec-edgar, ted, uk-company, federal-register, fda-recalls, ofac (official-data niches have too little demand); focus stays on the jobs cluster.
 2026-10-14 | REJECT | J5 BambooHR part | Auto-rejected under standing ToS rule (CLAUDE.md rule 3) before any build: bamboohr.com Terms of Service §4.2 forbid using the Service (which hosts customers' careers pages) "with any robot, spider, other automated device, or manual process to monitor or copy any content". Personio and Teamtailor parts of J5 built as approved.
+2026-10-21 | REJECT | scorecard 10-20 item 1 | Owner, in chat: keep the 10-14 REJECT (no title/SEO tests for the six official-data Actors).
+2026-10-21 | APPROVE | scorecard 10-20 item 2 | Owner, in chat: title/SEO test for company-jobs-scraper (exact copy presented for sign-off before applying).
+2026-10-21 | REJECT | scorecard 10-20 items 3-5 | Owner, in chat: no title/SEO tests for the small website/data Actors.
+2026-10-21 | REJECT | scorecard 10-20 item 6 | Owner, in chat: no retirements for now.
