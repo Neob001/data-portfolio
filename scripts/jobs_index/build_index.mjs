@@ -45,8 +45,9 @@ const POLICY = {
   workable: { workers: 1, gapMs: 3000 }, // ~3,650 requests at 1-2 req/s earned a 429 with Retry-After ~23h
   recruitee: { workers: 8, gapMs: 0 },
   // Career-site JSON (not a documented API): robots.txt checked per host, one site at a time per host,
-  // <= 6.7 request starts/s across all Workday hosts (8 sites in flight, ~1.2 s per request measured).
-  workday: { workers: 8, gapMs: 150 },
+  // <= 8.3 request starts/s across ~3,000 Workday tenant hosts (10 sites in flight). At 8/150 ms the
+  // 85-min budget covered only 3,676 of 4,796 sites on GitHub runners (2026-10-20 build).
+  workday: { workers: 10, gapMs: 120 },
   // Career-site feeds (Personio /xml, Teamtailor /jobs.rss): one host per company, robots.txt per host first.
   personio: { workers: 6, gapMs: 200 },
   teamtailor: { workers: 6, gapMs: 200 },

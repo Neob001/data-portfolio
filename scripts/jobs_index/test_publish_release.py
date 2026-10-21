@@ -88,6 +88,7 @@ def build_dir(built_at, shards=3):
     for i in range(shards):
         open(os.path.join(d, f"shards/s{i}.jsonl.br"), "wb").write(f"{built_at}-{i}".encode())
     open(os.path.join(d, "directory.json.gz"), "wb").write(b"dir")
+    open(os.path.join(d, "build_report.json"), "w").write(json.dumps({"boards_skipped_budget": 0}))
     json.dump(m, open(os.path.join(d, "manifest.json"), "w"))
     return d
 
@@ -126,7 +127,7 @@ class PublishTest(unittest.TestCase):
         self.assertFalse(any(n.startswith("shard-") for n in names))  # legacy gone
         self.assertIn(f"{b1}-shard-2.jsonl.br", names)  # previous build kept
         self.assertTrue(all(s["file"].startswith(b2) for s in self.live(gh)["shards"]))
-        self.assertEqual(len(names), 1 + (1 + 3) + (1 + 2))
+        self.assertEqual(len(names), 1 + (1 + 3 + 1) + (1 + 2 + 1))  # manifest + (directory, shards, build report) x 2 builds
 
     def test_rerun_of_same_build_replaces_its_files(self):
         gh = FakeGitHub(legacy_release())
@@ -149,6 +150,13 @@ class PublishTest(unittest.TestCase):
         gh._check = lambda op: None  # the broken manifest itself can't be validated
         pr.publish(gh, build_dir("2026-10-09T03:18:07.165Z"), log=lambda *_: None)
         self.assertIn("shard-0.jsonl.br", gh.names())
+
+    def test_build_report_is_published_and_referenced(self):
+        gh = FakeGitHub(legacy_release())
+        bid = pr.publish(gh, build_dir("2026-10-21T08:26:37.000Z"), log=lambda *_: None)
+        live = self.live(gh)
+        self.assertEqual(live["build_report"], f"{bid}-build_report.json")
+        self.assertIn(live["build_report"], gh.names())
 
     def test_empty_release(self):
         gh = FakeGitHub({})

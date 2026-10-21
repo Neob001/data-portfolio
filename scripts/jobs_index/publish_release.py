@@ -41,6 +41,12 @@ def stamped_manifest(manifest, bid):
         name = f"{bid}-shard-{i}.jsonl.{ext}"
         files.append((name, s["file"], "application/gzip" if ext == "gz" else "application/octet-stream"))
         s["file"] = name
+    # The builder's report (boards skipped per platform for time budget / rate limits, timings) is
+    # published with the build so nightly coverage can be checked without access to the Actions log.
+    if manifest.get("build_report"):
+        name = f"{bid}-build_report.json"
+        files.append((name, manifest["build_report"], "application/json"))
+        m["build_report"] = name
     return m, files
 
 
@@ -48,7 +54,10 @@ def files_of(manifest):
     """Asset names a published manifest refers to."""
     if not manifest:
         return set()
-    return {manifest.get("directory") or "directory.json.gz"} | {s["file"] for s in manifest.get("shards", [])}
+    names = {manifest.get("directory") or "directory.json.gz"} | {s["file"] for s in manifest.get("shards", [])}
+    if manifest.get("build_report"):
+        names.add(manifest["build_report"])
+    return names
 
 
 def stale_assets(asset_names, new_manifest, previous_manifest):
@@ -107,6 +116,8 @@ class GitHub:
 
 def publish(gh, index_dir, log=print):
     local = json.load(open(os.path.join(index_dir, "manifest.json")))
+    if "build_report" not in local and os.path.exists(os.path.join(index_dir, "build_report.json")):
+        local["build_report"] = "build_report.json"
     bid = build_id(local)
     manifest, files = stamped_manifest(local, bid)
     rel_id = gh.release()["id"]
