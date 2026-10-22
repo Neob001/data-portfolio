@@ -38,8 +38,10 @@ test('src/lib is the synced shared copy (never edited here)', () => {
 
 test('every Actor that reads the jobs index refuses to run below 2 GB (2,000+ job requests are OOM-killed at 1 GB)', () => {
   const root = new URL('../../', import.meta.url);
+  // company-jobs-scraper carries the core for its live mode only (careers pages -> boards); it never reads the index.
+  const LIVE_ONLY = ['company-jobs-scraper'];
   const readers = readdirSync(root).filter((d) => {
-    try { return readdirSync(new URL(`${d}/src/core/`, root)).includes('feed.js'); } catch { return false; }
+    try { return !LIVE_ONLY.includes(d) && readdirSync(new URL(`${d}/src/core/`, root)).includes('feed.js'); } catch { return false; }
   });
   assert.ok(readers.length >= 8, `found ${readers.length} index readers`);
   for (const d of readers) {

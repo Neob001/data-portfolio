@@ -377,8 +377,11 @@ test(`every jobs Actor's dataset schema accepts enriched rows (${JOB_ACTORS.join
     years_experience_min: i % 2 ? null : i,
     visa_sponsorship: [true, false, null][i % 3],
   }));
+  // company-jobs-scraper puts its detection fields (query, found, reason...) in front of the core row.
+  const { jobRow } = await import('../../company-jobs-scraper/src/transform.js');
+  const shape = { 'company-jobs-scraper': (row) => jobRow(row, { query: 'https://www.example.com', careersPageUrl: 'https://www.example.com/careers' }) };
   for (const slug of JOB_ACTORS) {
     const check = validator(slug);
-    for (const row of [...golden, ...synthetic]) check(row);
+    for (const row of [...golden, ...synthetic]) check((shape[slug] || ((r) => r))(row));
   }
 });
