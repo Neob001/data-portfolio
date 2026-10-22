@@ -7,7 +7,7 @@ import { boardKey, boardUrlFor } from './core/transform.js';
 import { createDeadline } from './lib/deadline.js';
 import {
   UA, LIMITS, HOST_GAP_MS, PAGE_MAX_BYTES, CAREERS_PATHS, parseCompanyInput, siteOf, robotsPath, boardFromUrl,
-  unsupportedPlatformOf, detectPlatforms, careersLinks, careersScore, missRow, jobRow,
+  unsupportedPlatformOf, detectPlatforms, careersLinks, postingLinks, careersScore, missRow, jobRow,
 } from './transform.js';
 
 export const COMPANY_CONCURRENCY = 3;
@@ -95,6 +95,7 @@ export async function discoverCompany(query, ctx) {
   let pages = 0;
   let read = 0;
   let probed = false;
+  let postingQueued = false;
   let firstFailure = null; // the input URL's own failure
   let unsupported = null;
   let careersPage = null;
@@ -160,10 +161,15 @@ export async function discoverCompany(query, ctx) {
       }
       if (det.unsupported) unsupported ||= { platform: det.unsupported, page: res.url };
       if (item.depth > 0 || careersScore(res.url, '') >= 3) careersPage ||= res.url;
-      if (item.depth < LIMITS.maxDepth) {
+      if (item.depth < LIMITS.maxDepth && !item.posting) {
         for (const l of careersLinks(res.html, res.url, { companySite, seen })) {
           if (!queue.some((q) => q.url === l.url)) queue.push({ url: l.url, depth: item.depth + 1, prio: 10 + l.score - item.depth });
         }
+      }
+      // A careers page listing jobs on the company's own front end: one posting may name the ATS.
+      if (!postingQueued && !item.posting && (item.depth > 0 || careersScore(res.url, '') >= 3)) {
+        const [p] = postingLinks(res.html, res.url, { companySite, seen });
+        if (p) { postingQueued = true; queue.push({ url: p, depth: LIMITS.maxDepth, prio: 3, posting: true }); }
       }
     }
     // Nothing left to follow: try the common careers paths once (unless the site itself is unreachable).

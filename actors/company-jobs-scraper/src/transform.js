@@ -13,7 +13,7 @@ export const UA = 'Mozilla/5.0 (compatible; factpipe-jobs-feed/1.0; +https://api
 // boards fetched, links followed from one page, discovery depth.
 export const LIMITS = { pagesPerCompany: 8, pagesPerHost: 6, boardsPerCompany: 3, linksPerPage: 3, maxDepth: 2, redirects: 5 };
 export const HOST_GAP_MS = 1000; // one page request start per second per company host
-export const PAGE_MAX_BYTES = 3 * 1024 * 1024;
+export const PAGE_MAX_BYTES = 8 * 1024 * 1024; // some careers pages inline every job as JSON (4.6 MB seen)
 
 /** Paths probed on the company's site when no page links to a careers page. */
 export const CAREERS_PATHS = ['/careers', '/jobs', '/careers/jobs', '/company/careers', '/about/careers', '/join-us', '/karriere'];
@@ -146,7 +146,9 @@ export function unsupportedPlatformOf(url) {
 }
 
 // Tokens that are template placeholders or generic words, not a company's board.
-const BAD_TOKEN = /^(?:\$|\{|%7b|undefined|null|none|example|your-?company|company|token|board)$|[${}<>]/i;
+// Teamtailor's own service hosts linked from its pages (not company career sites; the core skips www/app/...).
+const TT_NOT_CAREER_SITES = new Set(['trust', 'security', 'privacy', 'legal', 'academy', 'community', 'integrations', 'hub', 'media', 'career-site-builder']);
+const BAD_TOKEN =/^(?:\$|\{|%7b|undefined|null|none|example|your-?company|company|token|board)$|[${}<>]/i;
 
 /**
  * Supported job board an URL points at -> { ats, token, region? } or null. The core's parseBoardRef, plus
@@ -164,6 +166,7 @@ export function boardFromUrl(url) {
   if (/(^|\.)greenhouse\.io$/.test(host) && !/^(boards|job-boards|boards-api)\./.test(host)) return null; // www/app/api docs
   const b = parseBoardRef(s.replace(/^\/\//, 'https://'));
   if (!b || BAD_TOKEN.test(b.token)) return null;
+  if (b.ats === 'teamtailor' && TT_NOT_CAREER_SITES.has(b.token)) return null;
   return b;
 }
 
@@ -179,12 +182,31 @@ const URL_RX = /(?:https?:)?\/\/[a-z0-9][a-z0-9.-]*\.[a-z]{2,}(?::\d+)?(?:\/[^\s
 
 /** Every absolute URL in the page (attributes, inline scripts, JSON), resolved against the page URL. */
 export function urlsInPage(html, pageUrl) {
-  const text = unescapePage(html);
+  return urlsInText(unescapePage(html), pageUrl);
+}
+
+function urlsInText(text, pageUrl) {
   const out = [];
   for (const m of text.matchAll(URL_RX)) {
     let raw = m[0].replace(/[.,;:!?]+$/, '');
     if (raw.startsWith('//')) raw = `https:${raw}`;
     try { out.push(new URL(raw, pageUrl).href); } catch { /* skip */ }
+  }
+  return out;
+}
+
+// A careers page that calls the board API from inline JavaScript with the token in a variable:
+//   const boardToken = 'acme'; fetch(`https://boards-api.greenhouse.io/v1/boards/${boardToken}/jobs`)
+const TEMPLATE_URL = /((?:boards-api\.greenhouse\.io\/v1\/boards|(?:job-)?boards\.greenhouse\.io|api\.(?:eu\.)?lever\.co\/v0\/postings|jobs\.(?:eu\.)?lever\.co|api\.ashbyhq\.com\/posting-api\/job-board|jobs\.ashbyhq\.com)\/)\$\{\s*([A-Za-z_$][\w$]*)\s*\}/gi;
+
+/** Boards whose token sits in a JS variable next to a templated board-API URL. */
+export function templatedBoards(text) {
+  const out = [];
+  for (const m of String(text || '').matchAll(TEMPLATE_URL)) {
+    const name = m[2].replace(/\$/g, '\\$');
+    const v = text.match(new RegExp(`(?:^|[^\\w$.])${name}\\s*[:=]\\s*["'\`]([A-Za-z0-9][A-Za-z0-9_.-]{0,80})["'\`]`));
+    const b = v && boardFromUrl(`https://${m[1]}${v[1]}`);
+    if (b) out.push(b);
   }
   return out;
 }
@@ -215,14 +237,16 @@ export function detectPlatforms(html, pageUrl) {
     if (cur) cur.refs += n; else counts.set(k, { ...b, refs: n });
   };
   const unsupported = new Map();
-  for (const u of urlsInPage(html, pageUrl)) {
+  const text = unescapePage(html);
+  for (const u of urlsInText(text, pageUrl)) {
     const b = boardFromUrl(u);
     if (b) { add(b); continue; }
     const p = unsupportedPlatformOf(u);
     if (p) unsupported.set(p, (unsupported.get(p) || 0) + 1);
   }
   // Greenhouse's embed script reads the board token from a global (Grnhse.Settings / grnhse_app + "for=").
-  for (const m of unescapePage(html).matchAll(/grnhse[\s\S]{0,300}?[?&]for=([A-Za-z0-9_-]+)/gi)) {
+  for (const b of templatedBoards(text)) add(b, 2);
+  for (const m of text.matchAll(/grnhse[\s\S]{0,300}?[?&]for=([A-Za-z0-9_-]+)/gi)) {
     if (!BAD_TOKEN.test(m[1])) add({ ats: 'greenhouse', token: m[1].toLowerCase() }, 0);
   }
   const host = new URL(pageUrl).hostname.toLowerCase();
@@ -285,6 +309,30 @@ export function careersLinks(html, pageUrl, { companySite = null, seen = new Set
   return [...found.values()]
     .sort((a, b) => b.score - a.score || a.url.length - b.url.length)
     .slice(0, limit);
+}
+
+// One job posting on the company's own site (its Apply button often points at the ATS).
+const POSTING_URL = /\/(?:jobs?|positions?|openings?|careers?|vacanc(?:y|ies)|stellen(?:angebote)?|job-?offers?|roles?|opportunities)\/(?:[^/?#]+\/)*[^/?#]*\d{4,}[^/?#]*\/?$|[?&](?:gh_jid|jobId|job_id|jid)=\w+/i;
+
+/**
+ * Last resort when a careers page shows jobs but no board link: links to single postings on the same site
+ * (one of them is read; postings rendered by the company's own front end often embed or link the ATS).
+ */
+export function postingLinks(html, pageUrl, { companySite = null, seen = new Set(), limit = 1 } = {}) {
+  const pageSite = siteOf(new URL(pageUrl).hostname);
+  const out = [];
+  for (const m of String(html || '').matchAll(/<a\b[^>]*\bhref\s*=\s*(?:"([^"]*)"|'([^']*)')/gi)) {
+    let u;
+    try { u = new URL(decodeEntities(m[1] ?? m[2] ?? ''), pageUrl); } catch { continue; }
+    if (!/^https?:$/.test(u.protocol) || NOT_PAGES.test(u.pathname)) continue;
+    const site = siteOf(u.hostname);
+    if (site !== pageSite && site !== companySite) continue;
+    u.hash = '';
+    if (!POSTING_URL.test(`${u.pathname}${u.search}`) || seen.has(u.href) || out.includes(u.href)) continue;
+    out.push(u.href);
+    if (out.length >= limit) break;
+  }
+  return out;
 }
 
 export { ATS_LIST };
