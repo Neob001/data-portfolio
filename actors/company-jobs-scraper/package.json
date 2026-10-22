@@ -1,8 +1,8 @@
 {
   "name": "company-jobs-scraper",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
-  "description": "Give it any company website - it finds the careers page, detects the ATS (Greenhouse, Lever, Ashby) and pulls every live",
+  "description": "Give it any company website - it finds the careers page, detects the job platform (Greenhouse, Lever, Ashby, Workable, Recruitee, Workday, Personio, Teamtailor) and returns every open job.",
   "engines": {
     "node": ">=22"
   },

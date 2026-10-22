@@ -3,7 +3,7 @@
   "name": "company-jobs-scraper",
   "title": "Career Page Jobs Scraper \u2014 Greenhouse, Lever & Ashby API",
   "description": "Paste company websites: finds each careers page, detects Greenhouse, Lever or Ashby and returns every open job (title, location, remote, department, apply link) as flat JSON. $2 per 1,000 jobs.",
-  "version": "0.1",
+  "version": "0.2",
   "buildTag": "latest",
   "input": "../INPUT_SCHEMA.json",
   "readme": "../README.md",
@@ -21,16 +21,119 @@
           "title": "Jobs",
           "transformation": {
             "fields": [
-              "company",
+              "company_name",
               "title",
-              "location",
+              "seniority",
+              "locations",
+              "workplace_type",
               "department",
-              "published_at",
+              "salary_min",
+              "salary_max",
+              "salary_currency",
+              "posted_at",
+              "ats",
               "job_url"
             ]
           },
           "display": {
-            "component": "table"
+            "component": "table",
+            "properties": {
+              "company_name": {
+                "label": "Company",
+                "format": "text"
+              },
+              "title": {
+                "label": "Title",
+                "format": "text"
+              },
+              "seniority": {
+                "label": "Seniority",
+                "format": "text"
+              },
+              "locations": {
+                "label": "Locations",
+                "format": "array"
+              },
+              "workplace_type": {
+                "label": "Workplace",
+                "format": "text"
+              },
+              "department": {
+                "label": "Department",
+                "format": "text"
+              },
+              "salary_min": {
+                "label": "Salary min",
+                "format": "number"
+              },
+              "salary_max": {
+                "label": "Salary max",
+                "format": "number"
+              },
+              "salary_currency": {
+                "label": "Currency",
+                "format": "text"
+              },
+              "posted_at": {
+                "label": "Posted",
+                "format": "date"
+              },
+              "ats": {
+                "label": "ATS",
+                "format": "text"
+              },
+              "job_url": {
+                "label": "Job",
+                "format": "link"
+              }
+            }
+          }
+        },
+        "companies": {
+          "title": "Detection per company",
+          "transformation": {
+            "fields": [
+              "query",
+              "found",
+              "detected_platform",
+              "careers_page_url",
+              "company_board",
+              "reason",
+              "reason_detail"
+            ]
+          },
+          "display": {
+            "component": "table",
+            "properties": {
+              "query": {
+                "label": "Input",
+                "format": "text"
+              },
+              "found": {
+                "label": "Jobs found",
+                "format": "boolean"
+              },
+              "detected_platform": {
+                "label": "Platform",
+                "format": "text"
+              },
+              "careers_page_url": {
+                "label": "Careers page",
+                "format": "link"
+              },
+              "company_board": {
+                "label": "Board",
+                "format": "text"
+              },
+              "reason": {
+                "label": "Reason",
+                "format": "text"
+              },
+              "reason_detail": {
+                "label": "Detail",
+                "format": "text"
+              }
+            }
           }
         }
       },
@@ -39,39 +142,95 @@
         "type": "object",
         "properties": {
           "query": {
-            "type": "string"
+            "type": "string",
+            "description": "The input line (company website, careers page or job-board URL) this row answers"
           },
           "found": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "true: a job row; false: the one explanatory row of a company without jobs (never charged)"
           },
-          "ats": {
+          "reason": {
             "type": [
               "string",
               "null"
-            ]
+            ],
+            "enum": [
+              "invalid_url",
+              "site_unreachable",
+              "robots_disallowed",
+              "unsupported_platform",
+              "no_supported_ats_detected",
+              "ats_board_empty",
+              "ats_board_not_found",
+              "ats_board_disallowed",
+              "ats_board_failed",
+              "duplicate_input",
+              "not_processed",
+              null
+            ],
+            "description": "Why a company has no job rows (null on job rows): invalid_url, site_unreachable, robots_disallowed, unsupported_platform, no_supported_ats_detected, ats_board_empty, ats_board_not_found, ats_board_disallowed, ats_board_failed, duplicate_input, not_processed"
           },
-          "board": {
+          "reason_detail": {
             "type": [
               "string",
               "null"
-            ]
+            ],
+            "description": "Plain-English explanation of `reason` (null on job rows)"
           },
-          "company": {
+          "careers_page_url": {
             "type": [
               "string",
               "null"
-            ]
+            ],
+            "description": "Page where the job board was found (the board URL itself when given directly); on rows without jobs the careers page we read, if any"
+          },
+          "detected_platform": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Job platform found for the company: the ats on job rows; on rows without jobs also unsupported ones (smartrecruiters, icims, successfactors, taleo, phenom, eightfold ...)"
           },
           "job_id": {
             "type": [
               "string",
               "null"
-            ]
+            ],
+            "description": "Stable id: ats:board:posting_id (null on rows without jobs)"
           },
           "title": {
             "type": [
               "string",
               "null"
+            ]
+          },
+          "company_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "company_board": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ats": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "greenhouse",
+              "lever",
+              "ashby",
+              "workable",
+              "recruitee",
+              "workday",
+              "personio",
+              "teamtailor",
+              null
             ]
           },
           "department": {
@@ -86,11 +245,63 @@
               "null"
             ]
           },
-          "location": {
+          "employment_type": {
             "type": [
               "string",
               "null"
+            ],
+            "enum": [
+              "full_time",
+              "part_time",
+              "contract",
+              "temporary",
+              "internship",
+              "other",
+              null
             ]
+          },
+          "seniority": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "intern",
+              "entry",
+              "mid",
+              "senior",
+              "lead",
+              "manager",
+              "director",
+              "executive",
+              null
+            ],
+            "description": "Level read from the job title by fixed rules (no AI): intern, entry, mid, senior, lead, manager, director, executive; null when the title has no level marker"
+          },
+          "workplace_type": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "remote",
+              "hybrid",
+              "onsite",
+              "unknown",
+              null
+            ]
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "country_codes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "remote": {
             "type": [
@@ -98,32 +309,77 @@
               "null"
             ]
           },
-          "employment_type": {
+          "salary_min": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "salary_max": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "salary_currency": {
             "type": [
               "string",
               "null"
             ]
           },
-          "published_at": {
+          "salary_period": {
             "type": [
               "string",
               "null"
             ],
-            "format": "date"
+            "enum": [
+              "year",
+              "month",
+              "week",
+              "day",
+              "hour",
+              null
+            ]
+          },
+          "salary_source": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "structured",
+              "description",
+              null
+            ],
+            "description": "structured: the ATS's own pay fields; description: pay stated in the description text (needs the description); null: no salary"
+          },
+          "years_experience_min": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Minimum years of experience the description asks for (\"3+ years\", \"3-5 years\" -> 3); null when not stated or the description was not read"
+          },
+          "visa_sponsorship": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "true: the description says visa sponsorship is offered; false: it says sponsorship is not available; null: not mentioned, or the description was not read"
+          },
+          "posted_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
           },
           "updated_at": {
             "type": [
               "string",
               "null"
             ],
-            "format": "date"
-          },
-          "job_url": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "format": "uri"
+            "format": "date-time"
           },
           "apply_url": {
             "type": [
@@ -132,15 +388,71 @@
             ],
             "format": "uri"
           },
-          "reason": {
+          "job_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri"
+          },
+          "description_text": {
             "type": [
               "string",
               "null"
             ]
           },
+          "description_snippet": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "description_status": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "included",
+              "not_requested",
+              "unavailable",
+              null
+            ],
+            "description": "included: full text fetched live from the ATS; not_requested: includeDescription=false; unavailable: live fetch failed or the ATS has no text"
+          },
+          "duplicate_sources": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "match_score": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "Keyword relevance 0-100: every keyword in the title 100, some in the title 60-70, department/team 40-50, description only 20-30; null without keywords"
+          },
+          "matched_in": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "title",
+              "department",
+              "description",
+              null
+            ],
+            "description": "Best place a keyword matched; null without keywords"
+          },
           "source_url": {
-            "type": "string",
-            "format": "uri"
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri",
+            "description": "API / feed URL the job was read from; on rows without jobs the page we read (null for an invalid input)"
           },
           "fetched_at": {
             "type": "string",

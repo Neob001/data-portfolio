@@ -4,9 +4,9 @@
   "schemaVersion": 1,
   "properties": {
     "companyUrls": {
-      "title": "Company websites or ATS board URLs",
+      "title": "Company websites, careers pages or job-board URLs",
       "type": "array",
-      "description": "Company homepages (we find the careers page and ATS automatically) or direct Greenhouse/Lever/Ashby board URLs.",
+      "description": "Company homepages (e.g. https://www.redhat.com) or careers pages: the Actor finds the careers page and its job board. Supported job platforms: Greenhouse, Lever, Ashby, Workable, Recruitee, Workday, Personio and Teamtailor (incl. Teamtailor career sites on their own domain). Direct board URLs work too (e.g. https://boards.greenhouse.io/gitlab). A company on another platform gets one free row explaining why.",
       "editor": "stringList",
       "prefill": [
         "https://boards.greenhouse.io/gitlab",
@@ -19,7 +19,7 @@
       "default": 200,
       "minimum": 1,
       "maximum": 5000,
-      "description": "Cap on charged job records per company.",
+      "description": "Cap on job rows (charged) per company. Newest jobs first.",
       "prefill": 25
     }
   },

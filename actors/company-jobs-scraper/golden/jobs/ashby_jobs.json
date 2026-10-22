@@ -1,0 +1,211 @@
+{
+ "apiVersion": "1",
+ "jobs": [
+  {
+   "id": "34413f8d-26bf-4bbc-8ade-eb309a0e2245",
+   "title": " Security Engineer, Cloud",
+   "department": "Engineering",
+   "team": "Backend",
+   "employmentType": "FullTime",
+   "location": "New York, NY (HQ)",
+   "shouldDisplayCompensationOnJobPostings": true,
+   "secondaryLocations": [
+    {
+     "location": "Remote (Canada)",
+     "address": {
+      "postalAddress": {
+       "addressCountry": "Canada"
+      }
+     }
+    },
+    {
+     "location": "Remote (US)",
+     "address": {
+      "postalAddress": {
+       "addressCountry": "United States"
+      }
+     }
+    },
+    {
+     "location": "Miami, FL",
+     "address": {
+      "postalAddress": {
+       "addressRegion": "Florida",
+       "addressCountry": "USA",
+       "addressLocality": "Miami"
+      }
+     }
+    }
+   ],
+   "publishedAt": "2026-04-07T17:12:35.753+00:00",
+   "isListed": true,
+   "isRemote": true,
+   "workplaceType": "Hybrid",
+   "address": {
+    "postalAddress": {
+     "addressRegion": "NY",
+     "addressCountry": "USA",
+     "addressLocality": "New York City"
+    }
+   },
+   "jobUrl": "https://jobs.ashbyhq.com/ramp/34413f8d-26bf-4bbc-8ade-eb309a0e2245",
+   "applyUrl": "https://jobs.ashbyhq.com/ramp/34413f8d-26bf-4bbc-8ade-eb309a0e2245/application",
+   "descriptionHtml": "<h1><strong>About Ramp</strong></h1><p style=\"min-height:1.5em\">Ramp is building the smart infrastructure for finance teams, embedded in the transaction flow of every dollar a business spends. We automate how over $200B in annualized spend flows in and out of 70,000+ companies: authorizing payments, flagging risk, categorizing spend, and closing books.</p><p style=\"min-height:1.5em\">The problems are high-stakes, data-dense, and unforgiving.</p><p style=\"min-height:1.5em\">We hire people with high agency and high urgency. We look for slope over intercept. We care less about where you trained and",
+   "descriptionPlain": "ABOUT RAMP\n\nRamp is building the smart infrastructure for finance teams, embedded in the transaction flow of every dollar a business spends. We automate how over $200B in annualized spend flows in and out of 70,000+ companies: authorizing payments, flagging risk, categorizing spend, and closing books.\n\nThe problems are high-stakes, data-dense, and unforgiving.\n\nWe hire people with high agency and high urgency. We look for slope over intercept. We care less about where you trained and more about ",
+   "compensation": {
+    "compensationTierSummary": "$211.4K \u2013 $290.6K \u2022 Offers Equity",
+    "scrapeableCompensationSalarySummary": "$211.4K - $290.6K",
+    "compensationTiers": [
+     {
+      "id": "5f7a903e-36e4-492c-ac09-f2745d717daa",
+      "tierSummary": "$211.4K \u2013 $290.6K \u2022 Offers Equity",
+      "title": null,
+      "additionalInformation": null,
+      "components": [
+       {
+        "id": "feaef96f-559f-4df8-a38c-3eee072a8d74",
+        "summary": "Offers Equity",
+        "compensationType": "EquityPercentage",
+        "interval": "NONE",
+        "currencyCode": null,
+        "minValue": null,
+        "maxValue": null
+       },
+       {
+        "id": "3481c194-45fd-4b89-8592-e8f4d4b51f20",
+        "summary": "$211.4K \u2013 $290.6K",
+        "compensationType": "Salary",
+        "interval": "1 YEAR",
+        "currencyCode": "USD",
+        "minValue": 211400,
+        "maxValue": 290600
+       }
+      ]
+     }
+    ],
+    "summaryComponents": [
+     {
+      "compensationType": "EquityPercentage",
+      "interval": "NONE",
+      "currencyCode": null,
+      "minValue": null,
+      "maxValue": null
+     },
+     {
+      "compensationType": "Salary",
+      "interval": "1 YEAR",
+      "currencyCode": "USD",
+      "minValue": 211400,
+      "maxValue": 290600
+     }
+    ]
+   }
+  },
+  {
+   "id": "d84bbf19-572a-499c-9c87-0c154ce85caf",
+   "title": "Account Manager | Mid-Market",
+   "department": "Sales",
+   "team": "Account Manager",
+   "employmentType": "FullTime",
+   "location": "New York, NY (HQ)",
+   "shouldDisplayCompensationOnJobPostings": true,
+   "secondaryLocations": [
+    {
+     "location": "San Francisco, CA",
+     "address": {
+      "postalAddress": {
+       "addressRegion": "California ",
+       "addressCountry": "USA",
+       "addressLocality": "San Fransisco"
+      }
+     }
+    },
+    {
+     "location": "Remote (US)",
+     "address": {
+      "postalAddress": {
+       "addressCountry": "United States"
+      }
+     }
+    }
+   ],
+   "publishedAt": "2025-06-05T17:33:32.680+00:00",
+   "isListed": true,
+   "isRemote": true,
+   "workplaceType": "Remote",
+   "address": {
+    "postalAddress": {
+     "addressRegion": "NY",
+     "addressCountry": "USA",
+     "addressLocality": "New York City"
+    }
+   },
+   "jobUrl": "https://jobs.ashbyhq.com/ramp/d84bbf19-572a-499c-9c87-0c154ce85caf",
+   "applyUrl": "https://jobs.ashbyhq.com/ramp/d84bbf19-572a-499c-9c87-0c154ce85caf/application",
+   "descriptionHtml": "<h1><strong>About Ramp</strong></h1><p style=\"min-height:1.5em\">Ramp is building the smart infrastructure for finance teams, embedded in the transaction flow of every dollar a business spends. We automate how over $200B in annualized spend flows in and out of 70,000+ companies: authorizing payments, flagging risk, categorizing spend, and closing books.</p><p style=\"min-height:1.5em\">The problems are high-stakes, data-dense, and unforgiving.</p><p style=\"min-height:1.5em\">We hire people with high agency and high urgency. We look for slope over intercept. We care less about where you trained and",
+   "descriptionPlain": "ABOUT RAMP\n\nRamp is building the smart infrastructure for finance teams, embedded in the transaction flow of every dollar a business spends. We automate how over $200B in annualized spend flows in and out of 70,000+ companies: authorizing payments, flagging risk, categorizing spend, and closing books.\n\nThe problems are high-stakes, data-dense, and unforgiving.\n\nWe hire people with high agency and high urgency. We look for slope over intercept. We care less about where you trained and more about ",
+   "compensation": {
+    "compensationTierSummary": "$190K \u2013 $260K \u2022 Offers Equity \u2022 Offers Commission \u2022 Multiple Ranges",
+    "scrapeableCompensationSalarySummary": "$190K - $260K",
+    "compensationTiers": [
+     {
+      "id": "67289cf1-ebc9-4685-91f1-ad0678b69d0c",
+      "tierSummary": "OTE $190K \u2013 $230K \u2022 Offers Equity \u2022 Offers Commission \u2022 The OTE range above has a 60/40 split",
+      "title": "US Remote",
+      "additionalInformation": "The OTE range above has a 60/40 split",
+      "components": [
+       {
+        "id": "a8bc0d41-c14e-47e3-9c51-c04ca2055ad8",
+        "summary": "Offers Commission",
+        "compensationType": "Commission",
+        "interval": "1 YEAR",
+        "currencyCode": "USD",
+        "minValue": null,
+        "maxValue": null
+       },
+       {
+        "id": "67889179-3aa3-44dc-8178-ee6054aac616",
+        "summary": "Offers Equity",
+        "compensationType": "EquityCashValue",
+        "interval": "1 YEAR",
+        "currencyCode": "USD",
+        "minValue": null,
+        "maxValue": null
+       },
+       {
+        "id": "63118d18-3f25-4a90-a6c4-9b7352d9cd5c",
+        "summary": "OTE $190K \u2013 $230K",
+        "compensationType": "Salary",
+        "interval": "1 YEAR",
+        "currencyCode": "USD",
+        "minValue": 190000,
+        "maxValue": 230000
+       }
+      ]
+     }
+    ],
+    "summaryComponents": [
+     {
+      "compensationType": "Commission",
+      "minValue": null,
+      "maxValue": null,
+      "interval": "1 YEAR"
+     },
+     {
+      "compensationType": "EquityCashValue",
+      "minValue": null,
+      "maxValue": null,
+      "interval": "1 YEAR"
+     },
+     {
+      "minValue": 190000,
+      "maxValue": 260000,
+      "currencyCode": "USD",
+      "interval": "1 YEAR",
+      "compensationType": "Salary"
+     }
+    ]
+   }
+  }
+ ]
+}

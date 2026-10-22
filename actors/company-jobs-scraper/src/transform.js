@@ -59,7 +59,7 @@ export function missRow({ query, reason, detail = null, careersPageUrl = null, p
 /** Core output row (toOutput) + this Actor's fields, in ROW_FIELDS order. */
 export function jobRow(coreRow, { query, careersPageUrl }) {
   const row = { query: String(query ?? ''), found: true, reason: null, reason_detail: null, careers_page_url: careersPageUrl, detected_platform: coreRow.ats };
-  for (const k of OUTPUT_FIELDS) row[k] = coreRow[k] === undefined ? (ARRAY_FIELDS.has(k) ? [] : null) : coreRow[k];
+  for (const k of OUTPUT_FIELDS) row[k] = coreRow[k] ?? (ARRAY_FIELDS.has(k) ? [] : null);
   return row;
 }
 
@@ -291,7 +291,8 @@ export function careersLinks(html, pageUrl, { companySite = null, seen = new Set
   for (const m of String(html || '').matchAll(/<a\b([^>]*)>([\s\S]{0,600}?)<\/a>/gi)) {
     const href = m[1].match(/\bhref\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i);
     const raw = href && decodeEntities(href[1] ?? href[2] ?? href[3] ?? '').trim();
-    if (!raw || /^(?:#|mailto:|tel:|javascript:|data:)/i.test(raw)) continue;
+    // (a backslash: HTML inside a JSON/JS string, href=\"...\" - its URLs are read by detectPlatforms instead)
+    if (!raw || /^(?:#|mailto:|tel:|javascript:|data:|\\)/i.test(raw)) continue;
     let u;
     try { u = new URL(raw, pageUrl); } catch { continue; }
     if (!/^https?:$/.test(u.protocol) || NOT_PAGES.test(u.pathname) || NEVER_FOLLOW.test(u.hostname)) continue;

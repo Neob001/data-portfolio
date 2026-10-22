@@ -1,0 +1,385 @@
+{
+ "_comment": "Real responses of https://workday.wd5.myworkdayjobs.com/Workday captured 2026-10-09, trimmed: jobs = one POST .../jobs response (postings picked from pages at offsets 0, 20, middle, end; total set to their count, facets dropped); details = GET .../job/<path> responses for those postings (descriptions cut to ~1,200 characters). robots_txt = GET /robots.txt of the host; site_page_head = the og:title meta tag of the site page (the rest of the page is a JS loader).",
+ "captured_at": "2026-10-09T11:05:35.989Z",
+ "robots_txt": "Sitemap: https://workday.wd5.myworkdayjobs.com/Workday/siteMap.xml\nSitemap: https://workday.wd5.myworkdayjobs.com/Workday_Early_Career/siteMap.xml\nSitemap: https://workday.wd5.myworkdayjobs.com/Workday_Executive_Site/siteMap.xml\nSitemap: https://workday.wd5.myworkdayjobs.com/Workday_Jobs/siteMap.xml\n\nUser-agent: *\nAllow: /Workday/\nAllow: /Workday_Early_Career/\nAllow: /Workday_Executive_Site/\nAllow: /Workday_Jobs/\nDisallow: /refreshFacet/",
+ "site_page_head": "<meta name=\"title\" property=\"og:title\" content=\"Careers at Workday\">",
+ "jobs": {
+  "total": 8,
+  "jobPostings": [
+   {
+    "title": "Account Executive Medium Enterprise - Lyon",
+    "externalPath": "/job/FRA-Remote/Account-Executive-Medium-Enterprise---Lyon_JR-0110680-1",
+    "locationsText": "FRA, Remote",
+    "postedOn": "Posted Today",
+    "remoteType": "Remote",
+    "bulletFields": [
+     "JR-0110680"
+    ]
+   },
+   {
+    "title": "Sales Development Representative",
+    "externalPath": "/job/USA-MA-Boston/Sales-Development-Representative_JR-0110773",
+    "locationsText": "USA, MA, Boston",
+    "postedOn": "Posted Yesterday",
+    "remoteType": "Flex",
+    "bulletFields": [
+     "JR-0110773"
+    ]
+   },
+   {
+    "title": "Senior Revenue Accountant",
+    "externalPath": "/job/USA-CA-Pleasanton/Senior-Revenue-Accountant_JR-0110631",
+    "locationsText": "2 Locations",
+    "postedOn": "Posted Yesterday",
+    "remoteType": "Flex",
+    "bulletFields": [
+     "JR-0110631"
+    ]
+   },
+   {
+    "title": "Principal Enablement Architect",
+    "externalPath": "/job/USA-IL-Home-Office/Principal-Enablement-Architect_JR-0110644",
+    "locationsText": "USA, IL, Home Office",
+    "postedOn": "Posted 2 Days Ago",
+    "remoteType": "Remote",
+    "bulletFields": [
+     "JR-0110644"
+    ]
+   },
+   {
+    "title": "Senior Global Sourcing Manager, Professional Services",
+    "externalPath": "/job/USA-CA-Pleasanton/Senior-Global-Sourcing-Manager--Professional-Services_JR-0110608-1",
+    "locationsText": "3 Locations",
+    "postedOn": "Posted 2 Days Ago",
+    "remoteType": "Flex",
+    "bulletFields": [
+     "JR-0110608"
+    ]
+   },
+   {
+    "title": "Business Development Representative UKI",
+    "externalPath": "/job/Ireland-Dublin/Corporate-Sales-development-UKI--Outbound-_JR-0094228",
+    "locationsText": "Ireland, Dublin",
+    "postedOn": "Posted 30+ Days Ago",
+    "remoteType": "Flex",
+    "bulletFields": [
+     "JR-0094228"
+    ]
+   },
+   {
+    "title": "Business Development Representative | German | Dublin based",
+    "externalPath": "/job/Ireland-Dublin/Corporate-Sales-Development-DACH--Outbound-_JR-0095231",
+    "locationsText": "7 Locations",
+    "postedOn": "Posted 30+ Days Ago",
+    "remoteType": "Flex",
+    "bulletFields": [
+     "JR-0095231"
+    ]
+   },
+   {
+    "title": "Sr Associate Support Engineer (AI/ML & Platform Operations)",
+    "externalPath": "/job/INDPune/Sr-Associate-Support-Engineer--AI-ML---Platform-Operations-_JR-0110069",
+    "locationsText": "IND.Pune",
+    "postedOn": "Posted Today",
+    "remoteType": "Flex",
+    "bulletFields": [
+     "JR-0110069"
+    ]
+   }
+  ],
+  "userAuthenticated": false
+ },
+ "details": {
+  "/job/FRA-Remote/Account-Executive-Medium-Enterprise---Lyon_JR-0110680-1": {
+   "jobPostingInfo": {
+    "id": "1764cfd04d06100078e37b6d62980000",
+    "title": "Account Executive Medium Enterprise - Lyon",
+    "jobDescription": "<p><b>Your work days are brighter here.</b></p><p></p><p>We’re obsessed with making hard work pay off, for our people, our customers, and the world around us. As a Fortune 500 company and a leading AI platform for managing people, money, and agents, we’re shaping the future of work so teams can reach their potential and focus on what matters most. The minute you join, you’ll feel it. Not just in the products we build, but in how we show up for each other. Our culture is rooted in integrity, empathy, and shared enthusiasm. We’re in this together, tackling big challenges with bold ideas and genuine care. We look for curious minds and courageous collaborators who bring sun-drenched optimism and drive. Whether you&#39;re building smarter solutions, supporting customers, or creating a space where everyone belongs, you’ll do meaningful work with Workmates who’ve got your back. In return, we’ll give you the trust to take risks, the tools to grow, the skills to develop and the support of a company invested in you for the long haul. So, if you want to inspire a brighter work day for everyone, including yourself, you’ve found a match in Workday, and we hope to be a match for you too.</p><p></p>",
+    "location": "FRA, Remote",
+    "postedOn": "Posted Today",
+    "startDate": "2026-10-09",
+    "timeType": "Full Time",
+    "remoteType": "Remote",
+    "jobReqId": "JR-0110680",
+    "jobPostingId": "Account-Executive-Medium-Enterprise---Lyon_JR-0110680-1",
+    "jobPostingSiteId": "Workday",
+    "jobRequisitionLocation": {
+     "descriptor": "France, Home Office",
+     "country": {
+      "descriptor": "France",
+      "id": "54c5b6971ffb4bf0b116fe7651ec789a",
+      "alpha2Code": "FR"
+     }
+    },
+    "externalUrl": "https://workday.wd5.myworkdayjobs.com/Workday/job/FRA-Remote/Account-Executive-Medium-Enterprise---Lyon_JR-0110680-1",
+    "canApply": true,
+    "posted": true
+   },
+   "hiringOrganization": {
+    "name": "Workday France",
+    "url": ""
+   },
+   "userAuthenticated": false
+  },
+  "/job/USA-MA-Boston/Sales-Development-Representative_JR-0110773": {
+   "jobPostingInfo": {
+    "id": "e2195e917078100050a65afb5ddc0000",
+    "title": "Sales Development Representative",
+    "jobDescription": "<p><b>Your work days are brighter here.</b></p><p></p><p>We’re obsessed with making hard work pay off, for our people, our customers, and the world around us. As a Fortune 500 company and a leading AI platform for managing people, money, and agents, we’re shaping the future of work so teams can reach their potential and focus on what matters most. The minute you join, you’ll feel it. Not just in the products we build, but in how we show up for each other. Our culture is rooted in integrity, empathy, and shared enthusiasm. We’re in this together, tackling big challenges with bold ideas and genuine care. We look for curious minds and courageous collaborators who bring sun-drenched optimism and drive. Whether you&#39;re building smarter solutions, supporting customers, or creating a space where everyone belongs, you’ll do meaningful work with Workmates who’ve got your back. In return, we’ll give you the trust to take risks, the tools to grow, the skills to develop and the support of a company invested in you for the long haul. So, if you want to inspire a brighter work day for everyone, including yourself, you’ve found a match in Workday, and we hope to be a match for you too.</p><p></p>",
+    "location": "USA, MA, Boston",
+    "postedOn": "Posted Yesterday",
+    "startDate": "2026-10-08",
+    "timeType": "Full Time",
+    "remoteType": "Flex",
+    "jobReqId": "JR-0110773",
+    "jobPostingId": "Sales-Development-Representative_JR-0110773",
+    "jobPostingSiteId": "Workday",
+    "country": {
+     "descriptor": "United States of America",
+     "id": "bc33aa3152ec42d4995f4791a106ed09"
+    },
+    "jobRequisitionLocation": {
+     "descriptor": "USA, MA, Boston",
+     "country": {
+      "descriptor": "United States of America",
+      "id": "bc33aa3152ec42d4995f4791a106ed09",
+      "alpha2Code": "US"
+     }
+    },
+    "externalUrl": "https://workday.wd5.myworkdayjobs.com/Workday/job/USA-MA-Boston/Sales-Development-Representative_JR-0110773",
+    "canApply": true,
+    "posted": true
+   },
+   "hiringOrganization": {
+    "name": "Workday, Inc.",
+    "url": ""
+   },
+   "userAuthenticated": false
+  },
+  "/job/USA-CA-Pleasanton/Senior-Revenue-Accountant_JR-0110631": {
+   "jobPostingInfo": {
+    "id": "80bc0ee7b636100110e734c24b7e0000",
+    "title": "Senior Revenue Accountant",
+    "jobDescription": "<p><b>Your work days are brighter here.</b></p><p></p><p>We’re obsessed with making hard work pay off, for our people, our customers, and the world around us. As a Fortune 500 company and a leading AI platform for managing people, money, and agents, we’re shaping the future of work so teams can reach their potential and focus on what matters most. The minute you join, you’ll feel it. Not just in the products we build, but in how we show up for each other. Our culture is rooted in integrity, empathy, and shared enthusiasm. We’re in this together, tackling big challenges with bold ideas and genuine care. We look for curious minds and courageous collaborators who bring sun-drenched optimism and drive. Whether you&#39;re building smarter solutions, supporting customers, or creating a space where everyone belongs, you’ll do meaningful work with Workmates who’ve got your back. In return, we’ll give you the trust to take risks, the tools to grow, the skills to develop and the support of a company invested in you for the long haul. So, if you want to inspire a brighter work day for everyone, including yourself, you’ve found a match in Workday, and we hope to be a match for you too.</p><p></p>",
+    "location": "USA, CA, Pleasanton",
+    "additionalLocations": [
+     "USA, UT, Salt Lake City"
+    ],
+    "postedOn": "Posted Yesterday",
+    "startDate": "2026-10-08",
+    "timeType": "Full Time",
+    "remoteType": "Flex",
+    "jobReqId": "JR-0110631",
+    "jobPostingId": "Senior-Revenue-Accountant_JR-0110631",
+    "jobPostingSiteId": "Workday",
+    "country": {
+     "descriptor": "United States of America",
+     "id": "bc33aa3152ec42d4995f4791a106ed09"
+    },
+    "jobRequisitionLocation": {
+     "descriptor": "USA, CA, Pleasanton",
+     "country": {
+      "descriptor": "United States of America",
+      "id": "bc33aa3152ec42d4995f4791a106ed09",
+      "alpha2Code": "US"
+     }
+    },
+    "externalUrl": "https://workday.wd5.myworkdayjobs.com/Workday/job/USA-CA-Pleasanton/Senior-Revenue-Accountant_JR-0110631",
+    "canApply": true,
+    "posted": true
+   },
+   "hiringOrganization": {
+    "name": "Workday, Inc.",
+    "url": ""
+   },
+   "userAuthenticated": false
+  },
+  "/job/USA-IL-Home-Office/Principal-Enablement-Architect_JR-0110644": {
+   "jobPostingInfo": {
+    "id": "17f15c265c82100171bf372260680000",
+    "title": "Principal Enablement Architect",
+    "jobDescription": "<p><b>Your work days are brighter here.</b></p><p></p><p>We’re obsessed with making hard work pay off, for our people, our customers, and the world around us. As a Fortune 500 company and a leading AI platform for managing people, money, and agents, we’re shaping the future of work so teams can reach their potential and focus on what matters most. The minute you join, you’ll feel it. Not just in the products we build, but in how we show up for each other. Our culture is rooted in integrity, empathy, and shared enthusiasm. We’re in this together, tackling big challenges with bold ideas and genuine care. We look for curious minds and courageous collaborators who bring sun-drenched optimism and drive. Whether you&#39;re building smarter solutions, supporting customers, or creating a space where everyone belongs, you’ll do meaningful work with Workmates who’ve got your back. In return, we’ll give you the trust to take risks, the tools to grow, the skills to develop and the support of a company invested in you for the long haul. So, if you want to inspire a brighter work day for everyone, including yourself, you’ve found a match in Workday, and we hope to be a match for you too.</p><p></p>",
+    "location": "USA, IL, Home Office",
+    "postedOn": "Posted 2 Days Ago",
+    "startDate": "2026-10-07",
+    "timeType": "Full Time",
+    "remoteType": "Remote",
+    "jobReqId": "JR-0110644",
+    "jobPostingId": "Principal-Enablement-Architect_JR-0110644",
+    "jobPostingSiteId": "Workday",
+    "country": {
+     "descriptor": "United States of America",
+     "id": "bc33aa3152ec42d4995f4791a106ed09"
+    },
+    "jobRequisitionLocation": {
+     "descriptor": "USA, IL, Home Office",
+     "country": {
+      "descriptor": "United States of America",
+      "id": "bc33aa3152ec42d4995f4791a106ed09",
+      "alpha2Code": "US"
+     }
+    },
+    "externalUrl": "https://workday.wd5.myworkdayjobs.com/Workday/job/USA-IL-Home-Office/Principal-Enablement-Architect_JR-0110644",
+    "canApply": true,
+    "posted": true
+   },
+   "hiringOrganization": {
+    "name": "Workday, Inc.",
+    "url": ""
+   },
+   "userAuthenticated": false
+  },
+  "/job/USA-CA-Pleasanton/Senior-Global-Sourcing-Manager--Professional-Services_JR-0110608-1": {
+   "jobPostingInfo": {
+    "id": "17f15c265c82100168dea58904d90001",
+    "title": "Senior Global Sourcing Manager, Professional Services",
+    "jobDescription": "<p><b>Your work days are brighter here.</b></p><p></p><p>We’re obsessed with making hard work pay off, for our people, our customers, and the world around us. As a Fortune 500 company and a leading AI platform for managing people, money, and agents, we’re shaping the future of work so teams can reach their potential and focus on what matters most. The minute you join, you’ll feel it. Not just in the products we build, but in how we show up for each other. Our culture is rooted in integrity, empathy, and shared enthusiasm. We’re in this together, tackling big challenges with bold ideas and genuine care. We look for curious minds and courageous collaborators who bring sun-drenched optimism and drive. Whether you&#39;re building smarter solutions, supporting customers, or creating a space where everyone belongs, you’ll do meaningful work with Workmates who’ve got your back. In return, we’ll give you the trust to take risks, the tools to grow, the skills to develop and the support of a company invested in you for the long haul. So, if you want to inspire a brighter work day for everyone, including yourself, you’ve found a match in Workday, and we hope to be a match for you too.</p><p></p>",
+    "location": "USA, CA, Pleasanton",
+    "additionalLocations": [
+     "USA, GA, Atlanta",
+     "USA, UT, Salt Lake City"
+    ],
+    "postedOn": "Posted 2 Days Ago",
+    "startDate": "2026-10-07",
+    "timeType": "Full Time",
+    "remoteType": "Flex",
+    "jobReqId": "JR-0110608",
+    "jobPostingId": "Senior-Global-Sourcing-Manager--Professional-Services_JR-0110608-1",
+    "jobPostingSiteId": "Workday",
+    "country": {
+     "descriptor": "United States of America",
+     "id": "bc33aa3152ec42d4995f4791a106ed09"
+    },
+    "jobRequisitionLocation": {
+     "descriptor": "USA, CA, Pleasanton",
+     "country": {
+      "descriptor": "United States of America",
+      "id": "bc33aa3152ec42d4995f4791a106ed09",
+      "alpha2Code": "US"
+     }
+    },
+    "externalUrl": "https://workday.wd5.myworkdayjobs.com/Workday/job/USA-CA-Pleasanton/Senior-Global-Sourcing-Manager--Professional-Services_JR-0110608-1",
+    "canApply": true,
+    "posted": true
+   },
+   "hiringOrganization": {
+    "name": "Workday, Inc.",
+    "url": ""
+   },
+   "userAuthenticated": false
+  },
+  "/job/Ireland-Dublin/Corporate-Sales-development-UKI--Outbound-_JR-0094228": {
+   "jobPostingInfo": {
+    "id": "7a71f06c551c1000c96e1167f3db0000",
+    "title": "Business Development Representative UKI",
+    "jobDescription": "<p><b>Your work days are brighter here.</b></p><br /><p>We’re obsessed with making hard work pay off, for our people, our customers, and the world around us. As a Fortune 500 company and a leading AI platform for managing people, money, and agents, we’re shaping the future of work so teams can reach their potential and focus on what matters most. The minute you join, you’ll feel it. Not just in the products we build, but in how we show up for each other. Our culture is rooted in integrity, empathy, and shared enthusiasm. We’re in this together, tackling big challenges with bold ideas and genuine care. We look for curious minds and courageous collaborators who bring sun-drenched optimism and drive. Whether you&#39;re building smarter solutions, supporting customers, or creating a space where everyone belongs, you’ll do meaningful work with Workmates who’ve got your back. In return, we’ll give you the trust to take risks, the tools to grow, the skills to develop and the support of a company invested in you for the long haul. So, if you want to inspire a brighter work day for everyone, including yourself, you’ve found a match in Workday, and we hope to be a match for you too.</p>",
+    "location": "Ireland, Dublin",
+    "postedOn": "Posted 30+ Days Ago",
+    "startDate": "2026-06-11",
+    "timeType": "Full Time",
+    "remoteType": "Flex",
+    "jobReqId": "JR-0094228",
+    "jobPostingId": "Corporate-Sales-development-UKI--Outbound-_JR-0094228",
+    "jobPostingSiteId": "Workday",
+    "country": {
+     "descriptor": "Ireland",
+     "id": "04a05835925f45b3a59406a2a6b72c8a"
+    },
+    "jobRequisitionLocation": {
+     "descriptor": "Ireland, Dublin",
+     "country": {
+      "descriptor": "Ireland",
+      "id": "04a05835925f45b3a59406a2a6b72c8a",
+      "alpha2Code": "IE"
+     }
+    },
+    "externalUrl": "https://workday.wd5.myworkdayjobs.com/Workday/job/Ireland-Dublin/Corporate-Sales-development-UKI--Outbound-_JR-0094228",
+    "canApply": true,
+    "posted": true
+   },
+   "hiringOrganization": {
+    "name": "Workday Limited",
+    "url": ""
+   },
+   "userAuthenticated": false
+  },
+  "/job/Ireland-Dublin/Corporate-Sales-Development-DACH--Outbound-_JR-0095231": {
+   "jobPostingInfo": {
+    "id": "f8ef62a8626f100147186e9e170f0000",
+    "title": "Business Development Representative | German | Dublin based",
+    "jobDescription": "<p><b>Your work days are brighter here.</b></p><br /><p>We’re obsessed with making hard work pay off, for our people, our customers, and the world around us. As a Fortune 500 company and a leading AI platform for managing people, money, and agents, we’re shaping the future of work so teams can reach their potential and focus on what matters most. The minute you join, you’ll feel it. Not just in the products we build, but in how we show up for each other. Our culture is rooted in integrity, empathy, and shared enthusiasm. We’re in this together, tackling big challenges with bold ideas and genuine care. We look for curious minds and courageous collaborators who bring sun-drenched optimism and drive. Whether you&#39;re building smarter solutions, supporting customers, or creating a space where everyone belongs, you’ll do meaningful work with Workmates who’ve got your back. In return, we’ll give you the trust to take risks, the tools to grow, the skills to develop and the support of a company invested in you for the long haul. So, if you want to inspire a brighter work day for everyone, including yourself, you’ve found a match in Workday, and we hope to be a match for you too.</p>",
+    "location": "Ireland, Dublin",
+    "additionalLocations": [
+     "Germany, Berlin",
+     "Germany, Hamburg",
+     "Czech Republic, Prague",
+     "Poland, Warsaw",
+     "Germany, Frankfurt",
+     "Germany, Munich"
+    ],
+    "postedOn": "Posted 30+ Days Ago",
+    "startDate": "2026-06-05",
+    "timeType": "Full Time",
+    "remoteType": "Flex",
+    "jobReqId": "JR-0095231",
+    "jobPostingId": "Corporate-Sales-Development-DACH--Outbound-_JR-0095231",
+    "jobPostingSiteId": "Workday",
+    "country": {
+     "descriptor": "Ireland",
+     "id": "04a05835925f45b3a59406a2a6b72c8a"
+    },
+    "jobRequisitionLocation": {
+     "descriptor": "Ireland, Dublin",
+     "country": {
+      "descriptor": "Ireland",
+      "id": "04a05835925f45b3a59406a2a6b72c8a",
+      "alpha2Code": "IE"
+     }
+    },
+    "externalUrl": "https://workday.wd5.myworkdayjobs.com/Workday/job/Ireland-Dublin/Corporate-Sales-Development-DACH--Outbound-_JR-0095231",
+    "canApply": true,
+    "posted": true
+   },
+   "hiringOrganization": {
+    "name": "Workday Limited",
+    "url": ""
+   },
+   "userAuthenticated": false
+  },
+  "/job/INDPune/Sr-Associate-Support-Engineer--AI-ML---Platform-Operations-_JR-0110069": {
+   "jobPostingInfo": {
+    "id": "54370dc4a4a010014561fdd5a0f60000",
+    "title": "Sr Associate Support Engineer (AI/ML & Platform Operations)",
+    "jobDescription": "<p><b>Your work days are brighter here.</b></p><p></p><p>We’re obsessed with making hard work pay off, for our people, our customers, and the world around us. As a Fortune 500 company and a leading AI platform for managing people, money, and agents, we’re shaping the future of work so teams can reach their potential and focus on what matters most. The minute you join, you’ll feel it. Not just in the products we build, but in how we show up for each other. Our culture is rooted in integrity, empathy, and shared enthusiasm. We’re in this together, tackling big challenges with bold ideas and genuine care. We look for curious minds and courageous collaborators who bring sun-drenched optimism and drive. Whether you&#39;re building smarter solutions, supporting customers, or creating a space where everyone belongs, you’ll do meaningful work with Workmates who’ve got your back. In return, we’ll give you the trust to take risks, the tools to grow, the skills to develop and the support of a company invested in you for the long haul. So, if you want to inspire a brighter work day for everyone, including yourself, you’ve found a match in Workday, and we hope to be a match for you too.</p><p></p>",
+    "location": "IND.Pune",
+    "postedOn": "Posted Today",
+    "startDate": "2026-10-09",
+    "timeType": "Full Time",
+    "remoteType": "Flex",
+    "jobReqId": "JR-0110069",
+    "jobPostingId": "Sr-Associate-Support-Engineer--AI-ML---Platform-Operations-_JR-0110069",
+    "jobPostingSiteId": "Workday",
+    "country": {
+     "descriptor": "India",
+     "id": "c4f78be1a8f14da0ab49ce1162348a5e"
+    },
+    "jobRequisitionLocation": {
+     "descriptor": "IND.Pune",
+     "country": {
+      "descriptor": "India",
+      "id": "c4f78be1a8f14da0ab49ce1162348a5e",
+      "alpha2Code": "IN"
+     }
+    },
+    "externalUrl": "https://workday.wd5.myworkdayjobs.com/Workday/job/INDPune/Sr-Associate-Support-Engineer--AI-ML---Platform-Operations-_JR-0110069",
+    "canApply": true,
+    "posted": true
+   },
+   "hiringOrganization": {
+    "name": "",
+    "url": ""
+   },
+   "userAuthenticated": false
+  }
+ }
+}
