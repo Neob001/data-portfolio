@@ -414,10 +414,10 @@
       "staging_validated": true,
       "monetization_configured": true,
       "listing": {
-        "title": "Career Page Jobs Scraper — Greenhouse, Lever & Ashby API",
-        "description": "Paste company websites: finds each careers page, detects Greenhouse, Lever or Ashby and returns every open job (title, location, remote, department, apply link) as flat JSON. $2 per 1,000 jobs.",
-        "seoTitle": "Greenhouse, Lever & Ashby Jobs Scraper API",
-        "seoDescription": "Scrape open jobs from any company's career page: auto-detects Greenhouse, Lever and Ashby, returns title, location, remote flag and apply URL as flat JSON.",
+        "title": "Career Page Scraper — Jobs from Any Company Careers Page",
+        "description": "Paste company websites: finds each careers page, detects Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable or Recruitee and returns every open job as JSON with seniority and salary. $2 per 1,000 jobs.",
+        "seoTitle": "Career Page Scraper API: Jobs from Company Careers Pages",
+        "seoDescription": "Scrape open jobs from any company careers page: auto-detects Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor and more. Flat JSON with salary, seniority.",
         "categories": [
           "JOBS",
           "LEAD_GENERATION"

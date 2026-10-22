@@ -214,7 +214,7 @@ Yes. Run it through the Apify API or the official Python/JavaScript clients. You
 
 ## Related factpipe Actors
 
-- [Career Page Jobs Scraper](https://apify.com/factpipe/company-jobs-scraper): give it a company *homepage* and it finds the careers page and ATS for you.
+- [Career Page Scraper](https://apify.com/factpipe/company-jobs-scraper): give it a company *homepage* and it finds the careers page and ATS for you.
 
 ## Reliability
 

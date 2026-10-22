@@ -1,4 +1,4 @@
-# Career Page Jobs Scraper — Greenhouse, Lever & Ashby API
+# Career Page Scraper — Jobs from Any Company Careers Page
 
 <!-- factpipe:hero:start -->
 
