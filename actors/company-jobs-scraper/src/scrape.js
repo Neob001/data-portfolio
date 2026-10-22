@@ -242,7 +242,17 @@ export async function runCompanies(input, deps) {
     summary.results.push({ query, jobs: 0, reason: miss.reason, platform: miss.platform ?? null });
   };
 
-  async function one(query) {
+  // Inputs claim their boards in input order (the first input naming a board reads it), while discovery runs in parallel.
+  const gates = queries.map(() => { let open; const promise = new Promise((r) => { open = r; }); return { promise, open }; });
+  async function one(query, i) {
+    try {
+      await company(query, i);
+    } finally {
+      gates[i].open();
+    }
+  }
+
+  async function company(query, i) {
     if (stopped) return;
     if (!deadline.hasTimeFor(COMPANY_RESERVE_MS)) {
       summary.stop_reason = 'time_limit';
@@ -259,6 +269,7 @@ export async function runCompanies(input, deps) {
     summary.pages_fetched += d.pages || 0;
     if (d.miss) { log(`${query}: ${d.miss.reason}${d.miss.platform ? ` (${d.miss.platform})` : ''}`); await pushMiss(query, d.miss); return; }
 
+    if (i > 0) await gates[i - 1].promise;
     const boards = [];
     const dupOf = [];
     for (const b of d.boards) {
@@ -267,6 +278,7 @@ export async function runCompanies(input, deps) {
       claimed.set(k, query);
       boards.push(b);
     }
+    gates[i].open();
     if (!boards.length) {
       await pushMiss(query, { reason: 'duplicate_input', careersPageUrl: d.careersPageUrl, platform: d.boards[0].ats, sourceUrl: d.sourceUrl, detail: `Same job board as the input "${dupOf[0]}"; its jobs are delivered (and charged) once.` });
       return;
@@ -315,6 +327,6 @@ export async function runCompanies(input, deps) {
     await pushMiss(query, { ...miss, careersPageUrl: d.careersPageUrl, platform: boards[0].ats, sourceUrl: d.sourceUrl });
   }
 
-  await mapLimit(queries, deps.concurrency || COMPANY_CONCURRENCY, (q) => one(q));
+  await mapLimit(queries, deps.concurrency || COMPANY_CONCURRENCY, (q, i) => one(q, i));
   return summary;
 }

@@ -8,6 +8,7 @@
   "input": "../INPUT_SCHEMA.json",
   "readme": "../README.md",
   "dockerfile": "./Dockerfile",
+  "minMemoryMbytes": 512,
   "outputSchema": "./output_schema.json",
   "categories": [
     "JOBS",

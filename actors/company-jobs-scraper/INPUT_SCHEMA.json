@@ -10,7 +10,8 @@
       "editor": "stringList",
       "prefill": [
         "https://boards.greenhouse.io/gitlab",
-        "https://jobs.ashbyhq.com/ramp"
+        "https://jobs.ashbyhq.com/ramp",
+        "https://www.redhat.com"
       ]
     },
     "maxJobsPerCompany": {
