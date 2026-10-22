@@ -187,6 +187,21 @@ test('pagination: pages of 20 until total; per-site cap; budget and run deadline
   assert.ok(WORKDAY.maxJobsPerBoard >= 1000 && WORKDAY.pageSize === 20);
 });
 
+test('live mode: deps.maxJobsPerBoard caps the pages read per site (company-jobs-scraper needs N jobs, not 2,000)', async () => {
+  const s = fakeSite(1000);
+  const out = sink();
+  const summary = await runFeed(normalizeInput({ companyUrls: ['big.wd1/Big'], includeDescription: false, maxResults: 30 }), {
+    ...out, fetchJson: s.fetchJson, fetchText: s.fetchText, robotsCache: fresh(), maxJobsPerBoard: 30, now: () => NOW,
+  });
+  assert.equal(s.bodies.length, 2, 'two pages of 20 cover 30 jobs');
+  assert.deepEqual([summary.rows, summary.boards_truncated], [30, 1]);
+  const all = fakeSite(100);
+  await runFeed(normalizeInput({ companyUrls: ['big.wd1/Big'], includeDescription: false, maxResults: 30 }), {
+    ...sink(), fetchJson: all.fetchJson, fetchText: all.fetchText, robotsCache: fresh(), now: () => NOW,
+  });
+  assert.equal(all.bodies.length, 5, 'without the option the whole site is read');
+});
+
 test('robots.txt: a disallowed or unreachable robots.txt means the site is never called', async () => {
   // Disallowing rules, unreachable / 5xx, and (stricter than RFC 9309, owner rule) no robots file (4xx), a
   // non-text/plain answer or an HTML body: none of them is permission.

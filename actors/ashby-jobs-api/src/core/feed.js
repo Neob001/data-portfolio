@@ -506,7 +506,9 @@ export async function scanShard(index, shard, begin, { attempts = 3, log = () =>
 /**
  * @param opts normalizeInput() result
  * @param deps { pushData, charge, tracker?, log?, indexBaseUrl?, fetchJson?, fetchText?, readIndexFile?,
- *               streamShardLines?, fallbackBoards?, now?, topK?, deadline?, robotsCache? }
+ *               streamShardLines?, fallbackBoards?, now?, topK?, deadline?, robotsCache?, maxJobsPerBoard? }
+ *   maxJobsPerBoard: live mode reads at most this many jobs of a paged board (Workday, Teamtailor) instead of
+ *   the platform default (a caller that needs only N jobs per company does not page through 2,000).
  */
 export async function runFeed(opts, deps) {
   const log = deps.log || (() => {});
@@ -682,7 +684,9 @@ export async function runFeed(opts, deps) {
   /** One live board -> its jobs ([] when it failed; the failure is recorded in the summary). */
   async function liveOne(b) {
     try {
-      const r = await fetchBoard(b, { fetchJson: paced, fetchText, now: () => new Date(nowMs), deadline, robotsCache });
+      const r = await fetchBoard(b, {
+        fetchJson: paced, fetchText, now: () => new Date(nowMs), deadline, robotsCache, ...(deps.maxJobsPerBoard ? { maxJobs: deps.maxJobsPerBoard } : {}),
+      });
       summary.boards_ok += 1;
       if (r.truncated) {
         summary.boards_truncated += 1;
