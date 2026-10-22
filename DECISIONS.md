@@ -62,3 +62,5 @@ Item ids come from WEEKLY_REPORT.md. Nothing ships to a new data source, changes
 2026-10-21 | APPROVE | scorecard 10-20 item 2 | Owner, in chat: title/SEO test for company-jobs-scraper (exact copy presented for sign-off before applying).
 2026-10-21 | REJECT | scorecard 10-20 items 3-5 | Owner, in chat: no title/SEO tests for the small website/data Actors.
 2026-10-21 | REJECT | scorecard 10-20 item 6 | Owner, in chat: no retirements for now.
+2026-10-23 | APPROVE | C1 company-jobs-scraper retitle | Owner, in chat ("C1 yes"): title "Career Page Scraper — Jobs from Any Company Careers Page", description/SEO as presented 2026-10-22; price unchanged.
+2026-10-23 | APPROVE | P2 Jobs Feed price | Owner, in chat ("P2 yes"): ats-jobs-feed job-result $3 -> $5 per 1,000 jobs, Store tiers $4.50/$4.00/$3.50; other jobs Actors unchanged. Existing users get Apify's 14-day notice.
