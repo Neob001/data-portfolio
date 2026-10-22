@@ -384,7 +384,7 @@
     },
     "company-jobs-scraper": {
       "apify_actor_id": "7DuuakEPLtkToqkxI",
-      "source": "Greenhouse/Lever/Ashby public job-board APIs",
+      "source": "Company careers pages (robots.txt-checked discovery) -> Greenhouse, Lever, Ashby, Workable, Recruitee, Workday, Personio, Teamtailor public job-board APIs/feeds via the shared jobs core",
       "variant": "lookup (company -> jobs)",
       "status": "live",
       "approval": "AUTO-APPROVED standing decision 2026-09-12 (replacements)",
