@@ -127,7 +127,7 @@ Set a maximum charge per run in Apify, and the Actor stops cleanly when it is re
 
 ## Coverage
 
-Directory of 2026-10-09: **4,796 Workday career sites** listing **850,315 open jobs**, including NVIDIA, Salesforce, Adobe, Intel, Target, Boeing. The search index keeps the newest 300 jobs of each site (about half of all listed jobs); live mode reads up to 2,000 per site.
+Directory of 2026-10-09: **4,796 Workday career sites** listing **850,315 open jobs**, including NVIDIA, Salesforce, Adobe, Intel, Target, Boeing. The search index keeps the newest 500 jobs of each site (about half of all listed jobs); live mode reads up to 2,000 per site.
 
 Sites were discovered from Common Crawl's public URL index and validated against each site's own job list (at least one open job, and robots.txt allows reading it). They join the daily search index with its nightly build. Any other Workday career site works in live mode through `companyUrls`.
 
@@ -172,7 +172,7 @@ In the daily index, keywords match job titles: Workday job lists carry no descri
 Yes. Before reading a Workday site we read its host's robots.txt and skip any site whose rules disallow its job pages or the JSON endpoint they load. Requests are spaced (one at a time per site; at most 4 per second across all Workday hosts in this Actor, under 7 per second in the nightly index build) and back off on HTTP 429 and `Retry-After`.
 
 **Do I get every job of employers with thousands of openings?**
-Workday itself lists at most 2,000 jobs per site. Live mode reads up to 2,000 per site, newest first, within a 2.5-minute budget per site; the nightly index keeps the newest 300 per site. `RUN_SUMMARY` counts the sites that were cut short (`boards_truncated`).
+Workday itself lists at most 2,000 jobs per site. Live mode reads up to 2,000 per site, newest first, within a 2.5-minute budget per site; the nightly index keeps the newest 500 per site. `RUN_SUMMARY` counts the sites that were cut short (`boards_truncated`).
 
 **What happens to Greenhouse, Lever, Ashby, Workable, Recruitee, Personio or Teamtailor URLs?**
 They are ignored with a warning in the log, and the rest of the run goes ahead. If no Workday board is left, the run ends successfully with a message and nothing is charged. For several platforms in one run, use [Greenhouse, Lever, Ashby & Workday Jobs Scraper](https://apify.com/factpipe/ats-jobs-scraper).

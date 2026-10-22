@@ -66,12 +66,12 @@ jobs:
 
       # Builder also honours state/bans.json and trips its own breaker after 5 consecutive 429s (per ATS).
       # Workday runs in parallel with the other ATSs inside its own budget (see build_index.mjs): newest
-      # 300 jobs per site, 90 s per site, no new site after 100 min, so the fetch phase ends about with
+      # 500 jobs per site, 90 s per site, no new site after 100 min, so the fetch phase ends about with
       # Workable (~100 min at 3 s per board). Personio and Teamtailor are two more parallel queues with their own
       # budgets and breakers (measured 2026-10-14 on every valid board: Personio 2,396 boards in 19 min, Teamtailor 1,956 in 16 min; budget 45 min each).
       - name: Build slim index
         timeout-minutes: 140
-        run: node --max-old-space-size=6144 build_index.mjs --codec br --workday-max-jobs 300 --workday-site-budget-s 90 --workday-budget-min 100 --personio-budget-min 45 --teamtailor-budget-min 45 --teamtailor-max-jobs 1000
+        run: node --max-old-space-size=6144 build_index.mjs --codec br --workday-max-jobs 500 --workday-site-budget-s 90 --workday-budget-min 100 --personio-budget-min 45 --teamtailor-budget-min 45 --teamtailor-max-jobs 1000
 
       - name: Save validation state
         if: always()

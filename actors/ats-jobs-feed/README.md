@@ -148,7 +148,7 @@ Search-index build of 2026-10-10:
 | Recruitee | 12,819 |
 | **Total** | **731,924** from **15,339** company job boards (after collapsing 53,189 duplicate listings) |
 
-Workday sites contribute their newest 300 jobs each to the index; read a Workday site live (`companyUrls`) for all of its jobs.
+Workday sites contribute their newest 500 jobs each to the index; read a Workday site live (`companyUrls`) for all of its jobs.
 
 **Personio and Teamtailor** (added 2026-10-14): 2,397 Personio and 1,956 Teamtailor career sites with open jobs (22,853 and 39,070 listed jobs) are in the directory and join the search index with its nightly build. Until a platform's first build, a search limited to it reads a few built-in boards live; any Personio or Teamtailor board also works in live mode (`companyUrls`).
 

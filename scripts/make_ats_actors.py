@@ -45,7 +45,7 @@ WORKDAY_DIRECTORY_DATE = "2026-10-09"
 WORKDAY_BOARDS = 4796  # sites with >= 1 open job and robots.txt allowing the job pages + endpoint
 WORKDAY_JOBS = 850315  # sum of the sites' reported totals (Workday caps a site's total at 2,000)
 WORKDAY_EXAMPLES = ["NVIDIA", "Salesforce", "Adobe", "Intel", "Target", "Boeing"]  # verified in boards.json 2026-10-09
-WORKDAY_INDEX_CAP = 300  # newest jobs kept per Workday site by build_index.mjs (--workday-max-jobs default)
+WORKDAY_INDEX_CAP = 500  # newest jobs kept per Workday site (.github/workflows/jobs-index.yml --workday-max-jobs)
 # Real row from a local prefill run, 2026-10-09 (index without Workday yet -> built-in sites read live; descriptions shortened).
 WORKDAY_SAMPLE = {
     'job_id': 'workday:adobe.wd5/external_experienced:R171485',
