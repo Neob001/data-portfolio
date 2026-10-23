@@ -748,6 +748,52 @@
         "maxResults": 50,
         "maxPerCompany": 2
       }
+    },
+    {
+      "actor": "ats-jobs-feed",
+      "name": "jobs-feed-daily-new-job-listings",
+      "title": "Daily new job listings feed (only jobs new since the last run)",
+      "description": "Schedule this daily: returns only job listings that are new since the previous run, across Workday, Greenhouse, Lever, Ashby and 4 more ATSs.",
+      "input": {
+        "keywords": [
+          "data engineer"
+        ],
+        "postedWithinDays": 3,
+        "sinceLastRun": true,
+        "maxResults": 200,
+        "maxPerCompany": 5
+      }
+    },
+    {
+      "actor": "ats-jobs-feed",
+      "name": "jobs-feed-workday-job-postings",
+      "title": "Workday job postings API: newest jobs from Workday career sites",
+      "description": "Newest job postings from thousands of employers' Workday career sites (NVIDIA, Salesforce, Adobe...), with seniority and salary where published.",
+      "input": {
+        "ats": [
+          "workday"
+        ],
+        "postedWithinDays": 7,
+        "maxResults": 100,
+        "maxPerCompany": 3
+      }
+    },
+    {
+      "actor": "ats-jobs-feed",
+      "name": "jobs-feed-senior-remote-job-listings",
+      "title": "Senior remote job listings API (all ATS platforms)",
+      "description": "Senior and lead remote job listings posted this week, from 19,000+ company career sites, with salary and experience fields.",
+      "input": {
+        "remote": "remote_only",
+        "seniority": [
+          "senior",
+          "lead"
+        ],
+        "postedWithinDays": 7,
+        "maxResults": 100,
+        "maxPerCompany": 2,
+        "includeDescription": true
+      }
     }
   ]
 }

@@ -1,0 +1,30 @@
+actor                      users30 users7 runs30 fail% $/1k launched
+ats-jobs-feed                   58     43    689     5   3.0 2026-09-25
+sitemap-url-extractor            2      2     27     0   0.3 2026-09-12
+ats-jobs-scraper                 2      1     37     0   3.0 2026-09-27
+us-weather-forecast              2      1     27     0   2.0 2026-09-12
+remote-jobs-feed                 2      0     36     0   3.0 2026-09-27
+wikipedia-scraper                1      1     27     0   1.0 2026-09-13
+open-food-facts-scraper          1      1     27     0   1.0 2026-09-13
+fda-recalls-monitor              1      1     27     0   3.0 
+uk-company-lookup                1      1     26     0   2.5 2026-09-11
+sec-edgar-filings-search         1      1     26     0   2.0 2026-09-11
+sam-gov-contracts                1      1     26     0   2.0 2026-09-15
+ofac-sanctions-screening         1      1     26     0   3.0 2026-09-11
+france-company-lookup            1      1     26     0   3.0 2026-09-17
+federal-register-monitor         1      1     26     0   2.5 2026-09-11
+eu-vat-validation                1      1     26     0   2.0 2026-09-15
+eu-ted-tenders-monitor           1      1     26     0   3.0 2026-09-11
+ecb-exchange-rates               1      1     26     0   1.0 2026-09-15
+dns-records-lookup               1      1     26     0   1.5 2026-09-17
+company-jobs-scraper             1      1     26     0   2.0 2026-09-12
+broken-link-checker              1      1     26     0   1.5 
+companies-hiring                 1      1     24     0   5.0 2026-09-27
+tech-stack-detector              1      1     21     0  10.0 2026-09-30
+lever-jobs-api                   1      1     14     0   2.0 2026-10-09
+greenhouse-jobs-api              1      1     14     0   2.0 2026-10-09
+ashby-jobs-api                   1      1     14     0   2.0 2026-10-09
+workday-jobs-api                 1      1     13     0   2.0 2026-10-10
+lighthouse-auditor               1      0     33     6  10.0 2026-09-15
+website-screenshot               1      0     29     6   2.0 2026-09-19
+email-security-checker           1      0     26     0   3.0 2026-09-15
