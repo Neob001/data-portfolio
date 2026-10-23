@@ -134,6 +134,8 @@ More keywords matched means a higher score inside each band. Among equal scores,
 
 Example: 10,000 jobs cost **$30**. Set a maximum charge per run in Apify, and the Actor stops cleanly when it is reached.
 
+**Price change on November 6, 2026:** `job-result` becomes **$5.00 per 1,000** ($4.50 / $4.00 / $3.50 on Starter / Scale / Business plans), reflecting the added Workday, Personio and Teamtailor coverage and the new enrichment fields. Platform usage stays included.
+
 ## Coverage
 
 Search-index build of 2026-10-10:

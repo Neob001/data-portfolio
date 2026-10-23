@@ -1145,8 +1145,29 @@
           "event": "job-result",
           "change": "Store discounts: Starter -10%, Scale -20%, Business -30%; Free plan unchanged",
           "approval": "SD1"
+        },
+        {
+          "date": "2026-11-06",
+          "event": "job-result",
+          "price_usd": 0.005,
+          "tiers": {
+            "FREE": 0.005,
+            "BRONZE": 0.0045,
+            "SILVER": 0.004,
+            "GOLD": 0.0035
+          },
+          "note": "P2 (owner-approved 2026-10-23), scheduled in Console 2026-10-23, effective 2026-11-06T05:09Z after Apify's 14-day notice"
         }
-      ]
+      ],
+      "scheduled_price_change": {
+        "effective": "2026-11-06T05:09:07Z",
+        "event": "job-result",
+        "FREE": 0.005,
+        "BRONZE": 0.0045,
+        "SILVER": 0.004,
+        "GOLD": 0.0035,
+        "todo_on_effective": "set ppe_events.job-result proposed_price_usd/store_discount_tiers_usd to the new values; listing description '$3 per 1,000 jobs' -> '$5 per 1,000 jobs' (registry + actor.json + sync_listings); README pricing table + example ($30 -> $50); remove this note"
+      }
     },
     "remote-jobs-feed": {
       "apify_actor_id": "vsQjoYbCDY2wUzmIT",
