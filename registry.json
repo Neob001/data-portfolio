@@ -1127,9 +1127,9 @@
       },
       "listing": {
         "title": "Jobs Feed API — Workday, Greenhouse, Lever & Ashby Jobs",
-        "description": "Search 730,000+ live openings from 15,000+ companies' official Workday, Greenhouse, Lever, Ashby, Workable and Recruitee job boards. Deduplicated JSON, salary, remote and location filters. $3 per 1,000 jobs.",
-        "seoTitle": "Jobs Feed API: Workday, Greenhouse, Lever & Ashby Jobs",
-        "seoDescription": "Search 730k+ open jobs from 15k company career sites (Workday, Greenhouse, Lever, Ashby, Workable, Recruitee). Daily new-jobs feed, salary, remote filters.",
+        "description": "Job listings API: 800,000+ live job postings from 19,000+ companies' Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable and Recruitee boards. Salary, seniority, remote filters. $3 per 1,000 jobs.",
+        "seoTitle": "Job Listings API: Workday, Greenhouse, Lever & Ashby Jobs",
+        "seoDescription": "Job postings API: 800k+ open jobs from 19k company career sites (Workday, Greenhouse, Lever, Ashby, Personio...). Daily new-jobs feed, salary, seniority.",
         "categories": [
           "JOBS",
           "LEAD_GENERATION"
