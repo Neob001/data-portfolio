@@ -210,7 +210,7 @@ def workday_name(page):  # noqa: C901
 
 # ---------------------------------------------------------------- robots.txt (RFC 9309), Workday hosts
 # Same semantics as actors/ats-jobs-feed/src/core/robots.js: our group or "*", longest match wins, a tie
-# goes to Allow, 4xx = no robots.txt (all allowed), 5xx / unreachable = all disallowed.
+# goes to Allow, 404/410 = no robots.txt (all allowed, R1), other 4xx / 5xx / unreachable / HTML = all disallowed.
 def parse_robots(text):
     groups, cur, last_agent = [], None, False
     for raw in (text or '').splitlines():
@@ -258,12 +258,15 @@ def robots_allowed(rules, path):
 
 def robots_verdict(status, text, content_type, paths):
     """-> (allowed, reason) for the paths we read on one host (robotsVerdict() in core/robots.js).
-    Only a 2xx text/plain robots file grants permission: unreachable / 5xx, no robots file (4xx), a non-text/plain
-    answer and an HTML body all mean "disallow everything" (owner rule, stricter than RFC 9309)."""
+    RFC 9309 for a missing file (owner decision R1, 2026-10-23): 404/410 = no robots.txt = no restrictions.
+    Everything else stays strict: other 4xx, unreachable / 5xx, a non-text/plain answer and an HTML body all mean
+    "disallow everything"."""
     if status == 0 or status < 0 or status >= 500:
         return False, 'robots.txt unreachable'
+    if status in (404, 410):
+        return True, f'no robots.txt (HTTP {status}): no restrictions (RFC 9309)'
     if status >= 400:
-        return False, f'robots.txt HTTP {status} (no robots file is not taken as permission)'
+        return False, f'robots.txt HTTP {status}'
     if content_type is not None and not re.match(r'\s*text/plain\b', content_type, re.I):
         return False, f'robots.txt answered as {content_type or "no content type"}, not text/plain'
     if re.match(r'\s*<', text or ''):
@@ -515,7 +518,10 @@ def main():
         # Definitive answers (200 / 404 / 410 / robots-disallowed; Workday also 403 "permission denied" = site not
         # public, 422 = wrong data center) are reused while fresh; transient failures are retried.
         final = (200, 404, 410, 'robots', 'not_feed') + ((403, 422) if ats == 'workday' else ())
-        if prev and prev.get('ts', 0) >= fresh and prev.get('status') in final:
+        # Refusals only because robots.txt was missing (HTTP 404/410) predate R1 (2026-10-23: a missing file = no
+        # restrictions): re-check them now instead of waiting for them to age out.
+        stale_robots = prev and prev.get('status') == 'robots' and re.match(r'robots\.txt HTTP (404|410)\b', prev.get('reason') or '')
+        if prev and prev.get('ts', 0) >= fresh and prev.get('status') in final and not stale_robots:
             continue
         if prev is None and args.max_new:
             new_count[ats] = new_count.get(ats, 0) + 1

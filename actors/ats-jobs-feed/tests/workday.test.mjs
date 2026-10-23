@@ -203,18 +203,19 @@ test('live mode: deps.maxJobsPerBoard caps the pages read per site (company-jobs
 });
 
 test('robots.txt: a disallowed or unreachable robots.txt means the site is never called', async () => {
-  // Disallowing rules, unreachable / 5xx, and (stricter than RFC 9309, owner rule) no robots file (4xx), a
-  // non-text/plain answer or an HTML body: none of them is permission.
+  // Disallowing rules, unreachable / 5xx, 401/403/429, a non-text/plain answer or an HTML body: none of them is
+  // permission. A missing robots.txt (404/410) is (RFC 9309, owner decision R1 2026-10-23) — checked below.
   const html = { status: 200, text: '<!DOCTYPE html><html></html>', contentType: 'text/html; charset=utf-8' };
   const allowAllAsHtml = { status: 200, text: 'User-agent: *\nAllow: /', contentType: 'text/html' };
-  for (const robots of ['User-agent: *\nDisallow: /wday/', 'User-agent: *\nDisallow: /', 'User-agent: factpipe\nDisallow: /Big/', null, 503, 404, 410, html, allowAllAsHtml]) {
+  for (const robots of ['User-agent: *\nDisallow: /wday/', 'User-agent: *\nDisallow: /', 'User-agent: factpipe\nDisallow: /Big/', null, 503, 401, 403, 429, html, allowAllAsHtml]) {
     const s = fakeSite(10, { robots });
     await assert.rejects(fetchBoard(s.board, { fetchJson: s.fetchJson, fetchText: s.fetchText, robotsCache: fresh() }),
       (e) => e.failureClass === 'blocked' && e.robots === true, JSON.stringify(robots));
     assert.equal(s.bodies.length, 0, `no jobs call (${JSON.stringify(robots)})`);
   }
-  // "Allow: /<site>/" + other sites disallowed = allowed, as a plain body or as a text/plain meta answer.
-  for (const robots of [FX.robots_txt.replace(/Workday/g, 'Big'), { status: 200, text: 'User-agent: *\nAllow: /', contentType: 'text/plain; charset=utf-8' }]) {
+  // "Allow: /<site>/" + other sites disallowed = allowed, as a plain body or as a text/plain meta answer; and no
+  // robots.txt at all (404/410) = no restrictions.
+  for (const robots of [FX.robots_txt.replace(/Workday/g, 'Big'), { status: 200, text: 'User-agent: *\nAllow: /', contentType: 'text/plain; charset=utf-8' }, 404, 410]) {
     const s = fakeSite(10, { robots });
     const r = await fetchBoard(s.board, { fetchJson: s.fetchJson, fetchText: s.fetchText, robotsCache: fresh() });
     assert.equal(r.jobs.length, 10, String(robots));

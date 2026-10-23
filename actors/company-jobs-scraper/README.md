@@ -108,7 +108,7 @@ Detected but not read (the company gets a free row with `reason: "unsupported_pl
 ## How detection works
 
 1. **Direct board URL?** A Greenhouse/Lever/Ashby/… board URL in the input is read right away; no web page is fetched.
-2. **robots.txt first.** Before the first page of any host, its `/robots.txt` is fetched (asked as `text/plain`). Only a robots.txt that exists (HTTP 2xx, `text/plain`) and allows the page counts as permission; a host with no robots file, an error or an HTML answer is not read (`reason: "robots_disallowed"`).
+2. **robots.txt first.** Before the first page of any host, its `/robots.txt` is fetched (asked as `text/plain`). A `text/plain` robots.txt that allows the page, or no robots.txt at all (HTTP 404/410, as in the RFC 9309 standard), counts as permission; a robots.txt that disallows the page, an error (other 4xx, 5xx, unreachable) or an HTML answer means the host is not read (`reason: "robots_disallowed"`).
 3. **Read the page you gave** (homepage or careers page) and look for job-board links, iframes, embed scripts, inline JSON and board-API calls in its JavaScript. Redirects are followed hop by hop (each new host's robots.txt first); a redirect that lands on a job board (e.g. `/careers` → `apply.workable.com/acme`) is used without fetching the board page.
 4. **Follow careers links.** Links called "Careers", "Jobs", "Join us", "We're hiring", "Karriere", "Emplois"… or pointing to `/careers`, `/jobs`, `careers.<company>.com` are followed (best first, at most 3 per page, 2 levels deep, same company site). If no page links a careers page, common paths (`/careers`, `/jobs`, `/company/careers`, …) are tried. When a careers page lists jobs on the company's own front end, one posting page is read (its Apply button usually names the platform).
 5. **Small budget per company:** at most 8 page requests (6 per host), one request per second per host, so a company site sees a handful of polite requests.
@@ -122,7 +122,7 @@ An input that leads to a board already read in the same run gets `reason: "dupli
 |---|---|
 | `invalid_url` | The input is not a website URL |
 | `site_unreachable` | The website did not answer (DNS, timeout, HTTP error) |
-| `robots_disallowed` | The site's robots.txt does not allow reading the pages we need, or the site has no robots.txt |
+| `robots_disallowed` | The site's robots.txt does not allow reading the pages we need, or it answered with an error or an HTML page |
 | `unsupported_platform` | The careers page uses a job platform this Actor does not read (see `detected_platform`) |
 | `no_supported_ats_detected` | No supported job-board link found: an in-house careers system, or a page that loads its jobs with JavaScript only |
 | `ats_board_empty` | The job board exists but lists no open job right now |
@@ -187,7 +187,7 @@ You get one free row for that company with `found: false` and a `reason`: `unsup
 Yes. Put a list of company URLs in `companyUrls` and schedule the Actor; each run returns every live posting with title, department, location, seniority, salary where published and apply URL.
 
 **Why did the Actor not read a website?**
-It only reads sites whose robots.txt allows it (a missing robots.txt is not taken as permission) and makes at most 8 page requests per company, one per second per host. Job boards on Workday, Personio and Teamtailor are only read when their own robots.txt allows it.
+It only reads sites whose robots.txt allows it (a missing robots.txt means no restrictions, as in RFC 9309) and makes at most 8 page requests per company, one per second per host. Job boards on Workday, Personio and Teamtailor are only read when their own robots.txt allows it.
 
 **Can I call it from Python, JavaScript, Make, Zapier or an AI agent?**
 Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server. Input is small and output is deterministic flat JSON.

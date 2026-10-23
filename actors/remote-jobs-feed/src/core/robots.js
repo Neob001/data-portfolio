@@ -55,13 +55,14 @@ export function isAllowed(rules, path) {
 /**
  * Robots verdict for a set of paths on one host: { allowed, reason }.
  * `fetched` is { status, text, contentType? } of GET /robots.txt (asked with Accept: text/plain), or { error }
- * when it could not be fetched. Stricter than RFC 9309 on purpose (owner rule, LEARNINGS 2026-10-09): only a
- * 2xx text/plain robots file grants permission. 5xx / unreachable, 4xx (no robots file), a non-text/plain
- * content type and an HTML body all mean "disallow everything" for that host.
+ * when it could not be fetched. RFC 9309 for a missing file (owner decision R1, 2026-10-23): HTTP 404/410 = the
+ * host has no robots.txt = no restrictions. Stricter than the RFC everywhere else: other 4xx (401/403/429...),
+ * 5xx / unreachable, a 2xx with a non-text/plain content type or an HTML body all mean "disallow everything".
  */
 export function robotsVerdict(fetched, userAgent, paths) {
   if (!fetched || fetched.error || (fetched.status >= 500)) return { allowed: false, reason: 'robots.txt unreachable' };
-  if (fetched.status >= 400) return { allowed: false, reason: `robots.txt HTTP ${fetched.status} (no robots file is not taken as permission)` };
+  if (fetched.status === 404 || fetched.status === 410) return { allowed: true, reason: `no robots.txt (HTTP ${fetched.status}): no restrictions (RFC 9309)` };
+  if (fetched.status >= 400) return { allowed: false, reason: `robots.txt HTTP ${fetched.status}` };
   const ct = fetched.contentType;
   if (ct !== undefined && ct !== null && !/^\s*text\/plain\b/i.test(ct)) return { allowed: false, reason: `robots.txt answered as ${ct || 'no content type'}, not text/plain` };
   // Asked with Accept: text/html, Workday hosts answer /robots.txt with their HTML app: not a robots file.

@@ -131,7 +131,7 @@ test('teamtailor: real RSS -> records (channel name, city + country, remote stat
   assert.throws(() => parseBoard(TEAMTAILOR_BOARD, '<workzag-jobs/>'), /Unexpected teamtailor response/);
 });
 
-test('robots.txt first: allowed -> feed read; disallowed / 4xx / HTML / non-text/plain -> no other request to the host', async () => {
+test('robots.txt first: allowed or missing (404) -> feed read; disallowed / 403 / 5xx / HTML / non-text/plain -> no other request to the host', async () => {
   const net = fakeNetwork();
   const r = await fetchBoard(TEAMTAILOR_BOARD, { fetchText: net.fetchText, robotsCache: fresh(), now: () => new Date(NOW) });
   assert.deepEqual(net.calls, ['https://career.teamtailor.com/robots.txt', 'https://career.teamtailor.com/jobs.rss'], 'robots.txt is the first request');
@@ -144,7 +144,7 @@ test('robots.txt first: allowed -> feed read; disallowed / 4xx / HTML / non-text
     { status: 200, text: 'User-agent: factpipe-jobs-feed\nDisallow: /', contentType: 'text/plain' },
     { status: 200, text: 'User-agent: *\nAllow: /', contentType: 'text/html; charset=utf-8' },
     { status: 200, text: '<!DOCTYPE html><html><body>robots</body></html>', contentType: 'text/plain' },
-    () => { throw Object.assign(new Error('HTTP 404'), { status: 404 }); },
+    () => { throw Object.assign(new Error('HTTP 403'), { status: 403 }); },
     () => { throw Object.assign(new Error('HTTP 503'), { status: 503 }); },
     () => { throw new Error('ECONNRESET'); },
   ];
@@ -153,6 +153,13 @@ test('robots.txt first: allowed -> feed read; disallowed / 4xx / HTML / non-text
     await assert.rejects(fetchBoard(PERSONIO_BOARD, { fetchText: n.fetchText, robotsCache: fresh() }),
       (e) => e.failureClass === 'blocked' && e.robots === true, JSON.stringify(robots));
     assert.deepEqual(n.calls, [robotsUrl], `only robots.txt was requested (${JSON.stringify(robots)})`);
+  }
+  // No robots.txt (404/410) = no restrictions (RFC 9309, owner decision R1 2026-10-23): the feed is read.
+  for (const status of [404, 410]) {
+    const n = fakeNetwork({ [robotsUrl]: () => { throw Object.assign(new Error(`HTTP ${status}`), { status }); } });
+    const ok = await fetchBoard(PERSONIO_BOARD, { fetchText: n.fetchText, robotsCache: fresh(), now: () => new Date(NOW) });
+    assert.ok(ok.jobs.length > 0, `feed read when robots.txt is ${status}`);
+    assert.equal(n.calls[0], robotsUrl);
   }
   // One robots.txt per host per run (cache), asked for as text/plain.
   const seen = [];

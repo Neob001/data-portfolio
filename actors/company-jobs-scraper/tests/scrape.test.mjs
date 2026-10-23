@@ -96,9 +96,13 @@ test('robots-disallowed company host: no page request at all, one free explanato
   const { rows, charges } = await run(web, { companyUrls: ['https://careers.airhelp.com', 'https://www.sap.com', 'https://www.channable.com', 'https://nofile.example.org'] });
   assert.equal(charges, 0);
   assert.equal(rows.length, 4);
-  for (const r of rows) assert.deepEqual([r.found, r.reason], [false, 'robots_disallowed'], r.query);
+  const q = byQuery(rows);
+  for (const u of ['https://careers.airhelp.com', 'https://www.sap.com', 'https://www.channable.com']) assert.deepEqual([q[u][0].found, q[u][0].reason], [false, 'robots_disallowed'], u);
+  // No robots.txt (404) = no restrictions (RFC 9309, owner decision R1 2026-10-23): the homepage is read.
+  assert.notEqual(q['https://nofile.example.org'][0].reason, 'robots_disallowed');
+  assert.ok(web.calls.some((c) => c.startsWith('PAGE https://nofile.example.org')), 'host without robots.txt is read');
   assert.match(byQuery(rows)['https://careers.airhelp.com'][0].reason_detail, /not text\/plain/);
-  assert.equal(web.calls.filter((c) => c.startsWith('PAGE ')).length, 0, 'never a page request to a host whose robots.txt is not permission');
+  assert.equal(web.calls.filter((c) => c.startsWith('PAGE ') && !c.includes('nofile.example.org')).length, 0, 'never a page request to a host whose robots.txt is not permission');
 });
 
 test('robots.txt disallowing only the careers path: homepage read, careers page not', async () => {
