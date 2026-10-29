@@ -76,3 +76,6 @@ Replies are NEVER posted without a tick. Standing decision 2026-09-12.
 
 ## 2026-10-23
 (no drafts today. demand_monitor: 0 new hits, 0 open signals. Apify forum still returns non-JSON. No owner ticks pending.)
+
+## 2026-10-29
+(no drafts today. demand_monitor: 10 new raw hits, 0 passed the filters: 9 Dans-Plugins "Post X to SpigotMC" release chores (Medieval-Economy#182, Mailboxes#161, Fiefs#253, Dans-Plugin-Manager#164, Activity-Tracker#153, Wild-Pets#369, SimpleSkills#225, Nether-Access-Controller#101, Currencies#272) matched on keywords only, and SO 80013003 is an SEO/JS-crawling question, not a data request. All marked filtered. No DC proposals. Apify forum still returns non-JSON. No owner ticks pending.)
