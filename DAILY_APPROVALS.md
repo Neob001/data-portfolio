@@ -79,3 +79,6 @@ Replies are NEVER posted without a tick. Standing decision 2026-09-12.
 
 ## 2026-10-29
 (no drafts today. demand_monitor: 10 new raw hits, 0 passed the filters: 9 Dans-Plugins "Post X to SpigotMC" release chores (Medieval-Economy#182, Mailboxes#161, Fiefs#253, Dans-Plugin-Manager#164, Activity-Tracker#153, Wild-Pets#369, SimpleSkills#225, Nether-Access-Controller#101, Currencies#272) matched on keywords only, and SO 80013003 is an SEO/JS-crawling question, not a data request. All marked filtered. No DC proposals. Apify forum still returns non-JSON. No owner ticks pending.)
+
+## 2026-10-30
+(no drafts today. demand_monitor: 13 new raw hits, 0 passed the filters: all 13 are Dans-Plugins "Post X to SpigotMC" release chores (Wild-Pets#377, SimpleSkills#232, Nether-Access-Controller#109, Medieval-Economy#188, Medieval-Cookery#61, Mailboxes#167, KDRTracker#74, Fiefs#259, Democracy#82, Dans-Spawn-System#137, Dans-Essentials#215, Currencies#278, AlternateAccountFinder#169) matched on keywords only. All marked filtered. No DC proposals. Apify forum still returns non-JSON. No owner ticks pending.)
