@@ -33,7 +33,8 @@ def main():
                 "isPublic": False,
                 "versions": [{"versionNumber": "0.1", "sourceType": "GIT_REPO", "buildTag": "latest",
                               "gitRepoUrl": f"{REPO}#main:actors/{slug}", "envVars": []}],
-                "defaultRunOptions": {"build": "latest", "timeoutSecs": 300, "memoryMbytes": 1024},
+                # registry.json "default_run_options" overrides per Actor (e.g. a bulk export needs a longer timeout).
+                "defaultRunOptions": {"build": "latest", "timeoutSecs": 300, "memoryMbytes": 1024, **meta.get("default_run_options", {})},
             })["data"]["id"]
         put(f"/acts/{aid}", {k: listing[k] for k in ("title", "description", "seoTitle", "seoDescription", "categories") if k in listing})
         build = post(f"/acts/{aid}/builds?version=0.1&tag=latest", {})["data"]["id"]
