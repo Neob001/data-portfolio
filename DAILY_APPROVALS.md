@@ -88,3 +88,5 @@ Replies are NEVER posted without a tick. Standing decision 2026-09-12.
 
 ## 2026-11-03
 (no drafts today. demand_monitor: 6 new raw hits, 0 passed the filters: daksheshsharma2409/stox#28 is an internal "implement social post deletion API" dev ticket, and 5 Dans-Plugins "Post X to SpigotMC" release chores (Dans-Spawn-System#142, Currencies#286, Conquest-Recipes#133, AlternateAccountFinder#175, Activity-Tracker#168) matched on keywords only. All marked filtered. No DC proposals. Apify forum still returns non-JSON. No owner ticks pending.)
+
+(2026-11-03 rerun: demand_monitor: 0 new hits, 0 open signals. Apify forum still returns non-JSON. No owner ticks pending.)
