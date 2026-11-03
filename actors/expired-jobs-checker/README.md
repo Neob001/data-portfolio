@@ -82,7 +82,7 @@ Up to 200,000 jobs per run; identical inputs are checked once. The output has on
 
 ## Pricing (pay per event)
 
-TODO(owner): Pricing — $X per 1,000 jobs checked (`job-checked`, one event per `open` or `closed` row), plus a possible per-run start fee. Set the price in the Console, then replace this line before publishing.
+**$0.10 per 1,000 jobs checked** ($0.0001 per `job-checked`, one event per `open` or `closed` row). No start fee and no charge for platform usage: checking 10,000 jobs costs **$1**.
 
 `unknown` rows are free. Set a maximum charge per run in Apify and the Actor stops cleanly when it is reached; the remaining jobs get no row and no charge (the status message says how many).
 

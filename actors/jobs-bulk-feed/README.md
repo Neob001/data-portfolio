@@ -99,7 +99,7 @@ The same 32 fields as the [Jobs Feed API](https://apify.com/factpipe/ats-jobs-fe
 
 ## Pricing (pay per event)
 
-TODO(owner): Pricing — $X per 1,000 jobs (`job-result`, one event per delivered job). Set the price in the Console, then replace this line before publishing.
+**$2.00 per 1,000 jobs** ($0.002 per `job-result`, one event per delivered job), less on paid Apify plans: $1.80 (Bronze), $1.60 (Silver), $1.40 (Gold). No start fee and no charge for platform usage: 100,000 jobs cost **$200**, a typical day of new jobs (30,000-50,000) costs $60-100.
 
 Jobs skipped by `sinceLastRun` are never charged. Set a maximum charge per run in Apify and the Actor stops cleanly when it is reached; with `sinceLastRun` the next run continues with the jobs not delivered yet.
 

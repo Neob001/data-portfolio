@@ -9,7 +9,7 @@ import sys
 import time
 from pathlib import Path
 
-from apify_api import get, post
+from apify_api import BudgetExceeded, get, post
 
 ROOT = Path(__file__).resolve().parent.parent
 BATCH = 4
@@ -20,7 +20,7 @@ def start(aid):
         try:
             return post(f"/acts/{aid}/builds?version=0.1&tag=latest", {})["data"]["id"]
         except Exception as e:  # HTTP 402 when build memory is exhausted
-            if attempt == 5:
+            if attempt == 5 or isinstance(e, BudgetExceeded):
                 raise
             time.sleep(20 * (attempt + 1))
             last = e

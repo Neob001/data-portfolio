@@ -59,12 +59,12 @@ test('input schema: prefill is recognised (5 job ids, 2 job URLs)', () => {
   assert.deepEqual(Object.keys(p).sort(), ['jobIds', 'jobUrls']);
 });
 
-test('README: family structure, pricing left as an owner TODO, suite section before FAQ', () => {
+test('README: family structure, approved price, suite section before FAQ', () => {
   const md = read('README.md');
   for (const h of ['## Quick start', '## What you get', '## Use cases', '## Input', '## Output fields', '## Pricing', '## factpipe Jobs & Hiring Data', '## FAQ']) assert.ok(md.includes(h), h);
   assert.ok(md.indexOf('## factpipe Jobs & Hiring Data') < md.indexOf('## FAQ'));
-  assert.match(md, /TODO\(owner\): Pricing — \$X per 1,000 jobs checked/);
-  assert.ok(!/\$\d/.test(md), 'no concrete price before the owner sets it');
+  assert.ok(!/TODO|\$X/.test(md), 'no placeholder left');
+  assert.match(md, /\*\*\$0\.10 per 1,000 jobs checked\*\* \(\$0\.0001 per `job-checked`/, 'owner-approved price (N2 2026-11-03)');
   for (const s of ['ats-jobs-feed', 'remote-jobs-feed', 'ats-jobs-scraper', 'companies-hiring', 'greenhouse-jobs-api', 'lever-jobs-api', 'ashby-jobs-api', 'workday-jobs-api', 'company-jobs-scraper', 'jobs-bulk-feed']) {
     assert.ok(md.includes(`https://apify.com/factpipe/${s}`), s);
   }
@@ -74,14 +74,14 @@ test('README: family structure, pricing left as an owner TODO, suite section bef
   for (const s of STATUS_REASONS) assert.ok(md.includes(s), `README explains ${s}`);
 });
 
-test('registry: staging entry, PPE event without a price yet', () => {
+test('registry: approved price, staging or live', () => {
   const reg = JSON.parse(repo('registry.json')).actors[SLUG];
   assert.ok(reg, 'registry.json entry');
-  assert.equal(reg.status, 'staging');
-  assert.ok(reg.apify_actor_id === null || /^[A-Za-z0-9]{17}$/.test(reg.apify_actor_id), 'no Actor yet, or the private staging Actor');
-  assert.match(reg.approval, /publish \+ price pending owner approval/);
-  assert.ok(EVENT in reg.ppe_events);
-  for (const e of Object.values(reg.ppe_events)) assert.equal(e.proposed_price_usd, null);
+  assert.ok(['staging', 'live'].includes(reg.status));
+  assert.match(reg.apify_actor_id, /^[A-Za-z0-9]{17}$/);
+  assert.match(reg.approval, /^APPROVED N2 2026-11-03/);
+  assert.deepEqual(Object.keys(reg.ppe_events), [EVENT]);
+  assert.equal(reg.ppe_events[EVENT].proposed_price_usd, 0.0001);
   assert.ok(reg.pricing_rationale.length > 40);
   assert.equal(reg.listing.title, actor.title);
 });

@@ -9,10 +9,31 @@ Auth works in two modes:
 """
 import json
 import os
+import re
 import urllib.parse
 import urllib.request
 
 BASE = "https://api.apify.com/v2"
+
+# Free plan only (owner, 2026-11-03): our own runs/builds must leave this much of the
+# monthly $5 credit unused, so platform auto-tests and storage never hit the cap.
+BUDGET_RESERVE_USD = float(os.environ.get("APIFY_BUDGET_RESERVE_USD", "1.0"))
+_STARTS_COMPUTE = re.compile(r"^/(acts|actor-tasks)/[^/]+/(runs|builds|run-sync)")
+
+
+class BudgetExceeded(RuntimeError):
+    """Raised instead of starting a run/build that could push us past the free credit."""
+
+
+def check_budget(path: str) -> None:
+    if not _STARTS_COMPUTE.match(path):
+        return
+    d = get("/users/me/limits")["data"]
+    used, cap = d["current"]["monthlyUsageUsd"], d["limits"]["maxMonthlyUsageUsd"]
+    if used > cap - BUDGET_RESERVE_USD:
+        raise BudgetExceeded(
+            f"refusing POST {path.split('?')[0]}: own Apify usage ${used:.2f} of ${cap:.2f} "
+            f"(reserve ${BUDGET_RESERVE_USD:.2f}); cycle ends {d['monthlyUsageCycle']['endAt'][:10]}")
 
 
 def auth_headers() -> dict:
@@ -37,6 +58,7 @@ def get(path: str, **params) -> dict:
 
 
 def post(path: str, payload: dict) -> dict:
+    check_budget(path)
     req = urllib.request.Request(
         f"{BASE}{path}",
         data=json.dumps(payload).encode(),

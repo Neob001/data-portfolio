@@ -8,6 +8,7 @@ One-person, AI-native data business: narrow pay-per-event Actors on Apify Store 
 3. **Legal:** public data only; no PII (no officers/PSC/person profiles); no login walls; no ToS-forbidden sources; avoid LinkedIn/Amazon/Instagram/Facebook. Never pursue sources requiring photo-ID + selfie identity verification (ID.me or equivalent) — standing owner REJECT 2026-09-12. A source whose ToS page is bot-gated (CAPTCHA) is auto-rejected. New sources need an APPROVE line in DECISIONS.md first.
 4. **Pricing:** PPE only (rentals retired). Charge only successful non-empty results. Launch 10–20% below incumbent per-result cost; changes go through scripts/pricing.py proposals + owner approval.
 5. Truncate everything fed to a model: last 200 log lines, tiny golden samples, one actor dir.
+6. **Apify free plan only (owner, 2026-11-03): never pay Apify.** Our own runs/builds must fit the $5 monthly credit with $1 spare: `scripts/apify_api.py` refuses to start a run/build above $4 used (`BudgetExceeded` — wait for the cycle reset on the 10th, never work around it). Cloud tests are samples (prefill or `maxResults` <= 1,000; `staging_run.py` caps it); full-volume checks run locally. Never suggest a paid plan or extra credits.
 
 ## Layout
 - `actors/<slug>/`: src/ (main.js + pure transform.js + lib/ synced from shared/js — NEVER edit lib/ directly), tests/ (node --test vs golden/), INPUT_SCHEMA.json, .actor/, README.md.

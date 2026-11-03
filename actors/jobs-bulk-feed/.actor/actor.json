@@ -2,7 +2,7 @@
   "actorSpecification": 1,
   "name": "jobs-bulk-feed",
   "title": "Bulk Job Postings Feed — All New Jobs Daily",
-  "description": "Every new job posting, every day: 890,000+ jobs from 20,000+ company career sites (Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable, Recruitee) as one bulk feed. Only jobs not delivered before.",
+  "description": "Every new job posting, every day: 850,000+ jobs from 20,000+ company career sites (Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable, Recruitee) as one bulk feed. Only jobs not delivered before.",
   "version": "0.1",
   "buildTag": "latest",
   "input": "../INPUT_SCHEMA.json",
