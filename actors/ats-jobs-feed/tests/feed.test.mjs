@@ -406,7 +406,7 @@ test('openIndex waits out a brief manifest.json 404 (nightly publish swaps it), 
 });
 
 test('per-run fee (P3): only for runs with results, only once the event is priced', async () => {
-  const { shouldChargeRunFee } = await import('../src/core/actor_main.js');
+  const { shouldChargeRunFee } = await import('../src/core/run_fee.js');
   const priced = { 'job-result': 0.005, 'run-with-results': 0.01 };
   assert.equal(shouldChargeRunFee('run-with-results', 20, priced), true);
   assert.equal(shouldChargeRunFee('run-with-results', 0, priced), false, 'empty runs stay free (CLAUDE.md rule 4)');
