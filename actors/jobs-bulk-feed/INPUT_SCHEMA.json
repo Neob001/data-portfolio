@@ -1,0 +1,77 @@
+{
+  "title": "Bulk Job Postings Feed",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "ats": {
+      "title": "Job-board platforms",
+      "type": "array",
+      "description": "Only jobs from these applicant tracking systems. Empty = all eight.",
+      "editor": "select",
+      "items": {
+        "type": "string",
+        "enum": ["greenhouse", "lever", "ashby", "workable", "recruitee", "workday", "personio", "teamtailor"],
+        "enumTitles": ["Greenhouse", "Lever", "Ashby", "Workable", "Recruitee", "Workday", "Personio", "Teamtailor"]
+      }
+    },
+    "countries": {
+      "title": "Countries",
+      "type": "array",
+      "description": "2-letter ISO country codes (e.g. \"US\", \"DE\", \"GB\"). A job matches when any of its country_codes is listed; jobs whose location names no country (e.g. just \"Remote\") are excluded when this is set. Empty = worldwide.",
+      "editor": "stringList"
+    },
+    "remote": {
+      "title": "Remote",
+      "type": "string",
+      "description": "remote_only: remote jobs only. onsite_only: excludes jobs marked remote (on-site, hybrid and unspecified remain).",
+      "editor": "select",
+      "enum": ["any", "remote_only", "onsite_only"],
+      "enumTitles": ["Any", "Remote only", "Exclude remote"],
+      "default": "any"
+    },
+    "seniority": {
+      "title": "Seniority",
+      "type": "array",
+      "description": "Only jobs at these levels, read from the job title by fixed rules (no AI): intern, entry, mid, senior, lead, manager (people managers; not Product/Project/Account Manager), director (Director, Head of, VP), executive (C-level, SVP, founder). Jobs whose title has no level marker are excluded when this is set. Empty = all.",
+      "editor": "select",
+      "items": {
+        "type": "string",
+        "enum": ["intern", "entry", "mid", "senior", "lead", "manager", "director", "executive"],
+        "enumTitles": ["Intern / working student", "Entry level / junior", "Mid level", "Senior", "Lead / supervisor", "Manager", "Director / Head of / VP", "Executive (C-level, SVP, founder)"]
+      }
+    },
+    "postedWithinDays": {
+      "title": "Posted within (days)",
+      "type": "integer",
+      "description": "Only jobs first published in the last N days. Empty = any age (the whole index).",
+      "minimum": 1,
+      "maximum": 3650,
+      "prefill": 3
+    },
+    "sinceLastRun": {
+      "title": "Only jobs not delivered before",
+      "type": "boolean",
+      "description": "Remembers every job this Actor delivered for the same filters (in a named key-value store in your Apify account) and skips it on later runs, so a daily schedule gets each job once and is never charged twice. A run that stops at maxResults continues where it stopped next time.",
+      "default": true
+    },
+    "maxResults": {
+      "title": "Max results",
+      "type": "integer",
+      "description": "Maximum number of jobs to deliver (and charge for) in this run. Newest jobs come first.",
+      "default": 100000,
+      "minimum": 1,
+      "maximum": 2000000,
+      "prefill": 100
+    },
+    "fields": {
+      "title": "Output fields",
+      "type": "array",
+      "description": "Keep only these fields in each row (smaller datasets and faster exports). Empty = all fields (the same schema as Jobs Feed API).",
+      "editor": "select",
+      "items": {
+        "type": "string",
+        "enum": ["job_id", "title", "company_name", "company_board", "ats", "department", "team", "employment_type", "seniority", "workplace_type", "locations", "country_codes", "remote", "salary_min", "salary_max", "salary_currency", "salary_period", "salary_source", "years_experience_min", "visa_sponsorship", "posted_at", "updated_at", "apply_url", "job_url", "description_text", "description_snippet", "description_status", "duplicate_sources", "match_score", "matched_in", "source_url", "fetched_at"]
+      }
+    }
+  }
+}

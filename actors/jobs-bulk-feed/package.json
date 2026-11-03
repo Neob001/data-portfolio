@@ -1,0 +1,16 @@
+{
+  "name": "jobs-bulk-feed",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Bulk feed of every new job posting in the factpipe jobs index (Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable, Recruitee), streamed in batches.",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "apify": "^3.7.2"
+  },
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node --test 'tests/*.test.mjs'"
+  }
+}

@@ -25,6 +25,8 @@ TARGETS = [
     "greenhouse-jobs-api", "lever-jobs-api", "ashby-jobs-api", "workday-jobs-api",
     # careers-page discovery on top of the core's live mode
     "company-jobs-scraper",
+    # index-only readers: whole-index delivery and open/closed checks (no live board reads)
+    "jobs-bulk-feed", "expired-jobs-checker",
 ]
 
 

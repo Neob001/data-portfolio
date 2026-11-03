@@ -1,0 +1,341 @@
+{
+  "actorSpecification": 1,
+  "name": "jobs-bulk-feed",
+  "title": "Bulk Job Postings Feed — All New Jobs Daily",
+  "description": "Every new job posting, every day: 890,000+ jobs from 20,000+ company career sites (Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable, Recruitee) as one bulk feed. Only jobs not delivered before.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "minMemoryMbytes": 1024,
+  "outputSchema": "./output_schema.json",
+  "categories": [
+    "JOBS",
+    "LEAD_GENERATION"
+  ],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "jobs": {
+          "title": "Jobs",
+          "transformation": {
+            "fields": [
+              "title",
+              "seniority",
+              "company_name",
+              "locations",
+              "country_codes",
+              "workplace_type",
+              "salary_min",
+              "salary_max",
+              "salary_currency",
+              "posted_at",
+              "ats",
+              "job_url"
+            ]
+          },
+          "display": {
+            "component": "table",
+            "properties": {
+              "title": {
+                "label": "Title",
+                "format": "text"
+              },
+              "seniority": {
+                "label": "Seniority",
+                "format": "text"
+              },
+              "company_name": {
+                "label": "Company",
+                "format": "text"
+              },
+              "locations": {
+                "label": "Locations",
+                "format": "array"
+              },
+              "country_codes": {
+                "label": "Countries",
+                "format": "array"
+              },
+              "workplace_type": {
+                "label": "Workplace",
+                "format": "text"
+              },
+              "salary_min": {
+                "label": "Salary min",
+                "format": "number"
+              },
+              "salary_max": {
+                "label": "Salary max",
+                "format": "number"
+              },
+              "salary_currency": {
+                "label": "Currency",
+                "format": "text"
+              },
+              "posted_at": {
+                "label": "Posted",
+                "format": "date"
+              },
+              "ats": {
+                "label": "ATS",
+                "format": "text"
+              },
+              "job_url": {
+                "label": "Job",
+                "format": "link"
+              }
+            }
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "job_id": {
+            "type": "string",
+            "description": "Stable id: ats:board:posting_id"
+          },
+          "title": {
+            "type": "string"
+          },
+          "company_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "company_board": {
+            "type": "string"
+          },
+          "ats": {
+            "type": "string",
+            "enum": [
+              "greenhouse",
+              "lever",
+              "ashby",
+              "workable",
+              "recruitee",
+              "workday",
+              "personio",
+              "teamtailor"
+            ]
+          },
+          "department": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "team": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "employment_type": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "full_time",
+              "part_time",
+              "contract",
+              "temporary",
+              "internship",
+              "other",
+              null
+            ]
+          },
+          "seniority": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "intern",
+              "entry",
+              "mid",
+              "senior",
+              "lead",
+              "manager",
+              "director",
+              "executive",
+              null
+            ],
+            "description": "Level read from the job title by fixed rules (no AI): intern, entry, mid, senior, lead, manager, director, executive; null when the title has no level marker"
+          },
+          "workplace_type": {
+            "type": "string",
+            "enum": [
+              "remote",
+              "hybrid",
+              "onsite",
+              "unknown"
+            ]
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "country_codes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "remote": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "salary_min": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "salary_max": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "salary_currency": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "salary_period": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "year",
+              "month",
+              "week",
+              "day",
+              "hour",
+              null
+            ]
+          },
+          "salary_source": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "structured",
+              "description",
+              null
+            ],
+            "description": "structured: the ATS's own pay fields; null: no structured salary (pay stated only in the description is not read here)"
+          },
+          "years_experience_min": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Minimum years of experience published by the ATS itself (Personio); null otherwise (descriptions are not read here)"
+          },
+          "visa_sponsorship": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Always null in this Actor (it needs the description; use Jobs Feed API)"
+          },
+          "posted_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "apply_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "job_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "description_text": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Always null in this Actor (the index holds no full descriptions; use Jobs Feed API for them)"
+          },
+          "description_snippet": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "description_status": {
+            "type": "string",
+            "enum": [
+              "included",
+              "not_requested",
+              "unavailable"
+            ],
+            "description": "Always not_requested in this Actor (no live description fetch). included / unavailable appear only in Jobs Feed API rows"
+          },
+          "duplicate_sources": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "match_score": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "Always null in this Actor (no keyword ranking)"
+          },
+          "matched_in": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "title",
+              "department",
+              "description",
+              null
+            ],
+            "description": "Always null in this Actor (no keyword ranking)"
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The ATS API or feed URL the job was read from"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the nightly index build read this job's board"
+          }
+        }
+      }
+    }
+  }
+}
