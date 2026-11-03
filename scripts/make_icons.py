@@ -45,6 +45,8 @@ ICONS = {
     "ashby-jobs-api": ("jobs", "ASHBY"),
     "workday-jobs-api": ("jobs", "WD"),
     "company-jobs-scraper": ("jobs", "CAREER"),
+    "jobs-bulk-feed": ("jobs", "BULK"),
+    "expired-jobs-checker": ("jobs", "OPEN?"),
     "ecb-exchange-rates": ("data", "FX"),
     "us-weather-forecast": ("data", "WX"),
     "wikipedia-scraper": ("data", "WIKI"),

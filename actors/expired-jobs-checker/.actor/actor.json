@@ -35,14 +35,38 @@
           "display": {
             "component": "table",
             "properties": {
-              "input": { "label": "Input", "format": "text" },
-              "status": { "label": "Status", "format": "text" },
-              "status_reason": { "label": "Why", "format": "text" },
-              "company_name": { "label": "Company", "format": "text" },
-              "title": { "label": "Title", "format": "text" },
-              "ats": { "label": "ATS", "format": "text" },
-              "job_url": { "label": "Job", "format": "link" },
-              "last_seen_index_built_at": { "label": "Last seen in index", "format": "date" }
+              "input": {
+                "label": "Input",
+                "format": "text"
+              },
+              "status": {
+                "label": "Status",
+                "format": "text"
+              },
+              "status_reason": {
+                "label": "Why",
+                "format": "text"
+              },
+              "company_name": {
+                "label": "Company",
+                "format": "text"
+              },
+              "title": {
+                "label": "Title",
+                "format": "text"
+              },
+              "ats": {
+                "label": "ATS",
+                "format": "text"
+              },
+              "job_url": {
+                "label": "Job",
+                "format": "link"
+              },
+              "last_seen_index_built_at": {
+                "label": "Last seen in index",
+                "format": "date"
+              }
             }
           }
         }
@@ -56,37 +80,77 @@
             "description": "The job_id or job URL exactly as given"
           },
           "job_id": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "factpipe job_id (ats:board:posting_id) of the input; null when the input is not a recognisable job"
           },
           "status": {
             "type": "string",
-            "enum": ["open", "closed", "unknown"],
+            "enum": [
+              "open",
+              "closed",
+              "unknown"
+            ],
             "description": "open: listed in today's index; closed: its board is in today's index and the job is not; unknown: the index cannot tell (see status_reason)"
           },
           "status_reason": {
             "type": "string",
-            "enum": ["in_index", "duplicate_in_index", "not_in_index", "board_partially_indexed", "board_not_in_index", "unrecognized_input", "not_checked"],
+            "enum": [
+              "in_index",
+              "duplicate_in_index",
+              "not_in_index",
+              "board_partially_indexed",
+              "board_not_in_index",
+              "unrecognized_input",
+              "not_checked"
+            ],
             "description": "in_index / duplicate_in_index (listed under another job_id) -> open; not_in_index -> closed; board_partially_indexed (the board lists more jobs than the nightly build keeps), board_not_in_index, unrecognized_input, not_checked (run stopped) -> unknown"
           },
           "last_seen_index_built_at": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "format": "date-time",
             "description": "Build time of the index that lists the job (open rows); null otherwise"
           },
           "company_name": {
-            "type": ["string", "null"]
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "title": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Job title (open rows only: a closed job's title is not in the index any more)"
           },
           "ats": {
-            "type": ["string", "null"],
-            "enum": ["greenhouse", "lever", "ashby", "workable", "recruitee", "workday", "personio", "teamtailor", null]
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "greenhouse",
+              "lever",
+              "ashby",
+              "workable",
+              "recruitee",
+              "workday",
+              "personio",
+              "teamtailor",
+              null
+            ]
           },
           "job_url": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Job page (open rows: from the index; URL inputs: as given)"
           },
           "checked_at": {

@@ -794,6 +794,59 @@
         "maxPerCompany": 2,
         "includeDescription": true
       }
+    },
+    {
+      "actor": "jobs-bulk-feed",
+      "name": "new-jobs-last-24h-bulk",
+      "title": "All new jobs from the last 24 hours (bulk feed)",
+      "description": "Every job posted in the last day on 20,000+ company career sites, as flat JSON rows. Schedule daily for a complete new-jobs feed.",
+      "input": {
+        "postedWithinDays": 1,
+        "maxResults": 100
+      }
+    },
+    {
+      "actor": "jobs-bulk-feed",
+      "name": "us-jobs-bulk-feed",
+      "title": "New US job postings (bulk feed)",
+      "description": "New jobs located in the United States from company career sites (Workday, Greenhouse, Lever, Ashby and more), last 3 days.",
+      "input": {
+        "countries": [
+          "US"
+        ],
+        "postedWithinDays": 3,
+        "maxResults": 100
+      }
+    },
+    {
+      "actor": "jobs-bulk-feed",
+      "name": "remote-jobs-bulk-feed",
+      "title": "New remote job postings (bulk feed)",
+      "description": "Remote-only jobs posted in the last 3 days on 20,000+ company career sites, one flat row per job.",
+      "input": {
+        "remote": "remote_only",
+        "postedWithinDays": 3,
+        "maxResults": 100
+      }
+    },
+    {
+      "actor": "expired-jobs-checker",
+      "name": "check-if-jobs-still-open",
+      "title": "Check if job postings are still open",
+      "description": "Paste job IDs or job URLs from company career sites and get open, closed or unknown for each one.",
+      "input": {
+        "jobIds": [
+          "lever:palantir:5168e8fd-fec1-4fea-b7a1-81bdaea65850",
+          "greenhouse:datadog:1497543",
+          "ashby:supabase:d5573afa-636c-4219-832f-386f498243bf",
+          "personio:pmx:2048370",
+          "greenhouse:gitlab:1000000001"
+        ],
+        "jobUrls": [
+          "https://jobs.ashbyhq.com/posthog/8854fb74-8457-40cd-bc10-60125a0c0cd4",
+          "https://ingeteam.teamtailor.com/jobs/5577749-marine-electrical-system-engineer"
+        ]
+      }
     }
   ]
 }
