@@ -1,0 +1,16 @@
+{
+  "name": "expired-jobs-checker",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Open / closed / unknown status of job postings (factpipe job_ids or job URLs) against the daily factpipe jobs index.",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "apify": "^3.7.2"
+  },
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node --test 'tests/*.test.mjs'"
+  }
+}

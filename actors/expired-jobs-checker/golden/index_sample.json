@@ -1,0 +1,1987 @@
+{
+ "source": "factpipe jobs index build 2026-11-02T11:04:55.585Z (trimmed real records)",
+ "built_at": "2026-11-02T11:04:55.585Z",
+ "boards": {
+  "ashby:airwallex": {
+   "t": "airwallex",
+   "f": "2026-11-02T11:05:00.914Z",
+   "kw": "airwallex ai native financial operating system real time intelligent economy 675 000 businesses including mclaren racing qantas shein tiktok use"
+  },
+  "ashby:alan": {
+   "t": "alan",
+   "f": "2026-11-02T11:04:58.952Z",
+   "kw": "team alan healthcare health insurance company partner members every day france prevention today get need work new wait symptoms worse"
+  },
+  "ashby:altura": {
+   "t": "altura",
+   "f": "2026-11-02T11:04:59.645Z",
+   "kw": "gtm re altura ambitious ai saas startup organisations win tenders rfps bid management strategic teams right deals faster knowledge platform"
+  },
+  "ashby:applied compute": {
+   "t": "Applied Compute",
+   "f": "2026-11-02T11:05:01.984Z",
+   "kw": "re role applied compute infrastructure build work ai customers systems looking ll closely across make"
+  },
+  "greenhouse:abacusinsights": {
+   "t": "abacusinsights",
+   "f": "2026-11-02T11:04:56.711Z",
+   "kw": "abacus insights transforming data ai work health plans mission simple make healthcare usable people responsible care cost decisions act faster"
+  },
+  "greenhouse:agoda": {
+   "t": "agoda",
+   "f": "2026-11-02T11:05:02.799Z",
+   "kw": "agoda bridge world travel story began 2005 two lifelong friends entrepreneurs driven passion launched make easier everyone explore today part"
+  },
+  "greenhouse:airbnb": {
+   "t": "airbnb",
+   "f": "2026-11-02T11:05:01.902Z",
+   "kw": "community airbnb born 2007 two hosts welcomed three guests san francisco home since grown million billion guest arrivals almost every"
+  },
+  "greenhouse:airtrunk": {
+   "t": "airtrunk",
+   "f": "2026-11-02T11:05:02.312Z",
+   "kw": "want part asia pacific middle east apme largest innovative rapidly growing data centre company airtrunk hyperscale powerful purpose scale sustain"
+  },
+  "lever:agile-defense": {
+   "t": "agile-defense",
+   "f": "2026-11-02T11:05:44.195Z",
+   "kw": "agile defense know action defines outcome new challenges require solutions always look future embrace change unmovable spirit courage build comes"
+  },
+  "lever:ampd-energy": {
+   "t": "ampd-energy",
+   "f": "2026-11-02T11:06:13.044Z",
+   "kw": "engineering ampd energy transforming cities build cleaner smarter sustainably trailblazers making construction industry emission free products advanced compact connected battery"
+  },
+  "lever:belkins": {
+   "t": "belkins",
+   "f": "2026-11-02T11:07:38.911Z",
+   "kw": "2017 belkins started appointment setting agency one service offering fast forward today ve transformed group vibrant ecosystem services products define"
+  },
+  "lever:blablacar": {
+   "t": "blablacar",
+   "f": "2026-11-02T11:08:03.523Z",
+   "kw": "engineering end blablacar world leading community based travel app enabling 27 million members year carpool bus 21 countries team 800"
+  },
+  "personio:1komma5grad": {
+   "t": "1komma5grad",
+   "f": "2026-11-02T11:07:34.739Z",
+   "kw": "1k5 bei verfolgen vision living wind sunlight forever free dafur bauen heartbeat energiesystem zukunft bist dabei handwerk skalierbare software solar"
+  },
+  "personio:atania": {
+   "t": "atania",
+   "f": "2026-11-02T11:08:51.410Z",
+   "kw": "deine aufgaben von festangestellte bei"
+  },
+  "personio:culligan": {
+   "t": "culligan",
+   "f": "2026-11-02T11:11:32.530Z",
+   "kw": "deine benefits wie gestalte deinen sowie bis mehr zeit dich 30 urlaubstage sonderurlaub besondere anlasse zusatzlich freie tage heiligabend silvester"
+  },
+  "personio:edelstoff-media-gmbh": {
+   "t": "edelstoff-media-gmbh",
+   "f": "2026-11-02T11:12:51.847Z",
+   "kw": ""
+  },
+  "recruitee:accso": {
+   "t": "accso",
+   "f": "2026-11-02T11:04:58.099Z",
+   "kw": "erwartet dich bei uns arbeitest kunden wie axa bmw bahn zdf konzipierst entwickelst implementierst softwarelosungen dem ai methoden tools gesamten"
+  },
+  "recruitee:athora": {
+   "t": "athora",
+   "f": "2026-11-02T11:05:08.075Z",
+   "kw": "aan athora wat moet weten netherlands verzekeringsbedrijf bekende merken zwitserleven reaal houden voornamelijk bezig pensioenen levensverzekeringen nederlandse markt doen onderdeel"
+  },
+  "recruitee:careersdeltacapita": {
+   "t": "careersdeltacapita",
+   "f": "2026-11-02T11:05:29.858Z",
+   "kw": "services within role responsibilities"
+  },
+  "recruitee:eleqtron": {
+   "t": "eleqtron",
+   "f": "2026-11-02T11:05:47.823Z",
+   "kw": "eleqtron develops operates full stack computers based trapped ion technology computing new paradigm rapidly approaching commercial viability unique approach combines"
+  },
+  "teamtailor:abdulrauf1-1741255834": {
+   "t": "abdulrauf1-1741255834",
+   "f": "2026-11-02T11:19:20.551Z",
+   "kw": "key responsibilities experience"
+  },
+  "teamtailor:axiansgroup": {
+   "t": "axiansgroup",
+   "f": "2026-11-02T11:05:33.478Z",
+   "kw": "join axians innovation thrives trust autonomy every challenge opportunity create technology impact looking daily basis"
+  },
+  "teamtailor:codecamp": {
+   "t": "codecamp",
+   "f": "2026-11-02T11:06:57.675Z",
+   "kw": "work children code camp looking enthusiastic programs animation experienced interested working passionate video game building trustworthy independent punctual reliable able"
+  },
+  "teamtailor:epicompany": {
+   "t": "epicompany",
+   "f": "2026-11-02T11:08:28.147Z",
+   "kw": "part movement change way europe pays today digital payments still feel complicated random delays confusing rules extra apps accounts make"
+  },
+  "workable:activate-interactive-pte-ltd": {
+   "t": "activate-interactive-pte-ltd",
+   "f": "2026-11-02T11:07:07.956Z",
+   "kw": "technology activate interactive pte ltd leading consultancy headquartered singapore presence malaysia indonesia clients empowered quality cost effective impactful end development"
+  },
+  "workable:advansys-is": {
+   "t": "advansys-is",
+   "f": "2026-11-02T11:07:34.646Z",
+   "kw": "advansys role across engineering key responsibilities systems develop project requirements maintain teams support technical documentation activities"
+  },
+  "workable:amartha": {
+   "t": "amartha",
+   "f": "2026-11-02T11:09:53.247Z",
+   "kw": "fo lending untuk di memiliki dan dengan requirements pendidikan yang baik target keuangan dari jawab kerja diploma pengalaman sebagai mencapai"
+  },
+  "workable:astrome-technologies": {
+   "t": "astrome-technologies",
+   "f": "2026-11-02T11:13:16.663Z",
+   "kw": "engineering systems requirements high"
+  },
+  "workday:3m.wd1/search": {
+   "t": "3m.wd1/Search",
+   "f": "2026-11-02T11:18:02.321Z",
+   "kw": ""
+  },
+  "workday:aaco.wd105/aaco_careers": {
+   "t": "aaco.wd105/AACo_Careers",
+   "f": "2026-11-02T11:17:40.811Z",
+   "kw": ""
+  },
+  "workday:aah.wd5/external": {
+   "t": "aah.wd5/External",
+   "f": "2026-11-02T11:18:15.921Z",
+   "kw": ""
+  },
+  "workday:abbott.wd5/abbottcareers": {
+   "t": "abbott.wd5/abbottcareers",
+   "f": "2026-11-02T11:18:26.081Z",
+   "kw": ""
+  }
+ },
+ "records": [
+  {
+   "job_id": "ashby:airwallex:f66e5842-a7ee-48ea-bedb-ac095185b89f",
+   "title": "Account Manager, SME & Growth, CN",
+   "company_name": "Airwallex",
+   "company_board": "airwallex",
+   "ats": "ashby",
+   "department": "SME & Growth Business",
+   "team": "Account Management, SME & Growth",
+   "employment_type": "full_time",
+   "workplace_type": "unknown",
+   "locations": [
+    "CN - Shenzhen",
+    "CN - Guangzhou"
+   ],
+   "country_codes": [
+    "CN"
+   ],
+   "remote": null,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T09:31:50.968Z",
+   "updated_at": null,
+   "job_url": "https://jobs.ashbyhq.com/airwallex/f66e5842-a7ee-48ea-bedb-ac095185b89f",
+   "description_snippet": "ABOUT AIRWALLEX Airwallex is the AI-native financial operating system for a real-time, intelligent economy. More than 675,000 businesses, including McLaren Raci",
+   "duplicate_sources": [],
+   "kw": "business management customers rely manage complex needs borders lasting customer relationships support continued transaction activity identify opportunities expand value get portfolio industry handed development direct"
+  },
+  {
+   "job_id": "ashby:airwallex:4cb0147f-889c-4c22-9569-0fb6093b04e5",
+   "title": "Customer Success Manager, Enterprise",
+   "company_name": "Airwallex",
+   "company_board": "airwallex",
+   "ats": "ashby",
+   "department": "Enterprise Business",
+   "team": "Account Management, Enterprise",
+   "employment_type": "full_time",
+   "workplace_type": "unknown",
+   "locations": [
+    "CN - Shanghai"
+   ],
+   "country_codes": [
+    "CN"
+   ],
+   "remote": null,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T09:28:39.612Z",
+   "updated_at": null,
+   "job_url": "https://jobs.ashbyhq.com/airwallex/4cb0147f-889c-4c22-9569-0fb6093b04e5",
+   "description_snippet": "ABOUT AIRWALLEX Airwallex is the AI-native financial operating system for a real-time, intelligent economy. More than 675,000 businesses, including McLaren Raci",
+   "duplicate_sources": [],
+   "kw": "business account management team helps customers get value cross border manage strategic relationships solve operational challenges turn insight product improvements drive growth managing uncovering scenario"
+  },
+  {
+   "job_id": "ashby:alan:7115f641-7aa2-4835-ab1c-4d5839203bb1",
+   "title": "Field Marketing Manager - Belgium",
+   "company_name": "Alan",
+   "company_board": "alan",
+   "ats": "ashby",
+   "department": "Sales 🇧🇪",
+   "team": "Sales 🇧🇪",
+   "employment_type": "full_time",
+   "workplace_type": "remote",
+   "locations": [
+    "Anywhere in Belgium"
+   ],
+   "country_codes": [
+    "BE"
+   ],
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T09:48:02.769Z",
+   "updated_at": null,
+   "job_url": "https://jobs.ashbyhq.com/alan/7115f641-7aa2-4835-ab1c-4d5839203bb1",
+   "description_snippet": "HEALTH CAN’T WAIT. Not for symptoms to get worse. Not for a six‑month appointment. Not for a system to catch up. But that’s exactly how healthcare works today. ",
+   "duplicate_sources": [],
+   "kw": "sales role large employers public organisations don buy vendor pitch trust someone heard stage sat next dinner mission bring front decision makers ceos cfos chros"
+  },
+  {
+   "job_id": "ashby:alan:e8748316-8095-434b-b5a6-5d71aea7f2d8",
+   "title": "Expert Support Client Bilingue - Canada 🇨🇦",
+   "company_name": "Alan",
+   "company_board": "alan",
+   "ats": "ashby",
+   "department": "Care",
+   "team": "Care 🇨🇦",
+   "employment_type": "full_time",
+   "workplace_type": "onsite",
+   "locations": [
+    "Toronto, ON, Canada"
+   ],
+   "country_codes": [
+    "CA"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T08:33:09.868Z",
+   "updated_at": null,
+   "job_url": "https://jobs.ashbyhq.com/alan/e8748316-8095-434b-b5a6-5d71aea7f2d8",
+   "description_snippet": "Cette offre est également disponible en anglais ici https://jobs.ashbyhq.com/alan/18fd3bc7-8add-49ca-977e-30ad5e211cbf. Les deux annonces concernent le même pos",
+   "duplicate_sources": [],
+   "kw": "cette offre est egalement disponible anglais ici jobs ashbyhq 18fd3bc7 8add 49ca 977e 30ad5e211cbf deux annonces concernent meme poste sante attend pas ni que symptomes"
+  },
+  {
+   "job_id": "ashby:altura:7b9706c2-ec56-4d68-9695-5dc23b73ebe0",
+   "title": "Senior Customer Success Manager",
+   "company_name": "Altura",
+   "company_board": "altura",
+   "ats": "ashby",
+   "department": "GTM",
+   "team": "Customer Successs",
+   "employment_type": "full_time",
+   "workplace_type": "hybrid",
+   "locations": [
+    "Amsterdam HQ"
+   ],
+   "country_codes": [
+    "NL"
+   ],
+   "remote": true,
+   "salary_min": 75000,
+   "salary_max": 88000,
+   "salary_currency": "EUR",
+   "salary_period": "year",
+   "posted_at": "2026-11-02T09:37:45.624Z",
+   "updated_at": null,
+   "job_url": "https://jobs.ashbyhq.com/altura/7b9706c2-ec56-4d68-9695-5dc23b73ebe0",
+   "description_snippet": "WE'RE ALTURA, AN AMBITIOUS AI SAAS STARTUP! We help organisations win large, multi-stakeholder tenders and RFPs. Altura turns bid management from a tactical bot",
+   "duplicate_sources": [],
+   "kw": "successs help large multi stakeholder turns tactical bottleneck capability commercial pursue respond confidence compound build every runs paired collaboration grade foundations catching thrive iteke vp"
+  },
+  {
+   "job_id": "ashby:applied compute:4d3f6ac9-31fe-4dee-b4dc-34a36597d2ba",
+   "title": "Developer Relations Engineer",
+   "company_name": "Applied Compute",
+   "company_board": "Applied Compute",
+   "ats": "ashby",
+   "department": "GTM and Ops",
+   "team": "GTM and Ops",
+   "employment_type": "full_time",
+   "workplace_type": "onsite",
+   "locations": [
+    "San Francisco"
+   ],
+   "country_codes": [
+    "US"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-10-31T23:18:20.443Z",
+   "updated_at": null,
+   "job_url": "https://jobs.ashbyhq.com/Applied%20Compute/4d3f6ac9-31fe-4dee-b4dc-34a36597d2ba",
+   "description_snippet": "About the role As a Developer Relations Engineer your focus will be technical content, demos, and distribution. Your work will help developers and researchers d",
+   "duplicate_sources": [],
+   "kw": "gtm ops focus technical content demos distribution help developers researchers discover ac2 understand put directly engineers run experiments yourself turn results useful resources define devrel"
+  },
+  {
+   "job_id": "ashby:applied compute:f07d3c52-6181-4bcb-b4e8-8c172c933e66",
+   "title": "Field Marketing",
+   "company_name": "Applied Compute",
+   "company_board": "Applied Compute",
+   "ats": "ashby",
+   "department": "GTM and Ops",
+   "team": "GTM and Ops",
+   "employment_type": "full_time",
+   "workplace_type": "onsite",
+   "locations": [
+    "San Francisco"
+   ],
+   "country_codes": [
+    "US"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-10-26T19:02:29.624Z",
+   "updated_at": null,
+   "job_url": "https://jobs.ashbyhq.com/Applied%20Compute/f07d3c52-6181-4bcb-b4e8-8c172c933e66",
+   "description_snippet": "THE ROLE You'll be our first field marketer and own how Applied Compute shows up in person, from executive dinners to major conferences. You'll work directly wi",
+   "duplicate_sources": [],
+   "kw": "gtm ops first marketer shows person executive dinners major conferences directly account executives design teams head operations turn program pipeline playbook team scales calendar choose"
+  },
+  {
+   "job_id": "ashby:altura:c1257398-f625-4ad1-9259-62769b0b1756",
+   "title": "Senior AI Engineer",
+   "company_name": "Altura",
+   "company_board": "altura",
+   "ats": "ashby",
+   "department": "Engineering",
+   "team": "Engineering",
+   "employment_type": "full_time",
+   "workplace_type": "hybrid",
+   "locations": [
+    "Amsterdam HQ"
+   ],
+   "country_codes": [
+    "NL"
+   ],
+   "remote": true,
+   "salary_min": 115000,
+   "salary_max": 130000,
+   "salary_currency": "EUR",
+   "salary_period": "year",
+   "posted_at": "2026-10-08T07:37:21.516Z",
+   "updated_at": null,
+   "job_url": "https://jobs.ashbyhq.com/altura/c1257398-f625-4ad1-9259-62769b0b1756",
+   "description_snippet": "We’re Altura, an ambitious SaaS startup, and we just raised our Series A! At Altura, we’re making it easier for organisations to win complex deals (tenders and ",
+   "duplicate_sources": [],
+   "kw": "engineering raised series making easier complex powered simplify turning smooth connect automate tasks accessible efficiently effectively stopping first agentic virtual bidmanagement assistant designed lifecycle enjoy"
+  },
+  {
+   "job_id": "greenhouse:abacusinsights:8925405002",
+   "title": "Senior AI Security Engineer",
+   "company_name": "Abacus Insights",
+   "company_board": "abacusinsights",
+   "ats": "greenhouse",
+   "department": "Security & IT",
+   "team": null,
+   "employment_type": null,
+   "workplace_type": "unknown",
+   "locations": [
+    "India"
+   ],
+   "country_codes": [
+    "IN"
+   ],
+   "remote": null,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T09:32:58.000Z",
+   "updated_at": "2026-11-02T09:53:03.000Z",
+   "job_url": "https://boards.greenhouse.io/abacusinsights/jobs/8925405002?gh_jid=8925405002",
+   "description_snippet": "About Us Abacus Insights is transforming how data and AI work for health plans. Our mission is simple: make healthcare data usable, so the people responsible fo",
+   "duplicate_sources": [],
+   "kw": "engine behind headed next works directly alongside engineers building looking securit"
+  },
+  {
+   "job_id": "greenhouse:agoda:8326785",
+   "title": "Strategic Account Manager (Taipei)",
+   "company_name": "Agoda",
+   "company_board": "agoda",
+   "ats": "greenhouse",
+   "department": "Supply",
+   "team": null,
+   "employment_type": null,
+   "workplace_type": "unknown",
+   "locations": [
+    "Taipei, Taiwan"
+   ],
+   "country_codes": [
+    "TW"
+   ],
+   "remote": null,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T03:14:23.000Z",
+   "updated_at": "2026-11-02T03:15:05.000Z",
+   "job_url": "https://job-boards.greenhouse.io/agoda/jobs/8326785",
+   "description_snippet": "About Agoda At Agoda, we bridge the world through travel. Our story began in 2005, when two lifelong friends and entrepreneurs, driven by their passion for trav",
+   "duplicate_sources": [],
+   "kw": "supply opportunity main contact accommodation partners responsibility nurturing relationship key driving mutual growth developing business ability identify acquire new sources product offerings within assigned territory"
+  },
+  {
+   "job_id": "greenhouse:agoda:8239087",
+   "title": "Integration Manager – People Tech (Bangkok Based, relocation provided) [SHP]",
+   "company_name": "Agoda",
+   "company_board": "agoda",
+   "ats": "greenhouse",
+   "department": "Information Technology",
+   "team": null,
+   "employment_type": null,
+   "workplace_type": "unknown",
+   "locations": [
+    "Bangkok, Thailand"
+   ],
+   "country_codes": [
+    "TH"
+   ],
+   "remote": null,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T02:42:55.000Z",
+   "updated_at": "2026-11-02T02:42:55.000Z",
+   "job_url": "https://job-boards.greenhouse.io/agoda/jobs/8239087",
+   "description_snippet": "About Agoda At Agoda, we bridge the world through travel. Our story began in 2005, when two lifelong friends and entrepreneurs, driven by their passion for trav",
+   "duplicate_sources": [],
+   "kw": "information global service delivery gsd responsible office infrastructure staff connectivity provide hardware software access resources allow achieve goals operate 10 different providing 24 support employees"
+  },
+  {
+   "job_id": "greenhouse:airbnb:8345089",
+   "title": "Senior Program Manager, Design",
+   "company_name": "Airbnb",
+   "company_board": "airbnb",
+   "ats": "greenhouse",
+   "department": "Design",
+   "team": null,
+   "employment_type": null,
+   "workplace_type": "unknown",
+   "locations": [
+    "Singapore"
+   ],
+   "country_codes": [
+    "SG"
+   ],
+   "remote": null,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T04:13:19.000Z",
+   "updated_at": "2026-11-02T04:13:19.000Z",
+   "job_url": "https://careers.airbnb.com/positions/8345089?gh_jid=8345089",
+   "description_snippet": "Airbnb was born in 2007 when two hosts welcomed three guests to their San Francisco home, and has since grown to over 5 million hosts who have welcomed over 2 b",
+   "duplicate_sources": [],
+   "kw": "operations ensures organization runs effectively scale enabling teams deliver products usable lovable globally impactful partners closely product management engineering marketing creative business leaders fostering strong"
+  },
+  {
+   "job_id": "greenhouse:airtrunk:8014192003",
+   "title": "Maintenance Service Manager",
+   "company_name": "AirTrunk",
+   "company_board": "airtrunk",
+   "ats": "greenhouse",
+   "department": "DC Operations",
+   "team": null,
+   "employment_type": null,
+   "workplace_type": "unknown",
+   "locations": [
+    "Osaka, Japan"
+   ],
+   "country_codes": [
+    "JP"
+   ],
+   "remote": null,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-01T23:53:37.000Z",
+   "updated_at": "2026-11-01T23:53:37.000Z",
+   "job_url": "https://job-boards.greenhouse.io/airtrunk/jobs/8014192003",
+   "description_snippet": "Want to be a part of Asia Pacific & Middle East's (APME) largest, most innovative, and rapidly growing data centre company? AirTrunk is a hyperscale data centre",
+   "duplicate_sources": [],
+   "kw": "dc operations services msm reporting senior technical stsm making impact number supporting relation aspects achieve 100 time compliance customer slas multi disciplinary managers technicians third"
+  },
+  {
+   "job_id": "greenhouse:abacusinsights:8706824002",
+   "title": "Senior Business Intelligence Analyst (Healthcare)",
+   "company_name": "Abacus Insights",
+   "company_board": "abacusinsights",
+   "ats": "greenhouse",
+   "department": "Sales & Marketing",
+   "team": null,
+   "employment_type": null,
+   "workplace_type": "unknown",
+   "locations": [
+    "India"
+   ],
+   "country_codes": [
+    "IN"
+   ],
+   "remote": null,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-10-30T16:11:30.000Z",
+   "updated_at": "2026-11-02T09:52:11.000Z",
+   "job_url": "https://boards.greenhouse.io/abacusinsights/jobs/8706824002?gh_jid=8706824002",
+   "description_snippet": "About Us Abacus Insights is transforming how data and AI work for health plans. Our mission is simple: make healthcare data usable, so the people responsible fo",
+   "duplicate_sources": [],
+   "kw": "sales marketing seeking growth analytics team ideal professional years exp"
+  },
+  {
+   "job_id": "greenhouse:airbnb:8337229",
+   "title": "Senior Manager, Community Policy",
+   "company_name": "Airbnb",
+   "company_board": "airbnb",
+   "ats": "greenhouse",
+   "department": "Public Policy",
+   "team": null,
+   "employment_type": null,
+   "workplace_type": "unknown",
+   "locations": [
+    "United States"
+   ],
+   "country_codes": [
+    "US"
+   ],
+   "remote": null,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-10-30T19:19:06.000Z",
+   "updated_at": "2026-10-30T19:19:06.000Z",
+   "job_url": "https://careers.airbnb.com/positions/8337229?gh_jid=8337229",
+   "description_snippet": "Airbnb was born in 2007 when two hosts welcomed three guests to their San Francisco home, and has since grown to over 5 million hosts who have welcomed over 2 b",
+   "duplicate_sources": [],
+   "kw": "public mission create evolve principled policies establish rules road involves solving complex trust safety challenges time work informed rigorous research stakeholder collaboration design support email"
+  },
+  {
+   "job_id": "greenhouse:airtrunk:8046821003",
+   "title": "Global Travel Experience Manager",
+   "company_name": "AirTrunk",
+   "company_board": "airtrunk",
+   "ats": "greenhouse",
+   "department": "People & Culture",
+   "team": null,
+   "employment_type": null,
+   "workplace_type": "unknown",
+   "locations": [
+    "Singapore HQ"
+   ],
+   "country_codes": [
+    "SG"
+   ],
+   "remote": null,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-10-30T00:17:04.000Z",
+   "updated_at": "2026-10-30T00:43:17.000Z",
+   "job_url": "https://job-boards.greenhouse.io/airtrunk/jobs/8046821003",
+   "description_snippet": "Want to be a part of Asia Pacific & Middle East's (APME) largest, most innovative, and rapidly growing data centre company? AirTrunk is a hyperscale data centre",
+   "duplicate_sources": [],
+   "kw": "people culture impact shape fast business ll lead strategy behind safe seamless cost effective programme giving employees great wherever takes policy technology supplier partnerships traveller"
+  },
+  {
+   "job_id": "lever:agile-defense:2cd9e727-1ddc-4617-abac-8e95e70c0735",
+   "title": "Senior Technical Recruiter & Portfolio Owner",
+   "company_name": "Agile Defense",
+   "company_board": "agile-defense",
+   "ats": "lever",
+   "department": "Corporate",
+   "team": "Human Capital / People Operations",
+   "employment_type": "full_time",
+   "workplace_type": "remote",
+   "locations": [
+    "Remote",
+    "McLean, VA",
+    "Tampa, FL",
+    "Fort Huachuca, AZ"
+   ],
+   "country_codes": [
+    "US"
+   ],
+   "remote": true,
+   "salary_min": 110000,
+   "salary_max": 120000,
+   "salary_currency": "USD",
+   "salary_period": "year",
+   "posted_at": "2026-11-02T00:48:48.609Z",
+   "updated_at": null,
+   "job_url": "https://jobs.lever.co/agile-defense/2cd9e727-1ddc-4617-abac-8e95e70c0735",
+   "description_snippet": "About Agile Defense At Agile Defense we know that action defines the outcome and new challenges require new solutions. That’s why we always look to the future a",
+   "duplicate_sources": [],
+   "kw": "corporate human capital people operations role exists name redacted ownership becomes needs experienced recruiters full cleared requisitions stakeholders behind leads end coaching raising floor ii"
+  },
+  {
+   "job_id": "lever:ampd-energy:b72b5221-5ae1-47d5-a384-c10b436fc1d6",
+   "title": "Regional Sales Manager - HK & Taiwan",
+   "company_name": "Ampd Energy",
+   "company_board": "ampd-energy",
+   "ats": "lever",
+   "department": "Business development",
+   "team": "Business Development, East Asia",
+   "employment_type": "full_time",
+   "workplace_type": "hybrid",
+   "locations": [
+    "Taiwan"
+   ],
+   "country_codes": [
+    "TW"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T07:25:54.989Z",
+   "updated_at": null,
+   "job_url": "https://jobs.lever.co/ampd-energy/b72b5221-5ae1-47d5-a384-c10b436fc1d6",
+   "description_snippet": "About Ampd Energy Ampd Energy is transforming how cities build - cleaner, smarter, and more sustainably. We are trailblazers in making the construction industry",
+   "duplicate_sources": [],
+   "kw": "business development east asia overview growing join focused driving growth within solutions market mining industrial applications specifically looking someone experience systems equipment supporting operations hong"
+  },
+  {
+   "job_id": "lever:belkins:121416b0-eb1f-43fe-b0e7-cff8cd62efdb",
+   "title": "Brand Lead / Growth Marketing Lead | Revit",
+   "company_name": "Belkins",
+   "company_board": "belkins",
+   "ats": "lever",
+   "department": "Revit",
+   "team": "Marketing",
+   "employment_type": "full_time",
+   "workplace_type": "remote",
+   "locations": [
+    "Macedonia",
+    "Georgia",
+    "Kosovo",
+    "Serbia",
+    "Slovenia"
+   ],
+   "country_codes": [
+    "GE",
+    "MK",
+    "RS",
+    "SI",
+    "XK"
+   ],
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-01T19:22:59.167Z",
+   "updated_at": null,
+   "job_url": "https://jobs.lever.co/belkins/121416b0-eb1f-43fe-b0e7-cff8cd62efdb",
+   "description_snippet": "Back in 2017, Belkins started as an appointment-setting agency with just one service offering. Fast forward to today, and we’ve transformed into Belkins Group—a",
+   "duplicate_sources": [],
+   "kw": "back among successes ambitious start ups like evolved standalone powerhouses well innovative folderly believe future high end generation accessible adaptable sizes life stages rapidly growing"
+  },
+  {
+   "job_id": "lever:blablacar:1d8cd0ab-99f0-4ba2-8c22-6c25f9f202cb",
+   "title": "Senior Growth Lead",
+   "company_name": "BlaBlaCar",
+   "company_board": "blablacar",
+   "ats": "lever",
+   "department": "Marketing",
+   "team": "Marketing",
+   "employment_type": "full_time",
+   "workplace_type": "hybrid",
+   "locations": [
+    "São Paulo, Brazil"
+   ],
+   "country_codes": [
+    "BR"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T09:49:37.395Z",
+   "updated_at": null,
+   "job_url": "https://jobs.lever.co/blablacar/1d8cd0ab-99f0-4ba2-8c22-6c25f9f202cb",
+   "description_snippet": "About BlaBlaCar BlaBlaCar is the world’s leading community-based travel app enabling 27 million members a year to carpool or travel by bus in 21 countries. Our ",
+   "duplicate_sources": [],
+   "kw": "marketing re drive sustainable data informed entire customer lifecycle acquisition retention take next level brazil ll local partner settings strategy blending analytical rigor creative experimentation"
+  },
+  {
+   "job_id": "lever:agile-defense:a3223f2b-b4ba-4233-afcf-dedff11776fa",
+   "title": "Subcontracts Administrator",
+   "company_name": "Agile Defense",
+   "company_board": "agile-defense",
+   "ats": "lever",
+   "department": "Corporate",
+   "team": "Contracts, Pricing & Procurement",
+   "employment_type": "full_time",
+   "workplace_type": "remote",
+   "locations": [
+    "McLean, VA"
+   ],
+   "country_codes": [
+    "US"
+   ],
+   "remote": true,
+   "salary_min": 55000,
+   "salary_max": 85000,
+   "salary_currency": "USD",
+   "salary_period": "year",
+   "posted_at": "2026-10-30T19:35:36.519Z",
+   "updated_at": null,
+   "job_url": "https://jobs.lever.co/agile-defense/a3223f2b-b4ba-4233-afcf-dedff11776fa",
+   "description_snippet": "About Agile Defense At Agile Defense we know that action defines the outcome and new challenges require new solutions. That’s why we always look to the future a",
+   "duplicate_sources": [],
+   "kw": "corporate contracts pricing procurement remote mclean va summary seeking qualified individual join department internal government customers ideal candidate demonstrated aptitude work strong motivation learn grow"
+  },
+  {
+   "job_id": "lever:belkins:6564ad4e-8bfc-4d0e-8acc-e6a08f41b000",
+   "title": "Cold Calling SDR",
+   "company_name": "Belkins",
+   "company_board": "belkins",
+   "ats": "lever",
+   "department": "Belkins - Delivery",
+   "team": "Pay Per Meeting",
+   "employment_type": "full_time",
+   "workplace_type": "remote",
+   "locations": [
+    "Kosovo",
+    "Georgia",
+    "Lithuania",
+    "Serbia",
+    "Romania",
+    "Macedonia",
+    "Latvia"
+   ],
+   "country_codes": [
+    "GE",
+    "LT",
+    "LV",
+    "MK",
+    "RO",
+    "RS",
+    "XK"
+   ],
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-10-30T21:24:57.392Z",
+   "updated_at": null,
+   "job_url": "https://jobs.lever.co/belkins/6564ad4e-8bfc-4d0e-8acc-e6a08f41b000",
+   "description_snippet": "In 2017, Belkins started as an appointment-setting agency with just one service offering. Fast-forward to today, and we've transformed into Belkins Group — a vi",
+   "duplicate_sources": [],
+   "kw": "delivery pay meeting seven years running achieving amazing worldwide speak themselves global portfolio set 200 appointments delivering experts providing essential ready take growth next diving"
+  },
+  {
+   "job_id": "lever:blablacar:4b1d549d-4034-41a1-a697-e0a6572c13eb",
+   "title": "Confirmed Backend Engineer - Train",
+   "company_name": "BlaBlaCar",
+   "company_board": "blablacar",
+   "ats": "lever",
+   "department": "Engineering",
+   "team": "Back-end",
+   "employment_type": "full_time",
+   "workplace_type": "hybrid",
+   "locations": [
+    "Paris, France"
+   ],
+   "country_codes": [
+    "FR"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-10-23T14:47:59.350Z",
+   "updated_at": null,
+   "job_url": "https://jobs.lever.co/blablacar/4b1d549d-4034-41a1-a697-e0a6572c13eb",
+   "description_snippet": "About BlaBlaCar BlaBlaCar is the world’s leading community-based travel app enabling 27 million members a year to carpool or travel by bus in 21 countries. Our ",
+   "duplicate_sources": [],
+   "kw": "back software supply scale current distribution europe supporting expansion new markets developer work technical challenges feature development early stage conception testing strategy deployment monitoring releases"
+  },
+  {
+   "job_id": "lever:ampd-energy:8981cfcf-cf31-4c6b-ad1d-98a0378b964f",
+   "title": "Embedded Software Engineer",
+   "company_name": "Ampd Energy",
+   "company_board": "ampd-energy",
+   "ats": "lever",
+   "department": "Engineering",
+   "team": "Engineering",
+   "employment_type": "full_time",
+   "workplace_type": "onsite",
+   "locations": [
+    "Hong Kong"
+   ],
+   "country_codes": [
+    "HK"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-10-12T06:44:47.555Z",
+   "updated_at": null,
+   "job_url": "https://jobs.lever.co/ampd-energy/8981cfcf-cf31-4c6b-ad1d-98a0378b964f",
+   "description_snippet": "About Ampd Energy Ampd Energy is transforming how cities build - cleaner, smarter, and more sustainably. We are trailblazers in making the construction industry",
+   "duplicate_sources": [],
+   "kw": "job responsibilities maintain code microgrid controller load sharing paralleling management ems controlling high devices work cloud development iot telemetry reporting smart algorithms arbitrage peak shaving"
+  },
+  {
+   "job_id": "personio:1komma5grad:2871161",
+   "title": "Office Manager:in (m/w/d) 1KOMMA5° Bielefeld",
+   "company_name": "1KOMMA5° Bielefeld GmbH",
+   "company_board": "1komma5grad",
+   "ats": "personio",
+   "department": "Office Management",
+   "team": "1K5° Hildesheim",
+   "employment_type": "full_time",
+   "workplace_type": "unknown",
+   "locations": [
+    "Bielefeld"
+   ],
+   "country_codes": [
+    "DE"
+   ],
+   "remote": null,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T11:53:42.000Z",
+   "updated_at": null,
+   "job_url": "https://1komma5grad.jobs.personio.de/job/2871161",
+   "description_snippet": "1KOMMA5° Bei 1KOMMA5° verfolgen wir eine Vision: Living on wind and sunlight forever for free. Dafür bauen wir mit Heartbeat AI das Energiesystem der Zukunft. B",
+   "duplicate_sources": [],
+   "years_experience_hint": 1,
+   "kw": "management hildesheim bringen regionales zusammen warmepumpe virtuellen erneuerbare energien willst ubernehmen losungen wirklich zahlen gestalte energiewelt morgen erste kontaktperson kunden partner ubernimmst kommunikation telefon mail"
+  },
+  {
+   "job_id": "personio:1komma5grad:2871134",
+   "title": "Praktikant im Bereich Warehouse & Logistics (m/w/d) - 1KOMMA5° Remscheid",
+   "company_name": "Ampenova GmbH",
+   "company_board": "1komma5grad",
+   "ats": "personio",
+   "department": "Logistik",
+   "team": "1K5° Remscheid (Ampenova GmbH)",
+   "employment_type": "internship",
+   "workplace_type": "unknown",
+   "locations": [
+    "Remscheid"
+   ],
+   "country_codes": [],
+   "remote": null,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T11:44:39.000Z",
+   "updated_at": null,
+   "job_url": "https://1komma5grad.jobs.personio.de/job/2871134",
+   "description_snippet": "1KOMMA5° Bei 1KOMMA5° verfolgen wir eine Vision: Living on wind and sunlight forever for free. Dafür bauen wir mit Heartbeat AI das Energiesystem der Zukunft. B",
+   "duplicate_sources": [],
+   "years_experience_hint": 1,
+   "kw": "logistik ampenova gmbh bringen regionales zusammen warmepumpe virtuellen erneuerbare energien willst ubernehmen losungen wirklich zahlen gestalte energiewelt morgen unterstutzung wareneingangs warenausgangskontrolle sowie uberwachung bestandsgenauigkeit analyse"
+  },
+  {
+   "job_id": "personio:atania:2870766",
+   "title": "Senior Software Engineer (m/w/d)",
+   "company_name": "atania GmbH Wirtschaftsprüfungsgesellschaft",
+   "company_board": "atania",
+   "ats": "personio",
+   "department": "Technology",
+   "team": "Festangestellte (IT)",
+   "employment_type": "full_time",
+   "workplace_type": "unknown",
+   "locations": [
+    "München"
+   ],
+   "country_codes": [
+    "DE"
+   ],
+   "remote": null,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T08:49:33.000Z",
+   "updated_at": null,
+   "job_url": "https://atania.jobs.personio.de/job/2870766",
+   "description_snippet": "Deine Aufgaben • Beschreibung und Spezifikation neuer Anwendungen, Steuerung der KI-Agenten bei der Code-Erstellung sowie Sicherstellung qualitativ hochwertiger",
+   "duplicate_sources": [],
+   "kw": "technology beschreibung spezifikation neuer anwendungen steuerung ki agenten code erstellung sowie sicherstellung qualitativ hochwertiger ergebnisse enger zusammenarbeit product owner fachbereichen gemeinsam machst aus einer fachlichen"
+  },
+  {
+   "job_id": "personio:culligan:2870700",
+   "title": "Marketing Manager Messe & Events (m/w/d)",
+   "company_name": "Culligan Deutschland GmbH",
+   "company_board": "culligan",
+   "ats": "personio",
+   "department": "Marketing",
+   "team": "Kaufmännische Festangestellte",
+   "employment_type": "temporary",
+   "workplace_type": "unknown",
+   "locations": [
+    "Neuss"
+   ],
+   "country_codes": [],
+   "remote": null,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T07:31:54.000Z",
+   "updated_at": null,
+   "job_url": "https://culligan.jobs.personio.de/job/2870700",
+   "description_snippet": "Deine Benefits Arbeiten, wie es zu deinem Leben passt: Gestalte deinen Tag flexibel dank Gleitzeit sowie Arbeitszeitkonto und bis zu zwei Tagen mobilem Arbeiten",
+   "duplicate_sources": [],
+   "kw": "kaufmannische arbeiten es deinem leben passt tag flexibel dank gleitzeit arbeitszeitkonto zwei tagen mobilem pro woche erlebnisse regelma ige team firmenevents den zusammenhalt schaffen raum"
+  },
+  {
+   "job_id": "personio:edelstoff-media-gmbh:2870542",
+   "title": "Sales Manager private banking kongress & Eventformate (m/w/d) AB SOFORT (befristet auf 1 Jahr mit Option auf Verlängerung)",
+   "company_name": "rehblau events GmbH",
+   "company_board": "edelstoff-media-gmbh",
+   "ats": "personio",
+   "department": "Sales",
+   "team": "Festangestellte",
+   "employment_type": "temporary",
+   "workplace_type": "unknown",
+   "locations": [
+    "Hamburg"
+   ],
+   "country_codes": [
+    "DE"
+   ],
+   "remote": null,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-01T14:48:26.000Z",
+   "updated_at": null,
+   "job_url": "https://edelstoff-media-gmbh.jobs.personio.de/job/2870542",
+   "description_snippet": "Über uns Wir sind eine inhabergeführte Eventagentur, die sich auf die Konzeption und Umsetzung hochwertiger Konferenzen spezialisiert hat. Der Fokus liegt auf d",
+   "duplicate_sources": [],
+   "kw": "festangestellte uber uns sind inhabergefuhrte eventagentur sich konzeption umsetzung hochwertiger konferenzen spezialisiert hat fokus liegt finanzbranche unser flaggschiff gro wealth management forum dach region viermal"
+  },
+  {
+   "job_id": "personio:culligan:2869155",
+   "title": "Servicetechniker für Trinkwasserspender (m/w/d) in Aschaffenburg/Darmstadt",
+   "company_name": "Culligan Deutschland GmbH",
+   "company_board": "culligan",
+   "ats": "personio",
+   "department": "Operations BFC",
+   "team": "Gewerbliche Festangestellte",
+   "employment_type": "full_time",
+   "workplace_type": "unknown",
+   "locations": [
+    "Darmstadt"
+   ],
+   "country_codes": [
+    "DE"
+   ],
+   "remote": null,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-10-30T11:22:33.000Z",
+   "updated_at": null,
+   "job_url": "https://culligan.jobs.personio.de/job/2869155",
+   "description_snippet": "Deine Benefits Attraktive Vergütung: Freue dich auf ein faires Vergütungspaket mit festem Gehalt, zusätzlichen Spesen und einer attraktiven Technikerprämie.Arbe",
+   "duplicate_sources": [],
+   "years_experience_hint": 2,
+   "kw": "operations bfc gewerbliche attraktive vergutung freue faires vergutungspaket festem gehalt zusatzlichen spesen attraktiven technikerpramie arbeitszeit ab haustur dein arbeitstag beginnt bereits fahrt ersten kunden endet"
+  },
+  {
+   "job_id": "personio:atania:2857022",
+   "title": "Steuerberater (m/w/d) – International Tax",
+   "company_name": "LKC International Steuerberatungsgesellschaft mbH",
+   "company_board": "atania",
+   "ats": "personio",
+   "department": "Steuer",
+   "team": "Festangestellte",
+   "employment_type": "full_time",
+   "workplace_type": "unknown",
+   "locations": [
+    "Berlin"
+   ],
+   "country_codes": [
+    "DE"
+   ],
+   "remote": null,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-10-23T09:42:53.000Z",
+   "updated_at": null,
+   "job_url": "https://atania.jobs.personio.de/job/2857022",
+   "description_snippet": "Unternehmensbeschreibung Für die LKC-International suchen wir am Standort Berlin einen Steuerberater (m/w/d) mit Zusatzqualifikation Fachberater für Internation",
+   "duplicate_sources": [],
+   "kw": "steuer unternehmensbeschreibung lkc suchen standort berlin einen zusatzqualifikation fachberater internationales steuerrecht mochtest nicht nur bearbeiten sondern wirklich gestalten willst grenzuberschreitende strukturen verstehen individuelle losungen entwickeln"
+  },
+  {
+   "job_id": "personio:edelstoff-media-gmbh:2830664",
+   "title": "Multimedia-Redakteur (m/w/d) für unser Content-Marketing-Team",
+   "company_name": "Edelstoff Media GmbH",
+   "company_board": "edelstoff-media-gmbh",
+   "ats": "personio",
+   "department": "Content Marketing",
+   "team": "Festangestellte",
+   "employment_type": "full_time",
+   "workplace_type": "unknown",
+   "locations": [
+    "Hamburg"
+   ],
+   "country_codes": [
+    "DE"
+   ],
+   "remote": null,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-10-06T15:42:11.000Z",
+   "updated_at": null,
+   "job_url": "https://edelstoff-media-gmbh.jobs.personio.de/job/2830664",
+   "description_snippet": "Über uns Edelstoff Media ist eines der führenden B2B-Medienhäuser der Finanzbranche im deutschsprachigen Raum. Mit unseren Publikationen DAS INVESTMENT und priv",
+   "duplicate_sources": [],
+   "kw": "festangestellte uber uns edelstoff media eines fuhrenden b2b medienhauser finanzbranche deutschsprachigen raum unseren publikationen investment private banking magazin erreichen tausende entscheiderinnen entscheider aus fondsberatung unabhangigen"
+  },
+  {
+   "job_id": "recruitee:accso:2805074",
+   "title": "Senior Solution Architect / Facharchitekt*",
+   "company_name": "Accso – Accelerated Solutions GmbH",
+   "company_board": "accso",
+   "ats": "recruitee",
+   "department": null,
+   "team": null,
+   "employment_type": "full_time",
+   "workplace_type": "hybrid",
+   "locations": [
+    "München, Bayern, Deutschland"
+   ],
+   "country_codes": [
+    "DE"
+   ],
+   "remote": false,
+   "salary_min": 87500,
+   "salary_max": 108000,
+   "salary_currency": "EUR",
+   "salary_period": "year",
+   "posted_at": "2026-11-02T08:44:06.000Z",
+   "updated_at": "2026-11-02T08:44:06.000Z",
+   "job_url": "https://accso.recruitee.com/o/senior-solution-architect-facharchitekt-5",
+   "description_snippet": "Das erwartet dich bei uns: • Du arbeitest für Kunden wie AXA, BMW, die Deutsche Bahn und das ZDF • Du konzipierst, entwickelst und implementierst Softwarelösung",
+   "duplicate_sources": [],
+   "kw": "deutsche entwirfst anspruchsvolle end losungsarchitekturen business anforderungen technischen moglichkeiten einklang bringen bindeglied zwischen fachbereich ubersetzt komplexe geschaftsanforderungen umsetzbare architekturen beratst unsere strategischen ausrichtung ihrer landschaft"
+  },
+  {
+   "job_id": "recruitee:athora:2804938",
+   "title": "Senior Recruiter",
+   "company_name": "Athora Netherlands",
+   "company_board": "athora",
+   "ats": "recruitee",
+   "department": "Business Enablement",
+   "team": null,
+   "employment_type": "contract",
+   "workplace_type": "hybrid",
+   "locations": [
+    "Amsterdam, Noord-Holland, Nederland"
+   ],
+   "country_codes": [
+    "NL"
+   ],
+   "remote": false,
+   "salary_min": 4435,
+   "salary_max": 5913,
+   "salary_currency": "EUR",
+   "salary_period": "month",
+   "posted_at": "2026-11-02T07:01:27.000Z",
+   "updated_at": "2026-11-02T09:44:31.000Z",
+   "job_url": "https://athora.recruitee.com/o/senior-recruiter-1",
+   "description_snippet": "Bouw jij vandaag al aan het talent dat Athora morgen nodig heeft? Dan maken we graag kennis met je! Wat je over ons moet weten? Wij zijn Athora Netherlands, een",
+   "duplicate_sources": [],
+   "kw": "business enablement bouw vandaag al talent morgen nodig heeft dan maken graag kennis recruitment gaat verder invullen vacatures interim opdrachten vooruitkijken welke expertise talenten nu"
+  },
+  {
+   "job_id": "recruitee:careersdeltacapita:2805236",
+   "title": "Senior Analyst - Confirmations Operations - Emerging Market Rates",
+   "company_name": "Delta Capita",
+   "company_board": "careersdeltacapita",
+   "ats": "recruitee",
+   "department": "Post Trade services (OTCMS)",
+   "team": null,
+   "employment_type": "full_time",
+   "workplace_type": "hybrid",
+   "locations": [
+    "Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia"
+   ],
+   "country_codes": [
+    "MY"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T09:37:51.000Z",
+   "updated_at": "2026-11-02T09:37:51.000Z",
+   "job_url": "https://careersdeltacapita.recruitee.com/o/senior-analyst-confirmations-operations-emerging-market-rates",
+   "description_snippet": "Process/Function Description: This position sits within the Emerging Market Rates Confirmation Operations team. The role is responsible for managing the end-to-",
+   "duplicate_sources": [],
+   "kw": "post trade otcms process function description position sits confirmation team responsible managing end including second level inbound activities affirmation chasing indexing matching well outbound tasks"
+  },
+  {
+   "job_id": "recruitee:careersdeltacapita:2804973",
+   "title": "Senior Analyst - Confirmations Operations - FX & Precious Metals",
+   "company_name": "Delta Capita",
+   "company_board": "careersdeltacapita",
+   "ats": "recruitee",
+   "department": "Post Trade services (OTCMS)",
+   "team": null,
+   "employment_type": "full_time",
+   "workplace_type": "hybrid",
+   "locations": [
+    "Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia"
+   ],
+   "country_codes": [
+    "MY"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T07:44:36.000Z",
+   "updated_at": "2026-11-02T07:44:36.000Z",
+   "job_url": "https://careersdeltacapita.recruitee.com/o/senior-analyst-confirmations-operations-fx-precious-metals",
+   "description_snippet": "Process/Function Description: This position sits within the FX & Precious Metal Options and Emerging Market Rates Confirmation Operations team. The role is resp",
+   "duplicate_sources": [],
+   "kw": "post trade otcms process function description position sits metal options emerging market rates confirmation team responsible managing end including second level inbound activities affirmation chasing"
+  },
+  {
+   "job_id": "recruitee:eleqtron:2805369",
+   "title": "RF Application Engineer (f/m/d)",
+   "company_name": "eleQtron GmbH",
+   "company_board": "eleqtron",
+   "ats": "recruitee",
+   "department": "Electronics",
+   "team": null,
+   "employment_type": "full_time",
+   "workplace_type": "onsite",
+   "locations": [
+    "Siegen, Nordrhein-Westfalen, Germany"
+   ],
+   "country_codes": [
+    "DE"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T10:33:37.000Z",
+   "updated_at": "2026-11-02T10:53:31.000Z",
+   "job_url": "https://eleqtron.recruitee.com/o/rf-application-engineer-fmd",
+   "description_snippet": "eleQtron develops and operates full-stack quantum computers based on trapped-ion technology. Quantum computing is a new computing paradigm rapidly approaching c",
+   "duplicate_sources": [],
+   "kw": "electronics quantum test validate optimize subsystems core platform siegen electronic engineering team play key testing characterizing validating integrating systems support platforms work closely international physicists"
+  },
+  {
+   "job_id": "recruitee:athora:2594102",
+   "title": "Reporting Specialist",
+   "company_name": "Athora Netherlands",
+   "company_board": "athora",
+   "ats": "recruitee",
+   "department": "Finance",
+   "team": null,
+   "employment_type": "full_time",
+   "workplace_type": "hybrid",
+   "locations": [
+    "Amsterdam, Noord-Holland, Nederland"
+   ],
+   "country_codes": [
+    "NL"
+   ],
+   "remote": false,
+   "salary_min": 3820.83,
+   "salary_max": 5780.73,
+   "salary_currency": "EUR",
+   "salary_period": "month",
+   "posted_at": "2026-10-30T08:10:14.000Z",
+   "updated_at": "2026-10-30T08:10:27.000Z",
+   "job_url": "https://athora.recruitee.com/o/reporting-specialist-6",
+   "description_snippet": "As a Reporting Specialist you prepare and maintain standard and tailored reporting for Athora Netherlands. You ensure completeness and data quality, make analys",
+   "duplicate_sources": [],
+   "kw": "finance prepare maintain standard tailored ensure completeness data quality make analysis key movements help evolve templates disclosures line internal policies external guidance sound like something"
+  },
+  {
+   "job_id": "recruitee:accso:2797335",
+   "title": "Senior Full Stack Engineer Cape Town*",
+   "company_name": "Accso – Accelerated Solutions GmbH",
+   "company_board": "accso",
+   "ats": "recruitee",
+   "department": null,
+   "team": null,
+   "employment_type": "full_time",
+   "workplace_type": "hybrid",
+   "locations": [
+    "Capetown, Western Cape, South Africa"
+   ],
+   "country_codes": [
+    "ZA"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-10-26T11:20:57.000Z",
+   "updated_at": "2026-11-02T08:19:24.000Z",
+   "job_url": "https://accso.recruitee.com/o/senior-full-stack-engineer-cape-town",
+   "description_snippet": "What to expect: • You solve challenging software engineering problems in a wide variety of projects for well-known, large German and South African clients. • Yo",
+   "duplicate_sources": [],
+   "kw": "expect solve challenging software engineering problems wide variety projects well known large german south african clients develop high performing frontend backend solution using primarily java"
+  },
+  {
+   "job_id": "recruitee:eleqtron:2764415",
+   "title": "IT Systems & Platform Engineer (f/m/d)",
+   "company_name": "eleQtron GmbH",
+   "company_board": "eleqtron",
+   "ats": "recruitee",
+   "department": "IT Support & Security",
+   "team": null,
+   "employment_type": "full_time",
+   "workplace_type": "onsite",
+   "locations": [
+    "Siegen, Nordrhein-Westfalen, Germany"
+   ],
+   "country_codes": [
+    "DE"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-10-01T06:31:08.000Z",
+   "updated_at": "2026-10-08T06:12:20.000Z",
+   "job_url": "https://eleqtron.recruitee.com/o/it-systems-platform-engineer-fmd",
+   "description_snippet": "eleQtron develops and operates full-stack quantum computers based on trapped-ion technology. Quantum computing is a new computing paradigm rapidly approaching c",
+   "duplicate_sources": [],
+   "kw": "support security quantum overview join team siegen hands focused supporting operating cloud infrastructure engineering platforms monitoring secure access environments within defined strategy governance framework take"
+  },
+  {
+   "job_id": "teamtailor:abdulrauf1-1741255834:8648705",
+   "title": "Insurance Admin & Sales Support Intern",
+   "company_name": "Burjline Builders",
+   "company_board": "abdulrauf1-1741255834",
+   "ats": "teamtailor",
+   "department": null,
+   "team": null,
+   "employment_type": null,
+   "workplace_type": "onsite",
+   "locations": [
+    "Manama, Bahrain"
+   ],
+   "country_codes": [
+    "BH"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T08:22:27.000Z",
+   "updated_at": null,
+   "job_url": "https://jobs.burjlinebuilders.com/jobs/8648705-insurance-admin-sales-support-intern",
+   "description_snippet": "Job Title Insurance Admin & Sales Support Intern Location Manama, Bahrain Employment Type Internship Industry Insurance Key Responsibilities • Assist in adminis",
+   "duplicate_sources": [],
+   "kw": "job title location manama bahrain employment type internship industry assist administrative tasks related policies documentation team preparing presentations proposals clients maintain accurate records client interactions"
+  },
+  {
+   "job_id": "teamtailor:abdulrauf1-1741255834:8647503",
+   "title": "Civil Multi-Skilled Maintenance Technician",
+   "company_name": "Burjline Builders",
+   "company_board": "abdulrauf1-1741255834",
+   "ats": "teamtailor",
+   "department": null,
+   "team": null,
+   "employment_type": null,
+   "workplace_type": "onsite",
+   "locations": [
+    "Ad Dammam, Saudi Arabia"
+   ],
+   "country_codes": [
+    "SA"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-01T20:22:16.000Z",
+   "updated_at": null,
+   "job_url": "https://jobs.burjlinebuilders.com/jobs/8647503-civil-multi-skilled-maintenance-technician",
+   "description_snippet": "Job Summary: The Civil Multi-Skilled Maintenance Technician is responsible for carrying out preventive, corrective, and emergency maintenance of civil and archi",
+   "duplicate_sources": [],
+   "kw": "job summary responsible carrying preventive corrective emergency architectural assets within commercial residential industrial institutional facilities role requires strong gypsum works painting carpentry masonry tile fixing"
+  },
+  {
+   "job_id": "teamtailor:axiansgroup:8650132",
+   "title": "Senior Data Analyst",
+   "company_name": "Axians Portugal Group",
+   "company_board": "axiansgroup",
+   "ats": "teamtailor",
+   "department": null,
+   "team": null,
+   "employment_type": null,
+   "workplace_type": "onsite",
+   "locations": [
+    "Lisboa, Portugal"
+   ],
+   "country_codes": [
+    "PT"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T10:43:12.000Z",
+   "updated_at": null,
+   "job_url": "https://axianstechtalent.teamtailor.com/jobs/8650132-senior-data-analyst",
+   "description_snippet": "Join Axians, where innovation thrives on trust and autonomy, and where every challenge is an opportunity to create technology with impact. SENIOR DATA ANALYST W",
+   "duplicate_sources": [],
+   "kw": "highly motivated detail oriented consultant dynamic team role act trusted advisor helping stakeholders transform business needs driven solutions ideal candidate combines strong analytical capabilities excellent"
+  },
+  {
+   "job_id": "teamtailor:axiansgroup:8649473",
+   "title": "Senior Project Manager in Global Markets",
+   "company_name": "Axians Portugal Group",
+   "company_board": "axiansgroup",
+   "ats": "teamtailor",
+   "department": null,
+   "team": null,
+   "employment_type": null,
+   "workplace_type": "onsite",
+   "locations": [
+    "Lisboa, Portugal"
+   ],
+   "country_codes": [
+    "PT"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T09:27:30.000Z",
+   "updated_at": null,
+   "job_url": "https://axianstechtalent.teamtailor.com/jobs/8649473-senior-project-manager-in-global-markets",
+   "description_snippet": "Join Axians, where innovation thrives on trust and autonomy, and where every challenge is an opportunity to create technology with impact. SENIOR PROJECT MANAGE",
+   "duplicate_sources": [],
+   "kw": "experienced lead strategic initiatives within environment role goes far beyond traditional management requiring strong leadership business acumen stakeholder ability drive transformation across multiple functions responsible"
+  },
+  {
+   "job_id": "teamtailor:codecamp:8648151",
+   "title": "Qualified Teacher - Holiday Camp Leadership Role",
+   "company_name": "Code Camp Ltd",
+   "company_board": "codecamp",
+   "ats": "teamtailor",
+   "department": "Events & Experiences (Camps)",
+   "team": "Camp Manager",
+   "employment_type": null,
+   "workplace_type": "onsite",
+   "locations": [
+    "Hillarys, Australia"
+   ],
+   "country_codes": [
+    "AU"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T05:44:04.000Z",
+   "updated_at": null,
+   "job_url": "https://codecamp.teamtailor.com/jobs/8648151-qualified-teacher-holiday-camp-leadership-role",
+   "description_snippet": "Are you a qualified primary or high school teacher seeking casual work over the summer school holidays? Partner with Code Camp to inspire creativity in kids thr",
+   "duplicate_sources": [],
+   "kw": "events experiences camps manager high school seeking summer holidays partner inspire kids technology unique professional opportunity one program providers offered coding design youtube dj minecraft"
+  },
+  {
+   "job_id": "teamtailor:codecamp:8648149",
+   "title": "Casual Instructor - Teach Kids Coding and Creativity",
+   "company_name": "Code Camp Ltd",
+   "company_board": "codecamp",
+   "ats": "teamtailor",
+   "department": "Events & Experiences (Camps)",
+   "team": "Head Teacher",
+   "employment_type": null,
+   "workplace_type": "onsite",
+   "locations": [
+    "Perth, Australia"
+   ],
+   "country_codes": [
+    "AU"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T05:42:39.000Z",
+   "updated_at": null,
+   "job_url": "https://codecamp.teamtailor.com/jobs/8648149-casual-instructor-teach-kids-coding-and-creativity",
+   "description_snippet": "Want casual work teaching coding and creativity to children? Code Camp are looking for enthusiastic casual instructors to teach programs in coding, Minecraft, R",
+   "duplicate_sources": [],
+   "kw": "events experiences camps head teacher want teaching instructors minecraft roblox craft summer school holidays ages 13 technology think ai youtube editing design music production stem"
+  },
+  {
+   "job_id": "teamtailor:epicompany:8648497",
+   "title": "Business Operations Internship – Remote-First",
+   "company_name": "Epi Company",
+   "company_board": "epicompany",
+   "ats": "teamtailor",
+   "department": "Member Development & Strategy",
+   "team": null,
+   "employment_type": null,
+   "workplace_type": "remote",
+   "locations": [
+    "Paris, France",
+    "Amsterdam, Netherlands"
+   ],
+   "country_codes": [
+    "FR",
+    "NL"
+   ],
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T07:53:34.000Z",
+   "updated_at": null,
+   "job_url": "https://careers.epicompany.eu/jobs/8648497-business-operations-internship-remote-first",
+   "description_snippet": "🚀 Be part of a movement to change the way Europe pays In today’s digital Europe, payments still feel too complicated. Random delays, confusing rules, extra app",
+   "duplicate_sources": [],
+   "kw": "member development strategy austria 17 contribute solution shaping future gain hands analytical experience real analyse performance kpis using databricks strategic projects tangible impact exposure international"
+  },
+  {
+   "job_id": "teamtailor:epicompany:8606986",
+   "title": "HR Project Manager – Remote-First",
+   "company_name": "Epi Company",
+   "company_board": "epicompany",
+   "ats": "teamtailor",
+   "department": "Talent Acquisition",
+   "team": null,
+   "employment_type": null,
+   "workplace_type": "remote",
+   "locations": [
+    "Brussels, Belgium",
+    "Paris, France",
+    "Berlin, Germany",
+    "Madrid, Spain"
+   ],
+   "country_codes": [
+    "BE",
+    "DE",
+    "ES",
+    "FR"
+   ],
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-10-23T08:35:59.000Z",
+   "updated_at": null,
+   "job_url": "https://careers.epicompany.eu/jobs/8606986-hr-project-manager-remote-first",
+   "description_snippet": "🚀 Be part of a movement to change the way Europe pays In today’s digital Europe, payments still feel too complicated. Random delays, confusing rules, extra app",
+   "duplicate_sources": [],
+   "kw": "talent acquisition operate highly regulated industry means rigor structure matter doesn mean everything set stone plenty room experiment challenge introduce better tools practices curious enthusiastic"
+  },
+  {
+   "job_id": "workable:activate-interactive-pte-ltd:00BB6C9369",
+   "title": "Software Engineer (NodeJS) - A26351",
+   "company_name": "Activate Interactive Pte Ltd",
+   "company_board": "activate-interactive-pte-ltd",
+   "ats": "workable",
+   "department": "Co-Development",
+   "team": "Information Technology",
+   "employment_type": "full_time",
+   "workplace_type": "unknown",
+   "locations": [
+    "Singapore, Singapore, Singapore"
+   ],
+   "country_codes": [
+    "SG"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T00:00:00.000Z",
+   "updated_at": null,
+   "job_url": "https://apply.workable.com/j/00BB6C9369",
+   "description_snippet": "Activate Interactive Pte Ltd (“Activate”) is a leading technology consultancy headquartered in Singapore with a presence in Malaysia and Indonesia. Our clients ",
+   "duplicate_sources": [],
+   "kw": "information realise unit hiring work government agencies engagement year internal code project pdo space rapid product delivery experimentation mission ambiguous ideas working products quickly learn"
+  },
+  {
+   "job_id": "workable:activate-interactive-pte-ltd:10DC08D61D",
+   "title": "Software Engineer (NodeJS) - A26261",
+   "company_name": "Activate Interactive Pte Ltd",
+   "company_board": "activate-interactive-pte-ltd",
+   "ats": "workable",
+   "department": "Co-Development",
+   "team": "Information Technology",
+   "employment_type": "full_time",
+   "workplace_type": "unknown",
+   "locations": [
+    "Singapore, Singapore, Singapore"
+   ],
+   "country_codes": [
+    "SG"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T00:00:00.000Z",
+   "updated_at": null,
+   "job_url": "https://apply.workable.com/j/10DC08D61D",
+   "description_snippet": "Activate Interactive Pte Ltd (“Activate”) is a leading technology consultancy headquartered in Singapore with a presence in Malaysia and Indonesia. Our clients ",
+   "duplicate_sources": [],
+   "kw": "information realise unit looking back engagement year internal code backend focused stack design develop core services based digital platform focus apis database logic workflows audit"
+  },
+  {
+   "job_id": "workable:advansys-is:75B44B5FF2",
+   "title": "Senior Project Planner",
+   "company_name": "AIS",
+   "company_board": "advansys-is",
+   "ats": "workable",
+   "department": "ADVANSYS",
+   "team": null,
+   "employment_type": "full_time",
+   "workplace_type": "unknown",
+   "locations": [
+    "Nasr City, Al Manteqah Al Oula, Egypt"
+   ],
+   "country_codes": [
+    "EG"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-01T00:00:00.000Z",
+   "updated_at": null,
+   "job_url": "https://apply.workable.com/j/75B44B5FF2",
+   "description_snippet": "Job Summary We are seeking an experienced Senior Project Planner to join our team and play a key role in planning, scheduling, cost control, and project perform",
+   "duplicate_sources": [],
+   "kw": "job summary seeking experienced join team play planning scheduling cost control performance management complex projects successful candidate responsible developing maintaining schedules conducting controls analysis identifying"
+  },
+  {
+   "job_id": "workable:advansys-is:A7895AE66F",
+   "title": "Project Planner",
+   "company_name": "AIS",
+   "company_board": "advansys-is",
+   "ats": "workable",
+   "department": "ADVANSYS",
+   "team": null,
+   "employment_type": null,
+   "workplace_type": "unknown",
+   "locations": [
+    "Nasr City, Al Manteqah Al Oula, Egypt"
+   ],
+   "country_codes": [
+    "EG"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-01T00:00:00.000Z",
+   "updated_at": null,
+   "job_url": "https://apply.workable.com/j/A7895AE66F",
+   "description_snippet": "Job Summary We are looking for a Planner to support project planning and scheduling activities across multi-disciplinary engineering projects. The role involves",
+   "duplicate_sources": [],
+   "kw": "job summary looking planning scheduling multi disciplinary projects involves developing maintaining schedules tracking progress identifying delays supporting controls reporting functions update baseline monitor identify critical"
+  },
+  {
+   "job_id": "workable:amartha:11283FF046",
+   "title": "Business Manager - Sulawesi Tenggara (Talent Pool)",
+   "company_name": "Amartha",
+   "company_board": "amartha",
+   "ats": "workable",
+   "department": "FO - Lending",
+   "team": null,
+   "employment_type": "contract",
+   "workplace_type": "unknown",
+   "locations": [
+    "Kendari, Kendari City, Indonesia"
+   ],
+   "country_codes": [
+    "ID"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T00:00:00.000Z",
+   "updated_at": null,
+   "job_url": "https://apply.workable.com/j/11283FF046",
+   "description_snippet": "Tugas & Tanggungjawab : • Memastikan seluruh KPI Cabang di lingkup Regionalnya dapat dicapai dengan baik • Memastikan operasional cabang di Areanya dapat berjal",
+   "duplicate_sources": [],
+   "kw": "tugas tanggungjawab kpi cabang lingkup regionalnya dicapai operasional areanya berjalan melalui pemenuhan pengelolaan sdm ekspansi kawasan kelola amartha portfolio sesuai tujuan nilai audit ekspekstasi management"
+  },
+  {
+   "job_id": "workable:amartha:39D2FEE5C1",
+   "title": "Business Manager - Kalimantan Selatan (Talent Pool)",
+   "company_name": "Amartha",
+   "company_board": "amartha",
+   "ats": "workable",
+   "department": "FO - Lending",
+   "team": null,
+   "employment_type": "contract",
+   "workplace_type": "unknown",
+   "locations": [
+    "Banjarmasin, Banjarmasin City, Indonesia"
+   ],
+   "country_codes": [
+    "ID"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T00:00:00.000Z",
+   "updated_at": null,
+   "job_url": "https://apply.workable.com/j/39D2FEE5C1",
+   "description_snippet": "Tugas & Tanggungjawab : • Memastikan seluruh KPI Cabang di lingkup Regionalnya dapat dicapai dengan baik • Memastikan operasional cabang di Areanya dapat berjal",
+   "duplicate_sources": [],
+   "kw": "tugas tanggungjawab kpi cabang lingkup regionalnya dicapai operasional areanya berjalan melalui pemenuhan pengelolaan sdm ekspansi kawasan kelola amartha portfolio sesuai tujuan nilai audit ekspekstasi management"
+  },
+  {
+   "job_id": "workable:astrome-technologies:04A4773C55",
+   "title": "Senior PCB Design Engineer",
+   "company_name": "Astrome Technologies",
+   "company_board": "astrome-technologies",
+   "ats": "workable",
+   "department": "Electronics",
+   "team": "Engineering",
+   "employment_type": "full_time",
+   "workplace_type": "unknown",
+   "locations": [
+    "Bengaluru, Karnataka, India"
+   ],
+   "country_codes": [
+    "IN"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T00:00:00.000Z",
+   "updated_at": null,
+   "job_url": "https://apply.workable.com/j/04A4773C55",
+   "description_snippet": "We are seeking a highly skilled and detail-oriented Senior PCB Design Engineer to join our hardware development team. In this role, you will be responsible for ",
+   "duplicate_sources": [],
+   "kw": "electronics seeking highly skilled detail oriented join hardware development team role responsible end layout optimization complex printed circuit boards advanced ideal candidate brings strong background"
+  },
+  {
+   "job_id": "workable:astrome-technologies:9149F5301F",
+   "title": "Mechanical Design Engineer",
+   "company_name": "Astrome Technologies",
+   "company_board": "astrome-technologies",
+   "ats": "workable",
+   "department": "Mechanical",
+   "team": "Engineering",
+   "employment_type": "full_time",
+   "workplace_type": "unknown",
+   "locations": [
+    "Bengaluru, Karnataka, India"
+   ],
+   "country_codes": [
+    "IN"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-10-28T00:00:00.000Z",
+   "updated_at": null,
+   "job_url": "https://apply.workable.com/j/9149F5301F",
+   "description_snippet": "• Design and develop mechanical systems for enclosure structures, including the payload integration platforms and mechanisms. • Collaborate with cross-functiona",
+   "duplicate_sources": [],
+   "kw": "develop enclosure structures including payload integration platforms mechanisms collaborate cross functional teams define integrate subsystems overall system perform finite element analysis fea simulations evaluate structural"
+  },
+  {
+   "job_id": "workday:3m.wd1/search:R01169129",
+   "title": "Senior Application Engineer",
+   "company_name": "3M",
+   "company_board": "3m.wd1/Search",
+   "ats": "workday",
+   "department": null,
+   "team": null,
+   "employment_type": null,
+   "workplace_type": "onsite",
+   "locations": [
+    "CN, Shanghai"
+   ],
+   "country_codes": [
+    "CN"
+   ],
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T00:00:00.000Z",
+   "updated_at": null,
+   "job_url": "https://3m.wd1.myworkdayjobs.com/Search/job/CN-Shanghai/Senior-Application-Engineer_R01169129",
+   "description_snippet": null,
+   "duplicate_sources": [],
+   "kw": ""
+  },
+  {
+   "job_id": "workday:3m.wd1/search:R01169565-2",
+   "title": "Sales Representative (m/w/*) für das Verkaufsgebiet Nordostdeutschland",
+   "company_name": "3M",
+   "company_board": "3m.wd1/Search",
+   "ats": "workday",
+   "department": null,
+   "team": null,
+   "employment_type": null,
+   "workplace_type": "remote",
+   "locations": [
+    "Remote-Germany"
+   ],
+   "country_codes": [
+    "DE"
+   ],
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T00:00:00.000Z",
+   "updated_at": null,
+   "job_url": "https://3m.wd1.myworkdayjobs.com/Search/job/Remote-Germany/Sales-Representative--m-w----fr-das-Verkaufsgebiet-Rhein-Main-Pfalz_R01169565-2",
+   "description_snippet": null,
+   "duplicate_sources": [],
+   "kw": ""
+  },
+  {
+   "job_id": "workday:aaco.wd105/aaco_careers:JR100235",
+   "title": "Regional Sales Manager, South East",
+   "company_name": "AACo",
+   "company_board": "aaco.wd105/AACo_Careers",
+   "ats": "workday",
+   "department": null,
+   "team": null,
+   "employment_type": null,
+   "workplace_type": "unknown",
+   "locations": [
+    "Florida"
+   ],
+   "country_codes": [
+    "US"
+   ],
+   "remote": null,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-01T00:00:00.000Z",
+   "updated_at": null,
+   "job_url": "https://aaco.wd105.myworkdayjobs.com/AACo_Careers/job/Florida/Regional-Sales-Manager--South-East_JR100235",
+   "description_snippet": null,
+   "duplicate_sources": [],
+   "kw": ""
+  },
+  {
+   "job_id": "workday:aah.wd5/external:R276928",
+   "title": "Manager Supply Chain Operations",
+   "company_name": "AAH",
+   "company_board": "aah.wd5/External",
+   "ats": "workday",
+   "department": null,
+   "team": null,
+   "employment_type": null,
+   "workplace_type": "unknown",
+   "locations": [
+    "Advocate Trinity Hospital - 2320 E 93rd St"
+   ],
+   "country_codes": [],
+   "remote": null,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-01T00:00:00.000Z",
+   "updated_at": null,
+   "job_url": "https://aah.wd5.myworkdayjobs.com/External/job/Advocate-Trinity-Hospital---2320-E-93rd-St/Manager-Supply-Chain-Operations_R276928",
+   "description_snippet": null,
+   "duplicate_sources": [],
+   "kw": ""
+  },
+  {
+   "job_id": "workday:abbott.wd5/abbottcareers:31161017",
+   "title": "Local Marketing Manager - Pharmacy",
+   "company_name": "Abbott",
+   "company_board": "abbott.wd5/abbottcareers",
+   "ats": "workday",
+   "department": null,
+   "team": null,
+   "employment_type": null,
+   "workplace_type": "unknown",
+   "locations": [
+    "China - Shanghai"
+   ],
+   "country_codes": [
+    "CN"
+   ],
+   "remote": null,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T00:00:00.000Z",
+   "updated_at": null,
+   "job_url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/China---Shanghai/Local-Marketing-Manager---Pharmacy_31161017",
+   "description_snippet": null,
+   "duplicate_sources": [],
+   "kw": ""
+  },
+  {
+   "job_id": "workday:abbott.wd5/abbottcareers:31162687",
+   "title": "Sr. Cybersecurity Engineer",
+   "company_name": "Abbott",
+   "company_board": "abbott.wd5/abbottcareers",
+   "ats": "workday",
+   "department": null,
+   "team": null,
+   "employment_type": null,
+   "workplace_type": "unknown",
+   "locations": [
+    "India - Mumbai"
+   ],
+   "country_codes": [
+    "IN"
+   ],
+   "remote": null,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-11-02T00:00:00.000Z",
+   "updated_at": null,
+   "job_url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/India---Mumbai/Sr-Cybersecurity-Engineer_31162687",
+   "description_snippet": null,
+   "duplicate_sources": [],
+   "kw": ""
+  },
+  {
+   "job_id": "workday:aaco.wd105/aaco_careers:JR100216-1",
+   "title": "Station Operations Officer",
+   "company_name": "AACo",
+   "company_board": "aaco.wd105/AACo_Careers",
+   "ats": "workday",
+   "department": null,
+   "team": null,
+   "employment_type": null,
+   "workplace_type": "unknown",
+   "locations": [
+    "Anthony Lagoon"
+   ],
+   "country_codes": [],
+   "remote": null,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-10-30T00:00:00.000Z",
+   "updated_at": null,
+   "job_url": "https://aaco.wd105.myworkdayjobs.com/AACo_Careers/job/Anthony-Lagoon/Station-Operations-Officer_JR100216-1",
+   "description_snippet": null,
+   "duplicate_sources": [],
+   "kw": ""
+  },
+  {
+   "job_id": "workday:aah.wd5/external:R271194",
+   "title": "Director of Clinical Operations",
+   "company_name": "AAH",
+   "company_board": "aah.wd5/External",
+   "ats": "workday",
+   "department": null,
+   "team": null,
+   "employment_type": null,
+   "workplace_type": "unknown",
+   "locations": [
+    "Atrium Health Mercy - 2001 Vail Ave, Charlotte, NC"
+   ],
+   "country_codes": [
+    "US"
+   ],
+   "remote": null,
+   "salary_min": null,
+   "salary_max": null,
+   "salary_currency": null,
+   "salary_period": null,
+   "posted_at": "2026-10-31T00:00:00.000Z",
+   "updated_at": null,
+   "job_url": "https://aah.wd5.myworkdayjobs.com/External/job/Atrium-Health-Mercy---2001-Vail-Ave-Charlotte-NC/Director-of-Clinical-Operations_R271194",
+   "description_snippet": null,
+   "duplicate_sources": [],
+   "kw": ""
+  }
+ ]
+}

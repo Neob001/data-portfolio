@@ -1,0 +1,17 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Output of expired-jobs-checker",
+  "type": "object",
+  "properties": {
+    "resultsDatasetUrl": {
+      "type": "string",
+      "title": "Checks",
+      "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=checks"
+    },
+    "runSummary": {
+      "type": "string",
+      "title": "Run summary",
+      "template": "{{actorRun.defaultKeyValueStoreUrl}}/records/RUN_SUMMARY"
+    }
+  }
+}

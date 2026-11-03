@@ -1,0 +1,30 @@
+{
+  "title": "Expired Jobs Checker",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "jobIds": {
+      "title": "Job IDs",
+      "type": "array",
+      "description": "job_id values from any factpipe jobs Actor (Jobs Feed API, Bulk Job Postings Feed, Workday/Greenhouse/Lever/Ashby Jobs API...), e.g. \"greenhouse:gitlab:8396674002\" or \"workday:redhat.wd5/jobs:R-043519\". Up to 200,000 per run.",
+      "editor": "stringList",
+      "prefill": [
+        "lever:palantir:5168e8fd-fec1-4fea-b7a1-81bdaea65850",
+        "greenhouse:datadog:1497543",
+        "ashby:supabase:d5573afa-636c-4219-832f-386f498243bf",
+        "personio:pmx:2048370",
+        "greenhouse:gitlab:1000000001"
+      ]
+    },
+    "jobUrls": {
+      "title": "Job URLs",
+      "type": "array",
+      "description": "Job page or apply links (job_url / apply_url) on Greenhouse, Lever, Ashby, Workable, Recruitee, Workday, Personio or Teamtailor, e.g. \"https://jobs.lever.co/acme/<id>\" or \"https://acme.wd5.myworkdayjobs.com/External/job/Berlin/Engineer_R123\". A company careers-page URL works when an indexed job uses it (e.g. Greenhouse ?gh_jid= links).",
+      "editor": "stringList",
+      "prefill": [
+        "https://jobs.ashbyhq.com/posthog/8854fb74-8457-40cd-bc10-60125a0c0cd4",
+        "https://ingeteam.teamtailor.com/jobs/5577749-marine-electrical-system-engineer"
+      ]
+    }
+  }
+}
