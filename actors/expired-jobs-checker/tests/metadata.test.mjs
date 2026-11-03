@@ -78,7 +78,7 @@ test('registry: staging entry, PPE event without a price yet', () => {
   const reg = JSON.parse(repo('registry.json')).actors[SLUG];
   assert.ok(reg, 'registry.json entry');
   assert.equal(reg.status, 'staging');
-  assert.equal(reg.apify_actor_id, null);
+  assert.ok(reg.apify_actor_id === null || /^[A-Za-z0-9]{17}$/.test(reg.apify_actor_id), 'no Actor yet, or the private staging Actor');
   assert.match(reg.approval, /publish \+ price pending owner approval/);
   assert.ok(EVENT in reg.ppe_events);
   for (const e of Object.values(reg.ppe_events)) assert.equal(e.proposed_price_usd, null);

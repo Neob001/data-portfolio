@@ -414,3 +414,15 @@ test('per-run fee (P3): only for runs with results, only once the event is price
   assert.equal(shouldChargeRunFee('run-with-results', 20, null), false);
   assert.equal(shouldChargeRunFee(null, 20, priced), false, 'other Actors pass no runFeeEvent');
 });
+
+test('one job per job_id within a board: Workable per-location repeats are merged', async () => {
+  const { mergeSameJobId } = await import('../src/core/transform.js');
+  const a = { job_id: 'workable:acme:ABC123', title: 'Engineer', locations: ['Berlin, Germany'], country_codes: ['DE'] };
+  const b = { job_id: 'workable:acme:ABC123', title: 'Engineer', locations: ['Paris, France'], country_codes: ['FR'] };
+  const c = { job_id: 'workable:acme:XYZ', title: 'Designer', locations: ['Berlin, Germany'], country_codes: ['DE'] };
+  const out = mergeSameJobId([a, b, c]);
+  assert.equal(out.length, 2);
+  assert.deepEqual(out[0].locations, ['Berlin, Germany', 'Paris, France']);
+  assert.deepEqual(out[0].country_codes, ['DE', 'FR']);
+  assert.equal(out[1].job_id, 'workable:acme:XYZ');
+});

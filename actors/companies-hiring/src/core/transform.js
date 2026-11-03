@@ -729,7 +729,25 @@ export function parseBoard(board, response, { fetchedAt = new Date() } = {}) {
     try { job = norm(board, raw, companyName); } catch { job = null; } // one malformed job never sinks a board
     if (job && job.title && job.job_url) jobs.push(job);
   }
-  return { company_name: companyName, jobs }; // null when the ATS response carries no company name
+  return { company_name: companyName, jobs: mergeSameJobId(jobs) }; // null when the ATS response carries no company name
+}
+
+/**
+ * One job per job_id within a board. Workable lists a multi-location posting once per location with the same
+ * shortcode (30,818 repeated job_ids in the 2026-11-02 index); merge them: union of locations and country codes,
+ * everything else from the first entry. Exported for tests.
+ */
+export function mergeSameJobId(jobs) {
+  const byId = new Map();
+  for (const job of jobs) {
+    const cur = byId.get(job.job_id);
+    if (!cur) { byId.set(job.job_id, job); continue; }
+    cur.locations = [...new Set([...(cur.locations || []), ...(job.locations || [])])];
+    if (Array.isArray(cur.country_codes) || Array.isArray(job.country_codes)) {
+      cur.country_codes = [...new Set([...(cur.country_codes || []), ...(job.country_codes || [])])];
+    }
+  }
+  return [...byId.values()];
 }
 
 // ------------------------------------------------------------------ dedupe
