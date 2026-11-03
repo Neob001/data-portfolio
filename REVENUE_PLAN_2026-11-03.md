@@ -9,7 +9,7 @@ Data: Console Insights (Oct final), Apify Store API demand scans (state/demand_s
 ## The market we can legally serve
 - The big job-data pools on the Apify Store are commercial job boards whose terms forbid scraping: Indeed 11.5k real users, Naukri 5.2k, Glassdoor 2.6k, Upwork 1.6k, StepStone 926, SEEK 899, Wellfound 778, LinkedIn ~18k. Our rules keep us out of all of them (correctly).
 - Our segment = company career sites (ATS). Its leader (fantastic-jobs) has: career-site job listing API 1,632 users / 163k runs at $12/1k + $0.01 per run; career-site FEED 281 users at $2.50/1k + $0.10 per run; expired-jobs API 12 users at $0.75 per run; per-ATS APIs 75-175 users each at $2-2.50/1k.
-- Coverage expansion under our rules is nearly exhausted (iCIMS/Oracle/BambooHR terms, SmartRecruiters/SuccessFactors robots). Remaining legal sources are small: Arbeitsagentur ~154 users, Himalayas ~211 (research running).
+- Coverage expansion under our rules is nearly exhausted (iCIMS/Oracle/BambooHR terms, SmartRecruiters/SuccessFactors robots). The remaining candidates (Arbeitsagentur, Himalayas, YC Work at a Startup) were all rejected on their terms on 2026-11-03: new revenue must come from products built on the existing index, and from price.
 
 ## Levers, ranked by expected revenue
 
@@ -20,7 +20,7 @@ Data: Console Insights (Oct final), Apify Store API demand scans (state/demand_s
 | 3 | Per-run start fee on Jobs Feed (leader charges $0.01/run) | price change, earliest ~Nov 23 (one change per month) | 1,214 runs/month today; ~$4-12/month now, scales with schedules |
 | 4 | **Expired-jobs checker** (which postings closed) - leader $0.75/run | build (running) + approval | small: ~$20-50/month, near-zero cost |
 | 5 | Price review after Nov 6 data (leader is at $12/1k) | 2 weeks of data | if paying users hold at $5, test $7-8 in December |
-| 6 | Arbeitsagentur (official German job portal API, ~1M jobs) / Himalayas | legal research (running), then source approval | small direct demand (154 / 211 users), more coverage for Jobs Feed |
+| 6 | ~~Arbeitsagentur / Himalayas / YC Work at a Startup~~ | REJECTED 2026-11-03 (terms forbid; see DECISIONS) | — |
 
 ## What we stop / don't do
 - No more Store-ranking work: 90% of Jobs Feed page visitors have no referrer (direct/API/AI tools), Store search sends ~3%.
