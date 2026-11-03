@@ -12,7 +12,16 @@ import { runFeed, INDEX_BASE_URL } from './feed.js';
  * @param toOptions raw input -> normalizeInput() options (throws a readable Error on bad input)
  * @param noBoardsMessage badRefs -> status message when live mode has no usable board left
  */
-export async function runJobsActor({ slug, toOptions = normalizeInput, noBoardsMessage = noSupportedBoardsMessage }) {
+/**
+ * Per-run fee (owner decision P3, 2026-11-03): one `runFeeEvent` per run, charged only when the run delivered at
+ * least one job (CLAUDE.md rule 4: charge only successful, non-empty results) and only once the event exists in the
+ * Actor's Store pricing (before that the code ships dormant). Pure, exported for tests.
+ */
+export function shouldChargeRunFee(runFeeEvent, rows, perEventPrices) {
+  return Boolean(runFeeEvent) && rows > 0 && perEventPrices != null && Object.prototype.hasOwnProperty.call(perEventPrices, runFeeEvent);
+}
+
+export async function runJobsActor({ slug, toOptions = normalizeInput, noBoardsMessage = noSupportedBoardsMessage, runFeeEvent = null }) {
   await Actor.init();
   const started = Date.now();
   const input = (await Actor.getInput()) ?? {};
@@ -54,8 +63,19 @@ export async function runJobsActor({ slug, toOptions = normalizeInput, noBoardsM
     throw e;
   }
 
+  let runFeeCharged = 0;
+  if (runFeeEvent) {
+    let prices = null;
+    try { prices = Actor.getChargingManager().getPricingInfo().perEventPrices; } catch { prices = null; }
+    if (shouldChargeRunFee(runFeeEvent, summary.rows, prices)) {
+      const r = await Actor.charge({ eventName: runFeeEvent });
+      runFeeCharged = r?.chargedCount ?? 1;
+    }
+  }
+
   const allLiveFailed = summary.boards_requested > 0 && summary.boards_ok === 0;
   await writeRunSummary(Actor, {
+    run_fee_charged: runFeeCharged,
     rows: summary.rows,
     charged_events: summary.charged_events,
     errors: summary.boards_failed + summary.shards_failed,

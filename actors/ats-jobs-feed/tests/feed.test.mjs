@@ -404,3 +404,13 @@ test('openIndex waits out a brief manifest.json 404 (nightly publish swaps it), 
   await assert.rejects(readIndexFile('https://index.example', 'shard-0.jsonl.br', { attempts: 3 }), /HTTP 404/);
   assert.equal(calls, 1); // a missing shard is not retried
 });
+
+test('per-run fee (P3): only for runs with results, only once the event is priced', async () => {
+  const { shouldChargeRunFee } = await import('../src/core/actor_main.js');
+  const priced = { 'job-result': 0.005, 'run-with-results': 0.01 };
+  assert.equal(shouldChargeRunFee('run-with-results', 20, priced), true);
+  assert.equal(shouldChargeRunFee('run-with-results', 0, priced), false, 'empty runs stay free (CLAUDE.md rule 4)');
+  assert.equal(shouldChargeRunFee('run-with-results', 20, { 'job-result': 0.005 }), false, 'dormant until the event is in the pricing');
+  assert.equal(shouldChargeRunFee('run-with-results', 20, null), false);
+  assert.equal(shouldChargeRunFee(null, 20, priced), false, 'other Actors pass no runFeeEvent');
+});
