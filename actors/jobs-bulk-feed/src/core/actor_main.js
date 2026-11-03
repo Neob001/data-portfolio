@@ -6,13 +6,14 @@ import { writeRunSummary } from '../lib/run_summary.js';
 import { loadTracker } from '../lib/incremental.js';
 import { normalizeInput, filterIdentity } from './filters.js';
 import { runFeed, INDEX_BASE_URL } from './feed.js';
+import { shouldChargeRunFee } from './run_fee.js';
 
 /**
  * @param slug Actor slug (names the incremental-state store)
  * @param toOptions raw input -> normalizeInput() options (throws a readable Error on bad input)
  * @param noBoardsMessage badRefs -> status message when live mode has no usable board left
  */
-export async function runJobsActor({ slug, toOptions = normalizeInput, noBoardsMessage = noSupportedBoardsMessage }) {
+export async function runJobsActor({ slug, toOptions = normalizeInput, noBoardsMessage = noSupportedBoardsMessage, runFeeEvent = null }) {
   await Actor.init();
   const started = Date.now();
   const input = (await Actor.getInput()) ?? {};
@@ -54,8 +55,19 @@ export async function runJobsActor({ slug, toOptions = normalizeInput, noBoardsM
     throw e;
   }
 
+  let runFeeCharged = 0;
+  if (runFeeEvent) {
+    let prices = null;
+    try { prices = Actor.getChargingManager().getPricingInfo().perEventPrices; } catch { prices = null; }
+    if (shouldChargeRunFee(runFeeEvent, summary.rows, prices)) {
+      const r = await Actor.charge({ eventName: runFeeEvent });
+      runFeeCharged = r?.chargedCount ?? 1;
+    }
+  }
+
   const allLiveFailed = summary.boards_requested > 0 && summary.boards_ok === 0;
   await writeRunSummary(Actor, {
+    run_fee_charged: runFeeCharged,
     rows: summary.rows,
     charged_events: summary.charged_events,
     errors: summary.boards_failed + summary.shards_failed,
