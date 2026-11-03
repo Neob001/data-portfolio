@@ -348,7 +348,9 @@ test('live mode: description-based salary / years / visa on a board whose ATS ha
 
 // ------------------------------------------------------------------ dataset schema of every jobs Actor
 const ROOT = new URL('../../', import.meta.url);
-const JOB_ACTORS = readdirSync(ROOT).filter((d) => existsSync(new URL(`${d}/src/core/feed.js`, ROOT)) && d !== 'companies-hiring');
+// Actors whose rows are not job rows (one row per company / per checked job) are left out.
+const NOT_JOB_ROWS = ['companies-hiring', 'expired-jobs-checker'];
+const JOB_ACTORS = readdirSync(ROOT).filter((d) => existsSync(new URL(`${d}/src/core/feed.js`, ROOT)) && !NOT_JOB_ROWS.includes(d));
 
 function validator(slug) {
   const fields = JSON.parse(readFileSync(new URL(`${slug}/.actor/actor.json`, ROOT), 'utf8')).storages.dataset.fields.properties;

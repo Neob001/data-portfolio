@@ -40,12 +40,18 @@ test('every Actor that reads the jobs index refuses to run below 2 GB (2,000+ jo
   const root = new URL('../../', import.meta.url);
   // company-jobs-scraper carries the core for its live mode only (careers pages -> boards); it never reads the index.
   const LIVE_ONLY = ['company-jobs-scraper'];
+  // Index readers that stream instead of ranking (no top-K candidate heap, no live descriptions), with their
+  // measured peak RSS on the full published index (build 2026-11-02, 890k records):
+  //  - jobs-bulk-feed: whole index, 859,594 jobs pushed in 1,000-row batches + sinceLastRun state = 350 MB;
+  //  - expired-jobs-checker: 100k job_ids (all 79 shards) = 384 MB.
+  // 1 GB keeps ~2.5x margin. Re-measure before raising their input limits or when the index doubles.
+  const STREAMING = { 'jobs-bulk-feed': 1024, 'expired-jobs-checker': 1024 };
   const readers = readdirSync(root).filter((d) => {
     try { return !LIVE_ONLY.includes(d) && readdirSync(new URL(`${d}/src/core/`, root)).includes('feed.js'); } catch { return false; }
   });
-  assert.ok(readers.length >= 8, `found ${readers.length} index readers`);
+  assert.ok(readers.length >= 10, `found ${readers.length} index readers`);
   for (const d of readers) {
     const a = JSON.parse(readFileSync(new URL(`${d}/.actor/actor.json`, root), 'utf8'));
-    assert.ok((a.minMemoryMbytes ?? 0) >= 2048, `${d}: minMemoryMbytes ${a.minMemoryMbytes}`);
+    assert.ok((a.minMemoryMbytes ?? 0) >= (STREAMING[d] ?? 2048), `${d}: minMemoryMbytes ${a.minMemoryMbytes}`);
   }
 });
