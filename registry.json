@@ -22,15 +22,15 @@
       "launched_at": "2026-09-11T08:35:36Z",
       "last_fix_date": "2026-09-15",
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 123,
+        "as_of": "2026-11-03",
+        "totalRuns": 164,
         "totalUsers30Days": 1
       },
       "staging_started_at": "2026-09-10T16:46:05Z",
       "staging_validated": true,
       "monetization_configured": true,
       "listing": {
-        "title": "SEC EDGAR Filings Scraper API — 10-K, 10-Q, 8-K Full-Text",
+        "title": "SEC EDGAR Filings Scraper API \u2014 10-K, 10-Q, 8-K Full-Text",
         "description": "Full-text search and monitor SEC EDGAR filings (10-K, 10-Q, 8-K, S-1, Form 4, 13F) by keyword via the official SEC API. No API key, flat JSON, new-filing alerts. $2 per 1,000 filings.",
         "seoTitle": "SEC EDGAR Full-Text Search API: 10-K, 8-K Filings Scraper",
         "seoDescription": "Search the full text of SEC EDGAR filings by keyword and get flat JSON: 10-K, 10-Q, 8-K, S-1, Form 4. Official SEC API, no key, scheduled monitoring.",
@@ -78,15 +78,15 @@
       "launched_at": "2026-09-11T08:35:36Z",
       "last_fix_date": "2026-09-15",
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 122,
+        "as_of": "2026-11-03",
+        "totalRuns": 163,
         "totalUsers30Days": 1
       },
       "staging_started_at": "2026-09-10T16:46:05Z",
       "staging_validated": true,
       "monetization_configured": true,
       "listing": {
-        "title": "EU Tenders Scraper — TED Public Procurement Notices API",
+        "title": "EU Tenders Scraper \u2014 TED Public Procurement Notices API",
         "description": "Search and monitor EU public tenders and procurement notices from TED by CPV code, country and keyword. Official TED API, no key, flat JSON with deadlines, new-tender alerts. $3 per 1,000.",
         "seoTitle": "EU Tenders API: TED Public Procurement Notices Scraper",
         "seoDescription": "Find EU public tenders by CPV code, country and keyword from the official TED API. Deadlines, buyers and PDF links as flat JSON; daily new-tender alerts.",
@@ -134,8 +134,8 @@
       "launched_at": "2026-09-11T08:35:36Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 41,
+        "as_of": "2026-11-03",
+        "totalRuns": 79,
         "totalUsers30Days": 1
       },
       "notes": "Keyless by default: owner's CH key set as secret env var COMPANIES_HOUSE_API_KEY (shared 600 req/5min quota; revisit if volume grows). Customers may bring their own key. Officers/PSC variant still requires owner legal approval (L1).",
@@ -143,7 +143,7 @@
       "staging_validated": true,
       "monetization_configured": true,
       "listing": {
-        "title": "UK Companies House Lookup API — Company Data, No API Key",
+        "title": "UK Companies House Lookup API \u2014 Company Data, No API Key",
         "description": "Look up UK companies by number or name on Companies House: status, incorporation date, SIC codes, registered office, overdue accounts, insolvency. Bulk lists, no API key. $2.50 per 1,000 found.",
         "seoTitle": "UK Companies House API Lookup: Company Data in Bulk",
         "seoDescription": "Bulk-check UK companies on Companies House by number or name: status, SIC codes, address, overdue accounts, insolvency history. Official API, no key needed.",
@@ -188,14 +188,14 @@
       "launched_at": "2026-09-11T09:51:12Z",
       "last_fix_date": "2026-09-15",
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 44,
+        "as_of": "2026-11-03",
+        "totalRuns": 58,
         "totalUsers30Days": 1
       },
       "staging_validated": true,
       "monetization_configured": true,
       "listing": {
-        "title": "Federal Register Scraper — US Rules & Regulations Monitor",
+        "title": "Federal Register Scraper \u2014 US Rules & Regulations Monitor",
         "description": "Search and monitor the US Federal Register: final rules, proposed rules, notices and presidential documents by keyword and agency. Official API, no key, flat JSON, new-document alerts. $2.50 per 1,000.",
         "seoTitle": "Federal Register API: Monitor US Rules & Proposed Rules",
         "seoDescription": "Track new US federal rules, proposed rules, notices and presidential documents by keyword and agency. Official Federal Register API, flat JSON, daily alerts.",
@@ -243,15 +243,15 @@
       "launched_at": null,
       "last_fix_date": "2026-09-15",
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 43,
+        "as_of": "2026-11-03",
+        "totalRuns": 57,
         "totalUsers30Days": 1
       },
       "staging_validated": true,
       "monetization_configured": true,
       "notes": "Confirmed public via GET /v2/acts isPublic=true on 2026-09-13 (weekly report); exact publish time not recorded.",
       "listing": {
-        "title": "FDA Recalls Scraper API — Food, Drug & Device Recalls",
+        "title": "FDA Recalls Scraper API \u2014 Food, Drug & Device Recalls",
         "description": "Search and monitor FDA recalls and enforcement reports for food, drugs and medical devices via official openFDA. Filter by keyword, Class I/II/III, date. No key, flat JSON, alerts. $3 per 1,000.",
         "seoTitle": "FDA Recalls API: Food, Drug & Device Recall Monitor",
         "seoDescription": "Get FDA food, drug and medical device recalls as flat JSON from official openFDA: firm, product, reason, Class I/II/III, distribution. Daily new-recall alerts.",
@@ -299,14 +299,14 @@
       "launched_at": "2026-09-11T09:51:12Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 43,
+        "as_of": "2026-11-03",
+        "totalRuns": 57,
         "totalUsers30Days": 1
       },
       "staging_validated": true,
       "monetization_configured": true,
       "listing": {
-        "title": "Sanctions Screening API — OFAC, EU, UK & UN Lists (AML/KYC)",
+        "title": "Sanctions Screening API \u2014 OFAC, EU, UK & UN Lists (AML/KYC)",
         "description": "Screen people, companies and vessels against the official OFAC SDN, EU, UK and UN Security Council sanctions lists, incl. aliases, with fuzzy match scores. Bulk AML/KYC checks. No API key. $3 per 1,000 names.",
         "seoTitle": "Sanctions Screening API: OFAC, EU, UK & UN List Check",
         "seoDescription": "Bulk-screen names against official OFAC SDN, EU, UK and UN sanctions lists with aliases and fuzzy match scores. Fresh data each run, no API key. AML/KYC.",
@@ -357,14 +357,14 @@
       "launched_at": "2026-09-12T09:33:41Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 59,
+        "as_of": "2026-11-03",
+        "totalRuns": 73,
         "totalUsers30Days": 2
       },
       "staging_validated": true,
       "monetization_configured": true,
       "listing": {
-        "title": "US Weather Forecast API — NWS/NOAA Hourly & 7-Day, No Key",
+        "title": "US Weather Forecast API \u2014 NWS/NOAA Hourly & 7-Day, No Key",
         "description": "Official National Weather Service (NOAA) forecasts for any US latitude/longitude: hourly or 7-day periods with temperature, rain chance and wind. Bulk locations, no API key. $2 per 1,000 locations.",
         "seoTitle": "US Weather Forecast API: NWS Hourly & 7-Day Forecasts",
         "seoDescription": "Bulk US weather forecasts from the official National Weather Service: hourly or 7-day periods, temperature, precipitation chance, wind, as flat JSON. No key.",
@@ -407,14 +407,14 @@
       "launched_at": "2026-09-12T09:33:41Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 37,
+        "as_of": "2026-11-03",
+        "totalRuns": 53,
         "totalUsers30Days": 1
       },
       "staging_validated": true,
       "monetization_configured": true,
       "listing": {
-        "title": "Career Page Scraper — Jobs from Any Company Careers Page",
+        "title": "Career Page Scraper \u2014 Jobs from Any Company Careers Page",
         "description": "Paste company websites: finds each careers page, detects Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable or Recruitee and returns every open job as JSON with seniority and salary. $2 per 1,000 jobs.",
         "seoTitle": "Career Page Scraper API: Jobs from Company Careers Pages",
         "seoDescription": "Scrape open jobs from any company careers page: auto-detects Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor and more. Flat JSON with salary, seniority.",
@@ -457,14 +457,14 @@
       "launched_at": "2026-09-12T09:33:41Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 38,
-        "totalUsers30Days": 2
+        "as_of": "2026-11-03",
+        "totalRuns": 53,
+        "totalUsers30Days": 0
       },
       "staging_validated": true,
       "monetization_configured": true,
       "listing": {
-        "title": "Sitemap URL Extractor & 404 Checker — XML Sitemap Scraper",
+        "title": "Sitemap URL Extractor & 404 Checker \u2014 XML Sitemap Scraper",
         "description": "Extract every URL from any website's XML sitemaps: robots.txt discovery, nested sitemap indexes, lastmod and priority. Optional HTTP status check finds 404s and redirects. $0.30 per 1,000 URLs.",
         "seoTitle": "Sitemap URL Extractor: Get All URLs from XML Sitemaps",
         "seoDescription": "Extract all URLs from any site's sitemap.xml, including sitemap indexes, with lastmod and optional HTTP status checks to find broken 404 links and redirects.",
@@ -508,14 +508,14 @@
       "launched_at": "2026-09-13T13:24:30Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 37,
+        "as_of": "2026-11-03",
+        "totalRuns": 50,
         "totalUsers30Days": 1
       },
       "staging_validated": true,
       "monetization_configured": true,
       "listing": {
-        "title": "Wikipedia Scraper API — Articles, Summaries & Full Text",
+        "title": "Wikipedia Scraper API \u2014 Articles, Summaries & Full Text",
         "description": "Get Wikipedia articles by title, URL or keyword search in any language: summary, full plain text, categories, Wikidata ID, coordinates, thumbnail, last edit. Official API, no key. $1 per 1,000 articles.",
         "seoTitle": "Wikipedia Scraper API: Article Text, Summary & Metadata",
         "seoDescription": "Extract Wikipedia articles in any language as flat JSON: summary, full text, categories, Wikidata ID, coordinates. Official MediaWiki API, CC BY-SA attribution.",
@@ -561,14 +561,14 @@
       "launched_at": "2026-09-13T13:24:30Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 37,
+        "as_of": "2026-11-03",
+        "totalRuns": 50,
         "totalUsers30Days": 1
       },
       "staging_validated": true,
       "monetization_configured": true,
       "listing": {
-        "title": "Open Food Facts Scraper — Nutrition & Barcode Lookup API",
+        "title": "Open Food Facts Scraper \u2014 Nutrition & Barcode Lookup API",
         "description": "Look up food products by barcode (EAN/UPC) or keyword on Open Food Facts: nutrition per 100g, ingredients, allergens, Nutri-Score, NOVA, Eco-Score, brands. No API key. $1 per 1,000 products.",
         "seoTitle": "Food Barcode & Nutrition API: Open Food Facts Scraper",
         "seoDescription": "Get nutrition facts, ingredients, allergens and Nutri-Score for any food barcode (EAN/UPC) or keyword from Open Food Facts as flat JSON. No API key needed.",
@@ -614,12 +614,12 @@
       "launched_at": "2026-09-15T09:30:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 38,
+        "as_of": "2026-11-03",
+        "totalRuns": 53,
         "totalUsers30Days": 1
       },
       "listing": {
-        "title": "ECB Exchange Rates API — Official Euro FX Rates, History",
+        "title": "ECB Exchange Rates API \u2014 Official Euro FX Rates, History",
         "description": "Official European Central Bank euro reference exchange rates: latest or full daily history since 1999 for 30+ currencies, any base currency via cross rates. No API key. $1 per 1,000 rates.",
         "seoTitle": "ECB Exchange Rates API: Official Daily FX Rates & History",
         "seoDescription": "Get official ECB euro reference exchange rates as JSON: latest or historical daily rates, 30+ currencies, any base currency. No key, pay per rate.",
@@ -665,12 +665,12 @@
       "launched_at": "2026-09-15T09:30:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 39,
+        "as_of": "2026-11-03",
+        "totalRuns": 53,
         "totalUsers30Days": 1
       },
       "listing": {
-        "title": "Email Security Checker — SPF, DKIM, DMARC & MX Audit",
+        "title": "Email Security Checker \u2014 SPF, DKIM, DMARC & MX Audit",
         "description": "Audit any domain's email authentication: SPF (lookups, -all), DMARC policy, DKIM keys, MX, MTA-STS and TLS-RPT, with a 0-100 score and fix list. Bulk domains, no key. $3 per 1,000 domains.",
         "seoTitle": "SPF, DKIM & DMARC Checker API: Bulk Email Security Audit",
         "seoDescription": "Check SPF, DKIM, DMARC, MX, MTA-STS and TLS-RPT for thousands of domains. Score, grade and fix list per domain. No key, pay per domain.",
@@ -716,12 +716,12 @@
       "launched_at": "2026-09-15T09:30:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 35,
+        "as_of": "2026-11-03",
+        "totalRuns": 49,
         "totalUsers30Days": 1
       },
       "listing": {
-        "title": "EU VAT Validation API — VIES VAT Number Checker (Bulk)",
+        "title": "EU VAT Validation API \u2014 VIES VAT Number Checker (Bulk)",
         "description": "Validate EU VAT numbers in bulk against the official EU VIES service: valid/invalid, registered company name and address, check timestamp. Handles VIES throttling. $2 per 1,000 checks.",
         "seoTitle": "EU VAT Number Validation API: Bulk VIES VAT Checker",
         "seoDescription": "Validate EU VAT numbers in bulk via official VIES: validity, company name, address, timestamp. Automatic retries on VIES throttling. Pay per check.",
@@ -767,12 +767,12 @@
       "launched_at": "2026-09-15T09:30:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 50,
+        "as_of": "2026-11-03",
+        "totalRuns": 64,
         "totalUsers30Days": 1
       },
       "listing": {
-        "title": "Lighthouse & Core Web Vitals Checker API — Bulk PageSpeed",
+        "title": "Lighthouse & Core Web Vitals Checker API \u2014 Bulk PageSpeed",
         "description": "Run real Google Lighthouse audits in bulk: performance, SEO, accessibility and best-practices scores, LCP/CLS/TBT with pass/fail, and top fixes. Mobile and desktop. No API key or quota. $10 per 1,000 audits.",
         "seoTitle": "Bulk Lighthouse & Core Web Vitals Checker (PageSpeed API)",
         "seoDescription": "Audit thousands of URLs with Lighthouse: performance, SEO, accessibility scores, LCP, CLS, TBT and top fixes. Mobile & desktop, no quota. Pay per audit.",
@@ -819,12 +819,12 @@
       "launched_at": "2026-09-15T09:30:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 43,
+        "as_of": "2026-11-03",
+        "totalRuns": 57,
         "totalUsers30Days": 1
       },
       "listing": {
-        "title": "SAM.gov Contract Opportunities Scraper — Federal Bids API",
+        "title": "SAM.gov Contract Opportunities Scraper \u2014 Federal Bids API",
         "description": "US federal contract opportunities from the official SAM.gov data extract: solicitations, sources sought, awards. Filter by keyword, NAICS, set-aside, agency, state; daily new-bid alerts. No key. $2 per 1,000.",
         "seoTitle": "SAM.gov Contract Opportunities API: Federal Bids & RFPs",
         "seoDescription": "Search and monitor US federal contract opportunities from official SAM.gov data: RFPs, sources sought, awards. NAICS, set-aside filters. No key.",
@@ -871,12 +871,12 @@
       "launched_at": "2026-09-17T09:36:18Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 33,
+        "as_of": "2026-11-03",
+        "totalRuns": 47,
         "totalUsers30Days": 1
       },
       "listing": {
-        "title": "DNS Records Lookup API — Bulk A, MX, TXT, NS, CNAME & CAA",
+        "title": "DNS Records Lookup API \u2014 Bulk A, MX, TXT, NS, CNAME & CAA",
         "description": "Bulk DNS lookups for any list of domains: A, AAAA, MX, TXT, NS, CNAME, SOA and CAA records, plus mail/DNS provider detection, SPF/DMARC presence and TXT verification tokens. No API key. $1.50 per 1,000 domains.",
         "seoTitle": "DNS Lookup API: Bulk A, MX, TXT, NS & CAA Records",
         "seoDescription": "Bulk DNS records lookup for any domain list: A, AAAA, MX, TXT, NS, CNAME, SOA, CAA plus mail and DNS provider detection. No API key, pay per domain.",
@@ -923,12 +923,12 @@
       "launched_at": "2026-09-17T09:36:18Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 32,
+        "as_of": "2026-11-03",
+        "totalRuns": 46,
         "totalUsers30Days": 1
       },
       "listing": {
-        "title": "France Company Lookup API — SIREN, SIRET & Sirene Data",
+        "title": "France Company Lookup API \u2014 SIREN, SIRET & Sirene Data",
         "description": "Look up French companies by SIREN, SIRET or name in the official Sirene registry: legal form, NAF code, head office, headcount, status, computed VAT number. Bulk, no API key, no personal data. $3 per 1,000 found.",
         "seoTitle": "France Company Lookup API: SIREN, SIRET & Sirene Data",
         "seoDescription": "Look up French companies by SIREN, SIRET or name from official Sirene open data: legal form, NAF code, address, headcount, VAT. No key, no personal data.",
@@ -970,12 +970,12 @@
       "launched_at": null,
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 37,
+        "as_of": "2026-11-03",
+        "totalRuns": 51,
         "totalUsers30Days": 1
       },
       "listing": {
-        "title": "Broken Link Checker — Find 404s & Dead Links on Any Website",
+        "title": "Broken Link Checker \u2014 Find 404s & Dead Links on Any Website",
         "description": "Crawl any website and find every broken link: 404s, dead images, dead scripts and stylesheets, DNS failures, redirect loops. BFS same-host crawl, robots.txt aware. $1.50 per 1,000 pages scanned.",
         "seoTitle": "Broken Link Checker API: Find 404s & Dead Links in Bulk",
         "seoDescription": "Crawl any website and find broken links, 404s, dead images and redirect loops. Shows where each link appears and its anchor text. Pay per page scanned.",
@@ -1024,12 +1024,12 @@
       "launched_at": null,
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
+        "as_of": "2026-11-03",
         "totalRuns": 7,
         "totalUsers30Days": 0
       },
       "listing": {
-        "title": "News Monitor — Company News & Adverse Media (GDELT)",
+        "title": "News Monitor \u2014 Company News & Adverse Media (GDELT)",
         "description": "Monitor company or keyword news and screen for adverse media (fraud, sanctions, lawsuits, recalls) from GDELT's open global news index. Flat JSON, incremental mode, no API key. $2 per 1,000 articles.",
         "seoTitle": "News Monitoring API: Company News & Adverse Media Screening",
         "seoDescription": "Monitor news about any company or keyword and screen for adverse media (fraud, sanctions, lawsuits) from GDELT open data. Daily alerts, pay per article.",
@@ -1069,12 +1069,12 @@
       "launched_at": "2026-09-19T13:46:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 42,
-        "totalUsers30Days": 1
+        "as_of": "2026-11-03",
+        "totalRuns": 57,
+        "totalUsers30Days": 0
       },
       "listing": {
-        "title": "Website Screenshot API — Bulk Full-Page Screenshots",
+        "title": "Website Screenshot API \u2014 Bulk Full-Page Screenshots",
         "description": "Capture full-page or viewport screenshots of any list of URLs in bulk. Desktop or mobile, PNG or JPEG, cookie banners hidden. No browser to manage. $2 per 1,000 screenshots.",
         "seoTitle": "Website Screenshot API: Bulk Full-Page Screenshots of URLs",
         "seoDescription": "Take full-page or viewport screenshots of any list of URLs in PNG or JPEG, desktop or mobile, with cookie banners hidden. Pay per screenshot.",
@@ -1121,12 +1121,12 @@
       "launched_at": "2026-09-25T09:27:05Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 547,
-        "totalUsers30Days": 34
+        "as_of": "2026-11-03",
+        "totalRuns": 1287,
+        "totalUsers30Days": 99
       },
       "listing": {
-        "title": "Jobs Feed API — Workday, Greenhouse, Lever & Ashby Jobs",
+        "title": "Jobs Feed API \u2014 Workday, Greenhouse, Lever & Ashby Jobs",
         "description": "Job listings API: 800,000+ live job postings from 19,000+ companies' Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable and Recruitee boards. Salary, seniority, remote filters. $3 per 1,000 jobs.",
         "seoTitle": "Job Listings API: Workday, Greenhouse, Lever & Ashby Jobs",
         "seoDescription": "Job postings API: 800k+ open jobs from 19k company career sites (Workday, Greenhouse, Lever, Ashby, Personio...). Daily new-jobs feed, salary, seniority.",
@@ -1195,12 +1195,12 @@
       "launched_at": "2026-09-27T08:03:41Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 38,
+        "as_of": "2026-11-03",
+        "totalRuns": 55,
         "totalUsers30Days": 2
       },
       "listing": {
-        "title": "Remote Jobs API — Remote & Work-From-Home Jobs Feed",
+        "title": "Remote Jobs API \u2014 Remote & Work-From-Home Jobs Feed",
         "description": "Remote and work-from-home jobs from 15,000+ companies' official Workday, Greenhouse, Lever, Ashby, Workable and Recruitee job boards. Filter by region or time zone, ranked by relevance. $3 per 1,000 jobs.",
         "seoTitle": "Remote Jobs API: Remote & Work-From-Home Jobs Feed",
         "seoDescription": "Remote and work-from-home jobs from 15,000+ career sites (Workday, Greenhouse, Lever, Ashby, Workable, Recruitee). Region filters, daily feed. Pay per job.",
@@ -1247,9 +1247,9 @@
       "launched_at": "2026-09-27T08:03:41Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 36,
-        "totalUsers30Days": 1
+        "as_of": "2026-11-03",
+        "totalRuns": 59,
+        "totalUsers30Days": 2
       },
       "listing": {
         "title": "Greenhouse, Lever, Ashby & Workday Jobs Scraper API",
@@ -1299,12 +1299,12 @@
       "launched_at": "2026-09-27T08:26:39Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 36,
+        "as_of": "2026-11-03",
+        "totalRuns": 50,
         "totalUsers30Days": 1
       },
       "listing": {
-        "title": "Companies Hiring — Hiring Signals & Sales Leads by Role",
+        "title": "Companies Hiring \u2014 Hiring Signals & Sales Leads by Role",
         "description": "Find companies hiring for any role across 15,000+ company job boards (Workday, Greenhouse, Lever, Ashby, Workable, Recruitee): one row per company with open roles, hiring velocity and locations. $5 per 1,000 companies.",
         "seoTitle": "Companies Hiring API: Hiring Signals & Sales Leads by Role",
         "seoDescription": "Find companies hiring for any role across 15,000+ career sites incl. Workday: open roles, hiring velocity, locations, departments per company. Pay per company.",
@@ -1351,12 +1351,12 @@
       "launched_at": "2026-09-30T13:25:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 30,
+        "as_of": "2026-11-03",
+        "totalRuns": 44,
         "totalUsers30Days": 1
       },
       "listing": {
-        "title": "Tech Stack Detector — Wappalyzer Alternative for Any Website",
+        "title": "Tech Stack Detector \u2014 Wappalyzer Alternative for Any Website",
         "description": "Detect the tech stack of any website in bulk: CMS, ecommerce platform, analytics, CDN, hosting, JS frameworks, email provider. 3,000+ technologies via plain HTTP + DNS, no browser. $10 per 1,000 domains.",
         "seoTitle": "Tech Stack Detector API: Wappalyzer Alternative for Any Site",
         "seoDescription": "Detect the CMS, e-commerce platform, analytics, CDN, frameworks and email provider of any website in bulk. 3,500+ technologies. Pay per domain.",
@@ -1403,13 +1403,13 @@
       "launched_at": "2026-10-09T06:30:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 15,
+        "as_of": "2026-11-03",
+        "totalRuns": 29,
         "totalUsers30Days": 1
       },
       "listing": {
-        "title": "Greenhouse Jobs API — Search All Greenhouse Job Boards",
-        "description": "Search open jobs on 3,600+ Greenhouse job boards (Stripe, Databricks, Anthropic…) by keyword, location, remote and department, or fetch any Greenhouse board live. Full descriptions. $2 per 1,000 jobs.",
+        "title": "Greenhouse Jobs API \u2014 Search All Greenhouse Job Boards",
+        "description": "Search open jobs on 3,600+ Greenhouse job boards (Stripe, Databricks, Anthropic\u2026) by keyword, location, remote and department, or fetch any Greenhouse board live. Full descriptions. $2 per 1,000 jobs.",
         "seoTitle": "Greenhouse Jobs API: Greenhouse Job Board Scraper",
         "seoDescription": "Search every Greenhouse job board via the public Greenhouse API: keywords, locations, remote, departments, full descriptions. $2 per 1,000 jobs.",
         "categories": [
@@ -1455,13 +1455,13 @@
       "launched_at": "2026-10-09T06:30:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 15,
+        "as_of": "2026-11-03",
+        "totalRuns": 29,
         "totalUsers30Days": 1
       },
       "listing": {
-        "title": "Lever Jobs API — Search All Lever Job Postings",
-        "description": "Search open jobs on 1,500+ Lever job boards (Palantir, Spotify, Zoox…) by keyword, location, remote and department, or fetch any jobs.lever.co board live. Salary where published. $2 per 1,000 jobs.",
+        "title": "Lever Jobs API \u2014 Search All Lever Job Postings",
+        "description": "Search open jobs on 1,500+ Lever job boards (Palantir, Spotify, Zoox\u2026) by keyword, location, remote and department, or fetch any jobs.lever.co board live. Salary where published. $2 per 1,000 jobs.",
         "seoTitle": "Lever Jobs API: Lever Postings API & Job Scraper",
         "seoDescription": "Search every Lever job board via the public Lever Postings API: keywords, locations, remote, salary where published, full descriptions. $2 per 1,000 jobs.",
         "categories": [
@@ -1507,13 +1507,13 @@
       "launched_at": "2026-10-09T06:30:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 15,
+        "as_of": "2026-11-03",
+        "totalRuns": 30,
         "totalUsers30Days": 1
       },
       "listing": {
-        "title": "Ashby Jobs API — Search All Ashby Job Boards",
-        "description": "Search open jobs on 2,700+ Ashby job boards (OpenAI, Ramp, Notion, Snowflake…) by keyword, location, remote and department, or fetch any jobs.ashbyhq.com board live. Salary where published. $2 per 1,000 jobs.",
+        "title": "Ashby Jobs API \u2014 Search All Ashby Job Boards",
+        "description": "Search open jobs on 2,700+ Ashby job boards (OpenAI, Ramp, Notion, Snowflake\u2026) by keyword, location, remote and department, or fetch any jobs.ashbyhq.com board live. Salary where published. $2 per 1,000 jobs.",
         "seoTitle": "Ashby Jobs API: Ashby Job Board Scraper",
         "seoDescription": "Search every Ashby job board via Ashby's public posting API: keywords, locations, remote, salary where published, full descriptions. $2 per 1,000 jobs.",
         "categories": [
@@ -1559,13 +1559,13 @@
       "launched_at": "2026-10-10T05:45:00Z",
       "last_fix_date": null,
       "kpis": {
-        "as_of": "2026-10-20",
-        "totalRuns": 16,
+        "as_of": "2026-11-03",
+        "totalRuns": 31,
         "totalUsers30Days": 1
       },
       "listing": {
-        "title": "Workday Jobs API — Search Workday Career Sites",
-        "description": "Search open jobs on 4,000+ Workday career sites (NVIDIA, Salesforce, Adobe, Intel…) by keyword, location and remote, or read any myworkdayjobs.com site live. Full descriptions. $2 per 1,000 jobs.",
+        "title": "Workday Jobs API \u2014 Search Workday Career Sites",
+        "description": "Search open jobs on 4,000+ Workday career sites (NVIDIA, Salesforce, Adobe, Intel\u2026) by keyword, location and remote, or read any myworkdayjobs.com site live. Full descriptions. $2 per 1,000 jobs.",
         "seoTitle": "Workday Jobs API: Workday Job Scraper (myworkdayjobs)",
         "seoDescription": "Search Workday career sites (myworkdayjobs.com) by keyword, location and remote, with full descriptions, or read any Workday site live. $2 per 1,000 jobs.",
         "categories": [
