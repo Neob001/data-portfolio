@@ -1143,6 +1143,76 @@
       "capture_score": 0.318,
       "status": "filtered",
       "detected_at": "2026-11-03T03:46:27.307478+00:00"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/Dans-Plugins/Nether-Access-Controller/issues/114",
+      "title": "Post 2.3.2 to SpigotMC",
+      "body": "`v2.3.2` is the stable release on GitHub, but the listing at https://www.spigotmc.org/resources/95905/ still shows the previous version until an update is posted there by hand (SpigotMC has no API for it).\n\n## Post update\n\n1. Open https://www.spigotmc.org/resources/95905/, choose **Post update**.\n2. Version string: `2.3.2`\n3. Download: **External download** \u2192 `https://github.com/Dans-Plugins/Nethe",
+      "created_at": "2026-11-04T03:02:56Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 0.798,
+      "status": "filtered",
+      "detected_at": "2026-11-04T09:07:53.103834+00:00"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/Dans-Plugins/MiniFactions/issues/134",
+      "title": "Post 1.1.2 to SpigotMC",
+      "body": "`v1.1.2` is the stable release on GitHub, but the listing at https://www.spigotmc.org/resources/140091/ still shows the previous version until an update is posted there by hand (SpigotMC has no API for it).\n\n## Post update\n\n1. Open https://www.spigotmc.org/resources/140091/, choose **Post update**.\n2. Version string: `1.1.2`\n3. Download: **External download** \u2192 `https://github.com/Dans-Plugins/Min",
+      "created_at": "2026-11-04T02:45:24Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 0.79,
+      "status": "filtered",
+      "detected_at": "2026-11-04T09:07:53.104356+00:00"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/Dans-Plugins/Medieval-Economy/issues/196",
+      "title": "Post 2.3.3 to SpigotMC",
+      "body": "`v2.3.3` is the stable release on GitHub, but the listing at https://www.spigotmc.org/resources/81836/ still shows the previous version until an update is posted there by hand (SpigotMC has no API for it).\n\n## Post update\n\n1. Open https://www.spigotmc.org/resources/81836/, choose **Post update**.\n2. Version string: `2.3.3`\n3. Download: **External download** \u2192 `https://github.com/Dans-Plugins/Medie",
+      "created_at": "2026-11-04T01:46:46Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 0.766,
+      "status": "filtered",
+      "detected_at": "2026-11-04T09:07:53.104837+00:00"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/Dans-Plugins/Medieval-Cookery/issues/71",
+      "title": "Post 0.2.5 to SpigotMC",
+      "body": "`v0.2.5` is the stable release on GitHub, but the listing at https://www.spigotmc.org/resources/140092/ still shows the previous version until an update is posted there by hand (SpigotMC has no API for it).\n\n## Post update\n\n1. Open https://www.spigotmc.org/resources/140092/, choose **Post update**.\n2. Version string: `0.2.5`\n3. Download: **External download** \u2192 `https://github.com/Dans-Plugins/Med",
+      "created_at": "2026-11-04T01:36:44Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 0.761,
+      "status": "filtered",
+      "detected_at": "2026-11-04T09:07:53.105311+00:00"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/Dans-Plugins/Easy-Links/issues/91",
+      "title": "Post 0.8.1 to SpigotMC",
+      "body": "`v0.8.1` is the stable release on GitHub, but the listing at https://www.spigotmc.org/resources/98040/ still shows the previous version until an update is posted there by hand (SpigotMC has no API for it).\n\n## Post update\n\n1. Open https://www.spigotmc.org/resources/98040/, choose **Post update**.\n2. Version string: `0.8.1`\n3. Download: **External download** \u2192 `https://github.com/Dans-Plugins/Easy-",
+      "created_at": "2026-11-04T01:19:13Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 0.754,
+      "status": "filtered",
+      "detected_at": "2026-11-04T09:07:53.105779+00:00"
     }
   ]
 }
