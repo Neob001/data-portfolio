@@ -96,3 +96,6 @@ Replies are NEVER posted without a tick. Standing decision 2026-09-12.
 
 ## 2026-11-05
 (no drafts today. demand_monitor: 13 new raw hits, 0 passed the filters: allegro/allegro-api#14286 asks about Allegro Analytics seller reports, which sit behind seller OAuth login and private account data (login-gated, not a public-data build), and 12 Dans-Plugins "Post X to SpigotMC" release chores matched on keywords only. All marked filtered. No 'have' matches, no DC proposals. Apify forum still returns non-JSON. No owner ticks pending.)
+
+## 2026-11-06
+(no drafts today. demand_monitor: 3 new raw hits, 0 passed the filters: all 3 are Dans-Plugins "Post X to SpigotMC" release chores (MiniFactions#141, KDRTracker#91, Activity-Tracker#179) matched on keywords only. All marked filtered. No have matches, no DC proposals. Apify forum still returns non-JSON. No owner ticks pending.)
