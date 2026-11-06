@@ -9,7 +9,7 @@ const actor = JSON.parse(read('.actor/actor.json'));
 test('actor.json: Store limits, categories, pricing mention', () => {
   assert.ok(actor.title.length <= 60, `title ${actor.title.length} chars`);
   assert.ok(actor.description.length <= 220, `description ${actor.description.length} chars`);
-  assert.match(actor.description, /\$3 per 1,000 jobs/);
+  assert.match(actor.description, /\$5 per 1,000 jobs/);
   // Category names already used elsewhere in this repo (valid Apify Store categories).
   const known = new Set();
   for (const dir of readdirSync(new URL('../../', import.meta.url))) {

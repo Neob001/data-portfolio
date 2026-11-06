@@ -2,7 +2,7 @@
 
 <!-- factpipe:hero:start -->
 
-**Search live openings from thousands of companies' official Greenhouse, Lever, Ashby, Workable and Recruitee job boards. Deduplicated JSON with salary, remote and location filters. $3 per 1,000 jobs.**
+**Search live openings from thousands of companies' official Greenhouse, Lever, Ashby, Workable and Recruitee job boards. Deduplicated JSON with salary, remote and location filters. $5 per 1,000 jobs.**
 
 | Title | Company | Locations | Workplace | Salary min |
 |---|---|---|---|---|
@@ -16,7 +16,7 @@
 
 <!-- factpipe:hero:end -->
 
-Search **live job openings from 10,000+ companies** in one feed. The jobs come from the **official public job-board APIs** of Greenhouse, Lever, Ashby, Workable and Recruitee. Filter by keyword, location, country, remote, company, department, employment type and posting date. Keyword searches are **ranked by relevance** (title matches first), and you get flat, deduplicated JSON with salary ranges wherever the employer publishes them. **$3 per 1,000 jobs**, and you pay only for jobs delivered.
+Search **live job openings from 10,000+ companies** in one feed. The jobs come from the **official public job-board APIs** of Greenhouse, Lever, Ashby, Workable and Recruitee. Filter by keyword, location, country, remote, company, department, employment type and posting date. Keyword searches are **ranked by relevance** (title matches first), and you get flat, deduplicated JSON with salary ranges wherever the employer publishes them. **$5 per 1,000 jobs**, and you pay only for jobs delivered.
 
 ## Quick start
 
@@ -130,11 +130,9 @@ More keywords matched means a higher score inside each band. Among equal scores,
 
 | Event | Price | Meaning |
 |---|---|---|
-| `job-result` | **$3.00 per 1,000** ($0.003 each) | One job record delivered, with or without its description. **No start fee. Runs with no matches, jobs skipped by `sinceLastRun`, jobs found closed at delivery time, and failed boards are never charged.** |
+| `job-result` | **$5.00 per 1,000** ($0.005 each) | One job record delivered, with or without its description. **No start fee. Runs with no matches, jobs skipped by `sinceLastRun`, jobs found closed at delivery time, and failed boards are never charged.** |
 
-Example: 10,000 jobs cost **$30**. Set a maximum charge per run in Apify, and the Actor stops cleanly when it is reached.
-
-**Price change on November 6, 2026:** `job-result` becomes **$5.00 per 1,000** ($4.50 / $4.00 / $3.50 on Starter / Scale / Business plans), reflecting the added Workday, Personio and Teamtailor coverage and the new enrichment fields. Platform usage stays included.
+Example: 10,000 jobs cost **$50**. Set a maximum charge per run in Apify, and the Actor stops cleanly when it is reached.
 
 ## Coverage
 
@@ -191,7 +189,7 @@ These Actors search the same daily index of 730,000+ open jobs from 15,000+ comp
 ## FAQ
 
 **How is this different from LinkedIn or Indeed scrapers?**
-We don't scrape any job site. Every job comes from the employer's own applicant tracking system, through the official public API that also powers the company's careers page. That makes the data first-party and current: a job is gone from the feed once the employer closes it. It also carries the direct apply link, and there are no reposts, recruiter spam or login walls. There is no ban risk and no proxy cost, which is why it costs $3 per 1,000 jobs.
+We don't scrape any job site. Every job comes from the employer's own applicant tracking system, through the official public API that also powers the company's careers page. That makes the data first-party and current: a job is gone from the feed once the employer closes it. It also carries the direct apply link, and there are no reposts, recruiter spam or login walls. There is no ban risk and no proxy cost, which is why it costs $5 per 1,000 jobs.
 
 **How fresh is the data?**
 The search index is rebuilt daily. With `includeDescription` on (the default), every delivered job is re-checked live against the employer's ATS during your run, and closed jobs are dropped. `fetched_at` is when the index read that board, and `posted_at` is the employer's own publish date.

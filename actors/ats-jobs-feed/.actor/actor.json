@@ -2,7 +2,7 @@
   "actorSpecification": 1,
   "name": "ats-jobs-feed",
   "title": "Jobs Feed API — Workday, Greenhouse, Lever & Ashby Jobs",
-  "description": "Job listings API: 800,000+ live job postings from 19,000+ companies' Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable and Recruitee boards. Salary, seniority, remote filters. $3 per 1,000 jobs.",
+  "description": "Job listings API: 800,000+ live job postings from 19,000+ companies' Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable and Recruitee boards. Salary, seniority, remote filters. $5 per 1,000 jobs.",
   "version": "0.1",
   "buildTag": "latest",
   "input": "../INPUT_SCHEMA.json",
