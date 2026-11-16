@@ -1,6 +1,6 @@
 # Expired Jobs Checker — Is This Job Posting Still Open?
 
-An **expired jobs checker** for job boards, aggregators and recruiting tools: paste job IDs or job URLs and find out, per job, whether the posting is still **open** or has been **closed / expired** by the employer. It checks against a daily index of 20,000+ company career sites on Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable and Recruitee, so a run with thousands of jobs takes seconds and never touches the employers' sites.
+An **expired jobs checker** for job boards, aggregators and recruiting tools: paste job IDs or job URLs and find out, per job, whether the posting is still **open** or has been **closed / expired** by the employer. It checks against a daily index of 19,000+ company career sites on Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable and Recruitee, so a run with thousands of jobs takes seconds and never touches the employers' sites.
 
 Remove dead listings from your job board, stop alerting candidates about filled roles, or measure how long jobs stay open.
 
@@ -88,7 +88,7 @@ Up to 200,000 jobs per run; identical inputs are checked once. The output has on
 
 ## factpipe Jobs & Hiring Data
 
-These Actors share the same nightly index of open jobs from 20,000+ company career sites:
+These Actors share the same nightly index of open jobs from 19,000+ company career sites:
 
 - [Expired Jobs Checker](https://apify.com/factpipe/expired-jobs-checker) (this Actor): open or closed, per job_id or job URL.
 - [Bulk Job Postings Feed](https://apify.com/factpipe/jobs-bulk-feed): every new job every day, as one bulk feed.

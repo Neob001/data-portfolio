@@ -1,8 +1,8 @@
 # Bulk Job Postings Feed — All New Jobs Daily
 
-A **bulk job postings feed** for job boards, HR-tech products and labour-market research: every open job from **20,000+ company career sites** on Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable and Recruitee, delivered as flat JSON rows. Run it once for the whole index (about **860,000 unique jobs**), then schedule it daily: with `sinceLastRun` (on by default) each run returns **only the jobs it has not delivered before**, so you get every new job once and never pay twice for the same posting.
+A **bulk job postings feed** for job boards, HR-tech products and labour-market research: every open job from **19,000+ company career sites** on Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable and Recruitee, delivered as flat JSON rows. Run it once for the whole index (about **800,000 unique jobs**), then schedule it daily: with `sinceLastRun` (on by default) each run returns **only the jobs it has not delivered before**, so you get every new job once and never pay twice for the same posting.
 
-No keyword search, no ranking, no scraping during your run: the Actor streams a prebuilt index that is rebuilt every night from the employers' own applicant tracking systems, so even a full delivery of 800,000+ jobs is fast and cheap.
+No keyword search, no ranking, no scraping during your run: the Actor streams a prebuilt index that is rebuilt every night from the employers' own applicant tracking systems, so even a full delivery of 790,000+ jobs is fast and cheap.
 
 ## Quick start
 
@@ -105,7 +105,7 @@ Jobs skipped by `sinceLastRun` are never charged. Set a maximum charge per run i
 
 ## factpipe Jobs & Hiring Data
 
-These Actors share the same nightly index of open jobs from 20,000+ company career sites:
+These Actors share the same nightly index of open jobs from 19,000+ company career sites:
 
 - [Bulk Job Postings Feed](https://apify.com/factpipe/jobs-bulk-feed) (this Actor): every new job every day, as one bulk feed.
 - [Jobs Feed API](https://apify.com/factpipe/ats-jobs-feed): keyword search ranked by relevance, every filter, full descriptions fetched live.
@@ -119,7 +119,7 @@ These Actors share the same nightly index of open jobs from 20,000+ company care
 ## FAQ
 
 **How is this different from the Jobs Feed API (ats-jobs-feed)?**
-The [Jobs Feed API](https://apify.com/factpipe/ats-jobs-feed) is a search: keywords, relevance ranking, company and department filters, live description fetch, typically tens to a few thousand jobs per run. This Actor is a bulk export: no keywords and no ranking, just every job that matches a few coarse filters, streamed in batches of 1,000, so it can deliver the whole index (800,000+ jobs) in one run. Use the bulk feed to mirror the data; use the Jobs Feed API to find specific jobs or to get full descriptions.
+The [Jobs Feed API](https://apify.com/factpipe/ats-jobs-feed) is a search: keywords, relevance ranking, company and department filters, live description fetch, typically tens to a few thousand jobs per run. This Actor is a bulk export: no keywords and no ranking, just every job that matches a few coarse filters, streamed in batches of 1,000, so it can deliver the whole index (790,000+ jobs) in one run. Use the bulk feed to mirror the data; use the Jobs Feed API to find specific jobs or to get full descriptions.
 
 **How fresh is the data?**
 The index is rebuilt every night from the employers' ATS APIs and feeds and published around 10:00 UTC (some days up to an hour later). Each row's `fetched_at` says when the build read that company's board; `posted_at` is the employer's own publish date. Schedule the Actor after about 11:00 UTC to get each new build's jobs on the same day. A run never contacts the job boards itself.

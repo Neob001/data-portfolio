@@ -1127,7 +1127,7 @@
       },
       "listing": {
         "title": "Jobs Feed API \u2014 Workday, Greenhouse, Lever & Ashby Jobs",
-        "description": "Job listings API: 800,000+ live job postings from 19,000+ companies' Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable and Recruitee boards. Salary, seniority, remote filters. $5 per 1,000 jobs.",
+        "description": "Job listings API: 790,000+ live job postings from 19,000+ companies' Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable and Recruitee boards. Salary, seniority, remote filters. $5 per 1,000 jobs.",
         "seoTitle": "Job Listings API: Workday, Greenhouse, Lever & Ashby Jobs",
         "seoDescription": "Job postings API: 800k+ open jobs from 19k company career sites (Workday, Greenhouse, Lever, Ashby, Personio...). Daily new-jobs feed, salary, seniority.",
         "categories": [
@@ -1608,9 +1608,9 @@
       },
       "listing": {
         "title": "Bulk Job Postings Feed \u2014 All New Jobs Daily",
-        "description": "Every new job posting, every day: 850,000+ jobs from 20,000+ company career sites (Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable, Recruitee) as one bulk feed. Only jobs not delivered before.",
+        "description": "Every new job posting, every day: 790,000+ jobs from 19,000+ company career sites (Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable, Recruitee) as one bulk feed. Only jobs not delivered before.",
         "seoTitle": "Bulk Job Postings Feed: All New Jobs Daily (Job Data Feed)",
-        "seoDescription": "Bulk job data feed: every new job posting from 20,000+ company career sites (Workday, Greenhouse, Lever, Ashby...) daily, only jobs not delivered before.",
+        "seoDescription": "Bulk job data feed: every new job posting from 19,000+ company career sites (Workday, Greenhouse, Lever, Ashby...) daily, only jobs not delivered before.",
         "categories": [
           "JOBS",
           "LEAD_GENERATION"
