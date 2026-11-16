@@ -99,3 +99,6 @@ Replies are NEVER posted without a tick. Standing decision 2026-09-12.
 
 ## 2026-11-06
 (no drafts today. demand_monitor: 3 new raw hits, 0 passed the filters: all 3 are Dans-Plugins "Post X to SpigotMC" release chores (MiniFactions#141, KDRTracker#91, Activity-Tracker#179) matched on keywords only. All marked filtered. No have matches, no DC proposals. Apify forum still returns non-JSON. No owner ticks pending.)
+
+## 2026-11-16
+(no drafts today. demand_monitor: 5 new raw hits, 0 passed the filters: 4 Dans-Plugins "Post X to SpigotMC" release chores (Democracy#106, Bookshelves-You-Can-Use#83, AlternateAccountFinder#194, Activity-Tracker#203) matched on keywords only, and HN 50413158 asks about backtesting math/science breakthroughs with AI models, not a data request. All marked filtered. No have matches, no DC proposals. Apify forum still returns non-JSON. No owner ticks pending.)
