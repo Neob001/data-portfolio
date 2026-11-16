@@ -199,7 +199,7 @@ export async function discoverCompany(query, ctx) {
   }
   return { miss: {
     reason: 'no_supported_ats_detected', careersPageUrl: careersPage, sourceUrl,
-    detail: `Read ${read} page(s)${careersPage ? ` incl. ${careersPage}` : ''}: no link to a supported job board (Greenhouse, Lever, Ashby, Workable, Recruitee, Workday, Personio, Teamtailor). The company may use an in-house careers system or load its jobs with JavaScript only.`,
+    detail: `Read ${read} page(s)${careersPage ? ` incl. ${careersPage}` : ''}: no link to a supported job board (Greenhouse, Lever, Ashby, Workable, Recruitee, Workday, Personio, Teamtailor, JazzHR, Pinpoint). The company may use an in-house careers system or load its jobs with JavaScript only.`,
   }, pages };
 }
 

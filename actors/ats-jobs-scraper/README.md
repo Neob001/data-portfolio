@@ -83,7 +83,7 @@ One flat record per job opening:
 
 | Field | Type | Notes |
 |---|---|---|
-| `ats` | string[] | Any of `greenhouse`, `lever`, `ashby`, `workable`, `recruitee`, `workday`, `personio`, `teamtailor`. Empty = all eight |
+| `ats` | string[] | Any of `greenhouse`, `lever`, `ashby`, `workable`, `recruitee`, `workday`, `personio`, `teamtailor`, `jazzhr`, `pinpoint`. Empty = all ten |
 | `companies` | string[] | Company names (`Datadog`) or board tokens (`datadog`, `greenhouse:datadog`). Empty = every company on the chosen platforms |
 | `keywords` | string[] | Case-insensitive. Title matches rank first, then department/team, then description (first ~1,500 characters) |
 | `keywordMatch` | `any` \| `all` | Default `any` |
@@ -113,6 +113,8 @@ One flat record per job opening:
 | Workday | `https://acme.wd5.myworkdayjobs.com/External` (any page, also `/en-US/…`) | `workday:acme.wd5/External` |
 | Personio | `https://acme.jobs.personio.de` (any page, also `.jobs.personio.com`) | `personio:acme` |
 | Teamtailor | `https://acme.teamtailor.com/jobs` (any page) | `teamtailor:acme`; a custom domain hosted by Teamtailor: `teamtailor:careers.acme.com` |
+| JazzHR | `https://acme.applytojob.com/apply` (any page) | `jazzhr:acme` |
+| Pinpoint | `https://acme.pinpointhq.com` (any page) | `pinpoint:acme` |
 
 **How it works.** Without `companyUrls`, the Actor searches a compact search index of every job board in our directory, rebuilt daily from the ATS APIs. It downloads only the index parts for your chosen ATSs and date range. With keywords, it ranks every matching job before delivering the top `maxResults`. For each delivered job it then fetches the full description live from the company's ATS (one API call per company), which also drops jobs closed since the nightly build (not delivered, not charged).
 
@@ -138,11 +140,13 @@ Search-index build of 2026-09-25: **730,000+ open jobs** on **15,000+ company jo
 
 **Personio and Teamtailor** (added 2026-10-14): 2,397 Personio and 1,956 Teamtailor career sites with open jobs (22,853 and 39,070 listed jobs) are in the directory and join the search index with its nightly build. Until a platform's first build, a search limited to it reads a few built-in boards live; any Personio or Teamtailor board also works in live mode (`companyUrls`).
 
+**JazzHR and Pinpoint** (added 2026-11-16): about 7,450 JazzHR companies (108,000 live jobs in JazzHR's public job sitemaps) and Pinpoint career sites join the directory as they are validated and the search index with its nightly build. JazzHR career pages list title and location; the posting date, description and published pay come from each job's page. Until a platform's first build, a search limited to it reads a few built-in boards live; any JazzHR or Pinpoint board also works in live mode (`companyUrls`).
+
 Boards were discovered from Common Crawl's public URL index and validated against each ATS API or feed. Every indexed board had at least one open job when last checked. A company that isn't indexed yet works in live mode through `companyUrls`.
 
 ## Sources and terms
 
-Only official, public, unauthenticated job-board APIs and feeds that the ATS vendors publish for displaying and syndicating open jobs. No career-site HTML scraping, no logins, no LinkedIn or Indeed.
+Only official, public, unauthenticated job-board APIs and feeds that the ATS vendors publish for displaying and syndicating open jobs, plus public career pages where a platform has no feed (JazzHR: the job list and each job page's schema.org JobPosting data, the structured data published for search engines). No other career-site HTML is scraped, no logins, no LinkedIn or Indeed.
 
 | ATS | API | Reuse terms |
 |---|---|---|
@@ -154,6 +158,8 @@ Only official, public, unauthenticated job-board APIs and feeds that the ATS ven
 | Workday | Public career sites (`<company>.<wdN>.myworkdayjobs.com/<site>`) | Not a vendor-documented API: the job list and job pages each site loads for its visitors. Each host's robots.txt is checked first (career sites allow `/<site>/`); about 4 requests/s across all Workday hosts |
 | Personio | [XML job feed](https://developer.personio.de/docs/retrieving-open-job-positions) (`<company>.jobs.personio.de/xml`) | Published by Personio for job portals and company sites. Each host's robots.txt is read first and only a text/plain file allowing `/xml` and `/job/` counts; a company that disallows it is never read |
 | Teamtailor | Career-site RSS feed (`<company>.teamtailor.com/jobs.rss`) | The jobs feed each career site links for its visitors (`rel="alternate"`), no Teamtailor API or login. robots.txt checked per host first (career sites disallow only `/app/`, `/messages/` and similar) |
+| JazzHR | Career page (`<company>.applytojob.com/apply`) and the schema.org JobPosting data on each job page | The public career page each company publishes, and the structured data its job pages publish for search engines; companies come from JazzHR's public job sitemaps. robots.txt checked per host first (it disallows only `/cb`). [Employ's terms](https://www.employinc.com/jazzhr-terms-of-service/) are a customer agreement with no clause on reading published jobs |
+| Pinpoint | Postings feed (`<company>.pinpointhq.com/postings.json`) | The JSON each career site serves for its visitors, no login. robots.txt checked per company: a company that disallows it is never read, and single postings a company disallows are skipped |
 
 SmartRecruiters is deliberately **not** included, because its API host's robots.txt disallows automated access. BambooHR is **not** included either: its Terms of Service forbid using any robot or spider to monitor or copy content from the service, which hosts its customers' careers pages.
 

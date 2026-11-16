@@ -202,3 +202,14 @@ test('an unreadable shard makes only its platform\'s missing jobs unknown/not_ch
   assert.ok(summary.shards_failed >= 1);
   assert.deepEqual(rows.map((r) => `${r.status}/${r.status_reason}`), ['unknown/not_checked', 'closed/not_in_index']);
 });
+
+test('JazzHR and Pinpoint job URLs -> the index job_id (posting id in the URL)', async () => {
+  const { postingIdFromUrl } = await import('../src/check.js');
+  assert.equal(postingIdFromUrl('jazzhr', 'https://brennancenter.applytojob.com/apply/WpIfUaLo9Q/Associate-Editor?source=GS'), 'WpIfUaLo9Q');
+  assert.equal(postingIdFromUrl('pinpoint', 'https://nypl.pinpointhq.com/en/postings/7EA0CEC2-63cc-4f0d-a3e1-f3104da45065'), '7ea0cec2-63cc-4f0d-a3e1-f3104da45065');
+  assert.equal(postingIdFromUrl('jazzhr', 'https://brennancenter.applytojob.com/apply'), null);
+  assert.deepEqual(parseJobId('pinpoint:NYPL:7ea0cec2-63cc-4f0d-a3e1-f3104da45065'),
+    { ats: 'pinpoint', token: 'nypl', jobId: 'pinpoint:nypl:7ea0cec2-63cc-4f0d-a3e1-f3104da45065' });
+  const it = parseItem({ kind: 'url', input: 'https://brennancenter.applytojob.com/apply/WpIfUaLo9Q/Associate-Editor' });
+  assert.equal(it.jobId, 'jazzhr:brennancenter:WpIfUaLo9Q');
+});

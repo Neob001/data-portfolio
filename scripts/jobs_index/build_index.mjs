@@ -13,6 +13,8 @@
 // Workday 8 sites in parallel (one per host) @ >=150 ms between request starts across all Workday hosts, robots.txt
 // checked per host. Personio / Teamtailor (career-site feeds, one host per company): 6 boards in parallel @ >=200 ms
 // between request starts per platform, robots.txt of each host read (Accept: text/plain) before its feed.
+// JazzHR / Pinpoint (career page / postings.json + job pages, one host per company): 4 resp. 3 boards in parallel @
+// >=250 / 500 ms between request starts per platform, robots.txt of each host first, then each job page's path too.
 //
 // Workday budget: a site's jobs come 20 per request, so a 2,000-job site costs 100 requests. Each site keeps
 // its newest --workday-max-jobs jobs, stops paging after --workday-site-budget-s, and the whole Workday queue
@@ -23,8 +25,21 @@
 // Personio / Teamtailor budget: one feed request per board (+ robots.txt; Personio + one English feed when a position
 // has no default-language description). Each platform's queue runs in parallel with the others, rotates daily
 // and stops starting boards after --personio-budget-min / --teamtailor-budget-min, with its own 429 breaker.
+//
+// JazzHR / Pinpoint budget (career page / postings.json + job pages for the JSON-LD details; robots.txt per host
+// first, one request in flight per host): each runs in its own parallel queue inside --jazzhr-budget-min /
+// --pinpoint-budget-min, in two passes. Pass 1 reads the lists (robots.txt + one request per board); pass 2 reads job
+// pages, only for jobs not read on an earlier night, at most --jazzhr-max-details / --pinpoint-max-details per board,
+// while the budget lasts. State between nights: state/hosted/<ats>.json.gz (restored with the rest of state/): each
+// board's last list and the trimmed job-page data.
+//   - JazzHR: pass 1 only reads boards whose job set in JazzHR's public sitemaps changed since their last read (or that
+//     are older than --jazzhr-refresh-days, or never read: those first); unchanged boards are carried over with their
+//     original fetched_at. Without the sitemaps, all boards in daily-rotated order.
+//   - A board not reached in pass 1 (budget) or failing transiently keeps its last list for <= --hosted-carry-days,
+//     minus jobs that left the sitemaps.
 // Zero-token, deterministic. Needs node >= 22; imports only node builtins and the Actor's src/.
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
+import { gzipSync, gunzipSync } from 'node:zlib';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs, promisify } from 'node:util';
@@ -32,8 +47,9 @@ import { execFile } from 'node:child_process';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const SRC = resolve(HERE, '../../actors/ats-jobs-feed/src');
-const { fetchBoard } = await import(join(SRC, 'feed.js'));
-const { boardHost } = await import(join(SRC, 'core/transform.js'));
+const { fetchBoard, compactDetail, readJobPages } = await import(join(SRC, 'feed.js'));
+const { boardHost, mergeJobDetail } = await import(join(SRC, 'core/transform.js'));
+const { robotsVerdict } = await import(join(SRC, 'core/robots.js'));
 const { IndexWriter } = await import(join(SRC, 'index_writer.js'));
 const { fetchJson, FetchError } = await import(join(SRC, 'lib/http.js'));
 const execFileP = promisify(execFile);
@@ -51,9 +67,19 @@ const POLICY = {
   // Career-site feeds (Personio /xml, Teamtailor /jobs.rss): one host per company, robots.txt per host first.
   personio: { workers: 6, gapMs: 200 },
   teamtailor: { workers: 6, gapMs: 200 },
+  // HTML career pages + job pages (JazzHR) / postings feed + job pages (Pinpoint): one request in flight per host
+  // (a board's requests run one after another), <= 4 resp. 2 request starts/s across the platform. Pinpoint job pages
+  // answer slowly (~2.3 s each, smoke run 2026-11-16), so 3 boards are in flight to use its 2/s.
+  jazzhr: { workers: 4, gapMs: 250 },
+  pinpoint: { workers: 3, gapMs: 500 },
 };
 const FEED_ATS = new Set(['personio', 'teamtailor']);
-const ROBOTS_ATS = new Set(['workday', 'personio', 'teamtailor']);
+const HOSTED_ATS = new Set(['jazzhr', 'pinpoint']);
+const ROBOTS_ATS = new Set(['workday', 'personio', 'teamtailor', 'jazzhr', 'pinpoint']);
+const HOSTED_STATE = join(HERE, 'state', 'hosted');
+// JazzHR's public job sitemaps (listed in every applytojob.com robots.txt): which jobs are live, per company.
+const JAZZ_SITEMAP = (n) => `http://app.jazz.co/feeds/google/xml/${n}`;
+const JAZZ_SITEMAP_ROBOTS = 'https://app.jazz.co/robots.txt';
 
 const { values: args } = parseArgs({
   options: {
@@ -72,6 +98,13 @@ const { values: args } = parseArgs({
     'personio-budget-min': { type: 'string', default: '45' }, // stop starting Personio boards after this long
     'teamtailor-budget-min': { type: 'string', default: '45' }, // stop starting Teamtailor boards after this long
     'teamtailor-max-jobs': { type: 'string', default: '1000' }, // newest-first pages of 100 per Teamtailor site
+    'jazzhr-budget-min': { type: 'string', default: '80' }, // stop starting JazzHR boards after this long
+    'pinpoint-budget-min': { type: 'string', default: '30' }, // stop starting Pinpoint boards after this long
+    'jazzhr-max-details': { type: 'string', default: '15' }, // new job pages read per JazzHR board per night
+    'pinpoint-max-details': { type: 'string', default: '10' }, // new job pages read per Pinpoint board per night
+    'jazzhr-refresh-days': { type: 'string', default: '7' }, // re-read an unchanged JazzHR board after this long
+    'hosted-carry-days': { type: 'string', default: '3' }, // carry a board not read tonight for at most this long
+    'jazzhr-sitemaps': { type: 'string', default: '5' }, // sitemap files to read (0 = none)
   },
 });
 
@@ -110,7 +143,10 @@ async function curlJson(url, { retries = 3, timeoutMs = 180000, minDelayMs = 200
  * (names come from boards.json).
  */
 async function getText(url, { accept = null, meta = false, retries = 2, timeoutMs = 60000 } = {}) {
-  if (!url.endsWith('/robots.txt') && !/\/xml(?:\?language=en)?$|\/jobs\.rss(?:\?offset=\d+)?$/.test(url)) throw new Error(`name from boards.json, not ${url}`);
+  if (!url.endsWith('/robots.txt') && !/\/xml(?:\?language=en)?$|\/jobs\.rss(?:\?offset=\d+)?$/.test(url)
+    && !/^https:\/\/[a-z0-9-]+\.applytojob\.com\/apply(?:\/[A-Za-z0-9]{6,80}\/[^/?#]*)?$/.test(url)
+    && !/^https:\/\/[a-z0-9-]+\.pinpointhq\.com\/(?:postings\.json|(?:[a-z]{2}(?:-[A-Za-z]{2})?\/)?postings\/[0-9a-f-]{8,})$/.test(url)
+    && !/^http:\/\/app\.jazz\.co\/feeds\/google\/xml\/\d$/.test(url)) throw new Error(`name from boards.json, not ${url}`);
   let last;
   for (let a = 0; a <= retries; a += 1) {
     if (a) await new Promise((r) => setTimeout(r, 2000 * 2 ** (a - 1)));
@@ -162,6 +198,91 @@ function pacer(gapMs) {
   };
 }
 
+// ------------------------------------------------------------------ JazzHR / Pinpoint state between nights
+/** state/hosted/<ats>.json.gz -> { boards: {token: {name, fetched_at, jobs}}, details: {job_id: detail} } */
+async function loadHosted(ats) {
+  try {
+    const d = JSON.parse(gunzipSync(await readFile(join(HOSTED_STATE, `${ats}.json.gz`))).toString('utf8'));
+    return { boards: d.boards || {}, details: d.details || {} };
+  } catch { return { boards: {}, details: {} }; }
+}
+
+async function saveHosted(ats, state) {
+  // Keep details only for jobs still listed on a kept board.
+  const live = new Set();
+  for (const b of Object.values(state.boards)) for (const j of b.jobs) live.add(j.job_id);
+  const details = Object.fromEntries(Object.entries(state.details).filter(([id]) => live.has(id)));
+  await mkdir(HOSTED_STATE, { recursive: true });
+  const tmp = join(HOSTED_STATE, `${ats}.json.gz.tmp`);
+  await writeFile(tmp, gzipSync(Buffer.from(JSON.stringify({ version: 1, saved_at: new Date().toISOString(), boards: state.boards, details })), { level: 6 }));
+  await rename(tmp, join(HOSTED_STATE, `${ats}.json.gz`));
+  return { boards: Object.keys(state.boards).length, jobs: live.size, details: Object.keys(details).length };
+}
+
+/**
+ * JazzHR's public sitemaps -> Map(token -> Set(job id)) of live jobs, or null (robots.txt of app.jazz.co does not
+ * allow them, or a file failed: then every board is read in rotated order instead).
+ */
+async function jazzSitemaps(n) {
+  if (!n) return null;
+  const robots = await getText(JAZZ_SITEMAP_ROBOTS, { accept: 'text/plain', meta: true, retries: 1, timeoutMs: 30000 })
+    .catch((e) => (e?.status ? { status: e.status, text: '' } : { error: e?.message || 'unreachable' }));
+  const v = robotsVerdict(robots, ROBOTS_AGENT, ['/feeds/google/xml/0']);
+  if (!v.allowed) { console.error(`  jazzhr sitemaps not read: ${v.reason}`); return null; }
+  const live = new Map();
+  for (let i = 0; i < n; i += 1) {
+    let xml;
+    try { xml = await getText(JAZZ_SITEMAP(i), { accept: 'application/xml, text/xml;q=0.9, */*;q=0.1', retries: 2, timeoutMs: 300000 }); } catch (e) {
+      if (e?.status === 404) break;
+      console.error(`  jazzhr sitemap ${i} failed (${e.message}): boards are read in rotated order tonight`);
+      return null;
+    }
+    let found = 0;
+    for (const m of xml.matchAll(/<loc>\s*https?:\/\/([a-z0-9][a-z0-9-]*)\.applytojob\.com\/apply\/([A-Za-z0-9]{6,80})[/?<]/gi)) {
+      const tok = m[1].toLowerCase();
+      (live.get(tok) || live.set(tok, new Set()).get(tok)).add(m[2]);
+      found += 1;
+    }
+    if (!found) break;
+  }
+  return live.size ? live : null;
+}
+
+/** JazzHR job id of a job record ("jazzhr:<token>:<id>"). */
+const jazzId = (job) => String(job.job_id).split(':').pop();
+
+/**
+ * Order tonight's JazzHR / Pinpoint boards and pick the ones carried over without a request:
+ * -> { order: boards to read, carry: boards reused from the cache, unchanged: Set(token) }.
+ * JazzHR: boards whose sitemap jobs changed (or never read) are read, never-read first, in daily-rotated order;
+ * unchanged boards are carried from the cache (pass 2 still reads their missing job pages).
+ */
+function planHosted(ats, list, state, live, { refreshDays, carryDays, now = Date.now() }) {
+  const ageDays = (b) => (now - Date.parse(b?.fetched_at || 0)) / 86400000;
+  if (ats !== 'jazzhr' || !live) return { order: rotateDaily(list), carry: [], unchanged: new Set() };
+  const order = [];
+  const carry = [];
+  const unchanged = new Set();
+  for (const b of list) {
+    const tok = String(b.token).toLowerCase();
+    const cached = state.boards[tok];
+    const ids = live.get(tok);
+    if (!ids) { order.push({ b, fresh: 1 }); continue; } // no live job in the sitemaps tonight: read it to confirm
+    // Compare with the board's sitemap entries when it was last read (a career page can list jobs the sitemaps
+    // leave out, so its own job list is only the fallback for caches written before `sm` existed).
+    const known = new Set(cached?.sm || (cached?.jobs || []).map(jazzId));
+    const fresh = [...ids].filter((id) => !known.has(id)).length;
+    const gone = [...known].filter((id) => !ids.has(id)).length;
+    if (cached && !fresh && !gone && ageDays(cached) < refreshDays) {
+      unchanged.add(tok);
+      carry.push(b); // no list request; pass 2 still reads its missing job pages
+    } else order.push({ b, fresh: cached ? fresh + gone : ids.size + 1e6 }); // never-read boards first
+  }
+  const rotated = rotateDaily(order);
+  rotated.sort((x, y) => (y.fresh >= 1e6) - (x.fresh >= 1e6)); // stable: never-read boards first, each group in rotated order
+  return { order: rotated.map((x) => x.b), carry, unchanged };
+}
+
 async function main() {
   const t0 = Date.now();
   let boards = JSON.parse(await readFile(args.boards, 'utf8'));
@@ -195,9 +316,42 @@ async function main() {
   const queues = new Map();
   for (const b of boards) (queues.get(b.ats) || queues.set(b.ats, []).get(b.ats)).push(b);
   for (const a of ['workday', ...FEED_ATS]) if (queues.has(a)) queues.set(a, rotateDaily(queues.get(a)));
+  // JazzHR / Pinpoint: cached state from earlier nights, tonight's JazzHR sitemaps, read order + carry-over.
+  const hosted = {};
+  const hostedCfg = {
+    refreshDays: Number(args['jazzhr-refresh-days']) || 7,
+    carryDays: Number(args['hosted-carry-days']) || 3,
+    maxDetails: { jazzhr: Number(args['jazzhr-max-details']) || 0, pinpoint: Number(args['pinpoint-max-details']) || 0 },
+  };
+  /** Load a JazzHR / Pinpoint queue's state + (JazzHR) tonight's sitemaps -> its read order. Runs inside that queue, so the
+   * sitemap download never delays the other platforms. */
+  async function prepareHosted(a, list) {
+    const state = await loadHosted(a);
+    const ts = Date.now();
+    const live = a === 'jazzhr' ? await jazzSitemaps(Number(args['jazzhr-sitemaps'])) : null;
+    if (a === 'jazzhr') console.error(`  jazzhr sitemaps read in ${((Date.now() - ts) / 1000).toFixed(0)}s`);
+    const { order, carry, unchanged } = planHosted(a, list, state, live, hostedCfg);
+    hosted[a] = { state, live, carry, unchanged, pass2: [], carried_unchanged: carry.length, carried_boards: 0, carried_jobs: 0, sitemap_boards: live ? live.size : null };
+    console.error(`  ${a}: ${order.length} boards to read, ${carry.length} unchanged boards carried over${live ? ` (sitemaps: ${live.size} companies)` : ''}`);
+    return order;
+  }
+  /** Cached jobs of a board (with cached job-page details), for a board not read tonight; [] when too old. */
+  const carriedJobs = (a, b, { requireFresh = true } = {}) => {
+    const h = hosted[a];
+    const cached = h?.state.boards[String(b.token).toLowerCase()];
+    if (!cached || (requireFresh && (Date.now() - Date.parse(cached.fetched_at || 0)) / 86400000 > hostedCfg.carryDays)) return null;
+    // Drop jobs that left the sitemaps since the board was read (closed); jobs the sitemaps never listed stay.
+    const ids = h.live?.get(String(b.token).toLowerCase()) || new Set();
+    const listedThen = new Set(cached.sm || []);
+    const jobs = cached.jobs.filter((j) => !h.live || ids.has(jazzId(j)) || !listedThen.has(jazzId(j)))
+      .map((j) => mergeJobDetail(j, h.state.details[j.job_id]));
+    return { name: cached.name, jobs };
+  };
   // Per-queue time budgets: no new board of that platform after this point (each runs in parallel with the others).
   const queueEndsAt = {
     workday: t0 + (Number(args['workday-budget-min']) || 85) * 60000,
+    jazzhr: t0 + (Number(args['jazzhr-budget-min']) || 80) * 60000,
+    pinpoint: t0 + (Number(args['pinpoint-budget-min']) || 30) * 60000,
     personio: t0 + (Number(args['personio-budget-min']) || 45) * 60000,
     teamtailor: t0 + (Number(args['teamtailor-budget-min']) || 45) * 60000,
   };
@@ -213,7 +367,8 @@ async function main() {
   let addLock = Promise.resolve();
   let done = 0;
 
-  await Promise.all([...queues.entries()].map(async ([ats, list]) => {
+  await Promise.all([...queues.entries()].map(async ([ats, queued]) => {
+    const list = HOSTED_ATS.has(ats) ? await prepareHosted(ats, queued) : queued;
     const pol = POLICY[ats] || { workers: 2, gapMs: 500 };
     const wait = pacer(pol.gapMs);
     let next = 0;
@@ -226,10 +381,22 @@ async function main() {
     await Promise.all(Array.from({ length: pol.workers }, async () => {
       while (next < list.length) {
         if (queueEndsAt[ats] && Date.now() >= queueEndsAt[ats]) {
-          stats.skipped_budget = (stats.skipped_budget || 0) + (list.length - next);
-          (stats.skipped_budget_by_ats ||= {})[ats] = (stats.skipped_budget_by_ats[ats] || 0) + (list.length - next);
-          console.error(`  ${ats}: time budget spent - skipping its remaining ${list.length - next} boards this build`);
-          next = list.length;
+          const rest = list.slice(next);
+          next = list.length; // claim the rest before any await (the other workers stop here)
+          stats.skipped_budget = (stats.skipped_budget || 0) + rest.length;
+          (stats.skipped_budget_by_ats ||= {})[ats] = (stats.skipped_budget_by_ats[ats] || 0) + rest.length;
+          console.error(`  ${ats}: time budget spent - skipping its remaining ${rest.length} boards this build`);
+          if (HOSTED_ATS.has(ats)) {
+            // Boards not reached tonight keep their last read (<= --hosted-carry-days old, JazzHR jobs filtered by tonight's sitemaps).
+            for (const b of rest) {
+              const c = carriedJobs(ats, b, { requireFresh: !hosted[ats].unchanged.has(String(b.token).toLowerCase()) });
+              if (!c?.jobs.length) continue;
+              addLock = addLock.then(() => writer.addBoard({ ats: b.ats, token: b.token }, c.name || b.name || b.token, c.jobs));
+              await addLock;
+              hosted[ats].carried_boards += 1;
+              hosted[ats].carried_jobs += c.jobs.length;
+            }
+          }
           break;
         }
         if (blocked429 >= 5) {
@@ -255,7 +422,12 @@ async function main() {
         try {
           // robots.txt is fetched once per host (shared cache across workers): count it for the board that needed it.
           const newHost = ROBOTS_ATS.has(ats) && !robotsCache.has(boardHost(board));
-          const r = await fetchBoard(board, ats === 'workday'
+          const hs = hosted[ats]?.state;
+          const known = hs ? { get: (id) => hs.details[id] } : null;
+          const r = await fetchBoard(board, HOSTED_ATS.has(ats)
+            ? { fetchText: politeGetText, skipName: true, robotsCache, robotsAgent: ROBOTS_AGENT, feedTimeoutMs: 90000,
+              maxDetails: 0, knownDetails: known } // job pages in pass 2, after every board's list
+            : ats === 'workday'
             ? { fetchJson: politeFetchJson, fetchText: politeGetText, skipName: true, maxJobs: wdCfg.maxJobs, budgetMs: wdCfg.siteBudgetMs,
               deadline: wdDeadline, robotsCache, robotsAgent: ROBOTS_AGENT }
             : FEED_ATS.has(ats)
@@ -269,6 +441,19 @@ async function main() {
             if (ats === 'workday') s.listed_total = (s.listed_total || 0) + (r.total || 0);
             if (r.truncated) s.truncated = (s.truncated || 0) + 1;
           }
+          if (hs) {
+            s.jobs_robots_dropped = (s.jobs_robots_dropped || 0) + r.robots_dropped;
+            const tok = String(b.token).toLowerCase();
+            if (r.jobs.length) {
+              // The list result, without the description when the job page holds it (JazzHR: kept in details).
+              hs.boards[tok] = { name: r.company_name || b.name || b.token, fetched_at: r.jobs[0].fetched_at,
+                ...(hosted[ats].live ? { sm: [...(hosted[ats].live.get(tok) || [])] } : {}),
+                jobs: r.jobs.map((j) => ({ ...j, description_text: ats === 'jazzhr' ? null : (j.description_text || '').slice(0, 1500) || null })) };
+              hosted[ats].pass2.push({ board, name: r.company_name || b.name || b.token, jobs: r.jobs, read: true });
+            } else { delete hs.boards[tok]; stats.empty += 1; }
+            blocked429 = 0;
+            continue;
+          }
           const name = r.company_name || b.name || b.token;
           // Personio: a position's own <subcompany> stays; otherwise the directory name replaces the token.
           const own = (j) => ats === 'personio' && j.company_name && j.company_name !== String(b.token);
@@ -279,6 +464,20 @@ async function main() {
           blocked429 = 0;
         } catch (e) {
           blocked429 = e.status === 429 ? blocked429 + 1 : 0;
+          if (hosted[ats]) {
+            // Gone (404/410) or disallowed: forget it. A transient failure keeps last night's jobs (carry-over rules).
+            const tok = String(b.token).toLowerCase();
+            if (e.robots || e.status === 404 || e.status === 410) delete hosted[ats].state.boards[tok];
+            else {
+              const c = carriedJobs(ats, b);
+              if (c?.jobs.length) {
+                addLock = addLock.then(() => writer.addBoard(board, c.name || b.name || b.token, c.jobs));
+                await addLock;
+                hosted[ats].carried_boards += 1;
+                hosted[ats].carried_jobs += c.jobs.length;
+              }
+            }
+          }
           if (e.robots) {
             s.skipped_robots = (s.skipped_robots || 0) + 1; // robots.txt disallows: the feed / site was never called
             const why = e.message.replace(/^.*skipped: /, '').replace(/disallows \/.*$/, 'disallows a path we read');
@@ -295,8 +494,65 @@ async function main() {
         if (done % 200 === 0) console.error(`  ${done}/${boards.length} boards, ${writer.rawJobs} jobs, ${((Date.now() - t0) / 1000).toFixed(0)}s`);
       }
     }));
+    if (!HOSTED_ATS.has(ats)) return;
+    // Pass 2 (JazzHR / Pinpoint): job pages of jobs not read on an earlier night, while the queue's budget lasts:
+    // first the boards read tonight, then unchanged boards (sitemaps) that still have jobs without page data. Every
+    // board is then added to the index, with or without new page data.
+    const h = hosted[ats];
+    const s = stats.by_ats[ats] || (stats.by_ats[ats] = { boards: 0, jobs: 0, failed: 0 });
+    const known = { get: (id) => h.state.details[id] };
+    const items = [...h.pass2];
+    for (const b of h.carry) {
+      const c = carriedJobs(ats, b, { requireFresh: false });
+      if (c?.jobs.length) items.push({ board: { ats: b.ats, token: b.token }, name: c.name || b.name || b.token, jobs: c.jobs, read: false });
+    }
+    h.carry = [];
+    const deadline = { hasTimeFor: (ms) => Date.now() + ms < queueEndsAt[ats] + 60000 };
+    let k = 0;
+    await Promise.all(Array.from({ length: pol.workers }, async () => {
+      while (k < items.length) {
+        const it = items[k];
+        k += 1;
+        let jobs = it.jobs;
+        if (Date.now() < queueEndsAt[ats] && hostedCfg.maxDetails[ats] > 0 && jobs.some((j) => !(j.job_id in h.state.details))) {
+          try {
+            const p = await readJobPages(it.board, jobs, { fetchText: politeGetText, robotsCache, robotsAgent: ROBOTS_AGENT,
+              maxDetails: hostedCfg.maxDetails[ats], knownDetails: known, deadline });
+            s.requests = (s.requests || 0) + p.requests;
+            s.job_pages_read = (s.job_pages_read || 0) + p.details.size;
+            s.job_pages_failed = (s.job_pages_failed || 0) + p.details_failed;
+            s.jobs_closed_on_page = (s.jobs_closed_on_page || 0) + p.closed;
+            for (const [id, d] of p.details) h.state.details[id] = compactDetail(d, ats === 'jazzhr');
+            for (const id of p.no_data) h.state.details[id] = {}; // page without JobPosting data: not read again
+            if (p.closed) {
+              const open = new Set(p.jobs.map((j) => j.job_id));
+              const cb = h.state.boards[String(it.board.token).toLowerCase()];
+              if (cb) cb.jobs = cb.jobs.filter((j) => open.has(j.job_id));
+            }
+            jobs = p.jobs;
+          } catch (e) { /* job pages are an extra: the list stands */ }
+        }
+        if (!jobs.length) continue;
+        addLock = addLock.then(() => writer.addBoard(it.board, it.name, jobs));
+        await addLock;
+        if (it.read) { stats.ok += 1; s.boards += 1; s.jobs += jobs.length; } else { h.carried_boards += 1; h.carried_jobs += jobs.length; }
+      }
+    }));
   }));
 
+  // Unchanged JazzHR boards (same live jobs in tonight's sitemaps, read < --jazzhr-refresh-days ago).
+  const hostedReport = {};
+  for (const [a, h] of Object.entries(hosted)) {
+    for (const b of h.carry) {
+      const c = carriedJobs(a, b, { requireFresh: false });
+      if (!c?.jobs.length) continue;
+      await writer.addBoard({ ats: b.ats, token: b.token }, c.name || b.name || b.token, c.jobs);
+      h.carried_boards += 1;
+      h.carried_jobs += c.jobs.length;
+    }
+    hostedReport[a] = { sitemap_companies: h.sitemap_boards, carried_unchanged: h.carried_unchanged, carried_boards: h.carried_boards,
+      carried_jobs: h.carried_jobs, cache: await saveHosted(a, h.state) };
+  }
   const fetchSec = (Date.now() - t0) / 1000;
   console.error(`fetched in ${fetchSec.toFixed(0)}s; deduping, sharding and compressing...`);
   const manifest = await writer.finish();
@@ -313,6 +569,7 @@ async function main() {
     queue_budget_min: Object.fromEntries(Object.entries(queueEndsAt).map(([a, at]) => [a, (at - t0) / 60000])),
     boards_skipped_budget_by_ats: stats.skipped_budget_by_ats || {},
     by_ats: stats.by_ats,
+    hosted: hostedReport,
     jobs_before_dedupe: manifest.jobs_before_dedupe,
     jobs: manifest.jobs,
     shards: manifest.shards.length,

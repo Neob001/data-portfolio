@@ -19,7 +19,7 @@
     "jobUrls": {
       "title": "Job URLs",
       "type": "array",
-      "description": "Job page or apply links (job_url / apply_url) on Greenhouse, Lever, Ashby, Workable, Recruitee, Workday, Personio or Teamtailor, e.g. \"https://jobs.lever.co/acme/<id>\" or \"https://acme.wd5.myworkdayjobs.com/External/job/Berlin/Engineer_R123\". A company careers-page URL works when an indexed job uses it (e.g. Greenhouse ?gh_jid= links).",
+      "description": "Job page or apply links (job_url / apply_url) on Greenhouse, Lever, Ashby, Workable, Recruitee, Workday, Personio, Teamtailor, JazzHR or Pinpoint, e.g. \"https://jobs.lever.co/acme/<id>\" or \"https://acme.wd5.myworkdayjobs.com/External/job/Berlin/Engineer_R123\". A company careers-page URL works when an indexed job uses it (e.g. Greenhouse ?gh_jid= links).",
       "editor": "stringList",
       "prefill": [
         "https://jobs.ashbyhq.com/posthog/8854fb74-8457-40cd-bc10-60125a0c0cd4",

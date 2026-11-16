@@ -102,7 +102,9 @@
               "recruitee",
               "workday",
               "personio",
-              "teamtailor"
+              "teamtailor",
+              "jazzhr",
+              "pinpoint"
             ],
             "description": "ATS of that board"
           },

@@ -37,7 +37,8 @@ CANDIDATES = os.path.join(HERE, 'candidates.json')
 # files are in git, so the nightly workflow validates them incrementally (--max-new per run).
 WORKDAY_CANDIDATES = os.path.join(HERE, 'workday_candidates.json')
 COMMITTED_CANDIDATES = [WORKDAY_CANDIDATES, os.path.join(HERE, 'personio_candidates.json'),
-                        os.path.join(HERE, 'teamtailor_candidates.json')]
+                        os.path.join(HERE, 'teamtailor_candidates.json'), os.path.join(HERE, 'jazzhr_candidates.json'),
+                        os.path.join(HERE, 'pinpoint_candidates.json')]
 BOARDS = os.path.join(HERE, 'boards.json')
 CHECKPOINT = os.path.join(HERE, 'state', 'validate.jsonl')
 BANS = os.path.join(HERE, 'state', 'bans.json')  # {ats: unix time until which we must not call it}
@@ -73,8 +74,12 @@ POLICY = {
     # 4 boards in parallel, one request start per 250 ms across the platform.
     'personio': (4, 0.25),
     'teamtailor': (4, 0.25),
+    # JazzHR career pages (HTML, <company>.applytojob.com/apply) and Pinpoint postings feeds (<company>.pinpointhq.com/
+    # postings.json): one host per company, robots.txt of that host first; <= 4 resp. 2 request starts/s.
+    'jazzhr': (4, 0.25),
+    'pinpoint': (2, 0.5),
 }
-ROBOTS_CHECKED = ('workday', 'personio', 'teamtailor')
+ROBOTS_CHECKED = ('workday', 'personio', 'teamtailor', 'jazzhr', 'pinpoint')
 ROBOTS_AGENT = 'factpipe-jobs-index'
 
 
@@ -152,6 +157,10 @@ def board_host(ats, token):
         return f'{t}.jobs.personio.de'
     if ats == 'teamtailor':
         return f'{t}.teamtailor.com' if '.' not in t or TT_REGIONAL.match(t) else t
+    if ats == 'jazzhr':
+        return f'{t}.applytojob.com'
+    if ats == 'pinpoint':
+        return f'{t}.pinpointhq.com'
     return None
 
 
@@ -164,10 +173,18 @@ def robots_paths(ats, token):
         return ['/xml', '/job/']
     if ats == 'teamtailor':
         return ['/jobs.rss', '/jobs.rss?offset=100', '/jobs/']
+    if ats == 'jazzhr':
+        return ['/apply', '/apply/']
+    if ats == 'pinpoint':
+        return ['/postings.json', '/en/postings/', '/postings/']
     return []
 
 
 def api_url(ats, token, region=None):
+    if ats == 'jazzhr':
+        return f'https://{board_host(ats, token)}/apply'
+    if ats == 'pinpoint':
+        return f'https://{board_host(ats, token)}/postings.json'
     if ats in ('personio', 'teamtailor'):
         return f'https://{board_host(ats, token)}/' + ('xml' if ats == 'personio' else 'jobs.rss')
     if ats == 'workday':
@@ -184,6 +201,8 @@ def api_url(ats, token, region=None):
 
 
 def page_url(ats, token, region=None):
+    if ats == 'pinpoint':
+        return f'https://{board_host(ats, token)}/'
     if ats == 'personio':
         return f'https://{board_host(ats, token)}/'
     if ats == 'workday':
@@ -358,6 +377,37 @@ def feed_count_and_name(ats, body):
     return len(re.findall(r'<item>', body)), name or None
 
 
+JAZZ_JOB_RX = re.compile(r"list-group-item-heading[^>]*>\s*<a\s+[^>]*href=[\"'][^\"']*/apply/([A-Za-z0-9]{6,80})/")
+
+
+def jazzhr_count_and_name(body):
+    """JazzHR career page HTML -> (open jobs, company name); (None, None) if it is not a JazzHR career page.
+    Same rules as jazzhrListEntries() / jazzhrNameFromPage() in actors/ats-jobs-feed/src/core/transform.js."""
+    if not isinstance(body, str) or not re.search(r'(?i)applytojob|jazzhr|resumator', body):
+        return None, None
+    n = len(set(JAZZ_JOB_RX.findall(body)))
+    m = re.search(r'<title[^>]*>([^<]{1,250})</title>', body, re.I)
+    t = re.sub(r'\s+', ' ', html.unescape(m.group(1))).strip() if m else ''
+    nm = re.fullmatch(r'(?i)(.{1,200}?)\s+-\s+Career Page', t)
+    name = nm.group(1).strip() if nm else None
+    return n, (None if not name or re.fullmatch(r'(?i)jazzhr|career page', name) else name)
+
+
+def pinpoint_name(page):
+    """Pinpoint career page -> company name from og:title "Careers at X" or <title> "Jobs at X | ..."
+    (pinpointNameFromPage() in core/feed.js)."""
+    og = re.search(r'<meta[^>]*property="og:title"[^>]*content="([^"]{1,200})"', page or '', re.I)
+    ti = re.search(r'<title[^>]*>([^<]{1,250})</title>', page or '', re.I)
+    for m in (og, ti):
+        if not m:
+            continue
+        t = re.sub(r'\s+', ' ', html.unescape(m.group(1))).strip()
+        n = re.fullmatch(r'(?i)(?:careers?|jobs?|work)\s+(?:at|with)\s+(.{2,120}?)(?:\s+[|–-]\s+.*)?', t)
+        if n and n.group(1).strip().lower() != 'pinpoint':
+            return n.group(1).strip()
+    return None
+
+
 def title_name(ats, page):
     m = re.search(r'<title[^>]*>([^<]{1,200})</title>', page or '', re.I)
     if not m:
@@ -399,6 +449,33 @@ def check(ats, token, region, pacers, prev=None):
         if not allowed:
             rec.update({'status': 'robots', 'reason': reason})
             return rec
+    if ats in ('jazzhr', 'pinpoint'):
+        if ats == 'jazzhr':
+            status, body = get(api_url(ats, token), pacers[ats], retries=2, timeout=90, want_json=False, accept='text/html')
+            rec['status'] = status
+            if status != 200:
+                return rec
+            n, name = jazzhr_count_and_name(body)
+        else:
+            status, body = get(api_url(ats, token), pacers[ats], retries=2, timeout=90)
+            rec['status'] = status
+            if status != 200:
+                return rec
+            data = body.get('data') if isinstance(body, dict) else None
+            n = len(data) if isinstance(data, list) else None
+            name = None
+            if n:
+                name = (prev or {}).get('name') if (prev or {}).get('name_src') == 'page' else None
+                if not name:
+                    st, page = get(page_url(ats, token), pacers[ats], retries=1, timeout=60, want_json=False)
+                    name = pinpoint_name(page) if st == 200 else None
+                rec['name_src'] = 'page' if name else 'token'
+        if n is None:
+            rec['status'] = 'not_feed'  # answered, but not a JazzHR career page / Pinpoint postings feed (definitive)
+            return rec
+        rec['jobs'] = n
+        rec['name'] = name or token
+        return rec
     if ats in ('personio', 'teamtailor'):
         accept = 'application/xml, text/xml;q=0.9, */*;q=0.1' if ats == 'personio' else 'application/rss+xml, application/xml;q=0.9, */*;q=0.1'
         status, body = get(api_url(ats, token), pacers[ats], retries=2, timeout=90, want_json=False, accept=accept)

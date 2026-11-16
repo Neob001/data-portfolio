@@ -6,7 +6,7 @@
     "companyUrls": {
       "title": "Company websites, careers pages or job-board URLs",
       "type": "array",
-      "description": "Company homepages (e.g. https://www.redhat.com) or careers pages: the Actor finds the careers page and its job board. Supported job platforms: Greenhouse, Lever, Ashby, Workable, Recruitee, Workday, Personio and Teamtailor (incl. Teamtailor career sites on their own domain). Direct board URLs work too (e.g. https://boards.greenhouse.io/gitlab). A company on another platform gets one free row explaining why.",
+      "description": "Company homepages (e.g. https://www.redhat.com) or careers pages: the Actor finds the careers page and its job board. Supported job platforms: Greenhouse, Lever, Ashby, Workable, Recruitee, Workday, Personio, JazzHR, Pinpoint and Teamtailor (incl. Teamtailor career sites on their own domain). Direct board URLs work too (e.g. https://boards.greenhouse.io/gitlab). A company on another platform gets one free row explaining why.",
       "editor": "stringList",
       "prefill": [
         "https://boards.greenhouse.io/gitlab",
