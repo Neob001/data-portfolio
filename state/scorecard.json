@@ -270,8 +270,8 @@
       "real_users_7": 53,
       "real_runs_30": 1405,
       "fail_rate_30": 0.003,
-      "wow_users": 58,
-      "verdict": "growing",
+      "wow_users": 0,
+      "verdict": "has_users",
       "listing_drift": []
     },
     "remote-jobs-feed": {
@@ -296,8 +296,8 @@
       "real_users_7": 0,
       "real_runs_30": 19,
       "fail_rate_30": 0.0,
-      "wow_users": 1,
-      "verdict": "growing",
+      "wow_users": 0,
+      "verdict": "has_users",
       "listing_drift": []
     },
     "companies-hiring": {
@@ -329,7 +329,7 @@
     "greenhouse-jobs-api": {
       "public": true,
       "notice": "NONE",
-      "days_live": 37,
+      "days_live": 38,
       "price_per_1k": 2.0,
       "real_users_30": 0,
       "real_users_7": 0,
@@ -342,7 +342,7 @@
     "lever-jobs-api": {
       "public": true,
       "notice": "NONE",
-      "days_live": 37,
+      "days_live": 38,
       "price_per_1k": 2.0,
       "real_users_30": 0,
       "real_users_7": 0,
@@ -355,7 +355,7 @@
     "ashby-jobs-api": {
       "public": true,
       "notice": "NONE",
-      "days_live": 37,
+      "days_live": 38,
       "price_per_1k": 2.0,
       "real_users_30": 0,
       "real_users_7": 0,
@@ -368,7 +368,7 @@
     "workday-jobs-api": {
       "public": true,
       "notice": "NONE",
-      "days_live": 36,
+      "days_live": 37,
       "price_per_1k": 2.0,
       "real_users_30": 0,
       "real_users_7": 0,
@@ -376,6 +376,32 @@
       "fail_rate_30": 0.0,
       "wow_users": 0,
       "verdict": "no_traction",
+      "listing_drift": []
+    },
+    "jobs-bulk-feed": {
+      "public": true,
+      "notice": "NONE",
+      "days_live": 12,
+      "price_per_1k": 2.0,
+      "real_users_30": 0,
+      "real_users_7": 0,
+      "real_runs_30": 0,
+      "fail_rate_30": 0.0,
+      "wow_users": null,
+      "verdict": "too_early",
+      "listing_drift": []
+    },
+    "expired-jobs-checker": {
+      "public": true,
+      "notice": "NONE",
+      "days_live": 12,
+      "price_per_1k": 0.1,
+      "real_users_30": 0,
+      "real_users_7": 0,
+      "real_runs_30": 0,
+      "fail_rate_30": 0.0,
+      "wow_users": null,
+      "verdict": "too_early",
       "listing_drift": []
     }
   },
@@ -401,16 +427,16 @@
     "website-screenshot: 57 days live, 0 real users. Proposal: test a new title/SEO copy for its top buyer search, and if still 0 after 30 more days, a -30% price test (now $2.0/1k).",
     "companies-hiring: 49 days live, 0 real users. Proposal: test a new title/SEO copy for its top buyer search, and if still 0 after 30 more days, a -30% price test (now $5.0/1k).",
     "tech-stack-detector: 46 days live, 0 real users. Proposal: test a new title/SEO copy for its top buyer search, and if still 0 after 30 more days, a -30% price test (now $10.0/1k).",
-    "greenhouse-jobs-api: 37 days live, 0 real users. Proposal: test a new title/SEO copy for its top buyer search, and if still 0 after 30 more days, a -30% price test (now $2.0/1k).",
-    "lever-jobs-api: 37 days live, 0 real users. Proposal: test a new title/SEO copy for its top buyer search, and if still 0 after 30 more days, a -30% price test (now $2.0/1k).",
-    "ashby-jobs-api: 37 days live, 0 real users. Proposal: test a new title/SEO copy for its top buyer search, and if still 0 after 30 more days, a -30% price test (now $2.0/1k).",
-    "workday-jobs-api: 36 days live, 0 real users. Proposal: test a new title/SEO copy for its top buyer search, and if still 0 after 30 more days, a -30% price test (now $2.0/1k)."
+    "greenhouse-jobs-api: 38 days live, 0 real users. Proposal: test a new title/SEO copy for its top buyer search, and if still 0 after 30 more days, a -30% price test (now $2.0/1k).",
+    "lever-jobs-api: 38 days live, 0 real users. Proposal: test a new title/SEO copy for its top buyer search, and if still 0 after 30 more days, a -30% price test (now $2.0/1k).",
+    "ashby-jobs-api: 38 days live, 0 real users. Proposal: test a new title/SEO copy for its top buyer search, and if still 0 after 30 more days, a -30% price test (now $2.0/1k).",
+    "workday-jobs-api: 37 days live, 0 real users. Proposal: test a new title/SEO copy for its top buyer search, and if still 0 after 30 more days, a -30% price test (now $2.0/1k)."
   ],
   "health_flags": [
     "uk-company-lookup: 8% of runs failed (30d)"
   ],
   "totals": {
-    "live": 29,
+    "live": 31,
     "with_real_users": 4,
     "real_users_30": 160,
     "real_runs_30": 1446

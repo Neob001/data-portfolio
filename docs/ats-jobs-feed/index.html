@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Job Listings API: Workday, Greenhouse, Lever &amp; Ashby Jobs</title>
-<meta name="description" content="Job postings API: 800k+ open jobs from 19k company career sites (Workday, Greenhouse, Lever, Ashby, Personio...). Daily new-jobs feed, salary, seniority.">
+<meta name="description" content="Job postings API: 790k+ open jobs from 19k company career sites (Workday, Greenhouse, Lever, Ashby, Personio...). Daily new-jobs feed, salary, seniority.">
 <link rel="canonical" href="https://neob001.github.io/data-portfolio/ats-jobs-feed/">
 <link rel="stylesheet" href="../style.css">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Job Listings API: Workday, Greenhouse, Lever &amp; Ashby Jobs">
-<meta property="og:description" content="Job postings API: 800k+ open jobs from 19k company career sites (Workday, Greenhouse, Lever, Ashby, Personio...). Daily new-jobs feed, salary, seniority.">
+<meta property="og:description" content="Job postings API: 790k+ open jobs from 19k company career sites (Workday, Greenhouse, Lever, Ashby, Personio...). Daily new-jobs feed, salary, seniority.">
 <meta property="og:url" content="https://neob001.github.io/data-portfolio/ats-jobs-feed/">
 <meta property="og:site_name" content="factpipe Actor Tutorials">
 <meta name="twitter:card" content="summary">
@@ -18,7 +18,7 @@
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "Jobs Feed API \u2014 Workday, Greenhouse, Lever & Ashby Jobs",
-  "description": "Job listings API: 800,000+ live job postings from 19,000+ companies' Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable and Recruitee boards. Salary, seniority, remote filters. $5 per 1,000 jobs.",
+  "description": "Job listings API: 790,000+ live job postings from 19,000+ companies' Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable and Recruitee boards. Salary, seniority, remote filters. $5 per 1,000 jobs.",
   "url": "https://neob001.github.io/data-portfolio/ats-jobs-feed/",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Any (cloud, runs on Apify)",
@@ -181,7 +181,7 @@ console.log(items);
 <p>SmartRecruiters is deliberately <strong>not</strong> included, because its API host&#x27;s robots.txt disallows automated access. BambooHR is <strong>not</strong> included either: its Terms of Service forbid using any robot or spider to monitor or copy content from the service, which hosts its customers&#x27; careers pages.</p>
 <h2 id="factpipe-jobs-hiring-data">factpipe Jobs &amp; Hiring Data</h2>
 <p>These Actors search the same daily index of 730,000+ open jobs from 15,000+ company job boards:</p>
-<ul><li><a href="../ats-jobs-feed/">Jobs Feed API</a> (this Actor): every job, every filter, ranked by relevance.</li><li><a href="../remote-jobs-feed/">Remote Jobs API</a>: remote and work-from-home jobs only, filtered by region or time zone.</li><li><a href="../ats-jobs-scraper/">Greenhouse, Lever, Ashby &amp; Workday Jobs Scraper</a>: pick the applicant tracking systems and companies you want.</li><li><a href="../companies-hiring/">Companies Hiring</a>: one row per company that is hiring for a role, as sales leads or market research.</li><li><a href="../greenhouse-jobs-api/">Greenhouse Jobs API</a>: every Greenhouse job board in one search.</li><li><a href="../lever-jobs-api/">Lever Jobs API</a>: every Lever job board, with salary where published.</li><li><a href="../ashby-jobs-api/">Ashby Jobs API</a>: every Ashby job board: startup and AI jobs, with salary where published.</li><li><a href="../workday-jobs-api/">Workday Jobs API</a>: thousands of Workday career sites of large employers (NVIDIA, Salesforce, Adobe…), with full descriptions.</li></ul>
+<ul><li><a href="../ats-jobs-feed/">Jobs Feed API</a> (this Actor): every job, every filter, ranked by relevance.</li><li><a href="../remote-jobs-feed/">Remote Jobs API</a>: remote and work-from-home jobs only, filtered by region or time zone.</li><li><a href="../ats-jobs-scraper/">Greenhouse, Lever, Ashby &amp; Workday Jobs Scraper</a>: pick the applicant tracking systems and companies you want.</li><li><a href="../companies-hiring/">Companies Hiring</a>: one row per company that is hiring for a role, as sales leads or market research.</li><li><a href="../greenhouse-jobs-api/">Greenhouse Jobs API</a>: every Greenhouse job board in one search.</li><li><a href="../lever-jobs-api/">Lever Jobs API</a>: every Lever job board, with salary where published.</li><li><a href="../ashby-jobs-api/">Ashby Jobs API</a>: every Ashby job board: startup and AI jobs, with salary where published.</li><li><a href="../workday-jobs-api/">Workday Jobs API</a>: thousands of Workday career sites of large employers (NVIDIA, Salesforce, Adobe…), with full descriptions.</li><li><a href="../jobs-bulk-feed/">Bulk Job Postings Feed</a>: every new job every day as one bulk feed, no search needed.</li><li><a href="../expired-jobs-checker/">Expired Jobs Checker</a>: is a job posting still open? Open/closed per job ID or URL.</li></ul>
 <h2 id="faq">FAQ</h2>
 <p><strong>How is this different from LinkedIn or Indeed scrapers?</strong><br>
 We don&#x27;t scrape any job site. Every job comes from the employer&#x27;s own applicant tracking system, through the official public API that also powers the company&#x27;s careers page. That makes the data first-party and current: a job is gone from the feed once the employer closes it. It also carries the direct apply link, and there are no reposts, recruiter spam or login walls. There is no ban risk and no proxy cost, which is why it costs $5 per 1,000 jobs.</p>
@@ -203,6 +203,7 @@ Yes. Run it through the Apify API or the official Python/JavaScript clients. You
 <ul><li><a href="../company-jobs-scraper/">Career Page Scraper</a>: give it a company <em>homepage</em> and it finds the careers page and ATS for you.</li></ul>
 <h2 id="reliability">Reliability</h2>
 <p>Official ATS APIs only. The Actor uses retries with backoff, per-host rate limits and structured failure reporting, and writes a <code>RUN_SUMMARY</code> record on every run. Its daily auto-test input has a built-in live fallback.</p>
+<p><strong>Found Jobs Feed useful?</strong> A short review on the <a href="../ats-jobs-feed/">Apify Store page</a> helps other teams find it.</p>
 </main>
 <footer class="site-footer">
   <div class="wrap">

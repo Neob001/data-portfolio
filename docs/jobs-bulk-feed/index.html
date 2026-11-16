@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bulk Job Postings Feed: All New Jobs Daily (Job Data Feed)</title>
+<meta name="description" content="Bulk job data feed: every new job posting from 19,000+ company career sites (Workday, Greenhouse, Lever, Ashby...) daily, only jobs not delivered before.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/jobs-bulk-feed/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bulk Job Postings Feed: All New Jobs Daily (Job Data Feed)">
+<meta property="og:description" content="Bulk job data feed: every new job posting from 19,000+ company career sites (Workday, Greenhouse, Lever, Ashby...) daily, only jobs not delivered before.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/jobs-bulk-feed/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Bulk Job Postings Feed \u2014 All New Jobs Daily",
+  "description": "Every new job posting, every day: 790,000+ jobs from 19,000+ company career sites (Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable, Recruitee) as one bulk feed. Only jobs not delivered before.",
+  "url": "https://neob001.github.io/data-portfolio/jobs-bulk-feed/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "2",
+    "description": "Pay-per-result pricing: $2 per 1,000 job results",
+    "url": "https://apify.com/factpipe/jobs-bulk-feed"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>Bulk Job Postings Feed — All New Jobs Daily</h1>
+<p>&lt;!-- factpipe:hero:start --&gt;</p>
+<p><strong>Every new job posting, every day: 790,000+ jobs from 19,000+ company career sites (Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable, Recruitee) as one bulk feed. Only jobs not delivered before.</strong></p>
+<div class="table-wrap"><table><thead><tr><th>Title</th><th>Seniority</th><th>Company</th><th>Locations</th><th>Countries</th></tr></thead><tbody><tr><td>Senior Security Researcher</td><td>senior</td><td>Chainalysis</td><td>Tel Aviv Office</td><td>IL</td></tr><tr><td>Cyber Security Data Analyst</td><td>—</td><td>HUMAN</td><td>Tel Aviv, Israel</td><td>IL</td></tr><tr><td>Marketing Executive - Haircare</td><td>—</td><td>ZURU</td><td>Sydney / Australia</td><td>AU</td></tr></tbody></table></div>
+<p><em>Real output from the “All new jobs from the last 24 hours (bulk feed)” example, run on November 16, 2026.</em></p>
+<p><strong>Try a ready-made example:</strong> <a href="https://apify.com/factpipe/jobs-bulk-feed/examples/new-jobs-last-24h-bulk">All new jobs from the last 24 hours (bulk feed)</a> · <a href="https://apify.com/factpipe/jobs-bulk-feed/examples/us-jobs-bulk-feed">New US job postings (bulk feed)</a> · <a href="https://apify.com/factpipe/jobs-bulk-feed/examples/remote-jobs-bulk-feed">New remote job postings (bulk feed)</a></p>
+<p>&lt;!-- factpipe:hero:end --&gt;</p>
+<p>A <strong>bulk job postings feed</strong> for job boards, HR-tech products and labour-market research: every open job from <strong>19,000+ company career sites</strong> on Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable and Recruitee, delivered as flat JSON rows. Run it once for the whole index (about <strong>800,000 unique jobs</strong>), then schedule it daily: with <code>sinceLastRun</code> (on by default) each run returns <strong>only the jobs it has not delivered before</strong>, so you get every new job once and never pay twice for the same posting.</p>
+<p>No keyword search, no ranking, no scraping during your run: the Actor streams a prebuilt index that is rebuilt every night from the employers&#x27; own applicant tracking systems, so even a full delivery of 790,000+ jobs is fast and cheap.</p>
+<div class="quick-facts"><span class="badge">$2 / 1,000</span><a class="button" href="https://apify.com/factpipe/jobs-bulk-feed" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the prefilled input: <code>postedWithinDays: 3</code>, <code>maxResults: 100</code>. The run takes well under a minute.</li><li>You get 100 jobs posted in the last 3 days, newest first, in the same flat schema as the <a href="../ats-jobs-feed/">Jobs Feed API</a>.</li><li>Click <strong>Start</strong> again: <code>sinceLastRun</code> skips the 100 you already have and delivers the next 100. For the full feed, clear <code>maxResults</code> (default 100,000) and <code>postedWithinDays</code>, then schedule the Actor daily.</li></ol>
+<h2 id="what-you-get">What you get</h2>
+<p>One flat record per job opening. This one is from a local run of the prefilled input on November 3, 2026 (index build of November 2):</p>
+<pre><code class="language-json">{
+  &quot;job_id&quot;: &quot;ashby:clipboard:09b687bd-a7a9-479f-80cc-8b460eb4d99a&quot;,
+  &quot;title&quot;: &quot;Office and Events Manager&quot;,
+  &quot;company_name&quot;: &quot;Clipboard&quot;,
+  &quot;company_board&quot;: &quot;clipboard&quot;,
+  &quot;ats&quot;: &quot;ashby&quot;,
+  &quot;department&quot;: &quot;General&quot;,
+  &quot;team&quot;: &quot;General&quot;,
+  &quot;employment_type&quot;: &quot;full_time&quot;,
+  &quot;seniority&quot;: &quot;manager&quot;,
+  &quot;workplace_type&quot;: &quot;hybrid&quot;,
+  &quot;locations&quot;: [&quot;Hybrid (San Francisco, CA)&quot;],
+  &quot;country_codes&quot;: [&quot;US&quot;],
+  &quot;remote&quot;: true,
+  &quot;salary_min&quot;: 85000,
+  &quot;salary_max&quot;: 120000,
+  &quot;salary_currency&quot;: &quot;USD&quot;,
+  &quot;salary_period&quot;: &quot;year&quot;,
+  &quot;salary_source&quot;: &quot;structured&quot;,
+  &quot;years_experience_min&quot;: null,
+  &quot;visa_sponsorship&quot;: null,
+  &quot;posted_at&quot;: &quot;2026-11-02T00:04:40.403Z&quot;,
+  &quot;updated_at&quot;: null,
+  &quot;apply_url&quot;: &quot;https://jobs.ashbyhq.com/clipboard/09b687bd-a7a9-479f-80cc-8b460eb4d99a/application&quot;,
+  &quot;job_url&quot;: &quot;https://jobs.ashbyhq.com/clipboard/09b687bd-a7a9-479f-80cc-8b460eb4d99a&quot;,
+  &quot;description_text&quot;: null,
+  &quot;description_snippet&quot;: &quot;ABOUT CLIPBOARD Our mission is to uplift as many communities as possible. We do this through our app-based marketplace that connects healthcare professionals with the workplaces that need amazing workers. This enables hundreds of thousands of people to achieve financial stability for themselves…&quot;,
+  &quot;description_status&quot;: &quot;not_requested&quot;,
+  &quot;duplicate_sources&quot;: [],
+  &quot;match_score&quot;: null,
+  &quot;matched_in&quot;: null,
+  &quot;source_url&quot;: &quot;https://api.ashbyhq.com/posting-api/job-board/clipboard?includeCompensation=true&quot;,
+  &quot;fetched_at&quot;: &quot;2026-11-02T11:05:12.046Z&quot;
+}</code></pre>
+<p>A few more rows from a local run with <code>postedWithinDays: 2</code> (7,242 jobs, one per platform shown):</p>
+<div class="table-wrap"><table><thead><tr><th>Title</th><th>Company</th><th>Location</th><th>Platform</th><th>Seniority</th><th>Salary</th></tr></thead><tbody><tr><td>Senior Application Engineer</td><td>3M</td><td>CN, Shanghai</td><td>Workday</td><td>senior</td><td>—</td></tr><tr><td>Senior AI Security Engineer</td><td>Abacus Insights</td><td>India</td><td>Greenhouse</td><td>senior</td><td>—</td></tr><tr><td>Senior Technical Recruiter &amp; Portfolio Owner</td><td>Agile Defense</td><td>Remote</td><td>Lever</td><td>senior</td><td>from 110,000 USD</td></tr><tr><td>Senior Solution Architect / Facharchitekt*</td><td>Accso – Accelerated Solutions GmbH</td><td>München, Bayern, Deutschland</td><td>Recruitee</td><td>senior</td><td>from 87,500 EUR</td></tr><tr><td>Office Manager:in (m/w/d) 1KOMMA5° Bielefeld</td><td>1KOMMA5° Bielefeld GmbH</td><td>Bielefeld</td><td>Personio</td><td>manager</td><td>—</td></tr><tr><td>Insurance Admin &amp; Sales Support Intern</td><td>Burjline Builders</td><td>Manama, Bahrain</td><td>Teamtailor</td><td>intern</td><td>—</td></tr></tbody></table></div>
+<p>Need fewer columns? List them in <code>fields</code> (e.g. <code>[&quot;job_id&quot;, &quot;title&quot;, &quot;company_name&quot;, &quot;country_codes&quot;, &quot;posted_at&quot;, &quot;job_url&quot;]</code>) for smaller datasets and faster exports.</p>
+<h2 id="use-cases">Use cases</h2>
+<ul><li><strong>Job boards and aggregators</strong>: fill and refresh your board with direct-from-employer jobs and apply links every day, without running crawlers.</li><li><strong>HR-tech and recruiting products</strong>: a daily firehose of new openings for matching, alerts or sourcing tools.</li><li><strong>Labour-market and investment research</strong>: hiring volume by company, country, platform and seniority, day by day.</li><li><strong>Data warehouses and AI pipelines</strong>: one flat schema, stable <code>job_id</code>s, deterministic enrichment (no AI at run time).</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/jobs-bulk-feed" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+<h3 id="ready-made-examples">Ready-made examples</h3>
+<ul>
+<li><a href="https://apify.com/factpipe/jobs-bulk-feed/examples/new-jobs-last-24h-bulk" target="_blank" rel="noopener">All new jobs from the last 24 hours (bulk feed)</a>: Every job posted in the last day on 19,000+ company career sites, as flat JSON rows. Schedule daily for a complete new-jobs feed.</li>
+<li><a href="https://apify.com/factpipe/jobs-bulk-feed/examples/us-jobs-bulk-feed" target="_blank" rel="noopener">New US job postings (bulk feed)</a>: New jobs located in the United States from company career sites (Workday, Greenhouse, Lever, Ashby and more), last 3 days.</li>
+<li><a href="https://apify.com/factpipe/jobs-bulk-feed/examples/remote-jobs-bulk-feed" target="_blank" rel="noopener">New remote job postings (bulk feed)</a>: Remote-only jobs posted in the last 3 days on 19,000+ company career sites, one flat row per job.</li>
+</ul>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~jobs-bulk-feed/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;postedWithinDays&quot;: 3, &quot;maxResults&quot;: 100}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;postedWithinDays&quot;: 3,
+  &quot;maxResults&quot;: 100
+}
+
+run = client.actor(&quot;factpipe/jobs-bulk-feed&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;postedWithinDays&quot;: 3,
+  &quot;maxResults&quot;: 100
+};
+
+const run = await client.actor(&#x27;factpipe/jobs-bulk-feed&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>ats</code></td><td>string[]</td><td>Any of <code>greenhouse</code>, <code>lever</code>, <code>ashby</code>, <code>workable</code>, <code>recruitee</code>, <code>workday</code>, <code>personio</code>, <code>teamtailor</code>. Empty = all</td></tr><tr><td><code>countries</code></td><td>string[]</td><td>ISO country codes (<code>US</code>, <code>DE</code>, <code>GB</code>). Jobs whose location names no country (just &quot;Remote&quot;) are excluded when set</td></tr><tr><td><code>remote</code></td><td><code>any</code> \</td><td><code>remote_only</code> \</td><td><code>onsite_only</code></td><td><code>onsite_only</code> excludes jobs marked remote</td></tr><tr><td><code>seniority</code></td><td>string[]</td><td><code>intern</code>, <code>entry</code>, <code>mid</code>, <code>senior</code>, <code>lead</code>, <code>manager</code>, <code>director</code>, <code>executive</code>, read from the job title. Jobs without a level word are excluded when set</td></tr><tr><td><code>postedWithinDays</code></td><td>integer</td><td>Only jobs first published in the last N days. Empty = the whole index</td></tr><tr><td><code>sinceLastRun</code></td><td>boolean</td><td>Default <code>true</code>: skip every job this Actor already delivered for the same filters (see FAQ)</td></tr><tr><td><code>maxResults</code></td><td>integer</td><td>Default 100,000, maximum 2,000,000. Newest jobs come first</td></tr><tr><td><code>fields</code></td><td>string[]</td><td>Output fields to keep. Empty = all</td></tr></tbody></table></div>
+<h2 id="output-fields">Output fields</h2>
+<p>The same 32 fields as the <a href="../ats-jobs-feed/">Jobs Feed API</a>, so both datasets load into one table:</p>
+<ul><li><strong>Identity and links</strong>: <code>job_id</code> (stable: <code>ats:board:posting</code>), <code>job_url</code>, <code>apply_url</code>, <code>company_name</code>, <code>company_board</code>, <code>ats</code>, <code>duplicate_sources</code> (job_ids of the same opening on another board, collapsed into this row).</li><li><strong>Role</strong>: <code>title</code>, <code>department</code>, <code>team</code>, <code>employment_type</code>, <code>seniority</code> (from the title by fixed rules), <code>workplace_type</code>, <code>remote</code>.</li><li><strong>Where</strong>: <code>locations</code> (as written by the employer), <code>country_codes</code> (ISO).</li><li><strong>Pay</strong>: <code>salary_min</code>, <code>salary_max</code>, <code>salary_currency</code>, <code>salary_period</code>, <code>salary_source</code> (<code>structured</code> when the ATS publishes pay).</li><li><strong>When</strong>: <code>posted_at</code>, <code>updated_at</code>, <code>fetched_at</code> (when the nightly build read the board).</li><li><strong>Text</strong>: <code>description_snippet</code> (first ~300 characters). <code>description_text</code> is always <code>null</code> and <code>description_status</code> is <code>not_requested</code>: full descriptions are fetched live by the <a href="../ats-jobs-feed/">Jobs Feed API</a>, not by this bulk feed.</li><li><code>years_experience_min</code> comes only from ATSs that publish it (Personio); <code>visa_sponsorship</code>, <code>match_score</code> and <code>matched_in</code> are always <code>null</code> here (they need descriptions or keywords).</li><li><code>source_url</code>: the ATS API or feed the job was read from.</li></ul>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>job-result</code></td><td><strong>$2 per 1,000</strong> ($0.002 each)</td><td>One job posting delivered. Jobs skipped by sinceLastRun are never charged.</td></tr></tbody></table></div>
+<p><strong>$2.00 per 1,000 jobs</strong> ($0.002 per <code>job-result</code>, one event per delivered job), less on paid Apify plans: $1.80 (Bronze), $1.60 (Silver), $1.40 (Gold). No start fee and no charge for platform usage: 100,000 jobs cost <strong>$200</strong>, a typical day of new jobs (30,000-50,000) costs $60-100.</p>
+<p>Jobs skipped by <code>sinceLastRun</code> are never charged. Set a maximum charge per run in Apify and the Actor stops cleanly when it is reached; with <code>sinceLastRun</code> the next run continues with the jobs not delivered yet.</p>
+<h2 id="factpipe-jobs-hiring-data">factpipe Jobs &amp; Hiring Data</h2>
+<p>These Actors share the same nightly index of open jobs from 19,000+ company career sites:</p>
+<ul><li><a href="../jobs-bulk-feed/">Bulk Job Postings Feed</a> (this Actor): every new job every day, as one bulk feed.</li><li><a href="../ats-jobs-feed/">Jobs Feed API</a>: keyword search ranked by relevance, every filter, full descriptions fetched live.</li><li><a href="../expired-jobs-checker/">Expired Jobs Checker</a>: is a job you already have still open? Open / closed per job_id or job URL.</li><li><a href="../remote-jobs-feed/">Remote Jobs API</a>: remote and work-from-home jobs only, filtered by region or time zone.</li><li><a href="../ats-jobs-scraper/">Greenhouse, Lever, Ashby &amp; Workday Jobs Scraper</a>: pick the applicant tracking systems and companies you want.</li><li><a href="../companies-hiring/">Companies Hiring</a>: one row per company that is hiring for a role, as sales leads or market research.</li><li><a href="../greenhouse-jobs-api/">Greenhouse Jobs API</a>, <a href="../lever-jobs-api/">Lever Jobs API</a>, <a href="../ashby-jobs-api/">Ashby Jobs API</a> and <a href="../workday-jobs-api/">Workday Jobs API</a>: one platform each.</li><li><a href="../company-jobs-scraper/">Career Page Scraper</a>: give it a company homepage and it finds the careers page and ATS for you.</li></ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>How is this different from the Jobs Feed API (ats-jobs-feed)?</strong><br>
+The <a href="../ats-jobs-feed/">Jobs Feed API</a> is a search: keywords, relevance ranking, company and department filters, live description fetch, typically tens to a few thousand jobs per run. This Actor is a bulk export: no keywords and no ranking, just every job that matches a few coarse filters, streamed in batches of 1,000, so it can deliver the whole index (790,000+ jobs) in one run. Use the bulk feed to mirror the data; use the Jobs Feed API to find specific jobs or to get full descriptions.</p>
+<p><strong>How fresh is the data?</strong><br>
+The index is rebuilt every night from the employers&#x27; ATS APIs and feeds and published around 10:00 UTC (some days up to an hour later). Each row&#x27;s <code>fetched_at</code> says when the build read that company&#x27;s board; <code>posted_at</code> is the employer&#x27;s own publish date. Schedule the Actor after about 11:00 UTC to get each new build&#x27;s jobs on the same day. A run never contacts the job boards itself.</p>
+<p><strong>How does <code>sinceLastRun</code> work?</strong><br>
+The Actor remembers a compact fingerprint of every job_id it delivered for your filter combination, in a named key-value store in your own Apify account (<code>factpipe-jobs-bulk-feed-state</code>, about 10 MB per million jobs). Later runs skip those jobs and charge nothing for them. Unlike a posting-date cursor, this also catches jobs that join the index with an older posting date (a company newly added to the index, for example). A run cut short by <code>maxResults</code>, your maximum charge or the run timeout continues where it stopped next time. Jobs that leave the index are forgotten after 14 days. Changing <code>ats</code>, <code>countries</code>, <code>remote</code>, <code>seniority</code> or <code>postedWithinDays</code> starts a separate feed; <code>maxResults</code> and <code>fields</code> do not.</p>
+<p><strong>How long does a full run take?</strong><br>
+Locally the whole index (859,594 jobs) streams in about 10 seconds; on Apify most of the time goes into writing the rows to your dataset. Give a full first run a generous timeout (for example 1 hour) and at least 2 GB of memory for more CPU. If the run timeout comes close, the Actor stops cleanly, keeps what it delivered, and the next run continues.</p>
+<p><strong>Why is <code>description_text</code> empty?</strong><br>
+Full descriptions are not part of the index (it would be many gigabytes); they are fetched live from each ATS by the <a href="../ats-jobs-feed/">Jobs Feed API</a> for the jobs it delivers. Every row here has the first ~300 characters as <code>description_snippet</code>.</p>
+<p><strong>Which companies are covered?</strong><br>
+About 20,000 company job boards with open jobs: Workday (about 5,000 career sites of large employers), Greenhouse, Workable, Ashby, Lever, Personio, Teamtailor and Recruitee. Workday sites contribute their newest 500 jobs each and Teamtailor sites their newest 1,000. Boards were discovered from Common Crawl&#x27;s public URL index and validated against their ATS. LinkedIn, Indeed and other job sites are not scraped.</p>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier or an AI agent?</strong><br>
+Yes. Run it through the Apify API or the official Python/JavaScript clients, schedule it in Apify, and connect the dataset to Make, Zapier, n8n, Google Sheets or your warehouse through Apify integrations.</p>
+<h2 id="sources-and-terms">Sources and terms</h2>
+<p>Only the public job-board APIs and feeds that the ATS vendors publish for displaying open jobs (Greenhouse Job Board API, Lever Postings API, Ashby Public Job Posting API, Workable and Recruitee public endpoints, Personio XML feed, Teamtailor RSS feed, Workday public career sites with robots.txt checked first). No logins, no personal profiles. The nightly build does all reading; this Actor only downloads the published index.</p>
+<h2 id="reliability">Reliability</h2>
+<p>The index is published as build-stamped files with the previous build kept, so a run never sees a half-published index. Each part of the index is retried on a network error; a part that still fails is skipped and reported in the status message (with <code>sinceLastRun</code>, its jobs come with the next run). Every run writes a <code>RUN_SUMMARY</code> record (rows, skipped, stop reason, index build time).</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -775,6 +775,14 @@
    "workday-jobs-api": {
     "real_users_30": 0,
     "real_runs_30": 0
+   },
+   "jobs-bulk-feed": {
+    "real_users_30": 0,
+    "real_runs_30": 0
+   },
+   "expired-jobs-checker": {
+    "real_users_30": 0,
+    "real_runs_30": 0
    }
   }
  }

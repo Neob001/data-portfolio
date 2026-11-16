@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Expired Jobs Checker: Is a Job Posting Still Open?</title>
+<meta name="description" content="Check if job postings are open or closed/expired: job IDs or URLs from Workday, Greenhouse, Lever, Ashby &amp; more, checked against a daily index.">
+<link rel="canonical" href="https://neob001.github.io/data-portfolio/expired-jobs-checker/">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Expired Jobs Checker: Is a Job Posting Still Open?">
+<meta property="og:description" content="Check if job postings are open or closed/expired: job IDs or URLs from Workday, Greenhouse, Lever, Ashby &amp; more, checked against a daily index.">
+<meta property="og:url" content="https://neob001.github.io/data-portfolio/expired-jobs-checker/">
+<meta property="og:site_name" content="factpipe Actor Tutorials">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Expired Jobs Checker \u2014 Is This Job Posting Still Open?",
+  "description": "Check if job postings are still open or closed/expired: paste job IDs or job URLs (Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable, Recruitee) and get open/closed per job from a daily index.",
+  "url": "https://neob001.github.io/data-portfolio/expired-jobs-checker/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (cloud, runs on Apify)",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "0.1",
+    "description": "Pay-per-result pricing: $0.10 per 1,000 job checkeds",
+    "url": "https://apify.com/factpipe/expired-jobs-checker"
+  }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">factpipe</a>
+    <span class="tagline">Actor tutorials &amp; API examples</span>
+  </div>
+</header>
+<main class="wrap actor-page">
+<h1>Expired Jobs Checker — Is This Job Posting Still Open?</h1>
+<p>&lt;!-- factpipe:hero:start --&gt;</p>
+<p><strong>Check if job postings are still open or closed/expired: paste job IDs or job URLs (Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable, Recruitee) and get open/closed per job from a daily index.</strong></p>
+<div class="table-wrap"><table><thead><tr><th>Input</th><th>Status</th><th>Why</th><th>Company</th><th>Title</th></tr></thead><tbody><tr><td>lever:palantir:5168e8fd-fec1-4fea-b7a1-81bdaea6…</td><td>open</td><td>in_index</td><td>Palantir Technologies</td><td>Forward Deployed Software Engineer</td></tr><tr><td>greenhouse:datadog:1497543</td><td>open</td><td>in_index</td><td>Datadog</td><td>Commercial Account Executive - Boston</td></tr><tr><td>ashby:supabase:d5573afa-636c-4219-832f-386f4982…</td><td>open</td><td>in_index</td><td>Supabase</td><td>Customer Solution Architect (AMER)</td></tr></tbody></table></div>
+<p><em>Real output from the “Check if job postings are still open” example, run on November 16, 2026.</em></p>
+<p><strong>Try a ready-made example:</strong> <a href="https://apify.com/factpipe/expired-jobs-checker/examples/check-if-jobs-still-open">Check if job postings are still open</a></p>
+<p>&lt;!-- factpipe:hero:end --&gt;</p>
+<p>An <strong>expired jobs checker</strong> for job boards, aggregators and recruiting tools: paste job IDs or job URLs and find out, per job, whether the posting is still <strong>open</strong> or has been <strong>closed / expired</strong> by the employer. It checks against a daily index of 19,000+ company career sites on Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable and Recruitee, so a run with thousands of jobs takes seconds and never touches the employers&#x27; sites.</p>
+<p>Remove dead listings from your job board, stop alerting candidates about filled roles, or measure how long jobs stay open.</p>
+<div class="quick-facts"><span class="badge">$0.10 / 1,000</span><a class="button" href="https://apify.com/factpipe/expired-jobs-checker" target="_blank" rel="noopener">View on Apify Store</a></div>
+<h2 id="quick-start">Quick start</h2>
+<ol><li>Click <strong>Start</strong> with the prefilled input: five job IDs (one of them made up) and two job URLs. The run takes well under a minute.</li><li>You get one row per job: six <code>open</code> with title and company, and the made-up GitLab job <code>closed</code>, because GitLab&#x27;s board is in today&#x27;s index and that job is not.</li><li>Paste your own <code>job_id</code>s from any factpipe jobs Actor (e.g. the <a href="../jobs-bulk-feed/">Bulk Job Postings Feed</a>) or job links, and schedule the check daily.</li></ol>
+<h2 id="what-you-get">What you get</h2>
+<p>Real output from a local run of the prefilled input on November 3, 2026 (index build of November 2), two of the seven rows:</p>
+<pre><code class="language-json">[
+  {
+    &quot;input&quot;: &quot;lever:palantir:5168e8fd-fec1-4fea-b7a1-81bdaea65850&quot;,
+    &quot;job_id&quot;: &quot;lever:palantir:5168e8fd-fec1-4fea-b7a1-81bdaea65850&quot;,
+    &quot;status&quot;: &quot;open&quot;,
+    &quot;status_reason&quot;: &quot;in_index&quot;,
+    &quot;last_seen_index_built_at&quot;: &quot;2026-11-02T11:04:55.585Z&quot;,
+    &quot;company_name&quot;: &quot;Palantir Technologies&quot;,
+    &quot;title&quot;: &quot;Forward Deployed Software Engineer&quot;,
+    &quot;ats&quot;: &quot;lever&quot;,
+    &quot;job_url&quot;: &quot;https://jobs.lever.co/palantir/5168e8fd-fec1-4fea-b7a1-81bdaea65850&quot;,
+    &quot;checked_at&quot;: &quot;2026-11-03T04:53:44.583Z&quot;,
+    &quot;source_url&quot;: &quot;https://api.lever.co/v0/postings/palantir?mode=json&quot;,
+    &quot;fetched_at&quot;: &quot;2026-11-02T11:20:45.631Z&quot;
+  },
+  {
+    &quot;input&quot;: &quot;greenhouse:gitlab:1000000001&quot;,
+    &quot;job_id&quot;: &quot;greenhouse:gitlab:1000000001&quot;,
+    &quot;status&quot;: &quot;closed&quot;,
+    &quot;status_reason&quot;: &quot;not_in_index&quot;,
+    &quot;last_seen_index_built_at&quot;: null,
+    &quot;company_name&quot;: &quot;GitLab&quot;,
+    &quot;title&quot;: null,
+    &quot;ats&quot;: &quot;greenhouse&quot;,
+    &quot;job_url&quot;: null,
+    &quot;checked_at&quot;: &quot;2026-11-03T04:53:44.583Z&quot;,
+    &quot;source_url&quot;: &quot;https://boards-api.greenhouse.io/v1/boards/gitlab/jobs?content=true&quot;,
+    &quot;fetched_at&quot;: &quot;2026-11-02T11:06:14.999Z&quot;
+  }
+]</code></pre>
+<p>How a real list behaves: 10,000 job IDs taken from the November 1 index build and checked against the November 2 build came back 9,875 open, 72 closed and 53 unknown (49 of them on Workday sites with more open jobs than the index keeps per site, 4 on boards missing from the newer build; see FAQ).</p>
+<h2 id="use-cases">Use cases</h2>
+<ul><li><strong>Job boards and aggregators</strong>: find expired listings daily and take them down before candidates click dead links.</li><li><strong>Job alerts and newsletters</strong>: drop filled roles before you send.</li><li><strong>Recruiting and sales intelligence</strong>: see which roles a company has filled or pulled, and how long postings stay open.</li><li><strong>Data hygiene</strong>: refresh the status of a jobs dataset you bought or built elsewhere, as long as the jobs are on the supported platforms.</li></ul>
+<h2 id="code-examples">Copy-paste code examples</h2>
+<p>Every example runs the Actor and fetches its results in one call. Swap
+<code>YOUR_APIFY_TOKEN</code> for your own token from the
+<a href="https://console.apify.com/settings/integrations">Apify Console integrations page</a>,
+and edit the input to fit your own data.</p>
+<p><a class="button" href="https://apify.com/factpipe/expired-jobs-checker" target="_blank" rel="noopener">Run it in the Apify Console &rarr;</a></p>
+<h3 id="ready-made-examples">Ready-made examples</h3>
+<ul>
+<li><a href="https://apify.com/factpipe/expired-jobs-checker/examples/check-if-jobs-still-open" target="_blank" rel="noopener">Check if job postings are still open</a>: Paste job IDs or job URLs from company career sites and get open, closed or unknown for each one.</li>
+</ul>
+
+<h3>cURL</h3>
+<pre><code class="language-bash">curl &quot;https://api.apify.com/v2/acts/factpipe~expired-jobs-checker/run-sync-get-dataset-items?token=YOUR_APIFY_TOKEN&quot; \
+  -X POST \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;jobIds&quot;: [&quot;lever:palantir:5168e8fd-fec1-4fea-b7a1-81bdaea65850&quot;, &quot;greenhouse:datadog:1497543&quot;, &quot;ashby:supabase:d5573afa-636c-4219-832f-386f498243bf&quot;, &quot;personio:pmx:2048370&quot;, &quot;greenhouse:gitlab:1000000001&quot;], &quot;jobUrls&quot;: [&quot;https://jobs.ashbyhq.com/posthog/8854fb74-8457-40cd-bc10-60125a0c0cd4&quot;, &quot;https://ingeteam.teamtailor.com/jobs/5577749-marine-electrical-system-engineer&quot;]}&#x27;</code></pre>
+
+<h3>Python (apify-client)</h3>
+<pre><code class="language-python">from apify_client import ApifyClient
+
+client = ApifyClient(&quot;YOUR_APIFY_TOKEN&quot;)
+
+run_input = {
+  &quot;jobIds&quot;: [
+    &quot;lever:palantir:5168e8fd-fec1-4fea-b7a1-81bdaea65850&quot;,
+    &quot;greenhouse:datadog:1497543&quot;,
+    &quot;ashby:supabase:d5573afa-636c-4219-832f-386f498243bf&quot;,
+    &quot;personio:pmx:2048370&quot;,
+    &quot;greenhouse:gitlab:1000000001&quot;
+  ],
+  &quot;jobUrls&quot;: [
+    &quot;https://jobs.ashbyhq.com/posthog/8854fb74-8457-40cd-bc10-60125a0c0cd4&quot;,
+    &quot;https://ingeteam.teamtailor.com/jobs/5577749-marine-electrical-system-engineer&quot;
+  ]
+}
+
+run = client.actor(&quot;factpipe/expired-jobs-checker&quot;).call(run_input=run_input)
+
+for item in client.dataset(run[&quot;defaultDatasetId&quot;]).iterate_items():
+    print(item)
+</code></pre>
+
+<h3>JavaScript (apify-client)</h3>
+<pre><code class="language-javascript">import { ApifyClient } from &#x27;apify-client&#x27;;
+
+const client = new ApifyClient({ token: &#x27;YOUR_APIFY_TOKEN&#x27; });
+
+const input = {
+  &quot;jobIds&quot;: [
+    &quot;lever:palantir:5168e8fd-fec1-4fea-b7a1-81bdaea65850&quot;,
+    &quot;greenhouse:datadog:1497543&quot;,
+    &quot;ashby:supabase:d5573afa-636c-4219-832f-386f498243bf&quot;,
+    &quot;personio:pmx:2048370&quot;,
+    &quot;greenhouse:gitlab:1000000001&quot;
+  ],
+  &quot;jobUrls&quot;: [
+    &quot;https://jobs.ashbyhq.com/posthog/8854fb74-8457-40cd-bc10-60125a0c0cd4&quot;,
+    &quot;https://ingeteam.teamtailor.com/jobs/5577749-marine-electrical-system-engineer&quot;
+  ]
+};
+
+const run = await client.actor(&#x27;factpipe/expired-jobs-checker&#x27;).call(input);
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+</code></pre>
+<h2 id="input">Input</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td><code>jobIds</code></td><td>string[]</td><td><code>job_id</code> values from any factpipe jobs Actor, e.g. <code>greenhouse:gitlab:8396674002</code>, <code>workday:redhat.wd5/jobs:R-043519</code></td></tr><tr><td><code>jobUrls</code></td><td>string[]</td><td>Job page or apply links on the eight platforms, e.g. <code>https://jobs.lever.co/acme/&lt;id&gt;</code>, <code>https://acme.wd5.myworkdayjobs.com/en-US/External/job/Berlin/Engineer_R123</code>. Company careers-page links work when an indexed job uses them (e.g. Greenhouse <code>?gh_jid=</code> links)</td></tr></tbody></table></div>
+<p>Up to 200,000 jobs per run; identical inputs are checked once. The output has one row per input, in input order.</p>
+<h2 id="output-fields">Output fields</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Meaning</th></tr></thead><tbody><tr><td><code>input</code></td><td>The job_id or URL exactly as given</td></tr><tr><td><code>job_id</code></td><td>factpipe job_id of the job (<code>ats:board:posting</code>); <code>null</code> when the input is not a recognisable job</td></tr><tr><td><code>status</code></td><td><code>open</code>, <code>closed</code> or <code>unknown</code></td></tr><tr><td><code>status_reason</code></td><td><code>in_index</code> / <code>duplicate_in_index</code> (open), <code>not_in_index</code> (closed), <code>board_partially_indexed</code> / <code>board_not_in_index</code> / <code>unrecognized_input</code> / <code>not_checked</code> (unknown)</td></tr><tr><td><code>last_seen_index_built_at</code></td><td>Build time of the index that lists the job (open rows), else <code>null</code></td></tr><tr><td><code>company_name</code>, <code>title</code>, <code>ats</code>, <code>job_url</code></td><td>From the index for open jobs; closed rows keep the company (the title is gone with the job)</td></tr><tr><td><code>checked_at</code></td><td>When this run checked the job</td></tr><tr><td><code>source_url</code>, <code>fetched_at</code></td><td>Open and closed rows: the ATS API or feed URL the nightly build read the board from, and when. Unknown rows: the index manifest and its build time</td></tr></tbody></table></div>
+<p><strong>Status rules.</strong> <code>open</code>: today&#x27;s index lists the job, directly or as a duplicate of the same opening on another board of the company (<code>duplicate_in_index</code>). <code>closed</code>: the nightly build read the company&#x27;s board successfully and the job was not on it. <code>unknown</code>: the index cannot tell, because the board is not in today&#x27;s index (not in our directory, failed that night, or no open jobs left), the board has more open jobs than the build keeps per site, the input is not a job ID or job URL we recognise, or the run stopped before deciding.</p>
+<h2 id="pricing-pay-per-event">Pricing (pay per event)</h2>
+<div class="table-wrap"><table><thead><tr><th>Event</th><th>Price</th><th>Meaning</th></tr></thead><tbody><tr><td><code>job-checked</code></td><td><strong>$0.10 per 1,000</strong> ($0.0001 each)</td><td>One job with a definite answer (open or closed). Unknown results are free.</td></tr></tbody></table></div>
+<p><strong>$0.10 per 1,000 jobs checked</strong> ($0.0001 per <code>job-checked</code>, one event per <code>open</code> or <code>closed</code> row). No start fee and no charge for platform usage: checking 10,000 jobs costs <strong>$1</strong>.</p>
+<p><code>unknown</code> rows are free. Set a maximum charge per run in Apify and the Actor stops cleanly when it is reached; the remaining jobs get no row and no charge (the status message says how many).</p>
+<h2 id="factpipe-jobs-hiring-data">factpipe Jobs &amp; Hiring Data</h2>
+<p>These Actors share the same nightly index of open jobs from 19,000+ company career sites:</p>
+<ul><li><a href="../expired-jobs-checker/">Expired Jobs Checker</a> (this Actor): open or closed, per job_id or job URL.</li><li><a href="../jobs-bulk-feed/">Bulk Job Postings Feed</a>: every new job every day, as one bulk feed.</li><li><a href="../ats-jobs-feed/">Jobs Feed API</a>: keyword search ranked by relevance, every filter, full descriptions fetched live.</li><li><a href="../remote-jobs-feed/">Remote Jobs API</a>: remote and work-from-home jobs only, filtered by region or time zone.</li><li><a href="../ats-jobs-scraper/">Greenhouse, Lever, Ashby &amp; Workday Jobs Scraper</a>: pick the applicant tracking systems and companies you want.</li><li><a href="../companies-hiring/">Companies Hiring</a>: one row per company that is hiring for a role, as sales leads or market research.</li><li><a href="../greenhouse-jobs-api/">Greenhouse Jobs API</a>, <a href="../lever-jobs-api/">Lever Jobs API</a>, <a href="../ashby-jobs-api/">Ashby Jobs API</a> and <a href="../workday-jobs-api/">Workday Jobs API</a>: one platform each.</li><li><a href="../company-jobs-scraper/">Career Page Scraper</a>: give it a company homepage and it finds the careers page and ATS for you.</li></ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>How is this different from the Jobs Feed API (ats-jobs-feed)?</strong><br>
+The <a href="../ats-jobs-feed/">Jobs Feed API</a> finds jobs (keywords, filters, full descriptions). This Actor answers one question for jobs you already have: still open or not. It reads only the parts of the index that hold your jobs&#x27; companies, so checking 100,000 jobs is a single short run.</p>
+<p><strong>How fresh is the answer?</strong><br>
+As fresh as the index: it is rebuilt every night from the employers&#x27; ATS APIs and feeds and published around 10:00 UTC (some days up to an hour later). A job closed after that night&#x27;s build still shows <code>open</code> until the next build. <code>fetched_at</code> tells you when the build read the company&#x27;s board. Schedule daily checks after about 11:00 UTC. Rarely, an employer unlists a job for a moment while editing it; if the nightly read happens in that moment, the job shows <code>closed</code> for one day (in a spot check of 8 <code>closed</code> jobs against the live ATS APIs, 7 were gone and 1 had been re-listed an hour after the build read its board).</p>
+<p><strong>Why would a job be <code>unknown</code>?</strong><br>
+Mostly for two reasons. (1) The company&#x27;s board is not in today&#x27;s index: we don&#x27;t cover it, its board could not be read that night, or it has no open jobs left (then the job is most likely closed too, but we can&#x27;t prove it). (2) The board has more open jobs than the nightly build keeps per site (the newest 500 on a Workday site, 1,000 on Teamtailor), so an older job may be open but outside the index. Unknown rows are never charged.</p>
+<p><strong>Which inputs are recognised?</strong><br>
+Any <code>job_id</code> from a factpipe jobs Actor, and job URLs on Greenhouse (<code>job-boards.greenhouse.io/&lt;company&gt;/jobs/&lt;id&gt;</code>, also <code>?gh_jid=</code>), Lever, Ashby, Workable, Recruitee, Workday (with or without the <code>/en-US/</code> locale), Personio and Teamtailor (including custom career domains and company careers pages that an indexed job links to). A board URL without a specific job is reported as <code>unrecognized_input</code>.</p>
+<p><strong>What does <code>duplicate_in_index</code> mean?</strong><br>
+Some companies list the same opening on two boards (two Workday sites, a Teamtailor group site and a local site, or an old and a new ATS). The index keeps one copy and records the other job_ids; your job_id is open because its twin is listed. <code>job_url</code> points at the listed copy.</p>
+<p><strong>Can I call it from Python, JavaScript, Make, Zapier or an AI agent?</strong><br>
+Yes. Run it through the Apify API or the official Python/JavaScript clients, or connect it to Make, Zapier, n8n or Google Sheets through Apify integrations.</p>
+<h2 id="sources-and-terms">Sources and terms</h2>
+<p>The Actor reads only the published factpipe jobs index, built nightly from the public job-board APIs and feeds that the ATS vendors publish for displaying open jobs. No logins, no personal data, and no requests to the employers&#x27; sites during your run.</p>
+<h2 id="reliability">Reliability</h2>
+<p>Each part of the index is retried on a network error. When a part still cannot be read, only jobs of that platform that were not found elsewhere come back <code>unknown</code> with <code>not_checked</code>, never a wrong <code>closed</code>. Every run writes a <code>RUN_SUMMARY</code> record (open / closed / unknown counts, index build time, parts read).</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="../index.html">All factpipe Actor tutorials</a> &middot; <a href="https://apify.com/factpipe" target="_blank" rel="noopener">factpipe on Apify</a></p>
+    <p class="muted">Generated from each Actor's README. Pricing shown is pay-per-result; see the Apify Console for current details.</p>
+  </div>
+</footer>
+</body>
+</html>

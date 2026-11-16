@@ -1,16 +1,16 @@
 # Scorecard 2026-11-16
 
-Live Actors: 29 · with real users: 4 · real users (30d): 160 · real runs (30d): 1446
+Live Actors: 31 · with real users: 4 · real users (30d): 160 · real runs (30d): 1446
 Revenue: Apify Console > Insights > Monetization (not available via API).
 
 | Actor | Real users 30d | Δ week | Real runs 30d | Fail % | $/1k | Days live | Verdict |
 |---|---|---|---|---|---|---|---|
-| ats-jobs-feed | 156 | +58 | 1405 | 0 | 5.0 | 51 | growing |
-| ats-jobs-scraper | 2 | +1 | 19 | 0 | 3.0 | 49 | growing |
+| ats-jobs-feed | 156 | +0 | 1405 | 0 | 5.0 | 51 | has_users |
+| ats-jobs-scraper | 2 | +0 | 19 | 0 | 3.0 | 49 | has_users |
 | remote-jobs-feed | 1 | +0 | 0 | 0 | 3.0 | 49 | has_users |
 | us-weather-forecast | 1 | +0 | 0 | 0 | 2.0 | 64 | has_users |
 | uk-company-lookup | 0 | +0 | 22 | 8 | 2.5 | 65 | no_traction |
-| ashby-jobs-api | 0 | +0 | 0 | 0 | 2.0 | 37 | no_traction |
+| ashby-jobs-api | 0 | +0 | 0 | 0 | 2.0 | 38 | no_traction |
 | broken-link-checker | 0 | +0 | 0 | 0 | 1.5 | 61 | no_traction |
 | companies-hiring | 0 | +0 | 0 | 0 | 5.0 | 49 | no_traction |
 | company-jobs-scraper | 0 | +0 | 0 | 0 | 2.0 | 64 | no_traction |
@@ -19,11 +19,13 @@ Revenue: Apify Console > Insights > Monetization (not available via API).
 | email-security-checker | 0 | +0 | 0 | 0 | 3.0 | 61 | no_traction |
 | eu-ted-tenders-monitor | 0 | +0 | 0 | 0 | 3.0 | 65 | no_traction |
 | eu-vat-validation | 0 | +0 | 0 | 0 | 2.0 | 61 | no_traction |
+| expired-jobs-checker | 0 |  | 0 | 0 | 0.1 | 12 | too_early |
 | fda-recalls-monitor | 0 | +0 | 0 | 3 | 3.0 | 65 | no_traction |
 | federal-register-monitor | 0 | +0 | 0 | 0 | 2.5 | 65 | no_traction |
 | france-company-lookup | 0 | +0 | 0 | 0 | 3.0 | 59 | no_traction |
-| greenhouse-jobs-api | 0 | +0 | 0 | 0 | 2.0 | 37 | no_traction |
-| lever-jobs-api | 0 | +0 | 0 | 0 | 2.0 | 37 | no_traction |
+| greenhouse-jobs-api | 0 | +0 | 0 | 0 | 2.0 | 38 | no_traction |
+| jobs-bulk-feed | 0 |  | 0 | 0 | 2.0 | 12 | too_early |
+| lever-jobs-api | 0 | +0 | 0 | 0 | 2.0 | 38 | no_traction |
 | lighthouse-auditor | 0 | +0 | 0 | 0 | 10.0 | 61 | no_traction |
 | ofac-sanctions-screening | 0 | +0 | 0 | 0 | 3.0 | 65 | no_traction |
 | open-food-facts-scraper | 0 | +0 | 0 | 0 | 1.0 | 63 | no_traction |
@@ -33,7 +35,7 @@ Revenue: Apify Console > Insights > Monetization (not available via API).
 | tech-stack-detector | 0 | +0 | 0 | 0 | 10.0 | 46 | no_traction |
 | website-screenshot | 0 | +0 | 0 | 0 | 2.0 | 57 | no_traction |
 | wikipedia-scraper | 0 | +0 | 0 | 0 | 1.0 | 63 | no_traction |
-| workday-jobs-api | 0 | +0 | 0 | 0 | 2.0 | 36 | no_traction |
+| workday-jobs-api | 0 | +0 | 0 | 0 | 2.0 | 37 | no_traction |
 
 ## Proposals (owner decides)
 - sec-edgar-filings-search: 65 days live, 0 real users. Proposal: test a new title/SEO copy for its top buyer search, and if still 0 after 30 more days, a -30% price test (now $2.0/1k).
@@ -57,10 +59,10 @@ Revenue: Apify Console > Insights > Monetization (not available via API).
 - website-screenshot: 57 days live, 0 real users. Proposal: test a new title/SEO copy for its top buyer search, and if still 0 after 30 more days, a -30% price test (now $2.0/1k).
 - companies-hiring: 49 days live, 0 real users. Proposal: test a new title/SEO copy for its top buyer search, and if still 0 after 30 more days, a -30% price test (now $5.0/1k).
 - tech-stack-detector: 46 days live, 0 real users. Proposal: test a new title/SEO copy for its top buyer search, and if still 0 after 30 more days, a -30% price test (now $10.0/1k).
-- greenhouse-jobs-api: 37 days live, 0 real users. Proposal: test a new title/SEO copy for its top buyer search, and if still 0 after 30 more days, a -30% price test (now $2.0/1k).
-- lever-jobs-api: 37 days live, 0 real users. Proposal: test a new title/SEO copy for its top buyer search, and if still 0 after 30 more days, a -30% price test (now $2.0/1k).
-- ashby-jobs-api: 37 days live, 0 real users. Proposal: test a new title/SEO copy for its top buyer search, and if still 0 after 30 more days, a -30% price test (now $2.0/1k).
-- workday-jobs-api: 36 days live, 0 real users. Proposal: test a new title/SEO copy for its top buyer search, and if still 0 after 30 more days, a -30% price test (now $2.0/1k).
+- greenhouse-jobs-api: 38 days live, 0 real users. Proposal: test a new title/SEO copy for its top buyer search, and if still 0 after 30 more days, a -30% price test (now $2.0/1k).
+- lever-jobs-api: 38 days live, 0 real users. Proposal: test a new title/SEO copy for its top buyer search, and if still 0 after 30 more days, a -30% price test (now $2.0/1k).
+- ashby-jobs-api: 38 days live, 0 real users. Proposal: test a new title/SEO copy for its top buyer search, and if still 0 after 30 more days, a -30% price test (now $2.0/1k).
+- workday-jobs-api: 37 days live, 0 real users. Proposal: test a new title/SEO copy for its top buyer search, and if still 0 after 30 more days, a -30% price test (now $2.0/1k).
 
 ## Health flags
 - uk-company-lookup: 8% of runs failed (30d)
