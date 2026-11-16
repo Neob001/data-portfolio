@@ -1,0 +1,271 @@
+[
+ {
+  "id": "ocds-9t57fa-143409-2026-01-16T00:00:00Z",
+  "tag": [
+   "compiled"
+  ],
+  "date": "2026-01-16T00:00:00Z",
+  "ocid": "ocds-9t57fa-143409",
+  "buyer": {
+   "id": "571",
+   "name": "Rustenburg Local Municipality"
+  },
+  "awards": [
+   {
+    "id": "69946",
+    "title": "ALICOM",
+    "value": {
+     "amount": 1014239656,
+     "currency": "ZAR"
+    },
+    "status": "active",
+    "suppliers": [
+     {
+      "id": "104397",
+      "name": "ALICOM"
+     }
+    ],
+    "description": "EME"
+   }
+  ],
+  "tender": {
+   "id": "143409",
+   "title": "RLM/DCS/0040/2025/26",
+   "value": {
+    "amount": 0,
+    "currency": "ZAR"
+   },
+   "status": "active",
+   "category": "Services: Professional",
+   "province": "North West",
+   "documents": [
+    {
+     "id": "eeda07dc-37c8-462b-b585-319e43a8ee5d",
+     "url": "https://www.etenders.gov.za/home/Download?blobName=eeda07dc-37c8-462b-b585-319e43a8ee5d.pdf&downloadedFileName=Platinum%20Weekly%20advert%20-%2016%20Jan%202026.pdf",
+     "title": "Platinum Weekly advert - 16 Jan 2026.pdf",
+     "format": "pdf",
+     "language": "en",
+     "description": "Platinum Weekly advert - 16 Jan 2026.pdf",
+     "dateModified": "2026-01-16T10:32:26Z",
+     "documentType": "basic",
+     "datePublished": "2026-01-16T10:32:26Z"
+    }
+   ],
+   "description": "Appointment of a suitable and competent service provider for the supply, installation and maintenance of a comprehensive network connectivity solution, wireless Lan, Wan and contact centre solution for a period of 36 months",
+   "tenderPeriod": {
+    "endDate": "2026-02-03T11:30:00Z",
+    "startDate": "2026-01-16T00:00:00Z"
+   },
+   "contactPerson": {
+    "name": "Test Person",
+    "email": "person@example.org",
+    "telephoneNumber": "012-345-6789"
+   },
+   "briefingSession": {
+    "date": "2026-01-16T09:00:00Z",
+    "venue": "Rustenburg Local Municipality Offices",
+    "isSession": true,
+    "compulsory": true
+   },
+   "procuringEntity": {
+    "id": "571",
+    "name": "Rustenburg Local Municipality"
+   },
+   "deliveryLocation": "Missionary Mpheni House, Beyers Naude Drive - Rustenburg - Rustenburg - 0300",
+   "procurementMethod": "open",
+   "specialConditions": "See the attached",
+   "mainProcurementCategory": "",
+   "procurementMethodDetails": "Request for Bid(Open-Tender)",
+   "additionalProcurementCategories": [
+    "consultingServices"
+   ]
+  },
+  "parties": [
+   {
+    "id": "69946",
+    "name": "ALICOM",
+    "roles": [
+     "supplier"
+    ],
+    "address": {
+     "countryName": "South Africa"
+    },
+    "identifier": {
+     "legalName": "ALICOM"
+    }
+   }
+  ],
+  "language": "en-za",
+  "planning": {
+   "budget": {
+    "description": " - "
+   },
+   "rationale": ""
+  },
+  "initiationType": "tender"
+ },
+ {
+  "id": "ocds-9t57fa-145781-2026-01-31T00:00:00Z",
+  "tag": [
+   "compiled"
+  ],
+  "date": "2026-01-31T00:00:00Z",
+  "ocid": "ocds-9t57fa-145781",
+  "buyer": {
+   "id": "635",
+   "name": "Stellenbosch Municipality"
+  },
+  "tender": {
+   "id": "145781",
+   "title": "BSM 47/26",
+   "value": {
+    "amount": 0,
+    "currency": "ZAR"
+   },
+   "status": "cancelled",
+   "category": "Supplies: General",
+   "province": "Western Cape",
+   "documents": [
+    {
+     "id": "81f1ea19-156f-4b80-be69-144ab3b18da8",
+     "url": "https://www.etenders.gov.za/home/Download?blobName=81f1ea19-156f-4b80-be69-144ab3b18da8.pdf&downloadedFileName=Tender%20BSM%2047%2026%20Supply%20delivery%20offloading%20of%20Refuse%20Bags%20until%2030%20June%202029%20with%20adverts.pdf",
+     "title": "Tender BSM 47 26 Supply delivery offloading of Refuse Bags until 30 June 2029 with adverts.pdf",
+     "format": "pdf",
+     "language": "en",
+     "description": "Tender BSM 47 26 Supply delivery offloading of Refuse Bags until 30 June 2029 with adverts.pdf",
+     "dateModified": "2026-01-30T11:12:31Z",
+     "documentType": "basic",
+     "datePublished": "2026-01-30T11:12:31Z"
+    }
+   ],
+   "tenderers": [
+    {
+     "id": "93125",
+     "name": "BIDELA HORIZONS"
+    },
+    {
+     "id": "93133",
+     "name": "MABESIS ENTERPRISES"
+    }
+   ],
+   "description": "TENDER FOR B/SM 47/26: THE SUPPLY, DELIVERY AND OFFLOADING OF REFUSE BAGS FOR THE PERIOD ENDING 30 JUNE 2029",
+   "tenderPeriod": {
+    "endDate": "2026-03-02T12:00:00Z",
+    "startDate": "2026-01-31T00:00:00Z"
+   },
+   "contactPerson": {
+    "name": "Test Person",
+    "email": "person@example.org",
+    "telephoneNumber": "012-345-6789"
+   },
+   "briefingSession": {
+    "date": "0001-01-01T00:00:00Z",
+    "venue": "N/A",
+    "isSession": false,
+    "compulsory": false
+   },
+   "procuringEntity": {
+    "id": "635",
+    "name": "Stellenbosch Municipality"
+   },
+   "deliveryLocation": "Plein Street - Stellenbosch - Stellenbosch - 7690",
+   "procurementMethod": "open",
+   "specialConditions": "Will be stipulated within the tender document.",
+   "mainProcurementCategory": "goods",
+   "procurementMethodDetails": "Request for Bid(Open-Tender)",
+   "additionalProcurementCategories": [
+    "goods"
+   ]
+  },
+  "language": "en-za",
+  "planning": {
+   "budget": {
+    "description": " - "
+   },
+   "rationale": ""
+  },
+  "initiationType": "tender"
+ },
+ {
+  "id": "ocds-9t57fa-145781-2026-01-31T00:00:00Z",
+  "tag": [
+   "compiled"
+  ],
+  "date": "2026-01-31T00:00:00Z",
+  "ocid": "ocds-9t57fa-145781",
+  "buyer": {
+   "id": "635",
+   "name": "Stellenbosch Municipality"
+  },
+  "tender": {
+   "id": "145781",
+   "title": "BSM 47/26",
+   "value": {
+    "amount": 0,
+    "currency": "ZAR"
+   },
+   "status": "cancelled",
+   "category": "Supplies: General",
+   "province": "Western Cape",
+   "documents": [
+    {
+     "id": "81f1ea19-156f-4b80-be69-144ab3b18da8",
+     "url": "https://www.etenders.gov.za/home/Download?blobName=81f1ea19-156f-4b80-be69-144ab3b18da8.pdf&downloadedFileName=Tender%20BSM%2047%2026%20Supply%20delivery%20offloading%20of%20Refuse%20Bags%20until%2030%20June%202029%20with%20adverts.pdf",
+     "title": "Tender BSM 47 26 Supply delivery offloading of Refuse Bags until 30 June 2029 with adverts.pdf",
+     "format": "pdf",
+     "language": "en",
+     "description": "Tender BSM 47 26 Supply delivery offloading of Refuse Bags until 30 June 2029 with adverts.pdf",
+     "dateModified": "2026-01-30T11:12:31Z",
+     "documentType": "basic",
+     "datePublished": "2026-01-30T11:12:31Z"
+    }
+   ],
+   "tenderers": [
+    {
+     "id": "93125",
+     "name": "BIDELA HORIZONS"
+    },
+    {
+     "id": "93133",
+     "name": "MABESIS ENTERPRISES"
+    }
+   ],
+   "description": "TENDER FOR B/SM 47/26: THE SUPPLY, DELIVERY AND OFFLOADING OF REFUSE BAGS FOR THE PERIOD ENDING 30 JUNE 2029",
+   "tenderPeriod": {
+    "endDate": "2026-03-02T12:00:00Z",
+    "startDate": "2026-01-31T00:00:00Z"
+   },
+   "contactPerson": {
+    "name": "Test Person",
+    "email": "person@example.org",
+    "telephoneNumber": "012-345-6789"
+   },
+   "briefingSession": {
+    "date": "0001-01-01T00:00:00Z",
+    "venue": "N/A",
+    "isSession": false,
+    "compulsory": false
+   },
+   "procuringEntity": {
+    "id": "635",
+    "name": "Stellenbosch Municipality"
+   },
+   "deliveryLocation": "Plein Street - Stellenbosch - Stellenbosch - 7690",
+   "procurementMethod": "open",
+   "specialConditions": "Will be stipulated within the tender document.",
+   "mainProcurementCategory": "goods",
+   "procurementMethodDetails": "Request for Bid(Open-Tender)",
+   "additionalProcurementCategories": [
+    "goods"
+   ]
+  },
+  "language": "en-za",
+  "planning": {
+   "budget": {
+    "description": " - "
+   },
+   "rationale": ""
+  },
+  "initiationType": "tender"
+ }
+]

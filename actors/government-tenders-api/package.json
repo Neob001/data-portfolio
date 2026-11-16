@@ -1,0 +1,16 @@
+{
+  "name": "government-tenders-api",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Global public tenders and contract awards in one normalized feed: EU TED, US SAM.gov, UK Find a Tender and Contracts Finder, and 16 national open-data procurement platforms, from a nightly index.",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "apify": "^3.2.6"
+  },
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node --test 'tests/*.test.mjs'"
+  }
+}

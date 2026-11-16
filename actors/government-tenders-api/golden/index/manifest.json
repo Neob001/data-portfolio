@@ -1,0 +1,152 @@
+{
+ "format": 1,
+ "codec": "gzip",
+ "built_at": "2026-11-16T17:00:00.000Z",
+ "notices": 5,
+ "bytes": 3658,
+ "source_counts": {
+  "uk-fts": 1,
+  "ted": 1,
+  "sam": 1,
+  "uk-cf": 1,
+  "ocds-nl": 1
+ },
+ "country_counts": {
+  "GB": 2,
+  "PL": 1,
+  "US": 1,
+  "NL": 1
+ },
+ "notice_type_counts": {
+  "tender": 3,
+  "award": 2
+ },
+ "status_counts": {
+  "open": 3,
+  "awarded": 2
+ },
+ "age_bands_days": [
+  [
+   0,
+   3
+  ],
+  [
+   3,
+   8
+  ],
+  [
+   8,
+   32
+  ],
+  [
+   32,
+   92
+  ],
+  [
+   92,
+   null
+  ]
+ ],
+ "shards": [
+  {
+   "file": "shards/sam-b0-p0.jsonl.gz",
+   "source": "sam",
+   "band": 0,
+   "part": 0,
+   "notices": 1,
+   "open": 1,
+   "bytes": 908,
+   "raw_bytes": 1516,
+   "countries": [
+    "US"
+   ],
+   "notice_types": [
+    "tender"
+   ],
+   "published_from": "2026-11-15T14:29:06Z",
+   "published_to": "2026-11-15T14:29:06Z",
+   "deadline_max": "2027-01-15T20:00:00Z",
+   "fetched_max": "2026-11-16T16:08:43.330Z"
+  },
+  {
+   "file": "shards/ted-b0-p0.jsonl.gz",
+   "source": "ted",
+   "band": 0,
+   "part": 0,
+   "notices": 1,
+   "open": 0,
+   "bytes": 779,
+   "raw_bytes": 1308,
+   "countries": [
+    "PL"
+   ],
+   "notice_types": [
+    "award"
+   ],
+   "published_from": "2026-11-16T00:00:00Z",
+   "published_to": "2026-11-16T00:00:00Z",
+   "deadline_max": null,
+   "fetched_max": "2026-11-16T16:08:43.329Z"
+  },
+  {
+   "file": "shards/uk-cf-b0-p0.jsonl.gz",
+   "source": "uk-cf",
+   "band": 0,
+   "part": 0,
+   "notices": 1,
+   "open": 0,
+   "bytes": 771,
+   "raw_bytes": 1344,
+   "countries": [
+    "GB"
+   ],
+   "notice_types": [
+    "award"
+   ],
+   "published_from": "2026-11-16T16:27:38Z",
+   "published_to": "2026-11-16T16:27:38Z",
+   "deadline_max": null,
+   "fetched_max": "2026-11-16T16:37:55.456Z"
+  },
+  {
+   "file": "shards/uk-fts-b0-p0.jsonl.gz",
+   "source": "uk-fts",
+   "band": 0,
+   "part": 0,
+   "notices": 1,
+   "open": 1,
+   "bytes": 695,
+   "raw_bytes": 1237,
+   "countries": [
+    "GB"
+   ],
+   "notice_types": [
+    "tender"
+   ],
+   "published_from": "2026-11-16T16:24:57Z",
+   "published_to": "2026-11-16T16:24:57Z",
+   "deadline_max": "2026-12-16T12:00:00Z",
+   "fetched_max": "2026-11-16T16:37:55.485Z"
+  },
+  {
+   "file": "shards/ocds-nl-b1-p0.jsonl.gz",
+   "source": "ocds-nl",
+   "band": 1,
+   "part": 0,
+   "notices": 1,
+   "open": 1,
+   "bytes": 505,
+   "raw_bytes": 869,
+   "countries": [
+    "NL"
+   ],
+   "notice_types": [
+    "tender"
+   ],
+   "published_from": "2026-11-11T00:00:00Z",
+   "published_to": "2026-11-11T00:00:00Z",
+   "deadline_max": "2027-01-11T10:00:00Z",
+   "fetched_max": "2026-11-16T16:33:06.334Z"
+  }
+ ]
+}

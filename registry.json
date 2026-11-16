@@ -1669,6 +1669,51 @@
       "staging_validated": false,
       "monetization_configured": false,
       "staging_started_at": "2026-11-03T11:43:21Z"
+    },
+    "government-tenders-api": {
+      "apify_actor_id": null,
+      "source": "factpipe tenders index (GitHub release tenders-index; TED API, SAM.gov public extract, UK Find a Tender + Contracts Finder OCDS APIs, OCP Data Registry open-licence publications) - index only, no live scraping",
+      "variant": "index search + incremental (sinceLastRun)",
+      "status": "draft",
+      "approval": "APPROVED S-3 2026-11-17 (owner, in chat): global tenders index replacing eu-ted-tenders-monitor + sam-gov-contracts; per-source APPROVE lines pending (state/source_screen_tenders_2026-11-17.md); price/listing to be presented before publish",
+      "origin": "scan",
+      "incumbent_actor_id": "lofomachines/public-tenders-scraper",
+      "first_paid_run_date": null,
+      "ppe_events": {
+        "notice-result": {
+          "proposed_price_usd": 0.0035,
+          "title": "Notice result",
+          "description": "One public tender, award or contract notice delivered. Runs with no matching notice are free.",
+          "store_discount_tiers_usd": {
+            "FREE": 0.0035,
+            "BRONZE": 0.0035,
+            "SILVER": 0.0035,
+            "GOLD": 0.0035
+          }
+        }
+      },
+      "pricing_rationale": "PROPOSED (not approved): $3.50/1k = 12.5% below the only multi-country incumbent with users (lofomachines/public-tenders-scraper $4/1k, 12 users/30d); single-country leaders: SAM.gov fortuitous_pirate $3/1k (36 users), scrapesage $2.50/1k (23), TED memo23 $1/1k (20); off-Apify OpenOpps GBP 120-259/month.",
+      "launched_at": null,
+      "last_fix_date": null,
+      "kpis": {
+        "as_of": null,
+        "totalRuns": 0,
+        "totalUsers30Days": 0
+      },
+      "listing": {
+        "title": "Government Tenders API \u2014 Global Public Procurement Data",
+        "description": "Public tenders and contract awards from 40+ countries in one feed: EU TED, US SAM.gov, UK Find a Tender & Contracts Finder, Australia, Canada, Brazil and more. Filter by keyword, CPV/NAICS, country, value, deadline. $3.50 per 1,000 notices.",
+        "seoTitle": "Government Tenders API: Global Public Procurement & Bids",
+        "seoDescription": "Search public tenders, RFPs and contract awards from 40+ countries: EU TED, SAM.gov, UK Find a Tender, Contracts Finder and more. One normalized JSON feed, daily.",
+        "categories": [
+          "LEAD_GENERATION",
+          "BUSINESS"
+        ]
+      },
+      "notes": "Draft on branch claude/tenders-index. Index not yet published (workflow runs only on main). Keep eu-ted-tenders-monitor and sam-gov-contracts live until this replaces them.",
+      "staging_validated": false,
+      "monetization_configured": false,
+      "staging_started_at": null
     }
   },
   "apify_account": "factpipe",

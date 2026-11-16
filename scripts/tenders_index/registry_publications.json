@@ -1,0 +1,21 @@
+{
+  "_comment": "OCP Data Registry publications read by build_index.mjs (source ocds-<slug>). Only open licences that allow commercial reuse (screen: state/source_screen_tenders_2026-11-17.md). Licence + publisher are shown in the Actor README for attribution. Adding a publication needs a screen line first.",
+  "publications": [
+    { "id": 19, "slug": "au", "country": "AU", "language": "en", "publisher": "Australian Government Department of Finance (AusTender)", "licence": "CC BY 3.0 AU" },
+    { "id": 79, "slug": "ca-qc", "country": "CA", "language": "fr", "publisher": "Secrétariat du Conseil du trésor du Québec (SEAO)", "licence": "CC BY 4.0" },
+    { "id": 110, "slug": "ec", "country": "EC", "language": "es", "publisher": "Servicio Nacional de Contratación Pública (SERCOP), Ecuador", "licence": "CC BY 3.0 EC" },
+    { "id": 136, "slug": "de", "country": "DE", "language": "de", "publisher": "Beschaffungsamt des BMI (oeffentlichevergabe.de), Germany", "licence": "CC0 1.0" },
+    { "id": 142, "slug": "gt", "country": "GT", "language": "es", "publisher": "Ministerio de Finanzas Públicas (Guatecompras), Guatemala", "licence": "CC BY 4.0" },
+    { "id": 122, "slug": "hn", "country": "HN", "language": "es", "publisher": "Oficina Normativa de Contratación y Adquisiciones del Estado (ONCAE), Honduras", "licence": "CC BY 4.0" },
+    { "id": 133, "slug": "nl", "country": "NL", "language": "nl", "publisher": "TenderNed, Ministry of Economic Affairs, Netherlands", "licence": "CC0 1.0" },
+    { "id": 63, "slug": "py", "country": "PY", "language": "es", "publisher": "Dirección Nacional de Contrataciones Públicas (DNCP), Paraguay", "licence": "CC BY 4.0" },
+    { "id": 135, "slug": "pe", "country": "PE", "language": "es", "publisher": "Organismo Especializado para las Contrataciones Públicas Eficientes (OECE), Peru", "licence": "CC BY 4.0" },
+    { "id": 143, "slug": "za", "country": "ZA", "language": "en", "publisher": "National Treasury eTenders, South Africa", "licence": "ODC PDDL" },
+    { "id": 39, "slug": "gb-sct", "country": "GB", "language": "en", "publisher": "Scottish Procurement and Commercial Directorate (Public Contracts Scotland)", "licence": "OGL v3.0" },
+    { "id": 130, "slug": "ug", "country": "UG", "language": "en", "publisher": "Public Procurement and Disposal of Public Assets Authority (PPDA), Uganda", "licence": "ODC-By" },
+    { "id": 3, "slug": "zm", "country": "ZM", "language": "en", "publisher": "Zambia Public Procurement Authority (ZPPA)", "licence": "CC BY 4.0" },
+    { "id": 157, "slug": "br", "country": "BR", "language": "pt", "publisher": "Secretaria de Gestão e Inovação (Compras.gov.br), Brazil", "licence": "CC BY 4.0" },
+    { "id": 162, "slug": "bg", "country": "BG", "language": "bg", "publisher": "Public Procurement Agency (AOP), Bulgaria", "licence": "CC0 1.0" },
+    { "id": 161, "slug": "gr", "country": "GR", "language": "el", "publisher": "Diavgis, Greece", "licence": "CC BY 4.0" }
+  ]
+}

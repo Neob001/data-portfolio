@@ -18,6 +18,10 @@ jobs:
         run: python3 scripts/make_ats_actors.py --check
       - name: Jobs index publisher tests
         run: python3 scripts/jobs_index/test_publish_release.py
+      - name: Tenders index builder + publisher tests
+        run: |
+          node --test scripts/tenders_index/tests/*.test.mjs
+          python3 scripts/tenders_index/test_publish_release.py
       - name: Actor unit + golden tests
         run: |
           set -e
