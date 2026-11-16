@@ -799,7 +799,7 @@
       "actor": "jobs-bulk-feed",
       "name": "new-jobs-last-24h-bulk",
       "title": "All new jobs from the last 24 hours (bulk feed)",
-      "description": "Every job posted in the last day on 20,000+ company career sites, as flat JSON rows. Schedule daily for a complete new-jobs feed.",
+      "description": "Every job posted in the last day on 19,000+ company career sites, as flat JSON rows. Schedule daily for a complete new-jobs feed.",
       "input": {
         "postedWithinDays": 1,
         "maxResults": 100
@@ -822,7 +822,7 @@
       "actor": "jobs-bulk-feed",
       "name": "remote-jobs-bulk-feed",
       "title": "New remote job postings (bulk feed)",
-      "description": "Remote-only jobs posted in the last 3 days on 20,000+ company career sites, one flat row per job.",
+      "description": "Remote-only jobs posted in the last 3 days on 19,000+ company career sites, one flat row per job.",
       "input": {
         "remote": "remote_only",
         "postedWithinDays": 3,

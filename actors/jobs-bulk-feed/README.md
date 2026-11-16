@@ -1,5 +1,21 @@
 # Bulk Job Postings Feed — All New Jobs Daily
 
+<!-- factpipe:hero:start -->
+
+**Every new job posting, every day: 790,000+ jobs from 19,000+ company career sites (Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable, Recruitee) as one bulk feed. Only jobs not delivered before.**
+
+| Title | Seniority | Company | Locations | Countries |
+|---|---|---|---|---|
+| Senior Security Researcher | senior | Chainalysis | Tel Aviv Office | IL |
+| Cyber Security Data Analyst | — | HUMAN | Tel Aviv, Israel | IL |
+| Marketing Executive - Haircare | — | ZURU | Sydney / Australia | AU |
+
+*Real output from the “All new jobs from the last 24 hours (bulk feed)” example, run on November 16, 2026.*
+
+**Try a ready-made example:** [All new jobs from the last 24 hours (bulk feed)](https://apify.com/factpipe/jobs-bulk-feed/examples/new-jobs-last-24h-bulk) · [New US job postings (bulk feed)](https://apify.com/factpipe/jobs-bulk-feed/examples/us-jobs-bulk-feed) · [New remote job postings (bulk feed)](https://apify.com/factpipe/jobs-bulk-feed/examples/remote-jobs-bulk-feed)
+
+<!-- factpipe:hero:end -->
+
 A **bulk job postings feed** for job boards, HR-tech products and labour-market research: every open job from **19,000+ company career sites** on Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable and Recruitee, delivered as flat JSON rows. Run it once for the whole index (about **800,000 unique jobs**), then schedule it daily: with `sinceLastRun` (on by default) each run returns **only the jobs it has not delivered before**, so you get every new job once and never pay twice for the same posting.
 
 No keyword search, no ranking, no scraping during your run: the Actor streams a prebuilt index that is rebuilt every night from the employers' own applicant tracking systems, so even a full delivery of 790,000+ jobs is fast and cheap.
