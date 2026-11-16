@@ -1,17 +1,26 @@
 {
   "actorOutputSchemaVersion": 1,
   "title": "Output of companies-hiring",
+  "description": "Results of companies-hiring: the companies dataset (table view and all fields) and the run summary.",
   "type": "object",
   "properties": {
     "resultsDatasetUrl": {
       "type": "string",
       "title": "Companies",
-      "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=companies"
+      "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=companies",
+      "description": "One row per company hiring for the filters: open and matching job counts, departments, locations, hiring velocity, careers URL (table columns only; allFieldsDatasetUrl has every field)."
+    },
+    "allFieldsDatasetUrl": {
+      "type": "string",
+      "title": "Companies (all fields)",
+      "description": "Same rows with every field of the dataset schema, as JSON",
+      "template": "{{actorRun.defaultDatasetUrl}}?format=json&clean=true"
     },
     "runSummary": {
       "type": "string",
       "title": "Run summary",
-      "template": "{{actorRun.defaultKeyValueStoreUrl}}/records/RUN_SUMMARY"
+      "template": "{{actorRun.defaultKeyValueStoreUrl}}/records/RUN_SUMMARY",
+      "description": "Run summary (key-value record RUN_SUMMARY): rows written, charged events, errors, failure class, duration and finish time"
     }
   }
 }

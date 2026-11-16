@@ -100,16 +100,19 @@
             "description": "Stable id: ats:board:posting_id"
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "description": "Job title exactly as posted by the company"
           },
           "company_name": {
             "type": [
               "string",
               "null"
-            ]
+            ],
+            "description": "Company name as shown on its job board; null when the board does not state it"
           },
           "company_board": {
-            "type": "string"
+            "type": "string",
+            "description": "The company's board id on its ATS (e.g. stripe on Greenhouse, nvidia.wd5/NVIDIAExternalCareerSite on Workday); use it in the companies input"
           },
           "ats": {
             "type": "string",
@@ -124,19 +127,22 @@
               "teamtailor",
               "jazzhr",
               "pinpoint"
-            ]
+            ],
+            "description": "Applicant tracking system (job board platform) the job is hosted on"
           },
           "department": {
             "type": [
               "string",
               "null"
-            ]
+            ],
+            "description": "Department as stated by the company (e.g. Engineering); null when not given"
           },
           "team": {
             "type": [
               "string",
               "null"
-            ]
+            ],
+            "description": "Team or sub-department as stated by the company; null when not given"
           },
           "employment_type": {
             "type": [
@@ -151,7 +157,8 @@
               "internship",
               "other",
               null
-            ]
+            ],
+            "description": "Normalized employment type: full_time, part_time, contract, temporary, internship, other; null when not stated"
           },
           "seniority": {
             "type": [
@@ -178,43 +185,50 @@
               "hybrid",
               "onsite",
               "unknown"
-            ]
+            ],
+            "description": "remote, hybrid or onsite, from the ATS's own field or the location text; unknown when neither says"
           },
           "locations": {
             "type": "array",
             "items": {
               "type": "string"
-            }
+            },
+            "description": "Location strings as posted (city, region, country); empty when none given"
           },
           "country_codes": {
             "type": "array",
             "items": {
               "type": "string"
-            }
+            },
+            "description": "ISO 3166-1 alpha-2 country codes resolved from the locations (e.g. US, DE); empty when no country could be resolved"
           },
           "remote": {
             "type": [
               "boolean",
               "null"
-            ]
+            ],
+            "description": "true when the job is remote, false when it is on-site or hybrid, null when unknown"
           },
           "salary_min": {
             "type": [
               "number",
               "null"
-            ]
+            ],
+            "description": "Lower end of the stated pay range, in salary_currency per salary_period; null when no pay is stated"
           },
           "salary_max": {
             "type": [
               "number",
               "null"
-            ]
+            ],
+            "description": "Upper end of the stated pay range (equals salary_min for a single figure); null when no pay is stated"
           },
           "salary_currency": {
             "type": [
               "string",
               "null"
-            ]
+            ],
+            "description": "ISO 4217 currency code of the pay range (e.g. USD, EUR); null when no pay is stated"
           },
           "salary_period": {
             "type": [
@@ -228,7 +242,8 @@
               "day",
               "hour",
               null
-            ]
+            ],
+            "description": "Pay period of salary_min/salary_max: year, month, week, day or hour; null when no pay is stated"
           },
           "salary_source": {
             "type": [
@@ -261,34 +276,40 @@
               "string",
               "null"
             ],
-            "format": "date-time"
+            "format": "date-time",
+            "description": "When the company published the job (ISO 8601, UTC), from the ATS; null when the ATS does not give it"
           },
           "updated_at": {
             "type": [
               "string",
               "null"
             ],
-            "format": "date-time"
+            "format": "date-time",
+            "description": "When the posting was last changed (ISO 8601, UTC), from the ATS; null when not given"
           },
           "apply_url": {
             "type": "string",
-            "format": "uri"
+            "format": "uri",
+            "description": "URL where a candidate applies (often the job page itself)"
           },
           "job_url": {
             "type": "string",
-            "format": "uri"
+            "format": "uri",
+            "description": "Public job page on the company's careers site / ATS"
           },
           "description_text": {
             "type": [
               "string",
               "null"
-            ]
+            ],
+            "description": "Full job description as plain text (HTML removed); null when not requested or not available (see description_status)"
           },
           "description_snippet": {
             "type": [
               "string",
               "null"
-            ]
+            ],
+            "description": "First 300 characters of the description as plain text; null when no description is available"
           },
           "description_status": {
             "type": "string",
@@ -303,7 +324,8 @@
             "type": "array",
             "items": {
               "type": "string"
-            }
+            },
+            "description": "job_ids of copies of this job (same company, title and locations) found on other boards and merged into this row; empty when none"
           },
           "match_score": {
             "type": [
@@ -327,11 +349,13 @@
           },
           "source_url": {
             "type": "string",
-            "format": "uri"
+            "format": "uri",
+            "description": "The ATS API, feed or page URL the job was read from"
           },
           "fetched_at": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "When the job data was read from the source (ISO 8601, UTC): the nightly index build, or the live read during this run"
           }
         }
       }

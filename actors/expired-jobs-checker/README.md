@@ -102,6 +102,15 @@ Up to 200,000 jobs per run; identical inputs are checked once. The output has on
 
 `unknown` rows are free. Set a maximum charge per run in Apify and the Actor stops cleanly when it is reached; the remaining jobs get no row and no charge (the status message says how many).
 
+## Use with AI agents (MCP)
+
+AI agents can find, run and pay for this Actor on their own; nothing to set up on our side.
+
+- **Connect:** add `https://mcp.apify.com?tools=factpipe/expired-jobs-checker` to Claude, ChatGPT, Cursor, VS Code or any other MCP client and sign in with your Apify account. The agent sees the input schema, a description of every output field and this README.
+- **Example:** "Are these job links still open?" becomes the input `{"jobUrls": ["https://jobs.ashbyhq.com/posthog/8854fb74-8457-40cd-bc10-60125a0c0cd4"]}`.
+- **Cap the spend:** pass `maxTotalChargeUsd` when starting the run (API or the Python/JavaScript client). The Actor stops at the cap and keeps the checks already delivered; you are never charged above it.
+- **Output:** flat JSON with the same fields on every run, read from the source by fixed rules (no language model, no estimates), so results can be cited as they are. `allFieldsDatasetUrl` in the run output has every field; `resultsDatasetUrl` has the table columns.
+
 ## factpipe Jobs & Hiring Data
 
 These Actors share the same nightly index of open jobs from 19,000+ company career sites:

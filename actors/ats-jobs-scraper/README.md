@@ -126,6 +126,15 @@ One flat record per job opening:
 
 Set a maximum charge per run in Apify, and the Actor stops cleanly when it is reached.
 
+## Use with AI agents (MCP)
+
+AI agents can find, run and pay for this Actor on their own; nothing to set up on our side.
+
+- **Connect:** add `https://mcp.apify.com?tools=factpipe/ats-jobs-scraper` to Claude, ChatGPT, Cursor, VS Code or any other MCP client and sign in with your Apify account. The agent sees the input schema, a description of every output field and this README.
+- **Example:** "List product manager jobs at companies hiring on Greenhouse" becomes the input `{"ats": ["greenhouse"], "keywords": ["product manager"], "maxResults": 20}`.
+- **Cap the spend:** pass `maxTotalChargeUsd` when starting the run (API or the Python/JavaScript client). The Actor stops at the cap and keeps the jobs already delivered; you are never charged above it.
+- **Output:** flat JSON with the same fields on every run, read from the source by fixed rules (no language model, no estimates), so results can be cited as they are. `allFieldsDatasetUrl` in the run output has every field; `resultsDatasetUrl` has the table columns.
+
 ## Coverage
 
 Search-index build of 2026-09-25: **730,000+ open jobs** on **15,000+ company job boards**.

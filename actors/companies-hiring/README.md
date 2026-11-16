@@ -130,6 +130,15 @@ One flat record per company. A company with job boards on several ATSs (for exam
 
 Set a maximum charge per run in Apify, and the Actor stops cleanly when it is reached.
 
+## Use with AI agents (MCP)
+
+AI agents can find, run and pay for this Actor on their own; nothing to set up on our side.
+
+- **Connect:** add `https://mcp.apify.com?tools=factpipe/companies-hiring` to Claude, ChatGPT, Cursor, VS Code or any other MCP client and sign in with your Apify account. The agent sees the input schema, a description of every output field and this README.
+- **Example:** "Which companies are hiring 5 or more salespeople in the US?" becomes the input `{"keywords": ["sales"], "locations": ["United States"], "minMatchingJobs": 5, "maxResults": 20}`.
+- **Cap the spend:** pass `maxTotalChargeUsd` when starting the run (API or the Python/JavaScript client). The Actor stops at the cap and keeps the companies already delivered; you are never charged above it.
+- **Output:** flat JSON with the same fields on every run, read from the source by fixed rules (no language model, no estimates), so results can be cited as they are. `allFieldsDatasetUrl` in the run output has every field; `resultsDatasetUrl` has the table columns.
+
 ## Coverage
 
 Search-index build of 2026-09-25: **15,000+ company job boards** with **730,000+ open jobs**.

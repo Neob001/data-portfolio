@@ -86,7 +86,8 @@
         "type": "object",
         "properties": {
           "company_name": {
-            "type": "string"
+            "type": "string",
+            "description": "Company name as shown on its job board; null when the board does not state it"
           },
           "company_board": {
             "type": "string",
@@ -192,11 +193,13 @@
           },
           "source_url": {
             "type": "string",
-            "format": "uri"
+            "format": "uri",
+            "description": "The ATS API or feed URL of the company's main board (company_board)"
           },
           "fetched_at": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "When the nightly index build read the company's boards (ISO 8601, UTC)"
           }
         }
       }

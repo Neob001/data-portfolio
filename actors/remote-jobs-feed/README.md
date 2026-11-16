@@ -2,7 +2,7 @@
 
 <!-- factpipe:hero:start -->
 
-**Remote and work-from-home jobs from 10,000+ companies' official Greenhouse, Lever, Ashby, Workable and Recruitee job boards. Filter by region or time zone, ranked by relevance. $3 per 1,000 jobs.**
+**Remote and work-from-home jobs from 15,000+ companies' official Workday, Greenhouse, Lever, Ashby, Workable and Recruitee job boards. Filter by region or time zone, ranked by relevance. $3 per 1,000 jobs.**
 
 | Title | Company | Locations | Workplace | Salary min |
 |---|---|---|---|---|
@@ -16,7 +16,7 @@
 
 <!-- factpipe:hero:end -->
 
-Get **remote and work-from-home jobs from 6,000+ companies** in one feed, straight from the employers' own job boards on Greenhouse, Lever, Ashby, Workable and Recruitee. Filter by region or time zone ("US", "Europe", "EMEA", "Worldwide", "CET", "UTC-5"), keyword, company, department and posting date. Keyword searches are **ranked by relevance**, so jobs with your keyword in the title come first. You get flat, deduplicated JSON with apply links and salary ranges wherever the employer publishes them. **$3 per 1,000 jobs**, and you pay only for the jobs you get.
+Get **remote and work-from-home jobs from 6,000+ companies** in one feed, straight from the employers' own job boards on Workday, Greenhouse, Lever, Ashby, Workable, Recruitee and more. Filter by region or time zone ("US", "Europe", "EMEA", "Worldwide", "CET", "UTC-5"), keyword, company, department and posting date. Keyword searches are **ranked by relevance**, so jobs with your keyword in the title come first. You get flat, deduplicated JSON with apply links and salary ranges wherever the employer publishes them. **$3 per 1,000 jobs**, and you pay only for the jobs you get.
 
 ## Quick start
 
@@ -112,6 +112,15 @@ One flat record per remote job opening:
 | `job-result` | **$3.00 per 1,000** ($0.003 each) | One remote job delivered. **No start fee.** Runs with no matches, jobs skipped by `sinceLastRun` and jobs found closed are never charged. |
 
 Set a maximum charge per run in Apify, and the Actor stops cleanly when it is reached.
+
+## Use with AI agents (MCP)
+
+AI agents can find, run and pay for this Actor on their own; nothing to set up on our side.
+
+- **Connect:** add `https://mcp.apify.com?tools=factpipe/remote-jobs-feed` to Claude, ChatGPT, Cursor, VS Code or any other MCP client and sign in with your Apify account. The agent sees the input schema, a description of every output field and this README.
+- **Example:** "Find remote backend developer jobs open to Europe" becomes the input `{"keywords": ["backend"], "timezonesOrRegions": ["Europe"], "maxResults": 20}`.
+- **Cap the spend:** pass `maxTotalChargeUsd` when starting the run (API or the Python/JavaScript client). The Actor stops at the cap and keeps the jobs already delivered; you are never charged above it.
+- **Output:** flat JSON with the same fields on every run, read from the source by fixed rules (no language model, no estimates), so results can be cited as they are. `allFieldsDatasetUrl` in the run output has every field; `resultsDatasetUrl` has the table columns.
 
 ## Coverage
 

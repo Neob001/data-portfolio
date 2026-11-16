@@ -578,10 +578,25 @@ def output_schema(cfg):
     return {
         "actorOutputSchemaVersion": 1,
         "title": f"Output of {cfg['slug']}",
+        # Descriptions are what AI agents (Apify MCP fetch-actor-details) read to find the results.
+        "description": f"Results of {cfg['slug']}: the jobs dataset (table view and all fields) and the run summary.",
         "type": "object",
         "properties": {
-            "resultsDatasetUrl": {"type": "string", "title": "Jobs", "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=jobs"},
-            "runSummary": {"type": "string", "title": "Run summary", "template": "{{actorRun.defaultKeyValueStoreUrl}}/records/RUN_SUMMARY"},
+            "resultsDatasetUrl": {
+                "type": "string", "title": "Jobs",
+                "description": f"{cfg['name']} job postings matching the filters, one row per job (table columns only; allFieldsDatasetUrl has every field).",
+                "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=jobs",
+            },
+            "allFieldsDatasetUrl": {
+                "type": "string", "title": "Jobs (all fields)",
+                "description": "Same rows with every field of the dataset schema, as JSON",
+                "template": "{{actorRun.defaultDatasetUrl}}?format=json&clean=true",
+            },
+            "runSummary": {
+                "type": "string", "title": "Run summary",
+                "description": "Run summary (key-value record RUN_SUMMARY): rows written, charged events, errors, failure class, duration and finish time",
+                "template": "{{actorRun.defaultKeyValueStoreUrl}}/records/RUN_SUMMARY",
+            },
         },
     }
 
@@ -1071,6 +1086,15 @@ One flat record per job opening, from a real run:
 
 Set a maximum charge per run in Apify, and the Actor stops cleanly when it is reached.
 
+## Use with AI agents (MCP)
+
+AI agents can find, run and pay for this Actor on their own; nothing to set up on our side.
+
+- **Connect:** add `https://mcp.apify.com?tools=factpipe/[[SLUG]]` to Claude, ChatGPT, Cursor, VS Code or any other MCP client and sign in with your Apify account. The agent sees the input schema, a description of every output field and this README.
+- **Example:** "Find [[NAME]] [[KEYWORD_TEXT]] jobs posted in the last 7 days" becomes the input `{"keywords": [[KEYWORDS_JSON]], "postedWithinDays": 7, "maxResults": 20}`.
+- **Cap the spend:** pass `maxTotalChargeUsd` when starting the run (API or the Python/JavaScript client). The Actor stops at the cap and keeps the jobs already delivered; you are never charged above it.
+- **Output:** flat JSON with the same fields on every run, read from the source by fixed rules (no language model, no estimates), so results can be cited as they are. `allFieldsDatasetUrl` in the run output has every field; `resultsDatasetUrl` has the table columns.
+
 ## Coverage
 
 [[COVERAGE]]
@@ -1189,6 +1213,7 @@ def readme(platform, cfg):
         EXAMPLES=", ".join(cfg["examples"]), URL_EXAMPLE=cfg["url_examples"][0],
         SALARY_PHRASE="" if platform == "greenhouse" else "salary range (where the employer publishes one), employment type, ",
         KEYWORDS_JSON=json.dumps(cfg["keywords"]), PREFILL_STORY=cfg["prefill_story"],
+        SLUG=cfg["slug"], KEYWORD_TEXT=cfg["keywords"][0],
         COMPANY_EXAMPLE_JSON=json.dumps(cfg["company_example"]),
         SAMPLE=readme_sample(cfg), FIELDS_NOTE=cfg["fields_note"],
         USE_CASES="\n".join(f"- {u}" for u in cfg["use_cases"]),

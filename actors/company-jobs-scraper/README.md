@@ -164,6 +164,15 @@ Same idea, same inputs: a list of company URLs in, flat job records out. Field m
 
 Example: 1,000 jobs cost **$2.00**. You only pay for delivered results.
 
+## Use with AI agents (MCP)
+
+AI agents can find, run and pay for this Actor on their own; nothing to set up on our side.
+
+- **Connect:** add `https://mcp.apify.com?tools=factpipe/company-jobs-scraper` to Claude, ChatGPT, Cursor, VS Code or any other MCP client and sign in with your Apify account. The agent sees the input schema, a description of every output field and this README.
+- **Example:** "What jobs is Red Hat hiring for?" becomes the input `{"companyUrls": ["https://www.redhat.com"], "maxJobsPerCompany": 25}`.
+- **Cap the spend:** pass `maxTotalChargeUsd` when starting the run (API or the Python/JavaScript client). The Actor stops at the cap and keeps the jobs already delivered; you are never charged above it.
+- **Output:** flat JSON with the same fields on every run, read from the source by fixed rules (no language model, no estimates), so results can be cited as they are. `allFieldsDatasetUrl` in the run output has every field; `resultsDatasetUrl` has the table columns.
+
 ## factpipe Jobs & Hiring Data
 
 This Actor fetches jobs live from the career pages you give it. For search across many companies at once, the Actors below query a daily index of about 730,000 open jobs from 15,000 company job boards:

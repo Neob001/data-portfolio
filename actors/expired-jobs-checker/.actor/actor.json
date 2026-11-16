@@ -120,7 +120,8 @@
             "type": [
               "string",
               "null"
-            ]
+            ],
+            "description": "Company name as shown on its job board; null when the board does not state it"
           },
           "title": {
             "type": [
@@ -146,7 +147,8 @@
               "jazzhr",
               "pinpoint",
               null
-            ]
+            ],
+            "description": "Applicant tracking system (job board platform) the job is hosted on"
           },
           "job_url": {
             "type": [

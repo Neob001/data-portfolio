@@ -2,7 +2,7 @@
 
 <!-- factpipe:hero:start -->
 
-**Search live openings from thousands of companies' official Greenhouse, Lever, Ashby, Workable and Recruitee job boards. Deduplicated JSON with salary, remote and location filters. $5 per 1,000 jobs.**
+**Search 790,000+ live openings from 19,000+ companies' official Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable and Recruitee job boards. Deduplicated JSON with salary, remote and location filters. $5 per 1,000 jobs.**
 
 | Title | Company | Locations | Workplace | Salary min |
 |---|---|---|---|---|
@@ -16,13 +16,13 @@
 
 <!-- factpipe:hero:end -->
 
-Search **live job openings from 10,000+ companies** in one feed. The jobs come from the **official public job-board APIs** of Greenhouse, Lever, Ashby, Workable and Recruitee. Filter by keyword, location, country, remote, company, department, employment type and posting date. Keyword searches are **ranked by relevance** (title matches first), and you get flat, deduplicated JSON with salary ranges wherever the employer publishes them. **$5 per 1,000 jobs**, and you pay only for jobs delivered.
+Search **live job openings from 19,000+ companies** in one feed. The jobs come from the **companies' own job boards** on Workday, Greenhouse, Lever, Ashby, Personio, Teamtailor, Workable and Recruitee. Filter by keyword, location, country, remote, company, department, employment type and posting date. Keyword searches are **ranked by relevance** (title matches first), and you get flat, deduplicated JSON with salary ranges wherever the employer publishes them. **$5 per 1,000 jobs**, and you pay only for jobs delivered.
 
 ## Quick start
 
 1. Click **Start** with the prefilled input: `keywords: ["engineer"]`, `remote: "remote_only"`, `postedWithinDays: 7`, `maxResults: 20`. The run takes well under a minute.
 2. You get the 20 most relevant remote engineering jobs posted in the last week (jobs with "engineer" in the title first, newest first among equals), each with company, locations, country codes, apply link and (where published) salary.
-3. That first run costs at most **$0.06** (20 jobs × $0.003), which fits in Apify's free monthly credit. Then change the filters or schedule the run with `sinceLastRun: true` to get a daily feed of new jobs only.
+3. That first run costs at most **$0.10** (20 jobs × $0.005), which fits in Apify's free monthly credit. Then change the filters or schedule the run with `sinceLastRun: true` to get a daily feed of new jobs only.
 
 ## What you get
 
@@ -133,6 +133,15 @@ More keywords matched means a higher score inside each band. Among equal scores,
 | `job-result` | **$5.00 per 1,000** ($0.005 each) | One job record delivered, with or without its description. **No start fee. Runs with no matches, jobs skipped by `sinceLastRun`, jobs found closed at delivery time, and failed boards are never charged.** |
 
 Example: 10,000 jobs cost **$50**. Set a maximum charge per run in Apify, and the Actor stops cleanly when it is reached.
+
+## Use with AI agents (MCP)
+
+AI agents can find, run and pay for this Actor on their own; nothing to set up on our side.
+
+- **Connect:** add `https://mcp.apify.com?tools=factpipe/ats-jobs-feed` to Claude, ChatGPT, Cursor, VS Code or any other MCP client and sign in with your Apify account. The agent sees the input schema, a description of every output field and this README.
+- **Example:** "Find senior data engineer jobs in Germany posted this week" becomes the input `{"keywords": ["data engineer"], "locations": ["Germany"], "seniority": ["senior"], "postedWithinDays": 7, "maxResults": 20}`.
+- **Cap the spend:** pass `maxTotalChargeUsd` when starting the run (API or the Python/JavaScript client). The Actor stops at the cap and keeps the jobs already delivered; you are never charged above it.
+- **Output:** flat JSON with the same fields on every run, read from the source by fixed rules (no language model, no estimates), so results can be cited as they are. `allFieldsDatasetUrl` in the run output has every field; `resultsDatasetUrl` has the table columns.
 
 ## Coverage
 

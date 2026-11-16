@@ -1,16 +1,25 @@
 {
   "actorOutputSchemaVersion": 1,
   "title": "Output of lever-jobs-api",
+  "description": "Results of lever-jobs-api: the jobs dataset (table view and all fields) and the run summary.",
   "type": "object",
   "properties": {
     "resultsDatasetUrl": {
       "type": "string",
       "title": "Jobs",
+      "description": "Lever job postings matching the filters, one row per job (table columns only; allFieldsDatasetUrl has every field).",
       "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=jobs"
+    },
+    "allFieldsDatasetUrl": {
+      "type": "string",
+      "title": "Jobs (all fields)",
+      "description": "Same rows with every field of the dataset schema, as JSON",
+      "template": "{{actorRun.defaultDatasetUrl}}?format=json&clean=true"
     },
     "runSummary": {
       "type": "string",
       "title": "Run summary",
+      "description": "Run summary (key-value record RUN_SUMMARY): rows written, charged events, errors, failure class, duration and finish time",
       "template": "{{actorRun.defaultKeyValueStoreUrl}}/records/RUN_SUMMARY"
     }
   }

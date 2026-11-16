@@ -84,3 +84,7 @@ Item ids come from WEEKLY_REPORT.md. Nothing ships to a new data source, changes
 2026-11-16 | APPROVE | L4 review line | Owner: one passive README line in ats-jobs-feed inviting Store reviews (no direct contact).
 2026-11-16 | APPROVE | source jazzhr | Owner: add JazzHR ({co}.applytojob.com) to the index. Conditions: robots R1 per host, throttled, re-check Employ legal pages before release (state/source_screen_2026-11-16.md).
 2026-11-16 | APPROVE | source pinpoint | Owner: add Pinpoint ({co}.pinpointhq.com/postings.json) to the index. Conditions: robots R1 per tenant (drop tenants that disallow).
+2026-11-17 | APPROVE | S-1 agent-readiness pass | Owner, in chat ("approve 1, 2, 3"): jobs Actors' output/dataset schema descriptions, "Use with AI agents (MCP)" README section, congruent title/description/README terms (STRATEGY_2026-11-16.md §4.2). No price change.
+2026-11-17 | APPROVE | S-2 technographics | Owner, in chat: `mode: companies-by-technology` in Jobs Feed + standalone Actor, ~$15 per 1,000 companies (exact price/listing presented before publish), built from the existing jobs index (no new source).
+2026-11-17 | APPROVE | S-3 global tenders index | Owner, in chat: one global public-procurement index (TED, UK Find a Tender/Contracts Finder, OCDS publishers, SAM.gov) replacing eu-ted-tenders-monitor + sam-gov-contracts; each source still gets its own ToS/licence screen + APPROVE line before build.
+2026-11-17 | NOTE | S-4 e-commerce store index, S-5 AWS Data Exchange | Owner deciding later; nothing built.

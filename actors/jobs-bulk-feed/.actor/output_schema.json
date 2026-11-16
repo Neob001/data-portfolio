@@ -1,17 +1,26 @@
 {
   "actorOutputSchemaVersion": 1,
   "title": "Output of jobs-bulk-feed",
+  "description": "Results of jobs-bulk-feed: the jobs dataset (table view and all fields) and the run summary.",
   "type": "object",
   "properties": {
     "resultsDatasetUrl": {
       "type": "string",
       "title": "Jobs",
-      "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=jobs"
+      "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=jobs",
+      "description": "Every job in the nightly index matching the filters (or only jobs new since the last run with sinceLastRun), one row per job (table columns only; allFieldsDatasetUrl has every field)."
+    },
+    "allFieldsDatasetUrl": {
+      "type": "string",
+      "title": "Jobs (all fields)",
+      "description": "Same rows with every field of the dataset schema, as JSON",
+      "template": "{{actorRun.defaultDatasetUrl}}?format=json&clean=true"
     },
     "runSummary": {
       "type": "string",
       "title": "Run summary",
-      "template": "{{actorRun.defaultKeyValueStoreUrl}}/records/RUN_SUMMARY"
+      "template": "{{actorRun.defaultKeyValueStoreUrl}}/records/RUN_SUMMARY",
+      "description": "Run summary (key-value record RUN_SUMMARY): rows written, charged events, errors, failure class, duration and finish time"
     }
   }
 }

@@ -1,17 +1,26 @@
 {
   "actorOutputSchemaVersion": 1,
   "title": "Output of expired-jobs-checker",
+  "description": "Results of expired-jobs-checker: the checks dataset (table view and all fields) and the run summary.",
   "type": "object",
   "properties": {
     "resultsDatasetUrl": {
       "type": "string",
       "title": "Checks",
-      "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=checks"
+      "template": "{{actorRun.defaultDatasetUrl}}?format=json&view=checks",
+      "description": "One row per input job URL/id: status open, closed or unknown, with when it was last seen (table columns only; allFieldsDatasetUrl has every field)."
+    },
+    "allFieldsDatasetUrl": {
+      "type": "string",
+      "title": "Checks (all fields)",
+      "description": "Same rows with every field of the dataset schema, as JSON",
+      "template": "{{actorRun.defaultDatasetUrl}}?format=json&clean=true"
     },
     "runSummary": {
       "type": "string",
       "title": "Run summary",
-      "template": "{{actorRun.defaultKeyValueStoreUrl}}/records/RUN_SUMMARY"
+      "template": "{{actorRun.defaultKeyValueStoreUrl}}/records/RUN_SUMMARY",
+      "description": "Run summary (key-value record RUN_SUMMARY): rows written, charged events, errors, failure class, duration and finish time"
     }
   }
 }
