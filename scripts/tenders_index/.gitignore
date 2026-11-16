@@ -1,0 +1,4 @@
+# Rebuildable artefacts (the index is published as release assets; state lives in the Actions cache).
+index/
+state/
+__pycache__/

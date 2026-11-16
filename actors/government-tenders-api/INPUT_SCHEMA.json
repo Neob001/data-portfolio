@@ -1,0 +1,123 @@
+{
+  "title": "Government Tenders API",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "keywords": {
+      "title": "Keywords",
+      "type": "array",
+      "description": "Words or phrases to find in the notice title or description, case- and accent-insensitive (\"software\", \"road maintenance\", \"laptops\"). Title matches rank first. Notices are in their original language (TED titles also come in English). Empty = all notices.",
+      "editor": "stringList",
+      "prefill": ["software"]
+    },
+    "keywordMatch": {
+      "title": "Keyword match",
+      "type": "string",
+      "description": "any: a notice matches one of the keywords. all: it must match every keyword.",
+      "editor": "select",
+      "enum": ["any", "all"],
+      "default": "any"
+    },
+    "countries": {
+      "title": "Countries",
+      "type": "array",
+      "description": "2-letter ISO country codes of the buying authority (\"DE\", \"FR\", \"US\", \"GB\", \"AU\"). Empty = worldwide.",
+      "editor": "stringList"
+    },
+    "openOnly": {
+      "title": "Open for bids only",
+      "type": "boolean",
+      "description": "Only calls for tender (and prior notices) whose submission deadline is still in the future at run time.",
+      "default": false,
+      "prefill": true
+    },
+    "noticeTypes": {
+      "title": "Notice types",
+      "type": "array",
+      "description": "planning (prior information, sources sought), tender (calls for tender, solicitations), award (contract award notices), contract (contracts signed or modified), cancellation, other. Empty = all.",
+      "editor": "select",
+      "items": {
+        "type": "string",
+        "enum": ["planning", "tender", "award", "contract", "cancellation", "other"],
+        "enumTitles": ["Planning / prior information", "Call for tender / solicitation", "Contract award", "Contract signed / modified", "Cancellation", "Other"]
+      }
+    },
+    "cpvCodes": {
+      "title": "CPV codes (prefixes)",
+      "type": "array",
+      "description": "EU Common Procurement Vocabulary codes or prefixes: \"72\" = IT services, \"45\" = construction work, \"33\" = medical equipment. A notice matches when one of its CPV codes starts with one of these. Notices without CPV codes (SAM.gov, most Latin American platforms) are excluded when this is set.",
+      "editor": "stringList"
+    },
+    "naicsCodes": {
+      "title": "NAICS codes (prefixes)",
+      "type": "array",
+      "description": "US NAICS codes or prefixes (\"5415\" = computer systems design). Only SAM.gov notices carry NAICS codes.",
+      "editor": "stringList"
+    },
+    "buyers": {
+      "title": "Buyers",
+      "type": "array",
+      "description": "Text to find in the buying authority's name (\"ministry of defence\", \"NHS\", \"Stadt München\"). Empty = any buyer.",
+      "editor": "stringList"
+    },
+    "minValue": {
+      "title": "Minimum value",
+      "type": "integer",
+      "description": "Only notices with a stated value (estimated value for tenders, awarded value for awards) of at least this amount, in the notice's own currency. Notices without a value are excluded when this is set.",
+      "minimum": 0
+    },
+    "maxValue": {
+      "title": "Maximum value",
+      "type": "integer",
+      "description": "Only notices with a stated value of at most this amount, in the notice's own currency.",
+      "minimum": 0
+    },
+    "currency": {
+      "title": "Currency",
+      "type": "string",
+      "description": "Only notices whose value is in this ISO currency (\"EUR\", \"USD\", \"GBP\"). Use it with minimum/maximum value to compare like with like.",
+      "editor": "textfield"
+    },
+    "publishedWithinDays": {
+      "title": "Published within (days)",
+      "type": "integer",
+      "description": "Only notices published in the last N days. The index keeps 90 days of notices plus older calls that are still open.",
+      "minimum": 1,
+      "maximum": 3650
+    },
+    "deadlineAfter": {
+      "title": "Deadline on or after",
+      "type": "string",
+      "description": "Only notices whose submission deadline is on or after this date (YYYY-MM-DD), e.g. to leave enough time to prepare a bid.",
+      "editor": "datepicker"
+    },
+    "sources": {
+      "title": "Sources",
+      "type": "array",
+      "description": "Only these sources: ted, sam, uk-fts, uk-cf, or a national platform ocds-<country> (ocds-au, ocds-de, ocds-nl, ocds-br, ...). Empty = all.",
+      "editor": "stringList"
+    },
+    "sortBy": {
+      "title": "Sort by",
+      "type": "string",
+      "description": "relevance (keyword matches in the title first), newest (publication date), deadline (soonest deadline first) or value (largest first). Default: relevance with keywords, else deadline when open only, else newest.",
+      "editor": "select",
+      "enum": ["relevance", "newest", "deadline", "value"]
+    },
+    "sinceLastRun": {
+      "title": "Only notices not delivered before",
+      "type": "boolean",
+      "description": "Remembers the notices this Actor delivered for the same filters (in a named key-value store in your Apify account) and returns only notices added to the index since, so a daily schedule gets each notice once and is never charged twice.",
+      "default": false
+    },
+    "maxResults": {
+      "title": "Max results",
+      "type": "integer",
+      "description": "Maximum number of notices to deliver (and charge for) in this run.",
+      "minimum": 1,
+      "maximum": 100000,
+      "default": 100,
+      "prefill": 20
+    }
+  }
+}

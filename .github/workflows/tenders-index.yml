@@ -1,0 +1,74 @@
+# Nightly: global public-procurement index (owner approval S-3, 2026-11-17; sources screened in
+# state/source_screen_tenders_2026-11-17.md). Fetches what changed since last night from each approved source,
+# rebuilds the index from the rolling per-source stores (state/ in the Actions cache) and publishes it as
+# assets of the `tenders-index` release for actors/government-tenders-api.
+name: tenders-index daily
+
+on:
+  schedule:
+    - cron: '30 5 * * *'   # 05:30 UTC: after SAM.gov's early-morning extract and TED's daily publication
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths: ['.github/workflows/tenders-index.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tenders-index
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 58
+    defaults:
+      run:
+        working-directory: scripts/tenders_index
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # Rolling per-source stores (records/*.jsonl.gz) + cursors.json (days already fetched, registry collections read).
+      - name: Restore index state
+        uses: actions/cache/restore@v4
+        with:
+          path: scripts/tenders_index/state
+          key: tenders-index-state-${{ github.run_id }}
+          restore-keys: tenders-index-state-
+
+      - name: Unit tests
+        run: node --test tests/*.test.mjs
+
+      # Sources run in parallel, each inside the fetch budget (no new day / file after 32 min; a day in flight finishes).
+      # Nightly steady state: TED 3 refresh days (~14 pages of 250 each), UK FTS/CF 3 days each, SAM.gov one streamed
+      # 244 MB extract, the registry one redirect request per publication + a download only for new monthly collections.
+      # The first nights also backfill the 90-day window (newest days first) until each source's cursor is complete.
+      - name: Build index
+        timeout-minutes: 45
+        # TED and SAM.gov stay off until the owner decides their caveats (DECISIONS.md 2026-11-17 NOTE tenders-ted / tenders-sam).
+        run: node --max-old-space-size=10240 build_index.mjs --codec br --window-days 90 --budget-min 32 --registry-max-mb 1800 --sources uk-fts,uk-cf,ocds
+
+      - name: Save index state
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: scripts/tenders_index/state
+          key: tenders-index-state-${{ github.run_id }}
+
+      - name: Publish (GitHub release assets)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 publish_release.py "${{ github.repository }}" index
+
+      - name: Build report
+        if: always()
+        run: cat index/build_report.json || true

@@ -1,0 +1,1084 @@
+{
+ "fts_tender": {
+  "buyerID": [],
+  "id": "107787-2026",
+  "tag": [
+   "tender"
+  ],
+  "date": "2026-11-12T19:13:53Z",
+  "initiationType": "tender",
+  "ocid": "ocds-h6vhtk-051cf1",
+  "parties": [
+   {
+    "name": "NETWORK RAIL INFRASTRUCTURE LIMITED",
+    "id": "GB-PPON-PNZN-9524-VCQJ",
+    "identifier": {
+     "scheme": "GB-PPON",
+     "id": "PNZN-9524-VCQJ"
+    },
+    "address": {
+     "streetAddress": "Waterloo General Office",
+     "locality": "London",
+     "postalCode": "SE1 8SW",
+     "country": "GB",
+     "countryName": "United Kingdom",
+     "region": "UKI45"
+    },
+    "roles": [
+     "buyer"
+    ],
+    "details": {
+     "url": "https://www.networkrail.co.uk/",
+     "classifications": [
+      {
+       "scheme": "UK_CA_TYPE",
+       "id": "publicAuthorityCentralGovernment",
+       "description": "Public authority - central government"
+      }
+     ]
+    }
+   }
+  ],
+  "buyer": {
+   "id": "GB-PPON-PNZN-9524-VCQJ",
+   "name": "NETWORK RAIL INFRASTRUCTURE LIMITED"
+  },
+  "tender": {
+   "id": "37888",
+   "legalBasis": {
+    "id": "2023/54",
+    "scheme": "UKPGA",
+    "uri": "https://www.legislation.gov.uk/ukpga/2023/54/contents"
+   },
+   "title": "Aerial Services including asset inspection and surveys",
+   "description": "Porvision of Aerial Services including asset inspection and surveys",
+   "status": "active",
+   "items": [
+    {
+     "id": "1",
+     "additionalClassifications": [
+      {
+       "scheme": "CPV",
+       "id": "60440000",
+       "description": "Aerial and related services"
+      },
+      {
+       "scheme": "CPV",
+       "id": "60445000",
+       "description": "Aircraft operating services"
+      },
+      {
+       "scheme": "CPV",
+       "id": "71355000",
+       "description": "Surveying services"
+      }
+     ],
+     "deliveryAddresses": [
+      {
+       "region": "UKM",
+       "country": "GB",
+       "countryName": "United Kingdom"
+      }
+     ],
+     "relatedLot": "1"
+    },
+    {
+     "id": "2",
+     "additionalClassifications": [
+      {
+       "scheme": "CPV",
+       "id": "60440000",
+       "description": "Aerial and related services"
+      },
+      {
+       "scheme": "CPV",
+       "id": "60445000",
+       "description": "Aircraft operating services"
+      },
+      {
+       "scheme": "CPV",
+       "id": "71355000",
+       "description": "Surveying services"
+      }
+     ],
+     "deliveryAddresses": [
+      {
+       "region": "UKD",
+       "country": "GB",
+       "countryName": "United Kingdom"
+      },
+      {
+       "region": "UKF",
+       "country": "GB",
+       "countryName": "United Kingdom"
+      },
+      {
+       "region": "UKG",
+       "country": "GB",
+       "countryName": "United Kingdom"
+      },
+      {
+       "region": "UKH",
+       "country": "GB",
+       "countryName": "United Kingdom"
+      },
+      {
+       "region": "UKL",
+       "country": "GB",
+       "countryName": "United Kingdom"
+      },
+      {
+       "region": "UKJ",
+       "country": "GB",
+       "countryName": "United Kingdom"
+      },
+      {
+       "region": "UKK",
+       "country": "GB",
+       "countryName": "United Kingdom"
+      }
+     ],
+     "relatedLot": "2"
+    },
+    {
+     "id": "3",
+     "additionalClassifications": [
+      {
+       "scheme": "CPV",
+       "id": "60440000",
+       "description": "Aerial and related services"
+      },
+      {
+       "scheme": "CPV",
+       "id": "60445000",
+       "description": "Aircraft operating services"
+      },
+      {
+       "scheme": "CPV",
+       "id": "71355000",
+       "description": "Surveying services"
+      }
+     ],
+     "deliveryAddresses": [
+      {
+       "region": "UKM",
+       "country": "GB",
+       "countryName": "United Kingdom"
+      },
+      {
+       "region": "UKC",
+       "country": "GB",
+       "countryName": "United Kingdom"
+      },
+      {
+       "region": "UKF",
+       "country": "GB",
+       "countryName": "United Kingdom"
+      },
+      {
+       "region": "UKG",
+       "country": "GB",
+       "countryName": "United Kingdom"
+      },
+      {
+       "region": "UKH",
+       "country": "GB",
+       "countryName": "United Kingdom"
+      },
+      {
+       "region": "UKL",
+       "country": "GB",
+       "countryName": "United Kingdom"
+      },
+      {
+       "region": "UKK",
+       "country": "GB",
+       "countryName": "United Kingdom"
+      },
+      {
+       "region": "UKJ",
+       "country": "GB",
+       "countryName": "United Kingdom"
+      }
+     ],
+     "relatedLot": "3"
+    }
+   ],
+   "value": {
+    "amountGross": 41200000,
+    "amount": 34400000,
+    "currency": "GBP"
+   },
+   "procurementMethod": "open",
+   "procurementMethodDetails": "Competitive flexible procedure",
+   "procedure": {
+    "features": "This is a single-stage process, suppliers will submit both their PSQ and ITT responses at the same time. Part A (PSQ) will be evaluated first and only the top three ranked suppliers for each Lot will progress to Part B (ITT) evaluation. Full details of the procurement process are set out in the Instructions to Participants."
+   },
+   "mainProcurementCategory": "services",
+   "specialRegime": [
+    "utilities"
+   ],
+   "aboveThreshold": true,
+   "coveredBy": [
+    "GPA",
+    "CPTPP"
+   ],
+   "submissionMethodDetails": "Submission Address:\nhttps://networkrail.bravosolution.co.uk/web/login.html\nSpecial Instructions:\nSuppliers must be registered on the Network Rail Bravo eSourcing Portal. All procurement documents, communications, clarifications and submissions will be managed through Bravo.\nThis is a single-stage competitive procurement. The PSQ and ITT documents will be issued simultaneously, and suppliers must submit both Part A-PSQ Response, Part B-ITT Technical Envelope and Commercial Envelope in accordance with the instructions provided within Bravo and the procurement documentation by the submission date \nAccessing the Opportunity:\n1.\tVisit: https://networkrail.bravosolution.co.uk/web/login.html\n2.\tSelect \"View Current Opportunities\" and locate the Crewed Helicopter Aerial Services opportunity (Project Ref_31268).",
+   "submissionTerms": {
+    "electronicSubmissionPolicy": "allowed",
+    "languages": [
+     "en"
+    ]
+   },
+   "tenderPeriod": {
+    "endDate": "2026-12-17T10:00:00+00:00"
+   },
+   "enquiryPeriod": {
+    "endDate": "2026-12-10T10:00:00+00:00"
+   },
+   "awardPeriod": {
+    "endDate": "2027-06-15T23:59:59+01:00"
+   },
+   "lots": [
+    {
+     "id": "1",
+     "title": "Lot 1 Scotland",
+     "description": "Aerial Services including asset inspection and surveys services for Network Rail infrastructure across Scotland.",
+     "status": "active",
+     "value": {
+      "amountGross": 23700000,
+      "amount": 19800000,
+      "currency": "GBP"
+     },
+     "awardCriteria": {
+      "criteria": [
+       {
+        "type": "quality",
+        "name": "Organisational Structure",
+        "numbers": [
+         {
+          "number": 3.2,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "quality",
+        "name": "Aircraft and Operational Solution",
+        "numbers": [
+         {
+          "number": 4.8,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "quality",
+        "name": "Service Delivery",
+        "numbers": [
+         {
+          "number": 10,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "quality",
+        "name": "Mobilisation & Transition",
+        "numbers": [
+         {
+          "number": 4.8,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "quality",
+        "name": "Health & Safety",
+        "numbers": [
+         {
+          "number": 6.8,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "quality",
+        "name": "Innovation",
+        "numbers": [
+         {
+          "number": 3.2,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "quality",
+        "name": "Social Value - Environmental Sustainability",
+        "numbers": [
+         {
+          "number": 2,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "quality",
+        "name": "Social Value - Economic and Community",
+        "numbers": [
+         {
+          "number": 2,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "quality",
+        "name": "Information and Data Security",
+        "numbers": [
+         {
+          "number": 3.2,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "price",
+        "name": "Commercial Envelope",
+        "numbers": [
+         {
+          "number": 60,
+          "weight": "percentageExact"
+         }
+        ]
+       }
+      ]
+     },
+     "selectionCriteria": {
+      "criteria": [
+       {
+        "type": "economic",
+        "description": "Suppliers must demonstrate the legal and financial capacity required to deliver the contract. Audited accounts and insurance cover will not be required as a condition of participation prior to contract award."
+       },
+       {
+        "type": "technical",
+        "description": "Suppliers must demonstrate the technical capability, experience, resources and qualifications required to deliver the contract."
+       }
+      ]
+     },
+     "suitability": {
+      "sme": true,
+      "vcse": true
+     },
+     "contractPeriod": {
+      "startDate": "2028-04-01T00:00:00+01:00",
+      "endDate": "2036-03-31T23:59:59+01:00"
+     },
+     "hasOptions": true,
+     "options": {
+      "description": "Initial five-year contract with the option to extend for up to three additional one-year periods following Years 5, 6 and 7.  Provision is included for ad hoc and emergency services and contract variations in accordance with the Contract terms."
+     }
+    },
+    {
+     "id": "2",
+     "title": "Lot 2 England & Wales",
+     "description": "Aerial Services including asset inspection and surveys services for Network Rail infrastructure across England - Northwest & Central, Eastern, High Speed 1 and Wales",
+     "status": "active",
+     "value": {
+      "amountGross": 17500000,
+      "amount": 14600000,
+      "currency": "GBP"
+     },
+     "awardCriteria": {
+      "criteria": [
+       {
+        "type": "quality",
+        "name": "Organisational Structure",
+        "numbers": [
+         {
+          "number": 3.2,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "quality",
+        "name": "Aircraft and Operational Solution",
+        "numbers": [
+         {
+          "number": 4.8,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "quality",
+        "name": "Service Delivery",
+        "numbers": [
+         {
+          "number": 10,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "quality",
+        "name": "Mobilisation & Transition",
+        "numbers": [
+         {
+          "number": 4.8,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "quality",
+        "name": "Health & Safety",
+        "numbers": [
+         {
+          "number": 6.8,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "quality",
+        "name": "Innovation",
+        "numbers": [
+         {
+          "number": 3.2,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "quality",
+        "name": "Social Value - Environmental Sustainability",
+        "numbers": [
+         {
+          "number": 2,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "quality",
+        "name": "Social Value - Economic and Community",
+        "numbers": [
+         {
+          "number": 2,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "quality",
+        "name": "Information and Data Security",
+        "numbers": [
+         {
+          "number": 3.2,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "price",
+        "name": "Commercial Envelope",
+        "numbers": [
+         {
+          "number": 60,
+          "weight": "percentageExact"
+         }
+        ]
+       }
+      ]
+     },
+     "selectionCriteria": {
+      "criteria": [
+       {
+        "type": "economic",
+        "description": "Suppliers must demonstrate the legal and financial capacity required to deliver the contract. Audited accounts and insurance cover will not be required as a condition of participation prior to contract award."
+       },
+       {
+        "type": "technical",
+        "description": "Suppliers must demonstrate the technical capability, experience, resources and qualifications required to deliver the contract."
+       }
+      ]
+     },
+     "suitability": {
+      "sme": true,
+      "vcse": true
+     },
+     "contractPeriod": {
+      "startDate": "2028-04-01T00:00:00+01:00",
+      "endDate": "2036-03-31T23:59:59+01:00"
+     },
+     "hasOptions": true,
+     "options": {
+      "description": "Initial five-year contract with the option to extend for up to three additional one-year periods following Years 5, 6 and 7.  Provision is included for ad hoc and emergency services and contract variations in accordance with the Contract terms."
+     }
+    },
+    {
+     "id": "3",
+     "title": "Lot 3 National",
+     "description": "National Aerial Services including asset inspection and surveys services for Network Rail infrastructure across Scotland, England - Northwest & Central, Eastern,  High Speed 1 and Wales",
+     "status": "active",
+     "value": {
+      "amountGross": 0,
+      "amount": 0,
+      "currency": "GBP"
+     },
+     "awardCriteria": {
+      "criteria": [
+       {
+        "type": "quality",
+        "name": "Organisational Structure",
+        "numbers": [
+         {
+          "number": 3.2,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "quality",
+        "name": "Aircraft and Operational Solution",
+        "numbers": [
+         {
+          "number": 4.8,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "quality",
+        "name": "Service Delivery",
+        "numbers": [
+         {
+          "number": 10,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "quality",
+        "name": "Mobilisation & Transition",
+        "numbers": [
+         {
+          "number": 4.8,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "quality",
+        "name": "Health & Safety",
+        "numbers": [
+         {
+          "number": 6.8,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "quality",
+        "name": "Innovation",
+        "numbers": [
+         {
+          "number": 3.2,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "quality",
+        "name": "Social Value - Environmental Sustainability",
+        "numbers": [
+         {
+          "number": 2,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "quality",
+        "name": "Social Value - Economic and Community",
+        "numbers": [
+         {
+          "number": 2,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "quality",
+        "name": "Information and Data Security",
+        "numbers": [
+         {
+          "number": 3.2,
+          "weight": "percentageExact"
+         }
+        ]
+       },
+       {
+        "type": "price",
+        "name": "Commercial Envelope",
+        "numbers": [
+         {
+          "number": 60,
+          "weight": "percentageExact"
+         }
+        ]
+       }
+      ]
+     },
+     "selectionCriteria": {
+      "criteria": [
+       {
+        "type": "economic",
+        "description": "Suppliers must demonstrate the legal and financial capacity required to deliver the contract. Audited accounts and insurance cover will not be required as a condition of participation prior to contract award."
+       },
+       {
+        "type": "technical",
+        "description": "Suppliers must demonstrate the technical capability, experience, resources and qualifications required to deliver the contract."
+       }
+      ]
+     },
+     "suitability": {
+      "sme": true,
+      "vcse": true
+     },
+     "contractPeriod": {
+      "startDate": "2028-04-01T00:00:00+01:00",
+      "endDate": "2036-03-31T23:59:59+01:00"
+     },
+     "hasOptions": true,
+     "options": {
+      "description": "Initial five-year contract with the option to extend for up to three additional one-year periods following Years 5, 6 and 7.  Provision is included for ad hoc and emergency services and contract variations in accordance with the Contract terms."
+     }
+    }
+   ],
+   "lotDetails": {
+    "maximumLotsAwardedPerSupplier": 2,
+    "awardCriteria": {
+     "description": "Suppliers may bid for one, multiple or all Lots. Lots will be evaluated independently and may be awarded individually or in combination to the supplier(s) submitting the Most Advantageous Tender in accordance with the award criteria."
+    }
+   },
+   "documents": [
+    {
+     "id": "conflictOfInterest",
+     "documentType": "conflictOfInterest",
+     "description": "Not published"
+    },
+    {
+     "id": "future",
+     "documentType": "biddingDocuments",
+     "accessDetails": "All new documents and updates will be published via ia the NR Bravo E-sourcing System throughout the event. Where a stage is in progress, a message shall be sent to all particpants within the stage to inform them."
+    },
+    {
+     "id": "107787-2026",
+     "documentType": "tenderNotice",
+     "noticeType": "UK4",
+     "description": "Tender notice on Find a Tender",
+     "url": "https://www.find-tender.service.gov.uk/Notice/107787-2026",
+     "datePublished": "2026-11-12T19:13:53Z",
+     "format": "text/html"
+    }
+   ],
+   "hasRecurrence": true,
+   "recurrence": {
+    "dates": [
+     {
+      "startDate": "2035-06-01T23:59:59+01:00"
+     }
+    ]
+   }
+  },
+  "language": "en"
+ },
+ "fts_award": {
+  "ocid": "ocds-h6vhtk-07bb1d",
+  "buyerID": [],
+  "id": "107785-2026",
+  "tag": [
+   "award",
+   "contract"
+  ],
+  "date": "2026-11-12T18:50:50Z",
+  "initiationType": "tender",
+  "parties": [
+   {
+    "name": "National Audit Office",
+    "id": "GB-PPON-PBHM-8926-YDNL",
+    "identifier": {
+     "scheme": "GB-PPON",
+     "id": "PBHM-8926-YDNL"
+    },
+    "address": {
+     "streetAddress": "157-197 Buckingham Palace Road",
+     "locality": "London",
+     "postalCode": "SW1W 9SP",
+     "country": "GB",
+     "countryName": "United Kingdom",
+     "region": "UKI32"
+    },
+    "roles": [
+     "buyer"
+    ],
+    "details": {
+     "url": "http://www.nao.org.uk",
+     "classifications": [
+      {
+       "scheme": "UK_CA_TYPE",
+       "id": "publicAuthorityCentralGovernment",
+       "description": "Public authority - central government"
+      }
+     ]
+    }
+   },
+   {
+    "name": "WorldCC UK Ltd",
+    "id": "GB-COH-13010920",
+    "identifier": {
+     "scheme": "GB-COH",
+     "id": "13010920"
+    },
+    "address": {
+     "streetAddress": "3rd Floor, Great Titchfield House, 14-18 Great Titchfield Street",
+     "locality": "London",
+     "postalCode": "W1W 8BD",
+     "country": "GB",
+     "countryName": "United Kingdom",
+     "region": "UKI32"
+    },
+    "roles": [
+     "supplier"
+    ],
+    "details": {
+     "scale": "large",
+     "vcse": false
+    }
+   }
+  ],
+  "buyer": {
+   "id": "GB-PPON-PBHM-8926-YDNL",
+   "name": "National Audit Office"
+  },
+  "tender": {
+   "id": "ocds-h6vhtk-07bb1d",
+   "legalBasis": {
+    "id": "2023/54",
+    "scheme": "UKPGA",
+    "uri": "https://www.legislation.gov.uk/ukpga/2023/54/contents"
+   },
+   "title": "WorldCC Membership - 2026 - 34",
+   "description": "The National Audit Office has awarded a contract for the professional membership subscription to World Commerce & Contracting UK Ltd (WorldCC UK Ltd), providing access to professional learning, research, tools and resources to support commercial and contract management capability and best practice.\nThe contract commenced on 23 October 2026 and ends 22 October 2034. The total contract duration is 8 years (96 months) with a total contract value  of £41,000 including VAT.",
+   "status": "complete",
+   "procurementMethod": "direct",
+   "procurementMethodDetails": "Below threshold - without competition",
+   "lots": [
+    {
+     "id": "1",
+     "status": "complete",
+     "description": null
+    }
+   ]
+  },
+  "awards": [
+   {
+    "id": "1",
+    "status": "active",
+    "mainProcurementCategory": "services",
+    "suppliers": [
+     {
+      "id": "GB-COH-13010920",
+      "name": "WorldCC UK Ltd"
+     }
+    ],
+    "items": [
+     {
+      "id": "1",
+      "additionalClassifications": [
+       {
+        "scheme": "CPV",
+        "id": "98112000",
+        "description": "Services furnished by professional organisations"
+       }
+      ],
+      "deliveryAddresses": [
+       {
+        "region": "UK",
+        "country": "GB",
+        "countryName": "United Kingdom"
+       }
+      ],
+      "relatedLot": "1"
+     }
+    ],
+    "relatedLots": [
+     "1"
+    ]
+   }
+  ],
+  "contracts": [
+   {
+    "id": "1",
+    "awardID": "1",
+    "title": "WorldCC Membership 2026 - 34",
+    "status": "active",
+    "period": {
+     "startDate": "2026-10-23T00:00:00+01:00",
+     "endDate": "2027-10-22T23:59:59+01:00"
+    },
+    "value": {
+     "amountGross": 41000,
+     "amount": 34166.67,
+     "currency": "GBP"
+    },
+    "aboveThreshold": false,
+    "dateSigned": "2026-10-23T00:00:00+01:00",
+    "statusDetails": null,
+    "documents": [
+     {
+      "id": "107785-2026",
+      "documentType": "contractNotice",
+      "noticeType": "UK7",
+      "description": "Contract details notice on Find a Tender",
+      "url": "https://www.find-tender.service.gov.uk/Notice/107785-2026",
+      "datePublished": "2026-11-12T18:50:50Z",
+      "format": "text/html"
+     }
+    ]
+   }
+  ],
+  "language": "en"
+ },
+ "cf_award": {
+  "ocid": "ocds-b5fd17-c93e2506-169c-4fde-a60a-048490fbf0ea",
+  "id": "b8e851b7-aa00-4442-b861-4e96d5ff154e-921583",
+  "language": "en",
+  "date": "2026-11-13T21:35:20Z",
+  "tag": [
+   "award"
+  ],
+  "initiationType": "tender",
+  "tender": {
+   "id": "CF-3766800D0O000000rwimUAA",
+   "title": "Cirencester Masterplanning Agreement",
+   "description": "Constriction Consultancy: Cirencester Masterplanning Agreement",
+   "status": "complete",
+   "classification": {
+    "scheme": "CPV",
+    "id": "72224000",
+    "description": "Project management consultancy services"
+   },
+   "items": [
+    {
+     "id": "1",
+     "deliveryAddresses": [
+      {
+       "postalCode": "GL3 4AW"
+      },
+      {
+       "region": "South West",
+       "countryName": "United Kingdom"
+      }
+     ]
+    }
+   ],
+   "value": {
+    "amount": 190659.59,
+    "currency": "GBP"
+   },
+   "procurementMethod": "selective",
+   "procurementMethodDetails": "Call-off from a framework agreement",
+   "tenderPeriod": {
+    "endDate": "2026-11-10T12:00:00Z"
+   },
+   "contractPeriod": {
+    "startDate": "2026-11-11T00:00:00Z",
+    "endDate": "2029-04-02T23:59:59+01:00"
+   },
+   "suitability": {
+    "sme": true,
+    "vcse": false
+   },
+   "mainProcurementCategory": "services"
+  },
+  "parties": [
+   {
+    "id": "GB-CFS-334361",
+    "name": "Gloucestershire Health and Care NHS Foundation Trust",
+    "identifier": {
+     "legalName": "Gloucestershire Health and Care NHS Foundation Trust"
+    },
+    "address": {
+     "streetAddress": "3rd Floor, Victoria Warehouse",
+     "locality": "Gloucester",
+     "postalCode": "GL1 2EL",
+     "countryName": "United Kingdom"
+    },
+    "roles": [
+     "buyer"
+    ]
+   },
+   {
+    "id": "GB-CFS-309051",
+    "name": "WSP UK LIMITED",
+    "identifier": {
+     "legalName": "WSP UK LIMITED"
+    },
+    "address": {
+     "streetAddress": "Wsp House, 70 Chancery Lane WC2A 1AF"
+    },
+    "details": {
+     "scale": "large"
+    },
+    "roles": [
+     "supplier"
+    ]
+   }
+  ],
+  "buyer": {
+   "id": "GB-CFS-334361",
+   "name": "Gloucestershire Health and Care NHS Foundation Trust"
+  },
+  "awards": [
+   {
+    "id": "ocds-b5fd17-c93e2506-169c-4fde-a60a-048490fbf0ea-1",
+    "status": "active",
+    "date": "2026-11-11T00:00:00Z",
+    "datePublished": "2026-11-13T21:35:20Z",
+    "value": {
+     "amount": 190659.59,
+     "currency": "GBP"
+    },
+    "suppliers": [
+     {
+      "id": "GB-CFS-309051",
+      "name": "WSP UK LIMITED"
+     }
+    ],
+    "contractPeriod": {
+     "startDate": "2026-11-11T00:00:00Z",
+     "endDate": "2029-04-02T23:59:59+01:00"
+    },
+    "documents": [
+     {
+      "id": "1",
+      "documentType": "awardNotice",
+      "description": "Awarded contract notice on Contracts Finder",
+      "url": "https://www.contractsfinder.service.gov.uk/Notice/b8e851b7-aa00-4442-b861-4e96d5ff154e",
+      "datePublished": "2026-11-13T21:35:20Z",
+      "format": "text/html",
+      "language": "en"
+     }
+    ]
+   }
+  ]
+ },
+ "cf_tender": {
+  "ocid": "ocds-b5fd17-878ed281-6a75-4a83-ae1f-a67d68ac7f6f",
+  "id": "e22d5d91-9b44-4aa7-9bbb-97d3e4e7efad-921534",
+  "language": "en",
+  "date": "2026-11-13T12:42:13Z",
+  "tag": [
+   "tender"
+  ],
+  "initiationType": "tender",
+  "tender": {
+   "id": "53cef8b3-b102-4e28-a377-c1b55eaf8cd2",
+   "title": "CA18682 - RFQ 2026/47 - Kilcurry Subcatchment Targeted River & Catchment Assessment",
+   "description": "NMDDC wishes to appoint a suitably qualified environmental consultancy to undertake a targeted assessment of the Forkhill River and Cully River within the Northern Ireland section of the Kilcurry Subcatchment.\r\n\r\nTo access this competition: \r\n\r\nRegistered:\r\nLogin to https://suppliers.multiquote.com and view the opportunity CA18682.\r\n\r\nNot registered:\r\nVisit https://suppliers.multiquote.com then register and quote CA18682 as the reason for registration. \r\n\r\n Any queries please contact MultiQuote on 020 3920 8054.",
+   "datePublished": "2026-11-13T12:42:13Z",
+   "status": "active",
+   "classification": {
+    "scheme": "CPV",
+    "id": "90700000",
+    "description": "Environmental services"
+   },
+   "items": [
+    {
+     "id": "1",
+     "deliveryAddresses": [
+      {
+       "postalCode": "BT34 2QU"
+      },
+      {
+       "countryName": "British Oversea Territories"
+      },
+      {
+       "countryName": "Channel Islands"
+      },
+      {
+       "countryName": "Europe"
+      },
+      {
+       "countryName": "Isle of Man"
+      },
+      {
+       "countryName": "Rest of the World"
+      },
+      {
+       "countryName": "United Kingdom"
+      }
+     ]
+    }
+   ],
+   "value": {
+    "amount": 19550,
+    "currency": "GBP"
+   },
+   "procurementMethod": "open",
+   "procurementMethodDetails": "Open procedure",
+   "tenderPeriod": {
+    "endDate": "2026-11-28T12:00:00Z"
+   },
+   "contractPeriod": {
+    "startDate": "2026-12-07T00:00:00Z",
+    "endDate": "2027-04-05T23:59:59+01:00"
+   },
+   "suitability": {
+    "sme": true,
+    "vcse": false
+   },
+   "mainProcurementCategory": "services",
+   "documents": [
+    {
+     "id": "1",
+     "documentType": "tenderNotice",
+     "description": "Opportunity notice on Contracts Finder",
+     "url": "https://www.contractsfinder.service.gov.uk/Notice/e22d5d91-9b44-4aa7-9bbb-97d3e4e7efad",
+     "datePublished": "2026-11-13T12:42:13Z",
+     "format": "text/html",
+     "language": "en"
+    }
+   ]
+  },
+  "parties": [
+   {
+    "id": "GB-CFS-333373",
+    "name": "Newry, Mourne and Down District Council (NMD)",
+    "identifier": {
+     "legalName": "Newry, Mourne and Down District Council (NMD)"
+    },
+    "address": {
+     "streetAddress": "Unit 19 Rampart Road, Greenbank Industrial Estate",
+     "locality": "Newry",
+     "postalCode": "BT34 2QU",
+     "countryName": "England"
+    },
+    "details": {
+     "url": "https://suppliers.multiquote.com"
+    },
+    "roles": [
+     "buyer"
+    ]
+   }
+  ],
+  "buyer": {
+   "id": "GB-CFS-333373",
+   "name": "Newry, Mourne and Down District Council (NMD)"
+  }
+ }
+}

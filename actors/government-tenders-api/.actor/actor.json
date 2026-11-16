@@ -1,0 +1,257 @@
+{
+  "actorSpecification": 1,
+  "name": "government-tenders-api",
+  "title": "Government Tenders API — Global Public Procurement Data",
+  "description": "Public tenders and contract awards from 40+ countries in one feed: EU TED, US SAM.gov, UK Find a Tender & Contracts Finder, Australia, Canada, Brazil and more. Filter by keyword, CPV/NAICS, country, value, deadline. $3.50 per 1,000 notices.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "minMemoryMbytes": 1024,
+  "outputSchema": "./output_schema.json",
+  "categories": [
+    "LEAD_GENERATION",
+    "BUSINESS"
+  ],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "notices": {
+          "title": "Notices",
+          "transformation": {
+            "fields": [
+              "title",
+              "buyer_name",
+              "country_code",
+              "notice_type",
+              "status",
+              "value_amount",
+              "value_currency",
+              "published_at",
+              "deadline_at",
+              "notice_url"
+            ]
+          },
+          "display": {
+            "component": "table",
+            "properties": {
+              "title": {
+                "label": "Title",
+                "format": "text"
+              },
+              "buyer_name": {
+                "label": "Buyer",
+                "format": "text"
+              },
+              "country_code": {
+                "label": "Country",
+                "format": "text"
+              },
+              "notice_type": {
+                "label": "Type",
+                "format": "text"
+              },
+              "status": {
+                "label": "Status",
+                "format": "text"
+              },
+              "value_amount": {
+                "label": "Value",
+                "format": "number"
+              },
+              "value_currency": {
+                "label": "Currency",
+                "format": "text"
+              },
+              "published_at": {
+                "label": "Published",
+                "format": "date"
+              },
+              "deadline_at": {
+                "label": "Deadline",
+                "format": "date"
+              },
+              "notice_url": {
+                "label": "Notice",
+                "format": "link"
+              }
+            }
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "notice_id": {
+            "type": "string",
+            "description": "Stable notice ID, '<source>:<source id>' (ted:792825-2026, sam:<NoticeId>, uk-fts:<notice id>, uk-cf:<release id>, ocds-<country>:<ocid>). Same notice, same ID on every run"
+          },
+          "source": {
+            "type": "string",
+            "description": "Source of the notice: ted (EU Tenders Electronic Daily), sam (US SAM.gov), uk-fts (UK Find a Tender), uk-cf (UK Contracts Finder) or ocds-<country> (a national platform's open data via the Open Contracting Data Registry, e.g. ocds-au, ocds-de)"
+          },
+          "country_code": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "2-letter ISO country code of the buying authority (for national platforms: the platform's country)"
+          },
+          "buyer_name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Name of the contracting authority or buyer as published (an organisation, never a person). SAM.gov: department · sub-tier · office"
+          },
+          "buyer_country": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "2-letter ISO country code from the buyer's address, when published"
+          },
+          "title": {
+            "type": "string",
+            "description": "Notice title as published (TED: the English title 'Country – CPV label – original title'), max 300 characters"
+          },
+          "description_snippet": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "First 500 characters of the notice's description, whitespace collapsed; e-mail addresses and phone numbers replaced by [email redacted] / [phone redacted]"
+          },
+          "notice_type": {
+            "type": "string",
+            "description": "planning (prior information, sources sought), tender (call for tender, solicitation), award (contract award), contract (contract signed or modified), cancellation, other",
+            "enum": [
+              "planning",
+              "tender",
+              "award",
+              "contract",
+              "cancellation",
+              "other"
+            ]
+          },
+          "procedure_type": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Procurement procedure as the source states it (open, restricted, negotiated with call, Combined Synopsis/Solicitation, Request for Bid...)"
+          },
+          "status": {
+            "type": "string",
+            "description": "open (deadline in the future at run time), closed (deadline passed), awarded (award or contract notice), cancelled, unknown (no deadline published)",
+            "enum": [
+              "open",
+              "closed",
+              "awarded",
+              "cancelled",
+              "unknown"
+            ]
+          },
+          "cpv_codes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "EU Common Procurement Vocabulary codes (8 digits) of the notice; empty when the source uses none"
+          },
+          "naics_codes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "US NAICS codes (SAM.gov notices); empty elsewhere"
+          },
+          "unspsc_codes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "UNSPSC product codes where the source publishes them (several Latin American platforms); empty elsewhere"
+          },
+          "value_amount": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "Value in value_currency: the awarded value for award/contract notices, else the estimated value; null when not published"
+          },
+          "value_currency": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "ISO 4217 currency of value_amount (EUR, USD, GBP...)"
+          },
+          "published_at": {
+            "type": "string",
+            "description": "When the notice was published (ISO 8601, UTC; date-only sources at 00:00Z). For national-platform records: the date of the stage shown (award date for awards, tender publication otherwise)",
+            "format": "date-time"
+          },
+          "deadline_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Deadline for tenders / requests to participate (ISO 8601, UTC; TED publishes the date only, counted until 23:59:59Z); null for awards and when not published",
+            "format": "date-time"
+          },
+          "award_date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Date of the award decision for award and contract notices (ISO 8601, UTC)",
+            "format": "date-time"
+          },
+          "supplier_names": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Awarded suppliers, organisations only: v1 lists a supplier only when it carries a company or charity register number (UK Companies House, charity registers). Empty for other sources, so no sole trader or natural person is ever listed"
+          },
+          "lots_count": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Number of lots, when published"
+          },
+          "language": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "2-letter language code of the notice text"
+          },
+          "notice_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Public web page of the notice on the source platform; null when the platform's open data has no page link",
+            "format": "uri"
+          },
+          "source_url": {
+            "type": "string",
+            "description": "The API, extract or open-data file the notice was read from",
+            "format": "uri"
+          },
+          "fetched_at": {
+            "type": "string",
+            "description": "When the nightly index first read this notice (ISO 8601, UTC); the key of sinceLastRun",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}
