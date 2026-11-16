@@ -91,7 +91,7 @@ Need fewer columns? List them in `fields` (e.g. `["job_id", "title", "company_na
 
 | Field | Type | Notes |
 |---|---|---|
-| `ats` | string[] | Any of `greenhouse`, `lever`, `ashby`, `workable`, `recruitee`, `workday`, `personio`, `teamtailor`. Empty = all |
+| `ats` | string[] | Any of `greenhouse`, `lever`, `ashby`, `workable`, `recruitee`, `workday`, `personio`, `teamtailor`, `jazzhr`, `pinpoint`. Empty = all |
 | `countries` | string[] | ISO country codes (`US`, `DE`, `GB`). Jobs whose location names no country (just "Remote") are excluded when set |
 | `remote` | `any` \| `remote_only` \| `onsite_only` | `onsite_only` excludes jobs marked remote |
 | `seniority` | string[] | `intern`, `entry`, `mid`, `senior`, `lead`, `manager`, `director`, `executive`, read from the job title. Jobs without a level word are excluded when set |
@@ -150,14 +150,14 @@ Locally the whole index (859,594 jobs) streams in about 10 seconds; on Apify mos
 Full descriptions are not part of the index (it would be many gigabytes); they are fetched live from each ATS by the [Jobs Feed API](https://apify.com/factpipe/ats-jobs-feed) for the jobs it delivers. Every row here has the first ~300 characters as `description_snippet`.
 
 **Which companies are covered?**
-About 20,000 company job boards with open jobs: Workday (about 5,000 career sites of large employers), Greenhouse, Workable, Ashby, Lever, Personio, Teamtailor and Recruitee. Workday sites contribute their newest 500 jobs each and Teamtailor sites their newest 1,000. Boards were discovered from Common Crawl's public URL index and validated against their ATS. LinkedIn, Indeed and other job sites are not scraped.
+About 20,000 company job boards with open jobs: Workday (about 5,000 career sites of large employers), Greenhouse, Workable, Ashby, Lever, Personio, Teamtailor and Recruitee, with JazzHR and Pinpoint career sites joining from November 2026. Workday sites contribute their newest 500 jobs each and Teamtailor sites their newest 1,000. Boards were discovered from Common Crawl's public URL index and validated against their ATS. LinkedIn, Indeed and other job sites are not scraped.
 
 **Can I call it from Python, JavaScript, Make, Zapier or an AI agent?**
 Yes. Run it through the Apify API or the official Python/JavaScript clients, schedule it in Apify, and connect the dataset to Make, Zapier, n8n, Google Sheets or your warehouse through Apify integrations.
 
 ## Sources and terms
 
-Only the public job-board APIs and feeds that the ATS vendors publish for displaying open jobs (Greenhouse Job Board API, Lever Postings API, Ashby Public Job Posting API, Workable and Recruitee public endpoints, Personio XML feed, Teamtailor RSS feed, Workday public career sites with robots.txt checked first). No logins, no personal profiles. The nightly build does all reading; this Actor only downloads the published index.
+Only the public job-board APIs and feeds that the ATS vendors publish for displaying open jobs (Greenhouse Job Board API, Lever Postings API, Ashby Public Job Posting API, Workable and Recruitee public endpoints, Personio XML feed, Teamtailor RSS feed, Pinpoint postings feed, Workday public career sites and JazzHR career pages with their job pages' schema.org data, robots.txt checked first). No logins, no personal profiles. The nightly build does all reading; this Actor only downloads the published index.
 
 ## Reliability
 

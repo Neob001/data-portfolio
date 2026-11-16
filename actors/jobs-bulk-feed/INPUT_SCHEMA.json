@@ -10,8 +10,8 @@
       "editor": "select",
       "items": {
         "type": "string",
-        "enum": ["greenhouse", "lever", "ashby", "workable", "recruitee", "workday", "personio", "teamtailor"],
-        "enumTitles": ["Greenhouse", "Lever", "Ashby", "Workable", "Recruitee", "Workday", "Personio", "Teamtailor"]
+        "enum": ["greenhouse", "lever", "ashby", "workable", "recruitee", "workday", "personio", "teamtailor", "jazzhr", "pinpoint"],
+        "enumTitles": ["Greenhouse", "Lever", "Ashby", "Workable", "Recruitee", "Workday", "Personio", "Teamtailor", "JazzHR", "Pinpoint"]
       }
     },
     "countries": {

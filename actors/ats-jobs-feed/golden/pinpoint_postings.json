@@ -1,0 +1,154 @@
+{
+ "_comment": "Trimmed real Pinpoint responses captured 2026-11-16: robots.txt of nypl.pinpointhq.com (text/plain; 2 of its per-posting Disallow lines kept), 3 postings of /postings.json (texts cut to 300 chars, reporting_to replaced by a placeholder name: it is never copied), the JSON-LD of the first posting's page.",
+ "token": "nypl",
+ "robots_txt": "User-Agent: *\nDisallow: /mydata\nDisallow: /admin\nDisallow: /companies\nDisallow: /postings/84dda664-8f70-4e4e-be51-0aa3a51fe02d\nDisallow: /postings/d82c3467-9bb0-4e16-bd0d-5fd3c22f9d52\n\nSitemap: https://nypl.pinpointhq.com/sitemap\n",
+ "json": {
+  "data": [
+   {
+    "id": "539795",
+    "benefits": "<div><!--block--><strong>Core Values<br></strong><em>All team members are expected and encouraged to embody the NYPL Core Values:</em></div><ul><li><!--block-->Be <strong>Helpful</strong> to patrons and colleagues</li><li><!--block-->Be <strong>Resourceful</strong> in solving problems&nbsp;</li><li>",
+    "benefits_header": "More...",
+    "compensation": "$44,904 / year",
+    "compensation_minimum": 44904.0,
+    "compensation_maximum": 44904.0,
+    "compensation_currency": "USD",
+    "compensation_frequency": "year",
+    "compensation_visible": true,
+    "deadline_at": null,
+    "description": "<div><!--block--><strong>Overview:</strong><br>The New York Public Library (NYPL) has been an essential provider of free books, information, ideas, and education for all New Yorkers for more than 100 years. NYPL’s neighborhood libraries in the Bronx, Manhattan, and Staten Island—many of which date t</div>",
+    "employment_type": "full_time",
+    "employment_type_text": "Full Time",
+    "key_responsibilities": "<div><!--block--><strong>Required Education &amp; Certifications</strong></div><ul><li><!--block-->High School Diploma or GED and prior basic custodial/building superintendent work</li><li><!--block-->Valid driver’s license and clear driving record</li></ul><div><!--block--><strong>Required Experien</div>",
+    "key_responsibilities_header": "Required Education, Experience & Skills",
+    "reporting_to": "Jane Example",
+    "skills_knowledge_expertise": "",
+    "skills_knowledge_expertise_header": "",
+    "title": "Junior Library Custodian - East Manhattan Network",
+    "url": "https://nypl.pinpointhq.com/en/postings/7ea0cec2-63cc-4f0d-a3e1-f3104da45065",
+    "path": "/en/postings/7ea0cec2-63cc-4f0d-a3e1-f3104da45065",
+    "workplace_type": "onsite",
+    "workplace_type_text": "Onsite",
+    "job": {
+     "id": "544156",
+     "requisition_id": "00007712",
+     "department": {
+      "id": "6491",
+      "name": "Facilities"
+     },
+     "division": null,
+     "structure_custom_group_one": {
+      "id": "76",
+      "name": "Manhattan",
+      "title": "Borough"
+     }
+    },
+    "location": {
+     "id": "4162",
+     "city": "",
+     "name": "Various Locations",
+     "postal_code": "",
+     "province": "",
+     "street_address": ""
+    }
+   },
+   {
+    "id": "617104",
+    "benefits": "<div><!--block--><strong>Core Values<br></strong><em>All team members are expected and encouraged to embody the NYPL Core Values:</em></div><ul><li><!--block-->Be <strong>Helpful</strong> to patrons and colleagues</li><li><!--block-->Be <strong>Resourceful</strong> in solving problems&nbsp;</li><li>",
+    "benefits_header": "More...",
+    "compensation": "$70,000 - $76,000 / year",
+    "compensation_minimum": 70000.0,
+    "compensation_maximum": 76000.0,
+    "compensation_currency": "USD",
+    "compensation_frequency": "year",
+    "compensation_visible": true,
+    "deadline_at": null,
+    "description": "<div><!--block--><strong>Overview</strong></div><div><!--block-->As part of the Young Adult Programs &amp; Services team, the Teen Technology and Design team (TTAD) supports digital media and creative technology education initiatives for teens across the New York Public Library’s (NYPL) 88 branch li</div>",
+    "employment_type": "full_time",
+    "employment_type_text": "Full Time",
+    "key_responsibilities": "<div><!--block--><strong>Required Education &amp; Certifications</strong></div><ul><li><!--block-->Master’s Degree in Education, Library Sciences, Digital Media, Computer Science, or a related field</li></ul><div><!--block--><strong>Required Experience</strong></div><ul><li><!--block-->3+ years of e",
+    "key_responsibilities_header": "Required Education, Experience & Skills",
+    "reporting_to": "Jane Example",
+    "skills_knowledge_expertise": "",
+    "skills_knowledge_expertise_header": "",
+    "title": "Associate Manager, Teen Technology and Design",
+    "url": "https://nypl.pinpointhq.com/en/postings/9b356571-ecbc-4542-a432-06734cab6932",
+    "path": "/en/postings/9b356571-ecbc-4542-a432-06734cab6932",
+    "workplace_type": "hybrid",
+    "workplace_type_text": "Hybrid",
+    "job": {
+     "id": "615246",
+     "requisition_id": "00009432",
+     "department": {
+      "id": "6487",
+      "name": "Branch Programs & Services"
+     },
+     "division": null,
+     "structure_custom_group_one": {
+      "id": "76",
+      "name": "Manhattan",
+      "title": "Borough"
+     }
+    },
+    "location": {
+     "id": "4023",
+     "city": "New York",
+     "name": "Stephen A. Schwarzman Building",
+     "postal_code": "10018",
+     "province": "New York",
+     "street_address": "Fifth Avenue and 42nd Street"
+    }
+   },
+   {
+    "id": "592900",
+    "benefits": "<div><!--block--><strong>Core Values<br></strong><em>All team members are expected and encouraged to embody the NYPL Core Values:</em></div><ul><li><!--block-->Be <strong>Helpful</strong> to patrons and colleagues</li><li><!--block-->Be <strong>Resourceful</strong> in solving problems&nbsp;</li><li>",
+    "benefits_header": "More...",
+    "compensation": "$85,000 - $95,000 / year",
+    "compensation_minimum": 85000.0,
+    "compensation_maximum": 95000.0,
+    "compensation_currency": "USD",
+    "compensation_frequency": "year",
+    "compensation_visible": true,
+    "deadline_at": "2026-11-29T23:59:59-05:00",
+    "description": "<div><!--block--><strong>Overview</strong><br>For more than 125 years, The New York Public Library (NYPL) has been an essential provider of books, information, ideas, and education. With collections numbering more than 56 million items and serving more than 16 million patrons in person each year and</div>",
+    "employment_type": "full_time",
+    "employment_type_text": "Full Time",
+    "key_responsibilities": "<div><!--block--><strong>Required Education &amp; Certifications</strong></div><ul><li><!--block-->ALA-accredited MLS / MLIS or advanced degree in a related field, such as Museum Studies or Art History, with relevant, substantial research library experience in special collections</li></ul><div><!--b</div>",
+    "key_responsibilities_header": "Required Education, Experience & Skills",
+    "reporting_to": "Jane Example",
+    "skills_knowledge_expertise": "",
+    "skills_knowledge_expertise_header": "Preferred Qualifications",
+    "title": "Manager, Visual Materials Cataloging",
+    "url": "https://nypl.pinpointhq.com/en/postings/a433c617-12eb-41a2-acd2-d3cf960387ee",
+    "path": "/en/postings/a433c617-12eb-41a2-acd2-d3cf960387ee",
+    "workplace_type": "onsite",
+    "workplace_type_text": "Onsite",
+    "job": {
+     "id": "592958",
+     "requisition_id": "0000XXXX",
+     "department": {
+      "id": "8133",
+      "name": "Collections"
+     },
+     "division": null,
+     "structure_custom_group_one": {
+      "id": "84",
+      "name": "Long Island City",
+      "title": "Borough"
+     }
+    },
+    "location": {
+     "id": "3991",
+     "city": "Long Island City",
+     "name": "Library Services Center",
+     "postal_code": "",
+     "province": "New York",
+     "street_address": null
+    }
+   }
+  ]
+ },
+ "job_pages": {
+  "https://nypl.pinpointhq.com/en/postings/7ea0cec2-63cc-4f0d-a3e1-f3104da45065": "<html><head><title>Junior Library Custodian - East Manhattan Network</title>\n<script type=\"application/ld+json\">{\"@context\": \"http://schema.org\", \"@type\": \"JobPosting\", \"baseSalary\": {\"@type\": \"MonetaryAmount\", \"currency\": \"USD\", \"value\": {\"@type\": \"QuantitativeValue\", \"unitText\": \"YEAR\", \"value\": 44904.0}}, \"datePosted\": \"2026-07-08T20:01:26+01:00\", \"description\": \"<h1>Junior Library Custodian - East Manhattan Network</h1><p><strong>Department: </strong>Facilities</p><p><strong>Employment Type: </strong>Full Time</p><p><strong>Location: </strong>Various Location\", \"employmentType\": \"FULL_TIME\", \"hiringOrganization\": {\"@type\": \"Organization\", \"name\": \"The New York Public Library\", \"url\": \"https://www.nypl.org/\", \"sameAs\": \"https://www.nypl.org/\"}, \"identifier\": {\"@type\": \"PropertyValue\", \"name\": \"Pinpoint Job Posting ID\", \"value\": \"7ea0cec2-63cc-4f0d-a3e1-f3104da45065\"}, \"jobLocation\": {\"@type\": \"Place\", \"name\": \"Various Locations\", \"address\": {\"@type\": \"PostalAddress\", \"streetAddress\": \"\", \"addressCountry\": \"US\", \"addressLocality\": \"\", \"addressRegion\": \"\", \"postalCode\": \"\"}}, \"title\": \"Junior Library Custodian - East Manhattan Network\", \"applicantLocationRequirements\": {\"@type\": \"Country\", \"name\": \"United States\"}}</script>\n</head><body></body></html>\n"
+ },
+ "page_title": "<title>Jobs at The New York Public Library | The New York Public Library Careers</title>"
+}

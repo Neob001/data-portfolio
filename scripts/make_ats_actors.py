@@ -436,7 +436,8 @@ FIXTURES = {
     "workday": ("workday.wd5/Workday", "workday_site.json"),
 }
 ATS_NAMES = {"greenhouse": "Greenhouse", "lever": "Lever", "ashby": "Ashby", "workable": "Workable", "recruitee": "Recruitee",
-             "workday": "Workday", "personio": "Personio", "teamtailor": "Teamtailor"}
+             "workday": "Workday", "personio": "Personio", "teamtailor": "Teamtailor", "jazzhr": "JazzHR",
+             "pinpoint": "Pinpoint"}
 # Career-site feed goldens of the model actor (no per-ATS Actor of their own): every generated Actor checks that rows of
 # these platforms also match its dataset schema (identical to the model's).
 FEED_GOLDENS = ["personio_feed.json", "teamtailor_jobs.json"]

@@ -75,6 +75,8 @@ export function postingIdFromUrl(ats, url) {
   if (ats === 'workable') return path.match(/\/j\/([A-Za-z0-9]+)/)?.[1]?.toUpperCase() || null;
   if (ats === 'personio') return path.match(/\/job\/(\d+)/)?.[1] || null;
   if (ats === 'teamtailor') return path.match(/\/jobs\/(\d+)/)?.[1] || null;
+  if (ats === 'jazzhr') return path.match(/^\/apply\/([A-Za-z0-9]{6,80})(?:\/|$)/)?.[1] || null;
+  if (ats === 'pinpoint') return path.match(/\/postings\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/i)?.[1]?.toLowerCase() || null;
   if (ats === 'workday') {
     const i = path.indexOf('/job/');
     return i < 0 ? null : workdayJobId(path.slice(i)) || null;

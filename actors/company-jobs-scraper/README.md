@@ -16,7 +16,7 @@
 
 <!-- factpipe:hero:end -->
 
-Give it **any company website or careers page**: it finds the careers page, detects the job platform behind it and pulls every live job posting from that platform's **public job-board API or feed**. Eight platforms are supported: **Greenhouse, Lever, Ashby, Workable, Recruitee, Workday, Personio and Teamtailor** (incl. Teamtailor career sites on the company's own domain). No browser, no anti-bot fights: the same JSON and XML feeds the career pages themselves use. Direct board URLs (e.g. `boards.greenhouse.io/gitlab`) work too.
+Give it **any company website or careers page**: it finds the careers page, detects the job platform behind it and pulls every live job posting from that platform's **public job-board API or feed**. Ten platforms are supported: **Greenhouse, Lever, Ashby, Workable, Recruitee, Workday, Personio, Teamtailor, JazzHR and Pinpoint** (incl. Teamtailor career sites on the company's own domain). No browser, no anti-bot fights: the same JSON and XML feeds the career pages themselves use. Direct board URLs (e.g. `boards.greenhouse.io/gitlab`) work too.
 
 ## Quick start
 
@@ -102,8 +102,10 @@ A company without jobs gets **one free row** (`found: false`) that says why, for
 | Workday | `<tenant>.wd<N>.myworkdayjobs.com/<site>`, `wd<N>.myworkdaysite.com/recruiting/<tenant>/<site>` | the career site's own job list (robots.txt checked first) |
 | Personio | `<company>.jobs.personio.de` / `.com` links and iframes | Personio XML feed (robots.txt checked first) |
 | Teamtailor | `<company>.teamtailor.com` links, or a page that **is** a Teamtailor career site on the company's own domain (e.g. `career.qliro.com`) | Teamtailor RSS feed (robots.txt checked first) |
+| JazzHR | `<company>.applytojob.com` links | the career page's job list + each job page's schema.org JobPosting data (robots.txt checked first) |
+| Pinpoint | `<company>.pinpointhq.com` links | Pinpoint postings feed (robots.txt checked first) |
 
-Detected but not read (the company gets a free row with `reason: "unsupported_platform"` and the platform in `detected_platform`): SmartRecruiters, iCIMS, SAP SuccessFactors, Taleo, Oracle Recruiting Cloud, BambooHR, Jobvite, Eightfold, Phenom, Avature, Breezy, Pinpoint, JazzHR, Rippling, Dover, Gem, JOIN, softgarden, UKG, ADP, Dayforce, Paylocity, Zoho Recruit, Freshteam, Homerun, Jobylon, Comeet, Factorial.
+Detected but not read (the company gets a free row with `reason: "unsupported_platform"` and the platform in `detected_platform`): SmartRecruiters, iCIMS, SAP SuccessFactors, Taleo, Oracle Recruiting Cloud, BambooHR, Jobvite, Eightfold, Phenom, Avature, Breezy, Rippling, Dover, Gem, JOIN, softgarden, UKG, ADP, Dayforce, Paylocity, Zoho Recruit, Freshteam, Homerun, Jobylon, Comeet, Factorial.
 
 ## How detection works
 
@@ -151,7 +153,7 @@ Same idea, same inputs: a list of company URLs in, flat job records out. Field m
 
 | Field | Type | Notes |
 |---|---|---|
-| `companyUrls` | string[], required | Company homepages, careers pages or direct job-board URLs (any of the 8 platforms; `teamtailor:<host>` for a Teamtailor custom domain) |
+| `companyUrls` | string[], required | Company homepages, careers pages or direct job-board URLs (any of the 10 platforms; `teamtailor:<host>` for a Teamtailor custom domain) |
 | `maxJobsPerCompany` | integer | Cap on charged job rows per company, newest first (default 200) |
 
 ## Pricing (pay per event)
@@ -180,7 +182,7 @@ This Actor fetches jobs live from the career pages you give it. For search acros
 ## FAQ
 
 **Which job platforms are supported?**
-Greenhouse, Lever, Ashby, Workable, Recruitee, Workday, Personio and Teamtailor, via their public job-board APIs and feeds. Give a company homepage or careers page and the Actor detects the platform, or pass a board URL directly.
+Greenhouse, Lever, Ashby, Workable, Recruitee, Workday, Personio, Teamtailor, JazzHR and Pinpoint, via their public job-board APIs, feeds and career pages. Give a company homepage or careers page and the Actor detects the platform, or pass a board URL directly.
 
 **What if my company's careers page is not supported?**
 You get one free row for that company with `found: false` and a `reason`: `unsupported_platform` when the careers page uses a platform we detect but don't read yet (named in `detected_platform`, e.g. SmartRecruiters, iCIMS, SuccessFactors, Phenom), `no_supported_ats_detected` for an in-house careers system or a page that only loads its jobs with JavaScript, or `robots_disallowed` when the site's robots.txt does not allow automated reading. Nothing is charged and the other companies of the run are processed normally. If you know the company's board URL (for example from an "Apply" link), paste that URL instead.
@@ -189,7 +191,7 @@ You get one free row for that company with `found: false` and a `reason`: `unsup
 Yes. Put a list of company URLs in `companyUrls` and schedule the Actor; each run returns every live posting with title, department, location, seniority, salary where published and apply URL.
 
 **Why did the Actor not read a website?**
-It only reads sites whose robots.txt allows it (a missing robots.txt means no restrictions, as in RFC 9309) and makes at most 8 page requests per company, one per second per host. Job boards on Workday, Personio and Teamtailor are only read when their own robots.txt allows it.
+It only reads sites whose robots.txt allows it (a missing robots.txt means no restrictions, as in RFC 9309) and makes at most 8 page requests per company, one per second per host. Job boards on Workday, Personio, Teamtailor, JazzHR and Pinpoint are only read when their own robots.txt allows it.
 
 **Can I call it from Python, JavaScript, Make, Zapier or an AI agent?**
 Yes. Run it through the Apify API or official Python/JavaScript clients, connect it to Make, Zapier, n8n, Slack or Google Sheets via Apify integrations, or expose it to AI agents through the Apify MCP server. Input is small and output is deterministic flat JSON.

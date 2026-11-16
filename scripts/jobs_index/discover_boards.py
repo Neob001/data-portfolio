@@ -60,6 +60,9 @@ HOSTS = [
     # Teamtailor career sites <company>.teamtailor.com (also <company>.<region>.teamtailor.com) publish /jobs.rss.
     # Token: the host label(s) before .teamtailor.com ("acme", "acme.na").
     ('teamtailor', '*.teamtailor.com', 'com,teamtailor,', 'host', None),
+    # Pinpoint career sites <company>.pinpointhq.com publish /postings.json. Token: the subdomain. (JazzHR companies
+    # come from JazzHR's own public sitemaps instead: discover_jazzhr.py.)
+    ('pinpoint', '*.pinpointhq.com', 'com,pinpointhq,', 'host', None),
 ]
 
 RESERVED = {
@@ -77,6 +80,9 @@ RESERVED = {
                    'partner', 'partners', 'marketplace', 'jobs', 'mail', 'email', 'go', 'demo', 'staging', 'test', 'sandbox',
                    'developer', 'developers', 'academy', 'community', 'images', 'media', 'files', 'tt', 'na', 'eu', 'us',
                    'auth', 'login', 'sso', 'hub', 'feedback', 'events', 'webinars', 'info', 'click', 'links', 'track'},
+    # "pinpoint" is the vendor's own careers tenant (robots.txt: Disallow: /); validate_boards.py would drop it anyway.
+    'pinpoint': {'www', 'app', 'api', 'cdn', 'assets', 'static', 'support', 'help', 'status', 'docs', 'blog', 'developers',
+                 'developer', 'mail', 'demo', 'staging', 'test', 'sandbox', 'login', 'auth', 'sso', 'pinpoint'},
     'workday': {'wday', 'robots.txt', 'favicon.ico', 'refreshfacet', 'sitemap.xml', 'assets', 'static', 'api',
                 'talentcommunity', 'recruiting', 'job', 'jobs.xml', 'login', 'apply', 'cxs'},
 }
@@ -113,6 +119,7 @@ HOST_RX = {
     'personio': re.compile(r'^([a-z0-9][a-z0-9-]{0,62})\.jobs\.personio\.(?:de|com)$'),
     # "acme.teamtailor.com" -> "acme"; regional "acme.na.teamtailor.com" -> "acme.na"
     'teamtailor': re.compile(r'^([a-z0-9][a-z0-9-]{0,62}(?:\.[a-z]{2})?)\.teamtailor\.com$'),
+    'pinpoint': re.compile(r'^([a-z0-9][a-z0-9-]{0,62})\.pinpointhq\.com$'),
 }
 
 

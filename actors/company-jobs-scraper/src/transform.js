@@ -68,7 +68,7 @@ export function jobRow(coreRow, { query, careersPageUrl }) {
 export function parseCompanyInput(raw) {
   const s = String(raw ?? '').trim();
   if (!s) return { error: 'empty' };
-  const explicit = /^(?:greenhouse|lever|ashby|workable|recruitee|personio|teamtailor|workday):/i.test(s) ? parseBoardRef(s) : null;
+  const explicit = /^(?:greenhouse|lever|ashby|workable|recruitee|personio|teamtailor|jazzhr|pinpoint|workday):/i.test(s) ? parseBoardRef(s) : null;
   if (explicit) return { board: explicit };
   if (/\s/.test(s)) return { error: 'contains spaces' };
   let u;
@@ -115,8 +115,6 @@ export const UNSUPPORTED_PLATFORMS = [
   ['phenom', /(^|\.)phenompeople\.com$/],
   ['avature', /(^|\.)avature\.net$/],
   ['breezy', /(^|\.)breezy\.hr$/],
-  ['pinpoint', /(^|\.)pinpointhq\.com$/],
-  ['jazzhr', /(^|\.)applytojob\.com$/],
   ['rippling', /^ats\.rippling\.com$/],
   ['dover', /^app\.dover\.com$/, /^\/(?:jobs|apply)\//],
   ['gem', /^jobs\.gem\.com$/],
@@ -162,7 +160,7 @@ export function boardFromUrl(url) {
   let host;
   try { host = new URL(/^https?:\/\//i.test(s) ? s : `https://${s}`).hostname.toLowerCase(); } catch { return null; }
   // Only the platforms' own board hosts (parseBoardRef also accepts "ats:token" strings, never wanted here).
-  if (!/(^|\.)(greenhouse\.io|lever\.co|ashbyhq\.com|workable\.com|recruitee\.com|myworkdayjobs\.com|myworkdaysite\.com|jobs\.personio\.(de|com)|teamtailor\.com)$/.test(host)) return null;
+  if (!/(^|\.)(greenhouse\.io|lever\.co|ashbyhq\.com|workable\.com|recruitee\.com|myworkdayjobs\.com|myworkdaysite\.com|jobs\.personio\.(de|com)|teamtailor\.com|applytojob\.com|pinpointhq\.com)$/.test(host)) return null;
   if (/(^|\.)greenhouse\.io$/.test(host) && !/^(boards|job-boards|boards-api)\./.test(host)) return null; // www/app/api docs
   const b = parseBoardRef(s.replace(/^\/\//, 'https://'));
   if (!b || BAD_TOKEN.test(b.token)) return null;

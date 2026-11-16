@@ -1,13 +1,13 @@
 // Pure logic: ATS board detection, API URLs, per-ATS job normalization and cross-ATS dedupe.
 // Shared by the Actor (live mode) and scripts/jobs_index/build_index.mjs (the jobs index).
-import { clean, cleanDescription, snippetOf, normKey, companyKey } from './text.js';
+import { clean, cleanDescription, snippetOf, normKey, companyKey, decodeEntities } from './text.js';
 import { countryCodes } from './geo.js';
 import { parseXml, child, childrenOf, textOf } from './xml.js';
 
-export const ATS_LIST = ['greenhouse', 'lever', 'ashby', 'workable', 'recruitee', 'workday', 'personio', 'teamtailor'];
-// Platforms whose boards are career-site feeds rather than documented JSON APIs: robots.txt of the board's
-// host is read (Accept: text/plain) and must allow the paths we read BEFORE any other request to that host.
-export const ROBOTS_CHECKED_ATS = ['workday', 'personio', 'teamtailor'];
+export const ATS_LIST = ['greenhouse', 'lever', 'ashby', 'workable', 'recruitee', 'workday', 'personio', 'teamtailor', 'jazzhr', 'pinpoint'];
+// Platforms whose boards are career sites rather than documented JSON APIs: robots.txt of the board's host is
+// read (Accept: text/plain) and must allow the paths we read BEFORE any other request to that host.
+export const ROBOTS_CHECKED_ATS = ['workday', 'personio', 'teamtailor', 'jazzhr', 'pinpoint'];
 export const WORKPLACE_TYPES = ['remote', 'hybrid', 'onsite', 'unknown'];
 export const EMPLOYMENT_TYPES = ['full_time', 'part_time', 'contract', 'temporary', 'internship', 'other'];
 export const SALARY_PERIODS = ['year', 'month', 'week', 'day', 'hour'];
@@ -16,6 +16,10 @@ export const SALARY_PERIODS = ['year', 'month', 'week', 'day', 'hour'];
 // Teamtailor hosts that are not company career sites (first label).
 const TT_RESERVED = ['www', 'app', 'api', 'cdn', 'assets', 'scripts', 'static', 'support', 'help', 'status', 'docs', 'blog',
   'partner', 'partners', 'marketplace', 'jobs', 'mail', 'go', 'demo', 'staging', 'test', 'sandbox', 'developer', 'developers'];
+// JazzHR ({co}.applytojob.com) and Pinpoint ({co}.pinpointhq.com) hosts that are not company career sites.
+// "pinpoint" itself is the vendor's own careers tenant, whose robots.txt disallows everything.
+const HOSTED_RESERVED = ['www', 'app', 'api', 'cdn', 'assets', 'static', 'support', 'help', 'status', 'docs', 'blog',
+  'developers', 'developer', 'mail', 'demo', 'staging', 'test', 'sandbox', 'login', 'auth', 'sso'];
 const TOKEN = '([A-Za-z0-9][A-Za-z0-9_.%-]*)';
 export const BOARD_PATTERNS = [
   { ats: 'greenhouse', rx: new RegExp(`(?:boards|job-boards)\\.greenhouse\\.io/embed/job_board\\?for=${TOKEN}`, 'i') },
@@ -32,6 +36,8 @@ export const BOARD_PATTERNS = [
   { ats: 'recruitee', rx: /(?:https?:\/\/)?([a-z0-9][a-z0-9-]*)\.recruitee\.com(?:\/|$)/i, skip: ['www', 'app', 'api', 'blog', 'support'] },
   { ats: 'personio', rx: /^(?:https?:\/\/)?([a-z0-9][a-z0-9-]*)\.jobs\.personio\.(?:de|com)(?:[/?#]|$)/i, skip: ['www', 'api', 'app'] },
   { ats: 'teamtailor', rx: /^(?:https?:\/\/)?([a-z0-9][a-z0-9-]*(?:\.[a-z]{2})?)\.teamtailor\.com(?:[/?#]|$)/i, skip: TT_RESERVED },
+  { ats: 'jazzhr', rx: /^(?:https?:\/\/)?([a-z0-9][a-z0-9-]*)\.applytojob\.com(?:[/?#]|$)/i, skip: HOSTED_RESERVED },
+  { ats: 'pinpoint', rx: /^(?:https?:\/\/)?([a-z0-9][a-z0-9-]*)\.pinpointhq\.com(?:[/?#]|$)/i, skip: HOSTED_RESERVED },
 ];
 const RESERVED_FIRST_SEGMENT = new Set(['embed', 'v1', 'j', 'api', 'jobs', 'static', 'assets']);
 
@@ -42,7 +48,7 @@ const RESERVED_FIRST_SEGMENT = new Set(['embed', 'v1', 'j', 'api', 'jobs', 'stat
 export function parseBoardRef(ref) {
   const s = String(ref ?? '').trim();
   if (!s) return null;
-  const explicit = s.match(/^(greenhouse|lever|ashby|workable|recruitee|personio|teamtailor):(?:(eu):)?([^\s/?#]+)$/i);
+  const explicit = s.match(/^(greenhouse|lever|ashby|workable|recruitee|personio|teamtailor|jazzhr|pinpoint):(?:(eu):)?([^\s/?#]+)$/i);
   if (explicit) {
     const ats = explicit[1].toLowerCase();
     return withRegion({ ats, token: fixCase(ats, decodeURIComponent(explicit[3])) }, explicit[2] && ats === 'lever' ? 'eu' : null);
@@ -59,7 +65,7 @@ export function parseBoardRef(ref) {
   return null;
 }
 const withRegion = (b, region) => (region ? { ...b, region } : b);
-const fixCase = (ats, t) => (['greenhouse', 'recruitee', 'personio', 'teamtailor'].includes(ats) ? t.toLowerCase() : t);
+const fixCase = (ats, t) => (['greenhouse', 'recruitee', 'personio', 'teamtailor', 'jazzhr', 'pinpoint'].includes(ats) ? t.toLowerCase() : t);
 
 export function boardKey({ ats, token, region }) {
   return `${ats}${region ? `:${region}` : ''}:${String(token).toLowerCase()}`;
@@ -209,6 +215,8 @@ export function boardHost(board) {
   if (board.ats === 'workday') return workdayParts(board.token).host;
   if (board.ats === 'personio') return `${t}.jobs.personio.de`;
   if (board.ats === 'teamtailor') return !t.includes('.') || TT_REGIONAL.test(t) ? `${t}.teamtailor.com` : t;
+  if (board.ats === 'jazzhr') return `${t}.applytojob.com`;
+  if (board.ats === 'pinpoint') return `${t}.pinpointhq.com`;
   return null;
 }
 
@@ -223,10 +231,30 @@ export function robotsPathsFor(board) {
   if (board.ats === 'workday') return workdayRobotsPaths(board);
   if (board.ats === 'personio') return ['/xml', '/job/'];
   if (board.ats === 'teamtailor') return ['/jobs.rss', '/jobs.rss?offset=100', '/jobs/'];
+  // JazzHR: the career page (job list) and the job pages under it. Pinpoint: the postings feed and job pages
+  // (single postings a tenant disallows are dropped job by job, see jobPathsFor).
+  if (board.ats === 'jazzhr') return ['/apply', '/apply/'];
+  if (board.ats === 'pinpoint') return ['/postings.json', '/en/postings/', '/postings/'];
   return [];
 }
 
+/**
+ * Paths of one job's page that robots.txt must also allow (JazzHR, Pinpoint): a tenant can disallow single
+ * postings (Pinpoint lists "Disallow: /postings/<uuid>" for unlisted ones), and those jobs are never kept.
+ */
+export function jobPathsFor(board, job) {
+  let path;
+  try { path = new URL(job.job_url).pathname; } catch { return null; }
+  if (board.ats === 'pinpoint') {
+    const uuid = path.match(/\/postings\/([0-9a-f-]{8,})/i)?.[1];
+    return uuid ? [path, `/postings/${uuid}`] : [path];
+  }
+  return [path];
+}
+
 export function apiUrlFor({ ats, token, region }) {
+  if (ats === 'jazzhr') return `https://${boardHost({ ats, token })}/apply`;
+  if (ats === 'pinpoint') return `https://${boardHost({ ats, token })}/postings.json`;
   if (ats === 'personio') return `https://${boardHost({ ats, token })}/xml`;
   if (ats === 'teamtailor') return `https://${boardHost({ ats, token })}/jobs.rss`;
   if (ats === 'workday') {
@@ -243,6 +271,8 @@ export function apiUrlFor({ ats, token, region }) {
 }
 
 export function boardUrlFor({ ats, token, region }) {
+  if (ats === 'jazzhr') return `https://${boardHost({ ats, token })}/apply`;
+  if (ats === 'pinpoint') return `https://${boardHost({ ats, token })}/`;
   if (ats === 'personio') return `https://${boardHost({ ats, token })}/`;
   if (ats === 'teamtailor') return `https://${boardHost({ ats, token })}/jobs`;
   if (ats === 'greenhouse') return `https://job-boards.greenhouse.io/${token}`;
@@ -261,6 +291,8 @@ export function boardUrlFor({ ats, token, region }) {
 export function atsOfUrl(url) {
   const u = String(url);
   if (/\.myworkday(?:jobs|site)\.com\//.test(u)) return 'workday';
+  if (/\.applytojob\.com\/|\/\/app\.jazz\.co\//.test(u)) return 'jazzhr';
+  if (/\.pinpointhq\.com\//.test(u)) return 'pinpoint';
   if (/\.jobs\.personio\.(?:de|com)\//.test(u)) return 'personio';
   // Teamtailor custom domains are recognised by the feed path.
   if (/\.teamtailor\.com\/|\/jobs\.rss(?:[?#]|$)/.test(u)) return 'teamtailor';
@@ -642,6 +674,213 @@ function teamtailor(board, item, companyName) {
   });
 }
 
+// ------------------------------------------------------------------ JazzHR / Pinpoint career sites
+// JazzHR: every company has a public career page https://<co>.applytojob.com/apply that lists all open jobs
+// (title, location, sometimes department) in one HTML page, and one page per job (/apply/<id>/<slug>) that
+// carries a schema.org JobPosting (JSON-LD) for search engines: description, datePosted, employmentType,
+// baseSalary, address. The list gives the index its jobs; the JSON-LD fills in the rest (parseJobPostingLd).
+// Token: the subdomain.
+// Pinpoint: every company has https://<co>.pinpointhq.com/postings.json (all open postings with description,
+// department, employment type, workplace type and published compensation). No posting date there: the job
+// page's JSON-LD datePosted fills it in. Token: the subdomain.
+
+/** HTML entities + whitespace -> plain text of a short field. */
+const plainField = (s) => clean(decodeEntities(String(s ?? '').replace(/<[^>]*>/g, ' ')));
+
+/** JazzHR career page <title> "<Company> - Career Page" -> company name, else null. */
+export function jazzhrNameFromPage(html) {
+  const m = String(html || '').match(/<title[^>]*>([^<]{1,250})<\/title>/i);
+  const t = m ? plainField(m[1]) : null;
+  const name = t?.match(/^(.{1,200}?)\s+-\s+Career Page$/i)?.[1];
+  return name && !/^(jazzhr|career page)$/i.test(name) ? clean(name) : null;
+}
+
+// Icons JazzHR puts before each list detail (Font Awesome classes).
+const JAZZ_ICON = { 'map-marker': 'location', sitemap: 'department', building: 'department', briefcase: 'department', 'clock-o': 'employment', clock: 'employment' };
+
+/** JazzHR career page HTML -> list entries [{ id, url, title, location, department, employment }]. */
+export function jazzhrListEntries(board, html) {
+  const host = boardHost(board);
+  const out = [];
+  const seen = new Set();
+  // One chunk per list item: its heading link, then the detail <li>s up to the next item.
+  const chunks = String(html).split(/<li[^>]*class=["']list-group-item["'][^>]*>/i).slice(1);
+  for (const chunk of chunks) {
+    const m = chunk.match(/<h3[^>]*list-group-item-heading[^>]*>\s*<a\s+[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>\s*<\/h3>([\s\S]*)/i);
+    if (!m) continue;
+    let url;
+    try { url = new URL(decodeEntities(m[1]), `https://${host}/`); } catch { continue; }
+    const id = url.pathname.match(/^\/apply\/([A-Za-z0-9]{6,80})(?:\/|$)/)?.[1];
+    if (!id || url.hostname.toLowerCase() !== host || seen.has(id)) continue;
+    seen.add(id);
+    const entry = { id, url: `https://${host}${url.pathname}`, title: plainField(m[2]), location: null, department: null, employment: null };
+    for (const li of m[3].matchAll(/<li[^>]*>\s*<i class=['"]fa fa-([a-z-]+)['"][^>]*><\/i>([\s\S]*?)<\/li>/gi)) {
+      const field = JAZZ_ICON[li[1].toLowerCase()];
+      if (field && !entry[field]) entry[field] = plainField(li[2]);
+    }
+    out.push(entry);
+  }
+  return out;
+}
+
+function jazzhr(board, e, companyName) {
+  if (!e?.id || !e.title) return null;
+  return finish(board, {
+    id: e.id,
+    title: e.title,
+    company_name: companyName,
+    department: e.department || null,
+    team: null,
+    employment_type: e.employment || null,
+    locations: [e.location],
+    posted_at: null,
+    updated_at: null,
+    job_url: e.url,
+    apply_url: e.url,
+    description_text: null,
+  });
+}
+
+// Pinpoint workplace_type: onsite | hybrid | remote.
+const PINPOINT_WORKPLACE = { onsite: 'onsite', hybrid: 'hybrid', remote: 'remote' };
+
+function pinpoint(board, p, companyName) {
+  if (!p || !p.title || !p.url) return null;
+  // The posting's public id is the UUID in its URL (also the JSON-LD "Pinpoint Job Posting ID"); the numeric id is internal.
+  const id = String(p.url).match(/\/postings\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/i)?.[1]?.toLowerCase() ?? (p.id != null ? String(p.id) : null);
+  if (!id) return null;
+  const loc = p.location || {};
+  const place = [loc.city, loc.province].map(clean).filter(Boolean).join(', ') || clean(loc.name);
+  // Description sections as the career page shows them. reporting_to (a person's name) is never copied.
+  const sections = [
+    [null, p.description],
+    [p.key_responsibilities_header, p.key_responsibilities],
+    [p.skills_knowledge_expertise_header, p.skills_knowledge_expertise],
+    [p.benefits_header, p.benefits],
+  ].filter(([, body]) => clean(String(body ?? '').replace(/<[^>]*>/g, ' ')));
+  const html = sections.map(([head, body]) => `${head ? `<p><strong>${escHtml(head)}</strong></p>` : ''}${body}`).join('\n');
+  const visible = p.compensation_visible !== false;
+  return finish(board, {
+    id,
+    title: p.title,
+    company_name: companyName,
+    department: p.job?.department?.name || null,
+    team: p.job?.division?.name || null,
+    employment_type: p.employment_type ? String(p.employment_type).replace(/_/g, ' ') : p.employment_type_text,
+    workplace_type: PINPOINT_WORKPLACE[String(p.workplace_type || '').toLowerCase()] || null,
+    locations: [place],
+    salary_min: visible ? p.compensation_minimum : null,
+    salary_max: visible ? p.compensation_maximum : null,
+    salary_currency: visible ? p.compensation_currency : null,
+    salary_period: visible ? p.compensation_frequency : null,
+    posted_at: null,
+    updated_at: null,
+    job_url: p.url,
+    apply_url: p.url,
+    description_text: html.trim() ? cleanDescription(html) : null,
+  });
+}
+
+// ------------------------------------------------------------------ schema.org JobPosting (job pages)
+const asArray = (v) => (Array.isArray(v) ? v : v === undefined || v === null ? [] : [v]);
+
+function ldBlocks(html) {
+  const out = [];
+  for (const m of String(html || '').matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
+    let d;
+    try { d = JSON.parse(m[1]); } catch {
+      try { d = JSON.parse(m[1].replace(/[\u0000-\u001f]+/g, ' ')); } catch { continue; } // raw newlines inside strings
+    }
+    for (const x of asArray(d)) out.push(...(x && Array.isArray(x['@graph']) ? x['@graph'] : [x]));
+  }
+  return out;
+}
+
+const ldText = (v) => (v && typeof v === 'object' ? clean(v.name ?? v['@value'] ?? null) : clean(v));
+
+/**
+ * Job page HTML -> fields of its schema.org JobPosting, or null when the page has none:
+ * { title, description_text, posted_at, valid_through, employment_type, salary_*, locations, country_hints,
+ *   workplace_type, company_name }. Contacts in the description are redacted (cleanDescription).
+ */
+export function parseJobPostingLd(html) {
+  const jp = ldBlocks(html).find((x) => x && asArray(x['@type']).includes('JobPosting'));
+  if (!jp) return null;
+  const places = asArray(jp.jobLocation);
+  const locations = [];
+  const hints = [];
+  for (const pl of places) {
+    const a = pl?.address || {};
+    const country = ldText(a.addressCountry);
+    const parts = [ldText(a.addressLocality), ldText(a.addressRegion)].filter(Boolean);
+    if (parts.length) locations.push(parts.join(', '));
+    else if (ldText(pl?.name)) locations.push(ldText(pl.name));
+    if (country) hints.push(country);
+  }
+  const remote = asArray(jp.jobLocationType).some((t) => /telecommute/i.test(String(t)));
+  const bs = jp.baseSalary || {};
+  const v = bs.value && typeof bs.value === 'object' ? bs.value : { value: bs.value };
+  const unit = clean(v.unitText || bs.unitText);
+  const lo = v.minValue ?? v.value ?? null;
+  const hi = v.maxValue ?? v.value ?? null;
+  return {
+    title: plainField(jp.title),
+    description_text: jp.description ? cleanDescription(String(jp.description)) : null,
+    posted_at: isoDateTime(jp.datePosted),
+    valid_through: isoDateTime(jp.validThrough),
+    employment_type: asArray(jp.employmentType).map((x) => String(x).replace(/_/g, ' '))[0] || null,
+    ...salary(lo, hi, bs.currency || v.currency, unit),
+    locations: uniq(locations),
+    country_hints: uniq(hints),
+    workplace_type: remote ? 'remote' : null,
+    company_name: ldText(jp.hiringOrganization) || null,
+  };
+}
+
+/**
+ * One job page of a JazzHR / Pinpoint board -> parseJobPostingLd() result. Some JazzHR companies publish no
+ * JobPosting data (measured 2026-11-16: 30 of 61 pages on 5 boards); their job page still shows the description in
+ * its #job-description block, which is then the only field taken. null when neither is there.
+ */
+export function parseJobPage(ats, html) {
+  const ld = parseJobPostingLd(html);
+  if (ld || ats !== 'jazzhr') return ld;
+  const s = String(html || '');
+  const i = s.search(/<div[^>]*\bid=["']job-description["'][^>]*>/i);
+  if (i < 0) return null;
+  const rest = s.slice(i).replace(/^<div[^>]*>/i, '');
+  const end = rest.search(/<div[^>]*(?:resumator-mobile-apply-wrapper|id=["']job-application-form-container["'])/i);
+  const text = cleanDescription(end < 0 ? rest.slice(0, 200000) : rest.slice(0, end));
+  return text ? { description_text: text } : null;
+}
+
+/**
+ * A job from a list (JazzHR career page, Pinpoint postings.json) + the JSON-LD of its page -> the job with
+ * what the list lacked: posted date, description, employment type, structured salary, countries, remote.
+ * Values the list already has are kept. `detail` may also be a cached, trimmed parseJobPostingLd() result.
+ */
+export function mergeJobDetail(job, detail) {
+  if (!detail) return job;
+  const out = { ...job };
+  out.posted_at = job.posted_at || isoDateTime(detail.posted_at);
+  if (!job.employment_type && detail.employment_type) out.employment_type = employmentType(detail.employment_type);
+  const noPay = (job.salary_min === null || job.salary_min === undefined) && (job.salary_max === null || job.salary_max === undefined);
+  if (noPay && (detail.salary_min != null || detail.salary_max != null)) {
+    Object.assign(out, salary(detail.salary_min, detail.salary_max, detail.salary_currency, detail.salary_period));
+  }
+  if (!job.description_text && detail.description_text) {
+    out.description_text = detail.description_text;
+    out.description_snippet = snippetOf(detail.description_text);
+  }
+  if (!out.locations?.length && detail.locations?.length) out.locations = detail.locations;
+  out.country_codes = [...new Set([...(job.country_codes || []), ...countryCodes(out.locations || [], detail.country_hints || [])])].sort();
+  if ((!job.workplace_type || job.workplace_type === 'unknown') && detail.workplace_type) {
+    out.workplace_type = detail.workplace_type;
+    out.remote = remoteFlag(detail.workplace_type);
+  }
+  return out;
+}
+
 /** Feed text (or an already parsed root) -> root element; a body that is not XML is a schema change. */
 function feedRoot(ats, token, response) {
   if (response && typeof response === 'object' && Array.isArray(response.children)) return response;
@@ -706,6 +945,33 @@ export function parseBoard(board, response, { fetchedAt = new Date() } = {}) {
       jobs.push(job);
     }
     return { company_name: companyName, jobs, items: list.length };
+  }
+  if (ats === 'jazzhr') {
+    // The career page: no list markup at all means it is not a JazzHR career page (a page with no openings
+    // still has the "Current Openings" / "no openings" frame).
+    const html = typeof response === 'string' ? response : null;
+    if (html === null || !/applytojob|jazzhr|resumator/i.test(html)) throw schemaError(ats, token);
+    companyName = jazzhrNameFromPage(html);
+    const jobs = [];
+    for (const e of jazzhrListEntries(board, html)) {
+      let job = null;
+      try { job = jazzhr(board, e, companyName); } catch { job = null; }
+      if (job && job.title && job.job_url) jobs.push(job);
+    }
+    return { company_name: companyName, jobs };
+  }
+  if (ats === 'pinpoint') {
+    let body = response;
+    if (typeof body === 'string') { try { body = JSON.parse(body); } catch { throw schemaError(ats, token); } }
+    if (!Array.isArray(body?.data)) throw schemaError(ats, token);
+    list = body.data;
+    const jobs = [];
+    for (const raw of list) {
+      let job = null;
+      try { job = pinpoint(board, raw, null); } catch { job = null; }
+      if (job && job.title && job.job_url) jobs.push(job);
+    }
+    return { company_name: null, jobs: mergeSameJobId(jobs) };
   }
   if (ats === 'greenhouse') {
     list = response?.jobs;

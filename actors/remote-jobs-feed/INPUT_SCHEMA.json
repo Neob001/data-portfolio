@@ -89,7 +89,9 @@
           "recruitee",
           "workday",
           "personio",
-          "teamtailor"
+          "teamtailor",
+          "jazzhr",
+          "pinpoint"
         ],
         "enumTitles": [
           "Greenhouse",
@@ -99,7 +101,9 @@
           "Recruitee",
           "Workday",
           "Personio",
-          "Teamtailor"
+          "Teamtailor",
+          "JazzHR",
+          "Pinpoint"
         ]
       }
     },

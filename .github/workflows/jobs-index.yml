@@ -49,15 +49,22 @@ jobs:
       # New Workday, Personio and Teamtailor career sites from the newest Common Crawl crawl (zipnum reads of
       # data.commoncrawl.org; each (crawl, host) unit is checkpointed in state/, so this is a ~1 min no-op until a
       # new crawl appears, and --max-blocks bounds a large one: the rest resumes the next night).
-      - name: Discover new career sites (Workday, Personio, Teamtailor)
+      - name: Discover new career sites (Workday, Personio, Teamtailor, Pinpoint)
         timeout-minutes: 20
         continue-on-error: true
-        run: python3 discover_boards.py --ats workday,personio,teamtailor --mode zipnum --crawls 1 --walk-back 0 --max-blocks 40
+        run: python3 discover_boards.py --ats workday,personio,teamtailor,pinpoint --mode zipnum --crawls 1 --walk-back 0 --max-blocks 40
+
+      # New JazzHR companies from JazzHR's public job sitemaps (app.jazz.co/feeds/google/xml/0..4, listed in every
+      # applytojob.com robots.txt; app.jazz.co robots.txt read first). 5 requests, ~20 MB; adds to jazzhr_candidates.json.
+      - name: Discover new JazzHR career pages (public sitemaps)
+        timeout-minutes: 15
+        continue-on-error: true
+        run: python3 discover_jazzhr.py
 
       # Re-checks boards not checked in the last ~6 days (the daily build itself drops boards that fail). An ATS with an active
       # ban in state/bans.json (e.g. Workable after a 429 with a long Retry-After) is skipped;
       # a new long Retry-After records a ban and stops calling that ATS for this run.
-      # Never-checked candidates (workday/personio/teamtailor_candidates.json + new discoveries) are capped at
+      # Never-checked candidates (workday/personio/teamtailor/jazzhr/pinpoint_candidates.json + new discoveries) are capped at
       # 1,500 per ATS per night (~25 min for Workday at 4 requests/s; Personio/Teamtailor ~1.2 s per board and pool, so ~30 min),
       # all in parallel with the other ATSs. robots.txt of each career-site host is read first (Accept: text/plain).
       - name: Refresh board validation
@@ -69,9 +76,13 @@ jobs:
       # 500 jobs per site, 90 s per site, no new site after 100 min, so the fetch phase ends about with
       # Workable (~100 min at 3 s per board). Personio and Teamtailor are two more parallel queues with their own
       # budgets and breakers (measured 2026-10-14 on every valid board: Personio 2,396 boards in 19 min, Teamtailor 1,956 in 16 min; budget 45 min each).
+      # JazzHR and Pinpoint are two more parallel queues (robots.txt per host, one request in flight per host, <= 4 resp.
+      # 2 requests/s), each inside its own budget (80 / 30 min, so they end well before Workday/Workable at ~100 min and add
+      # only dedupe/shard time, ~1-2 min). Their state (list results + job-page details) is cached in state/hosted/, so after
+      # the first nights only JazzHR boards whose jobs changed in the public sitemaps and job pages of new jobs are read.
       - name: Build slim index
         timeout-minutes: 140
-        run: node --max-old-space-size=6144 build_index.mjs --codec br --workday-max-jobs 500 --workday-site-budget-s 90 --workday-budget-min 100 --personio-budget-min 45 --teamtailor-budget-min 45 --teamtailor-max-jobs 1000
+        run: node --max-old-space-size=6144 build_index.mjs --codec br --workday-max-jobs 500 --workday-site-budget-s 90 --workday-budget-min 100 --personio-budget-min 45 --teamtailor-budget-min 45 --teamtailor-max-jobs 1000 --jazzhr-budget-min 80 --pinpoint-budget-min 30 --jazzhr-max-details 15 --pinpoint-max-details 10
 
       - name: Save validation state
         if: always()

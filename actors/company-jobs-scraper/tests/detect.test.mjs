@@ -33,6 +33,8 @@ test('every platform of the core is detected on a real careers page', () => {
     'teamtailor_sacyr_home.html': ['teamtailor:sacyr'],
     'teamtailor_home.html': ['teamtailor:career'],
     'teamtailor_qliro_careersite.html': ['teamtailor:career.qliro.com'], // Teamtailor career site on a custom domain
+    'jazzhr_brennancenter_careers.html': ['jazzhr:brennancenter'], // job links <co>.applytojob.com/apply/<id>/<slug>
+    'pinpoint_nypl_careers.html': ['pinpoint:nypl'], // the Pinpoint career site itself; www.pinpointhq.com is not a board
   };
   const seen = new Set();
   for (const [file, want] of Object.entries(cases)) {

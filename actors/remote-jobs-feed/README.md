@@ -91,7 +91,7 @@ One flat record per remote job opening:
 | `locations` | string[] | Extra location text as written in the posting ("Remote (EU)") or ISO codes, OR-ed with the regions |
 | `postedWithinDays` | integer | Default **7** |
 | `companies` | string[] | Company names or board tokens |
-| `ats` | string[] | `greenhouse`, `lever`, `ashby`, `workable`, `recruitee`, `workday`, `personio`, `teamtailor` |
+| `ats` | string[] | `greenhouse`, `lever`, `ashby`, `workable`, `recruitee`, `workday`, `personio`, `teamtailor`, `jazzhr`, `pinpoint` |
 | `departments` | string[] | Substring match on department or team |
 | `employmentTypes` | string[] | `full_time`, `part_time`, `contract`, `temporary`, `internship`, `other` |
 | `seniority` | string[] | `intern`, `entry`, `mid`, `senior`, `lead`, `manager`, `director`, `executive`, read from the job title. Jobs whose title has no level marker are excluded when this is set |
@@ -127,11 +127,13 @@ Search-index build of 2026-09-25: **85,567 remote jobs** from **6,047 companies*
 
 **Personio and Teamtailor** (added 2026-10-14): 2,397 Personio and 1,956 Teamtailor career sites with open jobs (22,853 and 39,070 listed jobs) are in the directory and join the search index with its nightly build. Until a platform's first build, a search limited to it reads a few built-in boards live; any Personio or Teamtailor board also works in live mode (`companyUrls`).
 
+**JazzHR and Pinpoint** (added 2026-11-16): about 7,450 JazzHR companies (108,000 live jobs in JazzHR's public job sitemaps) and Pinpoint career sites join the directory as they are validated and the search index with its nightly build. JazzHR career pages list title and location; the posting date, description and published pay come from each job's page. Until a platform's first build, a search limited to it reads a few built-in boards live; any JazzHR or Pinpoint board also works in live mode (`companyUrls`).
+
 Only 584 remote jobs say explicitly that they are open worldwide ("Anywhere", "Worldwide", "Global"). Most remote jobs are limited to a country or region, which is why `timezonesOrRegions` matters.
 
 ## Sources and terms
 
-Only official, public, unauthenticated job-board APIs and feeds that the ATS vendors publish for displaying and syndicating open jobs. No career-site HTML scraping, no logins, no LinkedIn or Indeed.
+Only official, public, unauthenticated job-board APIs and feeds that the ATS vendors publish for displaying and syndicating open jobs, plus public career pages where a platform has no feed (JazzHR: the job list and each job page's schema.org JobPosting data, the structured data published for search engines). No other career-site HTML is scraped, no logins, no LinkedIn or Indeed.
 
 | ATS | API | Reuse terms |
 |---|---|---|
@@ -143,6 +145,8 @@ Only official, public, unauthenticated job-board APIs and feeds that the ATS ven
 | Workday | Public career sites (`<company>.<wdN>.myworkdayjobs.com/<site>`) | Not a vendor-documented API: the job list and job pages each site loads for its visitors. Each host's robots.txt is checked first (career sites allow `/<site>/`); about 4 requests/s across all Workday hosts |
 | Personio | [XML job feed](https://developer.personio.de/docs/retrieving-open-job-positions) (`<company>.jobs.personio.de/xml`) | Published by Personio for job portals and company sites. Each host's robots.txt is read first and only a text/plain file allowing `/xml` and `/job/` counts; a company that disallows it is never read |
 | Teamtailor | Career-site RSS feed (`<company>.teamtailor.com/jobs.rss`) | The jobs feed each career site links for its visitors (`rel="alternate"`), no Teamtailor API or login. robots.txt checked per host first (career sites disallow only `/app/`, `/messages/` and similar) |
+| JazzHR | Career page (`<company>.applytojob.com/apply`) and the schema.org JobPosting data on each job page | The public career page each company publishes, and the structured data its job pages publish for search engines; companies come from JazzHR's public job sitemaps. robots.txt checked per host first (it disallows only `/cb`). [Employ's terms](https://www.employinc.com/jazzhr-terms-of-service/) are a customer agreement with no clause on reading published jobs |
+| Pinpoint | Postings feed (`<company>.pinpointhq.com/postings.json`) | The JSON each career site serves for its visitors, no login. robots.txt checked per company: a company that disallows it is never read, and single postings a company disallows are skipped |
 
 ## factpipe Jobs & Hiring Data
 

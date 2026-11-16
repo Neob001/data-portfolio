@@ -12,7 +12,8 @@ import { TopK, rankCmp, newestCmp } from './rank.js';
 import { createDeadline } from '../lib/deadline.js';
 import {
   parseBoard, apiUrlFor, boardUrlFor, boardKey, dedupeJobs, atsOfUrl, parseWorkdayDetail, workdayDetailUrl,
-  boardHost, robotsPathsFor, personioEnglishUrl, teamtailorPageUrl, ROBOTS_CHECKED_ATS,
+  boardHost, robotsPathsFor, personioEnglishUrl, teamtailorPageUrl, ROBOTS_CHECKED_ATS, jobPathsFor, parseJobPage,
+  mergeJobDetail,
 } from './transform.js';
 import { selectShards, shardsForCompanies, INDEX_FORMAT, defaultApplyUrl } from './index_format.js';
 import { clean, snippetOf, normKey } from './text.js';
@@ -60,6 +61,17 @@ export const EXTRA_FALLBACK_BOARDS = {
     { ats: 'teamtailor', token: 'luminorbank' },
     { ats: 'teamtailor', token: 'ingeteam' },
   ],
+  // Career pages / postings feeds (robots.txt per host first); boards with 15-300 open jobs (validated 2026-11-16).
+  jazzhr: [
+    { ats: 'jazzhr', token: 'brennancenter' },
+    { ats: 'jazzhr', token: 'healthforce' },
+    { ats: 'jazzhr', token: 'pitchup' },
+  ],
+  pinpoint: [
+    { ats: 'pinpoint', token: 'nypl' },
+    { ats: 'pinpoint', token: 'ymcaboston' },
+    { ats: 'pinpoint', token: 'bmt' },
+  ],
 };
 
 // Workday CXS limits. The jobs endpoint rejects limit > 20 (HTTP 400) and reports at most total=2000.
@@ -73,6 +85,10 @@ export const WORKDAY = {
 // Teamtailor /jobs.rss pages: 100 items each, next ones at ?offset=N. Live mode reads up to 2,000 jobs per site
 // (the index build sets its own cap); a page that adds no new job ends the paging (offset ignored).
 export const TEAMTAILOR = { pageSize: 100, maxJobsPerBoard: 2000, pageReserveMs: 20000 };
+// JazzHR / Pinpoint: the list (career page / postings.json) is one request; each job page (JSON-LD JobPosting:
+// posted date, and for JazzHR the description) is one more. Live mode reads up to `liveMaxDetails` job pages
+// per board, one at a time; the index build passes its own cap and a cache of pages read on earlier nights.
+export const HOSTED = { liveMaxDetails: 25, detailReserveMs: 20000, detailTimeoutMs: 30000 };
 
 // robots.txt product token we answer to (our User-Agent below starts with it).
 export const ROBOTS_AGENT = 'factpipe-jobs-feed';
@@ -352,7 +368,104 @@ async function fetchWorkdayBoard(board, { fetchJson, fetchText, now, skipName, m
 const FEED_ACCEPT = {
   personio: 'application/xml, text/xml;q=0.9, */*;q=0.1',
   teamtailor: 'application/rss+xml, application/xml;q=0.9, text/xml;q=0.8, */*;q=0.1',
+  jazzhr: 'text/html, */*;q=0.1',
+  pinpoint: 'application/json, */*;q=0.1',
 };
+
+/** Pinpoint career page -> company name from og:title "Careers at X" or <title> "Jobs at X | ...", else null. */
+export function pinpointNameFromPage(html) {
+  const h = String(html || '');
+  const og = h.match(/<meta[^>]*property="og:title"[^>]*content="([^"]{1,200})"/i)?.[1];
+  const title = h.match(/<title[^>]*>([^<]{1,250})<\/title>/i)?.[1];
+  for (const raw of [og, title]) {
+    const t = clean(String(raw || '').replace(/&amp;/g, '&').replace(/&#0?39;|&apos;/g, "'").replace(/&quot;/g, '"'));
+    const n = t?.match(/^(?:careers?|jobs?|work)\s+(?:at|with)\s+(.{2,120}?)(?:\s+[|\u2013-]\s+.*)?$/i)?.[1];
+    if (n && !/^pinpoint$/i.test(n)) return clean(n);
+  }
+  return null;
+}
+
+/** Trimmed job-page fields for a cache (index build): the description only when the list has none (JazzHR). */
+export function compactDetail(d, keepDescription, maxChars = 1500) {
+  if (!d) return null;
+  const { title, valid_through, company_name, description_text, ...rest } = d;
+  return { ...rest, description_text: keepDescription && description_text ? description_text.slice(0, maxChars) : null };
+}
+
+/**
+ * Job pages of listed JazzHR / Pinpoint jobs -> the jobs merged with their JSON-LD details. Jobs with a known detail
+ * (knownDetails: Map-like job_id -> detail, read on an earlier night) need no request; at most `maxDetails` pages are
+ * read, one after another, and only while `deadline` has time. robots.txt of the host must allow each page's path
+ * (checked against the cached file; a host that disallows the board reads no page). A page answering 404/410 means
+ * the job closed: it is dropped. -> { jobs, details: Map(job_id -> detail), no_data: [job_id], details_failed, closed, requests }
+ */
+export async function readJobPages(board, listed, { fetchText = defaultFetchText, robotsCache = ROBOTS_CACHE, robotsAgent = ROBOTS_AGENT,
+  maxDetails = HOSTED.liveMaxDetails, knownDetails = null, deadline = null } = {}) {
+  const details = new Map();
+  const noData = [];
+  let closed = 0;
+  let detailsFailed = 0;
+  let requests = 0;
+  const jobs = [];
+  const missing = listed.some((j) => !knownDetails?.get(j.job_id));
+  const verdict = missing && maxDetails > 0 ? await boardRobots(board, { fetchText, cache: robotsCache, agent: robotsAgent }) : { allowed: false };
+  const robotsFile = verdict.allowed ? await robotsCache.get(boardHost(board)) : null;
+  for (const job of listed) {
+    const known = knownDetails?.get(job.job_id);
+    if (known) { jobs.push(mergeJobDetail(job, known)); continue; }
+    const paths = robotsFile && jobPathsFor(board, job);
+    if (!paths || !robotsVerdict(robotsFile, robotsAgent, paths).allowed || details.size + detailsFailed >= maxDetails
+      || (deadline && !deadline.hasTimeFor(HOSTED.detailReserveMs))) { jobs.push(job); continue; }
+    try {
+      requests += 1;
+      const d = parseJobPage(board.ats, bodyOf(await fetchText(job.job_url, { accept: 'text/html', retries: 1, timeoutMs: HOSTED.detailTimeoutMs })));
+      if (d) details.set(job.job_id, d);
+      else { detailsFailed += 1; noData.push(job.job_id); }
+      jobs.push(mergeJobDetail(job, d));
+    } catch (e) {
+      if (e?.status === 404 || e?.status === 410) { closed += 1; continue; }
+      detailsFailed += 1;
+      jobs.push(job);
+    }
+  }
+  return { jobs, details, no_data: noData, details_failed: detailsFailed, closed, requests };
+}
+
+/**
+ * One JazzHR / Pinpoint board: robots.txt of its host first (never any other request when it does not allow the
+ * career page / postings feed and job pages), then the list in one request, then job pages for the JSON-LD details
+ * (posted date; JazzHR also description, employment type, salary). A job whose own page robots.txt disallows is
+ * dropped; a job page answering 404/410 means the job closed since the list was cached (dropped too).
+ * opts.knownDetails: Map(job_id -> detail) read earlier (no request); opts.maxDetails: job pages to read now.
+ */
+async function fetchHostedBoard(board, { fetchText, now, skipName, robotsCache = ROBOTS_CACHE, robotsAgent = ROBOTS_AGENT, feedTimeoutMs = 60000,
+  maxDetails = HOSTED.liveMaxDetails, knownDetails = null, deadline = null }) {
+  const verdict = await boardRobots(board, { fetchText, cache: robotsCache, agent: robotsAgent });
+  if (!verdict.allowed) throw robotsError(board, verdict.reason);
+  const url = apiUrlFor(board);
+  const parsed = parseBoard(board, bodyOf(await fetchText(url, { accept: FEED_ACCEPT[board.ats], retries: 2, timeoutMs: feedTimeoutMs })));
+  let requests = 1;
+  const robotsFile = await robotsCache.get(boardHost(board));
+  let robotsDropped = 0;
+  const listed = parsed.jobs.filter((j) => {
+    const paths = jobPathsFor(board, j);
+    const ok = paths && robotsVerdict(robotsFile, robotsAgent, paths).allowed;
+    if (!ok) robotsDropped += 1;
+    return ok;
+  });
+  let name = parsed.company_name;
+  if (!name && board.ats === 'pinpoint' && !skipName && listed.length) {
+    try { name = pinpointNameFromPage(bodyOf(await fetchText(boardUrlFor(board), { timeoutMs: 20000 }))); requests += 1; } catch { name = null; }
+  }
+  const pages = await readJobPages(board, listed, { fetchText, robotsCache, robotsAgent, maxDetails, knownDetails, deadline });
+  requests += pages.requests;
+  const { jobs, details, no_data: noData, details_failed: detailsFailed, closed } = pages;
+  const iso = now().toISOString();
+  const out = jobs.map((j) => ({ ...j, company_name: name || j.company_name, source_url: url, fetched_at: iso }));
+  return {
+    board, company_name: name, jobs: out, source_url: url, requests, details, no_data: noData, details_failed: detailsFailed, closed, robots_dropped: robotsDropped,
+  };
+}
 
 /**
  * One Personio / Teamtailor board: robots.txt of its host first (never any other request when it does not
@@ -408,6 +521,7 @@ async function fetchFeedBoard(board, { fetchText, now, skipName, robotsCache, ro
 export async function fetchBoard(board, { fetchJson = libFetchJson, fetchText = defaultFetchText, now = () => new Date(), skipName = false, ...wd } = {}) {
   if (board.ats === 'workday') return fetchWorkdayBoard(board, { fetchJson, fetchText, now, skipName, ...wd });
   if (board.ats === 'personio' || board.ats === 'teamtailor') return fetchFeedBoard(board, { fetchText, now, skipName, ...wd });
+  if (board.ats === 'jazzhr' || board.ats === 'pinpoint') return fetchHostedBoard(board, { fetchText, now, skipName, ...wd });
   const url = apiUrlFor(board);
   const response = await fetchJson(url, { headers: { 'User-Agent': UA }, retries: 2, timeoutMs: board.ats === 'lever' ? 90000 : 45000, minDelayMs: 1000 });
   const parsed = parseBoard(board, response);
@@ -425,7 +539,10 @@ export async function fetchBoard(board, { fetchJson = libFetchJson, fetchText = 
 // Workday: at most one request start per 250 ms across all Workday hosts in a run, and one request in
 // flight per site (its pages are read one after another): career-site JSON is not a documented API.
 // Personio / Teamtailor: one subdomain per company, all on one platform: 250 ms between request starts.
-export const HOST_GAP_MS = { greenhouse: 0, ashby: 0, recruitee: 0, lever: 1000, workable: 3000, workday: 250, personio: 250, teamtailor: 250 };
+// JazzHR / Pinpoint: one subdomain per company on one platform, career pages and job pages are HTML: 500 ms.
+export const HOST_GAP_MS = {
+  greenhouse: 0, ashby: 0, recruitee: 0, lever: 1000, workable: 3000, workday: 250, personio: 250, teamtailor: 250, jazzhr: 500, pinpoint: 500,
+};
 
 export function hostPacer(gaps = HOST_GAP_MS) {
   const next = {};
@@ -575,7 +692,7 @@ export async function runFeed(opts, deps) {
   function liveBoard(board) {
     const k = boardKey(board);
     if (!boardCache.has(k)) {
-      boardCache.set(k, fetchBoard(board, { fetchJson: paced, fetchText, robotsCache, skipName: true, now: () => new Date(nowMs) })
+      boardCache.set(k, fetchBoard(board, { fetchJson: paced, fetchText, robotsCache, skipName: true, maxDetails: 0, now: () => new Date(nowMs) })
         .then((r) => { summary.description_boards_fetched += 1; return new Map(r.jobs.map((j) => [j.job_id, j.description_text])); })
         .catch((e) => { summary.description_boards_failed += 1; log(`Description fetch for ${k} failed: ${e.message}`); return null; }));
     }
@@ -608,8 +725,37 @@ export async function runFeed(opts, deps) {
     return detailCache.get(job.job_id);
   }
   const needsWorkdayDetail = (job) => job.ats === 'workday' && opts.includeDescription;
+
+  // ---- JazzHR: the career page lists no descriptions; each delivered job without one gets its job page
+  // (schema.org JobPosting). -> parseJobPostingLd() result | 'closed' (HTTP 404/410) | null
+  const pageCache = new Map();
+  function liveJobPage(job) {
+    if (!pageCache.has(job.job_id)) {
+      pageCache.set(job.job_id, (async () => {
+        const board = job._board || { ats: job.ats, token: job.company_board };
+        const verdict = await boardRobots(board, { fetchText, cache: robotsCache });
+        const paths = jobPathsFor(board, job);
+        const jobOk = verdict.allowed && paths && robotsVerdict(await (robotsCache || ROBOTS_CACHE).get(boardHost(board)), ROBOTS_AGENT, paths).allowed;
+        if (!jobOk) { summary.description_jobs_failed += 1; log(`Job page for ${job.job_id} skipped: robots.txt`); return null; }
+        if (!deadline.hasTimeFor(20000)) { summary.description_jobs_failed += 1; return null; }
+        try {
+          const d = parseJobPage(job.ats, await rawFetchTextPaced(job.job_url));
+          if (d) summary.description_jobs_fetched += 1; else summary.description_jobs_failed += 1;
+          return d;
+        } catch (e) {
+          if (e.status === 404 || e.status === 410) return 'closed';
+          summary.description_jobs_failed += 1;
+          log(`Job page for ${job.job_id} failed: ${e.message}`);
+          return null;
+        }
+      })());
+    }
+    return pageCache.get(job.job_id);
+  }
+  const rawFetchTextPaced = async (url) => bodyOf(await fetchText(url, { accept: 'text/html', retries: 1, timeoutMs: HOSTED.detailTimeoutMs }));
+  const needsJobPage = (job) => job.ats === 'jazzhr' && opts.includeDescription && !job.description_text;
   // Index records need their board re-read for descriptions; live-mode records already carry them.
-  const needsBoard = (job) => opts.includeDescription && job._board && job.ats !== 'workday';
+  const needsBoard = (job) => opts.includeDescription && job._board && job.ats !== 'workday' && job.ats !== 'jazzhr';
 
   /**
    * Deliver matches in the given order, fetching descriptions only for jobs about to be delivered
@@ -632,6 +778,7 @@ export async function runFeed(opts, deps) {
       await Promise.all([
         mapLimit(boards, 8, (b) => liveBoard(b)),
         mapLimit(batch.filter(needsWorkdayDetail), WORKDAY.detailConcurrency, (j) => liveWorkdayJob(j)),
+        mapLimit(batch.filter(needsJobPage), WORKDAY.detailConcurrency, (j) => liveJobPage(j)),
       ]);
       for (const job of batch) {
         if (stopped) break;
@@ -653,7 +800,13 @@ export async function runFeed(opts, deps) {
             job.country_codes = [...new Set([...job.country_codes, ...d.country_codes])].sort();
           }
         }
-        const { kw, _board, ...out } = job;
+        let ready = job;
+        if (needsJobPage(job)) {
+          const d = await liveJobPage(job);
+          if (d === 'closed') { summary.skipped_closed += 1; continue; }
+          ready = mergeJobDetail(job, d);
+        }
+        const { kw, _board, ...out } = ready;
         await emit(out);
       }
     }
