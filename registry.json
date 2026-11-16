@@ -1580,7 +1580,7 @@
       "apify_actor_id": "Rfmoj3qtukvcC5ihh",
       "source": "factpipe jobs index (GitHub release jobs-index; public ATS job-board APIs) - index only, no live board reads",
       "variant": "bulk index export",
-      "status": "staging",
+      "status": "live",
       "approval": "APPROVED N1 2026-11-03 (owner, in chat): publish at $2.00/1k",
       "origin": "scan",
       "incumbent_actor_id": null,
@@ -1599,7 +1599,7 @@
         }
       },
       "pricing_rationale": "Leader's career-site feed: $2.50/1k + $0.10/run (281 users). Launch $2.00/1k, no run fee. Platform cost ~$0.005/1k (dataset writes). Owner APPROVE N1 2026-11-03.",
-      "launched_at": null,
+      "launched_at": "2026-11-16T04:54:20Z",
       "last_fix_date": null,
       "kpis": {
         "as_of": "2026-11-16",
@@ -1629,7 +1629,7 @@
       "apify_actor_id": "nT117PX5oSpwS4oxs",
       "source": "factpipe jobs index (GitHub release jobs-index; public ATS job-board APIs) - index only, no live board reads",
       "variant": "index lookup",
-      "status": "staging",
+      "status": "live",
       "approval": "APPROVED N2 2026-11-03 (owner, in chat): publish at $0.10/1k checked",
       "origin": "scan",
       "incumbent_actor_id": null,
@@ -1648,7 +1648,7 @@
         }
       },
       "pricing_rationale": "Leader's expired-jobs API: $0.75 per run (12 users). Per-job $0.10/1k keeps small checks near-free; unknown rows free. Owner APPROVE N2 2026-11-03.",
-      "launched_at": null,
+      "launched_at": "2026-11-16T04:54:20Z",
       "last_fix_date": null,
       "kpis": {
         "as_of": "2026-11-16",

@@ -1087,6 +1087,8 @@ All of these Actors search the same daily index of open jobs from 10,000+ compan
 - [Remote Jobs API](https://apify.com/factpipe/remote-jobs-feed): remote and work-from-home jobs only, filtered by region or time zone.
 - [Companies Hiring](https://apify.com/factpipe/companies-hiring): one row per company that is hiring for a role, as sales leads or market research.
 [[FAMILY_LINKS]]
+- [Bulk Job Postings Feed](https://apify.com/factpipe/jobs-bulk-feed): every new job every day as one bulk feed, no search needed.
+- [Expired Jobs Checker](https://apify.com/factpipe/expired-jobs-checker): is a job posting still open? Open/closed per job ID or URL.
 
 ## FAQ
 

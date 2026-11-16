@@ -174,6 +174,8 @@ This Actor fetches jobs live from the career pages you give it. For search acros
 - [Lever Jobs API](https://apify.com/factpipe/lever-jobs-api): every Lever job board, with salary where published.
 - [Ashby Jobs API](https://apify.com/factpipe/ashby-jobs-api): every Ashby job board: startup and AI jobs, with salary where published.
 - [Workday Jobs API](https://apify.com/factpipe/workday-jobs-api): thousands of Workday career sites of large employers (NVIDIA, Salesforce, Adobe…), with full descriptions.
+- [Bulk Job Postings Feed](https://apify.com/factpipe/jobs-bulk-feed): every new job every day as one bulk feed, no search needed.
+- [Expired Jobs Checker](https://apify.com/factpipe/expired-jobs-checker): is a job posting still open? Open/closed per job ID or URL.
 
 ## FAQ
 

@@ -144,6 +144,8 @@ All of these Actors search the same daily index of open jobs from 10,000+ compan
 - [Lever Jobs API](https://apify.com/factpipe/lever-jobs-api): every Lever job board, with salary where published.
 - [Ashby Jobs API](https://apify.com/factpipe/ashby-jobs-api) (this Actor): every Ashby job board: startup and AI jobs, with salary where published.
 - [Workday Jobs API](https://apify.com/factpipe/workday-jobs-api): every Workday career site in our directory (large employers), or any Workday site live.
+- [Bulk Job Postings Feed](https://apify.com/factpipe/jobs-bulk-feed): every new job every day as one bulk feed, no search needed.
+- [Expired Jobs Checker](https://apify.com/factpipe/expired-jobs-checker): is a job posting still open? Open/closed per job ID or URL.
 
 ## FAQ
 
