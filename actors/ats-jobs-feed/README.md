@@ -221,3 +221,5 @@ Yes. Run it through the Apify API or the official Python/JavaScript clients. You
 ## Reliability
 
 Official ATS APIs only. The Actor uses retries with backoff, per-host rate limits and structured failure reporting, and writes a `RUN_SUMMARY` record on every run. Its daily auto-test input has a built-in live fallback.
+
+**Found Jobs Feed useful?** A short review on the [Apify Store page](https://apify.com/factpipe/ats-jobs-feed) helps other teams find it.
