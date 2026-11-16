@@ -1,0 +1,120 @@
+[
+  {
+    "company_name": "Acme Analytics",
+    "company_board": "acmeanalytics",
+    "ats": "greenhouse",
+    "careers_url": "https://job-boards.greenhouse.io/acmeanalytics",
+    "boards": [
+      {
+        "ats": "greenhouse",
+        "token": "acmeanalytics",
+        "careers_url": "https://job-boards.greenhouse.io/acmeanalytics",
+        "open_jobs": 4,
+        "jobs_with_text": 4
+      },
+      {
+        "ats": "ashby",
+        "token": "acmeanalytics",
+        "careers_url": "https://jobs.ashbyhq.com/acmeanalytics",
+        "open_jobs": 1,
+        "jobs_with_text": 1
+      }
+    ],
+    "technologies_matched": [
+      {
+        "technology": "dbt",
+        "jobs": 2
+      },
+      {
+        "technology": "Snowflake",
+        "jobs": 2
+      }
+    ],
+    "top_technologies": [
+      {
+        "technology": "Amazon Web Services (AWS)",
+        "category": "Cloud platforms & services",
+        "jobs": 2
+      },
+      {
+        "technology": "dbt",
+        "category": "Data integration & orchestration",
+        "jobs": 2
+      },
+      {
+        "technology": "Python",
+        "category": "Programming languages",
+        "jobs": 2
+      },
+      {
+        "technology": "Snowflake",
+        "category": "Data warehouse & lakehouse",
+        "jobs": 2
+      },
+      {
+        "technology": "Apache Airflow",
+        "category": "Data integration & orchestration",
+        "jobs": 1
+      },
+      {
+        "technology": "Go (Golang)",
+        "category": "Programming languages",
+        "jobs": 1
+      },
+      {
+        "technology": "Gong",
+        "category": "CRM & sales tools",
+        "jobs": 1
+      },
+      {
+        "technology": "Kubernetes",
+        "category": "DevOps & infrastructure as code",
+        "jobs": 1
+      },
+      {
+        "technology": "Looker",
+        "category": "BI & analytics",
+        "jobs": 1
+      },
+      {
+        "technology": "Outreach",
+        "category": "CRM & sales tools",
+        "jobs": 1
+      },
+      {
+        "technology": "Rust",
+        "category": "Programming languages",
+        "jobs": 1
+      },
+      {
+        "technology": "Salesforce",
+        "category": "CRM & sales tools",
+        "jobs": 1
+      },
+      {
+        "technology": "SQL",
+        "category": "Programming languages",
+        "jobs": 1
+      },
+      {
+        "technology": "Terraform",
+        "category": "DevOps & infrastructure as code",
+        "jobs": 1
+      },
+      {
+        "technology": "ZoomInfo",
+        "category": "CRM & sales tools",
+        "jobs": 1
+      }
+    ],
+    "jobs_mentioning_matched": 2,
+    "open_jobs_total": 5,
+    "jobs_with_text": 5,
+    "sample_job_urls": [
+      "https://job-boards.greenhouse.io/acmeanalytics/jobs/1001",
+      "https://job-boards.greenhouse.io/acmeanalytics/jobs/1002"
+    ],
+    "source_url": "https://boards-api.greenhouse.io/v1/boards/acmeanalytics/jobs?content=true",
+    "fetched_at": "2026-11-17T03:12:00.000Z"
+  }
+]

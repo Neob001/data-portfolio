@@ -7,8 +7,8 @@
 #   publish_apify_kvs       STORE_NAME_OR_ID    # needs $APIFY_TOKEN
 #
 # Files published (flat names, because release assets and KV records cannot contain "/"):
-#   GitHub release: manifest.json, <build>-directory.json.gz, <build>-shard-<n>.jsonl.br
-#   Apify KVS:      manifest.json, directory.json.gz, shard-<n>.jsonl.br
+#   GitHub release: manifest.json, <build>-directory.json.gz, <build>-shard-<n>.jsonl.br, <build>-companies_tech.json.gz
+#   Apify KVS:      manifest.json, directory.json.gz, shard-<n>.jsonl.br, companies_tech.json.gz
 # The published manifest.json is rewritten so "directory" and every shard "file" use those names.
 #
 # INDEX_BASE_URL to configure afterwards:
@@ -43,6 +43,8 @@ for i, s in enumerate(m["shards"]):
     ext = s["file"].rsplit(".", 1)[-1]
     ctype = "application/gzip" if ext == "gz" else "application/octet-stream"  # brotli: served as raw bytes
     print(f"shard-{i}.jsonl.{ext}\t{d}/{s['file']}\t{ctype}")
+if m.get("companies_tech"):  # technology counts per company board (companies-by-technology)
+    print(f"{m['companies_tech']}\t{d}/{m['companies_tech']}\tapplication/gzip")
 PY
 }
 

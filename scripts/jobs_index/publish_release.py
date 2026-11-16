@@ -6,6 +6,7 @@ upload (~50 MB) manifest.json and the shards were missing and Actor runs failed 
 
   1. upload the new build under build-stamped names (<build>-shard-<n>.jsonl.br, <build>-directory.json.gz)
      next to the old assets;
+     (plus <build>-build_report.json and <build>-companies_tech.json.gz when the build wrote them);
   2. upload the new manifest as <build>-manifest.json, delete manifest.json, rename the new one to
      manifest.json (the only gap is between those two API calls);
   3. delete assets that belong to neither the new build nor the previous one, so runs that read
@@ -47,6 +48,11 @@ def stamped_manifest(manifest, bid):
         name = f"{bid}-build_report.json"
         files.append((name, manifest["build_report"], "application/json"))
         m["build_report"] = name
+    # Per-company technology counts (companies-by-technology Actor / Jobs Feed mode), same lifecycle as the shards.
+    if manifest.get("companies_tech"):
+        name = f"{bid}-companies_tech.json.gz"
+        files.append((name, manifest["companies_tech"], "application/gzip"))
+        m["companies_tech"] = name
     return m, files
 
 
@@ -55,8 +61,9 @@ def files_of(manifest):
     if not manifest:
         return set()
     names = {manifest.get("directory") or "directory.json.gz"} | {s["file"] for s in manifest.get("shards", [])}
-    if manifest.get("build_report"):
-        names.add(manifest["build_report"])
+    for key in ("build_report", "companies_tech"):
+        if manifest.get(key):
+            names.add(manifest[key])
     return names
 
 

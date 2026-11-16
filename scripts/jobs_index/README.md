@@ -116,6 +116,7 @@ index/
   directory.json.gz      [[ats, token, company_name, jobs, [shard indices]], ...]
   shards/<ats>-b<band>-p<part>.jsonl.br   brotli (quality 11, 16 MB window); .jsonl.gz with --codec gz
   build_report.json      timings and failures of the build (not needed by the Actor)
+  companies_tech.json.gz technologies named in each board's job posts (see "Technographics asset" below)
 ```
 
 **Shard content:**
@@ -145,6 +146,16 @@ index/
   - `companies` → `directory.json.gz` maps the matching boards to their shards.
 - Within each shard the Actor sorts matches by `posted_at` before delivering, newest band first.
 - **Dedupe:** the same normalized company + title + locations is kept once (the most complete copy). The other ids go in `duplicate_sources`.
+
+## Technographics asset (`companies_tech.json.gz`, owner approval S-2 2026-11-17)
+
+For `actors/companies-by-technology` and the Jobs Feed `mode: "companies-by-technology"`. Written by `IndexWriter` (option `tech`, on in `build_index.mjs`; `--no-tech` skips it) and referenced by `manifest.companies_tech` (+ `manifest.companies_tech_stats`, also in `build_report.json` as `companies_tech`). No extra request: it reads text the build already holds.
+
+- **Detection** (`src/core/tech.js`): while a board's jobs still carry their full `description_text` (up to 20,000 chars, before any truncation), every job's title + description is matched against a curated dictionary (611 technologies in 27 categories, ~1,540 aliases). One case-insensitive regex compiled as a prefix trie runs once per job; case, context and co-occurrence rules are checked in JS for the few hits. Ambiguous words (Go, R, C, Rust, Swift, Spark, Chef, Helm, …) count only in a list of technologies *and* when the post also names a related technology; known false friends (Excel the verb, "tableau de bord", DBT therapy, "snowflake schema", HVAC airflow, GCP = Good Clinical Practice, "Key Success Factors", "X Ventures", "ex-Stripe") are excluded. A vendor's own board does not count its own product (`selfTechIds`). Golden negatives: `actors/ats-jobs-feed/tests/tech.test.mjs`.
+- **Counting:** after the index dedupe (the same opening on two boards counts once), per board: open jobs, jobs whose description was read, and one compact tuple per job naming ≥1 technology: `[tech ids, country codes, location indices, department index, job_url?]`. `job_url` is kept only for up to 3 sample jobs per technology per board. Format: header comment of `src/core/technographics.js`. Job text is never published.
+- **Coverage = jobs with a description at build time:** Greenhouse, Lever, Ashby, Workable, Recruitee, Personio, Teamtailor, Pinpoint 100%; **Workday 0%** (list pages only: titles; ~52% of all jobs, build of 2026-11-15); JazzHR only for jobs whose page was read (15 new pages per board per night, cached).
+
+**Measured 2026-11-17 (this machine):** 2,479 real jobs from 70 boards (avg 4,839 chars): **0.048 ms per job, 100 MB/s** (a flat 1,500-way alternation ran at 5.8 MB/s; the trie is 17x faster, same output); 48% of the jobs name ≥1 technology, 320 distinct technologies. Subset build (`--limit 150`, all 10 ATSs): 5,567 jobs → 341 ms of detection CPU in total, asset 40 KB for 108 boards / 1,063 jobs with a technology (~38 B per job). **Projection for the full nightly build** (~860k jobs before dedupe, ~400k with text): ~0.5–1 min of CPU, spread over the network-bound fetch phase, plus seconds for the final aggregation; ~7–8 MB asset. The build step stays at ~115 of its 140 minutes.
 
 ## Publishing and hosting
 

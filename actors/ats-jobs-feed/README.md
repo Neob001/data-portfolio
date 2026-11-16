@@ -126,6 +126,12 @@ More keywords matched means a higher score inside each band. Among equal scores,
 
 **Incremental mode.** With `sinceLastRun: true`, the Actor keeps a small cursor per filter combination in a named key-value store in your Apify account (`factpipe-ats-jobs-feed-state`). Jobs already delivered are skipped and not charged. A second run straight after the first returns 0 jobs and costs $0. Note that the cursor follows each job's posting date, so a board added to the index later only contributes jobs posted after your last run.
 
+## Companies-by-technology mode
+
+With `mode: "companies-by-technology"` and `technologies` (e.g. `["Snowflake", "dbt"]`), the Actor returns **one row per company** whose open job posts name those technologies, with job counts and its tech stack, instead of job rows: technographics for sales and lead generation. `technologyMatch`, `minJobsMentioning`, `locations`, `companies`, `departments` and `maxResults` apply; the job filters do not. Each company row is a `company-result` event, never a `job-result`.
+
+This mode is being rolled out. Until the `company-result` event is part of this Actor's pricing, a run with it stops at once, charges nothing and points you to [Companies by Technology](https://apify.com/factpipe/companies-by-technology), which takes the same input and returns the same rows. The default `mode: "jobs"` is unchanged.
+
 ## Pricing (pay per event)
 
 | Event | Price | Meaning |

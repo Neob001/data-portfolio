@@ -1,0 +1,93 @@
+[
+  {
+    "board": { "ats": "greenhouse", "token": "acmeanalytics" },
+    "name": "Acme Analytics",
+    "jobs": [
+      {
+        "job_id": "greenhouse:acmeanalytics:1001", "title": "Senior Data Engineer", "company_name": "Acme Analytics", "company_board": "acmeanalytics", "ats": "greenhouse",
+        "department": "Data Platform", "team": null, "employment_type": "full_time", "workplace_type": "hybrid", "locations": ["New York, NY"], "country_codes": ["US"], "remote": false,
+        "posted_at": "2026-11-10T00:00:00.000Z", "updated_at": null, "job_url": "https://job-boards.greenhouse.io/acmeanalytics/jobs/1001", "apply_url": "https://job-boards.greenhouse.io/acmeanalytics/jobs/1001",
+        "description_text": "You will build our warehouse on Snowflake with dbt models orchestrated by Apache Airflow.\nRequirements:\n- Python and SQL\n- Experience with star or snowflake schema design\n- AWS (S3, Lambda)\nQuestions? Ask Sarah Jenkins, our recruiter.",
+        "description_snippet": null, "fetched_at": "2026-11-17T03:10:00.000Z"
+      },
+      {
+        "job_id": "greenhouse:acmeanalytics:1002", "title": "Analytics Engineer", "company_name": "Acme Analytics", "company_board": "acmeanalytics", "ats": "greenhouse",
+        "department": "Data Platform", "team": null, "employment_type": "full_time", "workplace_type": "onsite", "locations": ["Berlin, Germany"], "country_codes": ["DE"], "remote": false,
+        "posted_at": "2026-11-12T00:00:00.000Z", "updated_at": null, "job_url": "https://job-boards.greenhouse.io/acmeanalytics/jobs/1002", "apply_url": "https://job-boards.greenhouse.io/acmeanalytics/jobs/1002",
+        "description_text": "Model data in dbt on Snowflake and ship dashboards in Looker. You will excel at stakeholder management.",
+        "description_snippet": null, "fetched_at": "2026-11-17T03:10:00.000Z"
+      },
+      {
+        "job_id": "greenhouse:acmeanalytics:1003", "title": "Account Executive, Mid-Market", "company_name": "Acme Analytics", "company_board": "acmeanalytics", "ats": "greenhouse",
+        "department": "Sales", "team": null, "employment_type": "full_time", "workplace_type": "remote", "locations": ["Remote - US"], "country_codes": ["US"], "remote": true,
+        "posted_at": "2026-11-14T00:00:00.000Z", "updated_at": null, "job_url": "https://job-boards.greenhouse.io/acmeanalytics/jobs/1003", "apply_url": "https://job-boards.greenhouse.io/acmeanalytics/jobs/1003",
+        "description_text": "Run your pipeline in Salesforce and Outreach, Gong and ZoomInfo. Ready to go? We react quickly to customers.",
+        "description_snippet": null, "fetched_at": "2026-11-17T03:10:00.000Z"
+      },
+      {
+        "job_id": "greenhouse:acmeanalytics:1004", "title": "Office Manager", "company_name": "Acme Analytics", "company_board": "acmeanalytics", "ats": "greenhouse",
+        "department": "G&A", "team": null, "employment_type": "full_time", "workplace_type": "onsite", "locations": ["New York, NY"], "country_codes": ["US"], "remote": false,
+        "posted_at": "2026-11-01T00:00:00.000Z", "updated_at": null, "job_url": "https://job-boards.greenhouse.io/acmeanalytics/jobs/1004", "apply_url": "https://job-boards.greenhouse.io/acmeanalytics/jobs/1004",
+        "description_text": "Keep the office running throughout the workday. Order supplies ASAP.",
+        "description_snippet": null, "fetched_at": "2026-11-17T03:10:00.000Z"
+      }
+    ]
+  },
+  {
+    "board": { "ats": "ashby", "token": "acmeanalytics" },
+    "name": "Acme Analytics Inc.",
+    "jobs": [
+      {
+        "job_id": "ashby:acmeanalytics:7f1c", "title": "Senior Data Engineer", "company_name": "Acme Analytics Inc.", "company_board": "acmeanalytics", "ats": "ashby",
+        "department": "Data Platform", "team": null, "employment_type": "full_time", "workplace_type": "hybrid", "locations": ["New York, NY"], "country_codes": ["US"], "remote": false,
+        "posted_at": "2026-11-09T00:00:00.000Z", "updated_at": null, "job_url": "https://jobs.ashbyhq.com/acmeanalytics/7f1c", "apply_url": "https://jobs.ashbyhq.com/acmeanalytics/7f1c/application",
+        "description_text": "Snowflake and dbt.",
+        "description_snippet": null, "fetched_at": "2026-11-17T03:12:00.000Z"
+      },
+      {
+        "job_id": "ashby:acmeanalytics:8a2d", "title": "Platform Engineer", "company_name": "Acme Analytics Inc.", "company_board": "acmeanalytics", "ats": "ashby",
+        "department": "Engineering", "team": "Infrastructure", "employment_type": "full_time", "workplace_type": "remote", "locations": ["London, UK"], "country_codes": ["GB"], "remote": true,
+        "posted_at": "2026-11-15T00:00:00.000Z", "updated_at": null, "job_url": "https://jobs.ashbyhq.com/acmeanalytics/8a2d", "apply_url": "https://jobs.ashbyhq.com/acmeanalytics/8a2d/application",
+        "description_text": "Run Kubernetes and Terraform on AWS. Services in Python, Go, and Rust.",
+        "description_snippet": null, "fetched_at": "2026-11-17T03:12:00.000Z"
+      }
+    ]
+  },
+  {
+    "board": { "ats": "workday", "token": "globex.wd5/Globex_Careers" },
+    "name": "Globex Corporation",
+    "jobs": [
+      {
+        "job_id": "workday:globex.wd5/Globex_Careers:R100", "title": "Salesforce Administrator", "company_name": "Globex Corporation", "company_board": "globex.wd5/Globex_Careers", "ats": "workday",
+        "department": null, "team": null, "employment_type": "full_time", "workplace_type": "onsite", "locations": ["Chicago, IL"], "country_codes": ["US"], "remote": false,
+        "posted_at": "2026-11-16T00:00:00.000Z", "updated_at": null, "job_url": "https://globex.wd5.myworkdayjobs.com/Globex_Careers/job/Chicago-IL/Salesforce-Administrator_R100", "apply_url": null,
+        "description_text": null, "description_snippet": null, "fetched_at": "2026-11-17T03:20:00.000Z"
+      },
+      {
+        "job_id": "workday:globex.wd5/Globex_Careers:R101", "title": "SAP FICO Consultant", "company_name": "Globex Corporation", "company_board": "globex.wd5/Globex_Careers", "ats": "workday",
+        "department": null, "team": null, "employment_type": "full_time", "workplace_type": "onsite", "locations": ["Frankfurt, Germany"], "country_codes": ["DE"], "remote": false,
+        "posted_at": "2026-11-16T00:00:00.000Z", "updated_at": null, "job_url": "https://globex.wd5.myworkdayjobs.com/Globex_Careers/job/Frankfurt/SAP-FICO-Consultant_R101", "apply_url": null,
+        "description_text": null, "description_snippet": null, "fetched_at": "2026-11-17T03:20:00.000Z"
+      },
+      {
+        "job_id": "workday:globex.wd5/Globex_Careers:R102", "title": "Warehouse Associate", "company_name": "Globex Corporation", "company_board": "globex.wd5/Globex_Careers", "ats": "workday",
+        "department": null, "team": null, "employment_type": "full_time", "workplace_type": "onsite", "locations": ["Chicago, IL"], "country_codes": ["US"], "remote": false,
+        "posted_at": "2026-11-16T00:00:00.000Z", "updated_at": null, "job_url": "https://globex.wd5.myworkdayjobs.com/Globex_Careers/job/Chicago-IL/Warehouse-Associate_R102", "apply_url": null,
+        "description_text": null, "description_snippet": null, "fetched_at": "2026-11-17T03:20:00.000Z"
+      }
+    ]
+  },
+  {
+    "board": { "ats": "lever", "token": "snowflake" },
+    "name": "Snowflake",
+    "jobs": [
+      {
+        "job_id": "lever:snowflake:aa11", "title": "Senior Software Engineer, Snowpark", "company_name": "Snowflake", "company_board": "snowflake", "ats": "lever",
+        "department": "Engineering", "team": "Snowpark", "employment_type": "full_time", "workplace_type": "hybrid", "locations": ["San Mateo, CA"], "country_codes": ["US"], "remote": false,
+        "posted_at": "2026-11-13T00:00:00.000Z", "updated_at": null, "job_url": "https://jobs.lever.co/snowflake/aa11", "apply_url": "https://jobs.lever.co/snowflake/aa11/apply",
+        "description_text": "Build Snowflake's Snowpark runtime in Java and Scala on Kubernetes.",
+        "description_snippet": null, "fetched_at": "2026-11-17T03:05:00.000Z"
+      }
+    ]
+  }
+]

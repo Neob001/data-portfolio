@@ -1,0 +1,16 @@
+{
+  "name": "companies-by-technology",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Companies by technology: which companies' open job posts name Snowflake, Salesforce, dbt, Kubernetes... One row per company, from 19,000+ public company job boards (technographics for sales and lead generation).",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "apify": "^3.2.6"
+  },
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node --test 'tests/*.test.mjs'"
+  }
+}

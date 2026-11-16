@@ -7,16 +7,36 @@ import { loadTracker } from '../lib/incremental.js';
 import { normalizeInput, filterIdentity } from './filters.js';
 import { runFeed, INDEX_BASE_URL } from './feed.js';
 import { shouldChargeRunFee } from './run_fee.js';
+import { runTechMode } from './tech_actor_main.js';
+
+/** Output modes of an Actor that opts in with `modes: true` (Jobs Feed). */
+export const RUN_MODES = ['jobs', 'companies-by-technology'];
 
 /**
  * @param slug Actor slug (names the incremental-state store)
  * @param toOptions raw input -> normalizeInput() options (throws a readable Error on bad input)
  * @param noBoardsMessage badRefs -> status message when live mode has no usable board left
+ * @param modes accept `mode` ("jobs" default | "companies-by-technology", see RUN_MODES)
  */
-export async function runJobsActor({ slug, toOptions = normalizeInput, noBoardsMessage = noSupportedBoardsMessage, runFeeEvent = null }) {
+export async function runJobsActor({ slug, toOptions = normalizeInput, noBoardsMessage = noSupportedBoardsMessage, runFeeEvent = null, modes = false }) {
   await Actor.init();
   const started = Date.now();
   const input = (await Actor.getInput()) ?? {};
+
+  // `mode: "companies-by-technology"` (Jobs Feed only): one row per company, charged as company-result, and only
+  // when the Actor's pricing has that event (otherwise it fails fast, charging nothing). Default "jobs": unchanged.
+  if (modes) {
+    const mode = input.mode ?? 'jobs';
+    if (!RUN_MODES.includes(mode)) {
+      await writeRunSummary(Actor, { errors: 1, failure_class: 'input_error', duration_ms: Date.now() - started });
+      await Actor.fail(`Invalid input: "mode" must be one of ${RUN_MODES.join(', ')} (got ${mode})`);
+      return;
+    }
+    if (mode === 'companies-by-technology') {
+      await runTechMode(input, { requireEvent: true });
+      return;
+    }
+  }
 
   let opts;
   try {

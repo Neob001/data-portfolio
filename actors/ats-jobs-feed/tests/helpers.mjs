@@ -65,7 +65,8 @@ export function assertMatchesSchema(row) {
     if (spec.enum) assert.ok(spec.enum.includes(value), `field ${key}=${value} not in enum ${spec.enum}`);
     if (actual === 'array' && spec.items?.type) for (const v of value) assert.equal(typeof v, spec.items.type, `${key}[] item ${v}`);
   }
-  for (const key of Object.keys(DATASET_FIELDS)) assert.ok(key in row, `row misses declared field ${key}`);
+  // Fields of the companies-by-technology mode appear on company rows only (description prefix).
+  for (const key of Object.keys(DATASET_FIELDS)) assert.ok(key in row || /^Companies-by-technology mode only: /.test(DATASET_FIELDS[key].description || ''), `row misses declared field ${key}`);
 }
 
 /** fetchJson stand-in serving golden fixtures by ATS API URL; records calls. */

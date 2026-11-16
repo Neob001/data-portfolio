@@ -1,0 +1,156 @@
+{
+  "actorSpecification": 1,
+  "name": "companies-by-technology",
+  "title": "Companies by Technology — Technographics from Job Posts",
+  "description": "Find companies using Snowflake, Salesforce, dbt, Kubernetes or 600 more technologies, read from 19,000+ companies' job posts. One row per company with its tech stack and job counts. $15 per 1,000 companies.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "../INPUT_SCHEMA.json",
+  "readme": "../README.md",
+  "dockerfile": "./Dockerfile",
+  "minMemoryMbytes": 2048,
+  "outputSchema": "./output_schema.json",
+  "categories": [
+    "LEAD_GENERATION",
+    "JOBS"
+  ],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "companies": {
+          "title": "Companies",
+          "transformation": {
+            "fields": [
+              "company_name",
+              "technologies_matched",
+              "jobs_mentioning_matched",
+              "open_jobs_total",
+              "jobs_with_text",
+              "top_technologies",
+              "careers_url"
+            ]
+          },
+          "display": {
+            "component": "table",
+            "properties": {
+              "company_name": {
+                "label": "Company",
+                "format": "text"
+              },
+              "technologies_matched": {
+                "label": "Matched technologies",
+                "format": "array"
+              },
+              "jobs_mentioning_matched": {
+                "label": "Jobs naming them",
+                "format": "number"
+              },
+              "open_jobs_total": {
+                "label": "Open jobs",
+                "format": "number"
+              },
+              "jobs_with_text": {
+                "label": "Jobs with description",
+                "format": "number"
+              },
+              "top_technologies": {
+                "label": "Tech stack (top 15)",
+                "format": "array"
+              },
+              "careers_url": {
+                "label": "Careers page",
+                "format": "link"
+              }
+            }
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "company_name": {
+            "type": "string",
+            "description": "Company name as shown on its job board"
+          },
+          "company_board": {
+            "type": "string",
+            "description": "Board token of the company's job board with the most jobs naming the requested technologies (see boards for all)"
+          },
+          "ats": {
+            "type": "string",
+            "enum": [
+              "greenhouse",
+              "lever",
+              "ashby",
+              "workable",
+              "recruitee",
+              "workday",
+              "personio",
+              "teamtailor",
+              "jazzhr",
+              "pinpoint"
+            ],
+            "description": "Applicant tracking system (ATS) of that board"
+          },
+          "careers_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Public job board page of the company (the board in company_board)"
+          },
+          "boards": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Every job board of the company: {ats, token, careers_url, open_jobs, jobs_with_text}. Boards with the same company name (ignoring legal suffixes) and the same board token are one company"
+          },
+          "technologies_matched": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "The requested technologies this company's open jobs name, with the number of jobs naming each: {technology, jobs}, most jobs first. Counts only jobs that pass the location and department filters"
+          },
+          "top_technologies": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "The company's tech stack as named in all of its open job posts: up to 15 {technology, category, jobs}, most jobs first (whatever technologies you asked for)"
+          },
+          "jobs_mentioning_matched": {
+            "type": "integer",
+            "description": "Open jobs whose title or description names at least one of the requested technologies (each job counted once), after the location and department filters"
+          },
+          "open_jobs_total": {
+            "type": "integer",
+            "description": "All open jobs of the company across its boards in tonight's index (an opening listed on two boards counted once)"
+          },
+          "jobs_with_text": {
+            "type": "integer",
+            "description": "Open jobs whose full description was read when the index was built. Lower than open_jobs_total where the platform's list has no descriptions (Workday: titles only), so a technology can only be found in the job title there"
+          },
+          "sample_job_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Up to 3 public job posting URLs that name the requested technologies (open them to see the context)"
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The ATS API or feed URL the company's main board was read from"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the nightly index build read the company's boards (ISO 8601, UTC)"
+          }
+        }
+      }
+    }
+  }
+}
