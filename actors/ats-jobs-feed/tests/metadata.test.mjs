@@ -2,10 +2,6 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
 import { OUTPUT_FIELDS } from '../src/core/feed.js';
-import { TECH_OUTPUT_FIELDS } from '../src/core/technographics.js';
-
-// actor_main.js imports the apify SDK (not installed for the tests); RUN_MODES is mirrored here and checked below.
-const RUN_MODES = ['jobs', 'companies-by-technology'];
 
 const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8');
 const actor = JSON.parse(read('.actor/actor.json'));
@@ -23,23 +19,9 @@ test('actor.json: Store limits, categories, pricing mention', () => {
   for (const c of actor.categories) assert.ok(known.has(c), `category ${c}`);
 });
 
-test('dataset schema declares exactly the fields the Actor outputs (job rows, then company rows of the tech mode)', () => {
-  const companyOnly = TECH_OUTPUT_FIELDS.filter((f) => !OUTPUT_FIELDS.includes(f));
-  const props = actor.storages.dataset.fields.properties;
-  assert.deepEqual(Object.keys(props), [...OUTPUT_FIELDS, ...companyOnly]);
-  for (const f of companyOnly) assert.match(props[f].description, /^Companies-by-technology mode only: /, f);
+test('dataset schema declares exactly the fields the Actor outputs', () => {
+  assert.deepEqual(Object.keys(actor.storages.dataset.fields.properties), OUTPUT_FIELDS);
   for (const f of actor.storages.dataset.views.jobs.transformation.fields) assert.ok(OUTPUT_FIELDS.includes(f), f);
-  for (const f of actor.storages.dataset.views.companies_by_technology.transformation.fields) assert.ok(TECH_OUTPUT_FIELDS.includes(f), f);
-});
-
-test('mode input: default jobs (unchanged behaviour), companies-by-technology guarded by the pricing event', () => {
-  const schema = JSON.parse(read('INPUT_SCHEMA.json'));
-  assert.deepEqual(schema.properties.mode.enum, RUN_MODES);
-  assert.equal(schema.properties.mode.default, 'jobs');
-  for (const k of ['mode', 'technologies', 'technologyMatch', 'minJobsMentioning']) assert.ok(!('prefill' in schema.properties[k]), k);
-  assert.match(read('src/main.js'), /modes: true/);
-  assert.match(schema.properties.mode.description, /without any charge/);
-  assert.match(read('README.md'), /## Companies-by-technology mode/);
 });
 
 test('output schema has no resourceType; Dockerfile uses apify/actor-node:22', () => {

@@ -215,51 +215,6 @@
       "description": "Optional. Fetch these boards live instead of searching the index, e.g. https://job-boards.greenhouse.io/gitlab, https://jobs.lever.co/acme, https://jobs.ashbyhq.com/acme, https://apply.workable.com/acme, https://acme.recruitee.com or \"greenhouse:gitlab\". All filters above still apply.",
       "editor": "stringList",
       "sectionCaption": "Live mode (companies not yet in the index)"
-    },
-    "mode": {
-      "title": "Output mode",
-      "type": "string",
-      "editor": "select",
-      "description": "jobs (default): one row per job, as always. companies-by-technology: one row per company whose open job posts name the Technologies below (technographics), charged per company row; uses Locations, Companies, Departments and Max results, and ignores the job filters. This mode is being rolled out: until it is enabled for this Actor's pricing, such a run stops at once without any charge and points to the Companies by Technology Actor (https://apify.com/factpipe/companies-by-technology).",
-      "enum": [
-        "jobs",
-        "companies-by-technology"
-      ],
-      "enumTitles": [
-        "Jobs (one row per job)",
-        "Companies by technology (one row per company)"
-      ],
-      "default": "jobs",
-      "sectionCaption": "Companies-by-technology mode"
-    },
-    "technologies": {
-      "title": "Technologies (companies-by-technology mode)",
-      "type": "array",
-      "editor": "stringList",
-      "description": "Only with mode companies-by-technology: technologies to look for in each company's open job posts, e.g. \"Snowflake\", \"Salesforce\", \"dbt\", \"Kubernetes\" (names or common aliases, up to 50)."
-    },
-    "technologyMatch": {
-      "title": "Technology match",
-      "type": "string",
-      "editor": "select",
-      "description": "Only with mode companies-by-technology. any: the company's jobs name at least one technology. all: they name every one (not necessarily in the same job).",
-      "enum": [
-        "any",
-        "all"
-      ],
-      "enumTitles": [
-        "Any technology",
-        "All technologies"
-      ],
-      "default": "any"
-    },
-    "minJobsMentioning": {
-      "title": "Minimum jobs mentioning",
-      "type": "integer",
-      "editor": "number",
-      "minimum": 1,
-      "nullable": true,
-      "description": "Only with mode companies-by-technology: only companies with at least this many open jobs naming the technologies. Empty = 1."
     }
   }
 }

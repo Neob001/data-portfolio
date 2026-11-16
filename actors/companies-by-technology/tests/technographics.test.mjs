@@ -141,13 +141,13 @@ test('loading fails clearly on an index without technology data', async () => {
   await assert.rejects(run(dir, { technologies: ['dbt'] }), /no technology data yet/);
 });
 
-test('company rows are valid against this Actor\'s and Jobs Feed\'s dataset schemas (types, enums)', async () => {
+test('company rows are valid against this Actor\'s dataset schema (types, enums); Jobs Feed gets the fields with its mode (held until company-result exists)', async () => {
   const rows = [
     ...(await run(golden.dir, { technologies: ['Snowflake', 'Salesforce', 'SAP', 'Kubernetes'] })).rows,
     ...(await run(golden.dir, { companies: ['Acme Analytics'] })).rows,
   ];
   assert.ok(rows.length >= 3);
-  for (const path of ['../.actor/actor.json', '../../ats-jobs-feed/.actor/actor.json']) {
+  for (const path of ['../.actor/actor.json']) {
     const fields = JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8')).storages.dataset.fields.properties;
     for (const row of rows) {
       for (const [key, value] of Object.entries(row)) {
@@ -168,4 +168,22 @@ test('Jobs Feed guard: only runs when the pricing has the company-result event',
   assert.equal(hasTechEvent({ 'job-result': {}, 'company-result': { eventPriceUsd: 0.015 } }), true);
   assert.match(missingEventMessage(), /nothing was run or charged/);
   assert.match(missingEventMessage(), /apify\.com\/factpipe\/companies-by-technology/);
+});
+
+test('a technology-detection failure never fails the index build: shards still written, no companies_tech asset', async () => {
+  const { mkdtemp, readdir } = await import('node:fs/promises');
+  const { tmpdir } = await import('node:os');
+  const { join } = await import('node:path');
+  const { IndexWriter, TECH_ASSET_FILE } = await import('../src/core/index_writer.js');
+  const dir = await mkdtemp(join(tmpdir(), 'cbt-fail-'));
+  const w = await new IndexWriter(dir, { builtAt: BUILT_AT, codec: 'gz', tech: true }).open();
+  const boards = load('boards.json');
+  await w.addBoard(boards[0].board, boards[0].name, boards[0].jobs);
+  w.techFailed(new Error('boom'));
+  for (const b of boards.slice(1)) await w.addBoard(b.board, b.name, b.jobs);
+  const manifest = await w.finish();
+  assert.ok(manifest.shards.length > 0);
+  assert.equal(manifest.companies_tech, undefined);
+  assert.match(manifest.companies_tech_stats.error, /boom/);
+  assert.ok(!(await readdir(dir)).includes(TECH_ASSET_FILE));
 });

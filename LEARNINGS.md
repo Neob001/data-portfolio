@@ -182,3 +182,8 @@
 - Precision review on 2,479 real jobs found: "Key Success Factors" (SuccessFactors), "backed by X Ventures", "ex-Stripe", "C." enumerators, and vendors' own boards (GitLab naming GitLab). All excluded now; golden negatives in ats-jobs-feed/tests/tech.test.mjs.
 - Coverage limit: Workday (~52% of jobs) is titles-only in the index, so its companies only match on job titles; jobs_with_text exposes this per row.
 - Jobs Feed mode is guarded: without the company-result event in its pricing a tech-mode run fails fast and charges nothing (company rows are never charged as job-result).
+
+## 2026-11-17 — technographics (S-2) merged to main, Jobs Feed mode held
+- Reviewed claude/technographics (21468cd): 611-tech dictionary in the shared jobs core, extraction during the nightly build from text already in memory (0.048 ms/job, ~1 min/night, ~7-8 MB companies_tech.json.gz asset), Actor companies-by-technology (draft, company-result $0.015).
+- Merge changes: (1) technology detection is failure-isolated in IndexWriter (techFailed(): switched off for the rest of the build, error in manifest.companies_tech_stats; test added) so it can never fail the jobs index build; (2) Jobs Feed's mode/technologies inputs, README section and company dataset fields NOT merged (actors/ats-jobs-feed INPUT_SCHEMA/README/actor.json/main.js/metadata test kept as on main): a visible mode that fails until the company-result event exists would cost failed runs (quality score). The mode code (actor_main `modes`) is in the core; the exposure lives on branch claude/technographics for when the event is added (monthly price-change window).
+- First asset: nightly build of 2026-11-17 03:00 UTC (also the first JazzHR/Pinpoint build).

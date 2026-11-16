@@ -72,6 +72,16 @@ export class IndexWriter {
     this.raw = null;
     this.tech = tech;
     this.techMs = 0; // CPU time spent detecting technologies (build report)
+    this.techError = null; // set by techFailed(): detection switched off, no companies_tech asset
+  }
+
+  /** Switch technology detection off for the rest of the build and remember why (once). */
+  techFailed(e) {
+    this.tech = false;
+    if (!this.techError) {
+      this.techError = String(e?.stack || e).slice(0, 500);
+      console.error(`technology detection disabled: ${this.techError}`);
+    }
   }
 
   async open() {
@@ -91,7 +101,12 @@ export class IndexWriter {
       kw: boardKw, fetched_at: jobs[0]?.fetched_at || this.builtAt.toISOString(),
     });
     // A vendor's own board names its own product everywhere (GitLab, Snowflake): not a technology it buys.
-    const self = this.tech ? selfTechIds(companyName, board.token) : null;
+    // Technology detection must never fail the index build: on any error it is switched off for the rest of the build
+    // (no companies_tech asset; the error goes to the manifest / build report).
+    let self = null;
+    if (this.tech) {
+      try { self = selfTechIds(companyName, board.token); } catch (e) { this.techFailed(e); }
+    }
     for (let i = 0; i < jobs.length; i += 1) {
       const job = jobs[i];
       const key = dedupeKey(job);
@@ -107,11 +122,13 @@ export class IndexWriter {
       let x;
       if (this.tech) {
         // Before truncation: the full description (up to DESCRIPTION_MAX) is only in memory here.
-        const t0 = performance.now();
-        let ids = detectTechIds(job.title, job.description_text);
-        if (self.size) ids = ids.filter((id) => !self.has(id));
-        this.techMs += performance.now() - t0;
-        x = [ids.join('.'), job.description_text ? 1 : 0];
+        try {
+          const t0 = performance.now();
+          let ids = detectTechIds(job.title, job.description_text);
+          if (self?.size) ids = ids.filter((id) => !self.has(id));
+          this.techMs += performance.now() - t0;
+          x = [ids.join('.'), job.description_text ? 1 : 0];
+        } catch (e) { this.techFailed(e); x = undefined; }
       }
       await writeLine(this.raw, JSON.stringify(x ? { bk, key, rec: slimRecord(job, jobKw[i]), x } : { bk, key, rec: slimRecord(job, jobKw[i]) }));
       this.rawJobs += 1;
@@ -125,13 +142,15 @@ export class IndexWriter {
     const groups = new Map();
     const groupPath = (ats, band) => join(this.tmpDir, `g-${ats}-${band}.jsonl`);
     let kept = 0;
-    const tech = this.tech ? new TechAggregator() : null;
+    let tech = this.tech ? new TechAggregator() : null;
     for await (const line of readLines(join(this.tmpDir, 'raw.jsonl'))) {
       const { bk, key, rec, x } = JSON.parse(line);
       const entry = this.best.get(key);
       if (!entry || entry.lite.job_id !== rec.job_id || entry.done) continue;
       entry.done = true;
-      if (tech) tech.add(bk, rec, x);
+      if (tech) {
+        try { tech.add(bk, rec, x); } catch (e) { this.techFailed(e); tech = null; }
+      }
       const dups = [...new Set(entry.dups)].filter((id) => id !== rec.job_id).sort();
       if (dups.length) rec.duplicate_sources = dups;
       const band = ageBand(rec.posted_at, builtAtMs);
@@ -227,17 +246,20 @@ export class IndexWriter {
       directory: 'directory.json.gz',
       shards,
     };
-    if (tech) {
-      const t0 = Date.now();
-      const out = tech.finish(this.boards, this.builtAt);
-      const gz = gzipSync(Buffer.from(JSON.stringify(out.data)), { level: 9 });
-      await writeFile(join(this.outDir, TECH_ASSET_FILE), gz);
-      manifest.companies_tech = TECH_ASSET_FILE;
-      manifest.companies_tech_stats = {
-        ...out.stats, bytes: gz.length, extract_ms: Math.round(this.techMs), write_ms: Date.now() - t0,
-      };
-      manifest.bytes += gz.length;
+    if (tech && this.tech) {
+      try {
+        const t0 = Date.now();
+        const out = tech.finish(this.boards, this.builtAt);
+        const gz = gzipSync(Buffer.from(JSON.stringify(out.data)), { level: 9 });
+        await writeFile(join(this.outDir, TECH_ASSET_FILE), gz);
+        manifest.companies_tech = TECH_ASSET_FILE;
+        manifest.companies_tech_stats = {
+          ...out.stats, bytes: gz.length, extract_ms: Math.round(this.techMs), write_ms: Date.now() - t0,
+        };
+        manifest.bytes += gz.length;
+      } catch (e) { this.techFailed(e); }
     }
+    if (this.techError) manifest.companies_tech_stats = { error: this.techError };
     await writeFile(join(this.outDir, 'manifest.json'), `${JSON.stringify(manifest, null, 1)}\n`);
     await rm(this.tmpDir, { recursive: true, force: true });
     return manifest;
