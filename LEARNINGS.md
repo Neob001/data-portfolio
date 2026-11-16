@@ -175,3 +175,10 @@
 - Congruency bugs found: Jobs Feed README still said "20 jobs × $0.003" (price $0.005 since 11-06) and "10,000+ companies / 5 ATS" vs listing "19,000+ / 8 ATS"; Remote Jobs README said 10,000+ / 5 ATS vs listing 15,000+ incl. Workday. Fixed in README only (listings unchanged).
 - Per-ATS family: template in make_ats_actors.py (README section + output schema), so regenerations keep it.
 - Goes live with the next rebuild of these Actors (scheduled jazzhr-pinpoint-rollout-check, 2026-11-17 16:00 JST, after the nightly build is verified).
+
+## 2026-11-17 — technographics (S-2): companies-by-technology (draft, branch claude/technographics)
+- Built from text the nightly build already holds: IndexWriter (option tech) detects technologies in each job's title + full description before truncation and writes companies_tech.json.gz (published with the index, stamped like the shards). No new source, no extra request.
+- Speed: one 1,500-way case-insensitive alternation ran at 5.8 MB/s (0.84 ms/job); the same literals compiled as a prefix-trie regex run at 100 MB/s (0.048 ms/job), identical output. Projected +0.5-1 min CPU on the full build.
+- Precision review on 2,479 real jobs found: "Key Success Factors" (SuccessFactors), "backed by X Ventures", "ex-Stripe", "C." enumerators, and vendors' own boards (GitLab naming GitLab). All excluded now; golden negatives in ats-jobs-feed/tests/tech.test.mjs.
+- Coverage limit: Workday (~52% of jobs) is titles-only in the index, so its companies only match on job titles; jobs_with_text exposes this per row.
+- Jobs Feed mode is guarded: without the company-result event in its pricing a tech-mode run fails fast and charges nothing (company rows are never charged as job-result).

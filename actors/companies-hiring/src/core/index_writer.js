@@ -10,6 +10,10 @@ import { join } from 'node:path';
 import { dedupeKey, dedupeLite, preferLite, boardKey } from './transform.js';
 import { factorBoardKeywords } from './keywords.js';
 import { ageBand, bandWindow, AGE_BANDS, INDEX_FORMAT, SLIM_FIELDS, defaultApplyUrl } from './index_format.js';
+import { detectTechIds, selfTechIds, TECHNOLOGIES, TECH_DICTIONARY_VERSION } from './tech.js';
+
+export const TECH_ASSET_FILE = 'companies_tech.json.gz'; // read by technographics.js (TECH_ASSET)
+export const TECH_SAMPLES_PER_TECH = 3;
 
 export const SHARD_MAX_BYTES = 5 * 1024 * 1024; // hard cap per compressed shard
 const RAW_CHUNK = { br: 32 * 1024 * 1024, gz: 16 * 1024 * 1024 }; // raw JSONL per shard before compression
@@ -52,8 +56,12 @@ export function slimRecord(job, kw) {
 }
 
 export class IndexWriter {
-  /** @param outDir index output directory  @param opts { builtAt: Date, tmpDir?, codec: 'br'|'gz' } */
-  constructor(outDir, { builtAt = new Date(), tmpDir = null, codec = 'br' } = {}) {
+  /**
+   * @param outDir index output directory
+   * @param opts { builtAt: Date, tmpDir?, codec: 'br'|'gz', tech: also write companies_tech.json.gz (technologies named
+   *   in each job's title + full description, see tech.js / technographics.js) }
+   */
+  constructor(outDir, { builtAt = new Date(), tmpDir = null, codec = 'br', tech = false } = {}) {
     this.outDir = outDir;
     this.tmpDir = tmpDir || join(outDir, '.tmp');
     this.builtAt = builtAt;
@@ -62,6 +70,8 @@ export class IndexWriter {
     this.boards = new Map(); // boardKey -> { ats, token, region, name, kw, fetched_at }
     this.rawJobs = 0;
     this.raw = null;
+    this.tech = tech;
+    this.techMs = 0; // CPU time spent detecting technologies (build report)
   }
 
   async open() {
@@ -80,6 +90,8 @@ export class IndexWriter {
       ats: board.ats, token: board.token, region: board.region || null, name: companyName || board.token,
       kw: boardKw, fetched_at: jobs[0]?.fetched_at || this.builtAt.toISOString(),
     });
+    // A vendor's own board names its own product everywhere (GitLab, Snowflake): not a technology it buys.
+    const self = this.tech ? selfTechIds(companyName, board.token) : null;
     for (let i = 0; i < jobs.length; i += 1) {
       const job = jobs[i];
       const key = dedupeKey(job);
@@ -92,7 +104,16 @@ export class IndexWriter {
         cur.dups.push(win === lite ? cur.lite.job_id : lite.job_id);
         cur.lite = win;
       }
-      await writeLine(this.raw, JSON.stringify({ bk, key, rec: slimRecord(job, jobKw[i]) }));
+      let x;
+      if (this.tech) {
+        // Before truncation: the full description (up to DESCRIPTION_MAX) is only in memory here.
+        const t0 = performance.now();
+        let ids = detectTechIds(job.title, job.description_text);
+        if (self.size) ids = ids.filter((id) => !self.has(id));
+        this.techMs += performance.now() - t0;
+        x = [ids.join('.'), job.description_text ? 1 : 0];
+      }
+      await writeLine(this.raw, JSON.stringify(x ? { bk, key, rec: slimRecord(job, jobKw[i]), x } : { bk, key, rec: slimRecord(job, jobKw[i]) }));
       this.rawJobs += 1;
     }
   }
@@ -104,11 +125,13 @@ export class IndexWriter {
     const groups = new Map();
     const groupPath = (ats, band) => join(this.tmpDir, `g-${ats}-${band}.jsonl`);
     let kept = 0;
+    const tech = this.tech ? new TechAggregator() : null;
     for await (const line of readLines(join(this.tmpDir, 'raw.jsonl'))) {
-      const { bk, key, rec } = JSON.parse(line);
+      const { bk, key, rec, x } = JSON.parse(line);
       const entry = this.best.get(key);
       if (!entry || entry.lite.job_id !== rec.job_id || entry.done) continue;
       entry.done = true;
+      if (tech) tech.add(bk, rec, x);
       const dups = [...new Set(entry.dups)].filter((id) => id !== rec.job_id).sort();
       if (dups.length) rec.duplicate_sources = dups;
       const band = ageBand(rec.posted_at, builtAtMs);
@@ -204,8 +227,91 @@ export class IndexWriter {
       directory: 'directory.json.gz',
       shards,
     };
+    if (tech) {
+      const t0 = Date.now();
+      const out = tech.finish(this.boards, this.builtAt);
+      const gz = gzipSync(Buffer.from(JSON.stringify(out.data)), { level: 9 });
+      await writeFile(join(this.outDir, TECH_ASSET_FILE), gz);
+      manifest.companies_tech = TECH_ASSET_FILE;
+      manifest.companies_tech_stats = {
+        ...out.stats, bytes: gz.length, extract_ms: Math.round(this.techMs), write_ms: Date.now() - t0,
+      };
+      manifest.bytes += gz.length;
+    }
     await writeFile(join(this.outDir, 'manifest.json'), `${JSON.stringify(manifest, null, 1)}\n`);
     await rm(this.tmpDir, { recursive: true, force: true });
     return manifest;
+  }
+}
+
+/**
+ * Per-board technology counts for companies_tech.json.gz (format: technographics.js). Fed with the jobs the index
+ * keeps after its dedupe, so the same opening on two boards counts once. Memory: one small tuple per job that names a
+ * technology.
+ */
+export class TechAggregator {
+  constructor() {
+    this.boards = new Map(); // bk -> { o, x, L: Map(location -> i), D: Map(dept -> i), jobs: [...] }
+    this.byAts = {};
+  }
+
+  /** One kept slim record + its [tech ids "3.17", has description 0|1] from addBoard(). */
+  add(bk, rec, x) {
+    let b = this.boards.get(bk);
+    if (!b) { b = { o: 0, x: 0, L: new Map(), D: new Map(), jobs: [] }; this.boards.set(bk, b); }
+    const a = this.byAts[rec.ats] || (this.byAts[rec.ats] = { jobs: 0, with_text: 0, with_tech: 0 });
+    b.o += 1;
+    a.jobs += 1;
+    if (x?.[1]) { b.x += 1; a.with_text += 1; }
+    if (!x?.[0]) return;
+    a.with_tech += 1;
+    const li = [];
+    for (const l of rec.locations || []) {
+      if (!b.L.has(l)) b.L.set(l, b.L.size);
+      li.push(b.L.get(l));
+    }
+    const dept = rec.department || rec.team || null;
+    if (dept && !b.D.has(dept)) b.D.set(dept, b.D.size);
+    b.jobs.push({ t: x[0], n: x[0].split('.').length, cc: (rec.country_codes || []).join('.'), li: li.join('.'),
+      di: dept ? b.D.get(dept) : -1, url: rec.job_url || null, p: rec.posted_at || '' });
+  }
+
+  /** -> { data (the asset), stats }. Sample job URLs: per board, up to TECH_SAMPLES_PER_TECH jobs per technology,
+   * picking the jobs that name the most technologies first (newest first among equals). */
+  finish(boardMeta, builtAt) {
+    const out = [];
+    let jobs = 0;
+    let samples = 0;
+    for (const [bk, b] of [...this.boards].sort((p, q) => p[0].localeCompare(q[0]))) {
+      if (!b.jobs.length) continue;
+      const meta = boardMeta.get(bk);
+      if (!meta) continue;
+      const order = b.jobs.map((j, i) => i).sort((i, k) => b.jobs[k].n - b.jobs[i].n || b.jobs[k].p.localeCompare(b.jobs[i].p));
+      const per = new Map();
+      const keep = new Set();
+      for (const i of order) {
+        const j = b.jobs[i];
+        if (!j.url) continue;
+        const tids = j.t.split('.');
+        if (!tids.some((t) => (per.get(t) || 0) < TECH_SAMPLES_PER_TECH)) continue;
+        for (const t of tids) per.set(t, (per.get(t) || 0) + 1);
+        keep.add(i);
+      }
+      samples += keep.size;
+      jobs += b.jobs.length;
+      out.push({
+        a: meta.ats, t: meta.token, ...(meta.region ? { r: meta.region } : {}), n: meta.name, f: meta.fetched_at, o: b.o, x: b.x,
+        L: [...b.L.keys()], D: [...b.D.keys()],
+        j: b.jobs.map((j, i) => (keep.has(i) ? [j.t, j.cc, j.li, j.di, j.url] : [j.t, j.cc, j.li, j.di])),
+      });
+    }
+    return {
+      data: {
+        format: 1, built_at: builtAt.toISOString(), dictionary_version: TECH_DICTIONARY_VERSION,
+        technologies: TECHNOLOGIES.map((t) => [t.slug, t.name, t.category]),
+        boards: out,
+      },
+      stats: { boards: out.length, jobs_with_technology: jobs, sample_urls: samples, by_ats: this.byAts },
+    };
   }
 }

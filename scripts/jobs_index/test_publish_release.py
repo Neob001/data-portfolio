@@ -80,10 +80,13 @@ class FakeGitHub:
         return self.by_name(asset["browser_download_url"])["data"]
 
 
-def build_dir(built_at, shards=3):
+def build_dir(built_at, shards=3, tech=True):
     d = tempfile.mkdtemp()
     m = {"format": 2, "built_at": built_at, "jobs": 10, "directory": "directory.json.gz",
          "shards": [{"file": f"shards/s{i}.jsonl.br"} for i in range(shards)]}
+    if tech:
+        m["companies_tech"] = "companies_tech.json.gz"
+        open(os.path.join(d, "companies_tech.json.gz"), "wb").write(f"tech-{built_at}".encode())
     os.makedirs(os.path.join(d, "shards"))
     for i in range(shards):
         open(os.path.join(d, f"shards/s{i}.jsonl.br"), "wb").write(f"{built_at}-{i}".encode())
@@ -127,7 +130,7 @@ class PublishTest(unittest.TestCase):
         self.assertFalse(any(n.startswith("shard-") for n in names))  # legacy gone
         self.assertIn(f"{b1}-shard-2.jsonl.br", names)  # previous build kept
         self.assertTrue(all(s["file"].startswith(b2) for s in self.live(gh)["shards"]))
-        self.assertEqual(len(names), 1 + (1 + 3 + 1) + (1 + 2 + 1))  # manifest + (directory, shards, build report) x 2 builds
+        self.assertEqual(len(names), 1 + (1 + 3 + 1 + 1) + (1 + 2 + 1 + 1))  # manifest + (directory, shards, build report, tech) x 2 builds
 
     def test_rerun_of_same_build_replaces_its_files(self):
         gh = FakeGitHub(legacy_release())
@@ -157,6 +160,23 @@ class PublishTest(unittest.TestCase):
         live = self.live(gh)
         self.assertEqual(live["build_report"], f"{bid}-build_report.json")
         self.assertIn(live["build_report"], gh.names())
+
+    def test_companies_tech_is_published_stamped_and_kept_one_cycle(self):
+        gh = FakeGitHub(legacy_release())
+        b1 = pr.publish(gh, build_dir("2026-11-17T03:00:00.000Z"), log=lambda *_: None)
+        live = self.live(gh)
+        self.assertEqual(live["companies_tech"], f"{b1}-companies_tech.json.gz")
+        self.assertEqual(gh.by_name(live["companies_tech"])["data"], b"tech-2026-11-17T03:00:00.000Z")
+        b2 = pr.publish(gh, build_dir("2026-11-18T03:00:00.000Z"), log=lambda *_: None)
+        self.assertIn(f"{b1}-companies_tech.json.gz", gh.names())  # previous build kept for in-flight runs
+        pr.publish(gh, build_dir("2026-11-19T03:00:00.000Z"), log=lambda *_: None)
+        self.assertNotIn(f"{b1}-companies_tech.json.gz", gh.names())
+        self.assertIn(f"{b2}-companies_tech.json.gz", gh.names())
+
+    def test_build_without_companies_tech(self):
+        gh = FakeGitHub(legacy_release())
+        pr.publish(gh, build_dir("2026-11-17T03:00:00.000Z", tech=False), log=lambda *_: None)
+        self.assertNotIn("companies_tech", self.live(gh))
 
     def test_empty_release(self):
         gh = FakeGitHub({})

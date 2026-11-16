@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-16",
+  "updated_at": "2026-11-17",
   "actors": {
     "sec-edgar-filings-search": {
       "apify_actor_id": "alNg1FFs9rdVhfX1T",
@@ -1669,6 +1669,45 @@
       "staging_validated": false,
       "monetization_configured": false,
       "staging_started_at": "2026-11-03T11:43:21Z"
+    },
+    "companies-by-technology": {
+      "apify_actor_id": null,
+      "source": "factpipe jobs index (GitHub release jobs-index: companies_tech.json.gz, technologies named in public ATS job posts)",
+      "variant": "technographics from job posts (company-level)",
+      "status": "draft",
+      "approval": "S-2 APPROVED by owner 2026-11-17 (chat): ~$15/1k companies; exact price and listing to be signed off before publish",
+      "origin": "scan",
+      "incumbent_actor_id": null,
+      "first_paid_run_date": null,
+      "ppe_events": {
+        "company-result": {
+          "proposed_price_usd": 0.015,
+          "title": "Company result",
+          "description": "One company whose open job posts name the requested technologies, with its tech stack and job counts.",
+          "store_discount_tiers_usd": {
+            "FREE": 0.015,
+            "BRONZE": 0.0135,
+            "SILVER": 0.012,
+            "GOLD": 0.0105
+          }
+        }
+      },
+      "pricing_rationale": "STRATEGY_2026-11-16 opportunity B: technographics from job posts sells at ~$13-20 per 1k companies on comparable plans (TheirStack ~$4.50-98/1k by plan); $15/1k with Store tiers -10/-20/-30%. Also offered as the Jobs Feed mode once its pricing has company-result.",
+      "launched_at": null,
+      "last_fix_date": null,
+      "kpis": {},
+      "listing": {
+        "title": "Companies by Technology \u2014 Technographics from Job Posts",
+        "description": "Find companies using Snowflake, Salesforce, dbt, Kubernetes or 600 more technologies, read from 19,000+ companies' job posts. One row per company with its tech stack and job counts. $15 per 1,000 companies.",
+        "seoTitle": "Companies Using Snowflake, Salesforce, dbt: Tech Stack API",
+        "seoDescription": "Find companies using any of 600+ technologies, read from the open job posts of 19,000+ companies' career sites: tech stack and job counts per company.",
+        "categories": [
+          "LEAD_GENERATION",
+          "JOBS"
+        ]
+      },
+      "staging_validated": false,
+      "monetization_configured": false
     }
   },
   "apify_account": "factpipe",

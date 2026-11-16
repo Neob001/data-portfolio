@@ -37,6 +37,9 @@
 //     original fetched_at. Without the sitemaps, all boards in daily-rotated order.
 //   - A board not reached in pass 1 (budget) or failing transiently keeps its last list for <= --hosted-carry-days,
 //     minus jobs that left the sitemaps.
+// Technographics: with every board's jobs still holding their full description text, IndexWriter (option tech) also
+// writes companies_tech.json.gz: per board, the technologies (src/core/tech.js) named in each kept job's title and
+// description. No extra request; measured cost in build_report.json (companies_tech.extract_ms).
 // Zero-token, deterministic. Needs node >= 22; imports only node builtins and the Actor's src/.
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
 import { gzipSync, gunzipSync } from 'node:zlib';
@@ -105,6 +108,9 @@ const { values: args } = parseArgs({
     'jazzhr-refresh-days': { type: 'string', default: '7' }, // re-read an unchanged JazzHR board after this long
     'hosted-carry-days': { type: 'string', default: '3' }, // carry a board not read tonight for at most this long
     'jazzhr-sitemaps': { type: 'string', default: '5' }, // sitemap files to read (0 = none)
+    // companies_tech.json.gz: technologies named in each job's title + full description (companies-by-technology).
+    // Pure CPU on text already in memory (no extra request); --no-tech skips it.
+    'no-tech': { type: 'boolean', default: false },
   },
 });
 
@@ -310,7 +316,7 @@ async function main() {
     boards = picked;
   }
   console.error(`building index from ${boards.length} boards -> ${args.out}`);
-  const writer = await new IndexWriter(resolve(args.out), { builtAt: new Date(), codec: args.codec }).open();
+  const writer = await new IndexWriter(resolve(args.out), { builtAt: new Date(), codec: args.codec, tech: !args['no-tech'] }).open();
   const stats = { ok: 0, failed: 0, empty: 0, by_ats: {} };
   const failures = [];
   const queues = new Map();
@@ -577,6 +583,8 @@ async function main() {
     total_bytes: manifest.bytes,
     raw_bytes: manifest.shards.reduce((a, s) => a + s.raw_bytes, 0),
     largest_shard_bytes: Math.max(0, ...manifest.shards.map((s) => s.bytes)),
+    // Technology detection (companies_tech.json.gz): CPU ms inside addBoard + per-ATS share of jobs with a description.
+    companies_tech: manifest.companies_tech_stats || null,
     fetch_seconds: Math.round(fetchSec),
     shard_seconds: Math.round(totalSec - fetchSec),
     total_seconds: Math.round(totalSec),

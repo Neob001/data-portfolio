@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Copy actors/ats-jobs-feed/src/core/*.js into the other jobs Actors' src/core/.
 
-The jobs Actors (remote-jobs-feed, ats-jobs-scraper, companies-hiring, company-jobs-scraper and the
+The jobs Actors (remote-jobs-feed, ats-jobs-scraper, companies-hiring, companies-by-technology, company-jobs-scraper and the
 per-ATS greenhouse/lever/ashby/workday-jobs-api from scripts/make_ats_actors.py) are thin
 wrappers around the same index reader, filters, keyword ranking, parsers and
 live-description code. Apify builds each Actor from its own directory, so that
@@ -27,6 +27,8 @@ TARGETS = [
     "company-jobs-scraper",
     # index-only readers: whole-index delivery and open/closed checks (no live board reads)
     "jobs-bulk-feed", "expired-jobs-checker",
+    # company-level technographics from the index's companies_tech asset (no live board reads)
+    "companies-by-technology",
 ]
 
 

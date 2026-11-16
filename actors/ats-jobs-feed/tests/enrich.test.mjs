@@ -349,9 +349,10 @@ test('live mode: description-based salary / years / visa on a board whose ATS ha
 // ------------------------------------------------------------------ dataset schema of every jobs Actor
 const ROOT = new URL('../../', import.meta.url);
 // Actors whose rows are not job rows (one row per company / per checked job) are left out.
-const NOT_JOB_ROWS = ['companies-hiring', 'expired-jobs-checker'];
+const NOT_JOB_ROWS = ['companies-hiring', 'expired-jobs-checker', 'companies-by-technology'];
 const JOB_ACTORS = readdirSync(ROOT).filter((d) => existsSync(new URL(`${d}/src/core/feed.js`, ROOT)) && !NOT_JOB_ROWS.includes(d));
 
+const COMPANY_MODE = /^Companies-by-technology mode only: /;
 function validator(slug) {
   const fields = JSON.parse(readFileSync(new URL(`${slug}/.actor/actor.json`, ROOT), 'utf8')).storages.dataset.fields.properties;
   return (row) => {
@@ -363,7 +364,8 @@ function validator(slug) {
       assert.ok(types.includes(actual) || (actual === 'integer' && types.includes('number')), `${slug}: ${key}=${JSON.stringify(value)} (${actual}) not in ${types}`);
       if (spec.enum) assert.ok(spec.enum.includes(value), `${slug}: ${key}=${value} not in enum (null must be listed too)`);
     }
-    for (const key of Object.keys(fields)) assert.ok(key in row, `${slug}: row misses ${key}`);
+    // Fields of the companies-by-technology mode (Jobs Feed) appear on company rows only.
+    for (const key of Object.keys(fields)) assert.ok(key in row || COMPANY_MODE.test(fields[key].description || ''), `${slug}: row misses ${key}`);
   };
 }
 

@@ -1,0 +1,28 @@
+{
+  "format": 1,
+  "built_at": "2026-11-17T03:30:00.000Z",
+  "dictionary_version": 1,
+  "technologies": [
+    ["dbt", "dbt", "data_integration"],
+    ["kubernetes", "Kubernetes", "devops"],
+    ["snowflake", "Snowflake", "data_warehouse"]
+  ],
+  "boards": [
+    {
+      "a": "greenhouse", "t": "initech", "n": "Initech", "f": "2026-11-17T03:11:00.000Z", "o": 9, "x": 9,
+      "L": ["Austin, TX"], "D": ["Data"],
+      "j": [
+        ["0.2", "US", "0", 0, "https://job-boards.greenhouse.io/initech/jobs/1"],
+        ["0.1", "US", "0", 0, "https://job-boards.greenhouse.io/initech/jobs/2"],
+        ["2", "US", "0", -1]
+      ]
+    },
+    {
+      "a": "lever", "t": "hooli", "r": "eu", "n": "Hooli", "f": "2026-11-17T03:14:00.000Z", "o": 3, "x": 2,
+      "L": ["London"], "D": ["Platform"],
+      "j": [
+        ["1", "GB", "0", 0, "https://jobs.eu.lever.co/hooli/abc"]
+      ]
+    }
+  ]
+}

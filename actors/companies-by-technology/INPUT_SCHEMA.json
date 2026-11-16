@@ -1,0 +1,71 @@
+{
+  "title": "Companies by Technology",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "technologies": {
+      "title": "Technologies",
+      "type": "array",
+      "description": "Technologies to look for in companies' open job posts, e.g. \"Snowflake\", \"Salesforce\", \"dbt\", \"Kubernetes\", \"React\", \"SAP\", \"HubSpot\" (names, common aliases such as \"k8s\" or \"golang\", case-insensitive; up to 50). A company qualifies when the title or description of at least one of its open jobs names one of them. Required unless you set Companies, which then lists every technology of those companies.",
+      "editor": "stringList",
+      "prefill": [
+        "Snowflake"
+      ]
+    },
+    "match": {
+      "title": "Technology match",
+      "type": "string",
+      "description": "\"any\": the company's jobs name at least one of the technologies. \"all\": the company's jobs name every one of them (not necessarily in the same job), e.g. Snowflake AND dbt.",
+      "editor": "select",
+      "enum": [
+        "any",
+        "all"
+      ],
+      "enumTitles": [
+        "Any technology",
+        "All technologies"
+      ],
+      "default": "any"
+    },
+    "countries": {
+      "title": "Countries",
+      "type": "array",
+      "description": "Only count jobs located in these countries: ISO codes (\"US\", \"GB\", \"DE\") or English names (\"Germany\"). Remote jobs count where the posting places them.",
+      "editor": "stringList"
+    },
+    "locations": {
+      "title": "Locations",
+      "type": "array",
+      "description": "Only count jobs in these places, as written in the posting (\"London\", \"California\", \"Berlin\"), or a 2-letter ISO country code.",
+      "editor": "stringList"
+    },
+    "departments": {
+      "title": "Departments",
+      "type": "array",
+      "description": "Only count jobs whose department or team contains one of these words, e.g. \"Engineering\", \"Data\", \"Finance\" (case-insensitive).",
+      "editor": "stringList"
+    },
+    "minJobsMentioning": {
+      "title": "Minimum jobs mentioning",
+      "type": "integer",
+      "description": "Only companies with at least this many open jobs naming the technologies (after the location filters). Raise it to keep companies where the technology is a real part of the stack, not a one-off.",
+      "minimum": 1,
+      "default": 1,
+      "prefill": 2
+    },
+    "companies": {
+      "title": "Companies",
+      "type": "array",
+      "description": "Only these companies: names or job-board tokens (\"Spotify\", \"stripe\", or a board URL). With no technologies set, each company's row lists every technology its job posts name (\"what tech does Acme use?\").",
+      "editor": "stringList"
+    },
+    "maxResults": {
+      "title": "Max companies",
+      "type": "integer",
+      "description": "Maximum company rows to return (most jobs mentioning the technologies first). Each row is one company-result event.",
+      "minimum": 1,
+      "default": 100,
+      "prefill": 20
+    }
+  }
+}
