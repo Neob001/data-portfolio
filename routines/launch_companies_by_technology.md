@@ -18,8 +18,8 @@ Push: `GIT_SSH_COMMAND="ssh -i ~/.ssh/data_portfolio_deploy" git push -q origin 
 2. Local run on the real asset: `cd actors/companies-by-technology && npm install --no-audit --no-fund` (if needed) and
    run the Actor locally with input `{"technologies":["Snowflake"],"minJobsMentioning":2,"maxResults":20}` (apify-cli
    `apify run` if installed, else `node src/main.js` with APIFY_LOCAL_STORAGE_DIR in the scratchpad and the input in
-   key_value_stores/default/INPUT.json). Required: 20 rows, every row has company/domain-or-board fields, `technologies`
-   containing Snowflake, job counts > 0. Also `node --test tests/*.test.mjs` passes. Else stop and report.
+   key_value_stores/default/INPUT.json). Required: 20 rows, every row has company_name and company_board, `technologies_matched`
+   containing Snowflake, jobs_mentioning_matched >= 2, source_url and fetched_at set. Also `node --test tests/*.test.mjs` passes. Else stop and report.
 3. `get('/users/me/limits')`: monthly usage below $3.00, else stop (wait for the cycle reset on the 10th).
 4. registry.json: companies-by-technology status "staging". `create_staging_actor.py companies-by-technology` (private
    Actor, listing, build; sets staging_started_at). Wait for the build to SUCCEED (poll `/actor-builds/<id>`).
