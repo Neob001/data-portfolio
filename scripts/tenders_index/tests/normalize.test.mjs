@@ -12,7 +12,7 @@ import { ocdsToRecord } from '../lib/ocds.mjs';
 import { ftsCtx, cfCtx, plannedDays } from '../lib/sources.mjs';
 import { retain, crossSourceDedupe, SourceStore } from '../lib/store.mjs';
 import { writeIndex, ageBand } from '../lib/writer.mjs';
-import { robotsAllows } from '../lib/robots.mjs';
+import { robotsAllows, storageHasNoRobots } from '../lib/robots.mjs';
 
 const fx = (f) => JSON.parse(readFileSync(new URL(`./fixtures/${f}`, import.meta.url), 'utf8'));
 const NOW = Date.parse('2026-11-14T03:00:00Z');
@@ -25,6 +25,7 @@ test('helpers: dates, snippets, redaction, codes', () => {
   assert.equal(isoTs('2026-12-11T12:00:00+00:00'), '2026-12-11T12:00:00Z');
   assert.equal(isoTs('garbage'), null);
   assert.equal(samTs('2026-09-14 10:22:33.123-04'), '2026-09-14T14:22:33Z');
+  assert.equal(samTs('2026-11-15 02:49:58'), '2026-11-15T02:49:58Z'); // no offset -> UTC on any machine
   assert.equal(redactContacts('Contact jane.doe@council.gov.uk or +44 20 7946 0958 about ref 2026/123 for £1,200,000'),
     'Contact [email redacted] or [phone redacted] about ref 2026/123 for £1,200,000');
   const s = snippet('word '.repeat(300));
@@ -195,4 +196,15 @@ test('AusTender compiled release: order number title -> contract description; bu
   assert.equal(r.deadline_at, null);
   assert.deepEqual(r.supplier_names, [], 'ABNs are issued to sole traders too: registry suppliers are never listed');
   assert.equal(r.language, 'en');
+});
+
+test('R1a: only S3 "no robots.txt object" errors on S3 hosts count as no rules', () => {
+  const s3 = { status: 403, server: 'AmazonS3', body: '<?xml version="1.0"?><Error><Code>AccessDenied</Code><Message>Access Denied</Message></Error>' };
+  assert.equal(storageHasNoRobots('falextracts.s3.amazonaws.com', s3), true);
+  assert.equal(storageHasNoRobots('bucket.s3.us-east-1.amazonaws.com', { ...s3, body: '<Error><Code>NoSuchKey</Code></Error>' }), true);
+  assert.equal(storageHasNoRobots('sam.gov', s3), false);
+  assert.equal(storageHasNoRobots('falextracts.s3.amazonaws.com.evil.com', s3), false);
+  assert.equal(storageHasNoRobots('falextracts.s3.amazonaws.com', { ...s3, server: 'nginx' }), false);
+  assert.equal(storageHasNoRobots('falextracts.s3.amazonaws.com', { ...s3, status: 401 }), false);
+  assert.equal(storageHasNoRobots('falextracts.s3.amazonaws.com', { ...s3, body: '<html>Forbidden</html>' }), false);
 });

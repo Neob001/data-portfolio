@@ -198,3 +198,9 @@
 ## 2026-11-17 — tenders index (S-3) merged to main with UK + OCP registry sources only
 - Reviewed claude/tenders-index (43207d1): per-source failure isolation, contact redaction, org-only supplier names, rolling 90-day store. Merged with `--sources uk-fts,uk-cf,ocds`; TED and SAM.gov off pending the owner's call on their caveats (DECISIONS NOTE). The workflow file change triggers the first build on push.
 - government-tenders-api stays draft: its README/listing still name TED and SAM.gov — rewrite coverage to the enabled sources before any publish.
+
+## 2026-11-17 — tenders index: first build, TED + SAM.gov on (owner decisions)
+- First tenders-index build (push-triggered, e5479dc): green, build step 33 min, 463,313 notices (UK FTS 33/91 backfill days, Contracts Finder complete, 16 OCP registry publications; Greece 169k, Guatemala 95k, Germany 57k, Brazil 46k largest).
+- Owner approved TED, SAM.gov (via new robots rule R1a: S3 403 AccessDenied for a missing robots.txt on a publisher's redirect target = no rules) and the companies-by-technology listing; declined folding company-result into P4.
+- SAM fetcher now follows sam.gov's 303 manually and gates the S3 target (R1 + R1a) instead of following it blind. Local smoke: TED 3,535 notices/day in 60 s; SAM 1,232 notices for the newest 4 days.
+- Fixed: SAM PostedDate has no offset and was parsed in the machine's local zone (JST locally, UTC in CI); now always read as UTC.

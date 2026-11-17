@@ -1,7 +1,19 @@
 // robots.txt gate, owner rule R1 (2026-10-23): request /robots.txt with `Accept: text/plain`; only a 2xx
 // text/plain file counts and it must allow the path; 404/410 = no restrictions; anything else (other 4xx,
 // 5xx, unreachable, HTML) = do not read the host. Checked once per host per night, before any data request.
+// Amendment R1a (owner, 2026-11-17): when a publisher's own download link redirects to an Amazon S3 storage
+// host, and that host answers /robots.txt with S3's 403 AccessDenied/NoSuchKey error (no robots.txt object;
+// RFC 9309 treats 4xx as "unavailable" = no rules), the host counts as having no restrictions. Only for
+// redirect targets of an approved publisher's link (`viaPublisher`), never for a host we pick ourselves.
 import { request, UA } from './http.mjs';
+
+const S3_HOST = /^([a-z0-9][a-z0-9.-]*\.)?s3([.-][a-z0-9-]+)*\.amazonaws\.com$/i;
+
+/** R1a: true when this robots.txt failure is S3 saying "no such object" for a publisher-linked host. */
+export function storageHasNoRobots(host, err) {
+  return Boolean(err && err.status === 403 && S3_HOST.test(host) && /^AmazonS3$/i.test(err.server || '')
+    && /<Code>\s*(AccessDenied|NoSuchKey)\s*<\/Code>/.test(err.body || ''));
+}
 
 const TOKEN = 'factpipe-tenders-index';
 
@@ -39,11 +51,15 @@ export function robotsAllows(text, path, token = TOKEN) {
 
 const cache = new Map();
 
-/** true when R1 lets us read `url`; the verdict per host is cached for the run. */
-export async function robotsOk(url, log = () => {}) {
+/**
+ * true when R1 lets us read `url`; the verdict per host is cached for the run.
+ * opts.viaPublisher: `url` is the redirect target of an approved publisher's link (enables R1a).
+ */
+export async function robotsOk(url, log = () => {}, { viaPublisher = false } = {}) {
   const u = new URL(url);
-  if (!cache.has(u.host)) {
-    cache.set(u.host, (async () => {
+  const key = viaPublisher ? `${u.host} via-publisher` : u.host;
+  if (!cache.has(key)) {
+    cache.set(key, (async () => {
       try {
         const res = await request(`${u.protocol}//${u.host}/robots.txt`, { headers: { accept: 'text/plain', 'user-agent': UA }, retries: 1, minGapMs: 0, timeoutMs: 30000 });
         const type = res.headers.get('content-type') || '';
@@ -52,11 +68,12 @@ export async function robotsOk(url, log = () => {}) {
         return { ok: true, text };
       } catch (e) {
         if (e.status === 404 || e.status === 410) return { ok: true, text: '' };
+        if (viaPublisher && storageHasNoRobots(u.host, e)) { log(`robots: ${u.host} has no robots.txt object (S3 403, rule R1a)`); return { ok: true, text: '' }; }
         return { ok: false, why: `robots.txt: ${e.message}` };
       }
     })());
   }
-  const v = await cache.get(u.host);
+  const v = await cache.get(key);
   if (!v.ok) { log(`robots: ${u.host} not readable (${v.why})`); return false; }
   return robotsAllows(v.text, u.pathname + u.search);
 }

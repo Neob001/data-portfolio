@@ -81,6 +81,9 @@ export function samTs(v) {
   if (!s) return null;
   const m = /^(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2}(?::\d{2})?)(?:\.\d+)?\s*([+-]\d{2})(?::?(\d{2}))?$/.exec(s);
   if (m) return isoTs(`${m[1]}T${m[2].length === 5 ? `${m[2]}:00` : m[2]}${m[3]}:${m[4] || '00'}`);
+  // No offset (PostedDate is "YYYY-MM-DD HH:MM:SS"): read as UTC, so the result never depends on the machine's time zone.
+  const z = /^(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2}(?::\d{2})?)(?:\.\d+)?$/.exec(s);
+  if (z) return isoTs(`${z[1]}T${z[2].length === 5 ? `${z[2]}:00` : z[2]}Z`);
   return isoTs(s);
 }
 

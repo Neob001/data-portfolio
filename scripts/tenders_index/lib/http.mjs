@@ -59,14 +59,15 @@ export async function request(url, opts = {}) {
     }
     if (res.ok || (redirect === 'manual' && res.status >= 300 && res.status < 400)) return res;
     const ra = retryAfterMs(res.headers.get('retry-after'));
-    await res.arrayBuffer().catch(() => null);
+    const errBody = (await res.text().catch(() => '')).slice(0, 2000);
     if (res.status === 429 || res.status >= 500) {
       last = new HttpError(`HTTP ${res.status} at ${url}`, res.status === 429 ? 'blocked' : 'site_down', res.status);
       if (ra !== null && ra > maxRetryAfterMs) throw Object.assign(last, { retryAfterMs: ra });
       await sleep(Math.max(ra ?? 0, 2000 * 2 ** attempt));
       continue;
     }
-    throw new HttpError(`HTTP ${res.status} at ${url}`, res.status === 403 ? 'blocked' : 'http_error', res.status);
+    throw Object.assign(new HttpError(`HTTP ${res.status} at ${url}`, res.status === 403 ? 'blocked' : 'http_error', res.status),
+      { server: res.headers.get('server') || '', body: errBody });
   }
   throw last;
 }

@@ -11,8 +11,8 @@ import { ocdsToRecord } from './ocds.mjs';
 import { robotsOk } from './robots.mjs';
 
 /** R1 gate before any data request to a host (verdict cached per host and night). */
-export async function gate(url) {
-  if (!(await robotsOk(url))) throw Object.assign(new HttpError(`robots.txt (rule R1) does not allow ${url}`, 'blocked'), { robots: true });
+export async function gate(url, opts = {}) {
+  if (!(await robotsOk(url, (m) => console.error(m), opts))) throw Object.assign(new HttpError(`robots.txt (rule R1) does not allow ${url}`, 'blocked'), { robots: true });
 }
 
 const DAY = 86400000;
@@ -157,7 +157,17 @@ export async function fetchSam(ctx) {
   const cutoff = ctx.opts.maxDays ? dayStr(ctx.now - ctx.opts.maxDays * DAY) : null;
   const maxBytes = (ctx.opts.samMaxMb || 0) * 1048576;
   await gate(SAM_CSV_URL);
-  const res = await request(SAM_CSV_URL, { minGapMs: 0, timeoutMs: 15 * 60000, retries: 3 });
+  // sam.gov answers with a 303 to a signed S3 URL; that storage host is gated too (R1 + R1a).
+  const hop = await request(SAM_CSV_URL, { minGapMs: 0, timeoutMs: 120000, retries: 3, redirect: 'manual' });
+  let dataUrl = SAM_CSV_URL;
+  if (hop.status >= 300 && hop.status < 400) {
+    await hop.arrayBuffer().catch(() => null);
+    const loc = hop.headers.get('location');
+    if (!loc) throw new HttpError('SAM.gov redirect without Location', 'schema_change');
+    dataUrl = new URL(loc, SAM_CSV_URL).href;
+    await gate(dataUrl, { viaPublisher: true });
+  }
+  const res = dataUrl === SAM_CSV_URL ? hop : await request(dataUrl, { minGapMs: 0, timeoutMs: 15 * 60000, retries: 3 });
   const decoder = new TextDecoder('windows-1252');
   let idx = null;
   let stop = false;

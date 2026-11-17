@@ -54,8 +54,7 @@ jobs:
       # The first nights also backfill the 90-day window (newest days first) until each source's cursor is complete.
       - name: Build index
         timeout-minutes: 45
-        # TED and SAM.gov stay off until the owner decides their caveats (DECISIONS.md 2026-11-17 NOTE tenders-ted / tenders-sam).
-        run: node --max-old-space-size=10240 build_index.mjs --codec br --window-days 90 --budget-min 32 --registry-max-mb 1800 --sources uk-fts,uk-cf,ocds
+        run: node --max-old-space-size=10240 build_index.mjs --codec br --window-days 90 --budget-min 32 --registry-max-mb 1800
 
       - name: Save index state
         if: always()
