@@ -64,11 +64,12 @@ test('README: quick start with the prefilled run cost, JSON sample, pricing, FAQ
   for (const s of ['ats-jobs-feed', 'companies-hiring']) assert.ok(md.includes(`https://apify.com/factpipe/${s}`), s);
 });
 
-test('registry: draft entry with the proposed company-result price and tiers (not live)', () => {
+test('registry: entry with the approved company-result price and tiers; an Apify id once staged', () => {
   const e = registry.actors[SLUG];
   assert.ok(e, 'registry entry');
-  assert.equal(e.status, 'draft');
-  assert.equal(e.apify_actor_id, null);
+  assert.ok(['draft', 'staging', 'live'].includes(e.status), e.status);
+  if (e.status === 'draft') assert.equal(e.apify_actor_id, null);
+  else assert.match(e.apify_actor_id, /^[A-Za-z0-9]{17}$/);
   assert.deepEqual(e.ppe_events['company-result'].store_discount_tiers_usd, { FREE: 0.015, BRONZE: 0.0135, SILVER: 0.012, GOLD: 0.0105 });
   assert.equal(e.listing.title, actor.title);
   assert.equal(e.listing.description, actor.description);
