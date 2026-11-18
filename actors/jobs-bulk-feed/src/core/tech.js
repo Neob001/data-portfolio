@@ -960,3 +960,35 @@ export function selfTechIds(companyName, token) {
   }
   return out;
 }
+
+// Company boilerplate ("trusted by Canva, OpenAI and Snowflake", "about us") repeats in every job post of a board and
+// names customers / partners, not technologies the company uses: Chainguard showed Snowflake in 108 of 108 jobs
+// (2026-11-18). The build drops long paragraphs that repeat across most of a board's posts before detection.
+export const BOILERPLATE = { minChars: 80, minJobs: 3, minShare: 0.5 };
+const paraKey = (p) => p.replace(/\s+/g, ' ').trim().toLowerCase();
+
+/** Long paragraphs that occur in >= minShare of a board's descriptions (and >= minJobs of them). -> Set(key) */
+export function boilerplateParagraphs(descriptions, opts = BOILERPLATE) {
+  const texts = descriptions.filter((d) => typeof d === 'string' && d);
+  const out = new Set();
+  if (texts.length < opts.minJobs) return out;
+  const counts = new Map();
+  for (const t of texts) {
+    const seen = new Set();
+    for (const p of t.split(/\n+/)) {
+      const k = paraKey(p);
+      if (k.length < opts.minChars || seen.has(k)) continue;
+      seen.add(k);
+      counts.set(k, (counts.get(k) || 0) + 1);
+    }
+  }
+  const need = Math.max(opts.minJobs, Math.ceil(texts.length * opts.minShare));
+  for (const [k, n] of counts) if (n >= need) out.add(k);
+  return out;
+}
+
+/** The description without the board's boilerplate paragraphs (unchanged when there are none). */
+export function stripBoilerplate(description, boilerplate) {
+  if (!description || !boilerplate?.size) return description;
+  return description.split(/\n+/).filter((p) => !boilerplate.has(paraKey(p))).join('\n');
+}

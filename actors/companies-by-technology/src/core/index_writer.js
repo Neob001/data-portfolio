@@ -10,7 +10,7 @@ import { join } from 'node:path';
 import { dedupeKey, dedupeLite, preferLite, boardKey } from './transform.js';
 import { factorBoardKeywords } from './keywords.js';
 import { ageBand, bandWindow, AGE_BANDS, INDEX_FORMAT, SLIM_FIELDS, defaultApplyUrl } from './index_format.js';
-import { detectTechIds, selfTechIds, TECHNOLOGIES, TECH_DICTIONARY_VERSION } from './tech.js';
+import { detectTechIds, selfTechIds, boilerplateParagraphs, stripBoilerplate, TECHNOLOGIES, TECH_DICTIONARY_VERSION } from './tech.js';
 
 export const TECH_ASSET_FILE = 'companies_tech.json.gz'; // read by technographics.js (TECH_ASSET)
 export const TECH_SAMPLES_PER_TECH = 3;
@@ -107,6 +107,11 @@ export class IndexWriter {
     if (this.tech) {
       try { self = selfTechIds(companyName, board.token); } catch (e) { this.techFailed(e); }
     }
+    // Paragraphs repeated in most of this board's posts (customer lists, "about us") are not technologies it uses.
+    let boiler = null;
+    if (this.tech) {
+      try { boiler = boilerplateParagraphs(jobs.map((j) => j.description_text)); } catch (e) { this.techFailed(e); }
+    }
     for (let i = 0; i < jobs.length; i += 1) {
       const job = jobs[i];
       const key = dedupeKey(job);
@@ -124,7 +129,7 @@ export class IndexWriter {
         // Before truncation: the full description (up to DESCRIPTION_MAX) is only in memory here.
         try {
           const t0 = performance.now();
-          let ids = detectTechIds(job.title, job.description_text);
+          let ids = detectTechIds(job.title, stripBoilerplate(job.description_text, boiler));
           if (self?.size) ids = ids.filter((id) => !self.has(id));
           this.techMs += performance.now() - t0;
           x = [ids.join('.'), job.description_text ? 1 : 0];
