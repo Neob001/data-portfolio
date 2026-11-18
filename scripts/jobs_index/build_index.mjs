@@ -217,7 +217,7 @@ function pacer(gapMs) {
 // robots.txt rule R1 is unchanged: a board is never read until its host's robots.txt was read with a 2xx.
 // The queue stops for the night after `maxCooldowns` pauses in a row without one successful board, or at once when a host
 // asks for more than `stopRetryAfterMs` via Retry-After.
-const RATE_LIMIT = { firstCooldownMs: 30000, maxCooldownMs: 300000, maxCooldowns: 6, maxGapMs: 2000, retriesPerBoard: 2,
+const RATE_LIMIT = { firstCooldownMs: 30000, maxCooldownMs: 300000, maxCooldowns: 16, maxGapMs: 2000, retriesPerBoard: 2,
   speedUpAfter: 50, stopRetryAfterMs: 600000 };
 const sleep = (ms) => new Promise((r) => setTimeout(r, Math.max(0, ms)));
 

@@ -82,7 +82,7 @@ jobs:
       # the first nights only JazzHR boards whose jobs changed in the public sitemaps and job pages of new jobs are read.
       - name: Build slim index
         timeout-minutes: 140
-        run: node --max-old-space-size=6144 build_index.mjs --codec br --workday-max-jobs 500 --workday-site-budget-s 90 --workday-budget-min 100 --personio-budget-min 45 --teamtailor-budget-min 45 --teamtailor-max-jobs 1000 --jazzhr-budget-min 80 --pinpoint-budget-min 30 --jazzhr-max-details 15 --pinpoint-max-details 10
+        run: node --max-old-space-size=6144 build_index.mjs --codec br --workday-max-jobs 500 --workday-site-budget-s 90 --workday-budget-min 100 --personio-budget-min 75 --teamtailor-budget-min 45 --teamtailor-max-jobs 1000 --jazzhr-budget-min 80 --pinpoint-budget-min 30 --jazzhr-max-details 15 --pinpoint-max-details 10
 
       - name: Save validation state
         if: always()
