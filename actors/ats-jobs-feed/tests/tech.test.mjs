@@ -3,6 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
   detectTechnologies, findTechnology, suggestTechnologies, TECHNOLOGIES, ALIASES, TECH_CATEGORIES,
+  boilerplateParagraphs, stripBoilerplate,
 } from '../src/core/tech.js';
 
 const has = (title, text, slug) => detectTechnologies(title, text).includes(slug);
@@ -227,4 +228,25 @@ test('user input lookup: names, slugs, aliases, typos get suggestions', () => {
   assert.equal(findTechnology('Salesforce').slug, 'salesforce');
   assert.equal(findTechnology('not a tech at all'), null);
   assert.ok(suggestTechnologies('snowflak').includes('Snowflake'));
+});
+
+test('company boilerplate repeated in most posts is not a technology the company uses (Chainguard 2026-11-18)', () => {
+  const about = 'Our customers include Fortune 500 enterprises and global industry leaders, including Canva, OpenAI and Snowflake.';
+  const roles = [
+    'We run Kubernetes on AWS and you will own our build pipeline.',
+    'You will sell to security teams; Salesforce experience is a plus.',
+    'Design marketing pages and campaigns for the brand team.',
+    'Support customers with onboarding and billing questions.',
+  ];
+  const posts = roles.map((r) => `${r}\n${about}\nWe are an equal opportunity employer.`);
+  const bp = boilerplateParagraphs(posts);
+  assert.equal(bp.size, 1); // the short equal-opportunity line is ignored (< minChars) - harmless either way
+  const found = posts.map((p) => detectTechnologies('Role', stripBoilerplate(p, bp)));
+  assert.ok(found.every((f) => !f.includes('snowflake')));
+  assert.ok(found[0].includes('kubernetes') && found[1].includes('salesforce'));
+  // A board with too few posts keeps everything; a paragraph in a minority of posts is kept.
+  assert.equal(boilerplateParagraphs(posts.slice(0, 2)).size, 0);
+  assert.equal(boilerplateParagraphs([posts[0], roles[1], roles[2], roles[3], roles[0]]).size, 0);
+  assert.equal(stripBoilerplate('', bp), '');
+  assert.equal(stripBoilerplate(posts[0], new Set()), posts[0]);
 });
