@@ -1671,10 +1671,10 @@
       "staging_started_at": "2026-11-03T11:43:21Z"
     },
     "companies-by-technology": {
-      "apify_actor_id": null,
+      "apify_actor_id": "L7ePxxGbVlTtbZoNZ",
       "source": "factpipe jobs index (GitHub release jobs-index: companies_tech.json.gz, technologies named in public ATS job posts)",
       "variant": "technographics from job posts (company-level)",
-      "status": "draft",
+      "status": "staging",
       "approval": "S-2 APPROVED 2026-11-17; listing + $15/1k (company-result $0.015, tiers 0.0135/0.012/0.0105) APPROVED by owner 2026-11-17 (DECISIONS 'listing companies-by-technology'); launch per routines/launch_companies_by_technology.md",
       "origin": "scan",
       "incumbent_actor_id": null,
@@ -1711,7 +1711,8 @@
       "default_run_options": {
         "memoryMbytes": 2048,
         "timeoutSecs": 300
-      }
+      },
+      "staging_started_at": "2026-11-18T14:43:33Z"
     },
     "government-tenders-api": {
       "apify_actor_id": null,
