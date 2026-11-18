@@ -107,3 +107,6 @@ Replies are NEVER posted without a tick. Standing decision 2026-09-12.
 
 ## 2026-11-17
 (no drafts today. demand_monitor: 0 new hits; the 8 open signals are the same Dans-Plugins "Post X to SpigotMC" release chores already logged 2026-11-16 as keyword-only matches. Apify forum still returns non-JSON. No owner ticks pending.)
+
+## 2026-11-18
+(no drafts today. demand_monitor: 8 new raw hits (16 open signals), 0 passed the filters: all 16 open are Dans-Plugins "Post X to SpigotMC" release chores (e.g. Wild-Pets#410, SimpleSkills#260, Medieval-Factions#2216, Currencies#310, Dans-Essentials#239) matched on keywords only. All marked filtered. No have matches, no DC proposals. Apify forum still returns non-JSON. No owner ticks pending.)

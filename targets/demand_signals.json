@@ -1519,7 +1519,7 @@
       "match_type": "buildable",
       "matched_actor": null,
       "capture_score": 0.888,
-      "status": "new",
+      "status": "filtered",
       "detected_at": "2026-11-16T09:07:27.613973+00:00"
     },
     {
@@ -1533,7 +1533,7 @@
       "match_type": "buildable",
       "matched_actor": null,
       "capture_score": 0.878,
-      "status": "new",
+      "status": "filtered",
       "detected_at": "2026-11-16T09:07:27.614460+00:00"
     },
     {
@@ -1547,7 +1547,7 @@
       "match_type": "buildable",
       "matched_actor": null,
       "capture_score": 0.849,
-      "status": "new",
+      "status": "filtered",
       "detected_at": "2026-11-16T09:07:27.614940+00:00"
     },
     {
@@ -1561,7 +1561,7 @@
       "match_type": "buildable",
       "matched_actor": null,
       "capture_score": 0.844,
-      "status": "new",
+      "status": "filtered",
       "detected_at": "2026-11-16T09:07:27.615413+00:00"
     },
     {
@@ -1575,7 +1575,7 @@
       "match_type": "buildable",
       "matched_actor": null,
       "capture_score": 0.84,
-      "status": "new",
+      "status": "filtered",
       "detected_at": "2026-11-16T09:07:27.615902+00:00"
     },
     {
@@ -1589,7 +1589,7 @@
       "match_type": "buildable",
       "matched_actor": null,
       "capture_score": 0.836,
-      "status": "new",
+      "status": "filtered",
       "detected_at": "2026-11-16T09:07:27.616374+00:00"
     },
     {
@@ -1603,7 +1603,7 @@
       "match_type": "buildable",
       "matched_actor": null,
       "capture_score": 0.832,
-      "status": "new",
+      "status": "filtered",
       "detected_at": "2026-11-16T09:07:27.616857+00:00"
     },
     {
@@ -1617,8 +1617,120 @@
       "match_type": "buildable",
       "matched_actor": null,
       "capture_score": 0.825,
-      "status": "new",
+      "status": "filtered",
       "detected_at": "2026-11-16T09:07:27.617643+00:00"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/Dans-Plugins/Medieval-Factions/issues/2216",
+      "title": "Post 11.0.0 to SpigotMC",
+      "body": "`v11.0.0` is the stable release on GitHub, but the listing at https://www.spigotmc.org/resources/79941/ still shows the previous version until an update is posted there by hand (SpigotMC has no API for it).\n\n## Post update\n\n1. Open https://www.spigotmc.org/resources/79941/, choose **Post update**.\n2. Version string: `11.0.0`\n3. Download: **External download** \u2192 `https://github.com/Dans-Plugins/Med",
+      "created_at": "2026-11-18T03:56:44Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 0.823,
+      "status": "filtered",
+      "detected_at": "2026-11-18T09:07:09.774386+00:00"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/Dans-Plugins/Medieval-Economy/issues/223",
+      "title": "Post 2.6.1 to SpigotMC",
+      "body": "`v2.6.1` is the stable release on GitHub, but the listing at https://www.spigotmc.org/resources/81836/ still shows the previous version until an update is posted there by hand (SpigotMC has no API for it).\n\n## Post update\n\n1. Open https://www.spigotmc.org/resources/81836/, choose **Post update**.\n2. Version string: `2.6.1`\n3. Download: **External download** \u2192 `https://github.com/Dans-Plugins/Medie",
+      "created_at": "2026-11-18T03:10:00Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 0.801,
+      "status": "filtered",
+      "detected_at": "2026-11-18T09:07:09.774964+00:00"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/Dans-Plugins/Medieval-Cookery/issues/109",
+      "title": "Post 0.3.1 to SpigotMC",
+      "body": "`v0.3.1` is the stable release on GitHub, but the listing at https://www.spigotmc.org/resources/140092/ still shows the previous version until an update is posted there by hand (SpigotMC has no API for it).\n\n## Post update\n\n1. Open https://www.spigotmc.org/resources/140092/, choose **Post update**.\n2. Version string: `0.3.1`\n3. Download: **External download** \u2192 `https://github.com/Dans-Plugins/Med",
+      "created_at": "2026-11-18T02:59:01Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 0.796,
+      "status": "filtered",
+      "detected_at": "2026-11-18T09:07:09.775433+00:00"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/Dans-Plugins/Mailboxes/issues/200",
+      "title": "Post 1.9.1 to SpigotMC",
+      "body": "`v1.9.1` is the stable release on GitHub, but the listing at https://www.spigotmc.org/resources/96611/ still shows the previous version until an update is posted there by hand (SpigotMC has no API for it).\n\n## Post update\n\n1. Open https://www.spigotmc.org/resources/96611/, choose **Post update**.\n2. Version string: `1.9.1`\n3. Download: **External download** \u2192 `https://github.com/Dans-Plugins/Mailb",
+      "created_at": "2026-11-18T02:50:23Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 0.793,
+      "status": "filtered",
+      "detected_at": "2026-11-18T09:07:09.775907+00:00"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/Dans-Plugins/KDRTracker/issues/106",
+      "title": "Post 0.6.2 to SpigotMC",
+      "body": "`v0.6.2` is the stable release on GitHub, but the listing at https://www.spigotmc.org/resources/140090/ still shows the previous version until an update is posted there by hand (SpigotMC has no API for it).\n\n## Post update\n\n1. Open https://www.spigotmc.org/resources/140090/, choose **Post update**.\n2. Version string: `0.6.2`\n3. Download: **External download** \u2192 `https://github.com/Dans-Plugins/KDR",
+      "created_at": "2026-11-18T02:40:21Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 0.788,
+      "status": "filtered",
+      "detected_at": "2026-11-18T09:07:09.776721+00:00"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/Dans-Plugins/Fiefs/issues/284",
+      "title": "Post 1.2.1 to SpigotMC",
+      "body": "`v1.2.1` is the stable release on GitHub, but the listing at https://www.spigotmc.org/resources/98559/ still shows the previous version until an update is posted there by hand (SpigotMC has no API for it).\n\n## Post update\n\n1. Open https://www.spigotmc.org/resources/98559/, choose **Post update**.\n2. Version string: `1.2.1`\n3. Download: **External download** \u2192 `https://github.com/Dans-Plugins/Fiefs",
+      "created_at": "2026-11-18T02:19:44Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 0.779,
+      "status": "filtered",
+      "detected_at": "2026-11-18T09:07:09.777199+00:00"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/Dans-Plugins/Dans-Essentials/issues/239",
+      "title": "Post 2.9.0 to SpigotMC",
+      "body": "`v2.9.0` is the stable release on GitHub, but the listing at https://www.spigotmc.org/resources/80513/ still shows the previous version until an update is posted there by hand (SpigotMC has no API for it).\n\n## Post update\n\n1. Open https://www.spigotmc.org/resources/80513/, choose **Post update**.\n2. Version string: `2.9.0`\n3. Download: **External download** \u2192 `https://github.com/Dans-Plugins/Dans-",
+      "created_at": "2026-11-18T01:53:30Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 0.769,
+      "status": "filtered",
+      "detected_at": "2026-11-18T09:07:09.777670+00:00"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/Dans-Plugins/Currencies/issues/310",
+      "title": "Post 3.10.0 to SpigotMC",
+      "body": "`v3.10.0` is the stable release on GitHub, but the listing at https://www.spigotmc.org/resources/96381/ still shows the previous version until an update is posted there by hand (SpigotMC has no API for it).\n\n## Post update\n\n1. Open https://www.spigotmc.org/resources/96381/, choose **Post update**.\n2. Version string: `3.10.0`\n3. Download: **External download** \u2192 `https://github.com/Dans-Plugins/Cur",
+      "created_at": "2026-11-18T01:42:07Z",
+      "engagement": 0,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": 0.764,
+      "status": "filtered",
+      "detected_at": "2026-11-18T09:07:09.778154+00:00"
     }
   ]
 }
