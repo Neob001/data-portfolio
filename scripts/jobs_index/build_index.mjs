@@ -195,14 +195,31 @@ function rotateDaily(list, now = new Date()) {
 
 function pacer(gapMs) {
   let next = 0;
-  return async () => {
-    if (!gapMs) return;
+  let gap = gapMs;
+  const wait = async () => {
+    if (!gap) return;
     const now = Date.now();
-    const wait = Math.max(0, next - now);
-    next = Math.max(now, next) + gapMs;
-    if (wait) await new Promise((r) => setTimeout(r, wait));
+    const ms = Math.max(0, next - now);
+    next = Math.max(now, next) + gap;
+    if (ms) await new Promise((r) => setTimeout(r, ms));
   };
+  // After a rate limit: double the spacing between request starts (at most RATE_LIMIT.maxGapMs), for the rest of the build.
+  wait.slow = () => { gap = Math.min(RATE_LIMIT.maxGapMs, Math.max(gap * 2, 250)); return gap; };
+  // After RATE_LIMIT.speedUpAfter successful boards in a row: halve it again, never below the platform's own spacing.
+  wait.fast = () => { gap = Math.max(gapMs, Math.floor(gap / 2)); return gap; };
+  wait.gap = () => gap;
+  return wait;
 }
+
+// Rate limits (HTTP 429 on any request of a platform, robots.txt included): the platform's queue pauses (30 s, doubling,
+// at most 5 min), its pacing slows down, and the boards that got the 429 go back to the end of the queue (at most 2
+// retries each); after `speedUpAfter` successful boards in a row the spacing halves again, down to the platform's own.
+// robots.txt rule R1 is unchanged: a board is never read until its host's robots.txt was read with a 2xx.
+// The queue stops for the night after `maxCooldowns` pauses in a row without one successful board, or at once when a host
+// asks for more than `stopRetryAfterMs` via Retry-After.
+const RATE_LIMIT = { firstCooldownMs: 30000, maxCooldownMs: 300000, maxCooldowns: 6, maxGapMs: 2000, retriesPerBoard: 2,
+  speedUpAfter: 50, stopRetryAfterMs: 600000 };
+const sleep = (ms) => new Promise((r) => setTimeout(r, Math.max(0, ms)));
 
 // ------------------------------------------------------------------ JazzHR / Pinpoint state between nights
 /** state/hosted/<ats>.json.gz -> { boards: {token: {name, fetched_at, jobs}}, details: {job_id: detail} } */
@@ -383,9 +400,22 @@ async function main() {
     const politeFetchText = async (url) => { throw new Error(`name from boards.json, not ${url}`); };
     // robots.txt and feeds of the career-site platforms, paced with the platform's other requests.
     const politeGetText = async (url, opts) => { await wait(); return getText(url, opts); };
-    let blocked429 = 0; // circuit breaker: consecutive rate-limit failures on this ATS
+    let pauseUntil = 0; // rate-limit cooldown of this ATS's queue (all workers wait)
+    let cooldowns = 0; // pauses in a row without a successful board in between
+    let stopped = false; // circuit breaker tripped: no more boards of this ATS tonight
+    const tries = new Map(); // board -> rate-limited attempts
+    let okStreak = 0; // successful boards since the last 429 (or the last speed-up)
+    const ok429 = () => {
+      cooldowns = 0;
+      okStreak += 1;
+      if (okStreak >= RATE_LIMIT.speedUpAfter && wait.gap() > pol.gapMs) { okStreak = 0; wait.fast(); }
+    };
     await Promise.all(Array.from({ length: pol.workers }, async () => {
       while (next < list.length) {
+        if (!stopped && pauseUntil > Date.now() && !(queueEndsAt[ats] && Date.now() >= queueEndsAt[ats])) {
+          await sleep(Math.min(pauseUntil, queueEndsAt[ats] || Infinity) - Date.now());
+          continue;
+        }
         if (queueEndsAt[ats] && Date.now() >= queueEndsAt[ats]) {
           const rest = list.slice(next);
           next = list.length; // claim the rest before any await (the other workers stop here)
@@ -405,9 +435,13 @@ async function main() {
           }
           break;
         }
-        if (blocked429 >= 5) {
-          stats.skipped_rate_limited = (stats.skipped_rate_limited || 0) + (list.length - next);
-          console.error(`  ${ats}: 5 consecutive HTTP 429 - skipping its remaining ${list.length - next} boards this build`);
+        if (stopped || cooldowns > RATE_LIMIT.maxCooldowns) {
+          if (next < list.length) {
+            stats.skipped_rate_limited = (stats.skipped_rate_limited || 0) + (list.length - next);
+            (stats.skipped_rate_limited_by_ats ||= {})[ats] = (stats.skipped_rate_limited_by_ats[ats] || 0) + (list.length - next);
+            console.error(`  ${ats}: still rate-limited after ${RATE_LIMIT.maxCooldowns} pauses - skipping its remaining ${list.length - next} boards this build`);
+          }
+          stopped = true;
           next = list.length;
           break;
         }
@@ -457,7 +491,7 @@ async function main() {
                 jobs: r.jobs.map((j) => ({ ...j, description_text: ats === 'jazzhr' ? null : (j.description_text || '').slice(0, 1500) || null })) };
               hosted[ats].pass2.push({ board, name: r.company_name || b.name || b.token, jobs: r.jobs, read: true });
             } else { delete hs.boards[tok]; stats.empty += 1; }
-            blocked429 = 0;
+            ok429();
             continue;
           }
           const name = r.company_name || b.name || b.token;
@@ -467,13 +501,35 @@ async function main() {
           addLock = addLock.then(() => writer.addBoard(board, name, jobs));
           await addLock;
           if (jobs.length) { stats.ok += 1; s.boards += 1; s.jobs += jobs.length; } else { stats.empty += 1; }
-          blocked429 = 0;
+          ok429();
         } catch (e) {
-          blocked429 = e.status === 429 ? blocked429 + 1 : 0;
+          if (e.status === 429) {
+            okStreak = 0;
+            s.rate_limited = (s.rate_limited || 0) + 1;
+            if (e.retryAfterMs > RATE_LIMIT.stopRetryAfterMs) {
+              stopped = true;
+              console.error(`  ${ats}: HTTP 429 with Retry-After ${Math.round(e.retryAfterMs / 1000)} s - stopping this ATS for tonight`);
+            } else if (pauseUntil <= Date.now()) {
+              cooldowns += 1;
+              const base = Math.min(RATE_LIMIT.maxCooldownMs, RATE_LIMIT.firstCooldownMs * 2 ** (cooldowns - 1));
+              pauseUntil = Date.now() + Math.max(base, e.retryAfterMs || 0);
+              const gap = wait.slow();
+              s.cooldowns = (s.cooldowns || 0) + 1;
+              s.gap_ms = gap;
+              console.error(`  ${ats}: HTTP 429 (${e.robots ? 'robots.txt' : 'data'}) - pause ${Math.round((pauseUntil - Date.now()) / 1000)} s, then ${gap} ms between requests`);
+            }
+            const n = (tries.get(b) || 0) + 1;
+            tries.set(b, n);
+            if (!stopped && n <= RATE_LIMIT.retriesPerBoard) {
+              list.push(b); // read it again after the pause
+              s.requeued = (s.requeued || 0) + 1;
+              continue;
+            }
+          }
           if (hosted[ats]) {
             // Gone (404/410) or disallowed: forget it. A transient failure keeps last night's jobs (carry-over rules).
             const tok = String(b.token).toLowerCase();
-            if (e.robots || e.status === 404 || e.status === 410) delete hosted[ats].state.boards[tok];
+            if ((e.robots && !e.transient) || e.status === 404 || e.status === 410) delete hosted[ats].state.boards[tok];
             else {
               const c = carriedJobs(ats, b);
               if (c?.jobs.length) {
@@ -485,7 +541,8 @@ async function main() {
             }
           }
           if (e.robots) {
-            s.skipped_robots = (s.skipped_robots || 0) + 1; // robots.txt disallows: the feed / site was never called
+            // robots.txt disallows (or could not be read: 429 / 5xx / unreachable): the feed / site was never called
+            s.skipped_robots = (s.skipped_robots || 0) + 1;
             const why = e.message.replace(/^.*skipped: /, '').replace(/disallows \/.*$/, 'disallows a path we read');
             s.robots_reasons ||= {};
             s.robots_reasons[why] = (s.robots_reasons[why] || 0) + 1;

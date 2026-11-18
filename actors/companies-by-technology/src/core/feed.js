@@ -311,12 +311,28 @@ async function fetchRobots(url, fetchText) {
 export async function boardRobots(board, { fetchText = defaultFetchText, cache = ROBOTS_CACHE, agent = ROBOTS_AGENT } = {}) {
   const host = boardHost(board);
   if (!cache.has(host)) cache.set(host, fetchRobots(`https://${host}/robots.txt`, fetchText));
-  return robotsVerdict(await cache.get(host), agent, robotsPathsFor(board));
+  const pending = cache.get(host);
+  const fetched = await pending;
+  const verdict = robotsVerdict(fetched, agent, robotsPathsFor(board));
+  // Rate-limited (429) or down (5xx / unreachable): still "do not read" (rule R1), but transient: forget the answer
+  // so a later attempt asks again, and mark it so callers back off and retry instead of treating it as a refusal.
+  if (!verdict.allowed && isTransientRobots(fetched)) {
+    if (cache.get(host) === pending) cache.delete(host);
+    return { ...verdict, transient: true, status: fetched?.status ?? null };
+  }
+  return verdict;
+}
+
+/** robots.txt answers that say "try later", not "keep out": HTTP 429, 5xx, unreachable. */
+export function isTransientRobots(fetched) {
+  return !fetched || Boolean(fetched.error) || fetched.status === 429 || fetched.status >= 500;
 }
 export const workdayRobots = boardRobots;
 
-function robotsError(board, reason) {
-  return Object.assign(new FetchError(`${boardKey(board)} skipped: ${reason}`, 'blocked', null), { robots: true });
+function robotsError(board, verdict) {
+  // A transient robots.txt failure carries its HTTP status (429 -> the caller's rate-limit handling) and `transient`.
+  return Object.assign(new FetchError(`${boardKey(board)} skipped: ${verdict.reason}`, 'blocked', verdict.status ?? null),
+    { robots: true, transient: Boolean(verdict.transient) });
 }
 
 /**
@@ -327,7 +343,7 @@ function robotsError(board, reason) {
 async function fetchWorkdayBoard(board, { fetchJson, fetchText, now, skipName, maxJobs = WORKDAY.maxJobsPerBoard,
   budgetMs = WORKDAY.liveBoardBudgetMs, deadline = null, robotsCache, robotsAgent }) {
   const verdict = await workdayRobots(board, { fetchText, cache: robotsCache, agent: robotsAgent });
-  if (!verdict.allowed) throw robotsError(board, verdict.reason);
+  if (!verdict.allowed) throw robotsError(board, verdict);
   const url = apiUrlFor(board);
   const started = Date.now();
   const postings = [];
@@ -441,7 +457,7 @@ export async function readJobPages(board, listed, { fetchText = defaultFetchText
 async function fetchHostedBoard(board, { fetchText, now, skipName, robotsCache = ROBOTS_CACHE, robotsAgent = ROBOTS_AGENT, feedTimeoutMs = 60000,
   maxDetails = HOSTED.liveMaxDetails, knownDetails = null, deadline = null }) {
   const verdict = await boardRobots(board, { fetchText, cache: robotsCache, agent: robotsAgent });
-  if (!verdict.allowed) throw robotsError(board, verdict.reason);
+  if (!verdict.allowed) throw robotsError(board, verdict);
   const url = apiUrlFor(board);
   const parsed = parseBoard(board, bodyOf(await fetchText(url, { accept: FEED_ACCEPT[board.ats], retries: 2, timeoutMs: feedTimeoutMs })));
   let requests = 1;
@@ -476,7 +492,7 @@ async function fetchHostedBoard(board, { fetchText, now, skipName, robotsCache =
 async function fetchFeedBoard(board, { fetchText, now, skipName, robotsCache, robotsAgent, feedTimeoutMs = 60000,
   maxJobs = TEAMTAILOR.maxJobsPerBoard, deadline = null }) {
   const verdict = await boardRobots(board, { fetchText, cache: robotsCache, agent: robotsAgent });
-  if (!verdict.allowed) throw robotsError(board, verdict.reason);
+  if (!verdict.allowed) throw robotsError(board, verdict);
   const url = apiUrlFor(board);
   const opts = { accept: FEED_ACCEPT[board.ats], retries: 2, timeoutMs: feedTimeoutMs };
   const parsed = parseBoard(board, bodyOf(await fetchText(url, opts)));

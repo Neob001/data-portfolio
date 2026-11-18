@@ -63,7 +63,7 @@ This is best-effort, and it over-redacts contact lines rather than under-redacti
 - Keeps boards with ≥1 open job. Records `ats, token, name, jobs, checked` (plus `region: "eu"` for EU Lever).
 - Lever and Ashby APIs don't return a company name, so the script reads the `<title>` of the hosted board page. Ashby titles are often just "Jobs", and then the token is used as the name.
 - Results are checkpointed in `state/validate.jsonl`. A re-run only re-checks boards older than `--max-age-hours`, plus any earlier transient failures (429, 5xx, timeouts).
-- Circuit breaker: a `429` with `Retry-After` > 300 s stops all calls to that ATS for the rest of the run. The builder does the same after 5 consecutive 429s.
+- Circuit breaker: a `429` with `Retry-After` > 300 s stops all calls to that ATS for the rest of the run. The builder pauses that ATS on a 429 (30 s doubling to 5 min, slower pacing, the boards retried later; robots.txt 429/5xx count as "try later", never as permission) and stops it for the night after 6 pauses in a row without a success.
 
 ## Workday (added 2026-10-09, owner approval J3)
 
@@ -165,7 +165,7 @@ For `actors/companies-by-technology` and the Jobs Feed `mode: "companies-by-tech
   - `publish_apify_kvs STORE`: uses `$APIFY_TOKEN` to PUT each record (`manifest.json`, `directory.json.gz`, `shard-<n>.jsonl.*`) and delete stale extra shards. It prints `INDEX_BASE_URL=https://api.apify.com/v2/key-value-stores/STORE/records`. The store must be publicly readable.
   - Both publish flat names, with the manifest rewritten to match.
 - `github-workflow.yml.draft` is a daily GitHub Actions job (03:00 UTC, 330 min timeout). It restores `state/` from the Actions cache, re-validates boards (any ATS with an active ban in `state/bans.json` is skipped), builds the slim index, saves state and publishes to the release. To enable it, copy it to `.github/workflows/` (owner decision).
-- **Rate-limit bans:** a `429` with `Retry-After` > 300 s makes `validate_boards.py` stop calling that ATS and record `{ats: until}` in `state/bans.json`. Both scripts skip a banned ATS until the ban expires. The builder also stops an ATS after 5 consecutive 429s.
+- **Rate-limit bans:** a `429` with `Retry-After` > 300 s makes `validate_boards.py` stop calling that ATS and record `{ats: until}` in `state/bans.json`. Both scripts skip a banned ATS until the ban expires. The builder pauses that ATS on a 429 (30 s doubling to 5 min, slower pacing, the boards retried later; robots.txt 429/5xx count as "try later", never as permission) and stops it for the night after 6 pauses in a row without a success; `validate_boards.py` keeps a board's last good result (<= 14 days) through a transient failure (429 / 5xx / unreachable, robots.txt included) instead of dropping it.
 
 ## Measured (2026-09-18/19, this sandbox, via a local HTTP proxy)
 

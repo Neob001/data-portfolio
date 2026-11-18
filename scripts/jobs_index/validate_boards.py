@@ -275,6 +275,14 @@ def robots_allowed(rules, path):
     return True if best is None else best[1]
 
 
+def robots_transient(status):
+    """robots.txt answers that mean "try later" (isTransientRobots() in core/feed.js): HTTP 429, 5xx, unreachable."""
+    return status is None or status <= 0 or status == 429 or status >= 500
+
+
+KEEP_PREV_DAYS = 14  # a board that answered 200 with jobs keeps that result through transient failures for this long
+
+
 def robots_verdict(status, text, content_type, paths):
     """-> (allowed, reason) for the paths we read on one host (robotsVerdict() in core/robots.js).
     RFC 9309 for a missing file (owner decision R1, 2026-10-23): 404/410 = no robots.txt = no restrictions.
@@ -447,6 +455,10 @@ def check(ats, token, region, pacers, prev=None):
         r_status, r_text, r_type = host_robots(board_host(ats, token), pacers[ats])
         allowed, reason = robots_verdict(r_status, r_text, r_type, robots_paths(ats, token))
         if not allowed:
+            if robots_transient(r_status):
+                # 429 / 5xx / unreachable: "try later", not "keep out". Still never called (R1), but not a refusal.
+                rec.update({'status': r_status if r_status and r_status > 0 else -1, 'reason': reason})
+                return rec
             rec.update({'status': 'robots', 'reason': reason})
             return rec
     if ats in ('jazzhr', 'pinpoint'):
@@ -597,7 +609,10 @@ def main():
         final = (200, 404, 410, 'robots', 'not_feed') + ((403, 422) if ats == 'workday' else ())
         # Refusals only because robots.txt was missing (HTTP 404/410) predate R1 (2026-10-23: a missing file = no
         # restrictions): re-check them now instead of waiting for them to age out.
-        stale_robots = prev and prev.get('status') == 'robots' and re.match(r'robots\.txt HTTP (404|410)\b', prev.get('reason') or '')
+        # Refusals recorded for a rate-limited / failing robots.txt (429, 5xx, unreachable; before 2026-11-18 these
+        # counted as "robots") are transient: re-check them now as well.
+        stale_robots = prev and prev.get('status') == 'robots' and re.match(
+            r'robots\.txt (HTTP (404|410|429|5\d\d)\b|unreachable)', prev.get('reason') or '')
         if prev and prev.get('ts', 0) >= fresh and prev.get('status') in final and not stale_robots:
             continue
         if prev is None and args.max_new:
@@ -623,10 +638,18 @@ def main():
         def run(ats, tok, region):
             if pacers[ats].blocked:
                 return  # host asked us to back off for a long time; leave the rest for the next run
+            prev = done.get((ats, tok.lower(), region))
             try:
-                rec = check(ats, tok, region, pacers, done.get((ats, tok.lower(), region)))
+                rec = check(ats, tok, region, pacers, prev)
             except Exception as e:  # noqa: BLE001 - one bad board never stops the sweep
                 rec = {'ats': ats, 'token': tok, 'status': -2, 'error': str(e)[:200], 'ts': time.time()}
+            st = rec.get('status')
+            if (isinstance(st, int) and robots_transient(st) and prev and prev.get('status') == 200 and prev.get('jobs')
+                    and prev.get('ts', 0) >= time.time() - KEEP_PREV_DAYS * 86400):
+                # Rate limit / outage tonight: keep the last good result (the build checks robots.txt again before reading).
+                with lock:
+                    counter['kept'] = counter.get('kept', 0) + 1
+                return
             with lock:
                 ck.write(json.dumps(rec) + '\n')
                 ck.flush()
@@ -678,6 +701,8 @@ def main():
         s['boards'] += 1
         s['jobs'] += b['jobs']
     log('boards.json:', len(boards), 'boards', summary, f'({time.time() - t0:.0f}s)')
+    if counter.get('kept'):
+        log(f"kept the last good result of {counter['kept']} boards through a transient failure (429 / 5xx / unreachable)")
     blocked = {}
     for (ats, _, _), r in done.items():
         if r.get('status') == 'robots':

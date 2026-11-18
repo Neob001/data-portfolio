@@ -71,7 +71,7 @@ jobs:
         timeout-minutes: 180
         run: python3 validate_boards.py --max-age-hours 150 --max-new 1500
 
-      # Builder also honours state/bans.json and trips its own breaker after 5 consecutive 429s (per ATS).
+      # Builder also honours state/bans.json; per ATS it pauses that ATS on a 429 (30 s doubling to 5 min, slower pacing, the boards retried later; robots.txt 429/5xx count as "try later", never as permission) and stops it for the night after 6 pauses in a row without a success.
       # Workday runs in parallel with the other ATSs inside its own budget (see build_index.mjs): newest
       # 500 jobs per site, 90 s per site, no new site after 100 min, so the fetch phase ends about with
       # Workable (~100 min at 3 s per board). Personio and Teamtailor are two more parallel queues with their own

@@ -169,6 +169,39 @@ test('robots.txt first: allowed or missing (404) -> feed read; disallowed / 403 
   assert.deepEqual(seen, [['https://career.teamtailor.com/robots.txt', 'text/plain']]);
 });
 
+// robots.txt answering 429 / 5xx / unreachable: still "do not read" (R1), but transient: not cached, so a later attempt
+// asks again, and fetchBoard's error carries the 429 for the index build's rate-limit handling (pause + retry).
+test('a rate-limited robots.txt is transient: never read, not cached, error carries HTTP 429', async () => {
+  const cache = new Map();
+  let calls = 0;
+  let answer = 429;
+  const ft = async (url) => {
+    calls += 1;
+    if (url.endsWith('/robots.txt') && answer !== 200) throw Object.assign(new Error(`HTTP ${answer}`), { status: answer });
+    if (url.endsWith('/robots.txt')) return { status: 200, text: 'User-agent: *\nAllow: /', contentType: 'text/plain' };
+    throw new Error(`no data request expected: ${url}`);
+  };
+  for (const st of [429, 503]) {
+    answer = st;
+    const v = await boardRobots(TEAMTAILOR_BOARD, { fetchText: ft, cache });
+    assert.equal(v.allowed, false);
+    assert.equal(v.transient, true);
+    assert.equal(v.status, st);
+    assert.equal(cache.size, 0, 'transient answer not cached');
+  }
+  answer = 429;
+  await assert.rejects(fetchBoard(TEAMTAILOR_BOARD, { fetchText: ft, robotsCache: cache, now: () => new Date(NOW) }),
+    (e) => e.robots === true && e.transient === true && e.status === 429);
+  // A real refusal stays cached and is not transient.
+  answer = 200;
+  const before = calls;
+  const ok = await boardRobots(TEAMTAILOR_BOARD, { fetchText: ft, cache });
+  assert.equal(ok.allowed, true);
+  assert.equal(ok.transient, undefined);
+  await boardRobots(TEAMTAILOR_BOARD, { fetchText: ft, cache });
+  assert.equal(calls, before + 1, 'a 2xx robots.txt is fetched once');
+});
+
 // A Teamtailor site with `total` jobs served as the real feed does: 100 items per page, next page at ?offset=N.
 function bigTeamtailor(total, { ignoreOffset = false } = {}) {
   const item = T.rss.match(/<item>[\s\S]*?<\/item>/)[0];
