@@ -1731,6 +1731,20 @@
       "capture_score": 0.764,
       "status": "filtered",
       "detected_at": "2026-11-18T09:07:09.778154+00:00"
+    },
+    {
+      "platform": "stackoverflow",
+      "url": "https://stackoverflow.com/questions/80017398/autodesk-forma-build-aps-data-management-api-returns-403-bim360dm-error-despite",
+      "title": "Autodesk Forma Build: APS Data Management API returns 403 BIM360DM_ERROR despite successful OAuth and Hub Administrator permissions",
+      "body": "company data api",
+      "created_at": "2026-11-18T10:56:52+00:00",
+      "engagement": -6,
+      "answered": false,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": -5.199,
+      "status": "filtered",
+      "detected_at": "2026-11-19T09:06:32.889951+00:00"
     }
   ]
 }
