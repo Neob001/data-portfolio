@@ -189,6 +189,14 @@ test('Workday board robots.txt disallowing the site -> ats_board_disallowed; tim
   assert.equal(late.summary.stop_reason, 'time_limit');
 });
 
+test('Workday robots.txt rate-limited (HTTP 429) -> ats_board_failed "try again later", never "disallowed" (2026-11-19)', async () => {
+  const web = fakeWeb({ robots: { 'acme.wd1.myworkdayjobs.com': { status: 429, text: 'Too Many Requests', contentType: 'text/plain' } } });
+  const { rows } = await run(web, { companyUrls: ['https://acme.wd1.myworkdayjobs.com/External'] });
+  assert.equal(rows[0].reason, 'ats_board_failed');
+  assert.match(rows[0].reason_detail || rows[0].detail || JSON.stringify(rows[0]), /rate-limiting.*429.*later/);
+  assert.ok(!web.calls.some((c) => c.startsWith('POST ')), 'board still not read');
+});
+
 test('discovery budget: few pages per company, careers paths probed last, depth limited', async () => {
   // A site where every page links two more careers-ish pages and nothing has a board.
   let n = 0;
