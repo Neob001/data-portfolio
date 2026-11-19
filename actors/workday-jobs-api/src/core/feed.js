@@ -864,7 +864,7 @@ export async function runFeed(opts, deps) {
       return r.jobs;
     } catch (e) {
       summary.boards_failed += 1;
-      summary.failed_boards.push({ board: boardKey(b), status: e.status ?? null, failure_class: e.failureClass || 'unknown', ...(e.robots ? { robots: true } : {}) });
+      summary.failed_boards.push({ board: boardKey(b), status: e.status ?? null, failure_class: e.failureClass || 'unknown', ...(e.robots ? { robots: true } : {}), ...(e.transient ? { transient: true } : {}) });
       log(`Board ${boardKey(b)} failed: ${e.message}`);
       return [];
     }

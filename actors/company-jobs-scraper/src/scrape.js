@@ -321,7 +321,9 @@ export async function runCompanies(input, deps) {
     const names = boards.map(boardKey).join(', ');
     let miss;
     if (s.boards_ok > 0) miss = { reason: 'ats_board_empty', detail: `The ${boards[0].ats} job board (${names}) lists no open job right now.` };
-    else if (failed.length && failed.every((f) => f.robots)) miss = { reason: 'ats_board_disallowed', detail: `The job board's robots.txt does not allow reading it (${names}).` };
+    // A robots.txt answered 429/5xx is "try later", not a refusal (the board is still not read).
+    else if (failed.length && failed.every((f) => f.robots && !f.transient)) miss = { reason: 'ats_board_disallowed', detail: `The job board's robots.txt does not allow reading it (${names}).` };
+    else if (failed.length && failed.every((f) => f.robots)) miss = { reason: 'ats_board_failed', detail: `The job board is rate-limiting requests right now (robots.txt HTTP ${failed[0].status || 429}: ${names}). Try this company again later.` };
     else if (failed.length && failed.every((f) => f.status === 404 || f.status === 410)) miss = { reason: 'ats_board_not_found', detail: `The job-board link on the careers page is dead (HTTP 404: ${names}).` };
     else miss = { reason: 'ats_board_failed', detail: `The job board did not answer (${failed.map((f) => `${f.board}: ${f.status || f.failure_class}`).join('; ') || names}).` };
     await pushMiss(query, { ...miss, careersPageUrl: d.careersPageUrl, platform: boards[0].ats, sourceUrl: d.sourceUrl });
