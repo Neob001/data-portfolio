@@ -2,7 +2,9 @@
 """Zero-token daily health check. Writes state/health.json.
 
 Flags an actor when: >=2 consecutive failed runs, or failure rate >5% in the
-last 24h, or 24h row count < 50% of the 7-day median. Exit code 1 when
+last 24h, or 24h row count < 50% of the 7-day median, or Apify marked it
+"under maintenance" (its daily Store test of the prefilled input failed - that
+test's runs are not in our run list, so only the Actor's `notice` shows it). Exit code 1 when
 anything is flagged (so a Routine can decide to act), 0 when all green.
 """
 import json
@@ -62,6 +64,10 @@ def main() -> int:
         }
         report["actors"][slug] = entry
 
+        notice = get(f"/acts/{actor_id}")["data"].get("notice") or "NONE"
+        entry["notice"] = notice
+        if notice != "NONE":
+            report["flags"].append({"actor": slug, "reason": "apify_notice", "value": notice})
         if consec >= 2:
             report["flags"].append({"actor": slug, "reason": "consecutive_failures", "value": consec})
         if total24 >= 5 and failed24 / total24 > 0.05:
