@@ -28,7 +28,7 @@ Push: `GIT_SSH_COMMAND="ssh -i ~/.ssh/data_portfolio_deploy" git push -q origin 
    `{"pricingModel":"PAY_PER_EVENT","pricingPerEvent":{"actorChargeEvents":{"company-result":{"eventTitle":"Company result",
    "eventDescription":"One company whose open job posts name the requested technologies, with its tech stack and job counts.",
    "eventTieredPricingUsd":{"FREE":{"tieredEventPriceUsd":0.015},"BRONZE":{"tieredEventPriceUsd":0.0135},
-   "SILVER":{"tieredEventPriceUsd":0.012},"GOLD":{"tieredEventPriceUsd":0.0105}}}}}}`. If the API refuses, set exactly
+   "SILVER":{"tieredEventPriceUsd":0.012},"GOLD":{"tieredEventPriceUsd":0.0105}}}}}}` plus `"isOneTimeEvent":false,"isPrimaryEvent":true` and PLATINUM/DIAMOND = the GOLD price (the API answers 400 "Charged event must contain price, title, and description" without them; with them PUT works - done this way 2026-11-19). If the API refuses, set exactly
    that price in Apify Console (Actor > Publication > Monetization, pay per event, event name `company-result`) via
    Claude in Chrome if available; if neither works, leave it unpriced and report (publish_actors.py will not publish an
    unpriced Actor). Verify via `get('/acts/<id>')` that the last pricingInfo is PAY_PER_EVENT with company-result FREE 0.015.
