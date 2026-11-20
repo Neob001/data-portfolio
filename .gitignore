@@ -9,3 +9,4 @@ state/pricing_proposals.json
 __pycache__/
 *.pyc
 .claude/
+scripts/jobs_index/workday_boards.jsonl.gz

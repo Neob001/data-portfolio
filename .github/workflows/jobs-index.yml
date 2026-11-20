@@ -71,6 +71,19 @@ jobs:
         timeout-minutes: 180
         run: python3 validate_boards.py --max-age-hours 150 --max-new 1500
 
+      # Workday since 2026-11-16 answers robots.txt with HTTP 429 to cloud IPs (GitHub runners, Apify), 200 to the owner's
+      # Mac. scripts/jobs_index/workday_local.sh reads every Workday site there (same code + robots.txt rule + pacing) and
+      # force-pushes the result to the data-only branch workday-data. The build adds those boards (--boards-from) when the
+      # file is complete, <= 36 h old and has >= 500 boards; otherwise it fetches Workday itself as before.
+      - name: Fetch Workday boards read on the owner's Mac (branch workday-data)
+        continue-on-error: true
+        run: |
+          if git fetch -q --depth 1 origin workday-data && git show FETCH_HEAD:workday_boards.jsonl.gz > workday_boards.jsonl.gz; then
+            git log -1 --format='%s' FETCH_HEAD
+          else
+            rm -f workday_boards.jsonl.gz; echo "no workday-data branch: the build fetches Workday itself"
+          fi
+
       # Builder also honours state/bans.json; per ATS it pauses that ATS on a 429 (30 s doubling to 5 min, slower pacing, the boards retried later; robots.txt 429/5xx count as "try later", never as permission) and stops it for the night after 6 pauses in a row without a success.
       # Workday runs in parallel with the other ATSs inside its own budget (see build_index.mjs): newest
       # 500 jobs per site, 90 s per site, no new site after 100 min, so the fetch phase ends about with
@@ -82,7 +95,7 @@ jobs:
       # the first nights only JazzHR boards whose jobs changed in the public sitemaps and job pages of new jobs are read.
       - name: Build slim index
         timeout-minutes: 140
-        run: node --max-old-space-size=6144 build_index.mjs --codec br --workday-max-jobs 500 --workday-site-budget-s 90 --workday-budget-min 100 --personio-budget-min 75 --teamtailor-budget-min 45 --teamtailor-max-jobs 1000 --jazzhr-budget-min 80 --pinpoint-budget-min 30 --jazzhr-max-details 15 --pinpoint-max-details 10
+        run: node --max-old-space-size=6144 build_index.mjs --codec br --workday-max-jobs 500 --workday-site-budget-s 90 --workday-budget-min 100 --personio-budget-min 75 --teamtailor-budget-min 45 --teamtailor-max-jobs 1000 --jazzhr-budget-min 80 --pinpoint-budget-min 30 --jazzhr-max-details 15 --pinpoint-max-details 10 --boards-from workday_boards.jsonl.gz
 
       - name: Save validation state
         if: always()
