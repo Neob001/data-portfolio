@@ -17,7 +17,9 @@ jobs:
       - name: Per-ATS jobs Actors match their generator
         run: python3 scripts/make_ats_actors.py --check
       - name: Jobs index publisher tests
-        run: python3 scripts/jobs_index/test_publish_release.py
+        run: |
+          python3 scripts/jobs_index/test_publish_release.py
+          node --test scripts/jobs_index/tests/*.test.mjs
       - name: Tenders index builder + publisher tests
         run: |
           node --test scripts/tenders_index/tests/*.test.mjs

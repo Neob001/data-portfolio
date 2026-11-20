@@ -42,7 +42,8 @@
 // description. No extra request; measured cost in build_report.json (companies_tech.extract_ms).
 // Zero-token, deterministic. Needs node >= 22; imports only node builtins and the Actor's src/.
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
-import { gzipSync, gunzipSync } from 'node:zlib';
+import { gzipSync, gunzipSync, createGzip } from 'node:zlib';
+import { createWriteStream } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs, promisify } from 'node:util';
@@ -111,6 +112,14 @@ const { values: args } = parseArgs({
     // companies_tech.json.gz: technologies named in each job's title + full description (companies-by-technology).
     // Pure CPU on text already in memory (no extra request); --no-tech skips it.
     'no-tech': { type: 'boolean', default: false },
+    // Boards fetched elsewhere (scripts/jobs_index/workday_local.sh on the owner's Mac: Workday answers robots.txt 429 to
+    // cloud IPs since 2026-11-16). --emit-boards writes every board this run adds (board, name, jobs) as gzipped JSON lines
+    // + a final {"_end": ...} line; --boards-from reads such a file and adds its boards instead of fetching their ATSs,
+    // when it is complete, <= --boards-from-max-age-h old and has >= --boards-from-min-boards boards (else: fetch as usual).
+    'emit-boards': { type: 'string', default: '' },
+    'boards-from': { type: 'string', default: '' },
+    'boards-from-max-age-h': { type: 'string', default: '36' },
+    'boards-from-min-boards': { type: 'string', default: '500' },
   },
 });
 
@@ -306,6 +315,26 @@ function planHosted(ats, list, state, live, { refreshDays, carryDays, now = Date
   return { order: rotated.map((x) => x.b), carry, unchanged };
 }
 
+/** Read a --emit-boards file -> { ok, reason, end, items }. Never throws (a bad file means: fetch as usual). */
+export async function readBoardsFile(path, { maxAgeH = 36, minBoards = 500, now = Date.now() } = {}) {
+  let text;
+  try { text = gunzipSync(await readFile(path)).toString('utf8'); } catch (e) { return { ok: false, reason: `unreadable: ${e.message}`.slice(0, 200), items: [] }; }
+  const lines = text.split('\n').filter(Boolean);
+  let end = null;
+  const items = [];
+  for (const l of lines) {
+    let o;
+    try { o = JSON.parse(l); } catch { return { ok: false, reason: 'corrupt line', items: [] }; }
+    if (o._end) { end = o; break; }
+    if (o?.board?.ats && o.board.token && Array.isArray(o.jobs)) items.push(o);
+  }
+  if (!end) return { ok: false, reason: 'incomplete (no _end line)', items: [] };
+  const ageH = (now - Date.parse(end.built_at)) / 3600000;
+  if (!(ageH <= maxAgeH)) return { ok: false, reason: `stale: built ${end.built_at} (${ageH.toFixed(1)} h > ${maxAgeH} h)`, end, items: [] };
+  if (items.length < minBoards) return { ok: false, reason: `too few boards: ${items.length} < ${minBoards}`, end, items: [] };
+  return { ok: true, reason: null, end, items };
+}
+
 async function main() {
   const t0 = Date.now();
   let boards = JSON.parse(await readFile(args.boards, 'utf8'));
@@ -332,9 +361,47 @@ async function main() {
     }
     boards = picked;
   }
+  let fromFile = null;
+  if (args['boards-from']) {
+    fromFile = await readBoardsFile(args['boards-from'], { maxAgeH: Number(args['boards-from-max-age-h']) || 36,
+      minBoards: Number(args['boards-from-min-boards']) || 0 });
+    fromFile.ats = [...new Set(fromFile.items.map((it) => it.board.ats))];
+    if (fromFile.ok) {
+      boards = boards.filter((b) => !fromFile.ats.includes(b.ats));
+      console.error(`boards from ${args['boards-from']}: ${fromFile.items.length} boards (${fromFile.ats.join(', ')}, built ${fromFile.end.built_at}) - not fetched tonight`);
+    } else {
+      console.error(`boards from ${args['boards-from']} NOT used (${fromFile.reason}) - fetching as usual`);
+    }
+  }
   console.error(`building index from ${boards.length} boards -> ${args.out}`);
   const writer = await new IndexWriter(resolve(args.out), { builtAt: new Date(), codec: args.codec, tech: !args['no-tech'] }).open();
   const stats = { ok: 0, failed: 0, empty: 0, by_ats: {} };
+  // --emit-boards: every board added to the index is also written out (lines in add order, addBoard calls are serialized).
+  let emit = null;
+  if (args['emit-boards']) {
+    const gz = createGzip();
+    const done = new Promise((res, rej) => { gz.pipe(createWriteStream(args['emit-boards'])).on('finish', res).on('error', rej); });
+    emit = { gz, done, boards: 0, jobs: 0 };
+    const add = writer.addBoard.bind(writer);
+    writer.addBoard = async (board, name, jobs) => {
+      if (jobs?.length) {
+        if (!emit.gz.write(`${JSON.stringify({ board, name, jobs })}\n`)) await new Promise((r) => emit.gz.once('drain', r));
+        emit.boards += 1;
+        emit.jobs += jobs.length;
+      }
+      return add(board, name, jobs);
+    };
+  }
+  if (fromFile?.ok) {
+    for (const it of fromFile.items) {
+      await writer.addBoard(it.board, it.name, it.jobs);
+      const s = stats.by_ats[it.board.ats] || (stats.by_ats[it.board.ats] = { boards: 0, jobs: 0, failed: 0, source: 'boards-from', fetched: fromFile.end.built_at });
+      s.boards += 1;
+      s.jobs += it.jobs.length;
+      stats.ok += 1;
+    }
+    fromFile.items = []; // free the memory
+  }
   const failures = [];
   const queues = new Map();
   for (const b of boards) (queues.get(b.ats) || queues.set(b.ats, []).get(b.ats)).push(b);
@@ -616,6 +683,11 @@ async function main() {
     hostedReport[a] = { sitemap_companies: h.sitemap_boards, carried_unchanged: h.carried_unchanged, carried_boards: h.carried_boards,
       carried_jobs: h.carried_jobs, cache: await saveHosted(a, h.state) };
   }
+  if (emit) {
+    emit.gz.end(`${JSON.stringify({ _end: true, built_at: new Date().toISOString(), ats: Object.keys(stats.by_ats), boards: emit.boards, jobs: emit.jobs, by_ats: stats.by_ats })}\n`);
+    await emit.done;
+    console.error(`emitted ${emit.boards} boards / ${emit.jobs} jobs -> ${args['emit-boards']}`);
+  }
   const fetchSec = (Date.now() - t0) / 1000;
   console.error(`fetched in ${fetchSec.toFixed(0)}s; deduping, sharding and compressing...`);
   const manifest = await writer.finish();
@@ -633,6 +705,8 @@ async function main() {
     boards_skipped_budget_by_ats: stats.skipped_budget_by_ats || {},
     by_ats: stats.by_ats,
     hosted: hostedReport,
+    boards_from: fromFile ? { file: args['boards-from'], used: fromFile.ok, reason: fromFile.reason, built_at: fromFile.end?.built_at || null,
+      ats: fromFile.ats, boards: fromFile.end?.boards ?? null, jobs: fromFile.end?.jobs ?? null } : null,
     jobs_before_dedupe: manifest.jobs_before_dedupe,
     jobs: manifest.jobs,
     shards: manifest.shards.length,
@@ -651,4 +725,4 @@ async function main() {
   console.log(JSON.stringify(report, null, 1));
 }
 
-await main();
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) await main();
