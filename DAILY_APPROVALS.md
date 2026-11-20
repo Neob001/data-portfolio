@@ -113,3 +113,6 @@ Replies are NEVER posted without a tick. Standing decision 2026-09-12.
 
 ## 2026-11-19
 (no drafts today. demand_monitor: 1 new raw hit, 0 passed the filters: SO 80017398 is an Autodesk APS OAuth 403 debugging question (login-gated private BIM360 account data, not a public-data build) matched on keywords only. Marked filtered. No have matches, no DC proposals. Apify forum still returns non-JSON. No owner ticks pending.)
+
+## 2026-11-21
+(no drafts today. demand_monitor: 9 new raw hits, 0 passed the filters: all 9 are Dans-Plugins "Post X to SpigotMC" release chores (NoMoreCreepers#94, Nether-Access-Controller#134, MiniFactions#155, Medieval-Economy#228, Medieval-Cookery#116, KDRTracker#112, Herald#132, Easy-Links#115, Democracy#112) matched on keywords only. All marked filtered. No have matches, no DC proposals. Apify forum still returns non-JSON. No owner ticks pending.)
