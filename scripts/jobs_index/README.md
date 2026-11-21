@@ -202,3 +202,8 @@ For `actors/companies-by-technology` and the Jobs Feed `mode: "companies-by-tech
 - **Prefill** (engineer, remote_only, 7 days, 20 results, includeDescription true): 1 shard read, 17 boards fetched live for descriptions, **3.7 s**, peak memory 246 MB.
 - **Worst-case keyword query** (`["kubernetes operator"]` all, all 38 shards, includeDescription true, maxResults 100): 67 matches from 45 boards, **84 s**, peak memory 307 MB. Most of that time is the live description calls. Large Greenhouse boards return multi-MB `content=true` payloads, and Lever is paced at 1 request/s.
 - **Pure scan of all 38 shards with no match:** 3.4 s, 43 MB read.
+
+Shrink guard (2026-11-21): a local run that reads < 60% of the boards of the last push (kept in
+`~/Library/Caches/factpipe-workday/last_pushed`) is not pushed while that push is < 36 h old, so a Workday maintenance
+window or outage never replaces a good file (`WORKDAY_FORCE_PUSH=1` overrides). The scheduled task skips Saturdays
+(Workday weekly maintenance, Friday ~23:00-03:00 Pacific = Saturday 07:00-11:00 UTC).

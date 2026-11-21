@@ -63,6 +63,17 @@ END=$(gunzip -c "$OUT.tmp" | tail -1)
 read BOARDS JOBS RL <<< "$(print -r -- "$END" | python3 -c 'import json,sys; e=json.load(sys.stdin); w=e["by_ats"].get("workday",{}); print(e["boards"], e["jobs"], w.get("rate_limited",0))')"
 MIN_REQ=$MIN_BOARDS; [[ -n "${WORKDAY_LIMIT:-}" ]] && MIN_REQ=1
 (( BOARDS >= MIN_REQ )) || fail "only $BOARDS boards read (< $MIN_REQ); not pushed (rate-limited: $RL)"
+# Shrink guard: a run that reads far fewer boards than the last pushed one (Workday's weekly maintenance, Friday
+# ~23:00-03:00 Pacific, answers ERR_TENANT_OUTAGE / an HTML page for robots.txt, which rule R1 skips) must not replace
+# a still-usable file. Only while that file is < 36 h old (the build ignores older ones anyway, so then push).
+LAST="$WORK/last_pushed"   # "<boards> <epoch seconds>" of the last push
+SHRINK_PCT=${WORKDAY_SHRINK_PCT:-60}
+if (( PUSH )) && [[ -z "${WORKDAY_LIMIT:-}" && -z "${WORKDAY_FORCE_PUSH:-}" && -r "$LAST" ]]; then
+  read LAST_BOARDS LAST_TS < "$LAST"
+  if (( ${LAST_BOARDS:-0} > 0 && $(date +%s) - ${LAST_TS:-0} < 36 * 3600 && BOARDS * 100 < LAST_BOARDS * SHRINK_PCT )); then
+    fail "only $BOARDS boards read vs $LAST_BOARDS on the last push (< ${SHRINK_PCT}%; Workday maintenance or outage?); previous file kept, not pushed (WORKDAY_FORCE_PUSH=1 overrides)"
+  fi
+fi
 mv -f "$OUT.tmp" "$OUT"
 SIZE=$(( $(stat -f %z "$OUT") / 1024 / 1024 ))
 SUMMARY="$BOARDS boards / $JOBS jobs, ${SIZE} MB, ${MINS} min, rate-limited $RL, code $SRC_SHA"
@@ -78,6 +89,7 @@ if (( PUSH )); then
   TREE=$(printf '100644 blob %s\tworkday_boards.jsonl.gz\n' "$BLOB" | "${D[@]}" mktree) || fail "mktree"
   COMMIT=$("${D[@]}" commit-tree "$TREE" -m "workday boards $(date -u +%Y-%m-%dT%H:%M:%SZ): $SUMMARY") || fail "commit-tree"
   "${D[@]}" push -q --force origin "${COMMIT}:refs/heads/workday-data" || fail "git push workday-data"
+  print -r -- "$BOARDS $(date +%s)" > "$LAST"
   "${D[@]}" prune --expire=now >/dev/null 2>&1   # only this script writes to data.git
   print -r -- "WORKDAY_LOCAL OK $SUMMARY, pushed workday-data ${COMMIT:0:7}"
 else
