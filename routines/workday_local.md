@@ -1,4 +1,8 @@
-# Routine: workday-local (local scheduled task, daily 17:00 JST = 08:00 UTC, before the ~11:00-12:00 UTC cloud build)
+# Routine: workday-local (local scheduled task, Sun-Fri 17:00 JST = 08:00 UTC, before the ~11:00-12:00 UTC cloud build)
+
+No Saturday run: Saturday 08:00 UTC is inside Workday's weekly maintenance (Friday ~23:00-03:00 Pacific); on 2026-11-21
+most tenants answered ERR_TENANT_OUTAGE and only 995 of 4,645 boards were read. Saturday's cloud build uses Friday's
+file (~27 h old, within the 36 h limit).
 
 Owner OK 2026-11-21 ("yes, build the Workday part locally"): Workday answers robots.txt 429 to cloud IPs, 200 to the
 owner's Mac. Background: scripts/jobs_index/README.md "Workday read on the owner's Mac".
@@ -15,5 +19,7 @@ Repo: /Users/neo/Library/Application Support/Claude/scratch-workspaces/506d9ec1-
    every 5 min). Its last line is `WORKDAY_LOCAL OK ...` or `WORKDAY_LOCAL FAIL <reason>`.
 3. OK: done; report the line in one sentence (boards, jobs, rate-limited count). Expect ~4,000+ boards; if fewer than
    2,000 or rate-limited > 500, say so: Workday may be throttling the Mac too.
-   FAIL: report the reason and the last 30 lines of ~/Library/Caches/factpipe-workday/last_run.log. Do not retry more
+   FAIL "... previous file kept, not pushed" (shrink guard: < 60% of the last push's boards, usually Workday
+   maintenance or an outage): expected now and then; report it in one sentence, do NOT retry - the previous file stays in use.
+   Other FAIL: report the reason and the last 30 lines of ~/Library/Caches/factpipe-workday/last_run.log. Do not retry more
    than once.
