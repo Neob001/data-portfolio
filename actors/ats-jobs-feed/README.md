@@ -134,6 +134,8 @@ More keywords matched means a higher score inside each band. Among equal scores,
 
 Example: 10,000 jobs cost **$50**. Set a maximum charge per run in Apify, and the Actor stops cleanly when it is reached.
 
+**Price change on December 10, 2026:** $7 per 1,000 jobs plus $0.01 per run that returns at least one job; runs with no results stay free.
+
 ## Use with AI agents (MCP)
 
 AI agents can find, run and pay for this Actor on their own; nothing to set up on our side.

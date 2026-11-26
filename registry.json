@@ -1157,8 +1157,31 @@
             "GOLD": 0.0035
           },
           "note": "P2 (owner-approved 2026-10-23), scheduled in Console 2026-10-23, effective 2026-11-06T05:09Z after Apify's 14-day notice"
+        },
+        {
+          "date": "2026-12-10",
+          "event": "job-result",
+          "price_usd": 0.007,
+          "tiers": {
+            "FREE": 0.007,
+            "BRONZE": 0.0063,
+            "SILVER": 0.0056,
+            "GOLD": 0.0049
+          },
+          "run_with_results_usd": 0.01,
+          "note": "P4 (owner-approved 2026-11-16), scheduled in Console 2026-11-26, effective 2026-12-10T03:45Z after Apify's 14-day notice; adds run-with-results $0.01 once per run with >= 1 job (no discounts)"
         }
-      ]
+      ],
+      "scheduled_price_change": {
+        "effective": "2026-12-10T03:45:14Z",
+        "event": "job-result",
+        "FREE": 0.007,
+        "BRONZE": 0.0063,
+        "SILVER": 0.0056,
+        "GOLD": 0.0049,
+        "run-with-results": 0.01,
+        "todo_on_effective": "set ppe_events.job-result proposed_price_usd/store_discount_tiers_usd to the new values and add ppe_events.run-with-results $0.01; fix the job-result event description 'Nothing else is charged.' (needs a Console price edit, locked until effective); listing description '$5 per 1,000 jobs' -> '$7 per 1,000 jobs' (registry + actor.json + metadata test + sync_listings); README headline, intro, first-run cost, pricing table ('No start fee'), example ($50 -> $70) and FAQ; remove this note"
+      }
     },
     "remote-jobs-feed": {
       "apify_actor_id": "vsQjoYbCDY2wUzmIT",
