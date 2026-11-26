@@ -121,3 +121,5 @@ Replies are NEVER posted without a tick. Standing decision 2026-09-12.
 
 ## 2026-11-26
 (no drafts today. demand_monitor: 3 new raw hits, 0 passed the filters: all 3 are Dans-Plugins "Post X to SpigotMC" release chores (Fiefs#290, Dans-Set-Home#176, AlternateAccountFinder#199) matched on keywords only. All marked filtered. No have matches, no DC proposals. Apify forum still returns non-JSON. No owner ticks pending.)
+
+(2026-11-26 second run: no drafts today. demand_monitor: 1 new raw hit, 0 passed the filters: SO 80016455 asks how to read a cell's data type with the Axyra-sheet library, a coding question matched on keywords only. Marked filtered. No have matches, no DC proposals. Apify forum still returns non-JSON. No owner ticks pending.)

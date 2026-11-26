@@ -2011,6 +2011,20 @@
       "capture_score": 0.478,
       "status": "filtered",
       "detected_at": "2026-11-26T03:48:21.737238+00:00"
+    },
+    {
+      "platform": "stackoverflow",
+      "url": "https://stackoverflow.com/questions/80016455/using-axyra-sheet-api-how-to-tell-data-type-when-reading-a-cell-value",
+      "title": "Using Axyra-sheet API, how to tell data type when reading a cell value?",
+      "body": "company data api",
+      "created_at": "2026-11-13T09:51:12+00:00",
+      "engagement": -2,
+      "answered": true,
+      "match_type": "buildable",
+      "matched_actor": null,
+      "capture_score": -0.143,
+      "status": "filtered",
+      "detected_at": "2026-11-26T09:13:18.057674+00:00"
     }
   ]
 }
